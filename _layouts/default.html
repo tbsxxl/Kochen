@@ -11,8 +11,7 @@
   <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
   <script src="{{ '/assets/utils.js' | relative_url }}"></script>
 </head>
-<body>
-  <!-- iPhone-friendly Topbar: minimal -->
+<body class="{% if page.layout == 'recipe' %}isRecipe{% endif %}">  <!-- iPhone-friendly Topbar: minimal -->
   <header class="iosTopbar">
     <div class="container iosTopbarInner">
       <button class="navIconBtn" id="backBtn" aria-label="Zurück">‹</button>
