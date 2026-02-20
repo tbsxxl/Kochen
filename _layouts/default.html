@@ -1,140 +1,128 @@
-<script>
-  window.RECIPE_DATA = {
-    id: "{{ page.url | relative_url }}",
-    title: {{ page.title | jsonify }},
-    baseServings: {{ page.servings | default: 1 }},
-    ingredients: {{ page.ingredients | jsonify }}
-  };
-</script>
+<!-- _layouts/default.html (vollständig) -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="theme-color" content="#f6f7f9">
 
-<div class="section">
-  <div class="card cardPad">
-    <div class="recipeHeader">
-      <div class="h1" style="margin:0">{{ page.title }}</div>
+  <!-- Wichtig: relative_url sorgt dafür, dass es mit baseurl funktioniert -->
+  <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
+  <script src="{{ '/assets/utils.js' | relative_url }}"></script>
+</head>
+<body>
+  <!-- iPhone-friendly Topbar: minimal -->
+  <header class="iosTopbar">
+    <div class="container iosTopbarInner">
+      <button class="navIconBtn" id="backBtn" aria-label="Zurück">‹</button>
 
-      {% if page.image %}
-        <div class="recipeHero">
-          <img class="recipeHeroImg" src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}">
+      <div class="iosTopTitleWrap">
+        <div class="iosTopTitle">
+          {% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}
         </div>
-      {% endif %}
-
-      <div class="kvRow">
-        {% if page.category %}<span class="kv">🏷 {{ page.category }}</span>{% endif %}
-        {% if page.time %}<span class="kv">⏱ {{ page.time }}</span>{% endif %}
-        {% if page.servings %}<span class="kv">🍽 {{ page.servings }}</span>{% endif %}
-        {% if page.date %}<span class="kv">📅 {{ page.date | date: "%d.%m.%Y" }}</span>{% endif %}
+        <div class="iosTopSub">{% if page.title %}{{ site.title }}{% else %}{{ site.description }}{% endif %}</div>
       </div>
 
-      {% if page.tags %}
-      <div class="chips">
-        {% for t in page.tags %}
-          <span class="chip">{{ t }}</span>
-        {% endfor %}
-      </div>
-      {% endif %}
+      <a class="navIconBtn" href="{{ '/rezeptindex/' | relative_url }}" aria-label="Suche"
+         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">⌕</a>
+    </div>
+  </header>
+
+  <main class="container appMain">
+    {{ content }}
+  </main>
+
+  <!-- Bottom Tabbar -->
+  <nav class="tabbar" aria-label="Navigation">
+    <div class="tabbarInner container">
+      <a class="tabItem" data-tab href="{{ '/' | relative_url }}">
+        <span class="tabIcon">⌂</span><span class="tabLabel">Start</span>
+      </a>
+
+      <a class="tabItem" data-tab href="{{ '/rezeptindex/' | relative_url }}">
+        <span class="tabIcon">🍲</span><span class="tabLabel">Rezepte</span>
+      </a>
+
+      <a class="tabItem" data-tab href="{{ '/shopping/' | relative_url }}">
+        <span class="tabIcon">🛒</span><span class="tabLabel">Liste</span>
+      </a>
+
+      <a class="tabItem" data-tab href="{{ '/kategorien/' | relative_url }}">
+        <span class="tabIcon">🏷</span><span class="tabLabel">Kategorien</span>
+      </a>
+
+      <button class="tabItem tabMore" id="moreBtn" aria-label="Mehr" type="button">
+        <span class="tabIcon">⋯</span><span class="tabLabel">Mehr</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Bottom Sheet: Mehr -->
+  <div class="sheetOverlay" id="sheetOverlay"></div>
+  <section class="sheet" id="sheet" aria-label="Mehr-Menü" aria-hidden="true">
+    <div class="sheetGrab"></div>
+    <div class="sheetHead">
+      <div class="sheetTitle">Mehr</div>
+      <button class="navIconBtn" id="sheetClose" aria-label="Schließen" type="button">✕</button>
     </div>
 
-    <div class="hr"></div>
-
-    <!-- Stats small line (moved up, actions moved down) -->
-    <div class="dim" id="statsLine"></div>
-
-    <div class="hr"></div>
-
-    <!-- Portionen + Zutaten -->
-    <div class="card cardPad recipeInnerCard" style="box-shadow:none;border:1px solid rgba(15,23,42,.10)">
-      <div class="searchRow" style="padding:0">
-        <div style="flex:1">
-          <div class="sub" style="margin-bottom:6px">Portionen</div>
-          <input id="servingsInput" inputmode="numeric" style="width:100%" />
-          <div class="dim" style="margin-top:6px">Basis: <span id="baseServings"></span></div>
-        </div>
-      </div>
-
-      <div class="hr"></div>
-
-      <div class="h2" style="margin:0 0 8px 0">Zutaten</div>
-      <div id="ingredientsList"></div>
+    <div class="sheetBody">
+      <a class="sheetRow" href="{{ '/admin/' | relative_url }}">⚙︎ Admin</a>
+      <a class="sheetRow" href="{{ '/backup/' | relative_url }}">⬇︎ Backup / Import</a>
+      <div class="sheetSep"></div>
+      <button class="sheetRow" id="toggleCompact" type="button">↕︎ Compact Mode</button>
+      <button class="sheetRow" id="toggleContrast" type="button">◐ High Contrast</button>
     </div>
+  </section>
 
-    <div class="hr"></div>
+  <script>
+  (function(){
+    // Back Button
+    const backBtn = document.getElementById('backBtn');
+    if (history.length > 1) backBtn.addEventListener('click', ()=>history.back());
+    else backBtn.style.visibility = 'hidden';
 
-    <div class="recipeBody">
-      {{ content }}
-    </div>
+    // Active Tab Highlight
+    const path = location.pathname.replace(/\/+$/,'') || "/";
+    const recipeBase = "{{ '/rezepte/' | relative_url }}".replace(/\/+$/,'');
+    const recipeIndex = "{{ '/rezeptindex/' | relative_url }}".replace(/\/+$/,'');
 
-    <div class="hr"></div>
+    document.querySelectorAll('[data-tab]').forEach(a=>{
+      const href = new URL(a.getAttribute('href'), location.origin).pathname.replace(/\/+$/,'') || "/";
+      if (href === path) a.classList.add('active');
+      if (recipeBase && path.startsWith(recipeBase) && href === recipeIndex) a.classList.add('active');
+    });
 
-    <div class="footerRow">
-      <a class="btn" href="{{ '/rezeptindex/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">← Alle Rezepte</a>
-      <a class="btn" href="{{ '/shopping/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">🛒 Shopping List</a>
-    </div>
-  </div>
-</div>
+    // Sheet open/close
+    const moreBtn = document.getElementById('moreBtn');
+    const overlay = document.getElementById('sheetOverlay');
+    const sheet = document.getElementById('sheet');
+    const closeBtn = document.getElementById('sheetClose');
 
-<!-- Sticky Bottom Action Bar (iPhone thumb area) -->
-<div class="recipeBar">
-  <div class="recipeBarInner">
-    <button class="rbarBtn" id="cookedBtn" aria-label="Gekocht">
-      <span class="rbarIcon">✅</span><span class="rbarTxt">Gekocht</span>
-    </button>
+    function openSheet(){ overlay.classList.add('open'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); }
+    function closeSheet(){ overlay.classList.remove('open'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); }
 
-    <button class="rbarBtn" id="favoriteBtn" aria-label="Favorit">
-      <span class="rbarIcon">☆</span><span class="rbarTxt">Favorit</span>
-    </button>
+    moreBtn.addEventListener('click', openSheet);
+    overlay.addEventListener('click', closeSheet);
+    closeBtn.addEventListener('click', closeSheet);
 
-    <button class="rbarBtn rbarPrimary" id="addToShopping" aria-label="Zur Liste">
-      <span class="rbarIcon">🛒</span><span class="rbarTxt">Zur Liste</span>
-    </button>
+    // Persisted toggles
+    const get = (k,fb)=>{ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):fb; }catch{return fb;} };
+    const set = (k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch{} };
 
-    <button class="rbarBtn" id="freezerBtn" aria-label="Kühltruhe">
-      <span class="rbarIcon">🧊</span><span class="rbarTxt">Freezer</span>
-    </button>
+    const compactKey="kochbuch.ui.compact";
+    const contrastKey="kochbuch.ui.contrast";
 
-    <button class="rbarBtn rbarMore" id="recipeMoreBtn" aria-label="Mehr">
-      <span class="rbarIcon">⋯</span><span class="rbarTxt">Mehr</span>
-    </button>
-  </div>
-</div>
+    function apply(){
+      document.body.classList.toggle('compact', !!get(compactKey,false));
+      document.body.classList.toggle('highContrast', !!get(contrastKey,false));
+    }
+    apply();
 
-<!-- Recipe More Sheet (Undo/Print etc.) -->
-<div class="sheetOverlay" id="recipeSheetOverlay"></div>
-<section class="sheet" id="recipeSheet" aria-label="Rezept-Menü" aria-hidden="true">
-  <div class="sheetGrab"></div>
-  <div class="sheetHead">
-    <div class="sheetTitle">Rezept</div>
-    <button class="navIconBtn" id="recipeSheetClose" aria-label="Schließen">✕</button>
-  </div>
-
-  <div class="sheetBody">
-    <button class="sheetRow" id="undoCookedBtn">↩︎ Undo „Gekocht“</button>
-    <button class="sheetRow" onclick="window.print()">🖨 Drucken</button>
-  </div>
-</section>
-
-<script src="{{ '/assets/recipe.js' | relative_url }}"></script>
-
-<script>
-(function(){
-  const moreBtn = document.getElementById('recipeMoreBtn');
-  const overlay = document.getElementById('recipeSheetOverlay');
-  const sheet = document.getElementById('recipeSheet');
-  const closeBtn = document.getElementById('recipeSheetClose');
-
-  if(!moreBtn || !overlay || !sheet || !closeBtn) return;
-
-  function openSheet(){
-    overlay.classList.add('open');
-    sheet.classList.add('open');
-    sheet.setAttribute('aria-hidden','false');
-  }
-  function closeSheet(){
-    overlay.classList.remove('open');
-    sheet.classList.remove('open');
-    sheet.setAttribute('aria-hidden','true');
-  }
-  moreBtn.addEventListener('click', openSheet);
-  overlay.addEventListener('click', closeSheet);
-  closeBtn.addEventListener('click', closeSheet);
-})();
-</script>
+    document.getElementById('toggleCompact').addEventListener('click', ()=>{ set(compactKey,!get(compactKey,false)); apply(); });
+    document.getElementById('toggleContrast').addEventListener('click', ()=>{ set(contrastKey,!get(contrastKey,false)); apply(); });
+  })();
+  </script>
+</body>
+</html>
