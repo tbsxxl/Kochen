@@ -9,27 +9,130 @@
   <script src="{{ '/assets/utils.js' | relative_url }}"></script>
 </head>
 <body>
-  <div id="topbar">
-    <div class="container">
-      <div id="topbarInner">
-        <div class="brand">
-          <div class="title">{{ site.title }}</div>
-          <div class="sub">{{ site.description }}</div>
+  <!-- iPhone-friendly Topbar -->
+  <header class="iosTopbar">
+    <div class="container iosTopbarInner">
+      <button class="navIconBtn" id="backBtn" aria-label="Zurück">‹</button>
+      <div class="iosTopTitleWrap">
+        <div class="iosTopTitle">
+          {% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}
         </div>
-        <div style="display:flex;gap:8px">
-          <a class="iconBtn" href="{{ '/' | relative_url }}" aria-label="Start" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">⌂</a>
-          <a class="iconBtn" href="{{ '/rezeptindex/' | relative_url }}" aria-label="Rezepte" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">🍲</a>
-          <a class="iconBtn" href="{{ '/kategorien/' | relative_url }}" aria-label="Kategorien" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">🏷</a>
-          <a class="iconBtn" href="{{ '/shopping/' | relative_url }}" aria-label="Shopping" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">🛒</a>
-          <a class="iconBtn" href="{{ '/backup/' | relative_url }}" aria-label="Backup" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">⬇︎</a>
-          <a class="iconBtn" href="{{ '/admin/' | relative_url }}" aria-label="Admin" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">⚙︎</a>
-        </div>
+        <div class="iosTopSub">{{ site.title }}</div>
       </div>
+      <a class="navIconBtn" href="{{ '/rezeptindex/' | relative_url }}" aria-label="Suche" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">⌕</a>
     </div>
-  </div>
+  </header>
 
-  <main class="container">
+  <main class="container appMain">
     {{ content }}
   </main>
+
+  <!-- Bottom Tabbar -->
+  <nav class="tabbar" aria-label="Navigation">
+    <div class="tabbarInner container">
+      <a class="tabItem" data-tab href="{{ '/' | relative_url }}">
+        <span class="tabIcon">⌂</span><span class="tabLabel">Start</span>
+      </a>
+
+      <a class="tabItem" data-tab href="{{ '/rezeptindex/' | relative_url }}">
+        <span class="tabIcon">🍲</span><span class="tabLabel">Rezepte</span>
+      </a>
+
+      <a class="tabItem" data-tab href="{{ '/shopping/' | relative_url }}">
+        <span class="tabIcon">🛒</span><span class="tabLabel">Liste</span>
+      </a>
+
+      <a class="tabItem" data-tab href="{{ '/kategorien/' | relative_url }}">
+        <span class="tabIcon">🏷</span><span class="tabLabel">Kategorien</span>
+      </a>
+
+      <button class="tabItem tabMore" id="moreBtn" aria-label="Mehr">
+        <span class="tabIcon">⋯</span><span class="tabLabel">Mehr</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Bottom Sheet: Mehr -->
+  <div class="sheetOverlay" id="sheetOverlay"></div>
+  <section class="sheet" id="sheet" aria-label="Mehr-Menü" aria-hidden="true">
+    <div class="sheetGrab"></div>
+    <div class="sheetHead">
+      <div class="sheetTitle">Mehr</div>
+      <button class="navIconBtn" id="sheetClose" aria-label="Schließen">✕</button>
+    </div>
+
+    <div class="sheetBody">
+      <a class="sheetRow" href="{{ '/admin/' | relative_url }}">⚙︎ Admin</a>
+      <a class="sheetRow" href="{{ '/backup/' | relative_url }}">⬇︎ Backup / Import</a>
+
+      <div class="sheetSep"></div>
+
+      <button class="sheetRow" id="toggleCompact">↕︎ Compact Mode</button>
+      <button class="sheetRow" id="toggleContrast">◐ High Contrast</button>
+    </div>
+  </section>
+
+  <script>
+  (function(){
+    // Back button: nur wenn es eine History gibt
+    const backBtn = document.getElementById('backBtn');
+    if (history.length > 1) {
+      backBtn.addEventListener('click', ()=>history.back());
+    } else {
+      backBtn.style.visibility = 'hidden';
+    }
+
+    // Active tab
+    const path = location.pathname.replace(/\/+$/,'') || "/";
+    document.querySelectorAll('[data-tab]').forEach(a=>{
+      const href = new URL(a.getAttribute('href'), location.origin).pathname.replace(/\/+$/,'') || "/";
+      if (href === path) a.classList.add('active');
+      // Rezept-Detailseiten -> Rezepte aktiv
+      const recipeBase = "{{ '/rezepte/' | relative_url }}".replace(/\/+$/,'');
+      const recipeIndex = "{{ '/rezeptindex/' | relative_url }}".replace(/\/+$/,'');
+      if (recipeBase && path.startsWith(recipeBase) && href === recipeIndex) a.classList.add('active');
+    });
+
+    // Sheet
+    const moreBtn = document.getElementById('moreBtn');
+    const overlay = document.getElementById('sheetOverlay');
+    const sheet = document.getElementById('sheet');
+    const closeBtn = document.getElementById('sheetClose');
+
+    function openSheet(){
+      overlay.classList.add('open');
+      sheet.classList.add('open');
+      sheet.setAttribute('aria-hidden','false');
+    }
+    function closeSheet(){
+      overlay.classList.remove('open');
+      sheet.classList.remove('open');
+      sheet.setAttribute('aria-hidden','true');
+    }
+    moreBtn.addEventListener('click', openSheet);
+    overlay.addEventListener('click', closeSheet);
+    closeBtn.addEventListener('click', closeSheet);
+
+    // Toggles (persist)
+    const get = (k,fb)=>{ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):fb; }catch{return fb;} };
+    const set = (k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch{} };
+
+    const compactKey="kochbuch.ui.compact";
+    const contrastKey="kochbuch.ui.contrast";
+
+    function apply(){
+      document.body.classList.toggle('compact', !!get(compactKey,false));
+      document.body.classList.toggle('highContrast', !!get(contrastKey,false));
+    }
+    apply();
+
+    document.getElementById('toggleCompact').addEventListener('click', ()=>{
+      set(compactKey, !get(compactKey,false)); apply();
+    });
+    document.getElementById('toggleContrast').addEventListener('click', ()=>{
+      set(contrastKey, !get(contrastKey,false)); apply();
+    });
+  })();
+  </script>
 </body>
 </html>
