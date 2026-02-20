@@ -117,6 +117,7 @@ layout: default
 
   <div class="sheetBody">
     <button class="sheetRow" id="undoCookedBtn" type="button">↩︎ Undo „Gekocht“</button>
+    <button class="sheetRow" id="resetCookModeBtn" type="button">🧹 Cooking Mode zurücksetzen</button>
     <button class="sheetRow" id="printBtn" type="button">🖨 Drucken</button>
   </div>
 </section>
@@ -131,6 +132,7 @@ layout: default
   const sheet = document.getElementById('recipeSheet');
   const closeBtn = document.getElementById('recipeSheetClose');
   const printBtn = document.getElementById('printBtn');
+  const resetCookModeBtn = document.getElementById('resetCookModeBtn');
 
   function openSheet(){ overlay.classList.add('open'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); }
   function closeSheet(){ overlay.classList.remove('open'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); }
@@ -138,6 +140,16 @@ layout: default
   moreBtn?.addEventListener('click', openSheet);
   overlay?.addEventListener('click', closeSheet);
   closeBtn?.addEventListener('click', closeSheet);
+  resetCookModeBtn?.addEventListener('click', ()=>{
+    try{
+      const id = window.RECIPE_DATA?.id;
+      if(id) localStorage.removeItem('kochbuch.cookmode.'+id);
+    }catch{}
+    // tell recipe.js to re-render if it's listening
+    window.dispatchEvent(new CustomEvent('kochbuch:cookmodeReset'));
+    closeSheet();
+  });
+
   printBtn?.addEventListener('click', ()=>window.print());
 
   // Hide recipe bar on non-recipe pages (safety, if layout reused)

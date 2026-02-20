@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="theme-color" content="#f6f7f9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <!-- Wichtig: relative_url sorgt dafür, dass es mit baseurl funktioniert -->
   <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
   <script src="{{ '/assets/utils.js' | relative_url }}"></script>
 </head>
-<body>
+<body class="{% if page.layout == 'recipe' %}isRecipe{% endif %}">
   <!-- iPhone-friendly Topbar: minimal -->
   <header class="iosTopbar">
     <div class="container iosTopbarInner">

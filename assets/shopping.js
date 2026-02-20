@@ -23,6 +23,13 @@
       row.className = "ingRow";
       row.style.opacity = e.checked ? "0.55" : "1";
 
+      row.addEventListener("click", ()=>{
+        const l = getList();
+        l[idx].checked = !l[idx].checked;
+        setList(l);
+        render();
+      });
+
       const left = document.createElement("div");
       left.className = "ingLeft";
       const name = document.createElement("div");
@@ -43,7 +50,8 @@
       const btn = document.createElement("button");
       btn.className = "smallBtn";
       btn.textContent = e.checked ? "✓" : "○";
-      btn.addEventListener("click", ()=>{
+      btn.addEventListener("click", (ev)=>{
+        ev.stopPropagation();
         const l = getList();
         l[idx].checked = !l[idx].checked;
         setList(l);

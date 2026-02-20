@@ -8,6 +8,16 @@
     set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch{} }
   };
   const baseServings = Number(data.baseServings || 1);
+  // Cooking mode (tap ingredients to mark as done)
+  const cookKey = 'kochbuch.cookmode.' + data.id;
+  const normKey = (s)=>String(s||'').trim().toLowerCase();
+  function ingKey(i){
+    const item = normKey(i.item);
+    const unit = normKey(U.normUnit(i.unit||''));
+    return item + '|' + unit;
+  }
+  function getCook(){ return ls.get(cookKey, {}); }
+  function setCook(v){ ls.set(cookKey, v); }
   const servingsInput = $("#servingsInput");
   const baseServingsEl = $("#baseServings");
   const listEl = $("#ingredientsList");
@@ -33,6 +43,16 @@
     for(const i of scaledIngredients()){
       const row = document.createElement("div");
       row.className = "ingRow";
+      const cook = getCook();
+      const k = ingKey(i);
+      if(cook[k]) row.classList.add("done");
+      row.addEventListener("click", ()=>{
+        const c = getCook();
+        c[k] = !c[k];
+        if(!c[k]) delete c[k];
+        setCook(c);
+        row.classList.toggle("done", !!c[k]);
+      });
       const left = document.createElement("div");
       left.className = "ingLeft";
       const name = document.createElement("div");
@@ -161,17 +181,17 @@
   // Shopping add
   const shopKey = "kochbuch.shopping";
   const addBtn = $("#addToShopping");
-  function normKey(s){ return String(s||"").trim().toLowerCase(); }
+  function shopNormKey(s){ return String(s||"").trim().toLowerCase(); }
   function mergeIntoShopping(ings){
     const list = ls.get(shopKey, []);
     const map = new Map();
-    for(const e of list) map.set(`${normKey(e.item)}|${normKey(e.unit)}`, e);
+    for(const e of list) map.set(`${shopNormKey(e.item)}|${shopNormKey(e.unit)}`, e);
     for(const i of ings){
       const item=String(i.item||"").trim(); if(!item) continue;
       const unit=U.normUnit(i.unit||"");
       const q0=num(i.qty);
       const conv=(q0!==null)?U.autoConvert(q0, unit):{qty:null,unit};
-      const k=`${normKey(item)}|${normKey(conv.unit)}`;
+      const k=`${shopNormKey(item)}|${shopNormKey(conv.unit)}`;
       const ex=map.get(k);
       if(ex){
         if(typeof ex.qty==="number" && typeof conv.qty==="number"){
@@ -192,6 +212,10 @@
   addBtn?.addEventListener("click", ()=>{
     mergeIntoShopping(scaledIngredients());
     addBtn.classList.add("saved"); setTimeout(()=>addBtn.classList.remove("saved"),600);
+  });
+
+  window.addEventListener("kochbuch:cookmodeReset", ()=>{
+    renderIngredients();
   });
 
   renderIngredients();
