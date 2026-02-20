@@ -1,3 +1,4 @@
+<!-- _layouts/home.html -->
 ---
 layout: default
 ---
@@ -25,14 +26,22 @@ layout: default
     {% for r in sorted limit: 6 %}
       <a class="linkCard" href="{{ r.url | relative_url }}">
         <div class="card recipeCard cardHover">
+          {% if r.image %}
+            <div class="thumb">
+              <img class="thumbImg" src="{{ r.image | relative_url }}" alt="{{ r.title | escape }}">
+            </div>
+          {% endif %}
+
           <div class="recipeTop">
             <h3 class="recipeTitle">{{ r.title }}</h3>
             {% if r.category %}<span class="badge action">{{ r.category }}</span>{% endif %}
           </div>
+
           <div class="recipeMeta">
             {% if r.time %}<span>⏱ {{ r.time }}</span>{% endif %}
             {% if r.servings %}<span>🍽 {{ r.servings }}</span>{% endif %}
           </div>
+
           {% if r.tags %}
           <div class="chips">
             {% for t in r.tags limit: 4 %}
