@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Pasta"
 tags: ["ragù", "slow", "italienisch"]
 time: "4–5 Std"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/nashville.jpg
 servings: 6
 ingredients:
   - { qty: 800, unit: "g", item: "Hackfleisch" }
