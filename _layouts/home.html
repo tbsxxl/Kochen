@@ -1,15 +1,12 @@
+<!-- _layouts/home.html (vollständig) -->
 ---
 layout: default
 ---
+
 <div class="section">
   <div class="card cardPad">
     <div class="h1">Übersicht</div>
-    <p class="p">Rezepte als Karten, mit Kategorien, Tags, Kühltruhe, Favoriten, Koch-Stats, Shopping List.</p>
-    <div class="hr"></div>
-    <div class="footerRow">
-      <a class="btn blue" href="{{ '/rezeptindex/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">Alle Rezepte</a>
-      <a class="btn" href="{{ '/shopping/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">Shopping List</a>
-    </div>
+    <p class="p">Rezepte, Kategorien, Shopping List, Favoriten & Stats.</p>
   </div>
 </div>
 
@@ -25,14 +22,29 @@ layout: default
     {% for r in sorted limit: 6 %}
       <a class="linkCard" href="{{ r.url | relative_url }}">
         <div class="card recipeCard cardHover">
+          {% if r.image %}
+            <div class="thumb">
+              <img
+                class="thumbImg"
+                src="{{ r.image | relative_url }}"
+                alt="{{ r.title | escape }}"
+                loading="lazy"
+                decoding="async"
+                style="width:100%;max-height:170px;object-fit:cover;display:block;"
+              >
+            </div>
+          {% endif %}
+
           <div class="recipeTop">
             <h3 class="recipeTitle">{{ r.title }}</h3>
             {% if r.category %}<span class="badge action">{{ r.category }}</span>{% endif %}
           </div>
+
           <div class="recipeMeta">
             {% if r.time %}<span>⏱ {{ r.time }}</span>{% endif %}
             {% if r.servings %}<span>🍽 {{ r.servings }}</span>{% endif %}
           </div>
+
           {% if r.tags %}
           <div class="chips">
             {% for t in r.tags limit: 4 %}
