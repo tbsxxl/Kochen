@@ -1,3 +1,4 @@
+<!-- rezeptindex.md -->
 ---
 layout: page
 title: Alle Rezepte
@@ -19,14 +20,22 @@ permalink: /rezeptindex/
     {% capture hay %}{{ r.title }} {{ r.category }} {{ r.time }} {{ r.servings }} {{ tags }}{% endcapture %}
     <a class="linkCard" href="{{ r.url | relative_url }}" data-recipe-card data-haystack="{{ hay | escape }}">
       <div class="card recipeCard cardHover">
+        {% if r.image %}
+          <div class="thumb">
+            <img class="thumbImg" src="{{ r.image | relative_url }}" alt="{{ r.title | escape }}">
+          </div>
+        {% endif %}
+
         <div class="recipeTop">
           <h3 class="recipeTitle">{{ r.title }}</h3>
           {% if r.category %}<span class="badge action">{{ r.category }}</span>{% endif %}
         </div>
+
         <div class="recipeMeta">
           {% if r.time %}<span>⏱ {{ r.time }}</span>{% endif %}
           {% if r.servings %}<span>🍽 {{ r.servings }}</span>{% endif %}
         </div>
+
         {% if r.tags %}
         <div class="chips">
           {% for t in r.tags limit: 6 %}
