@@ -254,3 +254,23 @@ a{color:inherit}
   .rbarBtn{min-height:54px;border-radius:15px}
   .rbarTxt{font-size:11px}
 }
+:root{
+  --heroMaxH: 240px;
+  --thumbMaxH: 170px;
+}
+
+.recipeHeroImg{
+  width:100%;
+  height: var(--heroMaxH);
+  max-height: var(--heroMaxH);
+  object-fit:cover;
+  display:block;
+}
+
+.thumbImg{
+  width:100%;
+  height: var(--thumbMaxH);
+  max-height: var(--thumbMaxH);
+  object-fit:cover;
+  display:block;
+}
