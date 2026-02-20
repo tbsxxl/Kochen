@@ -1,0 +1,15 @@
+title: "Tobis Kochbuch"
+description: "Online-Kochbuch"
+markdown: kramdown
+
+collections:
+  recipes:
+    output: true
+    permalink: /rezepte/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: recipes
+    values:
+      layout: recipe
