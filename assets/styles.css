@@ -390,3 +390,42 @@ a{color:inherit}
 .iosToggle input:checked + .iosToggleTrack .iosToggleKnob{
   transform: translateX(20px);
 }
+/* ===== One Bottom Bar System ===== */
+
+/* Tabbar standard */
+.tabbar{
+  position: fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:1000;
+  background:#fff;
+  border-top:1px solid #ddd;
+}
+
+/* Rezeptbar standard */
+.recipeBar{
+  position: fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:1100;
+  background:#fff;
+  border-top:1px solid #ddd;
+  padding:10px;
+}
+
+/* Auf Rezeptseiten: Tabbar AUS */
+body.isRecipe .tabbar{
+  display:none;
+}
+
+/* Auf Nicht-Rezeptseiten: Rezeptbar AUS */
+body:not(.isRecipe) .recipeBar{
+  display:none;
+}
+
+/* Main Abstand korrekt */
+.appMain{
+  padding-bottom:90px;
+}
