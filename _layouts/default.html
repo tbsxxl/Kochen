@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
   <script src="{{ '/assets/utils.js' | relative_url }}"></script>
 </head>
-<body class="{% if page.layout == 'recipe' %}isRecipe{% endif %}">  <!-- iPhone-friendly Topbar: minimal -->
+<body>
+  <!-- iPhone-friendly Topbar: minimal -->
   <header class="iosTopbar">
     <div class="container iosTopbarInner">
       <button class="navIconBtn" id="backBtn" aria-label="Zurück">‹</button>
@@ -33,7 +34,8 @@
   </main>
 
   <!-- Bottom Tabbar -->
-  <nav class="tabbar" aria-label="Navigation">
+  {% unless page.layout == "recipe" %}
+<nav class="tabbar" aria-label="Navigation">
     <div class="tabbarInner container">
       <a class="tabItem" data-tab href="{{ '/' | relative_url }}">
         <span class="tabIcon">⌂</span><span class="tabLabel">Start</span>
@@ -56,6 +58,7 @@
       </button>
     </div>
   </nav>
+{% endunless %}
 
   <!-- Bottom Sheet: Mehr -->
   <div class="sheetOverlay" id="sheetOverlay"></div>
