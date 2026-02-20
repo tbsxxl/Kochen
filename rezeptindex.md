@@ -1,10 +1,8 @@
-<!-- rezeptindex.md (vollständig) -->
 ---
 layout: page
 title: Alle Rezepte
 permalink: /rezeptindex/
 ---
-
 <div class="card" style="margin-top:10px">
   <div class="searchRow">
     <input id="searchInput" placeholder="Suchen: z. B. chicken, scharf, 60 min, pasta …" />
