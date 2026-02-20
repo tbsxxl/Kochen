@@ -1,0 +1,85 @@
+---
+layout: default
+---
+<script>
+  window.RECIPE_DATA = {
+    id: "{{ page.url | relative_url }}",
+    title: {{ page.title | jsonify }},
+    baseServings: {{ page.servings | default: 1 }},
+    ingredients: {{ page.ingredients | jsonify }}
+  };
+</script>
+
+<div class="section">
+  <div class="card cardPad">
+    <div class="recipeHeader">
+      <div class="h1" style="margin:0">{{ page.title }}</div>
+
+      <div class="kvRow">
+        {% if page.category %}<span class="kv">🏷 {{ page.category }}</span>{% endif %}
+        {% if page.time %}<span class="kv">⏱ {{ page.time }}</span>{% endif %}
+        {% if page.servings %}<span class="kv">🍽 {{ page.servings }}</span>{% endif %}
+        {% if page.date %}<span class="kv">📅 {{ page.date | date: "%d.%m.%Y" }}</span>{% endif %}
+      </div>
+
+      {% if page.tags %}
+      <div class="chips">
+        {% for t in page.tags %}
+          <span class="chip">{{ t }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="card cardPad" style="box-shadow:none;border:1px solid rgba(15,23,42,.10)">
+      <div class="footerRow" style="margin-bottom:10px">
+        <button class="btn" id="freezerBtn" style="flex:1">🧊 Nicht in Kühltruhe</button>
+        <button class="btn" id="favoriteBtn" style="flex:1">☆ Favorit</button>
+      </div>
+
+      <div class="footerRow" style="margin-bottom:10px">
+        <button class="btn green" id="cookedBtn" style="flex:1">✅ Gekocht</button>
+        <button class="btn" id="undoCookedBtn" style="flex:1">↩︎ Undo</button>
+      </div>
+
+      <div class="footerRow" style="margin-bottom:10px">
+        <button class="btn blue" id="addToShopping" style="flex:1">Zur Shopping List</button>
+        <button class="btn" onclick="window.print()" style="flex:1">Drucken</button>
+      </div>
+
+      <div class="dim" id="statsLine" style="margin-top:6px"></div>
+
+      <div class="hr"></div>
+
+      <div class="searchRow" style="padding:0">
+        <div style="flex:1">
+          <div class="sub" style="margin-bottom:6px">Portionen</div>
+          <input id="servingsInput" inputmode="numeric" style="width:100%" />
+          <div class="dim" style="margin-top:6px">Basis: <span id="baseServings"></span></div>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="h2" style="margin:0 0 8px 0">Zutaten</div>
+      <div id="ingredientsList"></div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="recipeBody">
+      {{ content }}
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="footerRow">
+      <a class="btn" href="{{ '/rezeptindex/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">← Alle Rezepte</a>
+      <a class="btn" href="{{ '/shopping/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">🛒 Shopping List</a>
+    </div>
+  </div>
+</div>
+
+<script src="{{ '/assets/recipe.js' | relative_url }}"></script>

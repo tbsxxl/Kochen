@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="theme-color" content="#f6f7f9">
+  <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
+  <script src="{{ '/assets/utils.js' | relative_url }}"></script>
+</head>
+<body>
+  <div id="topbar">
+    <div class="container">
+      <div id="topbarInner">
+        <div class="brand">
+          <div class="title">{{ site.title }}</div>
+          <div class="sub">{{ site.description }}</div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <a class="iconBtn" href="{{ '/' | relative_url }}" aria-label="Start" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">⌂</a>
+          <a class="iconBtn" href="{{ '/rezeptindex/' | relative_url }}" aria-label="Rezepte" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">🍲</a>
+          <a class="iconBtn" href="{{ '/kategorien/' | relative_url }}" aria-label="Kategorien" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">🏷</a>
+          <a class="iconBtn" href="{{ '/shopping/' | relative_url }}" aria-label="Shopping" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">🛒</a>
+          <a class="iconBtn" href="{{ '/backup/' | relative_url }}" aria-label="Backup" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">⬇︎</a>
+          <a class="iconBtn" href="{{ '/admin/' | relative_url }}" aria-label="Admin" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">⚙︎</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    {{ content }}
+  </main>
+</body>
+</html>
