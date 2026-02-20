@@ -5,8 +5,9 @@
   --action:#937972;
   --danger:#ef4444;
 
-  --sh1:0 1px 2px rgba(0,0,0,.06);
-  --sh2:0 12px 28px rgba(0,0,0,.10);
+  /* ultra-clean: softer shadows */
+  --sh1:0 1px 2px rgba(0,0,0,.04);
+  --sh2:0 10px 24px rgba(0,0,0,.08);
 
   --rSheet:24px;
   --rCard:16px;
@@ -20,7 +21,7 @@
 
   --barAlpha:.92;
 
-  --tabbarH: 86px;
+  --tabbarH: 78px;
   --recipeBarH: 76px;
 
   /* image caps */
@@ -33,7 +34,7 @@ html,body{height:100%}
 body{
   font-family: system-ui, -apple-system, Arial;
   margin:0;
-  padding: calc(14px) calc(14px + env(safe-area-inset-right)) calc(14px) calc(14px + env(safe-area-inset-left));
+  padding: calc(12px) calc(12px + env(safe-area-inset-right)) calc(12px) calc(12px + env(safe-area-inset-left));
   background:var(--bg);
   color:var(--text);
   font-variant-numeric: tabular-nums;
@@ -83,18 +84,18 @@ button:active, .btn:active, .tabItem:active, .chip:active, .ingRow:active{
 
 .card{
   background:var(--card);
-  border-radius: var(--rCard);
-  box-shadow: var(--sh1), 0 10px 25px rgba(0,0,0,.06);
-  border:1px solid rgba(15,23,42,.08);
+  border-radius: calc(var(--rCard) + 2px);
+  box-shadow: var(--sh1);
+  border:1px solid rgba(15,23,42,.06);
 }
-.cardPad{padding:12px}
+.cardPad{padding:16px}
 
 .h1{margin:10px 0 12px 0;font-size:20px;font-weight:var(--wTitle);letter-spacing:.2px}
 .h2{margin:0 0 8px 0;font-size:16px;font-weight:var(--wTitle)}
 .p{margin:0;color:var(--sub);font-weight:var(--wBody);line-height:1.55}
 .sub{color:var(--sub);font-weight:var(--wBody);font-size:var(--fsSecondary)}
 .dim{color:var(--sub2);font-weight:var(--wSecondary);font-size:var(--fsSecondary)}
-.hr{height:1px;background:rgba(15,23,42,.12);margin:12px 0}
+.hr{height:1px;background:rgba(15,23,42,.08);margin:14px 0}
 
 .searchRow{display:flex;gap:8px;align-items:center;padding:10px 12px}
 .searchRow input{
@@ -107,14 +108,14 @@ button:active, .btn:active, .tabItem:active, .chip:active, .ingRow:active{
 
 .footerRow{display:flex;gap:8px;flex-wrap:wrap}
 .btn{
-  border:none;border-radius:var(--rBtn);padding:14px 12px;font-weight:var(--wTitle);
-  cursor:pointer;min-height:52px;background:var(--muted);
+  border:none;border-radius:16px;padding:10px 12px;font-weight:var(--wTitle);
+  cursor:pointer;min-height:46px;background:rgba(15,23,42,.05);
   box-shadow:inset 0 0 0 1px rgba(15,23,42,.10);
 }
 .btn:active{transform:scale(.99)}
-.btn.blue{background:#1e88e5;color:#fff;box-shadow:0 12px 28px rgba(30,136,229,.16)}
-.btn.green{background:#22c55e;color:#fff;box-shadow:0 12px 28px rgba(34,197,94,.18)}
-.btn.red{background:var(--danger);color:#fff;box-shadow:0 12px 28px rgba(239,68,68,.16)}
+.btn.blue{background:rgba(0,122,255,.92);color:#fff;box-shadow:0 10px 24px rgba(0,122,255,.18)}
+.btn.green{background:rgba(34,197,94,.92);color:#fff;box-shadow:0 10px 24px rgba(34,197,94,.18)}
+.btn.red{background:rgba(239,68,68,.92);color:#fff;box-shadow:0 10px 24px rgba(239,68,68,.18)}
 
 .badge{
   background:var(--muted);border-radius:999px;padding:6px 10px;font-weight:var(--wBody);
@@ -147,11 +148,22 @@ button:active, .btn:active, .tabItem:active, .chip:active, .ingRow:active{
 .recipeBody ul,.recipeBody ol{padding-left:20px}
 
 /* Ingredients */
-.ingRow{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:10px 10px;border-radius:var(--rBtn);border:1px solid rgba(15,23,42,.10);
-  background:#fff;margin:8px 0
+.ingredientsList,
+#ingredientsList{
+  background:#fff;
+  border:1px solid rgba(15,23,42,.07);
+  border-radius:16px;
+  overflow:hidden;
 }
+.ingRow{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 16px;
+  margin:0;
+  border-bottom:1px solid rgba(15,23,42,.06);
+  background:#fff;
+  border-radius:0;
+}
+.ingRow:last-child{ border-bottom:none; }
 .ingLeft{min-width:0}
 .ingName{font-weight:var(--wBody);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ingQty{font-weight:var(--wTitle);color:var(--text);white-space:nowrap}
@@ -207,10 +219,11 @@ button:active, .btn:active, .tabItem:active, .chip:active, .ingRow:active{
   position: fixed; left:0; right:0; bottom:0; z-index:1300;
   background: rgba(246,247,249,var(--barAlpha));
   backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(15,23,42,.10);
+  border-top: none;
+  box-shadow: 0 -8px 24px rgba(0,0,0,.06);
   padding: 8px 0 calc(8px + env(safe-area-inset-bottom)) 0;
 }
-.tabbarInner{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tabbarInner{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .tabItem{
   text-decoration:none;color:var(--sub2);background:transparent;border:none;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -285,17 +298,13 @@ button:active, .btn:active, .tabItem:active, .chip:active, .ingRow:active{
 }
 
 
-/* ===== Single bottom bar logic (tabbar removed on recipe pages in layout) ===== */
-.recipeBar{
-  position: fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:1100;
+/* Recipe page: tabbar is hidden -> place recipeBar at safe-area */
+.isRecipe .recipeBar{
+  bottom: calc(env(safe-area-inset-bottom) + 10px);
 }
 
-.appMain{
-  padding-bottom:100px;
+.isRecipe .appMain{
+  padding-bottom: calc(var(--recipeBarH) + 22px + env(safe-area-inset-bottom));
 }
 
 /* Portion stepper */
