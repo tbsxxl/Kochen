@@ -2,6 +2,10 @@ title: "Tobis Kochbuch"
 description: "Online-Kochbuch"
 markdown: kramdown
 
+# WICHTIG: Repo-Name hier eintragen (ohne Domain)
+baseurl: "/kochbuch"
+url: "https://tbsxxl.github.io"
+
 collections:
   recipes:
     output: true
