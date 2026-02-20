@@ -3,7 +3,7 @@ description: "Online-Kochbuch"
 markdown: kramdown
 
 # WICHTIG: Repo-Name hier eintragen (ohne Domain)
-baseurl: "/kochbuch"
+baseurl: "/Kochen"
 url: "https://tbsxxl.github.io"
 
 collections:
