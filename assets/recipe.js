@@ -24,10 +24,11 @@
     renderIngredients();
   }
   setServings(baseServings);
-  servMinus?.addEventListener("click", ()=>{ U.hapt(); setServings((Number(servingsInput?.value)||baseServings) - 1); });
-  servPlus?.addEventListener("click", ()=>{ U.hapt(); setServings((Number(servingsInput?.value)||baseServings) + 1); });
-
-  const num = (x)=>U.tryNum(x);
+  // Safari/iOS: safeguard in case initial DOM paint happens before utils hydrate
+  setTimeout(()=>{ try{ setServings(currentServings()); }catch{} }, 0);
+  servMinus?.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); U.hapt(); setServings((Number(servingsInput?.value)||baseServings) - 1); });
+servPlus?.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); U.hapt(); setServings((Number(servingsInput?.value)||baseServings) + 1); });
+const num = (x)=>U.tryNum(x);
   function currentServings(){
     const v = num(servingsInput?.value);
     return (v && v>0) ? v : baseServings;
@@ -80,14 +81,10 @@
     const e = freezerEntry();
     if(!e){
       freezerBtn.setAttribute("aria-pressed","false");
-      freezerBtn.classList.remove("green","isOn");
-      try{ window.KOCHBUCH_UTILS.showToast("Nicht in Kühltruhe"); }catch{}
-    }else{
+      freezerBtn.classList.remove("green","isOn");}else{
       const p = e.portions ? `${e.portions} Portion${e.portions===1?"":"en"}` : "in Kühltruhe";
       freezerBtn.setAttribute("aria-pressed","true");
-      freezerBtn.classList.add("green","isOn");
-      try{ window.KOCHBUCH_UTILS.showToast("In Kühltruhe gespeichert"); }catch{}
-    }
+      freezerBtn.classList.add("green","isOn");}
   }
   
 freezerBtn?.addEventListener("click", ()=>{

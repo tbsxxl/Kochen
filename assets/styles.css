@@ -347,3 +347,31 @@ button:active, .btn:active, .tabItem:active, .chip:active, .ingRow:active{
   border:1px solid rgba(15,23,42,.10);
   box-shadow:none;
 }
+
+
+/* Press feedback */
+button,.btn,.rbarBtn,.stepBtn,.tabItem{ -webkit-tap-highlight-color: transparent; transition: transform .12s ease, filter .12s ease; }
+button:active,.btn:active,.rbarBtn:active,.stepBtn:active,.tabItem:active{ transform: scale(.98); filter: brightness(.96); }
+
+/* Recipe footer actions compact */
+.footerRow{ gap:12px; }
+.footerRow .btn{ min-height:46px; padding:10px 12px; border-radius:16px; font-weight:800; }
+@media (max-width:420px){ .footerRow .btn{ min-height:44px; border-radius:14px; font-size:15px; } }
+
+
+/* Shopping: actions compact (iPhone) */
+.shopActions{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.shopActions .btn{
+  min-height: 44px;
+  padding: 9px 12px;
+  font-size: 15px;
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(15,23,42,.10);
+}
+.shopActions .btn.red{
+  box-shadow: inset 0 0 0 1px rgba(239,68,68,.20);
+}
