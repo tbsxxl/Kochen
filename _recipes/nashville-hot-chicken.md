@@ -4,6 +4,7 @@ date: 2026-02-20
 category: "Chicken"
 tags: ["scharf", "fried", "amerikanisch"]
 time: "60–90 Min"
+image: /recipes/images/placeholder.jpg
 servings: 4
 ingredients:
   - { qty: 800, unit: "g", item: "Hähnchen" }
