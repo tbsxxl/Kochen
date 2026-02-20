@@ -1,3 +1,4 @@
+<!-- kategorien.md (vollständig) -->
 ---
 layout: page
 title: Kategorien
@@ -13,9 +14,23 @@ permalink: /kategorien/
     {% for r in rs %}
       <a class="linkCard" href="{{ r.url | relative_url }}">
         <div class="card recipeCard cardHover" style="box-shadow:none;border:1px solid rgba(15,23,42,.10)">
+          {% if r.image %}
+            <div class="thumb">
+              <img
+                class="thumbImg"
+                src="{{ r.image | relative_url }}"
+                alt="{{ r.title | escape }}"
+                loading="lazy"
+                decoding="async"
+                style="width:100%;max-height:170px;object-fit:cover;display:block;"
+              >
+            </div>
+          {% endif %}
+
           <div class="recipeTop">
             <h3 class="recipeTitle">{{ r.title }}</h3>
           </div>
+
           <div class="recipeMeta">
             {% if r.time %}<span>⏱ {{ r.time }}</span>{% endif %}
             {% if r.servings %}<span>🍽 {{ r.servings }}</span>{% endif %}
