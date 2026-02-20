@@ -8,21 +8,24 @@
     set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch{} }
   };
   const baseServings = Number(data.baseServings || 1);
-  // Cooking mode (tap ingredients to mark as done)
-  const cookKey = 'kochbuch.cookmode.' + data.id;
-  const normKey = (s)=>String(s||'').trim().toLowerCase();
-  function ingKey(i){
-    const item = normKey(i.item);
-    const unit = normKey(U.normUnit(i.unit||''));
-    return item + '|' + unit;
-  }
-  function getCook(){ return ls.get(cookKey, {}); }
-  function setCook(v){ ls.set(cookKey, v); }
   const servingsInput = $("#servingsInput");
   const baseServingsEl = $("#baseServings");
   const listEl = $("#ingredientsList");
   if(baseServingsEl) baseServingsEl.textContent = String(baseServings);
   if(servingsInput) servingsInput.value = String(baseServings);
+
+  const servVal = document.getElementById("servVal");
+  const servMinus = document.getElementById("servMinus");
+  const servPlus = document.getElementById("servPlus");
+  function setServings(v){
+    const n = Math.max(1, Math.min(99, Math.round(Number(v)||baseServings)));
+    if(servVal) servVal.textContent = String(n);
+    if(servingsInput) servingsInput.value = String(n);
+    renderIngredients();
+  }
+  setServings(baseServings);
+  servMinus?.addEventListener("click", ()=>{ U.hapt(); setServings((Number(servingsInput?.value)||baseServings) - 1); });
+  servPlus?.addEventListener("click", ()=>{ U.hapt(); setServings((Number(servingsInput?.value)||baseServings) + 1); });
 
   const num = (x)=>U.tryNum(x);
   function currentServings(){
@@ -43,16 +46,6 @@
     for(const i of scaledIngredients()){
       const row = document.createElement("div");
       row.className = "ingRow";
-      const cook = getCook();
-      const k = ingKey(i);
-      if(cook[k]) row.classList.add("done");
-      row.addEventListener("click", ()=>{
-        const c = getCook();
-        c[k] = !c[k];
-        if(!c[k]) delete c[k];
-        setCook(c);
-        row.classList.toggle("done", !!c[k]);
-      });
       const left = document.createElement("div");
       left.className = "ingLeft";
       const name = document.createElement("div");
@@ -86,39 +79,43 @@
     if(!freezerBtn) return;
     const e = freezerEntry();
     if(!e){
-      freezerBtn.textContent = "🧊 Nicht in Kühltruhe";
-      freezerBtn.classList.remove("green");
+      freezerBtn.setAttribute("aria-pressed","false");
+      freezerBtn.classList.remove("green","isOn");
+      try{ window.KOCHBUCH_UTILS.showToast("Nicht in Kühltruhe"); }catch{}
     }else{
       const p = e.portions ? `${e.portions} Portion${e.portions===1?"":"en"}` : "in Kühltruhe";
-      freezerBtn.textContent = `🧊 ${p}`;
-      freezerBtn.classList.add("green");
+      freezerBtn.setAttribute("aria-pressed","true");
+      freezerBtn.classList.add("green","isOn");
+      try{ window.KOCHBUCH_UTILS.showToast("In Kühltruhe gespeichert"); }catch{}
     }
   }
-  freezerBtn?.addEventListener("click", ()=>{
-    const f = getFreezer();
-    const e = f[data.id] || null;
-    if(!e){
-      const input = prompt("Wie viele Portionen sind in der Kühltruhe? (Zahl)", "1");
-      const n = num(input);
-      if(!(n && n>0)) return;
-      f[data.id] = { portions: Math.round(n), added: new Date().toISOString() };
-      setFreezer(f); renderFreezer(); return;
-    }
-    const action = prompt("Kühltruhe:\n1 = Portion entnommen\n2 = Portionen ändern\n3 = Entfernen", "1");
-    if(action === "1"){
-      e.portions = Math.max(0, (e.portions||0) - 1);
-      if(e.portions <= 0) delete f[data.id]; else f[data.id]=e;
-      setFreezer(f); renderFreezer();
-    }else if(action === "2"){
-      const input = prompt("Neue Portionen (Zahl)", String(e.portions||1));
-      const n = num(input);
-      if(!(n && n>0)) return;
-      e.portions = Math.round(n);
-      f[data.id]=e; setFreezer(f); renderFreezer();
-    }else if(action === "3"){
-      delete f[data.id]; setFreezer(f); renderFreezer();
-    }
-  });
+  
+freezerBtn?.addEventListener("click", ()=>{
+  U.hapt();
+  const f = getFreezer();
+  const e = f[data.id] || null;
+  if(!e){
+    f[data.id] = { portions: 1, added: new Date().toISOString() };
+    setFreezer(f);
+    renderFreezer();
+    U.showToast("In Kühltruhe (+1)");
+    return;
+  }
+  // Standard: eine Portion entnommen
+  const next = Math.max(0, (e.portions||0) - 1);
+  if(next <= 0){
+    delete f[data.id];
+    setFreezer(f);
+    renderFreezer();
+    U.showToast("Aus Kühltruhe entfernt");
+    return;
+  }
+  e.portions = next;
+  f[data.id] = e;
+  setFreezer(f);
+  renderFreezer();
+  U.showToast("Portion entnommen");
+});
 
   // Stats
   const statsKey = "kochbuch.stats";
@@ -145,15 +142,16 @@
   function renderStats(){
     const e=getEntry();
     if(favBtn){
-      favBtn.textContent = e.favorite ? "★ Favorit" : "☆ Favorit";
+      favBtn.setAttribute("aria-pressed", e.favorite ? "true":"false");
       favBtn.classList.toggle("blue", !!e.favorite);
+      favBtn.classList.toggle("isOn", !!e.favorite);
     }
     if(statsLine){
       statsLine.textContent = `Gekocht: ${e.cookedCount||0}× · Zuletzt: ${e.lastCooked?fmt(e.lastCooked):"—"}`;
     }
     if(undoBtn) undoBtn.style.opacity = (e.cookedCount||0)>0 ? "1" : ".55";
   }
-  favBtn?.addEventListener("click", ()=>{ const e=getEntry(); e.favorite=!e.favorite; setEntry(e); renderStats(); });
+  favBtn?.addEventListener("click", ()=>{ U.hapt(); const e=getEntry(); e.favorite=!e.favorite; setEntry(e); renderStats(); U.showToast("Undo: gekocht"); U.showToast("Als gekocht gespeichert"); U.showToast(e.favorite?"Favorit gespeichert":"Favorit entfernt"); });
   cookedBtn?.addEventListener("click", ()=>{
     const e=getEntry();
     const now=new Date().toISOString();
@@ -181,17 +179,17 @@
   // Shopping add
   const shopKey = "kochbuch.shopping";
   const addBtn = $("#addToShopping");
-  function shopNormKey(s){ return String(s||"").trim().toLowerCase(); }
+  function normKey(s){ return String(s||"").trim().toLowerCase(); }
   function mergeIntoShopping(ings){
     const list = ls.get(shopKey, []);
     const map = new Map();
-    for(const e of list) map.set(`${shopNormKey(e.item)}|${shopNormKey(e.unit)}`, e);
+    for(const e of list) map.set(`${normKey(e.item)}|${normKey(e.unit)}`, e);
     for(const i of ings){
       const item=String(i.item||"").trim(); if(!item) continue;
       const unit=U.normUnit(i.unit||"");
       const q0=num(i.qty);
       const conv=(q0!==null)?U.autoConvert(q0, unit):{qty:null,unit};
-      const k=`${shopNormKey(item)}|${shopNormKey(conv.unit)}`;
+      const k=`${normKey(item)}|${normKey(conv.unit)}`;
       const ex=map.get(k);
       if(ex){
         if(typeof ex.qty==="number" && typeof conv.qty==="number"){
@@ -212,10 +210,6 @@
   addBtn?.addEventListener("click", ()=>{
     mergeIntoShopping(scaledIngredients());
     addBtn.classList.add("saved"); setTimeout(()=>addBtn.classList.remove("saved"),600);
-  });
-
-  window.addEventListener("kochbuch:cookmodeReset", ()=>{
-    renderIngredients();
   });
 
   renderIngredients();

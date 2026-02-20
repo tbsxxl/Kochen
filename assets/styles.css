@@ -31,12 +31,9 @@
 *{-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, Arial;
+  font-family: system-ui, -apple-system, Arial;
   margin:0;
-  padding-top:14px;
-  padding-right: calc(14px + env(safe-area-inset-right));
-  padding-bottom:14px;
-  padding-left: calc(14px + env(safe-area-inset-left));
+  padding: calc(14px) calc(14px + env(safe-area-inset-right)) calc(14px) calc(14px + env(safe-area-inset-left));
   background:var(--bg);
   color:var(--text);
   font-variant-numeric: tabular-nums;
@@ -51,6 +48,35 @@ a{color:inherit}
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+/* Global press feedback */
+button, .btn, .tabItem, .chip, .ingRow{
+  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+}
+button:active, .btn:active, .tabItem:active, .chip:active, .ingRow:active{
+  transform: scale(.98);
+  filter: brightness(.97);
+}
+
+/* Toast */
+.toast{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(var(--tabbarH) + 14px + env(safe-area-inset-bottom));
+  background: rgba(15,23,42,.92);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+  z-index: 9999;
+}
+.toast.show{ opacity: 1; }
+
 
 .container{max-width:860px;margin:0 auto}
 .section{margin-top:12px}
@@ -121,7 +147,6 @@ a{color:inherit}
 .recipeBody ul,.recipeBody ol{padding-left:20px}
 
 /* Ingredients */
-
 .ingRow{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   padding:10px 10px;border-radius:var(--rBtn);border:1px solid rgba(15,23,42,.10);
@@ -130,28 +155,6 @@ a{color:inherit}
 .ingLeft{min-width:0}
 .ingName{font-weight:var(--wBody);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ingQty{font-weight:var(--wTitle);color:var(--text);white-space:nowrap}
-
-
-/* Cooking mode */
-.ingRow{cursor:pointer}
-.ingRow.done{opacity:.55}
-.ingRow.done .ingName{text-decoration:line-through}
-
-/* Small button (Shopping toggle) */
-.smallBtn{
-  min-width:44px;
-  min-height:44px;
-  border-radius:14px;
-  border:1px solid rgba(15,23,42,.12);
-  background: var(--muted);
-  color: var(--text);
-  font-weight: var(--wTitle);
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:0 10px;
-}
-.smallBtn:active{transform:scale(.98)}
 
 /* Images (capped) */
 .thumb{
@@ -198,11 +201,6 @@ a{color:inherit}
 
 /* Main padding for fixed tabbar */
 .appMain{ padding-bottom: calc(var(--tabbarH) + env(safe-area-inset-bottom)); }
-
-/* Recipe pages: no tabbar, but recipeBar is present */
-body.isRecipe .appMain{
-  padding-bottom: calc(var(--recipeBarH) + 16px + env(safe-area-inset-bottom));
-}
 
 /* Bottom Tabbar */
 .tabbar{
@@ -283,14 +281,60 @@ body.isRecipe .appMain{
 @media (max-width:420px){
   .recipeBarInner{gap:6px;padding:7px}
   .rbarBtn{min-height:54px;border-radius:15px}
-  .rbarTxt{display:none}
-  .rbarIcon{font-size:20px}
+  .rbarTxt{font-size:11px}
 }
 
-/* Recipe bar sits above tabbar on normal pages, but on recipe pages it sits at the safe-area bottom */
-body.isRecipe .recipeBar{
-  bottom: calc(env(safe-area-inset-bottom));
+
+/* ===== Single bottom bar logic (tabbar removed on recipe pages in layout) ===== */
+.recipeBar{
+  position: fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:1100;
 }
 
-/* iOS momentum scroll for long sheets */
-.sheetBody{ -webkit-overflow-scrolling: touch; }
+.appMain{
+  padding-bottom:100px;
+}
+
+/* Portion stepper */
+.portionStepper{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background: rgba(15,23,42,.06);
+  border:1px solid rgba(15,23,42,.10);
+  border-radius: 16px;
+  padding: 6px;
+}
+.stepBtn{
+  width:44px; height:44px;
+  border-radius: 14px;
+  border: 1px solid rgba(15,23,42,.10);
+  background: rgba(255,255,255,.74);
+  font-size: 22px;
+  font-weight: 900;
+}
+.stepVal{
+  min-width: 34px;
+  text-align:center;
+  font-weight: 900;
+  font-size: 16px;
+}
+
+/* Header / Icons */
+.iosTopbar{ position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(18px); background: rgba(246,247,249,var(--barAlpha)); border-bottom:1px solid rgba(15,23,42,.10); }
+.iosTopbarInner{ height:64px; display:grid; grid-template-columns:44px 1fr 44px; align-items:center; gap:10px; }
+.iosTopTitle{ font-size:20px; font-weight:var(--wTitle); line-height:1.05; }
+.iosTopSub{ font-size:13px; font-weight:var(--wSecondary); color:var(--sub2); margin-top:2px; }
+.iconSvg{ width:20px; height:20px; display:block; fill: currentColor; }
+.tabIcon .iconSvg{ width:22px; height:22px; }
+.rbarIcon .iconSvg{ width:20px; height:20px; }
+
+/* Secondary buttons */
+.btnSecondary{
+  background: rgba(15,23,42,.06);
+  border:1px solid rgba(15,23,42,.10);
+  box-shadow:none;
+}

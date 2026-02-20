@@ -41,5 +41,29 @@
     return (Math.abs(r - Math.round(r)) < 1e-9) ? String(Math.round(r)) : String(r);
   }
 
-  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum };
+  
+  function hapt(ms=10){
+    try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){}
+  }
+
+  function ensureToastEl(){
+    let el = document.getElementById('toast');
+    if(el) return el;
+    el = document.createElement('div');
+    el.id = 'toast';
+    el.className = 'toast';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  let toastTimer = null;
+  function showToast(msg){
+    const el = ensureToastEl();
+    el.textContent = msg;
+    el.classList.add('show');
+    if(toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=>el.classList.remove('show'), 1400);
+  }
+
+  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum, showToast, hapt };
 })();

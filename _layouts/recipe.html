@@ -54,9 +54,14 @@ layout: default
     <div class="card cardPad recipeInnerCard" style="box-shadow:none;border:1px solid rgba(15,23,42,.10)">
       <div class="searchRow" style="padding:0">
         <div style="flex:1">
-          <div class="sub" style="margin-bottom:6px">Portionen</div>
-          <input id="servingsInput" inputmode="numeric" style="width:100%" />
-          <div class="dim" style="margin-top:6px">Basis: <span id="baseServings"></span></div>
+          <div class="sub" style="margin-bottom:8px">Portionen</div>
+          <div class="portionStepper" aria-label="Portionen anpassen">
+            <button id="servMinus" class="stepBtn" type="button" aria-label="Portionen minus">−</button>
+            <div id="servVal" class="stepVal">1</div>
+            <button id="servPlus" class="stepBtn" type="button" aria-label="Portionen plus">+</button>
+          </div>
+          <input id="servingsInput" inputmode="numeric" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
+          <div class="dim" style="margin-top:8px">Basis: <span id="baseServings"></span></div>
         </div>
       </div>
 
@@ -75,8 +80,8 @@ layout: default
     <div class="hr"></div>
 
     <div class="footerRow">
-      <a class="btn" href="{{ '/rezeptindex/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">← Alle Rezepte</a>
-      <a class="btn" href="{{ '/shopping/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">🛒 Shopping List</a>
+      <a class="btn btnSecondary" href="{{ '/rezeptindex/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">Alle Rezepte</a>
+      <a class="btn btnSecondary" href="{{ '/shopping/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">Shopping List</a>
     </div>
   </div>
 </div>
@@ -85,23 +90,23 @@ layout: default
 <div class="recipeBar" id="recipeBar">
   <div class="recipeBarInner">
     <button class="rbarBtn" id="cookedBtn" type="button">
-      <span class="rbarIcon">✅</span><span class="rbarTxt">Gekocht</span>
+      <span class="rbarIcon"><svg class="iconSvg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 16.6 4.9 12.3a1 1 0 0 1 1.4-1.4l2.9 2.9 8.5-8.5a1 1 0 1 1 1.4 1.4l-9.9 9.9z"/></svg></span><span class="rbarTxt">Gekocht</span>
     </button>
 
     <button class="rbarBtn" id="favoriteBtn" type="button">
-      <span class="rbarIcon">☆</span><span class="rbarTxt">Favorit</span>
+      <span class="rbarIcon"><svg class="iconSvg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3 6.8 20l1-5.9L3.6 9.9l6-0.9L12 3.6l2.4 5.4 6 .9-4.2 4.2 1 5.9L12 17.3zm0-2.3 3.2 1.7-.6-3.6 2.6-2.6-3.6-.5L12 6.7 10.4 10l-3.6.5 2.6 2.6-.6 3.6L12 15z"/></svg></span><span class="rbarTxt">Favorit</span>
     </button>
 
     <button class="rbarBtn rbarPrimary" id="addToShopping" type="button">
-      <span class="rbarIcon">🛒</span><span class="rbarTxt">Zur Liste</span>
+      <span class="rbarIcon"><svg class="iconSvg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6h14l-1.3 7.2a2 2 0 0 1-2 1.6H9a2 2 0 0 1-2-1.6L5.3 4H3V2h3.1a1 1 0 0 1 1 .8L7.3 6zM9 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8.9 12.8h8.2l.9-4.8H8l.9 4.8z"/></svg></span><span class="rbarTxt">Zur Liste</span>
     </button>
 
     <button class="rbarBtn" id="freezerBtn" type="button">
-      <span class="rbarIcon">🧊</span><span class="rbarTxt">Freezer</span>
+      <span class="rbarIcon"><svg class="iconSvg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v4.1l2.9-1.7 1 1.7-2.9 1.7 2.9 1.7-1 1.7L13 9.9V13l3.5-2 1 1.7-3.5 2 3.5 2-1 1.7-3.5-2V22h-2v-4.1l-2.9 1.7-1-1.7 2.9-1.7-2.9-1.7 1-1.7L11 14.1V11l-3.5 2-1-1.7 3.5-2-3.5-2 1-1.7 3.5 2V2z"/></svg></span><span class="rbarTxt">Kühltruhe</span>
     </button>
 
     <button class="rbarBtn" id="recipeMoreBtn" type="button">
-      <span class="rbarIcon">⋯</span><span class="rbarTxt">Mehr</span>
+      <span class="rbarIcon"><svg class="iconSvg" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><span class="rbarTxt">Mehr</span>
     </button>
   </div>
 </div>
@@ -117,7 +122,6 @@ layout: default
 
   <div class="sheetBody">
     <button class="sheetRow" id="undoCookedBtn" type="button">↩︎ Undo „Gekocht“</button>
-    <button class="sheetRow" id="resetCookModeBtn" type="button">🧹 Cooking Mode zurücksetzen</button>
     <button class="sheetRow" id="printBtn" type="button">🖨 Drucken</button>
   </div>
 </section>
@@ -132,7 +136,6 @@ layout: default
   const sheet = document.getElementById('recipeSheet');
   const closeBtn = document.getElementById('recipeSheetClose');
   const printBtn = document.getElementById('printBtn');
-  const resetCookModeBtn = document.getElementById('resetCookModeBtn');
 
   function openSheet(){ overlay.classList.add('open'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); }
   function closeSheet(){ overlay.classList.remove('open'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); }
@@ -140,16 +143,6 @@ layout: default
   moreBtn?.addEventListener('click', openSheet);
   overlay?.addEventListener('click', closeSheet);
   closeBtn?.addEventListener('click', closeSheet);
-  resetCookModeBtn?.addEventListener('click', ()=>{
-    try{
-      const id = window.RECIPE_DATA?.id;
-      if(id) localStorage.removeItem('kochbuch.cookmode.'+id);
-    }catch{}
-    // tell recipe.js to re-render if it's listening
-    window.dispatchEvent(new CustomEvent('kochbuch:cookmodeReset'));
-    closeSheet();
-  });
-
   printBtn?.addEventListener('click', ()=>window.print());
 
   // Hide recipe bar on non-recipe pages (safety, if layout reused)
