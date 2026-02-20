@@ -355,8 +355,13 @@ button:active,.btn:active,.rbarBtn:active,.stepBtn:active,.tabItem:active{ trans
 
 /* Recipe footer actions compact */
 .footerRow{ gap:12px; }
-.footerRow .btn{ min-height:46px; padding:10px 12px; border-radius:16px; font-weight:800; }
-@media (max-width:420px){ .footerRow .btn{ min-height:44px; border-radius:14px; font-size:15px; } }
+.footerRow .btn{ min-height:44px; padding:9px 12px; border-radius:16px; font-weight:700; }
+@media (max-width:420px){ .footerRow .btn{ min-height:44px; border-radius:14px; font-size:14px; } }
+
+/* Shopping action buttons: keep them secondary & compact */
+.shopActions{ gap:12px; }
+.shopActions .btn{ min-height:44px; padding:8px 12px; font-weight:700; }
+.shopActions .btn.red{ background: rgba(239,68,68,.92); }
 
 
 /* Shopping: actions compact (iPhone) */
@@ -375,3 +380,10 @@ button:active,.btn:active,.rbarBtn:active,.stepBtn:active,.tabItem:active{ trans
 .shopActions .btn.red{
   box-shadow: inset 0 0 0 1px rgba(239,68,68,.20);
 }
+
+/* --- Fix: Shopping action buttons compact (iPhone) --- */
+.shopActions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.shopActions .btn{min-height:46px;padding:10px 12px;border-radius:16px}
+.shopActions .btnDanger{background:rgba(239,68,68,.92);color:#fff;border:1px solid rgba(239,68,68,.18)}
+.shopActions .btnSecondary{background:rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.10)}
+@media (max-width:420px){.shopActions .btn{min-height:44px;font-size:15px;border-radius:14px}}

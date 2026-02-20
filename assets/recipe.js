@@ -1,7 +1,15 @@
 (function(){
   const data = window.RECIPE_DATA;
   if(!data) return;
-  const U = window.KOCHBUCH_UTILS;
+  // Utils can be missing if cached files are inconsistent; provide a safe fallback.
+  const U = window.KOCHBUCH_UTILS || {
+    normUnit: (u)=>String(u||""),
+    autoConvert: (qty, unit)=>({ qty, unit }),
+    roundSmart: (n)=>String(n),
+    tryNum: (x)=>{ const n=Number(String(x||"").replace(",",".")); return Number.isFinite(n)?n:null; },
+    showToast: ()=>{},
+    hapt: ()=>{}
+  };
   const $ = (s)=>document.querySelector(s);
   const ls = {
     get(k, fb){ try{ const v = localStorage.getItem(k); return v?JSON.parse(v):fb; }catch{return fb;} },
@@ -43,29 +51,48 @@ const num = (x)=>U.tryNum(x);
   }
   function renderIngredients(){
     if(!listEl) return;
-    listEl.innerHTML = "";
-    for(const i of scaledIngredients()){
-      const row = document.createElement("div");
-      row.className = "ingRow";
-      const left = document.createElement("div");
-      left.className = "ingLeft";
-      const name = document.createElement("div");
-      name.className = "ingName";
-      name.textContent = i.item || "—";
-      left.appendChild(name);
-      const qty = document.createElement("div");
-      qty.className = "ingQty";
-      const unit = U.normUnit(i.unit||"");
-      const qn = num(i.qty);
-      if(qn !== null){
-        const conv = U.autoConvert(qn, unit);
-        qty.textContent = `${U.roundSmart(conv.qty)} ${conv.unit}`.trim();
-      }else{
-        qty.textContent = `${String(i.qty||"").trim()} ${unit}`.trim();
+    try{
+      listEl.innerHTML = "";
+      const items = scaledIngredients();
+      if(!items.length){
+        const empty = document.createElement('div');
+        empty.className = 'dim';
+        empty.style.padding = '12px 2px';
+        empty.textContent = 'Keine Zutaten hinterlegt.';
+        listEl.appendChild(empty);
+        return;
       }
-      row.appendChild(left);
-      row.appendChild(qty);
-      listEl.appendChild(row);
+      for(const i of items){
+        const row = document.createElement("div");
+        row.className = "ingRow";
+        const left = document.createElement("div");
+        left.className = "ingLeft";
+        const name = document.createElement("div");
+        name.className = "ingName";
+        name.textContent = i.item || "—";
+        left.appendChild(name);
+        const qty = document.createElement("div");
+        qty.className = "ingQty";
+        const unit = U.normUnit(i.unit||"");
+        const qn = num(i.qty);
+        if(qn !== null){
+          const conv = U.autoConvert(qn, unit);
+          qty.textContent = `${U.roundSmart(conv.qty)} ${conv.unit}`.trim();
+        }else{
+          qty.textContent = `${String(i.qty||"").trim()} ${unit}`.trim();
+        }
+        row.appendChild(left);
+        row.appendChild(qty);
+        listEl.appendChild(row);
+      }
+    }catch(err){
+      console.error('renderIngredients failed', err);
+      listEl.innerHTML = "";
+      const bad = document.createElement('div');
+      bad.className = 'dim';
+      bad.style.padding = '12px 2px';
+      bad.textContent = 'Zutaten konnten nicht angezeigt werden (Fehler).';
+      listEl.appendChild(bad);
     }
   }
   servingsInput?.addEventListener("input", renderIngredients);
@@ -148,7 +175,14 @@ freezerBtn?.addEventListener("click", ()=>{
     }
     if(undoBtn) undoBtn.style.opacity = (e.cookedCount||0)>0 ? "1" : ".55";
   }
-  favBtn?.addEventListener("click", ()=>{ U.hapt(); const e=getEntry(); e.favorite=!e.favorite; setEntry(e); renderStats(); U.showToast("Undo: gekocht"); U.showToast("Als gekocht gespeichert"); U.showToast(e.favorite?"Favorit gespeichert":"Favorit entfernt"); });
+  favBtn?.addEventListener("click", ()=>{
+    U.hapt();
+    const e=getEntry();
+    e.favorite=!e.favorite;
+    setEntry(e);
+    renderStats();
+    U.showToast(e.favorite?"Favorit gespeichert":"Favorit entfernt");
+  });
   cookedBtn?.addEventListener("click", ()=>{
     const e=getEntry();
     const now=new Date().toISOString();
@@ -160,6 +194,7 @@ freezerBtn?.addEventListener("click", ()=>{
     setEntry(e);
     cookedBtn.classList.add("saved"); setTimeout(()=>cookedBtn.classList.remove("saved"),600);
     renderStats();
+    U.showToast("Als gekocht gespeichert");
   });
   undoBtn?.addEventListener("click", ()=>{
     const e=getEntry();
@@ -207,6 +242,7 @@ freezerBtn?.addEventListener("click", ()=>{
   addBtn?.addEventListener("click", ()=>{
     mergeIntoShopping(scaledIngredients());
     addBtn.classList.add("saved"); setTimeout(()=>addBtn.classList.remove("saved"),600);
+    U.showToast("Zur Liste hinzugefügt");
   });
 
   renderIngredients();

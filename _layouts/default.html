@@ -6,14 +6,9 @@
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="theme-color" content="#f6f7f9">
 
-  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32.png' | relative_url }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16.png' | relative_url }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
-
   <!-- Wichtig: relative_url sorgt dafür, dass es mit baseurl funktioniert -->
-  <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
-  <script src="{{ '/assets/utils.js' | relative_url }}"></script>
+  <link rel="stylesheet" href="{{ ' /assets/styles.css?v=20260220_5' | relative_url }}">
+  <script src="{{ ' /assets/utils.js?v=20260220_5' | relative_url }}"></script>
 </head>
 <body class="{% if page.layout == 'recipe' %}isRecipe{% endif %}">
   <!-- iPhone-friendly Topbar: minimal -->
@@ -43,7 +38,7 @@
   {% unless page.layout == "recipe" %}
 <nav class="tabbar" aria-label="Navigation">
   <div class="tabbarInner container">
-    <a class="tabItem" data-tab href="{{ \'/\' | relative_url }}">
+    <a class="tabItem" data-tab href="{{ '/' | relative_url }}">
       <span class="tabIcon"><svg class="iconSvg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 3 10.6v9.2a1.2 1.2 0 0 0 1.2 1.2h5.1v-6.6h5.4V21h5.1A1.2 1.2 0 0 0 21 19.8v-9.2L12 3.2zm7 16.6h-3.1v-6.6H8.1v6.6H5v-8.5l7-5.7 7 5.7v8.5z"/></svg></span><span class="tabLabel">Start</span>
     </a>
 
