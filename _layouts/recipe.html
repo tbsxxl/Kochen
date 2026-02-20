@@ -34,6 +34,11 @@ layout: default
         {% if page.time %}<span class="kv">⏱ {{ page.time }}</span>{% endif %}
         {% if page.servings %}<span class="kv">🍽 {{ page.servings }}</span>{% endif %}
         {% if page.date %}<span class="kv">📅 {{ page.date | date: "%d.%m.%Y" }}</span>{% endif %}
+        <span class="kv kvFreezer" id="freezerPill" hidden>
+          <span class="kvIco"><svg class="iconSvg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v4.1l2.9-1.7 1 1.7-2.9 1.7 2.9 1.7-1 1.7L13 9.9V13l3.5-2 1 1.7-3.5 2 3.5 2-1 1.7-3.5-2V22h-2v-4.1l-2.9 1.7-1-1.7 2.9-1.7-2.9-1.7 1-1.7L11 14.1V11l-3.5 2-1-1.7 3.5-2-3.5-2 1-1.7 3.5 2V2z"/></svg></span>
+          <span id="freezerCount">0</span>
+        </span>
+      
       </div>
 
       {% if page.tags %}
@@ -122,11 +127,16 @@ layout: default
 
   <div class="sheetBody">
     <button class="sheetRow" id="undoCookedBtn" type="button">↩︎ Undo „Gekocht“</button>
+    <button class="sheetRow" id="freezerPlusBtn" type="button">❄︎ +1 in Kühltruhe</button>
+    <button class="sheetRow" id="freezerMinusBtn" type="button">❄︎ −1 entnehmen</button>
+    <button class="sheetRow" id="freezerClearBtn" type="button">❄︎ Kühltruhe leeren</button>
+    <button class="sheetRow" id="resetCookMode" type="button">🧹 Cooking Mode zurücksetzen</button>
+    <div class="sheetSep"></div>
     <button class="sheetRow" id="printBtn" type="button">🖨 Drucken</button>
   </div>
 </section>
 
-<script defer src="{{ '/assets/recipe.js?v=20260220_5' | relative_url }}"></script>
+<script defer src="{{ '/assets/recipe.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
 <script>
 (function(){
