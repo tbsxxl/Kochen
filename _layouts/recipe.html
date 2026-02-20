@@ -1,4 +1,3 @@
-<!-- _layouts/recipe.html -->
 ---
 layout: default
 ---
@@ -15,12 +14,6 @@ layout: default
   <div class="card cardPad">
     <div class="recipeHeader">
       <div class="h1" style="margin:0">{{ page.title }}</div>
-
-      {% if page.image %}
-        <div class="recipeHero">
-          <img class="recipeHeroImg" src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}">
-        </div>
-      {% endif %}
 
       <div class="kvRow">
         {% if page.category %}<span class="kv">🏷 {{ page.category }}</span>{% endif %}
