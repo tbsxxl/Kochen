@@ -1,9 +1,9 @@
-<!-- kategorien.md (vollständig) -->
 ---
 layout: page
 title: Kategorien
 permalink: /kategorien/
 ---
+
 
 {% assign grouped = site.recipes | group_by: "category" | sort: "name" %}
 {% for g in grouped %}
