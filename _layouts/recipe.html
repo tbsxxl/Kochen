@@ -1,6 +1,8 @@
+<!-- _layouts/recipe.html (vollständig) -->
 ---
 layout: default
 ---
+
 <script>
   window.RECIPE_DATA = {
     id: "{{ page.url | relative_url }}",
@@ -14,6 +16,19 @@ layout: default
   <div class="card cardPad">
     <div class="recipeHeader">
       <div class="h1" style="margin:0">{{ page.title }}</div>
+
+      {% if page.image %}
+        <div class="recipeHero">
+          <img
+            class="recipeHeroImg"
+            src="{{ page.image | relative_url }}"
+            alt="{{ page.title | escape }}"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;max-height:240px;object-fit:cover;display:block;"
+          >
+        </div>
+      {% endif %}
 
       <div class="kvRow">
         {% if page.category %}<span class="kv">🏷 {{ page.category }}</span>{% endif %}
@@ -33,26 +48,11 @@ layout: default
 
     <div class="hr"></div>
 
-    <div class="card cardPad" style="box-shadow:none;border:1px solid rgba(15,23,42,.10)">
-      <div class="footerRow" style="margin-bottom:10px">
-        <button class="btn" id="freezerBtn" style="flex:1">🧊 Nicht in Kühltruhe</button>
-        <button class="btn" id="favoriteBtn" style="flex:1">☆ Favorit</button>
-      </div>
+    <div class="dim" id="statsLine"></div>
 
-      <div class="footerRow" style="margin-bottom:10px">
-        <button class="btn green" id="cookedBtn" style="flex:1">✅ Gekocht</button>
-        <button class="btn" id="undoCookedBtn" style="flex:1">↩︎ Undo</button>
-      </div>
+    <div class="hr"></div>
 
-      <div class="footerRow" style="margin-bottom:10px">
-        <button class="btn blue" id="addToShopping" style="flex:1">Zur Shopping List</button>
-        <button class="btn" onclick="window.print()" style="flex:1">Drucken</button>
-      </div>
-
-      <div class="dim" id="statsLine" style="margin-top:6px"></div>
-
-      <div class="hr"></div>
-
+    <div class="card cardPad recipeInnerCard" style="box-shadow:none;border:1px solid rgba(15,23,42,.10)">
       <div class="searchRow" style="padding:0">
         <div style="flex:1">
           <div class="sub" style="margin-bottom:6px">Portionen</div>
@@ -82,4 +82,66 @@ layout: default
   </div>
 </div>
 
+<!-- Sticky Bottom Action Bar -->
+<div class="recipeBar" id="recipeBar">
+  <div class="recipeBarInner">
+    <button class="rbarBtn" id="cookedBtn" type="button">
+      <span class="rbarIcon">✅</span><span class="rbarTxt">Gekocht</span>
+    </button>
+
+    <button class="rbarBtn" id="favoriteBtn" type="button">
+      <span class="rbarIcon">☆</span><span class="rbarTxt">Favorit</span>
+    </button>
+
+    <button class="rbarBtn rbarPrimary" id="addToShopping" type="button">
+      <span class="rbarIcon">🛒</span><span class="rbarTxt">Zur Liste</span>
+    </button>
+
+    <button class="rbarBtn" id="freezerBtn" type="button">
+      <span class="rbarIcon">🧊</span><span class="rbarTxt">Freezer</span>
+    </button>
+
+    <button class="rbarBtn" id="recipeMoreBtn" type="button">
+      <span class="rbarIcon">⋯</span><span class="rbarTxt">Mehr</span>
+    </button>
+  </div>
+</div>
+
+<!-- Recipe More Sheet -->
+<div class="sheetOverlay" id="recipeSheetOverlay"></div>
+<section class="sheet" id="recipeSheet" aria-label="Rezept-Menü" aria-hidden="true">
+  <div class="sheetGrab"></div>
+  <div class="sheetHead">
+    <div class="sheetTitle">Rezept</div>
+    <button class="navIconBtn" id="recipeSheetClose" aria-label="Schließen" type="button">✕</button>
+  </div>
+
+  <div class="sheetBody">
+    <button class="sheetRow" id="undoCookedBtn" type="button">↩︎ Undo „Gekocht“</button>
+    <button class="sheetRow" id="printBtn" type="button">🖨 Drucken</button>
+  </div>
+</section>
+
 <script src="{{ '/assets/recipe.js' | relative_url }}"></script>
+
+<script>
+(function(){
+  // Recipe sheet
+  const moreBtn = document.getElementById('recipeMoreBtn');
+  const overlay = document.getElementById('recipeSheetOverlay');
+  const sheet = document.getElementById('recipeSheet');
+  const closeBtn = document.getElementById('recipeSheetClose');
+  const printBtn = document.getElementById('printBtn');
+
+  function openSheet(){ overlay.classList.add('open'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); }
+  function closeSheet(){ overlay.classList.remove('open'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); }
+
+  moreBtn?.addEventListener('click', openSheet);
+  overlay?.addEventListener('click', closeSheet);
+  closeBtn?.addEventListener('click', closeSheet);
+  printBtn?.addEventListener('click', ()=>window.print());
+
+  // Hide recipe bar on non-recipe pages (safety, if layout reused)
+  // (On this layout it always exists, so no-op)
+})();
+</script>
