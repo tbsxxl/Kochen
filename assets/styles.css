@@ -218,3 +218,36 @@ button,input,textarea{touch-action:manipulation}
   box-shadow:inset 0 0 0 1px rgba(15,23,42,.10);
 }
 .smallBtn:active{transform:scale(.99)}
+/* Recipe images */
+.thumb{
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(15,23,42,.10);
+  background: var(--muted);
+}
+
+.thumbImg{
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.recipeHero{
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(15,23,42,.10);
+  background: var(--muted);
+}
+
+.recipeHeroImg{
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 640px){
+  .thumbImg{ height: 170px; }
+  .recipeHeroImg{ height: 220px; }
+}
