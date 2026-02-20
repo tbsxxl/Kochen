@@ -1,0 +1,75 @@
+---
+layout: default
+---
+
+<div class="section">
+  <div class="card cardPad">
+    <div class="h1">Übersicht</div>
+    <p class="p">Rezepte, Kategorien, Shopping List, Favoriten & Stats.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="h2" style="padding:0 2px;">Empfehlungen</div>
+  <div id="recommendations"></div>
+</div>
+
+<div class="section">
+  <div class="h2" style="padding:0 2px;">Neueste Rezepte</div>
+  <div class="grid">
+    {% assign sorted = site.recipes | sort: "date" | reverse %}
+    {% for r in sorted limit: 6 %}
+      <a class="linkCard" href="{{ r.url | relative_url }}">
+        <div class="card recipeCard cardHover">
+          {% if r.image %}
+            <div class="thumb">
+              <img
+                class="thumbImg"
+                src="{{ r.image | relative_url }}"
+                alt="{{ r.title | escape }}"
+                loading="lazy"
+                decoding="async"
+                style="width:100%;max-height:170px;object-fit:cover;display:block;"
+              >
+            </div>
+          {% endif %}
+
+          <div class="recipeTop">
+            <h3 class="recipeTitle">{{ r.title }}</h3>
+            {% if r.category %}<span class="badge action">{{ r.category }}</span>{% endif %}
+          </div>
+
+          <div class="recipeMeta">
+            {% if r.time %}<span>⏱ {{ r.time }}</span>{% endif %}
+            {% if r.servings %}<span>🍽 {{ r.servings }}</span>{% endif %}
+          </div>
+
+          {% if r.tags %}
+          <div class="chips">
+            {% for t in r.tags limit: 4 %}
+              <span class="chip">{{ t }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+<script type="application/json" id="allRecipesJson">
+[
+{% assign sorted2 = site.recipes | sort: "title" %}
+{% for r in sorted2 %}
+  {
+    "id": "{{ r.url | relative_url }}",
+    "title": {{ r.title | jsonify }},
+    "category": {{ r.category | jsonify }},
+    "time": {{ r.time | jsonify }},
+    "servings": {{ r.servings | jsonify }},
+    "tags": {{ r.tags | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
+</script>
+<script defer src="{{ '/assets/home-reco.js?v=20260220_5' | relative_url }}"></script>

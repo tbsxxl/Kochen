@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<div class="section">
+  <div class="card cardPad">
+    {% if page.title %}
+      <div class="h1" style="margin-top:0">{{ page.title }}</div>
+      <div class="hr"></div>
+    {% endif %}
+    <div class="pageContent">
+      {{ content }}
+    </div>
+  </div>
+</div>
