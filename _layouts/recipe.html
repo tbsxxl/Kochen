@@ -82,27 +82,11 @@ layout: default
 </div>
 
 <!-- Sticky Bottom Action Bar -->
-<div class="recipeBar" id="recipeBar">
-  <div class="recipeBarInner">
-    <button class="rbarBtn" id="cookedBtn" type="button">
-      <span class="rbarIcon">✅</span><span class="rbarTxt">Gekocht</span>
-    </button>
-
-    <button class="rbarBtn" id="favoriteBtn" type="button">
-      <span class="rbarIcon">☆</span><span class="rbarTxt">Favorit</span>
-    </button>
-
-    <button class="rbarBtn rbarPrimary" id="addToShopping" type="button">
-      <span class="rbarIcon">🛒</span><span class="rbarTxt">Zur Liste</span>
-    </button>
-
-    <button class="rbarBtn" id="freezerBtn" type="button">
-      <span class="rbarIcon">🧊</span><span class="rbarTxt">Freezer</span>
-    </button>
-
-    <button class="rbarBtn" id="recipeMoreBtn" type="button">
-      <span class="rbarIcon">⋯</span><span class="rbarTxt">Mehr</span>
-    </button>
+<div class="recipeBar">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+    <button class="rbarBtn">Gekocht</button>
+    <button class="rbarBtn rbarPrimary">Zur Liste</button>
+    <button class="rbarBtn">Mehr</button>
   </div>
 </div>
 
