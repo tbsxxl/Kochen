@@ -5,6 +5,7 @@ category: "Pasta"
 tags: ["ragù", "slow", "italienisch"]
 time: "4–5 Std"
 servings: 6
+image: /recipes/images/bolognese.jpg
 ingredients:
   - { qty: 800, unit: "g", item: "Hackfleisch" }
   - { qty: 1, unit: "Stk", item: "Zwiebel" }
