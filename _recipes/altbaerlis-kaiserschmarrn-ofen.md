@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Dessert"
 tags: ["österreichisch", "süßspeise", "ofen", "kaiserschmarrn"]
 time: "ca. 55 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/Kaiserschmarrn.png
 servings: 4
 ingredients:
   - { qty: 130, unit: "g", item: "Mehl" }
