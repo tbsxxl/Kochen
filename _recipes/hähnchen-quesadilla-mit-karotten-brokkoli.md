@@ -1,5 +1,5 @@
 ---
-title: "Quesadilla mit Pollo, Brokkoli & Karotte"
+title: "Quesadilla mit Hähnchen, Brokkoli & Karotte"
 date: 2026-02-20
 category: "Mexican"
 tags: ["mexikanisch", "quesadilla", "hähnchen", "pfanne", "Cocina Mexicana", "Mexican"]
