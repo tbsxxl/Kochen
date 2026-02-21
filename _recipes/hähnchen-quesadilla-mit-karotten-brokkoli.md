@@ -1,8 +1,8 @@
 ---
-title: "Hähnchen Quesadilla mit Karotten & Brokkoli"
+title: "Quesadilla mit Pollo, Brokkoli & Karotte"
 date: 2026-02-20
 category: "Mexican"
-tags: ["quesadilla", "hähnchen", "gemüse", "pfanne"]
+tags: ["mexikanisch", "quesadilla", "hähnchen", "pfanne", "Cocina Mexicana", "Mexican"]
 time: "ca. 25–35 Min"
 image: /recipes/images/ques.png
 servings: 2–3
