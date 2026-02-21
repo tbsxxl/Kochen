@@ -32,11 +32,22 @@
 
 *{-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
+
+
+/* Globaler Hintergrund-Verlauf: immer vollflächig, unabhängig von Wrapper-Höhe */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background: linear-gradient(180deg, #eaf1ff 0%, #e6f5f0 100%);
+}
 body{
   font-family: system-ui, -apple-system, Arial;
   margin:0;
   padding:0;
-  background:var(--bg);
+  background: transparent;
   color:var(--text);
   font-variant-numeric: tabular-nums;
   min-height: 100dvh;
@@ -693,3 +704,9 @@ body{
 .listGroup .shopRow + .shopRow{ border-top: 1px solid rgba(15,23,42,.08); }
 
 .uEmpty{padding:14px 12px;color:rgba(15,23,42,.62);font-size:14px;}
+
+
+.container,
+.appMain{
+  background: transparent !important;
+}
