@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Mexican"
 tags: ["tacos", "hackfleisch", "schnell", "party"]
 time: "ca. 50 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/tacos.png
 servings: 4
 ingredients:
   - { qty: 1, unit: "EL", item: "Öl" }
