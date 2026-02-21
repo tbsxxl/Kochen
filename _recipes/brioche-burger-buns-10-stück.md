@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Bread"
 tags: ["burger", "brioche", "hefe", "backen"]
 time: "ca. 2 Std 50 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/Buns.png
 servings: 10
 ingredients:
   - { qty: 200, unit: "ml", item: "Wasser, warm" }
