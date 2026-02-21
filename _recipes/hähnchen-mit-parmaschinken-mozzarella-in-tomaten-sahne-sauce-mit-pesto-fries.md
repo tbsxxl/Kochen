@@ -1,5 +1,5 @@
 ---
-title: "Suprema di Pollo mit Prosciutto di Parma & Mozzarella"
+title: "Hähnchen mit Prosciutto & Mozzarella"
 date: 2026-02-20
 category: "Chicken"
 tags: ["italienisch", "hähnchen", "prosciutto", "mozzarella", "Pollame & Geflügel", "Chicken"]
