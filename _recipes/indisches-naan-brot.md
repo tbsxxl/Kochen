@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Bread"
 tags: ["indisch", "naan", "hefe", "pfanne"]
 time: "ca. 1 Std 55 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/naan.png
 servings: 1
 ingredients:
   - { qty: 500, unit: "g", item: "Mehl" }
