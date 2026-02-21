@@ -1,8 +1,8 @@
 ---
-title: "Geröstete Paprikacreme mit gegrilltem Gemüsetatar und Kräuteröl"
+title: "Crema di Peperoni Arrostiti mit Gemüsetatar & Olio alle Erbe"
 date: 2026-02-20
 category: "Starter"
-tags: ["suppe", "vegetarisch", "fine dining", "paprika", "gemüsetatar"]
+tags: ["italienisch", "vorspeise", "paprika", "vegetarisch", "Antipasto", "Starter"]
 time: "ca. 45–60 Min"
 image: /recipes/images/Paprikacreme.png
 servings: 4
