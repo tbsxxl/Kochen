@@ -1,5 +1,5 @@
 ---
-title: "Spiedini di Maiale mit Salsa di Paprika"
+title: "Schaschlik vom Schwein mit Paprikasauce "
 date: 2026-02-20
 category: "Pork"
 tags: ["italienisch", "schwein", "spieße", "paprikasauce", "Carne", "Pork"]
