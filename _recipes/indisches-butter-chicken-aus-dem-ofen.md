@@ -1,5 +1,5 @@
 ---
-title: "Butter Chicken Tandoori"
+title: "Butter Chicken"
 date: 2026-02-20
 category: "Indian"
 tags: ["indisch", "hähnchen", "tandoori", "ofen", "Pollame & Geflügel", "Chicken"]
