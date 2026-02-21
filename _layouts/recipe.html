@@ -71,13 +71,6 @@ layout: default
     <div class="recipeBody">
       {{ content }}
     </div>
-
-    <div class="hr"></div>
-
-    <div class="footerRow">
-      <a class="btn" href="{{ '/rezeptindex/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">← Alle Rezepte</a>
-      <a class="btn" href="{{ '/shopping/' | relative_url }}" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;flex:1">🛒 Shopping List</a>
-    </div>
   </div>
 </div>
 
@@ -97,7 +90,7 @@ layout: default
     </button>
 
     <button class="rbarBtn" id="freezerBtn" type="button">
-      <span class="rbarIcon">🧊</span><span class="rbarTxt">Freezer</span>
+      <span class="rbarIcon">🧊</span><span class="rbarTxt">Kühltruhe</span>
     </button>
 
     <button class="rbarBtn" id="recipeMoreBtn" type="button">
@@ -116,10 +109,63 @@ layout: default
   </div>
 
   <div class="sheetBody">
+    <button class="sheetRow" id="cookingModeBtn" type="button">🍳 Kochmodus</button>
     <button class="sheetRow" id="undoCookedBtn" type="button">↩︎ Undo „Gekocht“</button>
     <button class="sheetRow" id="printBtn" type="button">🖨 Drucken</button>
   </div>
 </section>
+
+<!-- Freezer Sheet (Kühltruhe) -->
+<div class="sheetOverlay" id="freezerSheetOverlay"></div>
+<section class="sheet" id="freezerSheet" aria-label="Kühltruhe" aria-hidden="true">
+  <div class="sheetGrab"></div>
+  <div class="sheetHead">
+    <div class="sheetTitle">Kühltruhe</div>
+    <button class="navIconBtn" id="freezerSheetClose" aria-label="Schließen" type="button">✕</button>
+  </div>
+  <div class="sheetBody">
+    <div class="sheetRow" style="display:flex;gap:10px;align-items:center;justify-content:space-between">
+      <div>
+        <div class="sub" style="margin:0">Portionen</div>
+        <div class="dim" style="margin-top:4px" id="freezerHint">Nicht in Kühltruhe</div>
+      </div>
+      <div class="qtyStepper" aria-label="Portionen ändern">
+        <button class="stepBtn" id="freezerMinus" type="button" aria-label="Minus">−</button>
+        <div class="stepVal" id="freezerCount">0</div>
+        <button class="stepBtn" id="freezerPlus" type="button" aria-label="Plus">+</button>
+      </div>
+    </div>
+    <div class="sheetSep"></div>
+    <button class="sheetRow" id="freezerRemove" type="button">🗑 Entfernen</button>
+  </div>
+</section>
+
+<!-- Cooking Mode Overlay -->
+<div class="cookOverlay" id="cookOverlay" aria-hidden="true">
+  <div class="cookTop">
+    <button class="navIconBtn" id="cookClose" type="button" aria-label="Kochmodus schließen">✕</button>
+    <div class="cookTitle" id="cookTitle">Kochmodus</div>
+    <div class="cookPill" id="cookStepPill">1/1</div>
+  </div>
+
+  <div class="cookTabs" role="tablist" aria-label="Kochmodus Tabs">
+    <button class="cookTab active" id="cookTabSteps" type="button" role="tab" aria-selected="true">Schritte</button>
+    <button class="cookTab" id="cookTabIngs" type="button" role="tab" aria-selected="false">Zutaten</button>
+  </div>
+
+  <div class="cookBody" id="cookBody">
+    <div class="cookPanel" id="cookPanelSteps" role="tabpanel">
+      <div class="cookStep" id="cookStepText"></div>
+      <div class="cookNav">
+        <button class="cookNavBtn" id="cookPrev" type="button">‹ Zurück</button>
+        <button class="cookNavBtn primary" id="cookNext" type="button">Weiter ›</button>
+      </div>
+    </div>
+    <div class="cookPanel" id="cookPanelIngs" role="tabpanel" hidden>
+      <div class="cookIngs" id="cookIngredients"></div>
+    </div>
+  </div>
+</div>
 
 <script defer src="{{ '/assets/recipe.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 

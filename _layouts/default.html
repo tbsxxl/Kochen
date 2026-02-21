@@ -65,6 +65,7 @@
     </div>
 
     <div class="sheetBody">
+      <a class="sheetRow" href="{{ '/kuehltruhe/' | relative_url }}">🧊 Kühltruhe</a>
       <a class="sheetRow" href="{{ '/kategorien/' | relative_url }}">🏷 Kategorien</a>
       <a class="sheetRow" href="{{ '/admin/' | relative_url }}">⚙︎ Admin</a>
       <a class="sheetRow" href="{{ '/backup/' | relative_url }}">⬇︎ Backup / Import</a>
@@ -95,6 +96,7 @@
     // Mark "Mehr" as active for secondary pages
     const more = document.getElementById('moreBtn');
     const morePaths = [
+      "{{ '/kuehltruhe/' | relative_url }}",
       "{{ '/kategorien/' | relative_url }}",
       "{{ '/admin/' | relative_url }}",
       "{{ '/backup/' | relative_url }}"

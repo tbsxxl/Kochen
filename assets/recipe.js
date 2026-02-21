@@ -59,46 +59,80 @@
   // Freezer
   const freezerKey = "kochbuch.freezer";
   const freezerBtn = $("#freezerBtn");
+  const freezerOverlay = $("#freezerSheetOverlay");
+  const freezerSheet = $("#freezerSheet");
+  const freezerClose = $("#freezerSheetClose");
+  const freezerMinus = $("#freezerMinus");
+  const freezerPlus = $("#freezerPlus");
+  const freezerCount = $("#freezerCount");
+  const freezerHint = $("#freezerHint");
+  const freezerRemove = $("#freezerRemove");
   function getFreezer(){ return ls.get(freezerKey, {}); }
   function setFreezer(v){ ls.set(freezerKey, v); }
   function freezerEntry(){ const f=getFreezer(); return f[data.id] || null; }
   function renderFreezer(){
     if(!freezerBtn) return;
     const e = freezerEntry();
+    const iconEl = freezerBtn.querySelector('.rbarIcon');
+    const txtEl = freezerBtn.querySelector('.rbarTxt');
+    if(iconEl) iconEl.textContent = '🧊';
     if(!e){
-      freezerBtn.textContent = "🧊 Nicht in Kühltruhe";
+      if(txtEl) txtEl.textContent = "Kühltruhe";
       freezerBtn.classList.remove("green");
     }else{
       const p = e.portions ? `${e.portions} Portion${e.portions===1?"":"en"}` : "in Kühltruhe";
-      freezerBtn.textContent = `🧊 ${p}`;
+      if(txtEl) txtEl.textContent = p;
       freezerBtn.classList.add("green");
     }
   }
-  freezerBtn?.addEventListener("click", ()=>{
+
+  function openFreezerSheet(){
+    if(!freezerOverlay || !freezerSheet) return;
+    freezerOverlay.classList.add('open');
+    freezerSheet.classList.add('open');
+    freezerSheet.setAttribute('aria-hidden','false');
+    syncFreezerSheet();
+  }
+  function closeFreezerSheet(){
+    freezerOverlay?.classList.remove('open');
+    freezerSheet?.classList.remove('open');
+    freezerSheet?.setAttribute('aria-hidden','true');
+  }
+  function syncFreezerSheet(){
+    const e = freezerEntry();
+    const p = e?.portions ? Number(e.portions) : 0;
+    if(freezerCount) freezerCount.textContent = String(p);
+    if(freezerHint) freezerHint.textContent = e ? 'In Kühltruhe gespeichert' : 'Nicht in Kühltruhe';
+    freezerMinus && (freezerMinus.disabled = p<=0);
+    freezerRemove && (freezerRemove.disabled = !e);
+  }
+  function setPortions(p){
     const f = getFreezer();
-    const e = f[data.id] || null;
-    if(!e){
-      const input = prompt("Wie viele Portionen sind in der Kühltruhe? (Zahl)", "1");
-      const n = num(input);
-      if(!(n && n>0)) return;
-      f[data.id] = { portions: Math.round(n), added: new Date().toISOString() };
-      setFreezer(f); renderFreezer(); return;
+    const n = Math.max(0, Math.min(999, Math.round(Number(p)||0)));
+    if(n<=0){
+      delete f[data.id];
+    }else{
+      f[data.id] = { portions: n, added: (f[data.id]?.added || new Date().toISOString()) };
     }
-    const action = prompt("Kühltruhe:\n1 = Portion entnommen\n2 = Portionen ändern\n3 = Entfernen", "1");
-    if(action === "1"){
-      e.portions = Math.max(0, (e.portions||0) - 1);
-      if(e.portions <= 0) delete f[data.id]; else f[data.id]=e;
-      setFreezer(f); renderFreezer();
-    }else if(action === "2"){
-      const input = prompt("Neue Portionen (Zahl)", String(e.portions||1));
-      const n = num(input);
-      if(!(n && n>0)) return;
-      e.portions = Math.round(n);
-      f[data.id]=e; setFreezer(f); renderFreezer();
-    }else if(action === "3"){
-      delete f[data.id]; setFreezer(f); renderFreezer();
-    }
+    setFreezer(f);
+    renderFreezer();
+    syncFreezerSheet();
+  }
+
+  freezerBtn?.addEventListener('click', openFreezerSheet);
+  freezerOverlay?.addEventListener('click', closeFreezerSheet);
+  freezerClose?.addEventListener('click', closeFreezerSheet);
+  freezerPlus?.addEventListener('click', ()=>{
+    const e=freezerEntry();
+    const p = (e?.portions?Number(e.portions):0) + 1;
+    setPortions(p);
   });
+  freezerMinus?.addEventListener('click', ()=>{
+    const e=freezerEntry();
+    const p = (e?.portions?Number(e.portions):0) - 1;
+    setPortions(p);
+  });
+  freezerRemove?.addEventListener('click', ()=> setPortions(0));
 
   // Stats
   const statsKey = "kochbuch.stats";
@@ -125,7 +159,10 @@
   function renderStats(){
     const e=getEntry();
     if(favBtn){
-      favBtn.textContent = e.favorite ? "★ Favorit" : "☆ Favorit";
+      const iconEl = favBtn.querySelector('.rbarIcon');
+      const txtEl = favBtn.querySelector('.rbarTxt');
+      if(iconEl) iconEl.textContent = e.favorite ? '★' : '☆';
+      if(txtEl) txtEl.textContent = 'Favorit';
       favBtn.classList.toggle("blue", !!e.favorite);
     }
     if(statsLine){
@@ -192,6 +229,130 @@
   addBtn?.addEventListener("click", ()=>{
     mergeIntoShopping(scaledIngredients());
     addBtn.classList.add("saved"); setTimeout(()=>addBtn.classList.remove("saved"),600);
+  });
+
+  // Cooking mode
+  const cookingBtn = $("#cookingModeBtn");
+  const cookOverlay = $("#cookOverlay");
+  const cookClose = $("#cookClose");
+  const cookTitle = $("#cookTitle");
+  const cookStepPill = $("#cookStepPill");
+  const cookStepText = $("#cookStepText");
+  const cookPrev = $("#cookPrev");
+  const cookNext = $("#cookNext");
+  const cookTabSteps = $("#cookTabSteps");
+  const cookTabIngs = $("#cookTabIngs");
+  const cookPanelSteps = $("#cookPanelSteps");
+  const cookPanelIngs = $("#cookPanelIngs");
+  const cookIngredients = $("#cookIngredients");
+
+  let steps = [];
+  let stepIdx = 0;
+  let wakeLock = null;
+
+  function collectSteps(){
+    const body = document.querySelector('.recipeBody');
+    if(!body) return [];
+    const lis = Array.from(body.querySelectorAll('ol li'));
+    const out = lis.map(li=>li.textContent.trim()).filter(Boolean);
+    if(out.length) return out;
+    // fallback: paragraphs as steps
+    return Array.from(body.querySelectorAll('p'))
+      .map(p=>p.textContent.trim())
+      .filter(t=>t.length>3)
+      .slice(0, 30);
+  }
+
+  function renderCookStep(){
+    if(!cookStepText || !cookStepPill) return;
+    const total = steps.length || 1;
+    stepIdx = Math.max(0, Math.min(total-1, stepIdx));
+    cookStepText.textContent = steps[stepIdx] || '—';
+    cookStepPill.textContent = `${stepIdx+1}/${total}`;
+    if(cookPrev) cookPrev.disabled = stepIdx===0;
+    if(cookNext) cookNext.disabled = stepIdx>=total-1;
+  }
+
+  function renderCookIngredients(){
+    if(!cookIngredients) return;
+    const ings = scaledIngredients();
+    cookIngredients.innerHTML = '';
+    for(const i of ings){
+      const unit = U.normUnit(i.unit||"");
+      const qn = num(i.qty);
+      let qty = '';
+      if(qn !== null){
+        const conv = U.autoConvert(qn, unit);
+        qty = `${U.roundSmart(conv.qty)} ${conv.unit}`.trim();
+      }else{
+        qty = `${String(i.qty||"").trim()} ${unit}`.trim();
+      }
+      const row = document.createElement('label');
+      row.className = 'cookIngRow';
+      row.innerHTML = `<input class="cookChk" type="checkbox" /> <div class="cookIngText"><div style="font-weight:700">${i.item||'—'}</div><div style="opacity:.85;margin-top:2px">${qty}</div></div>`;
+      cookIngredients.appendChild(row);
+    }
+  }
+
+  async function requestWakeLock(){
+    try{
+      if('wakeLock' in navigator && navigator.wakeLock?.request){
+        wakeLock = await navigator.wakeLock.request('screen');
+      }
+    }catch{ /* ignore */ }
+  }
+  async function releaseWakeLock(){
+    try{ await wakeLock?.release(); }catch{}
+    wakeLock = null;
+  }
+
+  function openCook(){
+    if(!cookOverlay) return;
+    // close recipe sheet if open
+    document.getElementById('recipeSheetOverlay')?.classList.remove('open');
+    const rs = document.getElementById('recipeSheet');
+    rs?.classList.remove('open');
+    rs?.setAttribute('aria-hidden','true');
+    steps = collectSteps();
+    stepIdx = 0;
+    if(cookTitle) cookTitle.textContent = data.title || 'Kochmodus';
+    cookOverlay.classList.add('open');
+    cookOverlay.setAttribute('aria-hidden','false');
+    document.body.classList.add('noScroll');
+    renderCookIngredients();
+    renderCookStep();
+    requestWakeLock();
+  }
+  function closeCook(){
+    cookOverlay?.classList.remove('open');
+    cookOverlay?.setAttribute('aria-hidden','true');
+    document.body.classList.remove('noScroll');
+    releaseWakeLock();
+  }
+
+  function setTab(which){
+    const stepsOn = which==='steps';
+    cookTabSteps?.classList.toggle('active', stepsOn);
+    cookTabSteps?.setAttribute('aria-selected', stepsOn?'true':'false');
+    cookTabIngs?.classList.toggle('active', !stepsOn);
+    cookTabIngs?.setAttribute('aria-selected', stepsOn?'false':'true');
+    if(cookPanelSteps) cookPanelSteps.hidden = !stepsOn;
+    if(cookPanelIngs) cookPanelIngs.hidden = stepsOn;
+  }
+
+  cookingBtn?.addEventListener('click', openCook);
+  cookClose?.addEventListener('click', closeCook);
+  cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
+  cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); });
+  cookNext?.addEventListener('click', ()=>{ stepIdx++; renderCookStep(); });
+  cookTabSteps?.addEventListener('click', ()=> setTab('steps'));
+  cookTabIngs?.addEventListener('click', ()=> setTab('ings'));
+
+  document.addEventListener('keydown', (e)=>{
+    if(!cookOverlay?.classList.contains('open')) return;
+    if(e.key === 'Escape') closeCook();
+    if(e.key === 'ArrowRight') { stepIdx++; renderCookStep(); }
+    if(e.key === 'ArrowLeft') { stepIdx--; renderCookStep(); }
   });
 
   renderIngredients();
