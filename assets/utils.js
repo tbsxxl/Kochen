@@ -41,5 +41,109 @@
     return (Math.abs(r - Math.round(r)) < 1e-9) ? String(Math.round(r)) : String(r);
   }
 
-  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum };
+
+  function renderToggleList(container, items, opts){
+    if(!container) return;
+    const {
+      emptyText = "Keine Einträge.",
+      getId = (item, idx) => String(idx),
+      getLabel = (item) => String(item?.label ?? item?.item ?? ""),
+      getSub = (item) => "",
+      getRightText = (item) => "",
+      isChecked = (item) => !!item?.checked,
+      onToggle = ()=>{},
+      onDelete = null
+    } = (opts || {});
+
+    container.innerHTML = "";
+    if(!items || !items.length){
+      const empty = document.createElement("div");
+      empty.className = "listRow";
+      empty.textContent = emptyText;
+      container.appendChild(empty);
+      return;
+    }
+
+    items.forEach((item, idx)=>{
+      const row = document.createElement("div");
+      row.className = "uRow pressable";
+      row.setAttribute("role","checkbox");
+      row.setAttribute("tabindex","0");
+
+      const checked = !!isChecked(item, idx);
+      row.setAttribute("aria-checked", checked ? "true" : "false");
+      row.dataset.id = getId(item, idx);
+      if(checked) row.classList.add("checked");
+
+      const lead = document.createElement("div");
+      lead.className = "uLead";
+      lead.textContent = checked ? "✓" : "○";
+      lead.setAttribute("aria-hidden","true");
+
+      const mid = document.createElement("div");
+      mid.className = "uMid";
+
+      const name = document.createElement("div");
+      name.className = "uName";
+      name.textContent = getLabel(item, idx) || "—";
+      mid.appendChild(name);
+
+      const subText = String(getSub(item, idx) || "").trim();
+      if(subText){
+        const sub = document.createElement("div");
+        sub.className = "uSub";
+        sub.textContent = subText;
+        mid.appendChild(sub);
+      }
+
+      const right = document.createElement("div");
+      right.className = "uRight";
+
+      const rt = getRightText(item, idx);
+      if(rt){
+        const qty = document.createElement("div");
+        qty.className = "uQty";
+        qty.textContent = String(rt);
+        right.appendChild(qty);
+      }
+
+      let delBtn = null;
+      if(typeof onDelete === "function"){
+        delBtn = document.createElement("button");
+        delBtn.className = "uDel";
+        delBtn.type = "button";
+        delBtn.textContent = "🗑";
+        delBtn.setAttribute("aria-label","Eintrag löschen");
+        right.appendChild(delBtn);
+        delBtn.addEventListener("click", (ev)=>{
+          ev.stopPropagation();
+          onDelete(item, idx);
+        });
+      }
+
+      function toggle(){
+        const now = !isChecked(item, idx);
+        onToggle(item, idx, now);
+      }
+
+      row.addEventListener("click", (ev)=>{
+        if(delBtn && (ev.target === delBtn)) return;
+        toggle();
+      });
+
+      row.addEventListener("keydown", (ev)=>{
+        if(ev.key === "Enter" || ev.key === " "){
+          ev.preventDefault();
+          toggle();
+        }
+      });
+
+      row.appendChild(lead);
+      row.appendChild(mid);
+      row.appendChild(right);
+      container.appendChild(row);
+    });
+  }
+
+  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum, renderToggleList };
 })();

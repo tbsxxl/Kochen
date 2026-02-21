@@ -629,6 +629,42 @@ body{
 }
 .listRow + .listRow{ border-top: 1px solid rgba(15,23,42,.08); }
 
+
+/* Unified toggle list rows (ingredients + shopping) */
+.uRow{
+  display:flex;align-items:center;gap:10px;
+  padding: 12px 12px;
+  min-height: 56px;
+  background: transparent;
+  border: none;
+  margin: 0;
+}
+.listGroup .uRow + .uRow{ border-top: 1px solid rgba(15,23,42,.08); }
+
+.uLead{
+  width: 28px;
+  flex: 0 0 28px;
+  display:flex;align-items:center;justify-content:center;
+  opacity:.55;
+  font-weight:800;
+}
+.uRow.checked .uLead{ opacity:1; }
+
+.uMid{ min-width:0; flex:1; }
+.uName{ font-weight: var(--wBody); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.uSub{ font-size: 13.5px; color: rgba(15,23,42,.62); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+.uRight{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
+.uQty{ font-weight: var(--wTitle); color: var(--text); white-space:nowrap; }
+.uDel{
+  width:44px;height:44px;border-radius:14px;border:1px solid rgba(15,23,42,.10);
+  background: rgba(255,255,255,.6);
+  display:inline-flex;align-items:center;justify-content:center;
+}
+
+.uRow.checked .uName{ text-decoration: line-through; opacity:.65; }
+.uRow.checked .uQty{ opacity:.55; }
+
 /* Recipe ingredients checklist */
 .ingCheckBtn{
   width:44px;height:44px;border-radius:14px;border:1px solid rgba(15,23,42,.10);
