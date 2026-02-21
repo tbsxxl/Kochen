@@ -33,7 +33,7 @@ html,body{height:100%}
 body{
   font-family: system-ui, -apple-system, Arial;
   margin:0;
-  padding:14px;
+  padding:0;
   background:var(--bg);
   color:var(--text);
   font-variant-numeric: tabular-nums;
@@ -49,7 +49,12 @@ a{color:inherit}
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
 
-.container{max-width:860px;margin:0 auto}
+.container{
+  max-width:860px;
+  margin:0 auto;
+  padding-left: calc(14px + env(safe-area-inset-left));
+  padding-right: calc(14px + env(safe-area-inset-right));
+}
 .section{margin-top:12px}
 
 .card{
@@ -120,7 +125,7 @@ a{color:inherit}
 /* Ingredients */
 .ingRow{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:10px 10px;border-radius:var(--rBtn);border:1px solid rgba(15,23,42,.10);
+  padding:14px 12px;min-height:44px;border-radius:var(--rBtn);border:1px solid rgba(15,23,42,.10);
   background:#fff;margin:8px 0
 }
 .ingLeft{min-width:0}
@@ -171,7 +176,15 @@ a{color:inherit}
 .iosTopSub{font-weight:var(--wSecondary);color:var(--sub2);font-size:12px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Main padding for fixed tabbar */
-.appMain{ padding-bottom: calc(var(--tabbarH) + env(safe-area-inset-bottom)); }
+.appMain{
+  padding-top: 12px;
+  padding-bottom: calc(var(--tabbarH) + env(safe-area-inset-bottom));
+}
+
+/* Recipe pages: tabbar is hidden; reserve space for the recipe action bar instead */
+.layout-recipe .appMain{
+  padding-bottom: calc(var(--recipeBarH) + env(safe-area-inset-bottom) + 16px);
+}
 
 /* Bottom Tabbar */
 .tabbar{
@@ -181,7 +194,7 @@ a{color:inherit}
   border-top: 1px solid rgba(15,23,42,.10);
   padding: 8px 0 calc(8px + env(safe-area-inset-bottom)) 0;
 }
-.tabbarInner{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tabbarInner{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .tabItem{
   text-decoration:none;color:var(--sub2);background:transparent;border:none;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -224,8 +237,10 @@ a{color:inherit}
 /* Recipe bottom action bar */
 .recipeBar{
   position: fixed; left:0; right:0;
-  bottom: calc(var(--tabbarH) + env(safe-area-inset-bottom));
-  z-index:1400; padding:10px 0; pointer-events:none;
+  bottom: 0;
+  z-index:1400;
+  padding:10px 0 calc(10px + env(safe-area-inset-bottom)) 0;
+  pointer-events:none;
 }
 .recipeBarInner{
   pointer-events:auto;
@@ -256,18 +271,7 @@ a{color:inherit}
 }
 
 
-/* ===== Single bottom bar logic (tabbar removed on recipe pages in layout) ===== */
-.recipeBar{
-  position: fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:1100;
-}
-
-.appMain{
-  padding-bottom:100px;
-}
+/* Recipe pages set their own bottom spacing via .recipeInnerCard and scroll-padding-bottom */
 
 /* Apple Clean Glass */
 :root{

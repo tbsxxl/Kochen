@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <script defer src="{{ '/assets/utils.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </head>
-<body>
+<body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}">
   <!-- iPhone-friendly Topbar: minimal -->
   <header class="iosTopbar">
     <div class="container iosTopbarInner">
@@ -28,7 +28,7 @@
     </div>
   </header>
 
-  <main class="container appMain">
+  <main class="container appMain" role="main">
     {{ content }}
   </main>
 
@@ -48,10 +48,6 @@
         <span class="tabIcon">🛒</span><span class="tabLabel">Liste</span>
       </a>
 
-      <a class="tabItem" data-tab href="{{ '/kategorien/' | relative_url }}">
-        <span class="tabIcon">🏷</span><span class="tabLabel">Kategorien</span>
-      </a>
-
       <button class="tabItem tabMore" id="moreBtn" aria-label="Mehr" type="button">
         <span class="tabIcon">⋯</span><span class="tabLabel">Mehr</span>
       </button>
@@ -69,6 +65,7 @@
     </div>
 
     <div class="sheetBody">
+      <a class="sheetRow" href="{{ '/kategorien/' | relative_url }}">🏷 Kategorien</a>
       <a class="sheetRow" href="{{ '/admin/' | relative_url }}">⚙︎ Admin</a>
       <a class="sheetRow" href="{{ '/backup/' | relative_url }}">⬇︎ Backup / Import</a>
       <div class="sheetSep"></div>
@@ -94,6 +91,15 @@
       if (href === path) a.classList.add('active');
       if (recipeBase && path.startsWith(recipeBase) && href === recipeIndex) a.classList.add('active');
     });
+
+    // Mark "Mehr" as active for secondary pages
+    const more = document.getElementById('moreBtn');
+    const morePaths = [
+      "{{ '/kategorien/' | relative_url }}",
+      "{{ '/admin/' | relative_url }}",
+      "{{ '/backup/' | relative_url }}"
+    ].map(p=>p.replace(/\/+$/,''));
+    if (more && morePaths.some(p=>p && path.startsWith(p))) more.classList.add('active');
 
     // Sheet open/close
     const moreBtn = document.getElementById('moreBtn');
