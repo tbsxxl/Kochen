@@ -17,7 +17,7 @@ function render(){
 
   if(!list.length){
     const empty = document.createElement("div");
-    empty.className = "card cardPad";
+    empty.className = "listRow";
     empty.textContent = "Keine Einträge.";
     listEl.appendChild(empty);
     return;

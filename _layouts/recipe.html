@@ -63,7 +63,9 @@ layout: default
       <div class="hr"></div>
 
       <div class="h2" style="margin:0 0 8px 0">Zutaten</div>
-      <div id="ingredientsList"></div>
+      <div class="listGroup" id="ingredientsGroup">
+        <div id="ingredientsList"></div>
+      </div>
     </div>
 
     <div class="hr"></div>
@@ -105,7 +107,7 @@ layout: default
   <div class="sheetGrab"></div>
   <div class="sheetHead">
     <div class="sheetTitle">Rezept</div>
-    <button class="navIconBtn" id="recipeSheetClose" aria-label="Schließen" type="button">✕</button>
+    <button class="navIconBtn pressable" id="recipeSheetClose" aria-label="Schließen" type="button">✕</button>
   </div>
 
   <div class="sheetBody">
@@ -127,7 +129,7 @@ layout: default
   <div class="sheetGrab"></div>
   <div class="sheetHead">
     <div class="sheetTitle">Kühltruhe</div>
-    <button class="navIconBtn" id="freezerSheetClose" aria-label="Schließen" type="button">✕</button>
+    <button class="navIconBtn pressable" id="freezerSheetClose" aria-label="Schließen" type="button">✕</button>
   </div>
   <div class="sheetBody">
     <div class="sheetRow" style="display:flex;gap:10px;align-items:center;justify-content:space-between">
@@ -149,7 +151,7 @@ layout: default
 <!-- Cooking Mode Overlay -->
 <div class="cookOverlay" id="cookOverlay" aria-hidden="true">
   <div class="cookTop">
-    <button class="navIconBtn" id="cookClose" type="button" aria-label="Kochmodus schließen">✕</button>
+    <button class="navIconBtn pressable" id="cookClose" type="button" aria-label="Kochmodus schließen">✕</button>
     <div class="cookTitle" id="cookTitle">Kochmodus</div>
     <div class="cookPill" id="cookStepPill">1/1</div>
   </div>
@@ -187,10 +189,23 @@ layout: default
   function openSheet(){ overlay.classList.add('open'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); }
   function closeSheet(){ overlay.classList.remove('open'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); }
 
-  moreBtn?.addEventListener('click', openSheet);
+  // iOS-like detents: half + full
+  function setDetent(mode){
+    sheet.classList.toggle('half', mode === 'half');
+    sheet.classList.toggle('full', mode === 'full');
+  }
+
+  moreBtn?.addEventListener('click', ()=>{ openSheet(); setDetent('half'); });
   overlay?.addEventListener('click', closeSheet);
   closeBtn?.addEventListener('click', closeSheet);
   printBtn?.addEventListener('click', ()=>window.print());
+
+  // Grabber toggles detents
+  const grab = sheet?.querySelector('.sheetGrab');
+  grab?.addEventListener('click', ()=>{
+    if(!sheet.classList.contains('open')) return;
+    setDetent(sheet.classList.contains('full') ? 'half' : 'full');
+  });
 
   // Hide recipe bar on non-recipe pages (safety, if layout reused)
   // (On this layout it always exists, so no-op)

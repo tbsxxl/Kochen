@@ -11,20 +11,17 @@
   <script defer src="{{ '/assets/utils.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </head>
 <body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}">
-  <!-- iPhone-friendly Topbar: minimal -->
-  <header class="iosTopbar">
+  <!-- iPhone-friendly Topbar: Back + Title only -->
+  <header class="iosTopbar" id="iosTopbar">
     <div class="container iosTopbarInner">
-      <button class="navIconBtn" id="backBtn" aria-label="Zurück">‹</button>
+      <button class="navIconBtn pressable" id="backBtn" aria-label="Zurück" type="button">‹</button>
 
       <div class="iosTopTitleWrap">
-        <div class="iosTopTitle">
-          {% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}
-        </div>
-        <div class="iosTopSub">{% if page.title %}{{ site.title }}{% else %}{{ site.description }}{% endif %}</div>
+        <div class="iosTopTitle">{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</div>
       </div>
 
-      <a class="navIconBtn" href="{{ '/rezeptindex/' | relative_url }}" aria-label="Suche"
-         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">⌕</a>
+      <!-- spacer to keep title centered on iOS-style bars -->
+      <span aria-hidden="true" style="width:44px;height:44px;display:inline-block"></span>
     </div>
   </header>
 
@@ -61,7 +58,7 @@
     <div class="sheetGrab"></div>
     <div class="sheetHead">
       <div class="sheetTitle">Mehr</div>
-      <button class="navIconBtn" id="sheetClose" aria-label="Schließen" type="button">✕</button>
+      <button class="navIconBtn pressable" id="sheetClose" aria-label="Schließen" type="button">✕</button>
     </div>
 
     <div class="sheetBody">
@@ -81,6 +78,12 @@
     const backBtn = document.getElementById('backBtn');
     if (history.length > 1) backBtn.addEventListener('click', ()=>history.back());
     else backBtn.style.visibility = 'hidden';
+
+    // Topbar density on scroll (iOS-like)
+    const topbar = document.getElementById('iosTopbar');
+    const onScroll = ()=>{ topbar?.classList.toggle('scrolled', (window.scrollY||0) > 4); };
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
 
     // Active Tab Highlight
     const path = location.pathname.replace(/\/+$/,'') || "/";
@@ -109,8 +112,20 @@
     const sheet = document.getElementById('sheet');
     const closeBtn = document.getElementById('sheetClose');
 
-    function openSheet(){ overlay.classList.add('open'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); }
+    // iOS-like detents: half + full
+    function setDetent(mode){
+      sheet.classList.toggle('half', mode === 'half');
+      sheet.classList.toggle('full', mode === 'full');
+    }
+    function openSheet(){ overlay.classList.add('open'); sheet.classList.add('open'); setDetent('half'); sheet.setAttribute('aria-hidden','false'); }
     function closeSheet(){ overlay.classList.remove('open'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); }
+
+    // Grabber toggles detents
+    const grab = sheet?.querySelector('.sheetGrab');
+    grab?.addEventListener('click', ()=>{
+      if(!sheet.classList.contains('open')) return;
+      setDetent(sheet.classList.contains('full') ? 'half' : 'full');
+    });
 
     moreBtn.addEventListener('click', openSheet);
     overlay.addEventListener('click', closeSheet);

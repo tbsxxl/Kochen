@@ -6,7 +6,7 @@ permalink: /shopping/
 
 <div class="card cardPad" style="margin-top:10px">
   <div class="searchRow">
-    <input id="addShopItem" type="text" placeholder="Artikel hinzufügen (z. B. Milch)" autocomplete="off" />
+    <input id="addShopItem" type="search" placeholder="Artikel hinzufügen (z. B. Milch)" autocomplete="off" />
     <button class="btn" id="addShopBtn" type="button">+</button>
   </div>
 </div>
@@ -19,7 +19,7 @@ permalink: /shopping/
 </div>
 
 <div class="section">
-  <div id="shopList"></div>
+  <div class="listGroup" id="shopList"></div>
 </div>
 
 <script defer src="{{ '/assets/shopping.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
