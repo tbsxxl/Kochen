@@ -1,5 +1,5 @@
 ---
-title: "Pasta al Forno mit Pomodoro & Mozzarella Fior di Latte"
+title: "Pasta al Forno"
 date: 2026-02-20
 category: "Pasta"
 tags: ["italienisch", "pasta", "ofen", "pomodoro", "vegetarisch", "Pasta & Cucina Italiana", "Pasta"]
