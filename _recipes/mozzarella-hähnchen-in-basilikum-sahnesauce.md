@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Chicken"
 tags: ["ofen", "hähnchen", "mozzarella", "sahnesauce"]
 time: "ca. 50 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/basilikum.png
 servings: 4
 ingredients:
   - { qty: 4, unit: "", item: "Hühnerbrustfilets" }
