@@ -5,7 +5,7 @@ category: "Baking"
 tags: ["cookies", "backen", "schokolade", "american"]
 time: "ca. 29 Min"
 image: /recipes/images/placeholder.jpg
-servings: ca. 20
+servings: 20
 ingredients:
   - { qty: 280, unit: "g", item: "Mehl" }
   - { qty: 250, unit: "g", item: "Butter" }
