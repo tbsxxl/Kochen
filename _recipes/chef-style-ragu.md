@@ -2,7 +2,7 @@
 title: "Ragù alla Bolognese"
 date: 2026-02-20
 category: "Pasta"
-tags: ["italienisch", "ragù", "rindfleisch", "schmorgericht", "Pasta & Cucina Italiana", "Pasta"]
+tags: ["italienisch", "pasta", "ofen", "pomodoro", "vegetarisch", "Pasta & Cucina Italiana", "Pasta"]
 time: "ca. 5 Std"
 image: /recipes/images/Ragù.png
 servings: 6
