@@ -22,38 +22,85 @@
   function scaledIngredients(){
     const factor = currentServings() / baseServings;
     const ings = Array.isArray(data.ingredients) ? data.ingredients : [];
-    return ings.map(i=>{
+    return ings.map((i,idx)=>{
       const q = num(i.qty);
-      return { item:String(i.item||"").trim(), unit:String(i.unit||""), qty:(q===null?i.qty:q*factor) };
+      return { idx, item:String(i.item||\"\").trim(), unit:String(i.unit||\"\"), qty:(q===null?i.qty:q*factor) };
     });
   }
-  function renderIngredients(){
-    if(!listEl) return;
-    listEl.innerHTML = "";
-    for(const i of scaledIngredients()){
-      const row = document.createElement("div");
-      row.className = "ingRow";
-      const left = document.createElement("div");
-      left.className = "ingLeft";
-      const name = document.createElement("div");
-      name.className = "ingName";
-      name.textContent = i.item || "—";
-      left.appendChild(name);
-      const qty = document.createElement("div");
-      qty.className = "ingQty";
-      const unit = U.normUnit(i.unit||"");
-      const qn = num(i.qty);
-      if(qn !== null){
-        const conv = U.autoConvert(qn, unit);
-        qty.textContent = `${U.roundSmart(conv.qty)} ${conv.unit}`.trim();
-      }else{
-        qty.textContent = `${String(i.qty||"").trim()} ${unit}`.trim();
-      }
-      row.appendChild(left);
-      row.appendChild(qty);
-      listEl.appendChild(row);
+  
+const ingCheckKey = `kochbuch.ingchecks.${data.id}`;
+function getIngChecks(){ return ls.get(ingCheckKey, {}); }
+function setIngChecks(v){ ls.set(ingCheckKey, v); }
+
+function renderIngredients(){
+  if(!listEl) return;
+  const checks = getIngChecks(); // { [idx]: true }
+  listEl.innerHTML = "";
+  for(const i of scaledIngredients()){
+    const row = document.createElement("div");
+    row.className = "ingRow pressable";
+    row.setAttribute("role","checkbox");
+    row.setAttribute("tabindex","0");
+
+    const checked = !!checks[i.idx];
+    if(checked) row.classList.add("checked");
+    row.setAttribute("aria-checked", checked ? "true" : "false");
+
+    const checkBtn = document.createElement("button");
+    checkBtn.className = "ingCheckBtn";
+    checkBtn.type = "button";
+    checkBtn.setAttribute("aria-label", checked ? "Zutat abhaken: an" : "Zutat abhaken: aus");
+    checkBtn.textContent = checked ? "✓" : "○";
+
+    const left = document.createElement("div");
+    left.className = "ingLeft";
+    const name = document.createElement("div");
+    name.className = "ingName";
+    name.textContent = i.item || "—";
+    left.appendChild(name);
+
+    const qty = document.createElement("div");
+    qty.className = "ingQty";
+    const unit = U.normUnit(i.unit||"");
+    const qn = num(i.qty);
+    if(qn !== null){
+      const conv = U.autoConvert(qn, unit);
+      qty.textContent = `${U.roundSmart(conv.qty)} ${conv.unit}`.trim();
+    }else{
+      qty.textContent = `${String(i.qty||"").trim()} ${unit}`.trim();
     }
+
+    function toggle(){
+      const c = getIngChecks();
+      const now = !c[i.idx];
+      if(now) c[i.idx] = true; else delete c[i.idx];
+      setIngChecks(c);
+      renderIngredients();
+    }
+
+    // Whole row toggles, but avoid double-trigger when pressing the button
+    row.addEventListener("click", (ev)=>{
+      if(ev.target === checkBtn) return;
+      toggle();
+    });
+    checkBtn.addEventListener("click", (ev)=>{
+      ev.stopPropagation();
+      toggle();
+    });
+    row.addEventListener("keydown", (ev)=>{
+      if(ev.key === "Enter" || ev.key === " "){
+        ev.preventDefault();
+        toggle();
+      }
+    });
+
+    row.appendChild(checkBtn);
+    row.appendChild(left);
+    row.appendChild(qty);
+    listEl.appendChild(row);
   }
+}
+
   servingsInput?.addEventListener("input", renderIngredients);
 
   // Freezer

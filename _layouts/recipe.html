@@ -109,6 +109,12 @@ layout: default
   </div>
 
   <div class="sheetBody">
+    <div class="sheetSectionLabel">Schnellzugriff</div>
+    <a class="sheetRow" href="{{ '/' | relative_url }}">⌂ Start</a>
+    <a class="sheetRow" href="{{ '/rezeptindex/' | relative_url }}">🍲 Rezepte</a>
+    <a class="sheetRow" href="{{ '/shopping/' | relative_url }}">🛒 Shopping List</a>
+
+    <div class="sheetSectionLabel">Aktionen</div>
     <button class="sheetRow" id="cookingModeBtn" type="button">🍳 Kochmodus</button>
     <button class="sheetRow" id="undoCookedBtn" type="button">↩︎ Undo „Gekocht“</button>
     <button class="sheetRow" id="printBtn" type="button">🖨 Drucken</button>
