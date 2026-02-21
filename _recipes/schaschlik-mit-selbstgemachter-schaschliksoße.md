@@ -1,8 +1,8 @@
 ---
-title: "Schaschlik mit selbstgemachter Schaschliksoße"
+title: "Spiedini di Maiale mit Salsa di Paprika"
 date: 2026-02-20
 category: "Pork"
-tags: ["schaschlik", "schwein", "schmoren", "grillpfanne"]
+tags: ["italienisch", "schwein", "spieße", "paprikasauce", "Carne", "Pork"]
 time: "ca. 2 Std"
 image: /recipes/images/Schaschlik.png
 servings: 4
