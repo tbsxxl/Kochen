@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Pizza"
 tags: ["pizza", "neapolitanisch", "24h ferment", "san marzano", "parmaschinken"]
 time: "ca. 24 Std Reifezeit + Backzeit"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/pizza.png
 servings: ca. 6 Pizzen
 ingredients:
   - { qty: 1000, unit: "g", item: "Weizenmehl Typ 00 (11–15 % Eiweiß)" }
