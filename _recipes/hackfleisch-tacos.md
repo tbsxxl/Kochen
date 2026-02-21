@@ -1,8 +1,8 @@
 ---
-title: "Hackfleisch-Tacos"
+title: "Tacos mit Rinderhack"
 date: 2026-02-20
 category: "Mexican"
-tags: ["tacos", "hackfleisch", "schnell", "party"]
+tags: ["mexikanisch", "tacos", "rindfleisch", "gewürze", "Cocina Mexicana", "Mexican"]
 time: "ca. 50 Min"
 image: /recipes/images/tacos.png
 servings: 4
