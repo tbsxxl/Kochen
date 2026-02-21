@@ -1,5 +1,18 @@
 (function(){
   const data = window.RECIPE_DATA;
+
+  function parseFirstNumber(v){
+    if(v===null||v===undefined) return NaN;
+    if(typeof v==="number") return v;
+    const s=String(v).replace(",",".");
+    const m=s.match(/-?\d+(?:\.\d+)?/);
+    return m?parseFloat(m[0]):NaN;
+  }
+  function safeQty(q){
+    if(typeof q==="number") return q;
+    const n=parseFirstNumber(q);
+    return Number.isFinite(n)?n:q;
+  }
   if(!data) return;
   // Utils can be missing if cached files are inconsistent; provide a safe fallback.
   const U = window.KOCHBUCH_UTILS || {
@@ -18,7 +31,7 @@
   const cookModeKey = `kochbuch.cookmode.${data.id}`;
   function getCookSet(){ return new Set(ls.get(cookModeKey, [])); }
   function setCookSet(set){ ls.set(cookModeKey, Array.from(set)); }
-  const baseServings = Number(data.baseServings || 1);
+  const baseServings = (Number.isFinite(parseFirstNumber(data.baseServings)) ? parseFirstNumber(data.baseServings) : 1);
   const servingsInput = $("#servingsInput");
   const baseServingsEl = $("#baseServings");
   const listEl = $("#ingredientsList");
