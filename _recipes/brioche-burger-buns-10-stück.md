@@ -1,8 +1,8 @@
 ---
-title: "Brioche Burger Buns (10 Stück)"
+title: "Brioche Buns"
 date: 2026-02-20
 category: "Bread"
-tags: ["burger", "brioche", "hefe", "backen"]
+tags: ["französisch", "hefeteig", "backen", "brioche", "Dessert & Pâtisserie", "Boulangerie"]
 time: "ca. 2 Std 50 Min"
 image: /recipes/images/Buns.png
 servings: 10
