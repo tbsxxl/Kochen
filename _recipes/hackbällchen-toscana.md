@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Oven"
 tags: ["hackfleisch", "tomatensauce", "mozzarella", "ofen"]
 time: "ca. 55 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/Toscana.png
 servings: 3
 ingredients:
   - { qty: 500, unit: "g", item: "Hackfleisch, gemischt" }
