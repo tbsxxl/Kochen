@@ -428,10 +428,45 @@ a{color:inherit}
   box-shadow: none;
 }
 
-/* Print: hide bottom bars/sheets */
+/* Print: minimal, clean recipe output */
+@page{ margin:16mm; }
 @media print{
-  .tabbar, .recipeTabbar, .sheetOverlay, .sheet{ display:none !important; }
+  /* App-UI ausblenden */
+  .iosTopbar,
+  .recipeTabbar,
+  .tabbar,
+  .sheetOverlay,
+  .sheet,
+  .cookOverlay{
+    display:none !important;
+  }
+
+  /* Hintergründe/Glass/Shadows entfernen */
   body{ background:#fff !important; }
+  body::before{ display:none !important; }
+
+  .card{
+    box-shadow:none !important;
+    border:none !important;
+  }
+
+  .container{
+    max-width:100% !important;
+    padding:0 !important;
+  }
+
+  /* Umbrüche verbessern */
+  h1,h2,h3{ break-after:avoid; }
+  ul,ol,table,.listGroup{ break-inside:avoid; }
+
+  /* Hero-Bild nicht zu hoch */
+  .recipeHeroImg{ max-height:120mm !important; }
+
+  /* Lesbarkeit */
+  .recipeBody{ font-size:11.5pt; line-height:1.35; }
+}
+
+body{ background:#fff !important; }
 }
 
 /* ------------------------------------------------------------
