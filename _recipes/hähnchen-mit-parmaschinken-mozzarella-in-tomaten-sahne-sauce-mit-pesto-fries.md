@@ -1,8 +1,8 @@
 ---
-title: "Hähnchen mit Parmaschinken & Mozzarella in Tomaten-Sahne-Sauce (mit Pesto & Fries)"
+title: "Suprema di Pollo mit Prosciutto di Parma & Mozzarella"
 date: 2026-02-20
 category: "Chicken"
-tags: ["ofen", "tomatensauce", "mozzarella", "parmaschinken"]
+tags: ["italienisch", "hähnchen", "prosciutto", "mozzarella", "Pollame & Geflügel", "Chicken"]
 time: "ca. 50–60 Min"
 image: /recipes/images/parmahähnchen.png
 servings: 2
