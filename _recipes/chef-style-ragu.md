@@ -5,7 +5,7 @@ category: "Pasta"
 tags: ["ragù", "bolognese", "slow cooked", "italienisch", "ofen"]
 time: "ca. 5 Std"
 image: /recipes/images/placeholder.jpg
-servings: k. A.
+servings: 6
 ingredients:
   - { qty: 1000, unit: "g", item: "Rinderhack (50% Beinscheibe, 50% Chuck)" }
   - { qty: 400, unit: "g", item: "Schweinebauch, gewürfelt" }
