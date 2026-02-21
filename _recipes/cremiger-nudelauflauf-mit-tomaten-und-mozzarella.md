@@ -1,8 +1,8 @@
 ---
-title: "Cremiger Nudelauflauf mit Tomaten und Mozzarella"
+title: "Pasta al Forno mit Pomodoro & Mozzarella Fior di Latte"
 date: 2026-02-20
 category: "Pasta"
-tags: ["vegetarisch", "auflauf", "pasta", "tomate", "mozzarella"]
+tags: ["italienisch", "pasta", "ofen", "pomodoro", "vegetarisch", "Pasta & Cucina Italiana", "Pasta"]
 time: "ca. 1 Std"
 image: /recipes/images/Nudelauflauf.png
 servings: 4
