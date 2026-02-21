@@ -1,8 +1,8 @@
 ---
-title: "Indisches Naan Brot"
+title: "Naan"
 date: 2026-02-20
 category: "Bread"
-tags: ["indisch", "naan", "hefe", "pfanne"]
+tags: ["indisch", "fladenbrot", "hefeteig", "pfanne", "vegetarisch", "Boulangerie"]
 time: "ca. 1 Std 55 Min"
 image: /recipes/images/naan.png
 servings: 1
