@@ -15,4 +15,4 @@ permalink: /shopping/
   <div id="shopList"></div>
 </div>
 
-<script defer src=\"{{ '/assets/shopping.js' | relative_url }}?v={{ site.time | date: '%s' }}\"></script>
+<script defer src="{{ '/assets/shopping.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>

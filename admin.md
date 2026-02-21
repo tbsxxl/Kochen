@@ -84,4 +84,4 @@ permalink: /admin/
   </div>
 </div>
 
-<script defer src=\"{{ '/assets/admin.js' | relative_url }}\"></script>
+<script defer src="{{ '/assets/admin.js' | relative_url }}"></script>
