@@ -1,8 +1,8 @@
 ---
-title: "Indisches Butter Chicken (aus dem Ofen)"
+title: "Butter Chicken Tandoori"
 date: 2026-02-20
 category: "Indian"
-tags: ["indisch", "butter chicken", "ofen", "scharf"]
+tags: ["indisch", "hähnchen", "tandoori", "ofen", "Pollame & Geflügel", "Chicken"]
 time: "ca. 2 Std"
 image: /recipes/images/butterchicken.png
 servings: 2
