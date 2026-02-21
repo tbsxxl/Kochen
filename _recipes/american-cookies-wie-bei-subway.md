@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Baking"
 tags: ["cookies", "backen", "schokolade", "american"]
 time: "ca. 29 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/Cookies.png
 servings: 20
 ingredients:
   - { qty: 280, unit: "g", item: "Mehl" }
