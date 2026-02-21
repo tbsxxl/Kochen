@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Beef"
 tags: ["deutsch", "schmorgericht", "gulasch", "rind"]
 time: "ca. 2 Std"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/gulasch.png
 servings: 4
 ingredients:
   - { qty: 600, unit: "g", item: "Rindergulasch (ca. 3×3 cm Stücke)" }
