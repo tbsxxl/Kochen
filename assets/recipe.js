@@ -274,14 +274,13 @@ function renderIngredients(){
   const cookingBtn = $("#cookingModeBtn");
   const cookingQuick = $("#cookingModeQuick");
 
-  // Portionen quick action: scroll + focus
-  const portionBtn = $("#portionBtn");
-  portionBtn?.addEventListener('click', ()=>{
-    const el = document.getElementById('servingsInput');
-    el?.scrollIntoView({ behavior:'smooth', block:'center' });
-    setTimeout(()=>{ try{ el?.focus(); }catch{} }, 250);
+  // Kühltruhe quick action: opens freezer sheet
+  const freezerQuick = $("#freezerQuick");
+  freezerQuick?.addEventListener('click', ()=>{
+    openFreezerSheet();
   });
-  const cookOverlay = $("#cookOverlay");
+
+const cookOverlay = $("#cookOverlay");
   const cookClose = $("#cookClose");
   const cookTitle = $("#cookTitle");
   const cookStepPill = $("#cookStepPill");

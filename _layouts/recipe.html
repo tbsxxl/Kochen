@@ -77,25 +77,25 @@ layout: default
 </div>
 
 <!-- Sticky Bottom Action Bar -->
-<div class="recipeBar bottomRail" id="recipeBar">
-  <div class="recipeBarInner">
-    <button class="rbarBtn" id="cookingModeQuick" type="button">
-      <span class="rbarIcon">🍳</span><span class="rbarTxt">Kochmodus</span>
+<nav class="tabbar bottomRail recipeTabbar" aria-label="Rezept Aktionen">
+  <div class="tabbarInner container">
+    <button class="tabItem pressable" id="cookingModeQuick" type="button">
+      <span class="tabIcon">🍳</span><span class="tabLabel">Kochmodus</span>
     </button>
 
-    <button class="rbarBtn rbarPrimary" id="addToShopping" type="button">
-      <span class="rbarIcon">🛒</span><span class="rbarTxt">Zur Liste</span>
+    <button class="tabItem pressable active" id="addToShopping" type="button">
+      <span class="tabIcon">🛒</span><span class="tabLabel">Zur Liste</span>
     </button>
 
-    <button class="rbarBtn" id="portionBtn" type="button">
-      <span class="rbarIcon">🍽</span><span class="rbarTxt">Portionen</span>
+    <button class="tabItem pressable" id="freezerQuick" type="button">
+      <span class="tabIcon">🧊</span><span class="tabLabel">Kühltruhe</span>
     </button>
 
-    <button class="rbarBtn" id="recipeMoreBtn" type="button">
-      <span class="rbarIcon">⋯</span><span class="rbarTxt">Mehr</span>
+    <button class="tabItem pressable" id="recipeMoreBtn" type="button">
+      <span class="tabIcon">⋯</span><span class="tabLabel">Mehr</span>
     </button>
   </div>
-</div>
+</nav>
 
 <!-- Recipe More Sheet -->
 <div class="sheetOverlay" id="recipeSheetOverlay"></div>

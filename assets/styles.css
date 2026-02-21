@@ -266,35 +266,6 @@ a{color:inherit}
 @keyframes savedFlash{0%{filter:brightness(1)}40%{filter:brightness(1.08)}100%{filter:brightness(1)}}
 .sheetSep{height:1px;background:rgba(15,23,42,.10);margin:10px 0}
 
-/* Recipe bottom action bar */
-.recipeBar{ z-index:1400; pointer-events:none; }
-.recipeBarInner{
-  pointer-events:auto;
-  max-width:860px;margin:0 auto;
-  display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
-  padding: 0 12px;
-}
-.rbarBtn{
-  border:none;background:transparent;border-radius:14px;min-height:54px;padding:8px;
-  cursor:pointer;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--text)
-}
-.rbarBtn:active{background:rgba(15,23,42,.05);transform:scale(.98)}
-.rbarIcon{font-size:18px;line-height:1}
-.rbarTxt{font-size:11.5px;font-weight:var(--wSecondary);color:var(--sub2);letter-spacing:.2px}
-.rbarBtn.green{color:var(--text);background:rgba(34,197,94,.10);box-shadow:inset 0 0 0 1px rgba(34,197,94,.20)}
-.rbarBtn.blue{color:var(--text);background:rgba(30,136,229,.10);box-shadow:inset 0 0 0 1px rgba(30,136,229,.20)}
-.rbarPrimary{background:var(--accent);color:#fff;box-shadow:0 12px 28px rgba(30,136,229,.18)}
-.rbarPrimary:active{background:#1976d2}
-.rbarPrimary .rbarTxt{color:rgba(255,255,255,.92)}
-.recipeInnerCard{margin-bottom: calc(var(--recipeBarH) + 10px);}
-
-@media (max-width:420px){
-  .recipeBarInner{gap:6px;padding:0 10px}
-  .rbarBtn{min-height:54px;border-radius:15px}
-  .rbarTxt{font-size:11px}
-}
-
 /* Small stepper (Kühltruhe) */
 .qtyStepper{display:flex;align-items:center;gap:8px}
 .stepBtn{
@@ -643,24 +614,7 @@ body{
 .listGroup .uRow + .uRow{ border-top: 1px solid rgba(15,23,42,.08); }
 
 
-/* Swipe-to-delete (Shopping List) */
-.swipeWrap{ position: relative; overflow: hidden; background: inherit; }
-.swipeWrap .uRow{ position: relative; z-index: 2; background: inherit; will-change: transform; transition: transform .18s ease; }
-.swipeAction{ z-index: 1; }
-.swipeAction{
-  position: absolute;
-  top: 0; bottom: 0;
-  right: 0;
-  width: var(--swipeW, 84px);
-  border: none;
-  background: var(--danger, #ef4444);
-  color: #fff;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.swipeWrap.open .uRow{ transform: translateX(calc(-1 * var(--swipeW, 84px))); }
+/* Unified toggle list */
 
 .uLead{
   width: 28px;
@@ -677,11 +631,6 @@ body{
 
 .uRight{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
 .uQty{ font-weight: var(--wTitle); color: var(--text); white-space:nowrap; }
-.uDel{
-  width:44px;height:44px;border-radius:14px;border:1px solid rgba(15,23,42,.10);
-  background: rgba(255,255,255,.6);
-  display:inline-flex;align-items:center;justify-content:center;
-}
 
 .uRow.checked .uName{ text-decoration: line-through; opacity:.65; }
 .uRow.checked .uQty{ opacity:.55; }
@@ -742,3 +691,5 @@ body{
   background:transparent;
 }
 .listGroup .shopRow + .shopRow{ border-top: 1px solid rgba(15,23,42,.08); }
+
+.uEmpty{padding:14px 12px;color:rgba(15,23,42,.62);font-size:14px;}
