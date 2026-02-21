@@ -1,8 +1,8 @@
 ---
-title: "Yangnyeom Tongdak (Korean Fried Chicken, doppelt frittiert)"
+title: "Yangnyeom Tongdak"
 date: 2026-02-20
 category: "Chicken"
-tags: ["koreanisch", "fried chicken", "scharf", "gochujang"]
+tags: ["koreanisch", "fried chicken", "scharf", "gochujang", "scharf", "Pollame & Geflügel", "Chicken"]
 time: "60 min"
 image: /recipes/images/yangnyeom.png
 servings: 4
