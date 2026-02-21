@@ -641,6 +641,25 @@ body{
 }
 .listGroup .uRow + .uRow{ border-top: 1px solid rgba(15,23,42,.08); }
 
+
+/* Swipe-to-delete (Shopping List) */
+.swipeWrap{ position: relative; overflow: hidden; }
+.swipeWrap .uRow{ will-change: transform; transition: transform .18s ease; }
+.swipeAction{
+  position: absolute;
+  top: 0; bottom: 0;
+  right: 0;
+  width: var(--swipeW, 84px);
+  border: none;
+  background: var(--danger, #ef4444);
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.swipeWrap.open .uRow{ transform: translateX(calc(-1 * var(--swipeW, 84px))); }
+
 .uLead{
   width: 28px;
   flex: 0 0 28px;

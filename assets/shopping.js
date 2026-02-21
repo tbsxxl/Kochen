@@ -36,6 +36,9 @@ function render(){
       setList(l);
       render();
     },
+    swipeDelete: true,
+    swipeWidth: 92,
+    deleteText: "Löschen",
     onDelete: (_it, idx)=>{
       const l = getList();
       l.splice(idx,1);
