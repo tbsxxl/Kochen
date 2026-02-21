@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Mexican"
 tags: ["quesadilla", "hähnchen", "gemüse", "pfanne"]
 time: "ca. 25–35 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/ques.png
 servings: 2–3
 ingredients:
   - { qty: "2–3", unit: "", item: "Weizentortillas, groß" }
