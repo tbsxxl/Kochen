@@ -25,4 +25,4 @@ permalink: /backup/
   </div>
 </div>
 
-
+<script defer src=\"{{ '/assets/backup.js' | relative_url }}\"></script>

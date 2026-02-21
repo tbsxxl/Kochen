@@ -1,11 +1,5 @@
 (function(){
-  const U = window.KOCHBUCH_UTILS || {
-  normUnit:(u)=>String(u||""),
-  autoConvert:(q,u)=>({qty:q,unit:u}),
-  roundSmart:(n)=>String(n),
-  showToast:()=>{},
-  hapt:()=>{}
-};
+  const U = window.KOCHBUCH_UTILS;
   const listEl = document.querySelector("#shopList");
   const clearCheckedBtn = document.querySelector("#clearChecked");
   const clearAllBtn = document.querySelector("#clearAll");
