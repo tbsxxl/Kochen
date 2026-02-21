@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Chicken"
 tags: ["ofen", "tomatensauce", "mozzarella", "parmaschinken"]
 time: "ca. 50–60 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/parmahähnchen.png
 servings: 2
 ingredients:
   - { qty: 2, unit: "", item: "Hähnchenbrustfilets" }
