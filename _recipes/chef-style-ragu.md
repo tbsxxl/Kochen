@@ -1,8 +1,8 @@
 ---
-title: "Chef-Style Ragù"
+title: "Ragù alla Bolognese"
 date: 2026-02-20
 category: "Pasta"
-tags: ["ragù", "bolognese", "slow cooked", "italienisch", "ofen"]
+tags: ["italienisch", "ragù", "rindfleisch", "schmorgericht", "Pasta & Cucina Italiana", "Pasta"]
 time: "ca. 5 Std"
 image: /recipes/images/Ragù.png
 servings: 6
