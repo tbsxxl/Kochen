@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Indian"
 tags: ["indisch", "butter chicken", "ofen", "scharf"]
 time: "ca. 2 Std"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/butterchicken.png
 servings: 2
 ingredients:
   - { qty: 500, unit: "g", item: "Hähnchenbrust" }
