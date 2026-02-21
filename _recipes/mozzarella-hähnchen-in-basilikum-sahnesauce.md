@@ -1,8 +1,8 @@
 ---
-title: "Mozzarella-Hähnchen in Basilikum-Sahnesauce"
+title: "Pollo al Basilico & Mozzarella"
 date: 2026-02-20
 category: "Chicken"
-tags: ["ofen", "hähnchen", "mozzarella", "sahnesauce"]
+tags: ["italienisch", "hähnchen", "basilikum", "mozzarella", "Pollame & Geflügel", "Chicken"]
 time: "ca. 50 Min"
 image: /recipes/images/basilikum.png
 servings: 4
