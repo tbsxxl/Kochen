@@ -1,10 +1,10 @@
 ---
-title: "Lasagne (wie beim Italiener)"
+title: "Lasagne"
 date: 2026-02-20
 category: "Pasta"
 tags: ["italienisch", "ofen", "lasagne", "bolognese", "bechamel"]
 time: "ca. 1 Std 40 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/lasagne.png
 servings: 4
 ingredients:
   - { qty: "n. B.", unit: "", item: "Olivenöl" }
