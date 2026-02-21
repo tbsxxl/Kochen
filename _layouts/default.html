@@ -127,9 +127,9 @@
       setDetent(sheet.classList.contains('full') ? 'half' : 'full');
     });
 
-    moreBtn.addEventListener('click', openSheet);
-    overlay.addEventListener('click', closeSheet);
-    closeBtn.addEventListener('click', closeSheet);
+    moreBtn?.addEventListener('click', openSheet);
+    overlay?.addEventListener('click', closeSheet);
+    closeBtn?.addEventListener('click', closeSheet);
 
     // Persisted toggles
     const get = (k,fb)=>{ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):fb; }catch{return fb;} };
@@ -144,8 +144,8 @@
     }
     apply();
 
-    document.getElementById('toggleCompact').addEventListener('click', ()=>{ set(compactKey,!get(compactKey,false)); apply(); });
-    document.getElementById('toggleContrast').addEventListener('click', ()=>{ set(contrastKey,!get(contrastKey,false)); apply(); });
+    document.getElementById('toggleCompact')?.addEventListener('click', ()=>{ set(compactKey,!get(compactKey,false)); apply(); });
+    document.getElementById('toggleContrast')?.addEventListener('click', ()=>{ set(contrastKey,!get(contrastKey,false)); apply(); });
   })();
   </script>
 </body>

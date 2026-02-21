@@ -23,7 +23,7 @@
   --barAlpha:.92;
 
   --tabbarH: 86px;
-  --recipeBarH: 76px;
+  --recipeBarH: 86px;
 
   /* image caps */
   --heroMaxH: 240px;
@@ -419,7 +419,7 @@ a{color:inherit}
 
 /* Print: hide bottom bars/sheets */
 @media print{
-  .tabbar, .recipeBar, .sheetBackdrop, .sheet{ display:none !important; }
+  .tabbar, .recipeTabbar, .sheetOverlay, .sheet{ display:none !important; }
   body{ background:#fff !important; }
 }
 
