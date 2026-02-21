@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Pasta"
 tags: ["vegetarisch", "auflauf", "pasta", "tomate", "mozzarella"]
 time: "ca. 1 Std"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/Nudelauflauf.png
 servings: 4
 ingredients:
   - { qty: 1, unit: "", item: "Zwiebel" }
