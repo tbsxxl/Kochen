@@ -745,3 +745,23 @@ body{
 .appMain{
   background: transparent !important;
 }
+
+/* Sheet darf nicht höher als der Viewport sein */
+.sheet{
+  max-height: calc(100dvh - 24px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header bleibt oben, Body scrollt */
+.sheetHead{
+  flex: 0 0 auto;
+}
+
+.sheetBody{
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /* genug Platz unten für Home-Indicator + Finger */
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
