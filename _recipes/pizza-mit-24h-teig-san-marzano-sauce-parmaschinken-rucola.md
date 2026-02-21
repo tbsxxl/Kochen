@@ -1,8 +1,8 @@
 ---
-title: "Pizza mit 24h Teig, San-Marzano-Sauce, Parmaschinken & Rucola"
+title: "Pizza Napoletana mit Pomodoro San Marzano, Prosciutto di Parma & Rucola"
 date: 2026-02-20
 category: "Pizza"
-tags: ["pizza", "neapolitanisch", "24h ferment", "san marzano", "parmaschinken"]
+tags: ["italienisch", "pizza", "napoletana", "prosciutto", "Pasta & Cucina Italiana", "Pizza"]
 time: "ca. 24 Std Reifezeit + Backzeit"
 image: /recipes/images/pizza.png
 servings: 6
