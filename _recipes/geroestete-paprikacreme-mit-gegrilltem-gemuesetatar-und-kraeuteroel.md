@@ -1,5 +1,5 @@
 ---
-title: "Crema di Peperoni Arrostiti mit Gemüsetatar & Olio alle Erbe"
+title: "Geröstete Paprikacreme mit Gemüsetatar"
 date: 2026-02-20
 category: "Starter"
 tags: ["italienisch", "vorspeise", "paprika", "vegetarisch", "Antipasto", "Starter"]
