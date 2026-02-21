@@ -2,7 +2,7 @@
 title: "Nashville Hot Chicken"
 date: 2026-02-20
 category: "Chicken"
-tags: ["scharf", "fried", "amerikanisch"]
+tags: ["amerikanisch", "hähnchen", "frittiert", "scharf", "Pollame & Geflügel", "Chicken"]
 time: "60–90 Min"
 image: /recipes/images/nashville.png
 servings: 4
