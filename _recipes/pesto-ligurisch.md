@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Sauce"
 tags: ["italienisch", "basilikum", "pesto", "schnell"]
 time: "ca. 20 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/pesto.png
 servings: 4
 ingredients:
   - { qty: 75, unit: "g", item: "Basilikum, frisch" }
