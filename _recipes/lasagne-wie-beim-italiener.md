@@ -1,8 +1,8 @@
 ---
-title: "Lasagne"
+title: "Lasagne al Forno"
 date: 2026-02-20
 category: "Pasta"
-tags: ["italienisch", "ofen", "lasagne", "bolognese", "bechamel"]
+tags: ["italienisch", "lasagne", "ragù", "ofen", "Pasta & Cucina Italiana", "Pasta"]
 time: "ca. 1 Std 40 Min"
 image: /recipes/images/lasagne.png
 servings: 4
