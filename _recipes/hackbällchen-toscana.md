@@ -1,8 +1,8 @@
 ---
-title: "Hackbällchen Toscana"
+title: "Polpette alla Toscana"
 date: 2026-02-20
 category: "Oven"
-tags: ["hackfleisch", "tomatensauce", "mozzarella", "ofen"]
+tags: ["italienisch", "hackfleisch", "ofen", "polpette", "Carne", "Beef"]
 time: "ca. 55 Min"
 image: /recipes/images/Toscana.png
 servings: 3
