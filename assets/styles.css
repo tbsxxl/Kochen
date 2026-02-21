@@ -395,3 +395,15 @@ button:active,.btn:active,.rbarBtn:active,.stepBtn:active,.tabItem:active{ trans
 
 .kvFreezer{ background: rgba(59,130,246,.12); border-color: rgba(59,130,246,.22); color:#1d4ed8; }
 .kvFreezer .iconSvg{ width:16px; height:16px; }
+
+/* Recipe error box */
+.errorBox{
+  margin: 12px 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(239,68,68,.12);
+  border: 1px solid rgba(239,68,68,.22);
+  color: rgba(127,29,29,1);
+  font-weight: 700;
+  font-size: 14px;
+}
