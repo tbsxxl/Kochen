@@ -77,22 +77,18 @@ layout: default
 </div>
 
 <!-- Sticky Bottom Action Bar -->
-<div class="recipeBar" id="recipeBar">
+<div class="recipeBar bottomRail" id="recipeBar">
   <div class="recipeBarInner">
-    <button class="rbarBtn" id="cookedBtn" type="button">
-      <span class="rbarIcon">✅</span><span class="rbarTxt">Gekocht</span>
-    </button>
-
-    <button class="rbarBtn" id="favoriteBtn" type="button">
-      <span class="rbarIcon">☆</span><span class="rbarTxt">Favorit</span>
+    <button class="rbarBtn" id="cookingModeQuick" type="button">
+      <span class="rbarIcon">🍳</span><span class="rbarTxt">Kochmodus</span>
     </button>
 
     <button class="rbarBtn rbarPrimary" id="addToShopping" type="button">
       <span class="rbarIcon">🛒</span><span class="rbarTxt">Zur Liste</span>
     </button>
 
-    <button class="rbarBtn" id="freezerBtn" type="button">
-      <span class="rbarIcon">🧊</span><span class="rbarTxt">Kühltruhe</span>
+    <button class="rbarBtn" id="portionBtn" type="button">
+      <span class="rbarIcon">🍽</span><span class="rbarTxt">Portionen</span>
     </button>
 
     <button class="rbarBtn" id="recipeMoreBtn" type="button">
@@ -118,6 +114,9 @@ layout: default
 
     <div class="sheetSectionLabel">Aktionen</div>
     <button class="sheetRow" id="cookingModeBtn" type="button">🍳 Kochmodus</button>
+    <button class="sheetRow" id="sheetFavoriteBtn" type="button">☆ Favorit</button>
+    <button class="sheetRow" id="sheetCookedBtn" type="button">✅ Gekocht</button>
+    <button class="sheetRow" id="sheetFreezerBtn" type="button">🧊 Kühltruhe</button>
     <button class="sheetRow" id="undoCookedBtn" type="button">↩︎ Undo „Gekocht“</button>
     <button class="sheetRow" id="printBtn" type="button">🖨 Drucken</button>
   </div>

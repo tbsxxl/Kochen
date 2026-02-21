@@ -96,7 +96,8 @@ function renderIngredients(){
 
   // Freezer
   const freezerKey = "kochbuch.freezer";
-  const freezerBtn = $("#freezerBtn");
+  const freezerBtn = null;
+  const freezerSheetOpenBtn = $("#sheetFreezerBtn");
   const freezerOverlay = $("#freezerSheetOverlay");
   const freezerSheet = $("#freezerSheet");
   const freezerClose = $("#freezerSheetClose");
@@ -109,23 +110,22 @@ function renderIngredients(){
   function setFreezer(v){ ls.set(freezerKey, v); }
   function freezerEntry(){ const f=getFreezer(); return f[data.id] || null; }
   function renderFreezer(){
-    if(!freezerBtn) return;
     const e = freezerEntry();
-    const iconEl = freezerBtn.querySelector('.rbarIcon');
-    const txtEl = freezerBtn.querySelector('.rbarTxt');
-    if(iconEl) iconEl.textContent = '🧊';
-    if(!e){
-      if(txtEl) txtEl.textContent = "Kühltruhe";
-      freezerBtn.classList.remove("green");
-    }else{
-      const p = e.portions ? `${e.portions} Portion${e.portions===1?"":"en"}` : "in Kühltruhe";
-      if(txtEl) txtEl.textContent = p;
-      freezerBtn.classList.add("green");
+    // Update label inside the recipe "Mehr" sheet
+    if(freezerSheetOpenBtn){
+      freezerSheetOpenBtn.textContent = e?.portions
+        ? `🧊 Kühltruhe · ${e.portions} Portion${e.portions===1?"":"en"}`
+        : "🧊 Kühltruhe";
     }
   }
 
   function openFreezerSheet(){
     if(!freezerOverlay || !freezerSheet) return;
+    // close recipe sheet if open
+    document.getElementById('recipeSheetOverlay')?.classList.remove('open');
+    const rs = document.getElementById('recipeSheet');
+    rs?.classList.remove('open');
+    rs?.setAttribute('aria-hidden','true');
     freezerOverlay.classList.add('open');
     freezerSheet.classList.add('open');
     freezerSheet.setAttribute('aria-hidden','false');
@@ -157,7 +157,7 @@ function renderIngredients(){
     syncFreezerSheet();
   }
 
-  freezerBtn?.addEventListener('click', openFreezerSheet);
+  freezerSheetOpenBtn?.addEventListener('click', ()=>{ openFreezerSheet(); });
   freezerOverlay?.addEventListener('click', closeFreezerSheet);
   freezerClose?.addEventListener('click', closeFreezerSheet);
   freezerPlus?.addEventListener('click', ()=>{
@@ -174,9 +174,9 @@ function renderIngredients(){
 
   // Stats
   const statsKey = "kochbuch.stats";
-  const cookedBtn = $("#cookedBtn");
+  const cookedBtn = $("#sheetCookedBtn");
   const undoBtn = $("#undoCookedBtn");
-  const favBtn = $("#favoriteBtn");
+  const favBtn = $("#sheetFavoriteBtn");
   const statsLine = $("#statsLine");
 
   function getStats(){ return ls.get(statsKey, {}); }
@@ -197,14 +197,15 @@ function renderIngredients(){
   function renderStats(){
     const e=getEntry();
     if(favBtn){
-      const iconEl = favBtn.querySelector('.rbarIcon');
-      const txtEl = favBtn.querySelector('.rbarTxt');
-      if(iconEl) iconEl.textContent = e.favorite ? '★' : '☆';
-      if(txtEl) txtEl.textContent = 'Favorit';
+      favBtn.textContent = `${e.favorite ? '★' : '☆'} Favorit`;
       favBtn.classList.toggle("blue", !!e.favorite);
     }
     if(statsLine){
       statsLine.textContent = `Gekocht: ${e.cookedCount||0}× · Zuletzt: ${e.lastCooked?fmt(e.lastCooked):"—"}`;
+    }
+    if(cookedBtn){
+      cookedBtn.textContent = `✅ Gekocht${(e.cookedCount||0)>0 ? ` · ${e.cookedCount||0}×` : ''}`;
+      cookedBtn.classList.toggle('green', (e.cookedCount||0)>0);
     }
     if(undoBtn) undoBtn.style.opacity = (e.cookedCount||0)>0 ? "1" : ".55";
   }
@@ -271,6 +272,15 @@ function renderIngredients(){
 
   // Cooking mode
   const cookingBtn = $("#cookingModeBtn");
+  const cookingQuick = $("#cookingModeQuick");
+
+  // Portionen quick action: scroll + focus
+  const portionBtn = $("#portionBtn");
+  portionBtn?.addEventListener('click', ()=>{
+    const el = document.getElementById('servingsInput');
+    el?.scrollIntoView({ behavior:'smooth', block:'center' });
+    setTimeout(()=>{ try{ el?.focus(); }catch{} }, 250);
+  });
   const cookOverlay = $("#cookOverlay");
   const cookClose = $("#cookClose");
   const cookTitle = $("#cookTitle");
@@ -379,6 +389,7 @@ function renderIngredients(){
   }
 
   cookingBtn?.addEventListener('click', openCook);
+  cookingQuick?.addEventListener('click', openCook);
   cookClose?.addEventListener('click', closeCook);
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
   cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); });
