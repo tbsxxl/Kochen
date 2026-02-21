@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Starter"
 tags: ["suppe", "vegetarisch", "fine dining", "paprika", "gemüsetatar"]
 time: "ca. 45–60 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/Paprikacreme.png
 servings: 4
 ingredients:
   - { qty: 3, unit: "", item: "Rote Paprika" }
