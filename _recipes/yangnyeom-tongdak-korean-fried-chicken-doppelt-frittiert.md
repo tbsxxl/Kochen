@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Chicken"
 tags: ["koreanisch", "fried chicken", "scharf", "gochujang"]
 time: "60 min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/yangnyeom.png
 servings: 4
 ingredients:
   - { qty: 2, unit: "lb", item: "Chicken wings (Hähnchenflügel)" }
