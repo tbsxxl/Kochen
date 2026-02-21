@@ -1,8 +1,8 @@
 ---
-title: "Pesto (Ligurisch)"
+title: "Pesto alla Genovese"
 date: 2026-02-20
 category: "Sauce"
-tags: ["italienisch", "basilikum", "pesto", "schnell"]
+tags: ["italienisch", "pesto", "basilikum", "sauce", "vegetarisch", "Pasta & Cucina Italiana", "Sauce"]
 time: "ca. 20 Min"
 image: /recipes/images/pesto.png
 servings: 4
