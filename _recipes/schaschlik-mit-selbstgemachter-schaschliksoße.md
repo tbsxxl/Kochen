@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Pork"
 tags: ["schaschlik", "schwein", "schmoren", "grillpfanne"]
 time: "ca. 2 Std"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/Schaschlik.png
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Schweinenacken" }
