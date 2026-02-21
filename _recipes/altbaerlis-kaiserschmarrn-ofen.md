@@ -2,7 +2,7 @@
 title: "Kaiserschmarrn aus dem Ofen"
 date: 2026-02-20
 category: "Dessert"
-tags: ["österreichisch", "süßspeise", "ofen", "kaiserschmarrn", "Dessert & Pâtisserie", "Desserts"]
+tags: ["österreichisch", "süßspeise", "ofen", "kaiserschmarrn", "vegetarisch", "Dessert & Pâtisserie", "Desserts"]
 time: "ca. 55 Min"
 image: /recipes/images/Kaiserschmarrn.png
 servings: 4
