@@ -19,12 +19,41 @@
     const v = num(servingsInput?.value);
     return (v && v>0) ? v : baseServings;
   }
+  function parseIngredientsFromBody(){
+    const body = document.querySelector('.recipeBody');
+    if(!body) return [];
+
+    // Find a heading that contains "Zutaten" and parse the first UL/OL after it.
+    const headings = Array.from(body.querySelectorAll('h1,h2,h3,h4,h5,h6'));
+    const h = headings.find(el => /zutaten/i.test(el.textContent||''));
+    if(!h) return [];
+
+    let n = h.nextElementSibling;
+    while(n && !/^(UL|OL)$/i.test(n.tagName)) n = n.nextElementSibling;
+    if(!n) return [];
+    const lis = Array.from(n.querySelectorAll('li'));
+    if(!lis.length) return [];
+
+    return lis
+      .map(li => (li.textContent||'').trim())
+      .filter(Boolean)
+      .map((t, idx) => ({ idx, item: t, unit: '', qty: null }));
+  }
+
   function scaledIngredients(){
     const factor = currentServings() / baseServings;
-    const ings = Array.isArray(data.ingredients) ? data.ingredients : [];
+    let ings = Array.isArray(data.ingredients) ? data.ingredients : [];
+    // Fallback: allow recipes that keep ingredients in markdown body.
+    if(!ings.length) ings = parseIngredientsFromBody();
+
     return ings.map((i,idx)=>{
       const q = num(i.qty);
-      return { idx, item:String(i.item||\"\").trim(), unit:String(i.unit||\"\"), qty:(q===null?i.qty:q*factor) };
+      return {
+        idx,
+        item: String(i.item || '').trim(),
+        unit: String(i.unit || ''),
+        qty: (q === null ? i.qty : q * factor)
+      };
     });
   }
   
