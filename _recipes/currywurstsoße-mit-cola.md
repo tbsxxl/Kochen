@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Sauce"
 tags: ["deutsch", "streetfood", "curry", "sauce", "cola", "schnell", "Sauce"]
 time: "ca. 15–20 Min"
-image: /recipes/images/cwurst.jpg
+image: /recipes/images/cwurst.png
 servings: 4
 ingredients:
   - { qty: 250, unit: "ml", item: "Cola" }
