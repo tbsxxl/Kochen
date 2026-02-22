@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Pasta"
 tags: ["italienisch", "ragù", "rindfleisch", "ofen", "familienklassiker", "pasta", "Pasta"]
 time: "ca. 1 Std 15 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/bolo2.png
 servings: 6
 ingredients:
   - { qty: 2, unit: "Zehen", item: "Knoblauch" }
