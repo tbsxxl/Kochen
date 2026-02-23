@@ -850,7 +850,6 @@ body{
 .favBadge.isFav{
   opacity: 1;
   transform: scale(1);
-  top: auto;
 }
 
 /* Avoid overlap with freezer chip on the right */
