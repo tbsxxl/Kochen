@@ -826,35 +826,36 @@ body{
 
 
 /* Favorite badge (only visible when recipe is favorited) */
-.favBadge{
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 16px;
-  background: rgba(255,255,255,.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: rgba(245, 158, 11, 1);
-  opacity: 0;
-  transform: scale(.95);
-  transition: opacity .15s ease, transform .15s ease;
-  pointer-events: none; /* indicator only */
+.favBadge {
+    position: absolute;
+    top: 80px;
+    right: 1px;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+    background: rgba(255, 255, 255, .70);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(245, 158, 11, 1);
+    opacity: 0;
+    transform: scale(.95);
+    transition: opacity .15s ease, transform .15s ease;
+    pointer-events: none;
 }
 .favBadge.isFav{
   opacity: 1;
   transform: scale(1);
+  top: auto;
 }
 
 /* Avoid overlap with freezer chip on the right */
-.freezerRow .favBadge{ right: 76px; top: 10px }
-.freezerCard .favBadge{ right: 76px; top: 10px }
+.freezerRow .favBadge{ right: 76px; top: auto }
+.freezerCard .favBadge{ right: 76px; top: auto }
 
 /* Horizontal scrollers: keep shadows from looking clipped */
 .hScroll{
