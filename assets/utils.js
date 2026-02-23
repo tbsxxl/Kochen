@@ -152,29 +152,79 @@
     function isFavById(id){
       if(!id) return false;
 
-      // A
-      const a = stats && stats[id];
-      if(a && typeof a === 'object' && 'favorite' in a) return !!a.favorite;
+      // Normalize to path-only, tolerant to:
+      // - trailing slash differences
+      // - baseurl depth differences (GitHub Pages)
+      // - accidentally stored absolute URLs
+      function normPath(x){
+        try{
+          x = String(x || "");
+          x = x.replace(/^https?:\/\/[^/]+/i, "");
+          x = x.split('#')[0].split('?')[0];
+          if(x && x[0] !== '/') x = '/' + x;
+          x = x.replace(/\/+/g, '/');
+          return x;
+        }catch{ return String(x || ""); }
+      }
 
-      // B
+      const raw = normPath(id);
+      const withSlash = raw.endsWith('/') ? raw : raw + '/';
+      const noSlash = raw.replace(/\/$/, '');
+
       const favMap = stats && stats.favorites;
+
+      // Direct A/B checks (as-is)
+      const a0 = stats && stats[id];
+      if(a0 && typeof a0 === 'object' && 'favorite' in a0) return !!a0.favorite;
       if(favMap && typeof favMap === 'object' && id in favMap) return !!favMap[id];
 
-      // Baseurl tolerance: try strip first path segment ("/repo/..." -> "/..."),
-      // then do an endsWith match against stored keys.
-      const stripped = id.replace(/^\/[\w-]+(?=\/)/, '');
-      const b1 = stats && stats[stripped];
-      if(b1 && typeof b1 === 'object' && 'favorite' in b1) return !!b1.favorite;
-      if(favMap && typeof favMap === 'object' && stripped in favMap) return !!favMap[stripped];
+      // Candidate list (raw + slash variants + progressively stripped baseurl segments)
+      const candidates = [];
+      const seen = new Set();
+      function push(v){
+        v = normPath(v);
+        if(!v) return;
+        const vs = v.endsWith('/') ? v : v + '/';
+        const vn = v.replace(/\/$/, '');
+        for(const t of [v, vs, vn]){
+          if(!seen.has(t)){
+            seen.add(t);
+            candidates.push(t);
+          }
+        }
+      }
+      push(raw);
+      push(withSlash);
+      push(noSlash);
 
-      // Loose match (fallback): if a key ends with the requested id (or stripped id).
+      try{
+        let cur = withSlash;
+        // strip '/a/b/c/' -> try '/b/c/', '/c/' etc.
+        while(cur.split('/').filter(Boolean).length > 1){
+          cur = '/' + cur.split('/').filter(Boolean).slice(1).join('/') + '/';
+          push(cur);
+        }
+      }catch{}
+
+      // Fast candidate checks
+      for(const cid of candidates){
+        const a = stats && stats[cid];
+        if(a && typeof a === 'object' && 'favorite' in a) return !!a.favorite;
+        if(favMap && typeof favMap === 'object' && cid in favMap) return !!favMap[cid];
+      }
+
+      // Loose match: compare normalized endings
       try{
         const keys = Object.keys(stats || {});
         for(const k of keys){
           if(k === 'favorites') continue;
-          if(k && (k.endsWith(id) || k.endsWith(stripped) || id.endsWith(k) || stripped.endsWith(k))){
-            const e = stats[k];
-            if(e && typeof e === 'object' && 'favorite' in e) return !!e.favorite;
+          const nk = normPath(k);
+          for(const cid of candidates){
+            const nc = normPath(cid);
+            if(nk && nc && (nk.endsWith(nc) || nc.endsWith(nk))){
+              const e = stats[k];
+              if(e && typeof e === 'object' && 'favorite' in e) return !!e.favorite;
+            }
           }
         }
       }catch{}
