@@ -195,6 +195,9 @@
     window.updateFavBadges();
   }
 
+  // update when navigating back/forward (bfcache on iOS Safari)
+  window.addEventListener("pageshow", ()=> window.updateFavBadges());
+
   // update when another tab changes localStorage
   window.addEventListener("storage", (e)=>{
     if(e.key === statsKey) window.updateFavBadges();
