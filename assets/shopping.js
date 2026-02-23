@@ -52,7 +52,14 @@ function addItem(){
 }
 
   clearCheckedBtn?.addEventListener("click", ()=>{ setList(getList().filter(x=>!x.checked)); render(); });
-  clearAllBtn?.addEventListener("click", ()=>{ setList([]); render(); });
+  clearAllBtn?.addEventListener("click", ()=>{
+    const cur = getList();
+    if(!cur.length) return;
+    const ok = window.confirm("Wirklich alles aus der Shopping List löschen?");
+    if(!ok) return;
+    setList([]);
+    render();
+  });
 
   addBtn?.addEventListener("click", addItem);
   addInput?.addEventListener("keydown", (ev)=>{ if(ev.key==="Enter") addItem(); });

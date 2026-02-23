@@ -178,6 +178,7 @@ function renderIngredients(){
   const undoBtn = $("#undoCookedBtn");
   const favBtn = $("#sheetFavoriteBtn");
   const statsLine = $("#statsLine");
+  const favPill = $("#favPill");
 
   function getStats(){ return ls.get(statsKey, {}); }
   function setStats(v){ ls.set(statsKey, v); }
@@ -199,6 +200,9 @@ function renderIngredients(){
     if(favBtn){
       favBtn.textContent = `${e.favorite ? '★' : '☆'} Favorit`;
       favBtn.classList.toggle("blue", !!e.favorite);
+    }
+    if(favPill){
+      favPill.hidden = !e.favorite;
     }
     if(statsLine){
       statsLine.textContent = `Gekocht: ${e.cookedCount||0}× · Zuletzt: ${e.lastCooked?fmt(e.lastCooked):"—"}`;

@@ -13,13 +13,13 @@ permalink: /shopping/
 
 <div class="card cardPad" style="margin-top:10px">
   <div class="footerRow">
-    <button class="btn" id="clearChecked" style="flex:1">Erledigte löschen</button>
-    <button class="btn red" id="clearAll" style="flex:1">Alles löschen</button>
+    <button class="btn btnGhost" id="clearChecked" style="flex:1" type="button">Erledigte löschen</button>
+    <button class="btn btnDangerOutline" id="clearAll" style="flex:1" type="button">Alles löschen</button>
   </div>
 </div>
 
 <div class="section">
-  <div class="listGroup" id="shopList"></div>
+  <div class="listGroup compactList" id="shopList"></div>
 </div>
 
 <script defer src="{{ '/assets/shopping.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>

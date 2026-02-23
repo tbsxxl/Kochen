@@ -34,6 +34,7 @@ layout: default
         {% if page.time %}<span class="kv">⏱ {{ page.time }}</span>{% endif %}
         {% if page.servings %}<span class="kv">🍽 {{ page.servings }}</span>{% endif %}
         {% if page.date %}<span class="kv">📅 {{ page.date | date: "%d.%m.%Y" }}</span>{% endif %}
+        <span class="kv kvFav" id="favPill" hidden>★ Favorit</span>
       </div>
 
       {% if page.tags %}

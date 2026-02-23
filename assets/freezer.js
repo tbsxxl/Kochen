@@ -33,10 +33,12 @@
         ${meta?`<div class="dim" style="margin-top:6px">${meta}</div>`:''}
 
         <div class="freezerControls">
-          <button class="btn" data-act="minus" type="button">−</button>
-          <div class="freezerCount" aria-label="Portionen">${portions} Portion${portions===1?'':'en'}</div>
-          <button class="btn" data-act="plus" type="button">+</button>
-          <button class="btn red" data-act="remove" type="button">Entfernen</button>
+          <div class="qtyStepper" aria-label="Portionen ändern">
+            <button class="stepBtn" data-act="minus" type="button" aria-label="Minus">−</button>
+            <div class="stepVal" aria-label="Portionen">${portions}</div>
+            <button class="stepBtn" data-act="plus" type="button" aria-label="Plus">+</button>
+          </div>
+          <button class="btn btnGhost freezerRemoveBtn" data-act="remove" type="button" aria-label="Aus Kühltruhe entfernen">🗑</button>
         </div>
       </div>
     `;
@@ -80,6 +82,8 @@
       if(entry.portions <= 0) delete f[id]; else f[id]=entry;
     }
     if(act === 'remove'){
+      const ok = window.confirm('Aus der Kühltruhe entfernen?');
+      if(!ok) return;
       delete f[id];
     }
     setFreezer(f);

@@ -4,9 +4,9 @@ title: Alle Rezepte
 permalink: /rezeptindex/
 ---
 <div class="card" style="margin-top:10px">
-  <div class="searchRow">
+  <div class="searchRow searchRowCompact">
     <input id="searchInput" placeholder="Suchen: z. B. chicken, scharf, 60 min, pasta …" />
-    <button id="clearSearch" class="btn" style="min-height:48px">Reset</button>
+    <button id="clearSearch" class="btn btnGhost" type="button" aria-label="Zurücksetzen">↺</button>
   </div>
 </div>
 
@@ -43,10 +43,16 @@ permalink: /rezeptindex/
         </div>
 
         {% if r.tags %}
-        <div class="chips">
-          {% for t in r.tags limit: 6 %}
+        {% assign tag_count = r.tags | size %}
+        {% assign show_count = 3 %}
+        {% assign rest = tag_count | minus: show_count %}
+        <div class="chips chipsCompact">
+          {% for t in r.tags limit: 3 %}
             <span class="chip">{{ t }}</span>
           {% endfor %}
+          {% if rest > 0 %}
+            <span class="chip chipMore">+{{ rest }}</span>
+          {% endif %}
         </div>
         {% endif %}
       </div>
