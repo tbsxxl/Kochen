@@ -144,11 +144,47 @@
 
   window.updateFavBadges = function updateFavBadges(){
     const stats = getStats();
+
+    // Support multiple shapes that may exist across project versions:
+    // A) stats[recipeId] = { favorite: true }
+    // B) stats.favorites[recipeId] = true
+    // Also tolerate baseurl changes by attempting a loose path match.
+    function isFavById(id){
+      if(!id) return false;
+
+      // A
+      const a = stats && stats[id];
+      if(a && typeof a === 'object' && 'favorite' in a) return !!a.favorite;
+
+      // B
+      const favMap = stats && stats.favorites;
+      if(favMap && typeof favMap === 'object' && id in favMap) return !!favMap[id];
+
+      // Baseurl tolerance: try strip first path segment ("/repo/..." -> "/..."),
+      // then do an endsWith match against stored keys.
+      const stripped = id.replace(/^\/[\w-]+(?=\/)/, '');
+      const b1 = stats && stats[stripped];
+      if(b1 && typeof b1 === 'object' && 'favorite' in b1) return !!b1.favorite;
+      if(favMap && typeof favMap === 'object' && stripped in favMap) return !!favMap[stripped];
+
+      // Loose match (fallback): if a key ends with the requested id (or stripped id).
+      try{
+        const keys = Object.keys(stats || {});
+        for(const k of keys){
+          if(k === 'favorites') continue;
+          if(k && (k.endsWith(id) || k.endsWith(stripped) || id.endsWith(k) || stripped.endsWith(k))){
+            const e = stats[k];
+            if(e && typeof e === 'object' && 'favorite' in e) return !!e.favorite;
+          }
+        }
+      }catch{}
+
+      return false;
+    }
+
     document.querySelectorAll('[data-fav-badge][data-recipe-id]').forEach(el=>{
       const id = el.getAttribute('data-recipe-id');
-      const entry = stats && stats[id];
-      const fav = !!(entry && entry.favorite);
-      el.classList.toggle('isFav', fav);
+      el.classList.toggle('isFav', isFavById(id));
     });
   };
 
