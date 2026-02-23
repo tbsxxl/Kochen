@@ -102,12 +102,12 @@ a{color:inherit}
 
 .hScroll{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 10px 2px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .hScroll::-webkit-scrollbar{display:none}
-.hCard{flex:0 0 82%;scroll-snap-align:start}
+.hCard{flex:0 0 80%;scroll-snap-align:start}
 
 .stack{display:flex;flex-direction:column;gap:12px}
 .freezerRow{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .freezerRight{display:flex;align-items:center;gap:8px}
-.freezerBadge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.22);font-weight:700}
+.freezerBadge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.20);font-weight:700}
 
 .footerRow{display:flex;gap:8px;flex-wrap:wrap}
 .btn{
@@ -236,11 +236,16 @@ a{color:inherit}
   -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid rgba(15,23,42,.10);
   padding: 8px 0 calc(8px + env(safe-area-inset-bottom)) 0;
+  min-height: calc(var(--tabbarH) + env(safe-area-inset-bottom));
+  box-sizing: border-box;
 }
+
+/* Recipe action bar should match the main tabbar height exactly */
+.recipeTabbar.bottomRail{ min-height: calc(var(--recipeBarH) + env(safe-area-inset-bottom)); }
 
 /* Bottom Tabbar */
 .tabbar{ z-index:1300; }
-.tabbarInner{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.tabbarInner{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;align-items:center}
 .tabItem{
   text-decoration:none;color:var(--sub2);background:transparent;border:none;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -479,8 +484,6 @@ a{color:inherit}
   .recipeBody{ font-size:11.5pt; line-height:1.35; }
 }
 
-body{ background:#fff !important; }
-}
 
 /* ------------------------------------------------------------
    Liquid Glass (global overrides)
