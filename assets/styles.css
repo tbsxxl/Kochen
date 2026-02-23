@@ -838,5 +838,5 @@ body{
 }
 
 /* Avoid overlap with freezer chip on the right */
-.freezerRow .favBadge{ right: 76px; top:auto}
-.freezerCard .favBadge{ right: 76px; top:auto}
+.freezerRow .favBadge{ right: 76px; top: auto}
+.freezerCard .favBadge{ right: 76px; top: auto}
