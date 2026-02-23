@@ -132,3 +132,35 @@
 
   window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum, renderToggleList };
 })();
+
+// Favorite badge indicator on list cards (uses kochbuch.stats)
+(function(){
+  const statsKey = "kochbuch.stats";
+
+  function getStats(){
+    try { return JSON.parse(localStorage.getItem(statsKey) || "{}"); }
+    catch { return {}; }
+  }
+
+  window.updateFavBadges = function updateFavBadges(){
+    const stats = getStats();
+    document.querySelectorAll('[data-fav-badge][data-recipe-id]').forEach(el=>{
+      const id = el.getAttribute('data-recipe-id');
+      const entry = stats && stats[id];
+      const fav = !!(entry && entry.favorite);
+      el.classList.toggle('isFav', fav);
+    });
+  };
+
+  // initial
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", ()=> window.updateFavBadges());
+  } else {
+    window.updateFavBadges();
+  }
+
+  // update when another tab changes localStorage
+  window.addEventListener("storage", (e)=>{
+    if(e.key === statsKey) window.updateFavBadges();
+  });
+})();

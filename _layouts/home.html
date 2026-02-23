@@ -10,6 +10,7 @@ layout: default
   <div class="h2" style="padding:0 2px;">Heute</div>
   <a class="linkCard" href="{{ featured.url | relative_url }}">
     <div class="card recipeCard cardHover homeFeatured">
+      <span class="favBadge" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-hidden="true">★</span>
       {% if featured.image %}
         <div class="thumb homeFeaturedThumb">
           <img
@@ -53,12 +54,13 @@ layout: default
 <div class="section">
   <div class="homeSectionHead">
     <div class="h2" style="padding:0 2px;">Neueste Rezepte</div>
-    <a class="btn ghost" href="{{ '/rezeptindex/' | relative_url }}">Alle</a>
+    <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle →</a>
   </div>
   <div class="grid">
-    {% for r in newest limit: 3 %}
+    {% for r in newest offset: 1 limit: 3 %}
       <a class="linkCard" href="{{ r.url | relative_url }}">
         <div class="card recipeCard cardHover">
+          <span class="favBadge" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-hidden="true">★</span>
           {% if r.image %}
             <div class="thumb">
               <img

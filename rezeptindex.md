@@ -18,6 +18,7 @@ permalink: /rezeptindex/
     {% capture hay %}{{ r.title }} {{ r.category }} {{ r.time }} {{ r.servings }} {{ tags }}{% endcapture %}
     <a class="linkCard" href="{{ r.url | relative_url }}" data-recipe-card data-haystack="{{ hay | escape }}">
       <div class="card recipeCard cardHover">
+        <span class="favBadge" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-hidden="true">★</span>
         {% if r.image %}
           <div class="thumb">
             <img

@@ -59,7 +59,7 @@
         <div class="card recipeCard cardHover">
           <div class="recipeTop">
             <h3 class="recipeTitle">${r.title}</h3>
-            <span class="badge">✨</span>
+            <span class="favBadge" data-fav-badge data-recipe-id="${r.id}" aria-hidden="true">★</span>
           </div>
           <div class="recipeMeta">${meta?`<span>${meta}</span>`:""}</div>
         </div>
@@ -73,6 +73,7 @@
     return `
       <a class="linkCard" href="${r.id}">
         <div class="card cardPad freezerRow cardHover">
+          <span class="favBadge" data-fav-badge data-recipe-id="${r.id}" aria-hidden="true">★</span>
           <div style="min-width:0">
             <div class="h3" style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.title}</div>
             ${meta?`<div class="dim" style="margin-top:4px">${meta}</div>`:""}
