@@ -25,6 +25,7 @@
     const portions = Number(entry?.portions || 0);
     return `
       <div class="card cardPad freezerCard" data-id="${id}">
+        <span class="favBadge" data-fav-badge data-recipe-id="${id}" aria-hidden="true">★</span>
         <div class="freezerTop">
           <a class="freezerTitle" href="${id}">${title}</a>
           <span class="badge green">🧊 ${portions}</span>
@@ -53,6 +54,11 @@
       return String(ta).localeCompare(String(tb),'de');
     });
     host.innerHTML = `<div class="grid" style="grid-template-columns:1fr">${ids.map(id=>row(id,f[id])).join('')}</div>`;
+
+    // Update favorite badges for dynamically rendered rows
+    if(typeof window.updateFavBadges === 'function'){
+      window.updateFavBadges();
+    }
   }
 
   host.addEventListener('click', (e)=>{

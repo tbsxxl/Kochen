@@ -14,6 +14,7 @@ permalink: /kategorien/
     {% for r in rs %}
       <a class="linkCard" href="{{ r.url | relative_url }}">
         <div class="card recipeCard cardHover" style="box-shadow:none;border:1px solid rgba(15,23,42,.10)">
+          <span class="favBadge" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-hidden="true">★</span>
           {% if r.image %}
             <div class="thumb">
               <img

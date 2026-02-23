@@ -810,3 +810,4 @@ body{
 
 /* Avoid overlap with freezer chip on the right */
 .freezerRow .favBadge{ right: 76px; }
+.freezerCard .favBadge{ right: 76px; }
