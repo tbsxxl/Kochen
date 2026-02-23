@@ -147,7 +147,16 @@ a{color:inherit}
 .cardHover:active{transform:scale(.99)}
 
 .recipeCard{position:relative;padding:12px;display:flex;flex-direction:column;gap:10px}
-.recipeTop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.recipeTop{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.recipeTopLeft{
+  flex:1;
+  min-width:0;
+}
 .recipeTitle{font-weight:var(--wTitle);font-size:16px;margin:0;letter-spacing:.2px}
 .recipeMeta{display:flex;gap:8px;flex-wrap:wrap;color:var(--sub2);font-size:var(--fsSecondary);font-weight:var(--wSecondary)}
 
@@ -814,6 +823,7 @@ body{
   visibility: hidden;
   pointer-events: none;
 }
+
 
 /* Favorite badge (only visible when recipe is favorited) */
 .favBadge{
