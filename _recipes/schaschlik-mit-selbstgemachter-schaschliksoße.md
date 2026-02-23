@@ -1,5 +1,5 @@
 ---
-title: "Schaschlik vom Schwein mit Paprikasauce "
+title: "Schaschlik vom Schwein mit Sauce "
 date: 2026-02-20
 category: "Pork"
 tags: ["italienisch", "schwein", "spieße", "paprikasauce", "Carne", "Pork"]
