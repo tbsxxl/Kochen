@@ -2,16 +2,61 @@
 layout: default
 ---
 
+{% assign newest = site.recipes | sort: "date" | reverse %}
+{% assign featured = newest | first %}
+
+<!-- Featured -->
 <div class="section">
-  <div class="h2" style="padding:0 2px;">Empfehlungen</div>
-  <div id="recommendations"></div>
+  <div class="h2" style="padding:0 2px;">Heute</div>
+  <a class="linkCard" href="{{ featured.url | relative_url }}">
+    <div class="card recipeCard cardHover homeFeatured">
+      {% if featured.image %}
+        <div class="thumb homeFeaturedThumb">
+          <img
+            class="thumbImg"
+            src="{{ featured.image | relative_url }}"
+            alt="{{ featured.title | escape }}"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;max-height:240px;object-fit:cover;display:block;"
+          >
+        </div>
+      {% endif %}
+
+      <div class="recipeTop">
+        <h3 class="recipeTitle">{{ featured.title }}</h3>
+        {% if featured.category %}<span class="badge action">{{ featured.category }}</span>{% endif %}
+      </div>
+
+      <div class="recipeMeta">
+        {% if featured.time %}<span>⏱ {{ featured.time }}</span>{% endif %}
+        {% if featured.servings %}<span>🍽 {{ featured.servings }}</span>{% endif %}
+      </div>
+    </div>
+  </a>
 </div>
 
+<!-- Recommendations -->
 <div class="section">
-  <div class="h2" style="padding:0 2px;">Neueste Rezepte</div>
+  <div class="homeSectionHead">
+    <div class="h2" style="padding:0 2px;">Für dich</div>
+  </div>
+  <div class="hScroll" id="forYouRow"></div>
+</div>
+
+<div class="section" id="freezerSection" hidden>
+  <div class="h2" style="padding:0 2px;">Aus der Kühltruhe</div>
+  <div class="stack" id="freezerList"></div>
+</div>
+
+<!-- Newest -->
+<div class="section">
+  <div class="homeSectionHead">
+    <div class="h2" style="padding:0 2px;">Neueste Rezepte</div>
+    <a class="btn ghost" href="{{ '/rezeptindex/' | relative_url }}">Alle</a>
+  </div>
   <div class="grid">
-    {% assign sorted = site.recipes | sort: "date" | reverse %}
-    {% for r in sorted limit: 6 %}
+    {% for r in newest limit: 3 %}
       <a class="linkCard" href="{{ r.url | relative_url }}">
         <div class="card recipeCard cardHover">
           {% if r.image %}
@@ -22,7 +67,7 @@ layout: default
                 alt="{{ r.title | escape }}"
                 loading="lazy"
                 decoding="async"
-                style="width:100%;max-height:170px;object-fit:cover;display:block;"
+                style="width:100%;max-height:190px;object-fit:cover;display:block;"
               >
             </div>
           {% endif %}
@@ -36,14 +81,6 @@ layout: default
             {% if r.time %}<span>⏱ {{ r.time }}</span>{% endif %}
             {% if r.servings %}<span>🍽 {{ r.servings }}</span>{% endif %}
           </div>
-
-          {% if r.tags %}
-          <div class="chips">
-            {% for t in r.tags limit: 4 %}
-              <span class="chip">{{ t }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
         </div>
       </a>
     {% endfor %}

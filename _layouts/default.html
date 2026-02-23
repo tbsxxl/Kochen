@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="theme-color" content="#f6f7f9">
-<link rel="icon" type="image/png" href="{{ '/assets/favicon-512.png' | relative_url }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicon-512.png' | relative_url }}">
+
   <!-- Wichtig: relative_url sorgt dafür, dass es mit baseurl funktioniert -->
   <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <script defer src="{{ '/assets/utils.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>

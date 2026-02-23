@@ -1,12 +1,14 @@
 (function(){
-  const host = document.querySelector("#recommendations");
+  const forYouHost = document.querySelector("#forYouRow");
+  const freezerHost = document.querySelector("#freezerList");
+  const freezerSection = document.querySelector("#freezerSection");
   const dataEl = document.querySelector("#allRecipesJson");
-  if(!host || !dataEl) return;
+  if(!forYouHost || !dataEl) return;
 
   let recipes = [];
   try{ recipes = JSON.parse(dataEl.textContent || "[]"); }catch{}
   if(!Array.isArray(recipes) || !recipes.length){
-    host.innerHTML = '<div class="card cardPad">Keine Rezepte gefunden.</div>';
+    forYouHost.innerHTML = '<div class="card cardPad">Keine Rezepte gefunden.</div>';
     return;
   }
 
@@ -41,47 +43,59 @@
     return recency + fav + freq;
   }
 
-  const forYou = enriched.slice().sort((a,b)=>score(b)-score(a)).slice(0, 8);
-  const freezerPicks = enriched.filter(x=>x.inFreezer).slice(0, 8);
+  const forYou = enriched.slice().sort((a,b)=>score(b)-score(a)).slice(0, 6);
+  const freezerPicks = enriched.filter(x=>x.inFreezer).slice(0, 6);
 
-  function card(r, badgeHtml){
-    const meta = [r.time?`⏱ ${r.time}`:"", r.servings?`🍽 ${r.servings}`:""].filter(Boolean).join(" · ");
-    const last = r.lastCooked ? new Date(r.lastCooked).toLocaleDateString("de-DE") : "nie";
-    const hint = (r.daysSince===null) ? "noch nie gekocht" : `zuletzt: ${last}`;
-    const right = badgeHtml || (r.category ? `<span class="badge action">${r.category}</span>` : "");
+  function metaLine(r){
+    return [r.time?`⏱ ${r.time}`:"", r.servings?`🍽 ${r.servings}`:""]
+      .filter(Boolean)
+      .join(" · ");
+  }
+
+  function miniCard(r){
+    const meta = metaLine(r);
     return `
-      <a class="linkCard" href="${r.id}">
+      <a class="linkCard hCard" href="${r.id}">
         <div class="card recipeCard cardHover">
           <div class="recipeTop">
             <h3 class="recipeTitle">${r.title}</h3>
-            ${right}
+            <span class="badge">✨</span>
           </div>
-          <div class="recipeMeta">
-            ${meta?`<span>${meta}</span>`:""}
-            <span>• ${hint}</span>
-            ${r.cookedCount?`<span>• ${r.cookedCount}×</span>`:""}
-            ${r.favorite?`<span>• ★</span>`:""}
+          <div class="recipeMeta">${meta?`<span>${meta}</span>`:""}</div>
+        </div>
+      </a>
+    `;
+  }
+
+  function freezerRow(r){
+    const meta = metaLine(r);
+    const portions = Number(r.freezerPortions || 0);
+    return `
+      <a class="linkCard" href="${r.id}">
+        <div class="card cardPad freezerRow cardHover">
+          <div style="min-width:0">
+            <div class="h3" style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.title}</div>
+            ${meta?`<div class="dim" style="margin-top:4px">${meta}</div>`:""}
+          </div>
+          <div class="freezerRight">
+            <span class="freezerBadge">🧊 ${portions}</span>
           </div>
         </div>
       </a>
     `;
   }
 
-  function section(title, items, badgeFn){
-    if(!items.length) return "";
-    return `
-      <div class="section">
-        <div class="h2" style="padding:0 2px;">${title}</div>
-        <div class="grid">
-          ${items.map(r=>card(r, badgeFn?badgeFn(r):"")).join("")}
-        </div>
-      </div>
-    `;
+  forYouHost.innerHTML = forYou.length
+    ? forYou.map(miniCard).join("")
+    : '<div class="card cardPad">Noch keine Daten. Markiere Rezepte als „Gekocht“ oder „Favorit“.</div>';
+
+  if(freezerHost && freezerSection){
+    if(freezerPicks.length){
+      freezerSection.hidden = false;
+      freezerHost.innerHTML = freezerPicks.map(freezerRow).join("");
+    }else{
+      freezerSection.hidden = true;
+      freezerHost.innerHTML = "";
+    }
   }
-
-  const html =
-    section("Für dich", forYou, ()=>'<span class="badge">✨</span>') +
-    section("Aus der Kühltruhe", freezerPicks, (r)=>`<span class="badge green">🧊 ${r.freezerPortions||""}</span>`);
-
-  host.innerHTML = html || '<div class="card cardPad">Noch keine Daten. Markiere Rezepte als „Gekocht“ oder „Favorit“.</div>';
 })();

@@ -96,6 +96,19 @@ a{color:inherit}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
 
+/* Home 2.0 (iPhone-first, same design system) */
+.homeSectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 2px;margin-bottom:10px}
+.btn.ghost{background:rgba(255,255,255,.55);border:1px solid rgba(15,23,42,.10);color:var(--text);box-shadow:none}
+
+.hScroll{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 10px 2px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.hScroll::-webkit-scrollbar{display:none}
+.hCard{flex:0 0 82%;scroll-snap-align:start}
+
+.stack{display:flex;flex-direction:column;gap:12px}
+.freezerRow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.freezerRight{display:flex;align-items:center;gap:8px}
+.freezerBadge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.22);font-weight:700}
+
 .footerRow{display:flex;gap:8px;flex-wrap:wrap}
 .btn{
   border:none;border-radius:var(--rBtn);padding:14px 12px;font-weight:var(--wTitle);
@@ -745,23 +758,3 @@ body{
 .appMain{
   background: transparent !important;
 }
-
-/* Sheet darf nicht höher als der Viewport sein */
-.sheet{
-  max-height: calc(100dvh - 24px);
-  display: flex;
-  flex-direction: column;
-}
-
-/* Header bleibt oben, Body scrollt */
-.sheetHead{
-  flex: 0 0 auto;
-}
-
-.sheetBody{
-  flex: 1 1 auto;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-
-  /* genug Platz unten für Home-Indicator + Finger */
-  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
