@@ -7,7 +7,7 @@ time: "ca. 2 Std + Kühlzeiten"
 image: /recipes/images/well.png
 servings: 4
 ingredients:
-  - { qty: "2 × 400", unit: "g", item: "Rinderfilet" }
+  - { qty: "800", unit: "g", item: "Rinderfilet" }
   - { qty: "n. B.", unit: "", item: "Olivenöl (zum Anbraten)" }
   - { qty: 500, unit: "g", item: "Gemischte Waldpilze, geputzt" }
   - { qty: 1, unit: "Zweig", item: "Thymian (Blätter)" }
