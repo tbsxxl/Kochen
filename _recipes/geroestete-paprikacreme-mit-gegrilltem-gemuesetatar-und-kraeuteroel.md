@@ -15,7 +15,7 @@ ingredients:
   - { qty: 80, unit: "ml", item: "Weißwein" }
   - { qty: 150, unit: "ml", item: "Sahne" }
   - { qty: 1, unit: "TL", item: "Majoran (frisch oder 1/2 TL getrocknet)" }
-  - { qty: "1–2", unit: "Zweige", item: "Thymian" }
+  - { qty: "2", unit: "Zweige", item: "Thymian" }
   - { qty: 1, unit: "EL", item: "Öl" }
   - { qty: "n. B.", unit: "", item: "Meersalz" }
   - { qty: "n. B.", unit: "", item: "Schwarzer Pfeffer" }
