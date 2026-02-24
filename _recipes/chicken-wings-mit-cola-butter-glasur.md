@@ -8,7 +8,7 @@ image: /recipes/images/wings.png
 servings: 3
 ingredients:
   - { qty: 1, unit: "kg", item: "Chicken Wings" }
-  - { qty: "1–2", unit: "EL", item: "Geräuchertes Paprikapulver" }
+  - { qty: "2", unit: "EL", item: "Geräuchertes Paprikapulver" }
   - { qty: 2, unit: "EL", item: "Würzmix" }
   - { qty: "Prise", unit: "", item: "Pfeffermix" }
   - { qty: "Schuss", unit: "", item: "Sojasauce" }
@@ -17,7 +17,7 @@ ingredients:
   - { qty: 4, unit: "EL", item: "Butter" }
   - { qty: 200, unit: "ml", item: "Cola" }
   - { qty: 1, unit: "EL", item: "Würzkraft" }
-  - { qty: "3–5", unit: "EL", item: "Bratöl" }
+  - { qty: "3", unit: "EL", item: "Bratöl" }
 ---
 
 ## Schritte
