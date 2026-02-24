@@ -12,14 +12,14 @@ ingredients:
   - { qty: 30, unit: "g", item: "Feines Meersalz" }
   - { qty: 1, unit: "g", item: "Frische Hefe (oder 0,35 g Trockenhefe)" }
   - { qty: 400, unit: "g", item: "San-Marzano-Tomaten (Dose)" }
-  - { qty: "1–1.5", unit: "TL", item: "Feines Salz (Sauce)" }
+  - { qty: "1", unit: "TL", item: "Feines Salz (Sauce)" }
   - { qty: "optional", unit: "", item: "4–6 Basilikumblätter" }
   - { qty: "optional", unit: "", item: "1 TL Olivenöl (Sauce)" }
   - { qty: "80–100", unit: "g", item: "Mozzarella (pro Pizza)" }
-  - { qty: "2–3", unit: "Scheiben", item: "Parmaschinken (pro Pizza)" }
+  - { qty: "3", unit: "Scheiben", item: "Parmaschinken (pro Pizza)" }
   - { qty: "1", unit: "Handvoll", item: "Rucola (pro Pizza)" }
   - { qty: "n. B.", unit: "", item: "Frisch geriebener Parmesan" }
-  - { qty: "1–2", unit: "EL", item: "Hochwertiges Olivenöl (pro Pizza)" }
+  - { qty: "1", unit: "EL", item: "Hochwertiges Olivenöl (pro Pizza)" }
 ---
 
 ## Schritte
