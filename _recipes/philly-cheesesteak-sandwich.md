@@ -7,10 +7,10 @@ time: "ca. 15–20 Min"
 image: /recipes/images/philly.png
 servings: 1
 ingredients:
-  - { qty: "150–200", unit: "g", item: "Rib-Eye oder Roastbeef, sehr dünn geschnitten" }
+  - { qty: "1200", unit: "g", item: "Rib-Eye oder Roastbeef, sehr dünn geschnitten" }
   - { qty: 1, unit: "", item: "Weiches längliches Sandwich-Brötchen (Hoagie-Style)" }
   - { qty: "0.5", unit: "", item: "Zwiebel, fein gestreift" }
-  - { qty: "2–3", unit: "Scheiben", item: "Provolone oder Cheddar (alternativ Schmelzkäse)" }
+  - { qty: "3", unit: "Scheiben", item: "Provolone oder Cheddar (alternativ Schmelzkäse)" }
   - { qty: 1, unit: "TL", item: "Neutrales Öl oder Butter" }
   - { qty: "n. B.", unit: "", item: "Salz" }
   - { qty: "n. B.", unit: "", item: "Schwarzer Pfeffer" }
