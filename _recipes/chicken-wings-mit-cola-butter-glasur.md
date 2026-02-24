@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Chicken"
 tags: ["wings", "ofen", "glasiert", "streetfood"]
 time: "ca. 45 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/wings.png
 servings: 2-3
 ingredients:
   - { qty: 1, unit: "kg", item: "Chicken Wings" }
