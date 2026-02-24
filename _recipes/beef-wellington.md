@@ -28,7 +28,7 @@ ingredients:
 ---
 
 ## Schritte
-1. Rinderfilets straff in dreifache Frischhaltefolie wickeln, um eine gleichmäßige Form zu erhalten. Über Nacht kühlen.
+1. Rinderfilets (Gesamt halbieren 2x400) straff in dreifache Frischhaltefolie wickeln, um eine gleichmäßige Form zu erhalten. Über Nacht kühlen.
 2. Folie entfernen. Filets in sehr heißer Pfanne mit wenig Olivenöl 30–60 Sekunden rundum scharf anbraten (innen roh). Vollständig abkühlen lassen.
 3. Pilze sehr fein hacken. Mit etwas Olivenöl, Thymian, Salz und Pfeffer bei hoher Hitze ca. 10 Minuten braten, bis sämtliche Flüssigkeit verdampft ist (trockene Duxelles). Abkühlen lassen.
 4. Blätterteig halbieren und jeweils rechteckig ausrollen (groß genug zum vollständigen Einschlagen). Kalt stellen.
