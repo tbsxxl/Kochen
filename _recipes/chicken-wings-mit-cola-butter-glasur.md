@@ -1,5 +1,5 @@
 ---
-title: "Chicken Wings mit Cola-Butter-Glasur"
+title: "Chicken Wings"
 date: 2026-02-20
 category: "Chicken"
 tags: ["wings", "ofen", "glasiert", "streetfood"]
