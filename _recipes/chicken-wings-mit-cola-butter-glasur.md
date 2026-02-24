@@ -5,7 +5,7 @@ category: "Chicken"
 tags: ["wings", "ofen", "glasiert", "streetfood"]
 time: "ca. 45 Min"
 image: /recipes/images/wings.png
-servings: 2-3
+servings: 3
 ingredients:
   - { qty: 1, unit: "kg", item: "Chicken Wings" }
   - { qty: "1–2", unit: "EL", item: "Geräuchertes Paprikapulver" }
