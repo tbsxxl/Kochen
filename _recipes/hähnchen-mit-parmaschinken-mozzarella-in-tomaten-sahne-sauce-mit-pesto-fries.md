@@ -20,11 +20,11 @@ ingredients:
   - { qty: 1, unit: "", item: "Zwiebel, klein" }
   - { qty: 1, unit: "Zehe", item: "Knoblauch" }
   - { qty: 1, unit: "TL", item: "Zucker" }
-  - { qty: "0.5–1", unit: "TL", item: "Salz (Sauce)" }
+  - { qty: "0.5", unit: "TL", item: "Salz (Sauce)" }
   - { qty: 0.5, unit: "TL", item: "Schwarzer Pfeffer (Sauce)" }
   - { qty: 1, unit: "TL", item: "Italienische Kräuter (oder Oregano/Thymian/Basilikum)" }
-  - { qty: "2–3", unit: "TL", item: "Pesto (zum Servieren)" }
-  - { qty: "400–500", unit: "g", item: "Fries (TK oder Kartoffeln)" }
+  - { qty: "2", unit: "TL", item: "Pesto (zum Servieren)" }
+  - { qty: "400", unit: "g", item: "Fries (TK oder Kartoffeln)" }
   - { qty: "n. B.", unit: "", item: "Öl & Salz (Fries)" }
 ---
 
