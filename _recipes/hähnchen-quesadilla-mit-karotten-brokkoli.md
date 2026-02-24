@@ -5,7 +5,7 @@ category: "Mexican"
 tags: ["mexikanisch", "quesadilla", "hähnchen", "pfanne", "Cocina Mexicana", "Mexican"]
 time: "ca. 25–35 Min"
 image: /recipes/images/ques.png
-servings: 2–3
+servings: 3
 ingredients:
   - { qty: "2–3", unit: "", item: "Weizentortillas, groß" }
   - { qty: 300, unit: "g", item: "Hähnchenbrustfilet, in Streifen" }
