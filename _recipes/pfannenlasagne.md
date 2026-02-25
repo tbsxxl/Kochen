@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Pasta"
 tags: ["lasagne","pfanne","one-pan","schnell","hackfleisch","rindfleisch","tomate","mozzarella","pasta"]
 time: "ca. 25–30 Min"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/Pfannenlasagne.png
 servings: 4
 ingredients:
   - { qty: 3, unit: "EL", item: "Öl" }
@@ -16,7 +16,7 @@ ingredients:
   - { qty: 2, unit: "EL", item: "Tomatenmark" }
   - { qty: 200, unit: "ml", item: "Sahne" }
   - { qty: 200, unit: "g", item: "Crème fraîche" }
-  - { qty: "400–700", unit: "ml", item: "Wasser (nach Bedarf)" }
+  - { qty: "500", unit: "ml", item: "Wasser (nach Bedarf)" }
   - { qty: 250, unit: "g", item: "Lasagneplatten (optional 350 g)" }
   - { qty: 2, unit: "TL", item: "Paprikapulver, edelsüß" }
   - { qty: "0.5", unit: "TL", item: "Oregano" }
