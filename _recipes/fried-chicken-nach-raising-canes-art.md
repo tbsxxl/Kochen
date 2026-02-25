@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Chicken"
 tags: ["fried chicken","american","buttermilk","frittiert","fastfood","chicken","dinner"]
 time: "ca. 45 Min + Marinierzeit"
-image: /recipes/images/Cane.png
+image: /recipes/images/cane.png
 servings: 6
 ingredients:
   - { qty: 1, unit: "kg", item: "Hähnchenbrust oder -keule ohne Knochen, in Streifen geschnitten" }
