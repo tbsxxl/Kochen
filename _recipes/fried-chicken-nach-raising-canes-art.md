@@ -1,8 +1,8 @@
 ---
-title: "Fried Chicken nach Raising-Canes-Art"
+title: "Buttermilk Fried Chicken (Raising Cane’s Style)"
 date: 2026-02-20
 category: "Chicken"
-tags: ["fried chicken", "american", "frittiert", "fastfood"]
+tags: ["fried chicken","american","buttermilk","frittiert","fastfood","chicken","dinner"]
 time: "ca. 45 Min + Marinierzeit"
 image: /recipes/images/placeholder.jpg
 servings: 4-6
