@@ -5,33 +5,36 @@ layout: default
 {% assign newest = site.recipes | sort: "date" | reverse %}
 {% assign featured = newest | first %}
 
-<!-- Featured -->
+<!-- Featured (Option B: wird per JS täglich ersetzt, Liquid bleibt als Fallback) -->
 <div class="section">
   <div class="h2" style="padding:0 2px;">Heute</div>
-  <a class="linkCard" href="{{ featured.url | relative_url }}">
+
+  <a class="linkCard" id="todayLink" href="{{ featured.url | relative_url }}">
     <div class="card recipeCard cardHover homeFeatured">
-      <span class="favBadge" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-hidden="true">★</span>
-      {% if featured.image %}
-        <div class="thumb homeFeaturedThumb">
-          <img
-            class="thumbImg"
-            src="{{ featured.image | relative_url }}"
-            alt="{{ featured.title | escape }}"
-            loading="lazy"
-            decoding="async"
-            style="width:100%;max-height:240px;object-fit:cover;display:block;"
-          >
-        </div>
-      {% endif %}
+      <span class="favBadge" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-hidden="true">★</span>
+
+      <div class="thumb homeFeaturedThumb" id="todayThumbWrap" {% unless featured.image %}style="display:none"{% endunless %}>
+        <img
+          class="thumbImg"
+          id="todayImg"
+          src="{% if featured.image %}{{ featured.image | relative_url }}{% endif %}"
+          alt="{{ featured.title | escape }}"
+          loading="lazy"
+          decoding="async"
+          style="width:100%;max-height:240px;object-fit:cover;display:block;"
+        >
+      </div>
 
       <div class="recipeTop">
-        <h3 class="recipeTitle">{{ featured.title }}</h3>
-        {% if featured.category %}<span class="badge action">{{ featured.category }}</span>{% endif %}
+        <h3 class="recipeTitle" id="todayTitle">{{ featured.title }}</h3>
+        <span class="badge action" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>
+          {{ featured.category }}
+        </span>
       </div>
 
       <div class="recipeMeta">
-        {% if featured.time %}<span>⏱ {{ featured.time }}</span>{% endif %}
-        {% if featured.servings %}<span>🍽 {{ featured.servings }}</span>{% endif %}
+        <span id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}>⏱ {{ featured.time }}</span>
+        <span id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}>🍽 {{ featured.servings }}</span>
       </div>
     </div>
   </a>
@@ -61,6 +64,7 @@ layout: default
       <a class="linkCard" href="{{ r.url | relative_url }}">
         <div class="card recipeCard cardHover">
           <span class="favBadge" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-hidden="true">★</span>
+
           {% if r.image %}
             <div class="thumb">
               <img
@@ -89,19 +93,95 @@ layout: default
   </div>
 </div>
 
+<!-- All recipes payload for JS (Option B needs url + image) -->
 <script type="application/json" id="allRecipesJson">
 [
 {% assign sorted2 = site.recipes | sort: "title" %}
 {% for r in sorted2 %}
   {
     "id": "{{ r.url | relative_url }}",
+    "url": "{{ r.url | relative_url }}",
     "title": {{ r.title | jsonify }},
     "category": {{ r.category | jsonify }},
     "time": {{ r.time | jsonify }},
     "servings": {{ r.servings | jsonify }},
-    "tags": {{ r.tags | jsonify }}
+    "tags": {{ r.tags | jsonify }},
+    "image": "{% if r.image %}{{ r.image | relative_url }}{% endif %}"
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]
 </script>
+
 <script defer src="{{ '/assets/home-reco.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+
+<!-- Option B: daily deterministic "Heute" selection (same on all devices) -->
+<script>
+(function(){
+  const elJson = document.getElementById('allRecipesJson');
+  if(!elJson) return;
+
+  let recipes = [];
+  try { recipes = JSON.parse(elJson.textContent || '[]'); } catch(e) { return; }
+  if(!Array.isArray(recipes) || recipes.length === 0) return;
+
+  // UTC day key => same selection everywhere for the same day
+  const dayKey = new Date().toISOString().slice(0,10); // YYYY-MM-DD
+
+  function hashString(s){
+    let h = 2166136261; // FNV-1a
+    for(let i=0;i<s.length;i++){
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return (h >>> 0);
+  }
+
+  const idx = hashString(dayKey) % recipes.length;
+  const r = recipes[idx];
+
+  const link = document.getElementById('todayLink');
+  const fav  = document.getElementById('todayFav');
+  const imgW = document.getElementById('todayThumbWrap');
+  const img  = document.getElementById('todayImg');
+  const ttl  = document.getElementById('todayTitle');
+  const cat  = document.getElementById('todayCat');
+  const t    = document.getElementById('todayTime');
+  const s    = document.getElementById('todayServings');
+
+  if(link && r.url) link.href = r.url;
+
+  if(fav){
+    fav.setAttribute('data-recipe-id', r.id || r.url || '');
+  }
+
+  if(ttl) ttl.textContent = r.title || '—';
+
+  if(cat){
+    if(r.category){ cat.textContent = r.category; cat.style.display = ''; }
+    else { cat.style.display = 'none'; }
+  }
+
+  if(t){
+    if(r.time){ t.textContent = `⏱ ${r.time}`; t.style.display = ''; }
+    else { t.style.display = 'none'; }
+  }
+
+  if(s){
+    if(r.servings){ s.textContent = `🍽 ${r.servings}`; s.style.display = ''; }
+    else { s.style.display = 'none'; }
+  }
+
+  if(imgW && img){
+    if(r.image){
+      img.src = r.image;
+      img.alt = r.title || '';
+      imgW.style.display = '';
+    } else {
+      imgW.style.display = 'none';
+    }
+  }
+
+  // If your favorite badge code listens to storage changes, this nudges a refresh.
+  window.dispatchEvent(new Event('storage'));
+})();
+</script>
