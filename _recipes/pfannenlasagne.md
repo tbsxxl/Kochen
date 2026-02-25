@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Pasta"
 tags: ["lasagne","pfanne","one-pan","schnell","hackfleisch","rindfleisch","tomate","mozzarella","pasta"]
 time: "ca. 25–30 Min"
-image: /recipes/images/Pfannenlasagne.png
+image: /recipes/images/pfannenlasagne.png
 servings: 4
 ingredients:
   - { qty: 3, unit: "EL", item: "Öl" }
