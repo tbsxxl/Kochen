@@ -2,10 +2,10 @@
 title: "Ratatouille"
 date: 2026-02-20
 category: "Vegetarisch"
-tags: ["ratatouille", "gemüse", "ofen"]
+tags: ["ratatouille","französisch","gemüse","vegetarisch","ofen","hauptgericht","beilage"]
 time: "ca. 1 Std"
 image: /recipes/images/placeholder.jpg
-servings: 4-5
+servings: 4
 ingredients:
   - { qty: 1, unit: "", item: "Aubergine" }
   - { qty: 2, unit: "", item: "Zucchini" }
