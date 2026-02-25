@@ -2,10 +2,10 @@
 title: "Çıtır Lahmacun"
 date: 2026-02-20
 category: "Oriental"
-tags: ["lahmacun", "türkisch", "pizza-art"]
+tags: ["lahmacun","türkisch","orientalisch","teig","backen","rindfleisch","streetfood"]
 time: "ca. 1,5 Std"
 image: /recipes/images/placeholder.jpg
-servings: 24-25
+servings: 24
 ingredients:
   - { qty: 1, unit: "kg", item: "Mehl" }
   - { qty: 520, unit: "ml", item: "Wasser" }
