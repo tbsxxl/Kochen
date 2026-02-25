@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Chicken"
 tags: ["shawarma","orientalisch","wrap","mariniert","pfanne","chicken","streetfood"]
 time: "ca. 40 Min + Marinierzeit"
-image: /recipes/images/shawarma.png
+image: /recipes/images/schawarma.png
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Hähnchenbrust oder -oberschenkel, dünn geschnitten" }
