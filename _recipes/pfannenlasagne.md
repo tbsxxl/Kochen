@@ -1,8 +1,8 @@
 ---
-title: "Pfannenlasagne"
+title: "Pfannenlasagne mit Rinderhack & Mozzarella"
 date: 2026-02-20
 category: "Pasta"
-tags: ["lasagne", "pfanne", "schnell", "hackfleisch"]
+tags: ["lasagne","pfanne","one-pan","schnell","hackfleisch","rindfleisch","tomate","mozzarella","pasta"]
 time: "ca. 25–30 Min"
 image: /recipes/images/placeholder.jpg
 servings: 4
@@ -11,7 +11,7 @@ ingredients:
   - { qty: 600, unit: "g", item: "Hackfleisch" }
   - { qty: 2, unit: "Zehen", item: "Knoblauch, gepresst" }
   - { qty: 1, unit: "", item: "Zwiebel, klein gehackt" }
-  - { qty: "1–2", unit: "", item: "Karotten, klein gewürfelt" }
+  - { qty: "2", unit: "", item: "Karotten, klein gewürfelt" }
   - { qty: 250, unit: "g", item: "Minitomaten, geviertelt" }
   - { qty: 2, unit: "EL", item: "Tomatenmark" }
   - { qty: 200, unit: "ml", item: "Sahne" }
