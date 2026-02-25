@@ -1,11 +1,11 @@
 ---
-title: "Chicken Shawarma"
+title: "Chicken Shawarma Wrap"
 date: 2026-02-20
 category: "Chicken"
-tags: ["shawarma", "wrap", "orientalisch"]
+tags: ["shawarma","orientalisch","wrap","mariniert","pfanne","chicken","streetfood"]
 time: "ca. 40 Min + Marinierzeit"
 image: /recipes/images/placeholder.jpg
-servings: 4-5
+servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Hähnchenfleisch, dünn geschnitten" }
   - { qty: 2, unit: "EL", item: "Olivenöl" }
