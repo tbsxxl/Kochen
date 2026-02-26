@@ -8,9 +8,9 @@ image: /recipes/images/schawarma.png
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Hähnchenbrust oder -oberschenkel, dünn geschnitten" }
-  - { qty: "2", unit: "Zehen", item: "Knoblauch, fein gehackt" }
-  - { qty: "1.5", unit: "EL", item: "Mayonnaise (Marinade)" }
-  - { qty: 2, unit: "EL", item: "Olivenöl (Marinade)" }
+  - { qty: "1–2", unit: "Zehen", item: "Knoblauch, fein gehackt" }
+  - { qty: "1.5", unit: "EL", item: "Mayonnaise" }
+  - { qty: 2, unit: "EL", item: "Olivenöl" }
   - { qty: 2, unit: "TL", item: "Paprikapulver" }
   - { qty: "0.33", unit: "TL", item: "Kreuzkümmel" }
   - { qty: 1, unit: "TL", item: "Paprikaflocken oder Chiliflocken" }
@@ -21,18 +21,24 @@ ingredients:
   - { qty: 2, unit: "EL", item: "Öl oder 1 EL Butter/Butterschmalz (zum Braten)" }
   - { qty: 150, unit: "g", item: "Griechischer Joghurt (rote Soße)" }
   - { qty: 3, unit: "EL", item: "Mayonnaise (rote Soße)" }
-  - { qty: 2, unit: "EL", item: "Ketchup (rote Soße)" }
+  - { qty: 2, unit: "EL", item: "Ketchup" }
   - { qty: "1–2", unit: "EL", item: "Sriracha" }
   - { qty: 200, unit: "g", item: "Griechischer Joghurt (weiße Soße)" }
   - { qty: 3, unit: "EL", item: "Mayonnaise (weiße Soße)" }
   - { qty: 1, unit: "", item: "Rote Zwiebel, in Scheiben" }
-  - { qty: 4, unit: "Stk.", item: "Lavasbrote oder Tortillas" }
+  - { qty: 1, unit: "TL", item: "Sumach" }
+  - { qty: "0.5", unit: "TL", item: "Paprikaflocken (Zwiebelsalat)" }
+  - { qty: "n. B.", unit: "", item: "Salz (Zwiebelsalat)" }
+  - { qty: "4–5", unit: "Stk.", item: "Lavasbrote oder Tortillas" }
+  - { qty: "n. B.", unit: "", item: "Eingelegte Gurken" }
+  - { qty: "n. B.", unit: "", item: "Tomaten & Gurken, gewürfelt" }
+  - { qty: "n. B.", unit: "", item: "Pommes gewürzt" }
 ---
 
 ## Schritte
-1. Hähnchen mit allen Zutaten der Marinade vermengen und mindestens 1 Stunde (besser über Nacht) kalt ziehen lassen.
-2. Zutaten für rote und weiße Knoblauchsoße jeweils separat verrühren und kaltstellen.
-3. Zwiebelsalat aus Zwiebeln, Petersilie, Sumach, Paprikaflocken und Salz vermengen.
-4. Öl oder Butter in einer heißen Pfanne erhitzen und Hähnchen ca. 8–10 Minuten goldbraun anbraten.
-5. Brot kurz in der Pfanne erwärmen.
-6. Brot mit gewünschter Soße bestreichen, Hähnchen, Zwiebelsalat, Gemüse und optional Pommes darauf verteilen und einrollen.
+1. Hähnchen mit allen Marinadezutaten vermengen und mindestens 1 Stunde (besser über Nacht) im Kühlschrank ziehen lassen.
+2. Öl oder Butter in einer heißen Pfanne erhitzen und Hähnchen ca. 10 Minuten goldbraun anbraten.
+3. Zutaten für rote und weiße Knoblauchsoße jeweils separat verrühren.
+4. Zwiebelsalat aus Zwiebel, Petersilie, Sumach, Paprikaflocken und Salz vermengen.
+5. Lavasbrot oder Tortilla kurz in der Pfanne erwärmen.
+6. Brot mit gewünschter Soße bestreichen, Hähnchen, Zwiebelsalat, Gemüse und Pommes darauf verteilen und fest einrollen.
