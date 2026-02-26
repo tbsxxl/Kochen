@@ -53,44 +53,13 @@ layout: default
   <div class="stack" id="freezerList"></div>
 </div>
 
-<!-- Newest -->
+<!-- Favorites (replaces "Neueste Rezepte") -->
 <div class="section">
   <div class="homeSectionHead">
-    <div class="h2" style="padding:0 2px;">Neueste Rezepte</div>
+    <div class="h2" style="padding:0 2px;">Favoriten</div>
     <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle →</a>
   </div>
-  <div class="grid">
-    {% for r in newest offset: 1 limit: 3 %}
-      <a class="linkCard" href="{{ r.url | relative_url }}">
-        <div class="card recipeCard cardHover">
-          <span class="favBadge" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-hidden="true">★</span>
-
-          {% if r.image %}
-            <div class="thumb">
-              <img
-                class="thumbImg"
-                src="{{ r.image | relative_url }}"
-                alt="{{ r.title | escape }}"
-                loading="lazy"
-                decoding="async"
-                style="width:100%;max-height:190px;object-fit:cover;display:block;"
-              >
-            </div>
-          {% endif %}
-
-          <div class="recipeTop">
-            <h3 class="recipeTitle">{{ r.title }}</h3>
-            {% if r.category %}<span class="badge action">{{ r.category }}</span>{% endif %}
-          </div>
-
-          <div class="recipeMeta">
-            {% if r.time %}<span>⏱ {{ r.time }}</span>{% endif %}
-            {% if r.servings %}<span>🍽 {{ r.servings }}</span>{% endif %}
-          </div>
-        </div>
-      </a>
-    {% endfor %}
-  </div>
+  <div class="grid" id="favNewestGrid"></div>
 </div>
 
 <!-- All recipes payload for JS (Option B needs url + image) -->
@@ -181,7 +150,99 @@ layout: default
     }
   }
 
-  // If your favorite badge code listens to storage changes, this nudges a refresh.
+  // Trigger fav badge refresh if your code listens to storage events
   window.dispatchEvent(new Event('storage'));
+})();
+</script>
+
+<!-- Render favorites into the "Favoriten" grid -->
+<script>
+(function(){
+  const grid = document.getElementById('favNewestGrid');
+  const elJson = document.getElementById('allRecipesJson');
+  if(!grid || !elJson) return;
+
+  let recipes = [];
+  try { recipes = JSON.parse(elJson.textContent || '[]'); } catch(e) { return; }
+  if(!Array.isArray(recipes) || recipes.length === 0) return;
+
+  function readFavIds(){
+    // adjust these keys if your project uses a specific one
+    const keysToTry = ['favorites','favourites','favRecipes','recipeFavorites','kochen:favorites'];
+    for(const k of keysToTry){
+      const raw = localStorage.getItem(k);
+      if(!raw) continue;
+      try{
+        const v = JSON.parse(raw);
+        if(Array.isArray(v)) return v.map(String);
+        if(v && typeof v === 'object'){
+          return Object.keys(v).filter(id => v[id]).map(String);
+        }
+      }catch(_){}
+    }
+
+    // fallback: keys like fav:/path => "1"
+    const ids = [];
+    for(let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i);
+      if(!k) continue;
+      if(k.startsWith('fav:') && localStorage.getItem(k) === '1'){
+        ids.push(k.slice(4));
+      }
+    }
+    return ids;
+  }
+
+  const favIds = readFavIds();
+
+  if(!favIds.length){
+    grid.innerHTML = `<div class="sub" style="padding:6px 2px;">Keine Favoriten markiert.</div>`;
+    return;
+  }
+
+  const byId = new Map();
+  recipes.forEach(r=>{
+    if(r?.id) byId.set(r.id, r);
+    if(r?.url) byId.set(r.url, r);
+  });
+
+  const favRecipes = favIds.map(id => byId.get(id)).filter(Boolean).slice(0, 3);
+
+  if(!favRecipes.length){
+    grid.innerHTML = `<div class="sub" style="padding:6px 2px;">Favoriten gefunden, aber IDs passen nicht zu den Rezept-URLs.</div>`;
+    return;
+  }
+
+  function esc(s){ return String(s ?? '').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+
+  grid.innerHTML = favRecipes.map(r=>{
+    const href = r.url || r.id || '#';
+    const img = r.image ? `
+      <div class="thumb">
+        <img class="thumbImg" src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async"
+             style="width:100%;max-height:190px;object-fit:cover;display:block;">
+      </div>` : '';
+
+    const cat = r.category ? `<span class="badge action">${esc(r.category)}</span>` : '';
+    const time = r.time ? `<span>⏱ ${esc(r.time)}</span>` : '';
+    const serv = r.servings ? `<span>🍽 ${esc(r.servings)}</span>` : '';
+
+    return `
+      <a class="linkCard" href="${esc(href)}">
+        <div class="card recipeCard cardHover">
+          <span class="favBadge isFav" aria-hidden="true">★</span>
+          ${img}
+          <div class="recipeTop">
+            <h3 class="recipeTitle">${esc(r.title)}</h3>
+            ${cat}
+          </div>
+          <div class="recipeMeta">
+            ${time}
+            ${serv}
+          </div>
+        </div>
+      </a>
+    `;
+  }).join('');
 })();
 </script>
