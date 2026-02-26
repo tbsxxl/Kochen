@@ -1,8 +1,18 @@
 ---
-title: "Butter Chicken Tacos"
+title: "utter Chicken Tacos mit Kashmiri-Chili & Mozzarella"
 date: 2026-02-20
 category: "Fusion"
-tags: ["butter chicken", "tacos", "indisch", "fusion"]
+tags: [
+  "fusion",
+  "indisch",
+  "mexikanisch",
+  "butter chicken",
+  "tacos",
+  "hähnchen",
+  "pfanne",
+  "streetfood",
+  "scharf"
+]
 time: "ca. 40 Min"
 image: /recipes/images/buch.png
 servings: 4
