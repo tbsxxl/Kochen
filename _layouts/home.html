@@ -221,7 +221,7 @@ function readFavIds(){
   });
 
   // keep favorite order, show first 3
-  const favRecipes = favIds.map(id => byId.get(id)).filter(Boolean).slice(0, 3);
+  const favRecipes = favIds.map(id => byId.get(id)).filter(Boolean).slice(0, 10);
 
   if(!favRecipes.length){
     grid.innerHTML = `<div class="sub" style="padding:6px 2px;">Favoriten gefunden, aber IDs passen nicht zu den Rezept-URLs. (Key: ${FAVORITES_KEY})</div>`;
