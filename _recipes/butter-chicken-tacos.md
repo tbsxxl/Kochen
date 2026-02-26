@@ -1,5 +1,5 @@
 ---
-title: "utter Chicken Tacos mit Kashmiri-Chili & Mozzarella"
+title: "Butter Chicken Tacos mit Kashmiri-Chili & Mozzarella"
 date: 2026-02-20
 category: "Fusion"
 tags: [
