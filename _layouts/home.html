@@ -168,7 +168,7 @@ layout: default
   if(!Array.isArray(recipes) || recipes.length === 0) return;
 
   // IMPORTANT: set this to the exact key your project uses for favorites
-  const FAVORITES_KEY = 'favorites';
+const STATS_KEY = 'kochbuch.stats';
 
   function normalizeId(id){
     id = String(id || '');
@@ -180,18 +180,32 @@ layout: default
     return id;
   }
 
-  function readFavIds(){
-    const raw = localStorage.getItem(FAVORITES_KEY);
-    if(!raw) return [];
-    try{
-      const v = JSON.parse(raw);
-      if(Array.isArray(v)) return v.map(normalizeId).filter(Boolean);
-      if(v && typeof v === 'object'){
-        return Object.keys(v).filter(k => v[k]).map(normalizeId).filter(Boolean);
-      }
-    }catch(_){}
+function readFavIds(){
+  const raw = localStorage.getItem(STATS_KEY);
+  if(!raw) return [];
+
+  try{
+    const stats = JSON.parse(raw);
+
+    // Variante A: stats[recipeId] = { favorite: true }
+    const idsA = Object.keys(stats || {})
+      .filter(k => k !== 'favorites')
+      .filter(k => stats[k]?.favorite === true);
+
+    // Variante B: stats.favorites[recipeId] = true
+    const idsB = Object.keys(stats?.favorites || {})
+      .filter(k => stats.favorites[k] === true);
+
+    const ids = [...idsA, ...idsB];
+
+    return ids
+      .map(normalizeId)
+      .filter(Boolean);
+
+  }catch{
     return [];
   }
+}
 
   const favIds = readFavIds();
 
