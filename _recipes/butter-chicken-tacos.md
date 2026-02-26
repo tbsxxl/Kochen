@@ -5,7 +5,7 @@ category: "Fusion"
 tags: ["butter chicken", "tacos", "indisch", "fusion"]
 time: "ca. 40 Min"
 image: /recipes/images/buch.png
-servings: 3-4
+servings: 4
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchenbrust oder ausgelöste Hähnchenschenkel" }
   - { qty: "n. B.", unit: "", item: "Salz" }
