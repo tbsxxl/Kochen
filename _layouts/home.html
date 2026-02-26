@@ -167,31 +167,30 @@ layout: default
   try { recipes = JSON.parse(elJson.textContent || '[]'); } catch(e) { return; }
   if(!Array.isArray(recipes) || recipes.length === 0) return;
 
-  function readFavIds(){
-    // adjust these keys if your project uses a specific one
-    const keysToTry = ['favorites','favourites','favRecipes','recipeFavorites','kochen:favorites'];
-    for(const k of keysToTry){
-      const raw = localStorage.getItem(k);
-      if(!raw) continue;
-      try{
-        const v = JSON.parse(raw);
-        if(Array.isArray(v)) return v.map(String);
-        if(v && typeof v === 'object'){
-          return Object.keys(v).filter(id => v[id]).map(String);
-        }
-      }catch(_){}
-    }
+  // IMPORTANT: set this to the exact key your project uses for favorites
+  const FAVORITES_KEY = 'favorites';
 
-    // fallback: keys like fav:/path => "1"
-    const ids = [];
-    for(let i=0;i<localStorage.length;i++){
-      const k = localStorage.key(i);
-      if(!k) continue;
-      if(k.startsWith('fav:') && localStorage.getItem(k) === '1'){
-        ids.push(k.slice(4));
+  function normalizeId(id){
+    id = String(id || '');
+    if(!id) return '';
+    // ensure leading slash (matches r.url | relative_url)
+    if(!id.startsWith('/')) id = '/' + id;
+    // keep trailing slash as in Jekyll permalinks
+    if(!id.endsWith('/')) id = id + '/';
+    return id;
+  }
+
+  function readFavIds(){
+    const raw = localStorage.getItem(FAVORITES_KEY);
+    if(!raw) return [];
+    try{
+      const v = JSON.parse(raw);
+      if(Array.isArray(v)) return v.map(normalizeId).filter(Boolean);
+      if(v && typeof v === 'object'){
+        return Object.keys(v).filter(k => v[k]).map(normalizeId).filter(Boolean);
       }
-    }
-    return ids;
+    }catch(_){}
+    return [];
   }
 
   const favIds = readFavIds();
@@ -203,14 +202,15 @@ layout: default
 
   const byId = new Map();
   recipes.forEach(r=>{
-    if(r?.id) byId.set(r.id, r);
-    if(r?.url) byId.set(r.url, r);
+    if(r?.id) byId.set(normalizeId(r.id), r);
+    if(r?.url) byId.set(normalizeId(r.url), r);
   });
 
+  // keep favorite order, show first 3
   const favRecipes = favIds.map(id => byId.get(id)).filter(Boolean).slice(0, 3);
 
   if(!favRecipes.length){
-    grid.innerHTML = `<div class="sub" style="padding:6px 2px;">Favoriten gefunden, aber IDs passen nicht zu den Rezept-URLs.</div>`;
+    grid.innerHTML = `<div class="sub" style="padding:6px 2px;">Favoriten gefunden, aber IDs passen nicht zu den Rezept-URLs. (Key: ${FAVORITES_KEY})</div>`;
     return;
   }
 
@@ -245,5 +245,11 @@ layout: default
       </a>
     `;
   }).join('');
+
+  // update if favorites change
+  window.addEventListener('storage', (e)=>{
+    if(!e || !e.key) return;
+    if(e.key === FAVORITES_KEY) location.reload();
+  });
 })();
 </script>
