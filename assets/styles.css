@@ -101,6 +101,37 @@ a{color:inherit}
 
 /* Home 2.0 (iPhone-first, same design system) */
 .homeSectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 2px;margin-bottom:10px}
+
+/* App-Store style headings (Light) */
+.homeBigTitle{
+  margin: 6px 0 12px 0;
+  padding: 0 2px;
+  font-size: 34px;
+  font-weight: 780;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+}
+.homeSectionTitle{
+  margin: 0;
+  padding: 0 2px;
+  font-size: 22px;
+  font-weight: 760;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+}
+
+/* Favorites: bigger cards in horizontal scroller */
+.hScroll{scroll-snap-type:x mandatory}
+.hCard.homeFavCard{flex:0 0 86%;}
+@media (min-width: 720px){
+  .hCard.homeFavCard{flex:0 0 46%;}
+}
+.homeFavThumb .thumbImg{
+  width:100%;
+  max-height: 190px;
+  object-fit: cover;
+  display:block;
+}
 .btn.ghost{background:rgba(255,255,255,.55);border:1px solid rgba(15,23,42,.10);color:var(--text);box-shadow:none}
 .btn.btnGhost{background:rgba(255,255,255,.55);border:1px solid rgba(15,23,42,.10);color:var(--text);box-shadow:none}
 .btn.btnDangerOutline{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.28);color:rgba(239,68,68,.95);box-shadow:none}
