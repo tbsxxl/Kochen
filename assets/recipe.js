@@ -95,6 +95,8 @@ function renderIngredients(){
   servingsInput?.addEventListener("input", renderIngredients);
 
   // Freezer
+  const freezerKey = "kochbuch.freezer";
+  const freezerBtn = null;
   const freezerSheetOpenBtn = $("#sheetFreezerBtn");
   const freezerOverlay = $("#freezerSheetOverlay");
   const freezerSheet = $("#freezerSheet");
@@ -104,38 +106,20 @@ function renderIngredients(){
   const freezerCount = $("#freezerCount");
   const freezerHint = $("#freezerHint");
   const freezerRemove = $("#freezerRemove");
-
-  function freezerEntry(){
-    return window.KOCHBUCH_STORE?.getEntry ? window.KOCHBUCH_STORE.getEntry(data.id) : { freezerCount: 0, frozenAt: null };
-  }
-
-  function setFreezerCountNext(count){
-    if(window.KOCHBUCH_STORE?.setFreezerCount){
-      window.KOCHBUCH_STORE.setFreezerCount(data.id, count);
-    }else{
-      // legacy fallback (no longer recommended)
-      const stats = getStats();
-      const e = stats[data.id] || {};
-      e.freezerCount = Math.max(0, Number(count||0));
-      if(e.freezerCount>0 && !e.frozenAt) e.frozenAt = new Date().toISOString();
-      if(e.freezerCount===0){ e.frozenAt=null; e.bestBeforeAt=null; }
-      stats[data.id]=e;
-      setStats(stats);
-    }
-    window.updateFavBadges && window.updateFavBadges();
-    window.dispatchEvent(new Event("kochbuch:stats"));
-  }
-
+  function getFreezer(){ return ls.get(freezerKey, {}); }
+  function setFreezer(v){ ls.set(freezerKey, v); }
+  function freezerEntry(){ const f=getFreezer(); return f[data.id] || null; }
   function renderFreezer(){
     const e = freezerEntry();
-    const c = Number(e?.freezerCount || 0);
+    // Update label inside the recipe "Mehr" sheet
     if(freezerSheetOpenBtn){
-      freezerSheetOpenBtn.textContent = c
-        ? `🧊 Kühltruhe · ${c} Portion${c===1?"":"en"}`
+      freezerSheetOpenBtn.textContent = e?.portions
+        ? `🧊 Kühltruhe · ${e.portions} Portion${e.portions===1?"":"en"}`
         : "🧊 Kühltruhe";
     }
   }
-function openFreezerSheet(){
+
+  function openFreezerSheet(){
     if(!freezerOverlay || !freezerSheet) return;
     // close recipe sheet if open
     document.getElementById('recipeSheetOverlay')?.classList.remove('open');
@@ -154,24 +138,34 @@ function openFreezerSheet(){
   }
   function syncFreezerSheet(){
     const e = freezerEntry();
-    const p = Number(e?.freezerCount || 0);
+    const p = e?.portions ? Number(e.portions) : 0;
     if(freezerCount) freezerCount.textContent = String(p);
-    if(freezerHint){
-      freezerHint.textContent = p>0
-        ? `In Kühltruhe gespeichert${e?.frozenAt ? " · eingefroren "+(new Date(e.frozenAt).toLocaleDateString("de-DE")) : ""}`
-        : "Nicht in Kühltruhe";
-    }
+    if(freezerHint) freezerHint.textContent = e ? 'In Kühltruhe gespeichert' : 'Nicht in Kühltruhe';
     freezerMinus && (freezerMinus.disabled = p<=0);
-    freezerRemove && (freezerRemove.disabled = p<=0);
+    freezerRemove && (freezerRemove.disabled = !e);
+  }
+  function setPortions(p){
+    const f = getFreezer();
+    const n = Math.max(0, Math.min(999, Math.round(Number(p)||0)));
+    if(n<=0){
+      delete f[data.id];
+    }else{
+      f[data.id] = { portions: n, added: (f[data.id]?.added || new Date().toISOString()) };
+    }
+    setFreezer(f);
+    renderFreezer();
+    syncFreezerSheet();
   }
 
-  function setPortions(p){
-    const n = Math.max(0, Math.min(999, Math.round(Number(p)||0)));
-    setFreezerCountNext(n);
-    syncFreezerSheet();
-    renderFreezer();
-  }
-freezerMinus?.addEventListener('click', ()=>{
+  freezerSheetOpenBtn?.addEventListener('click', ()=>{ openFreezerSheet(); });
+  freezerOverlay?.addEventListener('click', closeFreezerSheet);
+  freezerClose?.addEventListener('click', closeFreezerSheet);
+  freezerPlus?.addEventListener('click', ()=>{
+    const e=freezerEntry();
+    const p = (e?.portions?Number(e.portions):0) + 1;
+    setPortions(p);
+  });
+  freezerMinus?.addEventListener('click', ()=>{
     const e=freezerEntry();
     const p = (e?.portions?Number(e.portions):0) - 1;
     setPortions(p);
@@ -179,27 +173,20 @@ freezerMinus?.addEventListener('click', ()=>{
   freezerRemove?.addEventListener('click', ()=> setPortions(0));
 
   // Stats
-  const statsKey = window.KOCHBUCH_STORE?.STORE_KEY || "kochbuch.stats.v1";
+  const statsKey = "kochbuch.stats";
   const cookedBtn = $("#sheetCookedBtn");
   const undoBtn = $("#undoCookedBtn");
   const favBtn = $("#sheetFavoriteBtn");
   const statsLine = $("#statsLine");
   const favPill = $("#favPill");
 
-  function getStats(){
-    return window.KOCHBUCH_STORE?.getStats?.() || ls.get(statsKey, {});
-  }); }
-  function setStats(v){
-    if(window.KOCHBUCH_STORE?.setStats){ window.KOCHBUCH_STORE.setStats(v); return; }
-    ls.set(statsKey, v);
-  }
+  function getStats(){ return ls.get(statsKey, {}); }
+  function setStats(v){ ls.set(statsKey, v); }
   function getEntry(){
-    if(window.KOCHBUCH_STORE?.getEntry) return window.KOCHBUCH_STORE.getEntry(data.id);
     const all = getStats();
     return all[data.id] || { cookedCount:0, lastCooked:null, history:[], favorite:false };
   }
   function setEntry(e){
-    if(window.KOCHBUCH_STORE?.setEntry){ window.KOCHBUCH_STORE.setEntry(data.id, e); return; }
     const all = getStats(); all[data.id]=e; setStats(all);
   }
   function fmt(iso){
@@ -213,7 +200,6 @@ freezerMinus?.addEventListener('click', ()=>{
     if(favBtn){
       favBtn.textContent = `${e.favorite ? '★' : '☆'} Favorit`;
       favBtn.classList.toggle("blue", !!e.favorite);
-      favBtn.setAttribute("aria-pressed", e.favorite ? "true" : "false");
     }
     if(favPill){
       favPill.hidden = !e.favorite;
@@ -227,19 +213,7 @@ freezerMinus?.addEventListener('click', ()=>{
     }
     if(undoBtn) undoBtn.style.opacity = (e.cookedCount||0)>0 ? "1" : ".55";
   }
-  favBtn?.addEventListener("click", ()=>{
-    const before = getEntry();
-    const after = window.KOCHBUCH_STORE?.toggleFavorite ? window.KOCHBUCH_STORE.toggleFavorite(data.id) : (function(){ const e=getEntry(); e.favorite=!e.favorite; if(e.favorite) e.favoriteAt=new Date().toISOString(); else e.favoriteAt=null; setEntry(e); return e; })();
-    renderStats();
-    toast(after.favorite ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt", [{
-      label: "Rückgängig",
-      onClick: ()=>{
-        if(window.KOCHBUCH_STORE?.setEntry){ window.KOCHBUCH_STORE.setEntry(data.id, { favorite: before.favorite, favoriteAt: before.favoriteAt||null }); }
-        else { setEntry(before); }
-        renderStats();
-      }
-    }]);
-  });
+  favBtn?.addEventListener("click", ()=>{ const e=getEntry(); e.favorite=!e.favorite; setEntry(e); renderStats(); });
   cookedBtn?.addEventListener("click", ()=>{
     const e=getEntry();
     const now=new Date().toISOString();
@@ -436,31 +410,4 @@ const cookOverlay = $("#cookOverlay");
   renderIngredients();
   renderFreezer();
   renderStats();
-})()
-  function toast(msg, actions){
-    const el = document.createElement("div");
-    el.className = "toast";
-    el.innerHTML = `<div class="toastMsg">${msg}</div>` + (actions?`<div class="toastActions"></div>`:"");
-    document.body.appendChild(el);
-
-    if(actions){
-      const host = el.querySelector(".toastActions");
-      for(const a of actions){
-        const b = document.createElement("button");
-        b.type = "button";
-        b.className = "toastBtn";
-        b.textContent = a.label;
-        b.addEventListener("click", ()=>{ try{ a.onClick && a.onClick(); }finally{ close(); } });
-        host.appendChild(b);
-      }
-    }
-
-    let t = setTimeout(close, 3500);
-    function close(){
-      clearTimeout(t);
-      el.classList.add("out");
-      setTimeout(()=>el.remove(), 250);
-    }
-    requestAnimationFrame(()=>el.classList.add("in"));
-  }
-;
+})();

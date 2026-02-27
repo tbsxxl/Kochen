@@ -1,6 +1,5 @@
 (function(){
   const KEYS = [
-    "kochbuch.stats.v1",
     "kochbuch.stats",
     "kochbuch.freezer",
     "kochbuch.shopping",

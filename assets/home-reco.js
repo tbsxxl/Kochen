@@ -12,31 +12,16 @@
     return;
   }
 
-  function getStats(){
-    try{ return window.KOCHBUCH_STORE?.getStats?.() || JSON.parse(localStorage.getItem("kochbuch.stats.v1") || "{}"); }
-    catch{ return {}; }
-  }
-  function getFreezer(){
-    const s = getStats();
-    const out = {};
-    if(s && s.v===1 && s.recipes){
-      for(const [k,e] of Object.entries(s.recipes)){
-        const c = Number(e?.freezerCount||0);
-        if(c>0) out[k] = { portions: c, frozenAt: e.frozenAt||null };
-      }
-      return out;
-    }
-    try{ return JSON.parse(localStorage.getItem("kochbuch.freezer") || "{}"); }catch{ return {}; }
-  }
+  function getStats(){ try{ return JSON.parse(localStorage.getItem("kochbuch.stats") || "{}"); }catch{ return {}; } }
+  function getFreezer(){ try{ return JSON.parse(localStorage.getItem("kochbuch.freezer") || "{}"); }catch{ return {}; } }
 
   const stats = getStats();
-  const statsRecipes = (stats && stats.v===1 && stats.recipes) ? stats.recipes : (stats||{});
   const freezer = getFreezer();
   const now = Date.now();
   const DAY = 24*60*60*1000;
 
   const enriched = recipes.map(r=>{
-    const e = statsRecipes[r.id] || {};
+    const e = stats[r.id] || {};
     const last = e.lastCooked ? Date.parse(e.lastCooked) : null;
     const daysSince = (last && !isNaN(last)) ? Math.floor((now - last)/DAY) : null;
     return {
