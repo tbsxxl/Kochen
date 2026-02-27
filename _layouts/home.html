@@ -5,65 +5,69 @@ layout: default
 {% assign newest = site.recipes | sort: "date" | reverse %}
 {% assign featured = newest | first %}
 
-<!-- Featured (Option B: wird per JS täglich ersetzt, Liquid bleibt als Fallback) -->
-<div class="section">
-  <div class="homeBigTitle">Heute</div>
+<main class="page homePage">
 
-  <a class="linkCard" id="todayLink" href="{{ featured.url | relative_url }}">
-    <div class="card recipeCard cardHover homeFeatured">
+  <h1 class="page-title">Heute</h1>
+
+  <!-- Hero Card (tägliche Auswahl wird per JS gesetzt; featured ist Fallback) -->
+  <a class="linkCard heroLink" id="todayLink" href="{{ featured.url | relative_url }}">
+    <article class="hero-card" aria-label="Rezept des Tages">
       <span class="favBadge" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-hidden="true">★</span>
 
-      <div class="thumb homeFeaturedThumb" id="todayThumbWrap" {% unless featured.image %}style="display:none"{% endunless %}>
+      <div class="hero-media" id="todayThumbWrap" {% unless featured.image %}style="display:none"{% endunless %}>
         <img
-          class="thumbImg"
+          class="hero-img"
           id="todayImg"
           src="{% if featured.image %}{{ featured.image | relative_url }}{% endif %}"
           alt="{{ featured.title | escape }}"
           loading="lazy"
           decoding="async"
-          style="width:100%;max-height:240px;object-fit:cover;display:block;"
         >
       </div>
 
-      <div class="recipeTop">
-        <h3 class="recipeTitle" id="todayTitle">{{ featured.title }}</h3>
-        <span class="badge action" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>
-          {{ featured.category }}
-        </span>
-      </div>
+      <div class="hero-body">
+        <div class="hero-top">
+          <h2 class="hero-title" id="todayTitle">{{ featured.title }}</h2>
+          <span class="pill pill-accent" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</span>
+        </div>
 
-      <div class="recipeMeta">
-        <span id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}>⏱ {{ featured.time }}</span>
-        <span id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}>🍽 {{ featured.servings }}</span>
+        <div class="hero-meta" id="todayMeta">
+          <span id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}>⏱ {{ featured.time }}</span>
+          <span id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}>🍽 {{ featured.servings }}</span>
+        </div>
       </div>
-    </div>
+    </article>
   </a>
-</div>
 
-<!-- Recommendations -->
-<div class="section">
-  <div class="homeSectionHead">
-    <div class="homeSectionTitle">Für dich</div>
-  </div>
-  <div class="hScroll" id="forYouRow"></div>
-</div>
+  <!-- Für dich -->
+  <section class="section">
+    <div class="section-header">
+      <h3 class="section-title">Für dich</h3>
+    </div>
+    <div class="favorites-scroll hScroll" id="forYouRow" aria-label="Empfehlungen"></div>
+  </section>
 
-<div class="section" id="freezerSection" hidden>
-  <div class="homeSectionTitle">Aus der Kühltruhe</div>
-  <div class="stack" id="freezerList"></div>
-</div>
+  <!-- Favoriten -->
+  <section class="section">
+    <div class="section-header">
+      <h3 class="section-title">Favoriten</h3>
+      <a class="section-link" href="{{ '/rezeptindex/' | relative_url }}">Alle →</a>
+    </div>
+    <div class="favorites-scroll hScroll" id="favoritesRow" aria-label="Favoriten"></div>
+  </section>
 
-<!-- Favorites (replaces "Neueste Rezepte") -->
-<div class="section">
-  <div class="homeSectionHead">
-    <div class="homeSectionTitle">Favoriten</div>
-    <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle →</a>
-  </div>
+  <!-- Kühltruhe -->
+  <section class="section" id="freezerSection" hidden>
+    <div class="section-header">
+      <h3 class="section-title">Kühltruhe</h3>
+      <a class="section-link" href="{{ '/kuehltruhe/' | relative_url }}">Alle →</a>
+    </div>
+    <div class="stack" id="freezerList" aria-label="Kühltruhe"></div>
+  </section>
 
-  <div class="hScroll" id="favoritesRow"></div>
-</div>
+</main>
 
-<!-- All recipes payload for JS (Option B needs url + image) -->
+<!-- All recipes payload for JS -->
 <script type="application/json" id="allRecipesJson">
 [
 {% assign sorted2 = site.recipes | sort: "title" %}
@@ -84,7 +88,7 @@ layout: default
 
 <script defer src="{{ '/assets/home-reco.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
-<!-- Option B: daily deterministic "Heute" selection (same on all devices) -->
+<!-- Daily deterministic "Heute" selection -->
 <script>
 (function(){
   const elJson = document.getElementById('allRecipesJson');
@@ -94,7 +98,6 @@ layout: default
   try { recipes = JSON.parse(elJson.textContent || '[]'); } catch(e) { return; }
   if(!Array.isArray(recipes) || recipes.length === 0) return;
 
-  // UTC day key => same selection everywhere for the same day
   const dayKey = new Date().toISOString().slice(0,10); // YYYY-MM-DD
 
   function hashString(s){
@@ -115,174 +118,52 @@ layout: default
   const img  = document.getElementById('todayImg');
   const ttl  = document.getElementById('todayTitle');
   const cat  = document.getElementById('todayCat');
-  const t    = document.getElementById('todayTime');
-  const s    = document.getElementById('todayServings');
+  const tEl  = document.getElementById('todayTime');
+  const sEl  = document.getElementById('todayServings');
 
-  if(link && r.url) link.href = r.url;
+  if(link) link.href = r.url || r.id;
 
   if(fav){
-    fav.setAttribute('data-recipe-id', r.id || r.url || '');
+    fav.dataset.recipeId = r.id;
   }
 
-  if(ttl) ttl.textContent = r.title || '—';
+  if(ttl) ttl.textContent = r.title || "Rezept";
 
   if(cat){
-    if(r.category){ cat.textContent = r.category; cat.style.display = ''; }
-    else { cat.style.display = 'none'; }
+    if(r.category){
+      cat.style.display = "";
+      cat.textContent = r.category;
+    } else {
+      cat.style.display = "none";
+    }
   }
 
-  if(t){
-    if(r.time){ t.textContent = `⏱ ${r.time}`; t.style.display = ''; }
-    else { t.style.display = 'none'; }
+  if(tEl){
+    if(r.time){
+      tEl.style.display = "";
+      tEl.textContent = "⏱ " + r.time;
+    } else {
+      tEl.style.display = "none";
+    }
   }
 
-  if(s){
-    if(r.servings){ s.textContent = `🍽 ${r.servings}`; s.style.display = ''; }
-    else { s.style.display = 'none'; }
+  if(sEl){
+    if(r.servings){
+      sEl.style.display = "";
+      sEl.textContent = "🍽 " + r.servings;
+    } else {
+      sEl.style.display = "none";
+    }
   }
 
   if(imgW && img){
     if(r.image){
+      imgW.style.display = "";
       img.src = r.image;
-      img.alt = r.title || '';
-      imgW.style.display = '';
+      img.alt = r.title || "Rezept";
     } else {
-      imgW.style.display = 'none';
+      imgW.style.display = "none";
     }
   }
-
-  // Trigger fav badge refresh if your code listens to storage events
-  window.dispatchEvent(new Event('storage'));
-})();
-</script>
-
-<!-- Render favorites into the "Favoriten" row (App‑Store style) -->
-<script>
-(function(){
-  const host = document.getElementById('favoritesRow');
-  const elJson = document.getElementById('allRecipesJson');
-  if(!host || !elJson) return;
-
-  let recipes = [];
-  try { recipes = JSON.parse(elJson.textContent || '[]'); } catch(e) { return; }
-  if(!Array.isArray(recipes) || recipes.length === 0) return;
-
-  const STATS_KEY = 'kochbuch.stats';
-
-  function normPath(x){
-    try{
-      x = String(x || '');
-      x = x.replace(/^https?:\/\/[^/]+/i, '');
-      x = x.split('#')[0].split('?')[0];
-      if(x && x[0] !== '/') x = '/' + x;
-      x = x.replace(/\/+/g, '/');
-      return x;
-    }catch{ return String(x || ''); }
-  }
-
-  function normalizeId(id){
-    const raw = normPath(id);
-    if(!raw) return '';
-    // keep both variants to be tolerant across pages
-    return raw.endsWith('/') ? raw : raw + '/';
-  }
-
-  function getStats(){
-    try { return JSON.parse(localStorage.getItem(STATS_KEY) || '{}'); }
-    catch { return {}; }
-  }
-
-  function readFavIds(){
-    const stats = getStats();
-
-    // A) stats[recipeId] = { favorite: true }
-    const idsA = Object.keys(stats || {})
-      .filter(k => k !== 'favorites')
-      .filter(k => stats[k] && typeof stats[k] === 'object' && stats[k].favorite === true);
-
-    // B) stats.favorites[recipeId] = true
-    const idsB = Object.keys((stats && stats.favorites) || {})
-      .filter(k => stats.favorites && stats.favorites[k] === true);
-
-    // Merge + de-dup while preserving order (B first tends to be the newer shape)
-    const out = [];
-    const seen = new Set();
-    [...idsB, ...idsA].forEach(id=>{
-      const n = normalizeId(id);
-      if(!n || seen.has(n)) return;
-      seen.add(n);
-      out.push(n);
-    });
-    return out;
-  }
-
-  const byId = new Map();
-  recipes.forEach(r=>{
-    if(r?.id) byId.set(normalizeId(r.id), r);
-    if(r?.url) byId.set(normalizeId(r.url), r);
-    // also map without trailing slash (tolerant)
-    if(r?.id) byId.set(normPath(r.id), r);
-    if(r?.url) byId.set(normPath(r.url), r);
-  });
-
-  function esc(s){ return String(s ?? '').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
-
-  function render(){
-    const favIds = readFavIds();
-    if(!favIds.length){
-      host.innerHTML = `<div class="sub" style="padding:6px 2px;">Keine Favoriten markiert.</div>`;
-      return;
-    }
-
-    const favRecipes = favIds
-      .map(id => byId.get(id) || byId.get(normPath(id)))
-      .filter(Boolean);
-
-    if(!favRecipes.length){
-      host.innerHTML = `<div class="sub" style="padding:6px 2px;">Favoriten vorhanden, aber keine passenden Rezept-IDs gefunden.</div>`;
-      return;
-    }
-
-    host.innerHTML = favRecipes.map(r=>{
-      const href = r.url || r.id || '#';
-
-      const img = r.image ? `
-        <div class="thumb homeFavThumb">
-          <img class="thumbImg" src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
-        </div>` : '';
-
-      const cat = r.category ? `<span class="badge action">${esc(r.category)}</span>` : '';
-      const time = r.time ? `<span>⏱ ${esc(r.time)}</span>` : '';
-      const serv = r.servings ? `<span>🍽 ${esc(r.servings)}</span>` : '';
-
-      return `
-        <a class="linkCard hCard homeFavCard" href="${esc(href)}">
-          <div class="card recipeCard cardHover">
-            <span class="favBadge isFav" aria-hidden="true">★</span>
-            ${img}
-            <div class="recipeTop">
-              <h3 class="recipeTitle">${esc(r.title)}</h3>
-              ${cat}
-            </div>
-            <div class="recipeMeta">
-              ${time}
-              ${serv}
-            </div>
-          </div>
-        </a>
-      `;
-    }).join('');
-  }
-
-  render();
-
-  // Update on storage changes (favorite toggles)
-  window.addEventListener('storage', (e)=>{
-    if(!e || !e.key) return;
-    if(e.key === STATS_KEY) render();
-  });
-
-  // Optional: allow in-page updates (if you dispatch this event after toggling favorites)
-  window.addEventListener('kochbuch:stats', render);
 })();
 </script>

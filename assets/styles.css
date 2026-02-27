@@ -1,24 +1,31 @@
 /* assets/styles.css (vollständig, inklusive iPhone-Nav + capped images) */
 :root{
-  --bg:#f6f7f9; --card:#fff; --muted:#eef1f5; --muted2:#dfe4ea;
-  --text:#0f172a; --sub:#475569; --sub2:#64748b;
-  --action:#937972;
+  /* Apple-like tokens (default: dark) */
+  --bg:#0B0B0F;
+  --card:#15151B;
+  --card-elevated:#1C1C24;
+
+  --text:#F5F5F7;
+  --sub:rgba(245,245,247,.72);
+  --sub2:rgba(245,245,247,.55);
+
+  --accent:#0F766E; /* Petrol */
+
   --danger:#ef4444;
 
-  --sh1:0 1px 2px rgba(0,0,0,.06);
-  --sh2:0 12px 28px rgba(0,0,0,.10);
+  /* very subtle elevation (no loud shadows) */
+  --sh1: 0 1px 0 rgba(255,255,255,.06) inset;
+  --sh2: 0 1px 10px rgba(0,0,0,.22);
 
   --rSheet:24px;
-  --rCard:16px;
-  --rBtn:14px;
+  --rCard:28px;
+  --rBtn:18px;
 
   --fsBody:16px;
-  --fsSecondary:13.5px;
-  --wTitle:650;
+  --fsSecondary:14px;
+  --wTitle:700;
   --wBody:560;
   --wSecondary:520;
-
-  --accent:#1e88e5;
 
   --barAlpha:.92;
 
@@ -26,8 +33,27 @@
   --recipeBarH: 86px;
 
   /* image caps */
-  --heroMaxH: 240px;
+  --heroMaxH: 300px;
   --thumbMaxH: 170px;
+
+  --space-page:24px;
+  --space-section:36px;
+  --space-card:18px;
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#F6F7F9;
+    --card:#FFFFFF;
+    --card-elevated:#FFFFFF;
+
+    --text:#0F172A;
+    --sub:#475569;
+    --sub2:#64748b;
+
+    --sh1:0 1px 2px rgba(0,0,0,.06);
+    --sh2:0 12px 28px rgba(0,0,0,.10);
+  }
 }
 
 *{-webkit-tap-highlight-color:transparent}
@@ -35,19 +61,12 @@ html,body{height:100%}
 
 
 /* Globaler Hintergrund-Verlauf: immer vollflächig, unabhängig von Wrapper-Höhe */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  pointer-events:none;
-  background: linear-gradient(180deg, #eaf1ff 0%, #e6f5f0 100%);
-}
+/* background handled by body */
 body{
   font-family: system-ui, -apple-system, Arial;
   margin:0;
   padding:0;
-  background: transparent;
+  background: var(--bg);
   color:var(--text);
   font-variant-numeric: tabular-nums;
   min-height: 100dvh;
@@ -533,7 +552,7 @@ a{color:inherit}
 
   /* Hintergründe/Glass/Shadows entfernen */
   body{ background:#fff !important; }
-  body::before{ display:none !important; }
+  /* background handled by body */
 
   .card{
     box-shadow:none !important;
@@ -928,3 +947,204 @@ body{
   -webkit-overflow-scrolling: touch !important;
   padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
 }
+
+
+/* ---------------------------------------------------------
+   Apple-level Home (Heute)
+--------------------------------------------------------- */
+.page{
+  padding: 0 var(--space-page) calc(var(--tabbarH) + 24px);
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.page-title{
+  font-size: 38px;
+  font-weight: var(--wTitle);
+  letter-spacing: -0.02em;
+  margin: 32px 0 22px;
+}
+
+.section{
+  margin-top: var(--space-section);
+}
+
+.section-header{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.section-title{
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin:0;
+}
+
+.section-link{
+  font-size: 16px;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.section-link:active{opacity:.75}
+
+.hero-card{
+  position: relative;
+  background: var(--card-elevated);
+  border-radius: var(--rCard);
+  overflow: hidden;
+  box-shadow: var(--sh2);
+}
+
+.hero-media{
+  width: 100%;
+  max-height: var(--heroMaxH);
+}
+
+.hero-img{
+  width: 100%;
+  height: auto;
+  max-height: var(--heroMaxH);
+  object-fit: cover;
+  display: block;
+}
+
+.hero-body{
+  padding: 22px 22px 20px;
+}
+
+.hero-top{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.hero-title{
+  font-size: 22px;
+  font-weight: 650;
+  margin: 0;
+  line-height: 1.2;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-meta{
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--sub);
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  background: rgba(255,255,255,.08);
+  color: var(--text);
+}
+
+@media (prefers-color-scheme: light){
+  .pill{ background: rgba(15,23,42,.06); color: var(--text); }
+}
+
+.pill-accent{
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--text);
+}
+
+.favorites-scroll,
+.hScroll{
+  display:flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.favorites-scroll > a,
+.hScroll > a{
+  scroll-snap-align: start;
+}
+
+.hCard .card,
+.hScroll .card{
+  border-radius: var(--rBtn);
+}
+
+/* tighten existing cards into Apple-like style */
+.card{
+  background: var(--card);
+  border-radius: var(--rBtn);
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+@media (prefers-color-scheme: light){
+  .card{ border: 1px solid rgba(15,23,42,.06); }
+}
+
+.cardHover:active{ transform: scale(.99); }
+
+.favBadge{
+  position:absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(0,0,0,.35);
+  color: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+}
+
+@media (prefers-color-scheme: light){
+  .favBadge{ background: rgba(255,255,255,.72); color: rgba(15,23,42,.75); }
+}
+
+/* make stack rows calmer */
+.stack .card{
+  border-radius: var(--rBtn);
+}
+
+/* Topbar + Tabbar colors harmonize with dark base */
+.iosTopbar{
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+@media (prefers-color-scheme: light){
+  .iosTopbar{
+    border-bottom: 1px solid rgba(15,23,42,.06);
+  }
+}
+
+.tabbar{
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+@media (prefers-color-scheme: light){
+  .tabbar{ border-top: 1px solid rgba(15,23,42,.06); }
+}
+
