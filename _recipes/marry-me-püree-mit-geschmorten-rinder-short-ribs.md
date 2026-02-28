@@ -18,32 +18,27 @@ image: /recipes/images/placeholder.jpg
 servings: 4
 ---
 
-## Zutaten
 
-### Marry Me Püree
-- 1 kg Maris-Piper-Kartoffeln
-- 200 ml Vollmilch
-- 200 ml Schlagsahne
-- 4 Knoblauchzehen, gehackt
-- 3 Thymianzweige
-- 150 g Butter, geschmolzen
-- Feines Salz
-- Weißer Pfeffer
-- Frisch geriebene Muskatnuss
-
-### Geschmorte Rinder-Short-Ribs
-- 4 große Rinder-Short-Ribs
-- Salz und Pfeffer
-- 1 EL Öl
-- 1 Zwiebel, gewürfelt
-- 2 Stangen Sellerie, gewürfelt
-- 2 Karotten, gewürfelt
-- 2 EL Tomatenmark
-- 3 Knoblauchzehen, in Scheiben
-- 3 Thymianzweige
-- 2 Lorbeerblätter
-- 500 ml Rotwein
-- 750 ml–1 L Rinderbrühe
+ingredients:
+  - { qty: 1, unit: "kg", item: "Maris-Piper-Kartoffeln" }
+  - { qty: 200, unit: "ml", item: "Vollmilch" }
+  - { qty: 200, unit: "ml", item: "Schlagsahne" }
+  - { qty: 4, unit: "Zehen", item: "Knoblauch, gehackt" }
+  - { qty: "4", unit: "Zweige", item: "Thymian" }
+  - { qty: 150, unit: "g", item: "Butter, geschmolzen" }
+  - { qty: "n. B.", unit: "", item: "Feines Salz" }
+  - { qty: "n. B.", unit: "", item: "Weißer Pfeffer" }
+  - { qty: "n. B.", unit: "", item: "Muskatnuss, frisch gerieben" }
+  - { qty: "4", unit: "Stk.", item: "Rinder-Short-Ribs" }
+  - { qty: 1, unit: "EL", item: "Öl" }
+  - { qty: 1, unit: "", item: "Zwiebel, gewürfelt" }
+  - { qty: 2, unit: "Stangen", item: "Sellerie, gewürfelt" }
+  - { qty: 2, unit: "", item: "Karotten, gewürfelt" }
+  - { qty: 2, unit: "EL", item: "Tomatenmark" }
+  - { qty: 3, unit: "Zehen", item: "Knoblauch, in Scheiben" }
+  - { qty: 2, unit: "", item: "Lorbeerblätter" }
+  - { qty: 500, unit: "ml", item: "Rotwein" }
+  - { qty: "750–1000", unit: "ml", item: "Rinderbrühe" }
 
 ---
 
