@@ -1,8 +1,18 @@
 ---
-title: "Marry Me Püree mit geschmorten Rinder-Short-Ribs"
+title: "Geschmorte Rinder-Short-Ribs mit Kartoffelpüree"
 date: 2026-02-20
 category: "Hauptgericht"
-tags: ["kartoffelpüree","short ribs","schmorgericht","komfortessen"]
+tags: [
+  "rind",
+  "short ribs",
+  "schmorgericht",
+  "ofen",
+  "rotwein",
+  "hauptgericht",
+  "kartoffelpüree",
+  "komfortessen",
+  "beef"
+]
 time: "ca. 4,5–5 Stunden"
 image: /recipes/images/placeholder.jpg
 servings: 4
@@ -15,14 +25,14 @@ servings: 4
 - 200 ml Vollmilch
 - 200 ml Schlagsahne
 - 4 Knoblauchzehen, gehackt
-- 3–4 Thymianzweige
+- 3 Thymianzweige
 - 150 g Butter, geschmolzen
 - Feines Salz
 - Weißer Pfeffer
 - Frisch geriebene Muskatnuss
 
 ### Geschmorte Rinder-Short-Ribs
-- 3–4 große Rinder-Short-Ribs
+- 4 große Rinder-Short-Ribs
 - Salz und Pfeffer
 - 1 EL Öl
 - 1 Zwiebel, gewürfelt
