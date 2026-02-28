@@ -2,21 +2,10 @@
 title: "Geschmorte Rinder-Short-Ribs mit Kartoffelpüree"
 date: 2026-02-20
 category: "Hauptgericht"
-tags: [
-  "rind",
-  "short ribs",
-  "schmorgericht",
-  "ofen",
-  "rotwein",
-  "hauptgericht",
-  "kartoffelpüree",
-  "komfortessen",
-  "beef"
-]
+tags: [  "rind",  "short ribs",  "schmorgericht",  "ofen",  "rotwein",  "hauptgericht",  "kartoffelpüree",  "komfortessen", "beef"]
 time: "ca. 4,5–5 Stunden"
 image: /recipes/images/ribs.png
 servings: 4
----
 ingredients:
   - { qty: 1, unit: "kg", item: "Maris-Piper-Kartoffeln" }
   - { qty: 200, unit: "ml", item: "Vollmilch" }
