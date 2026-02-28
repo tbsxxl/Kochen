@@ -14,7 +14,7 @@ tags: [
   "beef"
 ]
 time: "ca. 4,5–5 Stunden"
-image: /recipes/images/placeholder.jpg
+image: /recipes/images/ribs.png
 servings: 4
 ---
 
