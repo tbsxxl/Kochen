@@ -17,8 +17,6 @@ time: "ca. 4,5–5 Stunden"
 image: /recipes/images/ribs.png
 servings: 4
 ---
-
-
 ingredients:
   - { qty: 1, unit: "kg", item: "Maris-Piper-Kartoffeln" }
   - { qty: 200, unit: "ml", item: "Vollmilch" }
@@ -42,11 +40,7 @@ ingredients:
   - { qty: 2, unit: "", item: "Lorbeerblätter" }
   - { qty: 500, unit: "ml", item: "Rotwein" }
   - { qty: "750", unit: "ml", item: "Rinderbrühe" }
-
-
 ---
-
-## Zubereitung
 
 ### Püree
 1. Kartoffeln schälen, würfeln und in kaltem Salzwasser aufkochen. Sanft köcheln lassen, bis sie vollständig weich sind. Abgießen und 20–30 Minuten abdampfen lassen.
