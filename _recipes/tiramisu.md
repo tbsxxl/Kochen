@@ -1,6 +1,6 @@
 ---
-title: "Tiramisu – klassisches Original"
-date: 2026-02-20
+title: "Tiramisù"
+date: 2026-03-08
 category: "Dessert"
 tags: ["tiramisu","italienisch","dessert","mascarpone","kaffee","klassiker"]
 time: "ca. 30 Min + 2 Std Kühlzeit"
