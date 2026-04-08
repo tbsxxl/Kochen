@@ -1,11 +1,9 @@
 -----
-
-title: “Klassische Fish & Chips mit Tartar-Sauce”
-date: 2026-04-08
-category: “Fisch”
-tags: [“fish and chips”, “frittieren”, “streetfood”, “klassiker”, “kartoffeln”, “tartar sauce”]
-time: “ca. 90 Min”
-image: /recipes/images/fish-and-chips.png
+title: "Fish and Chips mit Tartarsauce"
+date: 2026-02-20
+category: "Fisch"
+tags: ["englisch","fisch","frittieren","streetfood","klassiker","kartoffeln","tartarsauce"]
+time: "ca. 90 Min"
 servings: 4
 ingredients:
 
