@@ -1,4 +1,4 @@
------
+---
 title: "Fish and Chips mit Tartarsauce"
 date: 2026-02-20
 category: "Fisch"
