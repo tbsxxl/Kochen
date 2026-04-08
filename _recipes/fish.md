@@ -1,7 +1,7 @@
 ---
 title: "Fish and Chips mit Tartarsauce"
 date: 2026-02-20
-category: "Fisch"
+category: "Fish"
 tags: ["englisch","fisch","frittieren","streetfood","klassiker","kartoffeln","tartarsauce"]
 time: "ca. 90 Min"
 image: /recipes/images/fish.png
