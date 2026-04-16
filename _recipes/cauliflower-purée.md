@@ -1,11 +1,11 @@
 ---
-title: "Cauliflower Purée"
-date: 2026-02-20
+title: "Blumenkohlpüree mit Parmesan"
 category: "Beilage"
-tags: ["püree","beilage"]
+tags: ["blumenkohl","püree","beilage","vegetarisch","parmesan","cremig"]
 time: "ca. 45–60 Min"
-image: /recipes/images/cauliflower-puree.png
 servings: 8
+date: 2026-02-20
+image: /recipes/images/cauliflower-puree.png
 ingredients:
   - { qty: 250, unit: "g", item: "Butter" }
   - { qty: 10, unit: "g", item: "Öl" }
