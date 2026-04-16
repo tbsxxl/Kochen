@@ -4,7 +4,7 @@ date: 2026-02-20
 category: "Fish"
 tags: ["englisch","fisch","frittieren","streetfood","klassiker","kartoffeln","tartarsauce"]
 time: "ca. 90 Min"
-image: /recipes/images/ED01A6B8-ABD4-4A2E-9058-3DE10597EA6A.png
+image: /recipes/images/fish.png
 servings: 4
 ingredients:
 - { qty: 7, unit: “EL”, item: “Weizenmehl, aufgeteilt” }
