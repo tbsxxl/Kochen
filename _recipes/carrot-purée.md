@@ -16,7 +16,7 @@ ingredients:
 - { qty: 40, unit: "g", item: "Butter" }
   - { qty: "n. B.", unit: "", item: "Salz" }
   - { qty: 1, unit: "EL", item: "Zitronensaft" }
-  - - { qty: "n. B.", unit: "", item: "Karottensaft" }
+  - { qty: "n. B.", unit: "", item: "Karottensaft" }
 ---
 
 ## Schritte
