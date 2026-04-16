@@ -1,11 +1,11 @@
 ---
-title: "Celeriac Purée"
-date: 2026-02-20
+title: "Selleriepüree"
 category: "Beilage"
-tags: ["püree","beilage"]
+tags: ["sellerie","püree","beilage","vegetarisch","cremig"]
 time: "ca. 3–4 Std"
-image: /recipes/images/celeriac-puree.png
 servings: 6
+date: 2026-02-20
+image: /recipes/images/celeriac-puree.png
 ingredients:
   - { qty: 1.8, unit: "kg", item: "Knollensellerie, in Juliennestreifen" }
   - { qty: 1.6, unit: "L", item: "Vollmilch" }
