@@ -4,19 +4,16 @@ category: "Beilage"
 tags: ["karotte","püree","beilage","vegetarisch","cremig"]
 time: "ca. 30 Min"
 servings: 4
-
 date: 2026-02-20
-
 time: "ca. 30 Min"
 image: /recipes/images/carrot-puree.png
-
 ingredients:
 - { qty: 500, unit: "g", item: "Karotten, in Scheiben" }
 - { qty: 200, unit: "ml", item: "Wasser" }
 - { qty: 40, unit: "g", item: "Butter" }
-  - { qty: "n. B.", unit: "", item: "Salz" }
-  - { qty: 1, unit: "EL", item: "Zitronensaft" }
-  - { qty: "n. B.", unit: "", item: "Karottensaft" }
+- { qty: "n. B.", unit: "", item: "Salz" }
+- { qty: 1, unit: "EL", item: "Zitronensaft" }
+- { qty: "n. B.", unit: "", item: "Karottensaft" }
 ---
 
 ## Schritte
