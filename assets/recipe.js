@@ -2,11 +2,18 @@
   const data = window.RECIPE_DATA;
   if(!data) return;
   const U = window.KOCHBUCH_UTILS;
+  const UI = window.KOCHBUCH_UI || {};
   const $ = (s)=>document.querySelector(s);
   const ls = {
     get(k, fb){ try{ const v = localStorage.getItem(k); return v?JSON.parse(v):fb; }catch{return fb;} },
     set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch{} }
   };
+
+  function lightTap(){ try{ UI.haptic?.('light'); }catch{} }
+  function successTap(){ try{ UI.haptic?.('success'); }catch{} }
+  function pop(el){ try{ UI.pop?.(el); }catch{} }
+  function pulse(el){ try{ UI.pulse?.(el); }catch{} }
+  function flash(el){ try{ UI.flash?.(el); }catch{} }
   const baseServings = Number(data.baseServings || 1);
   const servingsInput = $("#servingsInput");
   const servingsMinus = $("#servingsMinus");
@@ -88,6 +95,7 @@ function renderIngredients(){
       const c = getIngChecks();
       if(now) c[it.idx] = true; else delete c[it.idx];
       setIngChecks(c);
+      lightTap();
       renderIngredients();
     }
   });
@@ -95,13 +103,18 @@ function renderIngredients(){
 
 
   function setServings(v){
+    const prev = currentServings();
     const n = Math.max(1, Math.min(999, Math.round(Number(v) || baseServings)));
     if(servingsInput) servingsInput.value = String(n);
     renderIngredients();
+    if(n !== prev){
+      lightTap();
+      pulse(servingsInput);
+    }
   }
 
   servingsInput?.addEventListener("input", renderIngredients);
-  servingsInput?.addEventListener("blur", ()=> setServings(currentServings()));
+  servingsInput?.addEventListener("blur", ()=>{ setServings(currentServings()); pulse(servingsInput); });
   servingsPlus?.addEventListener("click", ()=> setServings(currentServings() + 1));
   servingsMinus?.addEventListener("click", ()=> setServings(currentServings() - 1));
 
@@ -156,6 +169,7 @@ function renderIngredients(){
     freezerRemove && (freezerRemove.disabled = !e);
   }
   function setPortions(p){
+    const prev = Number(freezerEntry()?.portions || 0);
     const f = getFreezer();
     const n = Math.max(0, Math.min(999, Math.round(Number(p)||0)));
     if(n<=0){
@@ -166,6 +180,11 @@ function renderIngredients(){
     setFreezer(f);
     renderFreezer();
     syncFreezerSheet();
+    if(n !== prev){
+      (n > prev ? lightTap : lightTap)();
+      pulse(freezerCount);
+      pulse(freezerSheetOpenBtn);
+    }
   }
 
   freezerSheetOpenBtn?.addEventListener('click', ()=>{ openFreezerSheet(); });
@@ -224,7 +243,7 @@ function renderIngredients(){
     }
     if(undoBtn) undoBtn.style.opacity = (e.cookedCount||0)>0 ? "1" : ".55";
   }
-  favBtn?.addEventListener("click", ()=>{ const e=getEntry(); e.favorite=!e.favorite; setEntry(e); renderStats(); });
+  favBtn?.addEventListener("click", ()=>{ const e=getEntry(); e.favorite=!e.favorite; setEntry(e); renderStats(); successTap(); pop(favBtn); pop(favPill); if(typeof window.updateFavBadges === "function") window.updateFavBadges(); });
   cookedBtn?.addEventListener("click", ()=>{
     const e=getEntry();
     const now=new Date().toISOString();
@@ -236,6 +255,9 @@ function renderIngredients(){
     setEntry(e);
     cookedBtn.classList.add("saved"); setTimeout(()=>cookedBtn.classList.remove("saved"),600);
     renderStats();
+    successTap();
+    pop(cookedBtn);
+    flash(statsLine);
   });
   undoBtn?.addEventListener("click", ()=>{
     const e=getEntry();
@@ -247,6 +269,9 @@ function renderIngredients(){
     setEntry(e);
     undoBtn.classList.add("saved"); setTimeout(()=>undoBtn.classList.remove("saved"),600);
     renderStats();
+    lightTap();
+    pop(undoBtn);
+    flash(statsLine);
   });
 
   // Shopping add
@@ -283,6 +308,8 @@ function renderIngredients(){
   addBtn?.addEventListener("click", ()=>{
     mergeIntoShopping(scaledIngredients());
     addBtn.classList.add("saved"); setTimeout(()=>addBtn.classList.remove("saved"),600);
+    successTap();
+    pop(addBtn);
   });
 
   // Cooking mode
@@ -406,10 +433,10 @@ const cookOverlay = $("#cookOverlay");
   cookingQuick?.addEventListener('click', openCook);
   cookClose?.addEventListener('click', closeCook);
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
-  cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); });
-  cookNext?.addEventListener('click', ()=>{ stepIdx++; renderCookStep(); });
-  cookTabSteps?.addEventListener('click', ()=> setTab('steps'));
-  cookTabIngs?.addEventListener('click', ()=> setTab('ings'));
+  cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); pulse(cookStepText); });
+  cookNext?.addEventListener('click', ()=>{ stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText); });
+  cookTabSteps?.addEventListener('click', ()=>{ setTab('steps'); lightTap(); pulse(cookTabSteps); });
+  cookTabIngs?.addEventListener('click', ()=>{ setTab('ings'); lightTap(); pulse(cookTabIngs); });
 
   document.addEventListener('keydown', (e)=>{
     if(!cookOverlay?.classList.contains('open')) return;

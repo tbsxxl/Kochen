@@ -253,3 +253,57 @@
     if(e.key === statsKey) window.updateFavBadges();
   });
 })();
+
+
+(function(){
+  function haptic(kind){
+    try{
+      if(!navigator.vibrate) return;
+      const map = { light:[8], medium:[14], success:[10,22,10], warning:[18,24,18] };
+      navigator.vibrate(map[kind] || map.light);
+    }catch{}
+  }
+
+  function replayClass(el, cls){
+    if(!el || !cls) return;
+    el.classList.remove(cls);
+    void el.offsetWidth;
+    el.classList.add(cls);
+    const clear = ()=> el.classList.remove(cls);
+    el.addEventListener('animationend', clear, { once:true });
+  }
+
+  function bindPressables(root){
+    const scope = root || document;
+    let active = null;
+    const sel = '.pressable, .btn, .sheetRow, .tabItem, .recipePortionStep, .stepBtn, .counterBtn, .favBadge, .cookTab, .cookNavBtn, .uRow';
+
+    function clear(){
+      if(active) active.classList.remove('isPressed');
+      active = null;
+    }
+
+    scope.addEventListener('pointerdown', (e)=>{
+      const el = e.target.closest(sel);
+      if(!el) return;
+      active = el;
+      el.classList.add('isPressed');
+    }, true);
+
+    ['pointerup','pointercancel','dragstart','scroll'].forEach(name=>{
+      scope.addEventListener(name, clear, true);
+    });
+    scope.addEventListener('pointerleave', clear, true);
+  }
+
+  window.KOCHBUCH_UI = {
+    haptic,
+    pop(el){ replayClass(el, 'uiPop'); },
+    pulse(el){ replayClass(el, 'uiPulse'); },
+    flash(el){ replayClass(el, 'uiFlash'); },
+    bindPressables
+  };
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ()=>bindPressables(document));
+  else bindPressables(document);
+})();
