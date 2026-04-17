@@ -40,7 +40,7 @@
 <nav class="tabbar bottomRail" aria-label="Navigation">
     <div class="tabbarInner container">
       <a class="tabItem" data-tab href="{{ '/' | relative_url }}">
-        <span class="tabIcon">⌂</span><span class="tabLabel">Start</span>
+        <span class="tabIcon"><span class="tabGlyph" aria-hidden="true">⌂</span></span><span class="tabLabel">Start</span>
       </a>
 
       <a class="tabItem tabItemBrand" data-tab href="{{ '/rezeptindex/' | relative_url }}">
@@ -48,11 +48,11 @@
       </a>
 
       <a class="tabItem" data-tab href="{{ '/shopping/' | relative_url }}">
-        <span class="tabIcon">🛒</span><span class="tabLabel">Liste</span>
+        <span class="tabIcon"><span class="tabGlyph" aria-hidden="true">▤</span></span><span class="tabLabel">Liste</span>
       </a>
 
       <button class="tabItem tabMore" id="moreBtn" aria-label="Mehr" type="button">
-        <span class="tabIcon">⋯</span><span class="tabLabel">Mehr</span>
+        <span class="tabIcon"><span class="tabGlyph" aria-hidden="true">⋯</span></span><span class="tabLabel">Mehr</span>
       </button>
     </div>
   </nav>
@@ -68,13 +68,13 @@
     </div>
 
     <div class="sheetBody">
-      <a class="sheetRow" href="{{ '/kuehltruhe/' | relative_url }}">🧊 Kühltruhe</a>
-      <a class="sheetRow" href="{{ '/kategorien/' | relative_url }}">🏷 Kategorien</a>
-      <a class="sheetRow" href="{{ '/admin/' | relative_url }}">⚙︎ Admin</a>
-      <a class="sheetRow" href="{{ '/backup/' | relative_url }}">⬇︎ Backup / Import</a>
+      <a class="sheetRow" href="{{ '/kuehltruhe/' | relative_url }}"><span class="rowGlyph" aria-hidden="true">❄︎</span><span>Kühltruhe</span></a>
+      <a class="sheetRow" href="{{ '/kategorien/' | relative_url }}"><span class="rowGlyph" aria-hidden="true">⌘</span><span>Kategorien</span></a>
+      <a class="sheetRow" href="{{ '/admin/' | relative_url }}"><span class="rowGlyph isMuted" aria-hidden="true">⚙︎</span><span>Admin</span></a>
+      <a class="sheetRow" href="{{ '/backup/' | relative_url }}"><span class="rowGlyph isMuted" aria-hidden="true">⇩</span><span>Backup / Import</span></a>
       <div class="sheetSep"></div>
-      <button class="sheetRow" id="toggleCompact" type="button">↕︎ Compact Mode</button>
-      <button class="sheetRow" id="toggleContrast" type="button">◐ High Contrast</button>
+      <button class="sheetRow" id="toggleCompact" type="button"><span class="rowGlyph isMuted" aria-hidden="true">↕︎</span><span>Compact Mode</span></button>
+      <button class="sheetRow" id="toggleContrast" type="button"><span class="rowGlyph isMuted" aria-hidden="true">◐</span><span>High Contrast</span></button>
     </div>
   </section>
 

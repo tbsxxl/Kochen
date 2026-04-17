@@ -137,9 +137,9 @@ function renderIngredients(){
     const e = freezerEntry();
     // Update label inside the recipe "Mehr" sheet
     if(freezerSheetOpenBtn){
-      freezerSheetOpenBtn.textContent = e?.portions
-        ? `🧊 Kühltruhe · ${e.portions} Portion${e.portions===1?"":"en"}`
-        : "🧊 Kühltruhe";
+      freezerSheetOpenBtn.innerHTML = e?.portions
+        ? `<span class="rowGlyph" aria-hidden="true">❄︎</span><span>Kühltruhe · ${e.portions} Portion${e.portions===1?"":"en"}</span>`
+        : `<span class="rowGlyph" aria-hidden="true">❄︎</span><span>Kühltruhe</span>`;
     }
   }
 
@@ -228,7 +228,7 @@ function renderIngredients(){
   function renderStats(){
     const e=getEntry();
     if(favBtn){
-      favBtn.textContent = `${e.favorite ? '★' : '☆'} Favorit`;
+      favBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">${e.favorite ? '★' : '☆'}</span><span>Favorit</span>`;
       favBtn.classList.toggle("blue", !!e.favorite);
     }
     if(favPill){
@@ -238,7 +238,7 @@ function renderIngredients(){
       statsLine.textContent = `Gekocht: ${e.cookedCount||0}× · Zuletzt: ${e.lastCooked?fmt(e.lastCooked):"—"}`;
     }
     if(cookedBtn){
-      cookedBtn.textContent = `✅ Gekocht${(e.cookedCount||0)>0 ? ` · ${e.cookedCount||0}×` : ''}`;
+      cookedBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">✓</span><span>Gekocht${(e.cookedCount||0)>0 ? ` · ${e.cookedCount||0}×` : ''}</span>`;
       cookedBtn.classList.toggle('green', (e.cookedCount||0)>0);
     }
     if(undoBtn) undoBtn.style.opacity = (e.cookedCount||0)>0 ? "1" : ".55";

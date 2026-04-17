@@ -30,10 +30,10 @@ layout: default
       {% endif %}
 
       <div class="kvRow">
-        {% if page.category %}<span class="kv">🏷 {{ page.category }}</span>{% endif %}
-        {% if page.time %}<span class="kv">⏱ {{ page.time }}</span>{% endif %}
-        {% if page.servings %}<span class="kv">🍽 {{ page.servings }}</span>{% endif %}
-        {% if page.date %}<span class="kv">📅 {{ page.date | date: "%d.%m.%Y" }}</span>{% endif %}
+        {% if page.category %}<span class="kv"><span class="kvIcon" aria-hidden="true">⌘</span><span>{{ page.category }}</span></span>{% endif %}
+        {% if page.time %}<span class="kv"><span class="kvIcon" aria-hidden="true">◷</span><span>{{ page.time }}</span></span>{% endif %}
+        {% if page.servings %}<span class="kv"><span class="kvIcon" aria-hidden="true">◎</span><span>{{ page.servings }}</span></span>{% endif %}
+        {% if page.date %}<span class="kv"><span class="kvIcon" aria-hidden="true">▦</span><span>{{ page.date | date: "%d.%m.%Y" }}</span></span>{% endif %}
         <span class="kv kvFav" id="favPill" hidden>★ Favorit</span>
       </div>
 
@@ -87,15 +87,15 @@ layout: default
 <nav class="tabbar bottomRail recipeTabbar" aria-label="Rezept Aktionen">
   <div class="tabbarInner container">
     <button class="tabItem pressable" id="cookingModeQuick" type="button">
-      <span class="tabIcon">🍳</span><span class="tabLabel">Kochmodus</span>
+      <span class="tabIcon"><span class="tabGlyph" aria-hidden="true">◉</span></span><span class="tabLabel">Kochmodus</span>
     </button>
 
     <button class="tabItem pressable active" id="addToShopping" type="button">
-      <span class="tabIcon">🛒</span><span class="tabLabel">Zur Liste</span>
+      <span class="tabIcon"><span class="tabGlyph" aria-hidden="true">▤</span></span><span class="tabLabel">Zur Liste</span>
     </button>
 
     <button class="tabItem pressable" id="freezerQuick" type="button">
-      <span class="tabIcon">🧊</span><span class="tabLabel">Kühltruhe</span>
+      <span class="tabIcon"><span class="tabGlyph" aria-hidden="true">❄︎</span></span><span class="tabLabel">Kühltruhe</span>
     </button>
 
     <button class="tabItem pressable" id="recipeMoreBtn" type="button">
@@ -115,17 +115,17 @@ layout: default
 
   <div class="sheetBody">
     <div class="sheetSectionLabel">Schnellzugriff</div>
-    <a class="sheetRow" href="{{ '/' | relative_url }}">⌂ Start</a>
-    <a class="sheetRow" href="{{ '/rezeptindex/' | relative_url }}">🍲 Rezepte</a>
-    <a class="sheetRow" href="{{ '/shopping/' | relative_url }}">🛒 Shopping List</a>
+    <a class="sheetRow" href="{{ '/' | relative_url }}"><span class="rowGlyph" aria-hidden="true">⌂</span><span>Start</span></a>
+    <a class="sheetRow" href="{{ '/rezeptindex/' | relative_url }}"><span class="rowGlyph" aria-hidden="true">◌</span><span>Rezepte</span></a>
+    <a class="sheetRow" href="{{ '/shopping/' | relative_url }}"><span class="rowGlyph" aria-hidden="true">▤</span><span>Shopping List</span></a>
 
     <div class="sheetSectionLabel">Aktionen</div>
-    <button class="sheetRow" id="cookingModeBtn" type="button">🍳 Kochmodus</button>
-    <button class="sheetRow" id="sheetFavoriteBtn" type="button">☆ Favorit</button>
-    <button class="sheetRow" id="sheetCookedBtn" type="button">✅ Gekocht</button>
-    <button class="sheetRow" id="sheetFreezerBtn" type="button">🧊 Kühltruhe</button>
-    <button class="sheetRow" id="undoCookedBtn" type="button">↩︎ Undo „Gekocht“</button>
-    <button class="sheetRow" id="printBtn" type="button">🖨 Drucken</button>
+    <button class="sheetRow" id="cookingModeBtn" type="button"><span class="rowGlyph" aria-hidden="true">◉</span><span>Kochmodus</span></button>
+    <button class="sheetRow" id="sheetFavoriteBtn" type="button"><span class="rowGlyph" aria-hidden="true">★</span><span>Favorit</span></button>
+    <button class="sheetRow" id="sheetCookedBtn" type="button"><span class="rowGlyph" aria-hidden="true">✓</span><span>Gekocht</span></button>
+    <button class="sheetRow" id="sheetFreezerBtn" type="button"><span class="rowGlyph" aria-hidden="true">❄︎</span><span>Kühltruhe</span></button>
+    <button class="sheetRow" id="undoCookedBtn" type="button"><span class="rowGlyph" aria-hidden="true">↺</span><span>Undo „Gekocht“</span></button>
+    <button class="sheetRow" id="printBtn" type="button"><span class="rowGlyph" aria-hidden="true">⎙</span><span>Drucken</span></button>
   </div>
 </section>
 

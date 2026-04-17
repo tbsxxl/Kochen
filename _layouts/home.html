@@ -37,8 +37,8 @@ layout: default
       </div>
 
       <div class="recipeMeta">
-        <span id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}>⏱ {{ featured.time }}</span>
-        <span id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}>🍽 {{ featured.servings }}</span>
+        <span class="metaItem" id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true">◷</span><span>{{ featured.time }}</span></span>
+        <span class="metaItem" id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true">◎</span><span>{{ featured.servings }}</span></span>
       </div>
     </div>
   </a>
@@ -256,8 +256,8 @@ layout: default
         </div>` : '';
 
       const cat = r.category ? `<span class="badge action">${esc(r.category)}</span>` : '';
-      const time = r.time ? `<span>⏱ ${esc(r.time)}</span>` : '';
-      const serv = r.servings ? `<span>🍽 ${esc(r.servings)}</span>` : '';
+      const time = r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">◷</span><span>${esc(r.time)}</span></span>` : '';
+      const serv = r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">◎</span><span>${esc(r.servings)}</span></span>` : '';
 
       return `
         <a class="linkCard hCard homeFavCard" href="${esc(href)}">

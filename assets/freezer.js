@@ -21,16 +21,16 @@
   function row(id, entry){
     const r = byId.get(id);
     const title = r?.title || id;
-    const meta = [r?.category?`🏷 ${r.category}`:'', r?.time?`⏱ ${r.time}`:''].filter(Boolean).join(' · ');
+    const meta = [r?.category?`<span class=\"metaItem\"><span class=\"metaIcon\" aria-hidden=\"true\">⌘</span><span>${r.category}</span></span>`:'', r?.time?`<span class=\"metaItem\"><span class=\"metaIcon\" aria-hidden=\"true\">◷</span><span>${r.time}</span></span>`:''].filter(Boolean).join('<span class=\"metaDivider\">·</span>');
     const portions = Number(entry?.portions || 0);
     return `
       <div class="card cardPad freezerCard" data-id="${id}">
         <span class="favBadge" data-fav-badge data-recipe-id="${id}" aria-hidden="true">★</span>
         <div class="freezerTop">
           <a class="freezerTitle" href="${id}">${title}</a>
-          <span class="badge green">🧊 ${portions}</span>
+          <span class="badge green freezerBadge"><span class="metaIcon" aria-hidden="true">❄︎</span><span>${portions}</span></span>
         </div>
-        ${meta?`<div class="dim" style="margin-top:6px">${meta}</div>`:''}
+        ${meta?`<div class="recipeMeta" style="margin-top:6px">${meta}</div>`:''}
 
         <div class="freezerControls">
           <div class="qtyStepper" aria-label="Portionen ändern">
@@ -38,7 +38,7 @@
             <div class="stepVal" aria-label="Portionen">${portions}</div>
             <button class="stepBtn" data-act="plus" type="button" aria-label="Plus">+</button>
           </div>
-          <button class="btn btnGhost freezerRemoveBtn" data-act="remove" type="button" aria-label="Aus Kühltruhe entfernen">🗑</button>
+          <button class="btn btnGhost freezerRemoveBtn" data-act="remove" type="button" aria-label="Aus Kühltruhe entfernen"><span class="rowGlyph isMuted" aria-hidden="true">⌫</span></button>
         </div>
       </div>
     `;

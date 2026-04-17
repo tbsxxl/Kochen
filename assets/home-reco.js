@@ -47,9 +47,9 @@
   const freezerPicks = enriched.filter(x=>x.inFreezer).slice(0, 6);
 
   function metaLine(r){
-    return [r.time?`⏱ ${r.time}`:"", r.servings?`🍽 ${r.servings}`:""]
+    return [r.time?`<span class="metaItem"><span class="metaIcon" aria-hidden="true">◷</span><span>${r.time}</span></span>`:"", r.servings?`<span class="metaItem"><span class="metaIcon" aria-hidden="true">◎</span><span>${r.servings}</span></span>`:""]
       .filter(Boolean)
-      .join(" · ");
+      .join(`<span class="metaDivider">·</span>`);
   }
 
   function miniCard(r){
@@ -61,7 +61,7 @@
             <h3 class="recipeTitle">${r.title}</h3>
             <span class="favBadge" data-fav-badge data-recipe-id="${r.id}" aria-hidden="true">★</span>
           </div>
-          <div class="recipeMeta">${meta?`<span>${meta}</span>`:""}</div>
+          <div class="recipeMeta">${meta||""}</div>
         </div>
       </a>
     `;
@@ -79,7 +79,7 @@
             ${meta?`<div class="dim" style="margin-top:4px">${meta}</div>`:""}
           </div>
           <div class="freezerRight">
-            <span class="freezerBadge">🧊 ${portions}</span>
+            <span class="freezerBadge"><span class="metaIcon" aria-hidden="true">❄︎</span><span>${portions}</span></span>
           </div>
         </div>
       </a>

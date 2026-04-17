@@ -33,8 +33,8 @@ permalink: /kategorien/
           </div>
 
           <div class="recipeMeta">
-            {% if r.time %}<span>⏱ {{ r.time }}</span>{% endif %}
-            {% if r.servings %}<span>🍽 {{ r.servings }}</span>{% endif %}
+            {% if r.time %}<span class="metaItem"><span class="metaIcon" aria-hidden="true">◷</span><span>{{ r.time }}</span></span>{% endif %}
+            {% if r.servings %}<span class="metaItem"><span class="metaIcon" aria-hidden="true">◎</span><span>{{ r.servings }}</span></span>{% endif %}
           </div>
         </div>
       </a>
