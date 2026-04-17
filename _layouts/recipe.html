@@ -52,12 +52,18 @@ layout: default
 
     <div class="hr"></div>
 
-    <div class="card cardPad recipeInnerCard" style="box-shadow:none;border:1px solid rgba(15,23,42,.10)">
-      <div class="searchRow" style="padding:0">
-        <div style="flex:1">
-          <div class="sub" style="margin-bottom:6px">Portionen</div>
-          <input id="servingsInput" inputmode="numeric" style="width:100%" />
-          <div class="dim" style="margin-top:6px">Basis: <span id="baseServings"></span></div>
+    <div class="card cardPad recipeInnerCard">
+      <div class="recipePortionCard">
+        <div class="recipePortionHead">
+          <div class="recipePortionTitle">Portionen</div>
+          <div class="recipePortionBase">Basis: <span id="baseServings"></span></div>
+        </div>
+        <div class="recipePortionControls" aria-label="Portionen ändern">
+          <button class="recipePortionStep" id="servingsMinus" type="button" aria-label="Portionen verringern">−</button>
+          <div class="recipePortionValueWrap">
+            <input id="servingsInput" class="recipePortionInput" inputmode="numeric" />
+          </div>
+          <button class="recipePortionStep" id="servingsPlus" type="button" aria-label="Portionen erhöhen">+</button>
         </div>
       </div>
 

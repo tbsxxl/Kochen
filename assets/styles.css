@@ -48,8 +48,7 @@ body::before{
   z-index:-1;
   pointer-events:none;
   background:
-    radial-gradient(circle at top left, rgba(255,255,255,.74) 0%, rgba(255,255,255,0) 34%),
-    radial-gradient(circle at 88% 8%, rgba(223,147,79,.08) 0%, rgba(223,147,79,0) 22%),
+    radial-gradient(circle at top left, rgba(255,255,255,.68) 0%, rgba(255,255,255,0) 28%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
 }
 body{
@@ -178,7 +177,7 @@ img{max-width:100%}
 
 .homeSectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 2px;margin-bottom:10px}
 .homeBigTitle{
-  margin:8px 0 14px 0;
+  margin:4px 0 14px 0;
   padding:0 2px;
   font-size:34px;
   font-weight:620;
@@ -281,7 +280,7 @@ img{max-width:100%}
 
 .recipeCard{
   position:relative;
-  padding:14px;
+  padding:13px;
   display:flex;
   flex-direction:column;
   gap:14px;
@@ -290,8 +289,8 @@ img{max-width:100%}
 }
 .recipeTop{display:flex;align-items:flex-start;gap:10px}
 .recipeTopLeft{flex:1;min-width:0}
-.recipeTitle{font-weight:620;font-size:18px;line-height:1.12;margin:0;letter-spacing:-.03em}
-.recipeMeta{display:flex;gap:10px;flex-wrap:wrap;color:var(--sub2);font-size:14px;font-weight:500}
+.recipeTitle{font-weight:610;font-size:18px;line-height:1.12;margin:0;letter-spacing:-.03em}
+.recipeMeta{display:flex;gap:10px;flex-wrap:wrap;color:var(--sub2);font-size:13.5px;font-weight:500}
 .recipeHeader{display:flex;flex-direction:column;gap:12px}
 .kvRow{display:flex;gap:8px;flex-wrap:wrap}
 .recipeBody h2{margin:20px 0 8px 0;font-size:18px;font-weight:600;letter-spacing:-.02em}
@@ -374,28 +373,28 @@ img{max-width:100%}
 
 .iosTopbar{
   position:sticky;top:0;z-index:1200;
-  background:rgba(246,241,232,.96);
-  border-bottom:1px solid rgba(194,177,160,.42);
-  padding:calc(10px + env(safe-area-inset-top)) 0 12px 0;
+  background:rgba(246,241,232,.94);
+  border-bottom:1px solid rgba(194,177,160,.36);
+  padding:calc(8px + env(safe-area-inset-top)) 0 10px 0;
   backdrop-filter:blur(10px);
 }
-.iosTopbar.scrolled{background:rgba(243,238,231,.98);border-bottom-color:rgba(178,155,141,.72)}
-.iosTopbarInner{display:flex;align-items:center;gap:12px}
+.iosTopbar.scrolled{background:rgba(244,239,232,.97);border-bottom-color:rgba(194,177,160,.54)}
+.iosTopbarInner{display:flex;align-items:center;gap:10px}
 .navIconBtn{
   border:1px solid var(--line);
-  background:linear-gradient(180deg, #fffdf9, #f1e9df);
-  border-radius:18px;
-  min-width:48px;min-height:48px;
-  padding:0 14px;
+  background:linear-gradient(180deg, #fffdf9, #f3ece2);
+  border-radius:16px;
+  min-width:44px;min-height:44px;
+  padding:0 12px;
   font-weight:600;
-  box-shadow:0 1px 0 rgba(255,255,255,.8), 0 8px 18px rgba(52,41,31,.06);
+  box-shadow:0 1px 0 rgba(255,255,255,.8), 0 6px 16px rgba(52,41,31,.05);
   cursor:pointer
 }
 .navIconBtn:active{transform:scale(.99)}
 .iosTopBrand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
 .iosTopTitleWrap{min-width:0;flex:1}
-.iosTopTitle{font-weight:620;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.02em}
-.iosTopLogo{width:32px;height:32px;padding:5px;border-radius:999px;background:linear-gradient(180deg, rgba(255,252,247,.98), rgba(242,231,219,.95));border:1px solid rgba(229,216,197,.9);box-shadow:0 4px 12px rgba(52,41,31,.05);}
+.iosTopTitle{font-weight:620;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.02em}
+.iosTopLogo{width:30px;height:30px;padding:5px;border-radius:999px;background:linear-gradient(180deg, rgba(255,252,247,.98), rgba(242,231,219,.95));border:1px solid rgba(229,216,197,.9);box-shadow:0 4px 12px rgba(52,41,31,.05);}
 .iosTopSub{display:none}
 
 .appMain{padding-top:18px;padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom))}
@@ -597,9 +596,9 @@ img{max-width:100%}
   box-shadow:0 4px 12px rgba(52,41,31,.05);
 }
 .pageTitleBlock .h1{margin:0;font-size:28px;font-weight:620;letter-spacing:-.035em}
-.pageTitleBlock .subtleRule{height:1px;background:rgba(208,190,169,.72);margin-top:14px}
+.pageTitleBlock .subtleRule{height:1px;background:rgba(208,190,169,.56);margin-top:12px}
 .pageLeadCard{padding:0;background:transparent;border:none;box-shadow:none}
-.uEmpty{
+ .uEmpty{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
   padding:28px 16px;border-radius:22px;border:1px dashed rgba(207,184,157,.8);
   background:linear-gradient(180deg, rgba(255,252,247,.78), rgba(246,238,227,.72));
@@ -616,3 +615,62 @@ img{max-width:100%}
 
 .homeAllLink{text-decoration:none;color:var(--accentDeep);font-weight:650;font-size:13px;letter-spacing:.01em}
 .homeAllLink:active{opacity:.72}
+
+
+/* Final polish */
+.brandEyebrow{display:none}
+.homeSectionHead{margin-bottom:8px}
+.homeSectionTitle{font-size:20px;font-weight:600}
+.searchRow{padding:7px;background:linear-gradient(180deg, rgba(246,240,233,.94), rgba(242,235,226,.92));}
+.searchRow input{padding:13px 16px;border-radius:17px;background:rgba(255,251,245,.84)}
+.searchRow.searchRowCompact input{height:48px}
+.searchRow.searchRowCompact .btn{min-height:48px;min-width:48px}
+
+.favBadge{top:14px;right:14px;width:30px;height:30px;background:rgba(255,252,247,.92);border:1px solid rgba(178,155,141,.24);color:rgba(178,155,141,.86);box-shadow:0 8px 16px rgba(52,41,31,.07)}
+.favBadge.isFav{background:rgba(255,249,242,.98);border-color:rgba(223,147,79,.28);color:rgba(184,111,57,.96)}
+.freezerCard .favBadge,
+.freezerRow .favBadge{top:12px;right:12px}
+.freezerCard .badge.green,
+.freezerRow .freezerBadge{margin-right:44px}
+
+.recipeHeader .kvRow{gap:10px 8px}
+.recipeInnerCard{box-shadow:none !important;border:1px solid rgba(208,190,169,.42) !important;background:linear-gradient(180deg, rgba(255,252,247,.82), rgba(248,241,232,.76)) !important}
+.recipePortionCard{padding:14px;border-radius:20px;background:linear-gradient(180deg, rgba(247,241,233,.9), rgba(243,236,227,.82));border:1px solid rgba(208,190,169,.38)}
+.recipePortionHead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:10px}
+.recipePortionTitle{font-size:13px;font-weight:650;color:var(--sub);letter-spacing:-.01em}
+.recipePortionBase{font-size:13px;color:var(--sub2)}
+.recipePortionControls{display:flex;align-items:center;gap:10px}
+.recipePortionValueWrap{flex:1;min-width:0}
+.recipePortionInput{width:100%;height:68px;border:1px solid rgba(208,190,169,.44);background:rgba(255,252,247,.92);border-radius:18px;padding:0 18px;font-size:26px;font-weight:620;color:var(--text);box-shadow:inset 0 1px 0 rgba(255,255,255,.72)}
+.recipePortionInput:focus{outline:none;border-color:rgba(223,147,79,.46);box-shadow:0 0 0 3px rgba(223,147,79,.12)}
+.recipePortionStep{width:48px;height:48px;min-width:48px;border-radius:16px;border:1px solid rgba(208,190,169,.58);background:linear-gradient(180deg, #fffdf9, #f2ebe1);font-size:24px;line-height:1;color:var(--text);box-shadow:0 1px 0 rgba(255,255,255,.78), 0 8px 16px rgba(52,41,31,.05)}
+.recipePortionStep:active{transform:scale(.99)}
+
+.recipeBody .hr,.recipeHeader + .hr{background:rgba(208,190,169,.48)}
+.listGroup{border-color:rgba(208,190,169,.54);background:rgba(255,252,247,.9)}
+.listGroup .ingRow + .ingRow,.listGroup .uRow + .uRow{border-top-color:rgba(229,216,197,.82)}
+.ingRow{padding:15px 14px;min-height:58px}
+.ingName{font-weight:560}
+.ingQty{font-weight:560}
+
+.cookOverlay{background:rgba(29,24,20,.74);backdrop-filter:blur(8px)}
+.cookTop{padding:calc(10px + env(safe-area-inset-top)) 14px 8px 14px}
+.cookTabs{padding:0 14px 8px 14px}
+.cookStep{font-size:22px;line-height:1.32;background:rgba(30,25,21,.52);border:1px solid rgba(255,255,255,.08)}
+.cookNavBtn{min-height:54px;background:rgba(255,255,255,.06)}
+.cookNavBtn.primary{background:rgba(191,167,149,.96)}
+
+.freezerBadge{background:rgba(127,141,69,.10);border:1px solid rgba(127,141,69,.20);font-weight:650}
+.freezerControls{margin-top:14px}
+.counterBtn,.stepBtn{border-radius:14px}
+
+.shopRow{padding:12px 12px;border-color:rgba(208,190,169,.48);background:rgba(255,253,248,.94)}
+.btn.btnDangerOutline{background:rgba(178,77,72,.06)}
+.uEmpty{padding:34px 18px;background:linear-gradient(180deg, rgba(255,252,247,.56), rgba(246,238,227,.34))}
+
+@media (max-width:640px){
+  .recipePortionInput{height:64px;font-size:24px}
+  .recipePortionStep{width:46px;height:46px;min-width:46px}
+  .freezerCard .badge.green,
+  .freezerRow .freezerBadge{margin-right:42px}
+}

@@ -9,6 +9,8 @@
   };
   const baseServings = Number(data.baseServings || 1);
   const servingsInput = $("#servingsInput");
+  const servingsMinus = $("#servingsMinus");
+  const servingsPlus = $("#servingsPlus");
   const baseServingsEl = $("#baseServings");
   const listEl = $("#ingredientsList");
   if(baseServingsEl) baseServingsEl.textContent = String(baseServings);
@@ -92,7 +94,16 @@ function renderIngredients(){
 }
 
 
+  function setServings(v){
+    const n = Math.max(1, Math.min(999, Math.round(Number(v) || baseServings)));
+    if(servingsInput) servingsInput.value = String(n);
+    renderIngredients();
+  }
+
   servingsInput?.addEventListener("input", renderIngredients);
+  servingsInput?.addEventListener("blur", ()=> setServings(currentServings()));
+  servingsPlus?.addEventListener("click", ()=> setServings(currentServings() + 1));
+  servingsMinus?.addEventListener("click", ()=> setServings(currentServings() - 1));
 
   // Freezer
   const freezerKey = "kochbuch.freezer";
