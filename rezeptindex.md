@@ -4,7 +4,7 @@ title: Alle Rezepte
 permalink: /rezeptindex/
 ---
 
-<div class="card" style="margin-top:10px">
+<div class="section" style="margin-top:6px">
   <div class="searchRow searchRowCompact">
     <input id="searchInput" placeholder="Suchen: z. B. chicken, scharf, 60 min, pasta …" />
     <button id="clearSearch" class="btn btnGhost" type="button" aria-label="Zurücksetzen">↺</button>
