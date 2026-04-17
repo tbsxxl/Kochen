@@ -23,7 +23,7 @@ permalink: /kategorien/
                 alt="{{ r.title | escape }}"
                 loading="lazy"
                 decoding="async"
-                style="width:100%;max-height:170px;object-fit:cover;display:block;"
+               
               >
             </div>
           {% endif %}
