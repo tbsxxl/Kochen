@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
-  <meta name="theme-color" content="#f3eee7">
+  <meta name="theme-color" content="#f6f1e8">
 <link rel="icon" type="image/png" href="{{ '/assets/favicon-512-removebg-preview.png' | relative_url }}">
   <link rel="apple-touch-icon" sizes="1024x1024" href="{{ '/assets/favicon-512.png' | relative_url }}">
   <!-- Wichtig: relative_url sorgt dafür, dass es mit baseurl funktioniert -->
@@ -17,8 +17,13 @@
     <div class="container iosTopbarInner">
       <button class="navIconBtn pressable" id="backBtn" aria-label="Zurück" type="button">‹</button>
 
-      <div class="iosTopTitleWrap">
-        <div class="iosTopTitle">{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</div>
+      <div class="iosTopBrand">
+        <span class="brandMark iosTopLogo" aria-hidden="true">
+          <img src="{{ '/assets/favicon-512-removebg-preview.png' | relative_url }}" alt="">
+        </span>
+        <div class="iosTopTitleWrap">
+          <div class="iosTopTitle">{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</div>
+        </div>
       </div>
 
       <!-- spacer to keep title centered on iOS-style bars -->
@@ -38,8 +43,8 @@
         <span class="tabIcon">⌂</span><span class="tabLabel">Start</span>
       </a>
 
-      <a class="tabItem" data-tab href="{{ '/rezeptindex/' | relative_url }}">
-        <span class="tabIcon">🍲</span><span class="tabLabel">Rezepte</span>
+      <a class="tabItem tabItemBrand" data-tab href="{{ '/rezeptindex/' | relative_url }}">
+        <span class="tabIcon"><img src="{{ '/assets/favicon-512-removebg-preview.png' | relative_url }}" alt=""></span><span class="tabLabel">Rezepte</span>
       </a>
 
       <a class="tabItem" data-tab href="{{ '/shopping/' | relative_url }}">
