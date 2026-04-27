@@ -204,6 +204,47 @@ img{max-width:100%}
 }
 .searchRow input:focus{background:#fffefb; box-shadow:0 0 0 2px rgba(223,147,79,.16)}
 .searchRow input::placeholder{color:var(--sub2)}
+/* Standalone form fields (admin, backup) */
+.fieldInput{
+  width:100%;
+  padding:13px 16px;
+  border-radius:16px;
+  border:1px solid rgba(208,190,169,.52);
+  background:linear-gradient(180deg,rgba(255,253,249,.98),rgba(247,240,231,.94));
+  color:var(--text);
+  font-size:15px;
+  font-weight:500;
+  outline:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 4px 10px rgba(52,41,31,.03);
+}
+.fieldInput:focus{
+  border-color:rgba(199,154,117,.6);
+  box-shadow:0 0 0 3px rgba(199,154,117,.14),inset 0 1px 0 rgba(255,255,255,.8);
+}
+.fieldInput::placeholder{color:var(--sub2)}
+
+/* Code / textarea areas */
+.codeArea{
+  width:100%;
+  padding:14px 16px;
+  border-radius:16px;
+  border:1px solid rgba(208,190,169,.46);
+  background:rgba(247,241,234,.72);
+  color:var(--text);
+  font-size:13.5px;
+  font-weight:450;
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  line-height:1.6;
+  outline:none;
+  resize:vertical;
+  min-height:160px;
+  box-shadow:inset 0 1px 3px rgba(52,41,31,.04);
+}
+.codeArea:focus{
+  border-color:rgba(199,154,117,.5);
+  box-shadow:0 0 0 3px rgba(199,154,117,.10),inset 0 1px 3px rgba(52,41,31,.04);
+  background:rgba(255,252,247,.95);
+}
 
 .grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media (min-width:480px){ .grid{grid-template-columns:repeat(2,1fr);} }
@@ -564,7 +605,7 @@ img{max-width:100%}
 .freezerTop{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .freezerTitle{color:var(--text);text-decoration:none;font-weight:600}
 .freezerControls{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:nowrap;margin-top:12px}
-.freezerRemoveBtn{width:44px;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.freezerRemoveBtn{width:44px;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:14px}
 .freezerCount{padding:10px 12px;border-radius:14px;background:var(--muted);border:1px solid var(--line);font-weight:550}
 
 .cookOverlay{
@@ -779,7 +820,14 @@ button.isPressed,
   border:1px solid rgba(229,216,197,.9);
   box-shadow:0 4px 12px rgba(52,41,31,.05);
 }
-.pageTitleBlock .h1{margin:0;font-size:28px;font-weight:400;letter-spacing:-.01em;font-family:var(--fontDisplay)}
+.pageTitleBlock h1.h1,.pageTitleBlock .h1{
+  margin:0;
+  font-size:30px;
+  font-weight:400;
+  letter-spacing:-.01em;
+  font-family:var(--fontDisplay);
+  line-height:1.06;
+}
 .pageTitleBlock .subtleRule{height:1px;background:rgba(208,190,169,.40);margin-top:14px}
 .pageLeadCard{padding:0;background:transparent;border:none;box-shadow:none}
  .uEmpty{
@@ -792,7 +840,7 @@ button.isPressed,
 .uEmpty::before{
   content:"";
   width:42px;height:42px;border-radius:999px;
-  background:rgba(255,252,247,.95) url('../assets/favicon-512-removebg-preview.png') center/26px 26px no-repeat;
+  background:linear-gradient(180deg,rgba(255,252,247,.95),rgba(242,231,219,.9));
   border:1px solid rgba(229,216,197,.9);
   box-shadow:0 4px 12px rgba(52,41,31,.05);
 }

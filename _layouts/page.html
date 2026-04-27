@@ -5,12 +5,7 @@ layout: default
 <div class="pageShell">
   {% if page.title %}
     <div class="pageTitleBlock">
-      <div class="pageTitleRow">
-        <span class="brandMark pageTitleIcon" aria-hidden="true">
-          <img src="{{ '/assets/favicon-512-removebg-preview.png' | relative_url }}" alt="">
-        </span>
-        <div class="h1">{{ page.title }}</div>
-      </div>
+      <h1 class="h1">{{ page.title }}</h1>
       <div class="subtleRule"></div>
     </div>
   {% endif %}

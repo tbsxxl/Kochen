@@ -4,11 +4,8 @@ title: Kühltruhe
 permalink: /kuehltruhe/
 ---
 
-<div class="section">
-  <div class="card cardPad">
-    <div class="h2" style="margin:0">Aus der Kühltruhe</div>
-    <div class="dim" style="margin-top:6px">Verwalte Portionen, die du eingefroren hast.</div>
-  </div>
+<div class="section" style="margin-top:6px">
+  <p class="sub">Portionen die du eingefroren hast. Tippe auf einem Rezept auf „Kühltruhe" um Einträge hinzuzufügen.</p>
 </div>
 
 <div class="section">

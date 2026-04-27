@@ -13,18 +13,20 @@ permalink: /kategorien/
     {% assign rs = g.items | sort: "title" %}
     {% for r in rs %}
       <a class="linkCard" href="{{ r.url | relative_url }}">
-        <div class="card recipeCard cardHover" style="box-shadow:none;border:1px solid rgba(15,23,42,.10)">
+        <div class="card recipeCard cardHover">
           <span class="favBadge" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-hidden="true">★</span>
           {% if r.image %}
-            <div class="thumb">
+            <div class="thumb" style="position:relative">
               <img
                 class="thumbImg"
                 src="{{ r.image | relative_url }}"
                 alt="{{ r.title | escape }}"
                 loading="lazy"
                 decoding="async"
-               
               >
+              {% if r.category %}
+                <div class="heroOverlayCat" style="bottom:10px;left:10px;font-size:10.5px;padding:4px 9px">{{ r.category }}</div>
+              {% endif %}
             </div>
           {% endif %}
 

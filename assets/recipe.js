@@ -228,7 +228,7 @@ function renderIngredients(){
   function renderStats(){
     const e=getEntry();
     if(favBtn){
-      favBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">${e.favorite ? '★' : '☆'}</span><span>Favorit</span>`;
+      favBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">${e.favorite ? '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none" style="width:18px;height:18px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'}</span><span>Favorit</span>`;
       favBtn.classList.toggle("blue", !!e.favorite);
     }
     if(favPill){
@@ -238,7 +238,7 @@ function renderIngredients(){
       statsLine.textContent = `Gekocht: ${e.cookedCount||0}× · Zuletzt: ${e.lastCooked?fmt(e.lastCooked):"—"}`;
     }
     if(cookedBtn){
-      cookedBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">✓</span><span>Gekocht${(e.cookedCount||0)>0 ? ` · ${e.cookedCount||0}×` : ''}</span>`;
+      cookedBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg></span><span>Gekocht${(e.cookedCount||0)>0 ? ` · ${e.cookedCount||0}×` : ''}</span>`;
       cookedBtn.classList.toggle('green', (e.cookedCount||0)>0);
     }
     if(undoBtn) undoBtn.style.opacity = (e.cookedCount||0)>0 ? "1" : ".55";
