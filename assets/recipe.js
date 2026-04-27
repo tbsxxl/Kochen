@@ -243,7 +243,19 @@ function renderIngredients(){
     }
     if(undoBtn) undoBtn.style.opacity = (e.cookedCount||0)>0 ? "1" : ".55";
   }
-  favBtn?.addEventListener("click", ()=>{ const e=getEntry(); e.favorite=!e.favorite; setEntry(e); renderStats(); successTap(); pop(favBtn); pop(favPill); if(typeof window.updateFavBadges === "function") window.updateFavBadges(); });
+  favBtn?.addEventListener("click", ()=>{
+    const e=getEntry();
+    e.favorite=!e.favorite;
+    if(e.favorite) e.favoriteAt=new Date().toISOString();
+    setEntry(e);
+    renderStats();
+    successTap();
+    pop(favBtn);
+    pop(favPill);
+    if(typeof window.updateFavBadges === "function") window.updateFavBadges();
+    window.dispatchEvent(new StorageEvent("storage",{key:"kochbuch.stats"}));
+    window.dispatchEvent(new Event("kochbuch:stats"));
+  });
   cookedBtn?.addEventListener("click", ()=>{
     const e=getEntry();
     const now=new Date().toISOString();

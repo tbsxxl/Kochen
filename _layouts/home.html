@@ -44,20 +44,7 @@ layout: default
   </a>
 </div>
 
-<!-- Recommendations -->
-<div class="section">
-  <div class="homeSectionHead">
-    <div class="homeSectionTitle">Für dich</div>
-  </div>
-  <div class="hScroll" id="forYouRow"></div>
-</div>
-
-<div class="section" id="freezerSection" hidden>
-  <div class="homeSectionTitle">Aus der Kühltruhe</div>
-  <div class="stack" id="freezerList"></div>
-</div>
-
-<!-- Favorites (replaces "Neueste Rezepte") -->
+<!-- Favorites -->
 <div class="section">
   <div class="homeSectionHead">
     <div class="homeSectionTitle">Favoriten</div>
@@ -65,6 +52,20 @@ layout: default
   </div>
 
   <div class="hScroll" id="favoritesRow"></div>
+</div>
+
+<!-- Recommendations -->
+<div class="section">
+  <div class="homeSectionHead">
+    <div class="homeSectionTitle">Für dich</div>
+    <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle →</a>
+  </div>
+  <div class="hScroll" id="forYouRow"></div>
+</div>
+
+<div class="section" id="freezerSection" hidden>
+  <div class="homeSectionTitle">Aus der Kühltruhe</div>
+  <div class="stack" id="freezerList"></div>
 </div>
 
 <!-- All recipes payload for JS (Option B needs url + image) -->
@@ -196,27 +197,31 @@ layout: default
     catch { return {}; }
   }
 
-  function readFavIds(){
+  function readFavEntries(){
     const stats = getStats();
-
-    // A) stats[recipeId] = { favorite: true }
-    const idsA = Object.keys(stats || {})
-      .filter(k => k !== 'favorites')
-      .filter(k => stats[k] && typeof stats[k] === 'object' && stats[k].favorite === true);
-
-    // B) stats.favorites[recipeId] = true
-    const idsB = Object.keys((stats && stats.favorites) || {})
-      .filter(k => stats.favorites && stats.favorites[k] === true);
-
-    // Merge + de-dup while preserving order (B first tends to be the newer shape)
-    const out = [];
     const seen = new Set();
-    [...idsB, ...idsA].forEach(id=>{
-      const n = normalizeId(id);
-      if(!n || seen.has(n)) return;
-      seen.add(n);
-      out.push(n);
-    });
+    const out = [];
+
+    // Format A: stats[recipeId] = { favorite: true, favoriteAt: "..." }
+    Object.keys(stats || {})
+      .filter(k => k !== 'favorites' && stats[k]?.favorite === true)
+      .forEach(k => {
+        const n = normalizeId(k);
+        if(!n || seen.has(n)) return;
+        seen.add(n);
+        out.push({ id: n, at: stats[k].favoriteAt || null });
+      });
+
+    // Format B: legacy stats.favorites[id] = true
+    Object.keys((stats && stats.favorites) || {})
+      .filter(k => stats.favorites[k] === true)
+      .forEach(k => {
+        const n = normalizeId(k);
+        if(!n || seen.has(n)) return;
+        seen.add(n);
+        out.push({ id: n, at: null });
+      });
+
     return out;
   }
 
@@ -232,18 +237,27 @@ layout: default
   function esc(s){ return String(s ?? '').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
   function render(){
-    const favIds = readFavIds();
-    if(!favIds.length){
-      host.innerHTML = `<div class="sub" style="padding:6px 2px;">Keine Favoriten markiert.</div>`;
+    const favEntries = readFavEntries();
+    if(!favEntries.length){
+      host.innerHTML = `<div class="sub" style="padding:8px 2px;font-size:14px;">Noch keine Favoriten — tippe ★ auf einem Rezept.</div>`;
       return;
     }
 
-    const favRecipes = favIds
-      .map(id => byId.get(id) || byId.get(normPath(id)))
+    // Sort: most recently favorited first, then alphabetical
+    favEntries.sort((a,b)=>{
+      if(a.at && b.at) return b.at.localeCompare(a.at);
+      if(a.at) return -1;
+      if(b.at) return 1;
+      const ra = byId.get(a.id), rb = byId.get(b.id);
+      return (ra?.title||'').localeCompare(rb?.title||'', 'de');
+    });
+
+    const favRecipes = favEntries
+      .map(e => byId.get(e.id) || byId.get(normPath(e.id)))
       .filter(Boolean);
 
     if(!favRecipes.length){
-      host.innerHTML = `<div class="sub" style="padding:6px 2px;">Favoriten vorhanden, aber keine passenden Rezept-IDs gefunden.</div>`;
+      host.innerHTML = `<div class="sub" style="padding:8px 2px;font-size:14px;">Favoriten gespeichert, aber IDs konnten nicht zugeordnet werden.</div>`;
       return;
     }
 
@@ -251,8 +265,9 @@ layout: default
       const href = r.url || r.id || '#';
 
       const img = r.image ? `
-        <div class="thumb homeFavThumb">
-          <img class="thumbImg" src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
+        <div class="thumb homeFavThumb" style="border-radius:var(--rCard,16px) var(--rCard,16px) 0 0;margin:-13px -13px 0 -13px;overflow:hidden">
+          <img class="thumbImg" src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async"
+            style="aspect-ratio:3/2;min-height:0;max-height:180px">
         </div>` : '';
 
       const cat = r.category ? `<span class="badge action">${esc(r.category)}</span>` : '';
