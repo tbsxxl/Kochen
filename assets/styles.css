@@ -644,14 +644,27 @@ img{max-width:100%}
   padding-bottom:calc(10px + env(safe-area-inset-bottom));
   height:62vh;max-height:92vh;
   box-shadow:0 -20px 48px rgba(52,41,31,.12);
+  /* Fix: flex column so sheetBody can scroll independently */
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
 }
 .sheet.full{height:92vh}
 .sheet.half{height:62vh}
 .sheet.open{transform:translateY(0)}
-.sheetGrab{width:54px;height:5px;border-radius:999px;background:rgba(95,90,84,.24);margin:12px auto 8px auto}
-.sheetHead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px 12px 14px;border-bottom:1px solid var(--line)}
+.sheetGrab{width:54px;height:5px;border-radius:999px;background:rgba(95,90,84,.24);margin:12px auto 8px auto;flex-shrink:0}
+.sheetHead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px 12px 14px;border-bottom:1px solid var(--line);flex-shrink:0}
 .sheetTitle{font-weight:600;font-size:16px;letter-spacing:-.02em}
-.sheetBody{padding:10px 14px 0 14px;overflow:auto}
+.sheetBody{
+  padding:10px 14px calc(4px + env(safe-area-inset-bottom)) 14px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  flex:1;
+  /* Prevent scroll bleed to background on iOS */
+  -webkit-transform:translateZ(0);
+}
 .sheetRow{
   width:100%;display:block;text-decoration:none;text-align:left;
   background:rgba(255,253,248,.94);

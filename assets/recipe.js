@@ -153,12 +153,14 @@ function renderIngredients(){
     freezerOverlay.classList.add('open');
     freezerSheet.classList.add('open');
     freezerSheet.setAttribute('aria-hidden','false');
+    document.body.classList.add('noScroll');
     syncFreezerSheet();
   }
   function closeFreezerSheet(){
     freezerOverlay?.classList.remove('open');
     freezerSheet?.classList.remove('open');
     freezerSheet?.setAttribute('aria-hidden','true');
+    if(!document.querySelector('.sheet.open')) document.body.classList.remove('noScroll');
   }
   function syncFreezerSheet(){
     const e = freezerEntry();

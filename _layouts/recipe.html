@@ -190,8 +190,17 @@ layout: default
   const closeBtn = document.getElementById('recipeSheetClose');
   const printBtn = document.getElementById('printBtn');
 
-  function openSheet(){ overlay.classList.add('open'); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); }
-  function closeSheet(){ overlay.classList.remove('open'); sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); }
+  function openSheet(){
+    overlay.classList.add('open'); sheet.classList.add('open');
+    sheet.setAttribute('aria-hidden','false');
+    document.body.classList.add('noScroll');
+  }
+  function closeSheet(){
+    overlay.classList.remove('open'); sheet.classList.remove('open');
+    sheet.setAttribute('aria-hidden','true');
+    // Only remove noScroll if no other sheet is open
+    if(!document.querySelector('.sheet.open')) document.body.classList.remove('noScroll');
+  }
 
   // iOS-like detents: half + full
   function setDetent(mode){
