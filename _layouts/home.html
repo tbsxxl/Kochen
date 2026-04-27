@@ -29,16 +29,16 @@ layout: default
         >
       </div>
 
-      <div class="recipeTop">
-        <h3 class="recipeTitle" id="todayTitle">{{ featured.title }}</h3>
-        <span class="badge action" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>
-          {{ featured.category }}
-        </span>
+      <div class="homeFeaturedCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>
+        {{ featured.category }}
       </div>
 
-      <div class="recipeMeta">
-        <span class="metaItem" id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true">◷</span><span>{{ featured.time }}</span></span>
-        <span class="metaItem" id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true">◎</span><span>{{ featured.servings }}</span></span>
+      <div style="padding:12px 14px 4px">
+        <h2 class="recipeTitle" id="todayTitle" style="font-size:20px;font-weight:700;font-family:var(--fontDisplay);font-weight:400;letter-spacing:-.01em">{{ featured.title }}</h2>
+      </div>
+      <div class="recipeMeta" style="padding:0 14px 14px">
+        <span class="metaItem" id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ featured.time }}</span></span>
+        <span class="metaItem" id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span><span>{{ featured.servings }}</span></span>
       </div>
     </div>
   </a>
@@ -132,7 +132,7 @@ layout: default
   if(ttl) ttl.textContent = r.title || '—';
 
   if(cat){
-    if(r.category){ cat.textContent = r.category; cat.style.display = ''; }
+    if(r.category){ cat.textContent = r.category; cat.style.removeProperty('display'); }
     else { cat.style.display = 'none'; }
   }
 
@@ -271,8 +271,8 @@ layout: default
         </div>` : '';
 
       const cat = r.category ? `<span class="badge action">${esc(r.category)}</span>` : '';
-      const time = r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">◷</span><span>${esc(r.time)}</span></span>` : '';
-      const serv = r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">◎</span><span>${esc(r.servings)}</span></span>` : '';
+      const time = r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>${esc(r.time)}</span></span>` : '';
+      const serv = r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span><span>${esc(r.servings)}</span></span>` : '';
 
       return `
         <a class="linkCard hCard homeFavCard" href="${esc(href)}">
