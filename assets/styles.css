@@ -462,6 +462,45 @@ img{max-width:100%}
   pointer-events:none;
 }
 
+/* Recipe page: full-bleed image card (like hCard but full-width) */
+.recipePageCard{
+  padding:0;
+  overflow:hidden;
+  gap:0;
+}
+.recipePageHero{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  border-radius:var(--rCard) var(--rCard) 0 0;
+  background:var(--muted);
+}
+.recipePageHero .recipeHeroImg{
+  width:100%;
+  height:clamp(220px, 52vw, 340px);
+  object-fit:cover;
+  object-position:50% 38%;
+  display:block;
+  border-radius:0;
+  filter:brightness(1.06) contrast(1.01) saturate(1.02);
+}
+.recipePageHero .heroOverlayCat{
+  bottom:12px;
+  left:14px;
+}
+.recipePageBody{
+  padding:16px 16px 14px 16px;
+}
+.recipePageBody .h1{
+  font-size:28px;
+  line-height:1.06;
+}
+@media (min-width:540px){
+  .recipePageHero .recipeHeroImg{
+    height:clamp(280px, 44vw, 380px);
+  }
+}
+
 .thumb,
 .recipeHero{
   position:relative;
@@ -806,6 +845,7 @@ button.isPressed,
   h1,h2,h3{break-after:avoid}
   ul,ol,table,.listGroup{break-inside:avoid}
   .recipeHeroImg{max-height:120mm!important}
+  .heroOverlayCat{display:none!important}
   .recipeBody{font-size:11.5pt;line-height:1.35}
   a{color:inherit!important}
 }
@@ -873,7 +913,7 @@ button.isPressed,
 .freezerTop{padding-right:42px}
 
 .recipeHeader .kvRow{gap:10px 8px}
-.recipeInnerCard{box-shadow:none !important;border:1px solid rgba(208,190,169,.42) !important;background:linear-gradient(180deg, rgba(255,252,247,.82), rgba(248,241,232,.76)) !important}
+.recipeInnerCard{box-shadow:none !important;border:1px solid rgba(208,190,169,.38) !important;background:linear-gradient(180deg, rgba(255,252,247,.7), rgba(246,239,230,.65)) !important}
 .recipePortionCard{padding:12px;border-radius:18px;background:linear-gradient(180deg, rgba(247,241,233,.86), rgba(243,236,227,.78));border:1px solid rgba(208,190,169,.34)}
 .recipePortionHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
 .recipePortionTitle{font-size:12.5px;font-weight:650;color:var(--sub);letter-spacing:-.01em}
@@ -935,6 +975,45 @@ body::before{
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   border:1px solid rgba(255,255,255,.14);
   pointer-events:none;
+}
+
+/* Recipe page: full-bleed image card (like hCard but full-width) */
+.recipePageCard{
+  padding:0;
+  overflow:hidden;
+  gap:0;
+}
+.recipePageHero{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  border-radius:var(--rCard) var(--rCard) 0 0;
+  background:var(--muted);
+}
+.recipePageHero .recipeHeroImg{
+  width:100%;
+  height:clamp(220px, 52vw, 340px);
+  object-fit:cover;
+  object-position:50% 38%;
+  display:block;
+  border-radius:0;
+  filter:brightness(1.06) contrast(1.01) saturate(1.02);
+}
+.recipePageHero .heroOverlayCat{
+  bottom:12px;
+  left:14px;
+}
+.recipePageBody{
+  padding:16px 16px 14px 16px;
+}
+.recipePageBody .h1{
+  font-size:28px;
+  line-height:1.06;
+}
+@media (min-width:540px){
+  .recipePageHero .recipeHeroImg{
+    height:clamp(280px, 44vw, 380px);
+  }
 }
 
 .thumb,

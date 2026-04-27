@@ -12,25 +12,27 @@ layout: default
 </script>
 
 <div class="section">
-  <div class="card cardPad">
-    <div class="recipeHeader">
-      <div class="h1" style="margin:0">{{ page.title }}</div>
+  <div class="card recipePageCard">
 
-      {% if page.image %}
-        <div class="recipeHero">
-          <img
-            class="recipeHeroImg"
-            src="{{ page.image | relative_url }}"
-            alt="{{ page.title | escape }}"
-            loading="lazy"
-            decoding="async"
-           
-          >
-        </div>
-      {% endif %}
+    {% if page.image %}
+      <div class="recipePageHero">
+        <img
+          class="recipeHeroImg"
+          src="{{ page.image | relative_url }}"
+          alt="{{ page.title | escape }}"
+          loading="eager"
+          decoding="async"
+        >
+        {% if page.category %}
+          <div class="heroOverlayCat">{{ page.category }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
 
-      <div class="kvRow">
-        {% if page.category %}<span class="kv"><span class="kvIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></span><span>{{ page.category }}</span></span>{% endif %}
+    <div class="recipePageBody">
+      <div class="h1" style="margin:0 0 12px 0">{{ page.title }}</div>
+
+      <div class="kvRow" style="margin-bottom:0">
         {% if page.time %}<span class="kv"><span class="kvIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ page.time }}</span></span>{% endif %}
         {% if page.servings %}<span class="kv"><span class="kvIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span>{{ page.servings }}</span></span>{% endif %}
         {% if page.date %}<span class="kv"><span class="kvIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span>{{ page.date | date: "%d.%m.%Y" }}</span></span>{% endif %}
@@ -38,7 +40,7 @@ layout: default
       </div>
 
       {% if page.tags %}
-      <div class="chips">
+      <div class="chips" style="margin-top:10px">
         {% for t in page.tags %}
           <span class="chip">{{ t }}</span>
         {% endfor %}
@@ -46,13 +48,11 @@ layout: default
       {% endif %}
     </div>
 
-    <div class="hr"></div>
+    <div class="dim" id="statsLine" style="padding:0 16px;margin-top:2px"></div>
 
-    <div class="dim" id="statsLine"></div>
+    <div class="hr" style="margin:12px 16px 0 16px"></div>
 
-    <div class="hr"></div>
-
-    <div class="card cardPad recipeInnerCard">
+    <div class="card cardPad recipeInnerCard" style="margin:12px 16px">
       <div class="recipePortionCard">
         <div class="recipePortionHead">
           <div class="recipePortionTitle">Portionen</div>
@@ -75,9 +75,7 @@ layout: default
       </div>
     </div>
 
-    <div class="hr"></div>
-
-    <div class="recipeBody">
+    <div class="recipeBody" style="padding:0 16px 16px 16px">
       {{ content }}
     </div>
   </div>
