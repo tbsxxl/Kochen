@@ -28,16 +28,12 @@ permalink: /rezeptindex/
               loading="lazy"
               decoding="async"
             >
-            {% if r.category %}
-              <div class="heroOverlayCat">{{ r.category }}</div>
-            {% endif %}
+            {% if r.category %}<div class="heroOverlayCat">{{ r.category }}</div>{% endif %}
+            <span class="favBadge rcFavBadge" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-hidden="true">★</span>
           </div>
+        {% else %}
+          <span class="favBadge rcFavBadge" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-hidden="true" style="top:12px;right:12px">★</span>
         {% endif %}
-
-        <span class="favBadge"
-              data-fav-badge
-              data-recipe-id="{{ r.url | relative_url }}"
-              aria-hidden="true">★</span>
 
         <div class="rcBody">
           <h3 class="recipeTitle">{{ r.title }}</h3>

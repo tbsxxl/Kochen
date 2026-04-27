@@ -63,13 +63,13 @@
     const img = r.image ? `
       <div class="rcImg">
         <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
-        ${r.category ? `<div class="heroOverlayCat" style="bottom:9px;left:10px;font-size:10.5px;padding:4px 9px">${esc(r.category)}</div>` : ""}
-      </div>` : "";
+        ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
+        <span class="favBadge rcFavBadge" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true">★</span>
+      </div>` : `<span class="favBadge rcFavBadge" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true" style="top:12px;right:12px">★</span>`;
     return `
       <a class="linkCard hCard homeFavCard" href="${esc(r.id)}">
         <div class="card recipeCard cardHover">
           ${img}
-          <span class="favBadge" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true">★</span>
           <div class="rcBody">
             <h3 class="recipeTitle">${esc(r.title)}</h3>
             ${meta ? `<div class="recipeMeta">${meta}</div>` : ""}

@@ -284,13 +284,13 @@ img{max-width:100%}
 .homeFeaturedThumb{position:relative}
 .homeFeaturedCat{
   position:absolute;
-  top:12px;left:12px;
-  background:linear-gradient(180deg,rgba(0,0,0,.52),rgba(0,0,0,.38));
+  bottom:12px;left:12px;
+  background:linear-gradient(180deg,rgba(0,0,0,.54),rgba(0,0,0,.40));
   color:#fffdf8;
-  font-size:11.5px;font-weight:650;letter-spacing:.02em;
-  padding:5px 11px;border-radius:999px;
-  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  border:1px solid rgba(255,255,255,.12);
+  font-size:12px;font-weight:650;letter-spacing:.025em;
+  padding:6px 12px;border-radius:999px;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.14);
   z-index:2;
   pointer-events:none;
 }
@@ -945,8 +945,14 @@ button.isPressed,
   border-color:rgba(223,147,79,.28);
   color:rgba(184,111,57,.96);
 }
-/* favBadge always overlaps the image when rcImg is present */
-.recipeCard .favBadge{position:absolute;top:10px;right:10px}
+/* favBadge inside rcImg overlays the image */
+.rcImg{position:relative}
+.rcFavBadge{
+  position:absolute !important;
+  top:10px !important;
+  right:10px !important;
+  z-index:3;
+}
 .freezerCard .favBadge,
 .freezerRow .favBadge{
   top:50%;
@@ -1075,58 +1081,12 @@ body::before{
   filter:brightness(1.11) contrast(1.01) saturate(1.02);
 }
 
-.grid .recipeCard{
-  gap:12px;
-}
-.grid .recipeCard .recipeTop{
-  align-items:center;
-  gap:10px;
-}
-.grid .recipeCard .recipeTopLeft{
-  flex:1;
-  min-width:0;
-}
-.grid .recipeCard .recipeTitle{
-  font-size:17px;
-  line-height:1.16;
-}
-.grid .recipeCard .badge.action{
-  background:linear-gradient(180deg, #d7a074, #cb8f62);
-}
-.grid .recipeCard .favBadge{
-  position:static;
-  top:auto;
-  right:auto;
-  margin-left:2px;
-  flex:0 0 auto;
-  width:34px;
-  height:34px;
-  opacity:0;
-  transform:none;
-  pointer-events:none;
-  box-shadow:none;
-  background:rgba(255,252,247,.96);
-  border:1px solid rgba(223,147,79,.24);
-  color:rgba(184,111,57,.96);
-}
-.grid .recipeCard .favBadge.isFav{
-  opacity:1;
-}
-
-@media (max-width:640px){
-  .grid .recipeCard .favBadge{
-    width:32px;
-    height:32px;
-  }
-}
 
 
-.recipeTop > .favBadge{position:relative;top:auto;right:auto;margin-left:4px;flex:0 0 auto;box-shadow:none;opacity:1;pointer-events:auto;transform:none;}
-.recipeTop > .favBadge:not(.isFav){background:rgba(255,252,247,.94);color:rgba(191,142,97,.88);border-color:rgba(223,147,79,.18);}
-.recipeTop > .favBadge.isFav{background:rgba(255,249,242,.98);}
+
+
 
 .badge.action,.kv{min-height:38px}
-.grid .recipeCard .badge.action{min-height:38px;padding:8px 14px;background:linear-gradient(180deg, #d89c6d, #cc8957);}
 .metaDivider{opacity:.38;margin:0 2px}
 
 .tabIcon img{display:block;width:20px;height:20px;object-fit:contain}
