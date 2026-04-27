@@ -29,15 +29,16 @@
 
     return `
       <div class="card cardPad freezerCard" data-id="${id}">
-        <span class="favBadge" data-fav-badge data-recipe-id="${id}" aria-hidden="true">★</span>
         <div class="freezerTop">
-          <a class="freezerTitle" href="${id}" style="font-family:var(--fontDisplay);font-size:18px;font-weight:400;letter-spacing:-.01em">${title}</a>
+          <div style="min-width:0;flex:1">
+            <a class="freezerTitle" href="${id}">${title}</a>
+            ${timeMeta ? `<div class="recipeMeta" style="margin-top:5px">${timeMeta}</div>` : ''}
+          </div>
           <span class="freezerBadge">
             <span class="metaIcon" aria-hidden="true">${SVG_ICE}</span>
             <span>${portions}</span>
           </span>
         </div>
-        ${timeMeta ? `<div class="recipeMeta" style="margin-top:6px">${timeMeta}</div>` : ''}
         <div class="freezerControls">
           <div class="qtyStepper" aria-label="Portionen ändern">
             <button class="stepBtn" data-act="minus" type="button" aria-label="Minus">−</button>

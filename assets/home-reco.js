@@ -81,17 +81,17 @@
   function freezerRow(r){
     const meta = metaLine(r);
     const portions = Number(r.freezerPortions || 0);
-    return `
+        return `
       <a class="linkCard" href="${esc(r.id)}">
-        <div class="card cardPad freezerRow cardHover" style="position:relative">
-          <span class="favBadge" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true">★</span>
-          <div style="min-width:0">
-            <div class="h2" style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.title)}</div>
-            ${meta ? `<div class="dim" style="margin-top:4px">${meta}</div>` : ''}
+        <div class="card cardPad freezerRow cardHover">
+          <div style="min-width:0;flex:1">
+            <div style="font-family:var(--fontDisplay);font-size:17px;font-weight:400;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.title)}</div>
+            ${meta ? `<div class="recipeMeta" style="margin-top:4px">${meta}</div>` : ''}
           </div>
-          <div class="freezerRight">
-            <span class="freezerBadge"><span class="metaIcon" aria-hidden="true">❄︎</span><span>${portions}</span></span>
-          </div>
+          <span class="freezerBadge">
+            <span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="6 6 12 2 18 6"/><polyline points="6 18 12 22 18 18"/><polyline points="2 8 6 12 2 16"/><polyline points="22 8 18 12 22 16"/></svg></span>
+            <span>${portions}</span>
+          </span>
         </div>
       </a>`;
   }

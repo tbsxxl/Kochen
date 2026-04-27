@@ -307,7 +307,7 @@ img{max-width:100%}
 .section{margin-top:22px}
 .section:first-child{margin-top:8px}
 
-.freezerRow{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.freezerRow{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .freezerRight{display:flex;align-items:center;gap:8px}
 .freezerBadge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:rgba(98,120,88,.10);border:1px solid rgba(98,120,88,.20);font-weight:600}
 .footerRow{display:flex;gap:8px;flex-wrap:wrap}
@@ -687,8 +687,20 @@ img{max-width:100%}
 .stepBtn:active{transform:scale(.99);background:rgba(178,155,141,.08)}
 .stepVal{min-width:38px;text-align:center;font-weight:600;font-size:18px;color:var(--text)}
 
-.freezerTop{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.freezerTitle{color:var(--text);text-decoration:none;font-weight:600}
+.freezerTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.freezerTitle{
+  color:var(--text);
+  text-decoration:none;
+  font-family:var(--fontDisplay);
+  font-size:19px;
+  font-weight:400;
+  letter-spacing:-.01em;
+  line-height:1.15;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 .freezerControls{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:nowrap;margin-top:12px}
 .freezerRemoveBtn{width:44px;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:14px}
 .freezerCount{padding:10px 12px;border-radius:14px;background:var(--muted);border:1px solid var(--line);font-weight:550}
@@ -966,16 +978,9 @@ button.isPressed,
   right:10px !important;
   z-index:3;
 }
-.freezerCard .favBadge,
-.freezerRow .favBadge{
-  top:50%;
-  right:12px;
-  transform:translateY(-50%) scale(1);
-}
-.freezerCard .badge.green,
+.freezerRow .favBadge{top:50%;right:12px;transform:translateY(-50%) scale(1);}
 .freezerRow .freezerBadge{margin-right:42px}
 .freezerRight{position:relative;padding-right:42px}
-.freezerTop{padding-right:42px}
 
 .recipeHeader .kvRow{gap:10px 8px}
 .recipeInnerCard{box-shadow:none !important;border:1px solid rgba(208,190,169,.38) !important;background:linear-gradient(180deg, rgba(255,252,247,.7), rgba(246,239,230,.65)) !important}
