@@ -17,16 +17,18 @@ layout: default
     <div class="card recipeCard cardHover homeFeatured">
       <span class="favBadge" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-hidden="true">★</span>
 
-      <div class="thumb homeFeaturedThumb" id="todayThumbWrap" {% unless featured.image %}style="display:none"{% endunless %}>
+      <div class="rcImg" id="todayThumbWrap" {% unless featured.image %}style="display:none"{% endunless %}>
         <img
-          class="thumbImg"
           id="todayImg"
           src="{% if featured.image %}{{ featured.image | relative_url }}{% endif %}"
           alt="{{ featured.title | escape }}"
-          loading="lazy"
+          loading="eager"
           decoding="async"
-         
+          style="aspect-ratio:16/10"
         >
+        <div class="homeFeaturedCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>
+          {{ featured.category }}
+        </div>
       </div>
 
       <div class="homeFeaturedCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>
@@ -265,9 +267,9 @@ layout: default
       const href = r.url || r.id || '#';
 
       const img = r.image ? `
-        <div class="thumb homeFavThumb" style="border-radius:var(--rCard,16px) var(--rCard,16px) 0 0;margin:-13px -13px 0 -13px;overflow:hidden">
-          <img class="thumbImg" src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async"
-            style="aspect-ratio:3/2;min-height:0;max-height:180px">
+        <div class="rcImg">
+          <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
+          ${r.category ? `<div class="heroOverlayCat" style="bottom:9px;left:10px;font-size:10.5px;padding:4px 9px">${esc(r.category)}</div>` : ""}
         </div>` : '';
 
       const cat = r.category ? `<span class="badge action">${esc(r.category)}</span>` : '';

@@ -21,49 +21,45 @@ permalink: /rezeptindex/
       <div class="card recipeCard cardHover">
 
         {% if r.image %}
-          <div class="thumb" style="position:relative">
+          <div class="rcImg">
             <img
-              class="thumbImg"
               src="{{ r.image | relative_url }}"
               alt="{{ r.title | escape }}"
               loading="lazy"
               decoding="async"
             >
             {% if r.category %}
-              <div class="heroOverlayCat" style="bottom:10px;left:10px;font-size:10.5px;padding:4px 9px">{{ r.category }}</div>
+              <div class="heroOverlayCat">{{ r.category }}</div>
             {% endif %}
           </div>
         {% endif %}
 
-        <div class="recipeTop">
-          <div class="recipeTopLeft">
-            <h3 class="recipeTitle">{{ r.title }}</h3>
+        <span class="favBadge"
+              data-fav-badge
+              data-recipe-id="{{ r.url | relative_url }}"
+              aria-hidden="true">★</span>
+
+        <div class="rcBody">
+          <h3 class="recipeTitle">{{ r.title }}</h3>
+
+          <div class="recipeMeta">
+            {% if r.time %}<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ r.time }}</span></span>{% endif %}
+            {% if r.servings %}<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span>{{ r.servings }}</span></span>{% endif %}
           </div>
 
-          <span class="favBadge"
-                data-fav-badge
-                data-recipe-id="{{ r.url | relative_url }}"
-                aria-hidden="true">★</span>
+          {% if r.tags %}
+            {% assign tag_count = r.tags | size %}
+            {% assign rest = tag_count | minus: 3 %}
+            <div class="chips chipsCompact">
+              {% for t in r.tags limit: 3 %}
+                <span class="chip">{{ t }}</span>
+              {% endfor %}
+              {% if rest > 0 %}
+                <span class="chip chipMore">+{{ rest }}</span>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
-
-        <div class="recipeMeta">
-          {% if r.time %}<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ r.time }}</span></span>{% endif %}
-          {% if r.servings %}<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span><span>{{ r.servings }}</span></span>{% endif %}
-        </div>
-
-        {% if r.tags %}
-          {% assign tag_count = r.tags | size %}
-          {% assign show_count = 3 %}
-          {% assign rest = tag_count | minus: show_count %}
-          <div class="chips chipsCompact">
-            {% for t in r.tags limit: 3 %}
-              <span class="chip">{{ t }}</span>
-            {% endfor %}
-            {% if rest > 0 %}
-              <span class="chip chipMore">+{{ rest }}</span>
-            {% endif %}
-          </div>
-        {% endif %}
 
       </div>
     </a>

@@ -60,24 +60,20 @@
 
   function miniCard(r){
     const meta = metaLine(r);
-    // Same card structure as homeFavCard in home.html
-    const thumb = r.image ? `
-      <div class="thumb homeFavThumb" style="border-radius:var(--rCard,16px) var(--rCard,16px) 0 0;margin:-13px -13px 0 -13px;overflow:hidden">
-        <img class="thumbImg" src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async"
-          style="aspect-ratio:3/2;min-height:0;max-height:180px">
-      </div>` : '';
+    const img = r.image ? `
+      <div class="rcImg">
+        <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
+        ${r.category ? `<div class="heroOverlayCat" style="bottom:9px;left:10px;font-size:10.5px;padding:4px 9px">${esc(r.category)}</div>` : ""}
+      </div>` : "";
     return `
       <a class="linkCard hCard homeFavCard" href="${esc(r.id)}">
         <div class="card recipeCard cardHover">
+          ${img}
           <span class="favBadge" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true">★</span>
-          ${thumb}
-          <div class="recipeTop">
-            <div class="recipeTopLeft">
-              <h3 class="recipeTitle">${esc(r.title)}</h3>
-            </div>
-            ${r.category ? `<span class="badge action">${esc(r.category)}</span>` : ''}
+          <div class="rcBody">
+            <h3 class="recipeTitle">${esc(r.title)}</h3>
+            ${meta ? `<div class="recipeMeta">${meta}</div>` : ""}
           </div>
-          ${meta ? `<div class="recipeMeta">${meta}</div>` : ''}
         </div>
       </a>`;
   }
