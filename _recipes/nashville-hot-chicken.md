@@ -1,10 +1,10 @@
 ---
-title: "Nashville Hot Chicken"
+title: "Nashville Hot Chicken (Babish-Style)"
 date: 2026-05-04
 category: "Chicken"
 tags: ["amerikanisch", "hähnchen", "frittiert", "scharf", "nashville", "babish", "soulfood"]
 time: "ca. 60 Min + marinieren"
-image: /recipes/images/nashville.png
+image: /recipes/images/nashville-babish.png
 servings: 4
 ingredients:
 - { qty: 8, unit: "Stk.", item: "Hähnchenschenkel (mit Haut und Knochen)" }
