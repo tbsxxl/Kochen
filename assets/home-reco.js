@@ -1,5 +1,7 @@
 (function(){
   const forYouHost = document.querySelector("#forYouRow");
+  const recentHost = document.querySelector("#recentRow");
+  const recentSection = document.querySelector("#recentSection");
   const freezerHost = document.querySelector("#freezerList");
   const freezerSection = document.querySelector("#freezerSection");
   const dataEl = document.querySelector("#allRecipesJson");
@@ -21,6 +23,10 @@
   const now = Date.now();
   const DAY = 24*60*60*1000;
 
+  const SVG_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>';
+  const SVG_PEOPLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
+  const SVG_ICE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="6 6 12 2 18 6"/><polyline points="6 18 12 22 18 18"/><polyline points="2 8 6 12 2 16"/><polyline points="22 8 18 12 22 16"/></svg>';
+
   const enriched = recipes.map(r=>{
     const e = stats[r.id] || {};
     const last = e.lastCooked ? Date.parse(e.lastCooked) : null;
@@ -30,6 +36,7 @@
       cookedCount: Number(e.cookedCount || 0),
       favorite: !!e.favorite,
       lastCooked: e.lastCooked || null,
+      lastCookedTs: last,
       daysSince,
       inFreezer: !!freezer[r.id],
       freezerPortions: freezer[r.id]?.portions || 0
@@ -43,29 +50,22 @@
     return recency + freq;
   }
 
-  // Favoriten ausfiltern — die haben ihre eigene Zeile
-  const forYou = enriched
-    .filter(r => !r.favorite)
-    .sort((a,b) => score(b) - score(a))
-    .slice(0, 6);
-
-  const freezerPicks = enriched.filter(x => x.inFreezer).slice(0, 6);
-
   function metaLine(r){
     const parts = [];
-    if(r.time) parts.push(`<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>${esc(r.time)}</span></span>`);
-    if(r.servings) parts.push(`<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span><span>${esc(r.servings)}</span></span>`);
-    return parts.join(`<span class="metaDivider">·</span>`);
+    if(r.time) parts.push(`<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_CLOCK}</span><span>${esc(r.time)}</span></span>`);
+    if(r.servings) parts.push(`<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_PEOPLE}</span><span>${esc(r.servings)}</span></span>`);
+    return parts.join('');
   }
 
-  function miniCard(r){
+  function miniCard(r, opts){
+    const showFavState = !!(opts && opts.favState && r.favorite);
     const meta = metaLine(r);
     const img = r.image ? `
       <div class="rcImg">
         <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
         ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
-        <span class="favBadge rcFavBadge" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true">★</span>
-      </div>` : `<span class="favBadge rcFavBadge" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true" style="top:12px;right:12px">★</span>`;
+        <span class="favBadge rcFavBadge${showFavState?' isFav':''}" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true">★</span>
+      </div>` : `<span class="favBadge rcFavBadge${showFavState?' isFav':''}" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true" style="top:12px;right:12px">★</span>`;
     return `
       <a class="linkCard hCard homeFavCard" href="${esc(r.id)}">
         <div class="card recipeCard cardHover">
@@ -81,25 +81,47 @@
   function freezerRow(r){
     const meta = metaLine(r);
     const portions = Number(r.freezerPortions || 0);
-        return `
+    return `
       <a class="linkCard" href="${esc(r.id)}">
         <div class="card cardPad freezerRow cardHover">
           <div style="min-width:0;flex:1">
-            <div style="font-family:var(--fontDisplay);font-size:17px;font-weight:400;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.title)}</div>
+            <div class="freezerRowTitle">${esc(r.title)}</div>
             ${meta ? `<div class="recipeMeta" style="margin-top:4px">${meta}</div>` : ''}
           </div>
           <span class="freezerBadge">
-            <span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="6 6 12 2 18 6"/><polyline points="6 18 12 22 18 18"/><polyline points="2 8 6 12 2 16"/><polyline points="22 8 18 12 22 16"/></svg></span>
+            <span class="metaIcon" aria-hidden="true">${SVG_ICE}</span>
             <span>${portions}</span>
           </span>
         </div>
       </a>`;
   }
 
+  // Für dich: keine Favoriten (haben eigene Zeile)
+  const forYou = enriched
+    .filter(r => !r.favorite)
+    .sort((a,b) => score(b) - score(a))
+    .slice(0, 6);
+
   forYouHost.innerHTML = forYou.length
-    ? forYou.map(miniCard).join("")
+    ? forYou.map(r => miniCard(r)).join("")
     : '<div class="sub" style="padding:8px 2px;font-size:14px">Koche mehr Rezepte, um Empfehlungen zu sehen.</div>';
 
+  // Zuletzt gekocht: nach lastCooked absteigend
+  if(recentHost && recentSection){
+    const recent = enriched
+      .filter(r => r.lastCookedTs)
+      .sort((a,b) => b.lastCookedTs - a.lastCookedTs)
+      .slice(0, 6);
+    if(recent.length){
+      recentSection.hidden = false;
+      recentHost.innerHTML = recent.map(r => miniCard(r, {favState:true})).join("");
+    } else {
+      recentSection.hidden = true;
+    }
+  }
+
+  // Kühltruhe
+  const freezerPicks = enriched.filter(x => x.inFreezer).slice(0, 6);
   if(freezerHost && freezerSection){
     if(freezerPicks.length){
       freezerSection.hidden = false;

@@ -5,12 +5,8 @@ layout: default
 {% assign newest = site.recipes | sort: "date" | reverse %}
 {% assign featured = newest | first %}
 
-<!-- Featured (Option B: wird per JS täglich ersetzt, Liquid bleibt als Fallback) -->
+<!-- Heute -->
 <div class="section">
-  <div class="brandHero">
-    <span class="brandMark brandHeroMark" aria-hidden="true"><img src="{{ '/assets/favicon-512-removebg-preview.png' | relative_url }}" alt=""></span>
-    <div class="brandEyebrow">Kochbuch</div>
-  </div>
   <div class="homeBigTitle">Heute</div>
 
   <a class="linkCard" id="todayLink" href="{{ featured.url | relative_url }}">
@@ -24,36 +20,38 @@ layout: default
           decoding="async"
           style="aspect-ratio:16/10"
         >
-        <div class="homeFeaturedCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>
-          {{ featured.category }}
-        </div>
+        <div class="heroOverlayCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</div>
         <span class="favBadge rcFavBadge" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-hidden="true">★</span>
       </div>
-
-      
-
-      <div style="padding:12px 14px 4px">
-        <h2 class="recipeTitle" id="todayTitle" style="font-size:20px;font-weight:700;font-family:var(--fontDisplay);font-weight:400;letter-spacing:-.01em">{{ featured.title }}</h2>
-      </div>
-      <div class="recipeMeta" style="padding:0 14px 14px">
-        <span class="metaItem" id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ featured.time }}</span></span>
-        <span class="metaItem" id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span><span>{{ featured.servings }}</span></span>
+      <div class="rcBody">
+        <h2 class="recipeTitle homeFeaturedTitle" id="todayTitle">{{ featured.title }}</h2>
+        <div class="recipeMeta">
+          <span class="metaItem" id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span id="todayTimeText">{{ featured.time }}</span></span>
+          <span class="metaItem" id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span id="todayServingsText">{{ featured.servings }}</span></span>
+        </div>
       </div>
     </div>
   </a>
 </div>
 
-<!-- Favorites -->
+<!-- Schnellsuche -->
 <div class="section">
+  <div class="searchRow searchRowCompact">
+    <input id="homeSearch" type="search" placeholder="Rezept suchen …" autocomplete="off" />
+  </div>
+  <div class="stack" id="homeSearchResults" hidden style="margin-top:10px"></div>
+</div>
+
+<!-- Favoriten -->
+<div class="section" id="favoritesSection">
   <div class="homeSectionHead">
     <div class="homeSectionTitle">Favoriten</div>
     <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle →</a>
   </div>
-
   <div class="hScroll" id="favoritesRow"></div>
 </div>
 
-<!-- Recommendations -->
+<!-- Für dich -->
 <div class="section">
   <div class="homeSectionHead">
     <div class="homeSectionTitle">Für dich</div>
@@ -62,12 +60,21 @@ layout: default
   <div class="hScroll" id="forYouRow"></div>
 </div>
 
+<!-- Zuletzt gekocht -->
+<div class="section" id="recentSection" hidden>
+  <div class="homeSectionHead">
+    <div class="homeSectionTitle">Zuletzt gekocht</div>
+  </div>
+  <div class="hScroll" id="recentRow"></div>
+</div>
+
+<!-- Kühltruhe -->
 <div class="section" id="freezerSection" hidden>
   <div class="homeSectionTitle">Aus der Kühltruhe</div>
   <div class="stack" id="freezerList"></div>
 </div>
 
-<!-- All recipes payload for JS (Option B needs url + image) -->
+<!-- Alle Rezepte als JSON -->
 <script type="application/json" id="allRecipesJson">
 [
 {% assign sorted2 = site.recipes | sort: "title" %}
@@ -88,214 +95,185 @@ layout: default
 
 <script defer src="{{ '/assets/home-reco.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
-<!-- Option B: daily deterministic "Heute" selection (same on all devices) -->
+<!-- Tägliche deterministische Heute-Auswahl -->
 <script>
 (function(){
   const elJson = document.getElementById('allRecipesJson');
   if(!elJson) return;
-
   let recipes = [];
   try { recipes = JSON.parse(elJson.textContent || '[]'); } catch(e) { return; }
-  if(!Array.isArray(recipes) || recipes.length === 0) return;
+  if(!Array.isArray(recipes) || !recipes.length) return;
 
-  // UTC day key => same selection everywhere for the same day
-  const dayKey = new Date().toISOString().slice(0,10); // YYYY-MM-DD
-
-  function hashString(s){
-    let h = 2166136261; // FNV-1a
-    for(let i=0;i<s.length;i++){
-      h ^= s.charCodeAt(i);
-      h = Math.imul(h, 16777619);
-    }
-    return (h >>> 0);
+  const dayKey = new Date().toISOString().slice(0,10);
+  function hashStr(s){
+    let h = 2166136261;
+    for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h,16777619); }
+    return h >>> 0;
   }
+  const r = recipes[hashStr(dayKey) % recipes.length];
 
-  const idx = hashString(dayKey) % recipes.length;
-  const r = recipes[idx];
-
-  const link = document.getElementById('todayLink');
-  const fav  = document.getElementById('todayFav');
-  const imgW = document.getElementById('todayThumbWrap');
-  const img  = document.getElementById('todayImg');
-  const ttl  = document.getElementById('todayTitle');
-  const cat  = document.getElementById('todayCat');
-  const t    = document.getElementById('todayTime');
-  const s    = document.getElementById('todayServings');
+  const el = id => document.getElementById(id);
+  const link = el('todayLink'), fav = el('todayFav'), imgW = el('todayThumbWrap'),
+        img = el('todayImg'), ttl = el('todayTitle'), cat = el('todayCat'),
+        t = el('todayTime'), tTxt = el('todayTimeText'),
+        s = el('todayServings'), sTxt = el('todayServingsText');
 
   if(link && r.url) link.href = r.url;
-
-  if(fav){
-    fav.setAttribute('data-recipe-id', r.id || r.url || '');
-  }
-
+  if(fav) fav.setAttribute('data-recipe-id', r.id || r.url || '');
   if(ttl) ttl.textContent = r.title || '—';
-
-  if(cat){
-    if(r.category){ cat.textContent = r.category; cat.style.removeProperty('display'); }
-    else { cat.style.display = 'none'; }
-  }
-
-  if(t){
-    if(r.time){ t.textContent = `⏱ ${r.time}`; t.style.display = ''; }
-    else { t.style.display = 'none'; }
-  }
-
-  if(s){
-    if(r.servings){ s.textContent = `🍽 ${r.servings}`; s.style.display = ''; }
-    else { s.style.display = 'none'; }
-  }
-
+  if(cat){ r.category ? (cat.textContent = r.category, cat.style.removeProperty('display')) : (cat.style.display='none'); }
+  if(t && tTxt){ r.time ? (tTxt.textContent = r.time, t.style.removeProperty('display')) : (t.style.display='none'); }
+  if(s && sTxt){ r.servings ? (sTxt.textContent = r.servings, s.style.removeProperty('display')) : (s.style.display='none'); }
   if(imgW && img){
-    if(r.image){
-      img.src = r.image;
-      img.alt = r.title || '';
-      imgW.style.display = '';
-    } else {
-      imgW.style.display = 'none';
-    }
+    r.image ? (img.src = r.image, img.alt = r.title||'', imgW.style.removeProperty('display')) : (imgW.style.display='none');
   }
-
-  // Trigger fav badge refresh if your code listens to storage events
   window.dispatchEvent(new Event('storage'));
 })();
 </script>
 
-<!-- Render favorites into the "Favoriten" row (App‑Store style) -->
+<!-- Favoriten: sortiert nach favoriteAt, alphabetischer Fallback -->
 <script>
 (function(){
   const host = document.getElementById('favoritesRow');
+  const section = document.getElementById('favoritesSection');
   const elJson = document.getElementById('allRecipesJson');
   if(!host || !elJson) return;
 
   let recipes = [];
   try { recipes = JSON.parse(elJson.textContent || '[]'); } catch(e) { return; }
-  if(!Array.isArray(recipes) || recipes.length === 0) return;
+  if(!Array.isArray(recipes) || !recipes.length) return;
 
   const STATS_KEY = 'kochbuch.stats';
 
   function normPath(x){
-    try{
-      x = String(x || '');
-      x = x.replace(/^https?:\/\/[^/]+/i, '');
-      x = x.split('#')[0].split('?')[0];
-      if(x && x[0] !== '/') x = '/' + x;
-      x = x.replace(/\/+/g, '/');
-      return x;
-    }catch{ return String(x || ''); }
+    x = String(x||'').replace(/^https?:\/\/[^/]+/i,'').split('#')[0].split('?')[0];
+    if(x && x[0]!=='/') x='/'+x;
+    return x.replace(/\/+/g,'/');
   }
-
-  function normalizeId(id){
-    const raw = normPath(id);
-    if(!raw) return '';
-    // keep both variants to be tolerant across pages
-    return raw.endsWith('/') ? raw : raw + '/';
-  }
-
-  function getStats(){
-    try { return JSON.parse(localStorage.getItem(STATS_KEY) || '{}'); }
-    catch { return {}; }
-  }
-
-  function readFavEntries(){
-    const stats = getStats();
-    const seen = new Set();
-    const out = [];
-
-    // Format A: stats[recipeId] = { favorite: true, favoriteAt: "..." }
-    Object.keys(stats || {})
-      .filter(k => k !== 'favorites' && stats[k]?.favorite === true)
-      .forEach(k => {
-        const n = normalizeId(k);
-        if(!n || seen.has(n)) return;
-        seen.add(n);
-        out.push({ id: n, at: stats[k].favoriteAt || null });
-      });
-
-    // Format B: legacy stats.favorites[id] = true
-    Object.keys((stats && stats.favorites) || {})
-      .filter(k => stats.favorites[k] === true)
-      .forEach(k => {
-        const n = normalizeId(k);
-        if(!n || seen.has(n)) return;
-        seen.add(n);
-        out.push({ id: n, at: null });
-      });
-
-    return out;
-  }
+  function withSlash(p){ const n=normPath(p); return n.endsWith('/')?n:n+'/'; }
+  function getStats(){ try{ return JSON.parse(localStorage.getItem(STATS_KEY)||'{}'); }catch{ return {}; } }
+  function esc(s){ return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
   const byId = new Map();
-  recipes.forEach(r=>{
-    if(r?.id) byId.set(normalizeId(r.id), r);
-    if(r?.url) byId.set(normalizeId(r.url), r);
-    // also map without trailing slash (tolerant)
-    if(r?.id) byId.set(normPath(r.id), r);
-    if(r?.url) byId.set(normPath(r.url), r);
-  });
+  recipes.forEach(r=>{ const k=r.id||r.url||''; byId.set(withSlash(k),r); byId.set(normPath(k),r); });
 
-  function esc(s){ return String(s ?? '').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+  const SVG_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>';
+  const SVG_PEOPLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
+
+  function favCard(r){
+    const href = r.url||r.id||'#';
+    const img = r.image ? `
+      <div class="rcImg">
+        <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
+        ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
+        <span class="favBadge rcFavBadge isFav" aria-hidden="true">★</span>
+      </div>` : `<span class="favBadge rcFavBadge isFav" style="top:12px;right:12px" aria-hidden="true">★</span>`;
+    const time = r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_CLOCK}</span><span>${esc(r.time)}</span></span>` : '';
+    const serv = r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_PEOPLE}</span><span>${esc(r.servings)}</span></span>` : '';
+    return `
+      <a class="linkCard hCard homeFavCard" href="${esc(href)}">
+        <div class="card recipeCard cardHover">
+          ${img}
+          <div class="rcBody">
+            <h3 class="recipeTitle">${esc(r.title)}</h3>
+            ${time||serv ? `<div class="recipeMeta">${time}${serv}</div>` : ""}
+          </div>
+        </div>
+      </a>`;
+  }
 
   function render(){
-    const favEntries = readFavEntries();
+    const stats = getStats();
+    const seen = new Set();
+    const favEntries = [];
+
+    Object.keys(stats)
+      .filter(k => k!=='favorites' && stats[k]?.favorite===true)
+      .forEach(k => {
+        const n = withSlash(k);
+        if(seen.has(n)) return;
+        seen.add(n);
+        favEntries.push({ id:k, at: stats[k].favoriteAt||null });
+      });
+
+    Object.keys(stats.favorites||{}).forEach(k=>{
+      if(stats.favorites[k]!==true) return;
+      const n = withSlash(k);
+      if(seen.has(n)) return;
+      seen.add(n);
+      favEntries.push({ id:k, at:null });
+    });
+
     if(!favEntries.length){
-      host.innerHTML = `<div class="sub" style="padding:8px 2px;font-size:14px;">Noch keine Favoriten — tippe ★ auf einem Rezept.</div>`;
+      host.innerHTML = `<div class="sub" style="padding:8px 2px;font-size:14px">Noch keine Favoriten — tippe ★ auf einem Rezept.</div>`;
       return;
     }
 
-    // Sort: most recently favorited first, then alphabetical
     favEntries.sort((a,b)=>{
-      if(a.at && b.at) return b.at.localeCompare(a.at);
+      if(a.at&&b.at) return b.at.localeCompare(a.at);
       if(a.at) return -1;
       if(b.at) return 1;
-      const ra = byId.get(a.id), rb = byId.get(b.id);
-      return (ra?.title||'').localeCompare(rb?.title||'', 'de');
+      const ra = byId.get(withSlash(a.id)), rb = byId.get(withSlash(b.id));
+      return (ra?.title||'').localeCompare(rb?.title||'','de');
     });
 
     const favRecipes = favEntries
-      .map(e => byId.get(e.id) || byId.get(normPath(e.id)))
+      .map(e => byId.get(withSlash(e.id)) || byId.get(normPath(e.id)))
       .filter(Boolean);
 
-    if(!favRecipes.length){
-      host.innerHTML = `<div class="sub" style="padding:8px 2px;font-size:14px;">Favoriten gespeichert, aber IDs konnten nicht zugeordnet werden.</div>`;
-      return;
-    }
-
-    host.innerHTML = favRecipes.map(r=>{
-      const href = r.url || r.id || '#';
-
-      const img = r.image ? `
-        <div class="rcImg">
-          <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
-          ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
-          <span class="favBadge rcFavBadge isFav" aria-hidden="true">★</span>
-        </div>` : `<span class="favBadge rcFavBadge isFav" style="top:12px;right:12px" aria-hidden="true">★</span>`;
-
-      const time = r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>${esc(r.time)}</span></span>` : '';
-      const serv = r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span>${esc(r.servings)}</span></span>` : '';
-
-      return `
-        <a class="linkCard hCard homeFavCard" href="${esc(href)}">
-          <div class="card recipeCard cardHover">
-            ${img}
-            <div class="rcBody">
-              <h3 class="recipeTitle">${esc(r.title)}</h3>
-              ${time || serv ? `<div class="recipeMeta">${time}${serv}</div>` : ""}
-            </div>
-          </div>
-        </a>
-      `;
-    }).join('');
+    host.innerHTML = favRecipes.length
+      ? favRecipes.map(favCard).join('')
+      : `<div class="sub" style="padding:8px 2px;font-size:14px">Favoriten gespeichert, aber IDs nicht gefunden.</div>`;
   }
 
   render();
-
-  // Update on storage changes (favorite toggles)
-  window.addEventListener('storage', (e)=>{
-    if(!e || !e.key) return;
-    if(e.key === STATS_KEY) render();
-  });
-
-  // Optional: allow in-page updates (if you dispatch this event after toggling favorites)
+  window.addEventListener('storage', e=>{ if(!e.key||e.key===STATS_KEY) render(); });
   window.addEventListener('kochbuch:stats', render);
+})();
+</script>
+
+<!-- Schnellsuche -->
+<script>
+(function(){
+  const input = document.getElementById('homeSearch');
+  const results = document.getElementById('homeSearchResults');
+  const elJson = document.getElementById('allRecipesJson');
+  if(!input || !results || !elJson) return;
+
+  let recipes = [];
+  try { recipes = JSON.parse(elJson.textContent || '[]'); } catch(e) { return; }
+
+  function esc(s){ return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function norm(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  function search(q){
+    const nq = norm(q).trim();
+    if(nq.length < 2){ results.hidden = true; results.innerHTML=''; return; }
+    const hits = recipes.filter(r=>{
+      const hay = norm([r.title, r.category, ...(r.tags||[])].join(' '));
+      return nq.split(/\s+/).every(w => hay.includes(w));
+    }).slice(0, 6);
+
+    if(!hits.length){
+      results.innerHTML = `<div class="sub" style="padding:8px 2px;font-size:14px">Nichts gefunden.</div>`;
+      results.hidden = false;
+      return;
+    }
+
+    results.innerHTML = hits.map(r=>`
+      <a class="linkCard" href="${esc(r.url)}">
+        <div class="card cardPad cardHover" style="display:flex;align-items:center;gap:12px">
+          ${r.image ? `<img src="${esc(r.image)}" alt="" loading="lazy" style="width:56px;height:56px;object-fit:cover;border-radius:12px;flex-shrink:0">` : ''}
+          <div style="min-width:0">
+            <div style="font-weight:650;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.title)}</div>
+            ${r.category ? `<div class="dim" style="margin-top:2px;font-size:12.5px">${esc(r.category)}</div>` : ''}
+          </div>
+        </div>
+      </a>`).join('');
+    results.hidden = false;
+  }
+
+  let deb;
+  input.addEventListener('input', ()=>{ clearTimeout(deb); deb = setTimeout(()=>search(input.value), 160); });
 })();
 </script>
