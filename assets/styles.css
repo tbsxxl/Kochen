@@ -42,6 +42,8 @@
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
+html{overflow-x:hidden}
+body{overflow-x:clip}
 body::before{
   content:"";
   position:fixed;
@@ -110,7 +112,7 @@ img{max-width:100%}
 .rowGlyph{width:1.2em;text-align:center}
 .kvIcon,
 .metaIcon{width:1.1em;text-align:center}
-.metaItem{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.metaItem{display:inline-flex;align-items:center;gap:6px;max-width:100%}
 .metaIcon{font-size:.92em;opacity:.9}
 .kvIcon{font-size:.9em;opacity:.88}
 .tabIcon,.sheetRow .rowGlyph{color:var(--accentDeep)}
@@ -199,8 +201,8 @@ img{max-width:100%}
 .searchRow input:focus{background:#fffefb; box-shadow:0 0 0 2px rgba(223,147,79,.16)}
 .searchRow input::placeholder{color:var(--sub2)}
 
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-@media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:640px){ .grid{grid-template-columns:minmax(0,1fr);} }
 
 .homeSectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 2px;margin-bottom:10px}
 .homeBigTitle{
@@ -467,7 +469,7 @@ img{max-width:100%}
 }
 .recipeTabbar.bottomRail{min-height:calc(var(--recipeBarH) + env(safe-area-inset-bottom))}
 .tabbar{z-index:1300}
-.tabbarInner{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:center}
+.tabbarInner{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:center}
 .tabItem{
   text-decoration:none;
   color:var(--sub2);
