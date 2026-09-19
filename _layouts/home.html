@@ -18,7 +18,6 @@ layout: default
           alt="{{ featured.title | escape }}"
           loading="eager"
           decoding="async"
-          style="aspect-ratio:16/10"
         >
         <div class="heroOverlayCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</div>
         <span class="favBadge rcFavBadge" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-hidden="true">★</span>
