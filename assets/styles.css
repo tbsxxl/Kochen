@@ -1,26 +1,31 @@
 :root{
-  --bg:#faf9f6;
-  --bg2:#f2f1ec;
-  --surface:#ffffff;
-  --surfaceStrong:#ffffff;
-  --card:#ffffff;
-  --muted:#f1f0eb;
-  --muted2:#e5e3da;
-  --line:#e6e4dd;
-  --lineStrong:#c9c6ba;
-  --text:#131210;
-  --sub:#57544c;
-  --sub2:#8a867b;
-  --action:#26456f;
-  --actionText:#f7faff;
-  --accent:#26456f;
-  --accentSoft:#4a6c99;
-  --accentLeaf:#4f6132;
-  --accentDeep:#152d4a;
+  --bg:#fff9f2;
+  --bg2:#f7f0e6;
+  --surface:#f7f0e6;
+  --surfaceStrong:#fffdf9;
+  --card:#f7f0e6;
+  --muted:#f1ead9;
+  --muted2:#e5ded4;
+  --line:#e5ded4;
+  --lineStrong:#cdbfa0;
+  --text:#252a27;
+  --sub:#526b57;
+  --sub2:#6b6860;
+
+  --accent:#e8753d;
+  --accentSoft:#f0916a;
+  --accentDeep:#c05f2c;
+  --actionText:#252a27;
+  --action:#e8753d;
+
+  --accentLeaf:#526b57;
+  --accentOlive:#b8a35a;
+  --accentPetrol:#28565a;
+
   --danger:#a23327;
 
-  --sh1:0 1px 2px rgba(19,18,16,.04);
-  --sh2:0 10px 24px rgba(19,18,16,.05);
+  --sh1:0 1px 2px rgba(37,42,39,.05);
+  --sh2:0 10px 24px rgba(37,42,39,.06);
 
   --rSheet:18px;
   --rCard:12px;
@@ -300,7 +305,7 @@ font-family:var(--fontDisplay);}
   border-color:var(--accent);
   box-shadow:none;
 }
-.btn.red{background:var(--danger);border-color:var(--danger)}
+.btn.red{background:var(--danger);border-color:var(--danger);color:#fff8f6}
 .btn.btnGhost,.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text);box-shadow:none}
 .btn.btnDangerOutline{background:rgba(178,77,72,.08);border:1px solid rgba(178,77,72,.24);color:var(--danger);box-shadow:none}
 
@@ -309,8 +314,8 @@ font-family:var(--fontDisplay);}
   display:inline-flex;
   align-items:center;
   gap:7px;
-  background:rgba(247,241,232,.88);
-  border:1px solid rgba(206,184,157,.52);
+  background:var(--muted);
+  border:1px solid var(--line);
   border-radius:999px;
   padding:8px 13px;
   font-weight:580;
@@ -318,16 +323,16 @@ font-family:var(--fontDisplay);}
   line-height:1;
   letter-spacing:.004em;
   white-space:nowrap;
-  color:#453d35;
-  box-shadow:0 1px 0 rgba(255,255,255,.72) inset;
+  color:var(--text);
+  box-shadow:none;
 }
 .badge.action{
   background:var(--accent);
-  color:#fffdfa;
+  color:var(--actionText);
   border-color:var(--accent);
   box-shadow:none;
 }
-.kvFav{background:rgba(38,69,111,.08);border:1px solid rgba(38,69,111,.22);box-shadow:none;font-weight:620;color:#1d3a5f}
+.kvFav{background:rgba(184,163,90,.14);border:1px solid rgba(184,163,90,.4);box-shadow:none;font-weight:620;color:#7a6a2e}
 
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chipsCompact{gap:8px;margin-top:10px}
@@ -486,7 +491,7 @@ font-family:var(--fontDisplay);}
   box-shadow:none;
 }
 .tabItem.active .tabIcon,
-.tabItem.active .tabLabel{color:var(--accentDeep)}
+.tabItem.active .tabLabel{color:var(--accentLeaf)}
 .tabItemBrand.active .tabIcon img{filter:drop-shadow(0 1px 1px rgba(19,18,16,.12)) saturate(1.0)}
 .tabItem.tabItemBrand .tabIcon{display:flex;align-items:center;justify-content:center;width:22px;height:22px}
 .tabItem.tabItemBrand .tabIcon img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(19,18,16,.08))}
@@ -724,8 +729,8 @@ button.isPressed,
   opacity:1;
   transform:scale(1);
   background:var(--surface);
-  border-color:rgba(38,69,111,.32);
-  color:var(--accent);
+  border-color:rgba(184,163,90,.55);
+  color:var(--accentOlive);
 }
 
 
@@ -770,7 +775,7 @@ button.isPressed,
   box-shadow:0 4px 12px rgba(52,41,31,.05);
 }
 
-.homeAllLink{text-decoration:none;color:var(--accentDeep);font-weight:650;font-size:13px;letter-spacing:.01em}
+.homeAllLink{text-decoration:none;color:var(--accentPetrol);font-weight:650;font-size:13px;letter-spacing:.01em}
 .homeAllLink:active{opacity:.72}
 
 
@@ -799,7 +804,7 @@ button.isPressed,
 .recipePortionControls{display:flex;align-items:center;gap:10px}
 .recipePortionValueWrap{position:relative;flex:1;min-width:0}
 .recipePortionInput{width:100%;height:64px;border:1px solid rgba(208,190,169,.38);background:linear-gradient(180deg, rgba(255,253,249,.98), rgba(247,240,231,.94));border-radius:18px;padding:0 16px;font-size:24px;font-weight:650;color:var(--text);text-align:center;letter-spacing:-.03em;box-shadow:inset 0 1px 0 rgba(255,255,255,.82), 0 8px 18px rgba(52,41,31,.045)}
-.recipePortionInput:focus{outline:none;border-color:rgba(38,69,111,.4);box-shadow:0 0 0 3px rgba(38,69,111,.10)}
+.recipePortionInput:focus{outline:none;border-color:rgba(232,117,61,.5);box-shadow:0 0 0 3px rgba(232,117,61,.12)}
 .recipePortionStep{width:44px;height:44px;min-width:44px;border-radius:14px;border:1px solid rgba(208,190,169,.52);background:var(--surface);font-size:22px;font-weight:600;line-height:1;color:var(--text);box-shadow:0 1px 0 rgba(255,255,255,.78), 0 8px 16px rgba(52,41,31,.05)}
 .recipePortionValueWrap::after{content:"Portionen";position:absolute;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--sub2);pointer-events:none}
 .recipePortionStep:active{transform:translateY(1px) scale(.975)}
@@ -864,8 +869,8 @@ button.isPressed,
   pointer-events:none;
   box-shadow:none;
   background:rgba(255,252,247,.96);
-  border:1px solid rgba(38,69,111,.24);
-  color:rgba(38,69,111,.96);
+  border:1px solid rgba(184,163,90,.4);
+  color:rgba(122,106,46,.96);
 }
 .grid .recipeCard .favBadge.isFav{
   opacity:1;
@@ -880,7 +885,7 @@ button.isPressed,
 
 
 .recipeTop > .favBadge{position:relative;top:auto;right:auto;margin-left:4px;flex:0 0 auto;box-shadow:none;opacity:1;pointer-events:auto;transform:none;}
-.recipeTop > .favBadge:not(.isFav){background:rgba(255,252,247,.94);color:rgba(38,69,111,.75);border-color:rgba(38,69,111,.16);}
+.recipeTop > .favBadge:not(.isFav){background:rgba(255,252,247,.94);color:rgba(122,106,46,.75);border-color:rgba(184,163,90,.24);}
 .recipeTop > .favBadge.isFav{background:rgba(255,249,242,.98);}
 
 .badge.action,.kv{min-height:38px}
@@ -961,7 +966,7 @@ button.isPressed,
 .grid .recipeCard .favBadge.rcFavBadge.isFav,
 .hScroll .recipeCard .favBadge.rcFavBadge.isFav,
 .homeFeatured .favBadge.rcFavBadge.isFav{
-  background:var(--accent);border-color:var(--accent);color:#fff;
+  background:var(--accentOlive);border-color:var(--accentOlive);color:#252a27;
 }
 .homeFeatured{aspect-ratio:16/11}
 @media (min-width:640px){ .grid .recipeCard{aspect-ratio:4/5} }
@@ -1011,7 +1016,7 @@ body.noScroll{overflow:hidden}
 /* Tab icons: SVG color states */
 .tabIcon svg{display:block}
 .tabItem:not(.active) .tabIcon svg{color:var(--sub2)}
-.tabItem.active .tabIcon svg{color:var(--accentDeep, #b06f39)}
+.tabItem.active .tabIcon svg{color:var(--accentLeaf)}
 .rowGlyph{display:inline-flex;align-items:center;justify-content:center}
 .rowGlyph svg{flex-shrink:0}
 .kvIcon{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;opacity:.82}
@@ -1073,5 +1078,5 @@ body.noScroll{overflow:hidden}
 .sortChip.active{
   background:var(--accent);
   border-color:transparent;
-  color:#fffdf8;
+  color:var(--actionText);
 }
