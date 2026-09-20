@@ -2,7 +2,7 @@
 title: "Mezze Hackpfanne vom Weiderind"
 date: 2026-08-25
 category: "Fleisch"
-tags: ["rind", "hackfleisch", "griechisch", "high-protein", "schnell"]
+tags: ["rind", "hackfleisch", "griechisch", "high-protein", "schnell", "HelloFresh"]
 time: "25–35 Min"
 image: /recipes/images/mezze-hackpfanne-weiderind.png
 servings: 2
