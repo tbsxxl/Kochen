@@ -32,7 +32,7 @@
   --rBtn:10px;
 
   --fsBody:16px;
-  --fsSecondary:13.5px;
+  --fsSecondary:14px;
   --wTitle:700;
   --wBody:500;
   --wSecondary:500;
@@ -58,8 +58,8 @@ body::before{
   background:var(--bg);
 }
 body{
-  font-family: -apple-system, "SF Pro Text", BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --fontDisplay: -apple-system, "SF Pro Display", BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Inter", -apple-system, "SF Pro Text", BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --fontDisplay: "Fraunces", Georgia, serif;
   margin:0;
   padding:0;
   background:transparent;
@@ -69,7 +69,7 @@ body{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
   font-size:var(--fsBody);
-  line-height:1.45;
+  line-height:1.5;
   scroll-padding-bottom:calc(var(--tabbarH) + var(--recipeBarH) + 16px + env(safe-area-inset-bottom));
   overscroll-behavior-y:contain;
 }
@@ -166,11 +166,12 @@ img{max-width:100%}
 
 .h1{
   margin:10px 0 14px 0;
-  font-size:30px;
-  line-height:1.08;
-  font-weight:800;
-  letter-spacing:-.03em;
+  font-size:28px;
+  line-height:1.1;
+  font-weight:600;
+  letter-spacing:-.02em;
 font-family:var(--fontDisplay);}
+.recipePageBody .h1{font-size:36px;line-height:1.1}
 .h2{margin:0 0 8px 0;font-size:16px;font-weight:600;letter-spacing:-.01em}
 .p{margin:0;color:var(--sub);font-weight:var(--wBody);line-height:1.6}
 .sub{color:var(--sub);font-weight:var(--wBody);font-size:var(--fsSecondary)}
@@ -211,10 +212,10 @@ font-family:var(--fontDisplay);}
 .homeBigTitle{
   margin:4px 0 14px 0;
   padding:0 2px;
-  font-size:34px;
-  font-weight:800;
-  letter-spacing:-.03em;
-  line-height:1.05;
+  font-size:36px;
+  font-weight:600;
+  letter-spacing:-.02em;
+  line-height:1.1;
   font-family:var(--fontDisplay);
 }
 .homeSectionTitle{
@@ -266,7 +267,7 @@ font-family:var(--fontDisplay);}
   bottom:10px;left:10px;
   background:linear-gradient(180deg,rgba(0,0,0,.54),rgba(0,0,0,.40));
   color:#fffdf8;
-  font-size:11px;font-weight:650;letter-spacing:.025em;
+  font-size:12px;font-weight:500;letter-spacing:.03em;
   padding:5px 10px;border-radius:999px;
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   border:1px solid rgba(255,255,255,.14);
@@ -285,6 +286,7 @@ font-family:var(--fontDisplay);}
   border:1px solid var(--line);
   border-radius:var(--rBtn);
   padding:14px 14px;
+  font-size:15px;
   font-weight:600;
   cursor:pointer;
   min-height:52px;
@@ -344,11 +346,11 @@ font-family:var(--fontDisplay);}
   border:1px solid var(--line);
   border-radius:999px;
   padding:8px 14px;
-  font-weight:540;
+  font-weight:500;
   cursor:pointer;
   user-select:none;
-  font-size:13px;
-  letter-spacing:.004em;
+  font-size:14px;
+  letter-spacing:0;
   color:var(--sub);
 }
 .chipMore{opacity:.82;font-weight:600}
@@ -369,8 +371,8 @@ font-family:var(--fontDisplay);}
 }
 .recipeTop{display:flex;align-items:flex-start;gap:10px}
 .recipeTopLeft{flex:1;min-width:0}
-.recipeTitle{font-weight:700;font-size:17px;line-height:1.2;margin:0;letter-spacing:-.02em}
-.recipeMeta{display:flex;gap:12px;flex-wrap:wrap;color:var(--sub2);font-size:13.5px;font-weight:560;letter-spacing:-.01em}
+.recipeTitle{font-weight:600;font-size:18px;line-height:1.2;margin:0;letter-spacing:-.01em;font-family:"Inter",-apple-system,sans-serif}
+.recipeMeta{display:flex;gap:12px;flex-wrap:wrap;color:var(--sub2);font-size:14px;font-weight:500;letter-spacing:0}
 .recipeHeader{display:flex;flex-direction:column;gap:12px}
 .kvRow{display:flex;gap:8px;flex-wrap:wrap}
 .recipeBody h2{margin:20px 0 8px 0;font-size:18px;font-weight:600;letter-spacing:-.02em}
@@ -483,7 +485,7 @@ font-family:var(--fontDisplay);}
 }
 .tabItem:active{background:rgba(178,155,141,.08);transform:scale(.98)}
 .tabIcon{font-size:18px;line-height:1}
-.tabLabel{margin-top:6px;font-size:11.5px;font-weight:550;letter-spacing:.02em}
+.tabLabel{margin-top:6px;font-size:12px;font-weight:500;letter-spacing:.03em}
 .tabItem.active{
   color:var(--text);
   background:var(--muted);
@@ -782,7 +784,7 @@ button.isPressed,
 /* Final polish */
 .brandEyebrow{display:none}
 .homeSectionHead{margin-bottom:8px}
-.homeSectionTitle{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.homeSectionTitle{font-size:22px;font-weight:600;letter-spacing:-.02em;font-family:"Inter",-apple-system,sans-serif}
 
 .freezerCard .favBadge,
 .freezerRow .favBadge{
@@ -850,8 +852,8 @@ button.isPressed,
   min-width:0;
 }
 .grid .recipeCard .recipeTitle{
-  font-size:17px;
-  line-height:1.16;
+  font-size:18px;
+  line-height:1.2;
 }
 .grid .recipeCard .badge.action{
   background:var(--accent);
@@ -974,7 +976,7 @@ button.isPressed,
 /* ===== Modernization additions ===== */
 
 /* Featured card title uses display font */
-.homeFeaturedTitle{font-family:var(--fontDisplay);font-weight:750;font-size:20px;letter-spacing:-.02em;line-height:1.15}
+.homeFeaturedTitle{font-family:var(--fontDisplay);font-weight:600;font-size:20px;letter-spacing:-.01em;line-height:1.15}
 
 /* Recipe detail page: full-bleed card */
 .recipePageCard{padding:0;overflow:hidden;gap:0}
