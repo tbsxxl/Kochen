@@ -2,7 +2,7 @@
 title: "Cremige Gnocchi-Pfanne mit Brokkoli"
 date: 2026-08-25
 category: "Vegetarisch"
-tags: ["gnocchi", "vegetarisch", "brokkoli", "schnell"]
+tags: ["gnocchi", "vegetarisch", "brokkoli", "schnell", "HelloFresh"]
 time: "25–35 Min"
 image: /recipes/images/cremige-gnocchi-pfanne-brokkoli.png
 servings: 2
