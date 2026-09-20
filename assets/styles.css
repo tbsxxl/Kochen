@@ -435,33 +435,104 @@ font-family:var(--fontDisplay);}
 @media (max-width:640px){ :root{ --heroMaxH:250px; } }
 
 .iosTopbar{
-  position:sticky;top:0;z-index:1200;
-  background:rgba(239,236,227,.92);
-  border-bottom:1px solid var(--line);
+  position:fixed;top:0;left:0;right:0;z-index:1200;
+  background:rgba(255,249,242,.92);
+  border-bottom:1px solid transparent;
   padding:calc(8px + env(safe-area-inset-top)) 0 10px 0;
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:background .2s ease, border-color .2s ease;
 }
-.iosTopbar.scrolled{background:rgba(239,236,227,.96);border-bottom-color:var(--line)}
+.iosTopbar.scrolled{background:rgba(255,249,242,.94);border-bottom-color:var(--line)}
 .iosTopbarInner{display:flex;align-items:center;gap:10px}
 .navIconBtn{
   border:1px solid var(--line);
   background:var(--surface);
-  border-radius:16px;
-  min-width:44px;min-height:44px;
+  color:var(--text);
+  border-radius:999px;
+  min-width:40px;min-height:40px;
   padding:0 12px;
   font-weight:600;
-  box-shadow:var(--sh1);
-  cursor:pointer
+  font-size:18px;
+  box-shadow:none;
+  cursor:pointer;
+  transition:background .2s ease, border-color .2s ease, color .2s ease;
 }
-.navIconBtn:active{transform:scale(.99)}
+.navIconBtn:active{transform:scale(.97)}
 .iosTopBrand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
 .iosTopTitleWrap{min-width:0;flex:1}
-.iosTopTitle{font-weight:620;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.02em}
-.iosTopLogo{width:30px;height:30px;padding:5px;border-radius:999px;background:linear-gradient(180deg, rgba(255,252,247,.98), rgba(242,231,219,.95));border:1px solid rgba(229,216,197,.9);box-shadow:0 4px 12px rgba(52,41,31,.05);}
+.iosTopTitle{
+  font-weight:600;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  letter-spacing:-.01em;color:var(--text);
+  transition:opacity .2s ease, color .2s ease;
+}
+.iosTopLogo{width:28px;height:28px;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--line);box-shadow:none;transition:opacity .2s ease;}
 .iosTopSub{display:none}
 
-.appMain{padding-top:18px;padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom))}
+/* Pages with a full-bleed hero directly under the header (home, recipe detail):
+   header starts fully transparent over the photo, then solidifies on scroll. */
+body.layout-home .iosTopbar,
+body.layout-recipe .iosTopbar{
+  background:transparent;
+  border-bottom-color:transparent;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+body.layout-home .iosTopbar.scrolled,
+body.layout-recipe .iosTopbar.scrolled{
+  background:rgba(255,249,242,.94);
+  border-bottom-color:var(--line);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+body.layout-home .iosTopbar:not(.scrolled) .navIconBtn,
+body.layout-recipe .iosTopbar:not(.scrolled) .navIconBtn{
+  background:rgba(20,17,14,.32);
+  border-color:rgba(255,255,255,.34);
+  color:#fff;
+}
+body.layout-home .iosTopbar:not(.scrolled) .iosTopTitle,
+body.layout-recipe .iosTopbar:not(.scrolled) .iosTopTitle{
+  opacity:0;
+}
+body.layout-home .iosTopbar:not(.scrolled) .iosTopLogo,
+body.layout-recipe .iosTopbar:not(.scrolled) .iosTopLogo{
+  opacity:0;
+  pointer-events:none;
+}
+
+.appMain{padding-top:calc(52px + env(safe-area-inset-top) + 18px);padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom))}
 .layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) + env(safe-area-inset-bottom) + 16px)}
+body.layout-home .appMain,
+body.layout-recipe .appMain{padding-top:0}
+
+/* Home hero: bleeds full-width behind the transparent status bar/header */
+body.layout-home .section:first-of-type{margin-top:0}
+body.layout-home .homeFeatured .heroOverlayCat{
+  top:calc(52px + env(safe-area-inset-top) + 14px);
+}
+body.layout-home .homeBigTitle{
+  position:absolute;
+  top:calc(52px + env(safe-area-inset-top) + 54px);
+  left:calc(16px + env(safe-area-inset-left));
+  z-index:5;
+  margin:0;
+  color:#fff;
+  text-shadow:0 1px 10px rgba(0,0,0,.28);
+  font-size:28px;
+  pointer-events:none;
+}
+body.layout-home .iosTopbar.scrolled ~ .appMain .homeBigTitle{opacity:0;transition:opacity .15s ease}
+body.layout-home .homeFeatured{
+  margin-left:calc(-16px - env(safe-area-inset-left));
+  margin-right:calc(-16px - env(safe-area-inset-right));
+  border-radius:0;
+  aspect-ratio:auto;
+  min-height:calc(340px + env(safe-area-inset-top));
+}
+body.layout-home .homeFeatured .rcBody{padding-top:calc(52px + env(safe-area-inset-top) + 16px)}
+
+/* Recipe hero: flush to the very top under the transparent header */
+body.layout-recipe .section:first-of-type{margin-top:0}
+body.layout-recipe .recipePageCard{border-top-left-radius:0;border-top-right-radius:0}
+body.layout-recipe .recipePageHero{border-radius:0}
 
 .bottomRail{
   position:fixed;left:0;right:0;bottom:0;

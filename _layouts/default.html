@@ -101,7 +101,9 @@
 
     // Topbar density on scroll (iOS-like)
     const topbar = document.getElementById('iosTopbar');
-    const onScroll = ()=>{ topbar?.classList.toggle('scrolled', (window.scrollY||0) > 4); };
+    const heroPages = document.body.classList.contains('layout-home') || document.body.classList.contains('layout-recipe');
+    const scrollThreshold = heroPages ? 140 : 4;
+    const onScroll = ()=>{ topbar?.classList.toggle('scrolled', (window.scrollY||0) > scrollThreshold); };
     window.addEventListener('scroll', onScroll, { passive:true });
     onScroll();
 
