@@ -2,7 +2,7 @@
 title: "Pasta al Pomodoro mit Hähnchengeschnetzeltem"
 date: 2026-08-25
 category: "Pasta"
-tags: ["pasta", "hähnchen", "schnell", "high-protein"]
+tags: ["pasta", "hähnchen", "schnell", "high-protein", "HelloFresh"]
 time: "15–25 Min"
 image: /recipes/images/pasta-al-pomodoro-haehnchen.png
 servings: 2
