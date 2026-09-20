@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<div class="pageShell">
+  {% if page.title %}
+    <div class="pageTitleBlock">
+      <h1 class="h1">{{ page.title }}</h1>
+      <div class="subtleRule"></div>
+    </div>
+  {% endif %}
+
+  <div class="pageContent">
+    {{ content }}
+  </div>
+</div>
