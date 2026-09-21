@@ -228,7 +228,7 @@ function renderIngredients(){
   function renderStats(){
     const e=getEntry();
     if(favBtn){
-      favBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">${e.favorite ? '★' : '☆'}</span><span>Favorit</span>`;
+      favBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">${e.favorite ? '♥' : '♡'}</span><span>Favorit</span>`;
       favBtn.classList.toggle("blue", !!e.favorite);
     }
     if(favPill){

@@ -19,10 +19,10 @@ layout: default
           loading="eager"
           decoding="async"
         >
-        <div class="heroOverlayCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</div>
-        <span class="favBadge rcFavBadge" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-hidden="true">★</span>
+        <span class="favBadge rcFavBadge" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-hidden="true">♥</span>
       </div>
       <div class="rcBody">
+        <div class="cardCategory" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</div>
         <h2 class="recipeTitle homeFeaturedTitle" id="todayTitle">{{ featured.title }}</h2>
         <div class="recipeMeta">
           <span class="metaItem" id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span id="todayTimeText">{{ featured.time }}</span></span>
@@ -164,9 +164,8 @@ layout: default
     const img = r.image ? `
       <div class="rcImg">
         <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
-        ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
-        <span class="favBadge rcFavBadge isFav" aria-hidden="true">★</span>
-      </div>` : `<span class="favBadge rcFavBadge isFav" style="top:12px;right:12px" aria-hidden="true">★</span>`;
+        <span class="favBadge rcFavBadge isFav" aria-hidden="true">♥</span>
+      </div>` : `<span class="favBadge rcFavBadge isFav" style="top:12px;right:12px" aria-hidden="true">♥</span>`;
     const time = r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_CLOCK}</span><span>${esc(r.time)}</span></span>` : '';
     const serv = r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_PEOPLE}</span><span>${esc(r.servings)}</span></span>` : '';
     return `
@@ -174,6 +173,7 @@ layout: default
         <div class="card recipeCard cardHover">
           ${img}
           <div class="rcBody">
+            ${r.category ? `<div class="cardCategory">${esc(r.category)}</div>` : ""}
             <h3 class="recipeTitle">${esc(r.title)}</h3>
             ${time||serv ? `<div class="recipeMeta">${time}${serv}</div>` : ""}
           </div>
@@ -204,7 +204,7 @@ layout: default
     });
 
     if(!favEntries.length){
-      host.innerHTML = `<div class="sub" style="padding:8px 2px;font-size:14px">Noch keine Favoriten — tippe ★ auf einem Rezept.</div>`;
+      host.innerHTML = `<div class="sub" style="padding:8px 2px;font-size:14px">Noch keine Favoriten — tippe ♥ auf einem Rezept.</div>`;
       return;
     }
 

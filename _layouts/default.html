@@ -25,8 +25,9 @@
     }
   </script>
 </head>
-<body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}">
+<body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}{% if page.hide_topbar %} no-topbar{% endif %}">
   <!-- iPhone-friendly Topbar: Back + Title only -->
+  {% unless page.hide_topbar %}
   <header class="iosTopbar" id="iosTopbar">
     <div class="container iosTopbarInner">
       <button class="navIconBtn pressable" id="backBtn" aria-label="Zurück" type="button">‹</button>
@@ -44,6 +45,7 @@
       <span aria-hidden="true" style="width:44px;height:44px;display:inline-block"></span>
     </div>
   </header>
+  {% endunless %}
 
   <main class="container appMain" role="main">
     {{ content }}
