@@ -2,7 +2,7 @@
 title: "Dal-Curry mit geröstetem Blumenkohl"
 date: 2026-09-04
 category: "Curry"
-tags: ["vegetarisch", "curry", "indisch", "blumenkohl"]
+tags: ["vegetarisch", "curry", "indisch", "blumenkohl", "HelloFresh"]
 time: "35–45 Min"
 image: /recipes/images/dal-curry-geroesteter-blumenkohl.jpg
 servings: 2
