@@ -2,7 +2,7 @@
 title: "Chipotle-Honig-Hähnchen auf Kartoffel-Pfanne"
 date: 2026-08-25
 category: "Hähnchen"
-tags: ["hähnchen", "kartoffeln", "mexikanisch", "high-protein"]
+tags: ["hähnchen", "kartoffeln", "mexikanisch", "high-protein", "HelloFresh"]
 time: "30–40 Min"
 image: /recipes/images/chipotle-honig-haehnchen.jpg
 servings: 2
