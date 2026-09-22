@@ -2,7 +2,7 @@
 title: "Pikantes Thai Erdnuss-Curry mit Bio-Hähnchen"
 date: 2026-08-25
 category: "Curry"
-tags: ["hähnchen", "curry", "thai", "schnell", "scharf"]
+tags: ["hähnchen", "curry", "thai", "schnell", "scharf", "HelloFresh"]
 time: "15–25 Min"
 image: /recipes/images/thai-erdnuss-curry-haehnchen.jpg
 servings: 2
