@@ -2,7 +2,7 @@
 title: "Buttriges Hähnchen mit Kormapaste"
 date: 2026-08-25
 category: "Curry"
-tags: ["hähnchen", "curry", "indisch", "schnell"]
+tags: ["hähnchen", "curry", "indisch", "schnell", "HelloFresh"]
 time: "15–25 Min"
 image: /recipes/images/buttriges-haehnchen-korma.jpg
 servings: 2
