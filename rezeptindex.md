@@ -16,7 +16,7 @@ hide_topbar: true
 
   <div class="filterBar">
     <div class="filterBarLeft">
-      <button id="favToggle" class="pillToggle" type="button" aria-pressed="false">
+      <button id="favToggle" class="pillToggle" type="button" aria-pressed="false" aria-label="Nur Favoriten anzeigen">
         <span aria-hidden="true">♡</span> Favoriten
       </button>
       <div class="sortMenuWrap">
@@ -46,6 +46,11 @@ hide_topbar: true
 </div>
 
 <div class="section">
+  <div id="emptyState" class="uEmpty" hidden>
+    <div class="uEmptyTitle">Keine Rezepte gefunden</div>
+    <div class="uEmptyText">Versuch einen anderen Suchbegriff oder setze die Filter zurück.</div>
+    <button id="resetFilters" class="btn btnGhost" type="button" style="margin-top:12px">Filter zurücksetzen</button>
+  </div>
   <div class="grid" id="recipeGrid">
   {% assign sorted = site.recipes | sort: "title" %}
   {% for r in sorted %}
@@ -72,7 +77,7 @@ hide_topbar: true
           <div class="recipeMeta">
             {% if r.time %}<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ r.time }}</span></span>{% endif %}
             {% if r.servings %}<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span>{{ r.servings }}</span></span>{% endif %}
-            <span class="favBadge rcFavBadge metaFav" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-hidden="true">♥</span>
+            <span class="favBadge rcFavBadge metaFav" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-label="Favorit">♥</span>
           </div>
 
           {% if r.tags %}
@@ -112,12 +117,15 @@ hide_topbar: true
 
   let activeCat = "";
   let favOnly = false;
+  const emptyState = document.querySelector('#emptyState');
+  const resetBtn = document.querySelector('#resetFilters');
 
   function getStats(){ try{ return JSON.parse(localStorage.getItem('kochbuch.stats')||'{}'); }catch{ return {}; } }
   function isFavById(id){ const s = getStats(); return !!(s[id] && s[id].favorite); }
 
   function apply(){
     const term = norm(q?.value);
+    let visibleCount = 0;
     cards.forEach(c=>{
       const hay = norm(c.getAttribute('data-haystack'));
       const cat = c.getAttribute('data-category') || '';
@@ -125,8 +133,11 @@ hide_topbar: true
       const matchesTerm = !term || hay.includes(term);
       const matchesCat = !activeCat || cat === activeCat;
       const matchesFav = !favOnly || isFavById(id);
-      c.style.display = (matchesTerm && matchesCat && matchesFav) ? '' : 'none';
+      const visible = matchesTerm && matchesCat && matchesFav;
+      c.style.display = visible ? '' : 'none';
+      if (visible) visibleCount++;
     });
+    if (emptyState) emptyState.hidden = visibleCount > 0;
     if (typeof window.updateFavBadges === "function") window.updateFavBadges();
   }
 
@@ -190,5 +201,18 @@ hide_topbar: true
 
   q?.addEventListener('input', apply);
   clearBtn?.addEventListener('click', ()=>{ if(!q) return; q.value=''; q.focus(); apply(); });
+
+  resetBtn?.addEventListener('click', ()=>{
+    if(q) q.value = '';
+    activeCat = '';
+    favOnly = false;
+    catMenuItems.forEach(x=>x.classList.remove('active'));
+    catMenuItems[0]?.classList.add('active');
+    catToggle.classList.remove('pillToggleActive');
+    favToggle.setAttribute('aria-pressed','false');
+    favToggle.classList.remove('pillToggleActive');
+    favToggle.innerHTML = '<span aria-hidden="true">♡</span> Favoriten';
+    apply();
+  });
 })();
 </script>

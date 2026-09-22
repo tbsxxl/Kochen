@@ -440,10 +440,10 @@ font-family:var(--fontDisplay);}
   border-bottom:1px solid transparent;
   padding:calc(8px + env(safe-area-inset-top)) 0 10px 0;
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  transition:background .2s ease, border-color .2s ease, transform .28s ease;
+  transition:background .25s ease, border-color .25s ease, transform .28s ease, backdrop-filter .25s ease, -webkit-backdrop-filter .25s ease;
   transform:translateY(0);
 }
-.iosTopbar.scrolled{background:rgba(255,249,242,.94);border-bottom-color:var(--line)}
+.iosTopbar.scrolled{background:rgba(255,249,242,.72);border-bottom-color:var(--line)}
 .iosTopbar.hide{transform:translateY(-100%)}
 .iosTopbarInner{display:flex;align-items:center;gap:10px}
 .navIconBtn{
@@ -480,7 +480,7 @@ body.layout-recipe .iosTopbar{
 }
 body.layout-home .iosTopbar.scrolled,
 body.layout-recipe .iosTopbar.scrolled{
-  background:rgba(255,249,242,.94);
+  background:rgba(255,249,242,.72);
   border-bottom-color:var(--line);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
 }
@@ -500,8 +500,27 @@ body.layout-recipe .iosTopbar:not(.scrolled) .iosTopLogo{
   pointer-events:none;
 }
 
+/* Pages without a hero (Alle Rezepte, Kategorien, Einkaufsliste): the big page
+   title already shows the name, so the bar itself stays fully invisible until
+   the person scrolls — then it reveals a compact bar for quick navigation. */
+body.no-topbar .iosTopbar{
+  background:transparent;
+  border-bottom-color:transparent;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+body.no-topbar .iosTopbar.scrolled{
+  background:rgba(255,249,242,.72);
+  border-bottom-color:var(--line);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+body.no-topbar .iosTopbar:not(.scrolled) .navIconBtn,
+body.no-topbar .iosTopbar:not(.scrolled) .iosTopLogo,
+body.no-topbar .iosTopbar:not(.scrolled) .iosTopTitle{
+  opacity:0;
+  pointer-events:none;
+}
+
 .appMain{padding-top:calc(52px + env(safe-area-inset-top) + 18px);padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom))}
-body.no-topbar .appMain{padding-top:calc(env(safe-area-inset-top) + 22px)}
 body.no-topbar .subtleRule{display:none}
 body.no-topbar .pageTitleBlock .h1{margin-bottom:16px}
 .layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) + env(safe-area-inset-bottom) + 16px)}
@@ -854,6 +873,8 @@ button.isPressed,
   border:1px solid rgba(229,216,197,.9);
   box-shadow:0 4px 12px rgba(52,41,31,.05);
 }
+.uEmptyTitle{font-weight:700;font-size:16px;color:var(--text)}
+.uEmptyText{font-size:14px;color:var(--sub2);max-width:280px}
 
 .homeAllLink{text-decoration:none;color:var(--accentPetrol);font-weight:650;font-size:13px;letter-spacing:.01em}
 .homeAllLink:active{opacity:.72}
@@ -1061,31 +1082,14 @@ button.isPressed,
   display:inline-flex;
 }
 
-/* Favorite heart: always visible on the photo, outline when not favorited */
-.grid .recipeCard .favBadge.rcFavBadge,
-.hScroll .recipeCard .favBadge.rcFavBadge,
-.homeFeatured .favBadge.rcFavBadge{
-  opacity:1;
-  transform:scale(1);
-  top:10px !important;right:10px !important;
-  background:rgba(20,17,14,.32);
-  border:1px solid rgba(255,255,255,.5);
-  color:#fff;
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  font-size:16px;
-  pointer-events:auto;
-}
-.grid .recipeCard .favBadge.rcFavBadge.isFav,
-.hScroll .recipeCard .favBadge.rcFavBadge.isFav,
-.homeFeatured .favBadge.rcFavBadge.isFav{
-  background:var(--accentOlive);border-color:var(--accentOlive);color:#252a27;
-}
-
-/* Favorite heart shown inline in the meta row instead of on the photo */
+/* Favorite heart shown inline in the meta row instead of on the photo —
+   pure status indicator, only rendered when the recipe is actually favorited
+   (the card isn't a toggle button, tapping it just opens the recipe). */
 .recipeMeta{position:relative}
 .grid .recipeCard .favBadge.rcFavBadge.metaFav,
 .hScroll .recipeCard .favBadge.rcFavBadge.metaFav,
 .homeFeatured .favBadge.rcFavBadge.metaFav{
+  display:none;
   position:static !important;
   margin-left:auto;
   opacity:1;
@@ -1095,7 +1099,7 @@ button.isPressed,
   border:none;
   box-shadow:none;
   backdrop-filter:none;-webkit-backdrop-filter:none;
-  color:var(--sub2);
+  color:var(--accentOlive);
   font-size:18px;
   line-height:1;
   padding:0 2px;
@@ -1103,6 +1107,7 @@ button.isPressed,
 .grid .recipeCard .favBadge.rcFavBadge.metaFav.isFav,
 .hScroll .recipeCard .favBadge.rcFavBadge.metaFav.isFav,
 .homeFeatured .favBadge.rcFavBadge.metaFav.isFav{
+  display:inline-flex;
   background:none;
   color:var(--accentOlive);
 }

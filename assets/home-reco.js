@@ -63,16 +63,16 @@
     const img = r.image ? `
       <div class="rcImg">
         <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
-        <span class="favBadge rcFavBadge${showFavState?' isFav':''}" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true">♥</span>
-      </div>` : `<span class="favBadge rcFavBadge${showFavState?' isFav':''}" data-fav-badge data-recipe-id="${esc(r.id)}" aria-hidden="true" style="top:12px;right:12px">♥</span>`;
+        ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
+      </div>` : "";
+    const fav = `<span class="favBadge rcFavBadge metaFav${showFavState?' isFav':''}" data-fav-badge data-recipe-id="${esc(r.id)}" aria-label="Favorit">♥</span>`;
     return `
       <a class="linkCard hCard homeFavCard" href="${esc(r.id)}">
         <div class="card recipeCard cardHover">
           ${img}
           <div class="rcBody">
-            ${r.category ? `<div class="cardCategory">${esc(r.category)}</div>` : ""}
             <h3 class="recipeTitle">${esc(r.title)}</h3>
-            ${meta ? `<div class="recipeMeta">${meta}</div>` : ""}
+            <div class="recipeMeta">${meta||""}${fav}</div>
           </div>
         </div>
       </a>`;

@@ -55,7 +55,7 @@ function addItem(){
   clearAllBtn?.addEventListener("click", ()=>{
     const cur = getList();
     if(!cur.length) return;
-    const ok = window.confirm("Wirklich alles aus der Shopping List löschen?");
+    const ok = window.confirm("Wirklich alles aus der Einkaufsliste löschen?");
     if(!ok) return;
     setList([]);
     render();

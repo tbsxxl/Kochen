@@ -27,7 +27,6 @@
 </head>
 <body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}{% if page.hide_topbar %} no-topbar{% endif %}">
   <!-- iPhone-friendly Topbar: Back + Title only -->
-  {% unless page.hide_topbar %}
   <header class="iosTopbar" id="iosTopbar">
     <div class="container iosTopbarInner">
       <button class="navIconBtn pressable" id="backBtn" aria-label="Zurück" type="button">‹</button>
@@ -45,7 +44,6 @@
       <span aria-hidden="true" style="width:44px;height:44px;display:inline-block"></span>
     </div>
   </header>
-  {% endunless %}
 
   <main class="container appMain" role="main">
     {{ content }}
@@ -104,7 +102,8 @@
     // Topbar: transparent over hero at top, hides on scroll-down, reappears (solid) on scroll-up
     const topbar = document.getElementById('iosTopbar');
     const heroPages = document.body.classList.contains('layout-home') || document.body.classList.contains('layout-recipe');
-    const scrollThreshold = heroPages ? 140 : 4;
+    const noTopbarPage = document.body.classList.contains('no-topbar');
+    const scrollThreshold = heroPages ? 140 : (noTopbarPage ? 90 : 4);
     let lastY = window.scrollY || 0;
     const onScroll = ()=>{
       const y = window.scrollY || 0;
