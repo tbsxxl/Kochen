@@ -86,7 +86,7 @@ function renderIngredients(){
       const qn = num(it.qty);
       if(qn !== null){
         const conv = U.autoConvert(qn, unit);
-        return `${U.roundSmart(conv.qty)} ${conv.unit}`.trim();
+        return `${U.roundSmart(conv.qty, conv.unit)} ${conv.unit}`.trim();
       }
       return `${String(it.qty||"").trim()} ${unit}`.trim();
     },
@@ -102,18 +102,21 @@ function renderIngredients(){
 }
 
 
+  const ingBase = $("#ingBase");
+  function showBase(){ if(ingBase) ingBase.hidden = currentServings() === baseServings; }
   function setServings(v){
     const prev = currentServings();
     const n = Math.max(1, Math.min(999, Math.round(Number(v) || baseServings)));
     if(servingsInput) servingsInput.value = String(n);
     renderIngredients();
+    showBase();
     if(n !== prev){
       lightTap();
       pulse(servingsInput);
     }
   }
 
-  servingsInput?.addEventListener("input", renderIngredients);
+  servingsInput?.addEventListener("input", ()=>{ renderIngredients(); showBase(); });
   servingsInput?.addEventListener("blur", ()=>{ setServings(currentServings()); pulse(servingsInput); });
   servingsPlus?.addEventListener("click", ()=> setServings(currentServings() + 1));
   servingsMinus?.addEventListener("click", ()=> setServings(currentServings() - 1));
@@ -235,7 +238,10 @@ function renderIngredients(){
       favPill.hidden = !e.favorite;
     }
     if(statsLine){
-      statsLine.textContent = `Gekocht: ${e.cookedCount||0}× · Zuletzt: ${e.lastCooked?fmt(e.lastCooked):"—"}`;
+      const n = Number(e.cookedCount||0);
+      statsLine.textContent = n > 0
+        ? `${n}× gekocht${e.lastCooked ? ` · zuletzt am ${fmt(e.lastCooked)}` : ''}`
+        : '';
     }
     if(cookedBtn){
       cookedBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">✓</span><span>Gekocht${(e.cookedCount||0)>0 ? ` · ${e.cookedCount||0}×` : ''}</span>`;
@@ -307,7 +313,8 @@ function renderIngredients(){
         }
         ex.checked=false;
       }else{
-        map.set(k,{item,unit:conv.unit,qty:(typeof conv.qty==="number"?conv.qty:null),checked:false});
+        const label = (q0===null && i.qty!=null && !/^n\.?\s*b\.?$|nach bedarf/i.test(String(i.qty).trim())) ? String(i.qty).trim() : "";
+        map.set(k,{item,unit:conv.unit,qty:(typeof conv.qty==="number"?conv.qty:null),qtyLabel:label,from:data.title||"",checked:false});
       }
     }
     const out = Array.from(map.values()).sort((a,b)=>String(a.item).localeCompare(String(b.item),"de"));
@@ -342,6 +349,33 @@ const cookOverlay = $("#cookOverlay");
   const cookPanelSteps = $("#cookPanelSteps");
   const cookPanelIngs = $("#cookPanelIngs");
   const cookIngredients = $("#cookIngredients");
+  const cookProgressBar = $("#cookProgressBar");
+  const cookStepIngs = $("#cookStepIngs");
+  const cookStepIngsList = $("#cookStepIngsList");
+
+  // Zutaten, die im aktuellen Schritt vorkommen (einfacher Wortabgleich)
+  const STOP = new Set(("oder und mit ohne etwas sehr fein grob klein groß große frisch frische frischer "+
+    "dann nach alles alle kurz lang gut bis zum zur vom beim dazu hitze topf pfanne ofen minuten minute "+
+    "stunde stunden hälfte teil zugeben geben lassen rühren unter einer eine einen dem den der die das").split(" "));
+  function ingKeywords(item){
+    const head = String(item||"").toLowerCase().replace(/\(.*?\)/g," ").split(",")[0];
+    return head.split(/[^a-zäöüß]+/).filter(w=>w.length>=4 && !STOP.has(w));
+  }
+  function ingredientsForStep(text){
+    const lower = String(text||"").toLowerCase();
+    const tokens = lower.split(/[^a-zäöüß]+/).filter(t=>t.length>=4 && !STOP.has(t));
+    return scaledIngredients().filter(i=>{
+      const keys = ingKeywords(i.item);
+      return keys.some(k => lower.includes(k) || tokens.some(t => k.includes(t)));
+    });
+  }
+  function fmtQty(i){
+    const unit = U.normUnit(i.unit||"");
+    const qn = num(i.qty);
+    if(qn !== null){ const conv = U.autoConvert(qn, unit); return `${U.roundSmart(conv.qty, conv.unit)} ${conv.unit}`.trim(); }
+    return `${String(i.qty||"").trim()} ${unit}`.trim();
+  }
+  const escHtml = (x)=>String(x??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
   let steps = [];
   let stepIdx = 0;
@@ -366,8 +400,18 @@ const cookOverlay = $("#cookOverlay");
     stepIdx = Math.max(0, Math.min(total-1, stepIdx));
     cookStepText.textContent = steps[stepIdx] || '—';
     cookStepPill.textContent = `${stepIdx+1}/${total}`;
+    if(cookProgressBar) cookProgressBar.style.width = `${((stepIdx+1)/total)*100}%`;
+    if(cookStepIngs && cookStepIngsList){
+      const hits = ingredientsForStep(steps[stepIdx]);
+      cookStepIngs.hidden = !hits.length;
+      cookStepIngsList.innerHTML = hits.map(i=>`<div class="cookStepIng"><span>${escHtml(i.item)}</span><span class="num">${escHtml(fmtQty(i))}</span></div>`).join('');
+    }
     if(cookPrev) cookPrev.disabled = stepIdx===0;
-    if(cookNext) cookNext.disabled = stepIdx>=total-1;
+    if(cookNext){
+      const last = stepIdx>=total-1;
+      cookNext.textContent = last ? 'Fertig ✓' : 'Weiter ›';
+      cookNext.dataset.last = last ? '1' : '';
+    }
   }
 
   function renderCookIngredients(){
@@ -375,15 +419,7 @@ const cookOverlay = $("#cookOverlay");
     const ings = scaledIngredients();
     cookIngredients.innerHTML = '';
     for(const i of ings){
-      const unit = U.normUnit(i.unit||"");
-      const qn = num(i.qty);
-      let qty = '';
-      if(qn !== null){
-        const conv = U.autoConvert(qn, unit);
-        qty = `${U.roundSmart(conv.qty)} ${conv.unit}`.trim();
-      }else{
-        qty = `${String(i.qty||"").trim()} ${unit}`.trim();
-      }
+      const qty = fmtQty(i);
       const row = document.createElement('label');
       row.className = 'cookIngRow';
       row.innerHTML = `<input class="cookChk" type="checkbox" /> <div class="cookIngText"><div style="font-weight:700">${i.item||'—'}</div><div style="opacity:.85;margin-top:2px">${qty}</div></div>`;
@@ -442,7 +478,11 @@ const cookOverlay = $("#cookOverlay");
   cookClose?.addEventListener('click', closeCook);
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
   cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); pulse(cookStepText); });
-  cookNext?.addEventListener('click', ()=>{ stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText); });
+  cookNext?.addEventListener('click', ()=>{
+    if(cookNext.dataset.last){ closeCook(); successTap(); return; }
+    stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText);
+  });
+  cookStepText?.addEventListener('click', ()=>{ if(stepIdx < steps.length-1){ stepIdx++; renderCookStep(); lightTap(); } });
   cookTabSteps?.addEventListener('click', ()=>{ setTab('steps'); lightTap(); pulse(cookTabSteps); });
   cookTabIngs?.addEventListener('click', ()=>{ setTab('ings'); lightTap(); pulse(cookTabIngs); });
 

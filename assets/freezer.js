@@ -11,7 +11,16 @@
   let recipes=[];
   try{ recipes=JSON.parse(dataEl.textContent||'[]'); }catch{}
   if(!Array.isArray(recipes)) recipes=[];
-  const byId = new Map(recipes.map(r=>[r.id, r]));
+  const trimPath = (x)=> String(x||'').replace(/^https?:\/\/[^/]+/i,'').replace(/^\/Kochen(?=\/)/i,'').replace(/\/+$/,'');
+  const byId = new Map(recipes.map(r=>[trimPath(r.id), r]));
+  const lookup = (id)=> byId.get(trimPath(id));
+  const esc = (x)=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  function age(iso){
+    const t = Date.parse(iso||''); if(!t) return { text:'', days:0 };
+    const days = Math.floor((Date.now()-t)/86400000);
+    const text = days<=0 ? 'heute eingefroren' : days===1 ? 'seit gestern' : days<14 ? `seit ${days} Tagen` : days<60 ? `seit ${Math.round(days/7)} Wochen` : `seit ${Math.round(days/30)} Monaten`;
+    return { text, days };
+  }
 
   const freezerKey='kochbuch.freezer';
   function getFreezer(){ return ls.get(freezerKey, {}); }
@@ -22,28 +31,32 @@
   const SVG_TRASH = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>`;
 
   function row(id, entry){
-    const r = byId.get(id);
+    const r = lookup(id);
     const title = r?.title || id;
     const portions = Number(entry?.portions || 0);
-    const timeMeta = r?.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_CLOCK}</span><span>${r.time}</span></span>` : '';
+    const a = age(entry?.added);
+    const old = a.days >= 90;
+    const thumb = r?.image
+      ? `<img class="freezerThumb" src="${esc(r.image)}" srcset="${esc(r.srcset||'')}" sizes="64px" alt="" loading="lazy">`
+      : `<span class="freezerThumb freezerThumbEmpty" aria-hidden="true">${SVG_ICE}</span>`;
 
     return `
-      <div class="card cardPad freezerCard" data-id="${id}">
+      <div class="card cardPad freezerCard" data-id="${esc(id)}">
         <div class="freezerTop">
-          <div style="min-width:0;flex:1">
-            <a class="freezerTitle" href="${id}">${title}</a>
-            ${timeMeta ? `<div class="recipeMeta" style="margin-top:5px">${timeMeta}</div>` : ''}
-          </div>
-          <span class="freezerBadge">
-            <span class="metaIcon" aria-hidden="true">${SVG_ICE}</span>
-            <span>${portions}</span>
-          </span>
+          <a class="freezerLink" href="${esc(r?.id || id)}">
+            ${thumb}
+            <span class="freezerInfo">
+              <span class="freezerTitle">${esc(title)}</span>
+              <span class="freezerMeta">${r?.category ? esc(r.category) : ''}${r?.category && a.text ? ' · ' : ''}${a.text ? `<span class="${old ? 'freezerOld' : ''}">${a.text}</span>` : ''}</span>
+            </span>
+          </a>
         </div>
         <div class="freezerControls">
           <div class="qtyStepper" aria-label="Portionen ändern">
-            <button class="stepBtn" data-act="minus" type="button" aria-label="Minus">−</button>
+            <button class="stepBtn" data-act="minus" type="button" aria-label="Eine Portion weniger">−</button>
             <div class="stepVal" aria-label="Portionen">${portions}</div>
-            <button class="stepBtn" data-act="plus" type="button" aria-label="Plus">+</button>
+            <button class="stepBtn" data-act="plus" type="button" aria-label="Eine Portion mehr">+</button>
+            <span class="freezerUnit">${portions === 1 ? 'Portion' : 'Portionen'}</span>
           </div>
           <button class="btn btnDangerOutline freezerRemoveBtn" data-act="remove" type="button" aria-label="Aus Kühltruhe entfernen">
             <span class="metaIcon" style="width:16px;height:16px" aria-hidden="true">${SVG_TRASH}</span>
@@ -56,10 +69,11 @@
     const f = getFreezer();
     const ids = Object.keys(f);
     if(!ids.length){
-      host.innerHTML = `<div class="uEmpty"><p>Noch nichts eingefroren.</p><p class="sub" style="font-size:13px;margin-top:4px">Öffne ein Rezept und tippe auf „Kühltruhe".</p></div>`;
+      host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Noch nichts eingefroren</div><div class="uEmptyText">Öffne ein Rezept und tippe unten auf „Kühltruhe“.</div></div>`;
       return;
     }
-    ids.sort((a,b) => (byId.get(a)?.title||a).localeCompare(byId.get(b)?.title||b, 'de'));
+    // Älteste zuerst: was am längsten drin ist, sollte zuerst gegessen werden
+    ids.sort((a,b) => (Date.parse(f[a]?.added||'')||0) - (Date.parse(f[b]?.added||'')||0) || (lookup(a)?.title||a).localeCompare(lookup(b)?.title||b, 'de'));
     host.innerHTML = `<div class="stack">${ids.map(id=>row(id,f[id])).join('')}</div>`;
     if(typeof window.updateFavBadges === 'function') window.updateFavBadges();
   }

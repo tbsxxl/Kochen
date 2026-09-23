@@ -4,10 +4,23 @@ title: Kategorien
 permalink: /kategorien/
 ---
 
-{% assign grouped = site.recipes | group_by: "category" | sort: "name" %}
-{% for g in grouped %}
-<div class="section" style="margin-top:18px">
-  <div class="homeSectionTitle" style="margin-bottom:10px">{{ g.name }}</div>
+{% assign grouped = site.recipes | group_by: "category" %}
+{%- assign ordered = "" | split: "" -%}
+{%- for c in site.data.categories -%}
+  {%- assign hit = grouped | where: "name", c | first -%}
+  {%- if hit -%}{%- assign ordered = ordered | push: hit -%}{%- endif -%}
+{%- endfor -%}
+{%- for g in grouped -%}
+  {%- unless site.data.categories contains g.name -%}{%- assign ordered = ordered | push: g -%}{%- endunless -%}
+{%- endfor -%}
+
+<nav class="catRow" aria-label="Kategorien">
+  {% for g in ordered %}<a class="catChip" href="#cat-{{ g.name | slugify }}">{{ g.name }}</a>{% endfor %}
+</nav>
+
+{% for g in ordered %}
+<div class="section catSection" id="cat-{{ g.name | slugify }}">
+  <div class="homeSectionTitle">{{ g.name }} <span class="catCount">{{ g.items | size }}</span></div>
   <div class="grid">
     {% assign rs = g.items | sort: "title" %}
     {% for r in rs %}

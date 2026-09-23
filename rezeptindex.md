@@ -13,22 +13,21 @@ permalink: /rezeptindex/
     <button id="clearSearch" class="btn btnGhost" type="button" aria-label="Zurücksetzen">↺</button>
   </div>
 
+  {%- assign cat_names = "" | split: "" -%}
+  {%- assign present = site.recipes | map: "category" | uniq -%}
+  {%- for c in site.data.categories -%}{%- if present contains c -%}{%- assign cat_names = cat_names | push: c -%}{%- endif -%}{%- endfor -%}
+  {%- for c in present -%}{%- if c -%}{%- unless site.data.categories contains c -%}{%- assign cat_names = cat_names | push: c -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
+  <nav class="catRow" id="catRow" aria-label="Kategorie filtern">
+    <button class="catChip active" data-cat="" type="button" aria-pressed="true">Alle</button>
+    {%- for c in cat_names %}
+    <button class="catChip" data-cat="{{ c | escape }}" type="button" aria-pressed="false">{{ c }}</button>
+    {%- endfor %}
+  </nav>
+
   <div class="filterBar">
-    <div class="filterBarLeft">
-      <button id="favToggle" class="pillToggle" type="button" aria-pressed="false" aria-label="Nur Favoriten anzeigen">
-        <span aria-hidden="true">♡</span> Favoriten
-      </button>
-      <div class="sortMenuWrap">
-        <button id="catToggle" class="pillToggle" type="button" aria-expanded="false">Kategorien</button>
-        <div id="catMenu" class="sortMenu" hidden role="menu">
-          {% assign cats = site.recipes | map: "category" | uniq | sort %}
-          <button class="sortMenuItem active" data-cat="" type="button">Alle</button>
-          {% for c in cats %}
-            {% if c %}<button class="sortMenuItem" data-cat="{{ c | escape }}" type="button">{{ c }}</button>{% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
+    <button id="favToggle" class="pillToggle" type="button" aria-pressed="false" aria-label="Nur Favoriten anzeigen">
+      <span aria-hidden="true">♡</span> Favoriten
+    </button>
     <div class="sortMenuWrap">
       <button id="sortBtn" class="pillToggle sortToggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Sortieren">
         Sortieren
@@ -82,19 +81,6 @@ permalink: /rezeptindex/
             {% if r.servings %}<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span>{{ r.servings }}</span></span>{% endif %}
             <span class="favBadge rcFavBadge metaFav" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-label="Favorit">♥</span>
           </div>
-
-          {% if r.tags %}
-            {% assign tag_count = r.tags | size %}
-            {% assign rest = tag_count | minus: 3 %}
-            <div class="chips chipsCompact">
-              {% for t in r.tags limit: 3 %}
-                <span class="chip">{{ t }}</span>
-              {% endfor %}
-              {% if rest > 0 %}
-                <span class="chip chipMore">+{{ rest }}</span>
-              {% endif %}
-            </div>
-          {% endif %}
         </div>
 
       </div>
@@ -109,9 +95,7 @@ permalink: /rezeptindex/
   const clearBtn = document.querySelector('#clearSearch');
   const grid = document.querySelector('#recipeGrid');
   const cards = Array.from(document.querySelectorAll('[data-recipe-card]'));
-  const catMenu = document.querySelector('#catMenu');
-  const catMenuItems = Array.from(catMenu.querySelectorAll('.sortMenuItem'));
-  const catToggle = document.querySelector('#catToggle');
+  const catChips = Array.from(document.querySelectorAll('#catRow .catChip'));
   const favToggle = document.querySelector('#favToggle');
   const sortBtn = document.querySelector('#sortBtn');
   const sortMenu = document.querySelector('#sortMenu');
@@ -166,11 +150,9 @@ permalink: /rezeptindex/
   function closeMenu(menu, btn){ menu.hidden = true; btn?.setAttribute('aria-expanded','false'); }
   function openMenu(menu, btn){ menu.hidden = false; btn?.setAttribute('aria-expanded','true'); }
 
-  sortBtn?.addEventListener('click', (e)=>{ e.stopPropagation(); closeMenu(catMenu, catToggle); sortMenu.hidden ? openMenu(sortMenu, sortBtn) : closeMenu(sortMenu, sortBtn); });
-  catToggle?.addEventListener('click', (e)=>{ e.stopPropagation(); closeMenu(sortMenu, sortBtn); catMenu.hidden ? openMenu(catMenu, catToggle) : closeMenu(catMenu, catToggle); });
+  sortBtn?.addEventListener('click', (e)=>{ e.stopPropagation(); sortMenu.hidden ? openMenu(sortMenu, sortBtn) : closeMenu(sortMenu, sortBtn); });
   document.addEventListener('click', (e)=>{
     if (!sortMenu.hidden && !sortMenu.contains(e.target) && e.target !== sortBtn) closeMenu(sortMenu, sortBtn);
-    if (!catMenu.hidden && !catMenu.contains(e.target) && e.target !== catToggle) closeMenu(catMenu, catToggle);
   });
 
   sortMenuItems.forEach(item=>{
@@ -183,16 +165,20 @@ permalink: /rezeptindex/
     });
   });
 
-  catMenuItems.forEach(item=>{
-    item.addEventListener('click', ()=>{
-      catMenuItems.forEach(x=>x.classList.remove('active'));
-      item.classList.add('active');
-      activeCat = item.getAttribute('data-cat') || '';
-      catToggle.classList.toggle('pillToggleActive', !!activeCat);
-      closeMenu(catMenu, catToggle);
-      apply();
+  function setCat(cat){
+    activeCat = cat || '';
+    catChips.forEach(x=>{
+      const on = (x.getAttribute('data-cat') || '') === activeCat;
+      x.classList.toggle('active', on);
+      x.setAttribute('aria-pressed', String(on));
+      if(on) x.scrollIntoView({ block:'nearest', inline:'center', behavior:'smooth' });
     });
-  });
+    apply();
+  }
+  catChips.forEach(chip=> chip.addEventListener('click', ()=> setCat(chip.getAttribute('data-cat'))));
+  // Direktlink auf eine Kategorie: /rezeptindex/?kategorie=Pasta
+  const urlCat = new URLSearchParams(location.search).get('kategorie');
+  if(urlCat && catChips.some(x=>x.getAttribute('data-cat') === urlCat)) setCat(urlCat);
 
   favToggle?.addEventListener('click', ()=>{
     favOnly = !favOnly;
@@ -207,15 +193,11 @@ permalink: /rezeptindex/
 
   resetBtn?.addEventListener('click', ()=>{
     if(q) q.value = '';
-    activeCat = '';
     favOnly = false;
-    catMenuItems.forEach(x=>x.classList.remove('active'));
-    catMenuItems[0]?.classList.add('active');
-    catToggle.classList.remove('pillToggleActive');
     favToggle.setAttribute('aria-pressed','false');
     favToggle.classList.remove('pillToggleActive');
     favToggle.innerHTML = '<span aria-hidden="true">♡</span> Favoriten';
-    apply();
+    setCat('');
   });
 })();
 </script>

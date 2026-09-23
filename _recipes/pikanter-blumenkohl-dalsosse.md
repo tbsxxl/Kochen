@@ -1,7 +1,7 @@
 ---
 title: "Pikanter Blumenkohl in Dalsoße mit Kumin-Kartoffeln und Babyspinat"
 date: 2026-09-17
-category: "Hauptgericht"
+category: "Curry"
 tags: ["vegetarisch", "indisch", "curry", "wenig-vorbereitung", "HelloFresh"]
 time: "40 - 50 Min"
 image: /recipes/images/blumenkohl-dalsosse.jpg

@@ -1,7 +1,7 @@
 ---
 title: "Butter Chicken"
 date: 2026-02-20
-category: "Indian"
+category: "Curry"
 tags: ["indisch", "hähnchen", "tandoori", "ofen", "Pollame & Geflügel", "Chicken"]
 time: "ca. 2 Std"
 image: /recipes/images/butterchicken.jpg

@@ -1,7 +1,7 @@
 ---
 title: "Pad Kra Pao mit Ente Kross"
 date: 2026-09-17
-category: "Hauptgericht"
+category: "Asiatisch"
 tags: ["asiatisch", "thailändisch", "ente", "high-protein", "schnell", "HelloFresh"]
 time: "25 - 35 Min"
 image: /recipes/images/pad-kra-pao-ente.jpg

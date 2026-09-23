@@ -1,7 +1,7 @@
 ---
 title: "Nashville Hot Chicken (Babish-Style)"
 date: 2026-05-04
-category: "Chicken"
+category: "Knusprig & Frittiert"
 tags: ["amerikanisch", "hähnchen", "frittiert", "scharf", "nashville", "babish", "soulfood"]
 time: "ca. 60 Min + marinieren"
 image: /recipes/images/nashville.jpg

@@ -5,7 +5,7 @@ permalink: /kuehltruhe/
 ---
 
 <div class="section" style="margin-top:6px">
-  <p class="sub">Portionen die du eingefroren hast. Tippe auf einem Rezept auf „Kühltruhe" um Einträge hinzuzufügen.</p>
+  <p class="sub">Was du eingefroren hast, das Älteste zuerst. Neue Einträge legst du auf der Rezeptseite über „Kühltruhe“ an.</p>
 </div>
 
 <div class="section">
@@ -21,7 +21,9 @@ permalink: /kuehltruhe/
     "title": {{ r.title | jsonify }},
     "category": {{ r.category | jsonify }},
     "time": {{ r.time | jsonify }},
-    "servings": {{ r.servings | jsonify }}
+    "servings": {{ r.servings | jsonify }},
+    "image": "{% if r.image %}{{ r.image | relative_url }}?v={{ site.image_version }}{% endif %}",
+    "srcset": "{% if r.image %}{% include srcset.html src=r.image %}{% endif %}"
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]
