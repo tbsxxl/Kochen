@@ -52,25 +52,7 @@
     }
   </script>
 </head>
-<body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}{% if page.hide_topbar %} no-topbar{% endif %}">
-  <!-- iPhone-friendly Topbar: Back + Title only -->
-  <header class="iosTopbar" id="iosTopbar">
-    <div class="container iosTopbarInner">
-      <button class="navIconBtn pressable" id="backBtn" aria-label="Zurück" type="button">‹</button>
-
-      <div class="iosTopBrand">
-        <span class="brandMark iosTopLogo" aria-hidden="true">
-          <img src="{{ '/assets/logo.svg' | relative_url }}" alt="">
-        </span>
-        <div class="iosTopTitleWrap">
-          <div class="iosTopTitle{% if page.layout == 'home' %} brandWordmark{% endif %}">{% if page.layout == 'home' or page.title == nil %}{{ site.title }}{% else %}{{ page.title }}{% endif %}</div>
-        </div>
-      </div>
-
-      <!-- spacer to keep title centered on iOS-style bars -->
-      <span aria-hidden="true" style="width:44px;height:44px;display:inline-block"></span>
-    </div>
-  </header>
+<body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}">
 
   <main class="container appMain" role="main">
     {{ content }}
@@ -122,12 +104,6 @@
 
   <script>
   (function(){
-    // Back Button
-    const backBtn = document.getElementById('backBtn');
-    if (history.length > 1) backBtn.addEventListener('click', ()=>history.back());
-    else backBtn.style.visibility = 'hidden';
-
-    // Topbar: liegt oben auf der Seite und scrollt mit weg (keine einblendende Leiste).
 
     // Active Tab Highlight
     const path = location.pathname.replace(/\/+$/,'') || "/";

@@ -2,7 +2,6 @@
 layout: page
 title: Kategorien
 permalink: /kategorien/
-hide_topbar: true
 ---
 
 {% assign grouped = site.recipes | group_by: "category" | sort: "name" %}

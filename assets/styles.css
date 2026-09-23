@@ -196,7 +196,7 @@ code{font-family:var(--fontMono)}
 .stack{display:flex;flex-direction:column;gap:12px}
 
 .appMain{
-  padding-top:calc(56px + env(safe-area-inset-top) + 12px);
+  padding-top:calc(env(safe-area-inset-top) + 24px);
   padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 24px);
 }
 body.layout-home .appMain,
@@ -211,35 +211,9 @@ body.layout-recipe .appMain{padding-top:0}
 .pageTitleBlock{padding:4px 2px 0}
 .pageTitleBlock .h1{margin:0 0 4px}
 .pageTitleBlock .subtleRule{height:1px;background:var(--line);margin-top:12px}
-body.no-topbar .subtleRule{display:none}
+.pageTitleBlock .subtleRule{display:none}
 
 /* ---------- 4. Navigation ---------- */
-/* Topbar */
-.iosTopbar{
-  position:absolute;top:0;left:0;right:0;z-index:1200;
-  padding:calc(8px + env(safe-area-inset-top)) 0 8px;
-  background:var(--glass);
-  border-bottom:1px solid transparent;
-  backdrop-filter:saturate(1.6) blur(18px);
-  -webkit-backdrop-filter:saturate(1.6) blur(18px);
-  transform:translateY(0);
-  transition:background .25s ease, border-color .25s ease, transform .3s var(--ease);
-}
-.iosTopbar.scrolled{border-bottom-color:var(--line)}
-.iosTopbar.hide{transform:translateY(-100%)}
-.iosTopbarInner{display:flex;align-items:center;gap:10px}
-.iosTopBrand{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;flex:1}
-.iosTopTitleWrap{min-width:0}
-.iosTopTitle{
-  font-weight:600;font-size:var(--fs16);letter-spacing:0;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  transition:opacity .2s ease;
-}
-.iosTopLogo{
-  width:26px;height:26px;padding:3px;border-radius:var(--rPill);
-  background:var(--surface);border:1px solid var(--line);
-  transition:opacity .2s ease;
-}
 .navIconBtn{
   display:inline-flex;align-items:center;justify-content:center;
   min-width:40px;min-height:40px;padding:0 12px;
@@ -248,32 +222,6 @@ body.no-topbar .subtleRule{display:none}
   font-size:18px;font-weight:600;line-height:1;
   transition:background .2s ease, border-color .2s ease, color .2s ease, opacity .2s ease;
 }
-
-/* Seiten mit Foto direkt unter der Leiste: Leiste startet transparent */
-body.layout-home .iosTopbar:not(.scrolled),
-body.layout-recipe .iosTopbar:not(.scrolled),
-body.no-topbar .iosTopbar:not(.scrolled){
-  background:transparent;
-  backdrop-filter:none;-webkit-backdrop-filter:none;
-}
-body.layout-home .iosTopbar:not(.scrolled) .navIconBtn,
-body.layout-recipe .iosTopbar:not(.scrolled) .navIconBtn{
-  background:rgba(18,15,12,.36);
-  border-color:rgba(255,255,255,.28);
-  color:#fff;
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-}
-body.layout-home .iosTopbar:not(.scrolled) .iosTopTitle,
-body.layout-home .iosTopbar:not(.scrolled) .iosTopLogo,
-body.layout-recipe .iosTopbar:not(.scrolled) .iosTopTitle,
-body.layout-recipe .iosTopbar:not(.scrolled) .iosTopLogo,
-body.no-topbar .iosTopbar:not(.scrolled) .navIconBtn,
-body.no-topbar .iosTopbar:not(.scrolled) .iosTopLogo,
-body.no-topbar .iosTopbar:not(.scrolled) .iosTopTitle{
-  opacity:0;pointer-events:none;
-}
-body.layout-page .iosTopTitle,
-body.layout-page .iosTopLogo{opacity:0}
 
 .brandMark{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
 .brandMark img{width:100%;height:100%;object-fit:contain}
@@ -444,7 +392,8 @@ body.layout-page .iosTopLogo{opacity:0}
   outline:none;
 }
 .searchRow input::-webkit-search-cancel-button{-webkit-appearance:none}
-.searchRow .btn{min-height:44px;min-width:44px;padding:0 16px;box-shadow:none;font-size:var(--fs22);font-weight:500}
+.searchRow .btn{min-height:44px;min-width:44px;padding:0 16px;box-shadow:none}
+#addShopBtn{font-size:var(--fs22);font-weight:500}
 .searchRow .btn.btnGhost{border-color:transparent;color:var(--muted);font-size:var(--fs18)}
 .searchRowIcon .searchIcon{display:flex;flex-shrink:0;width:20px;height:20px;margin-left:12px;color:var(--muted)}
 .searchRowIcon .searchIcon svg{width:100%;height:100%}
@@ -657,7 +606,7 @@ body.layout-page .iosTopLogo{opacity:0}
 body.layout-home .section:first-of-type{margin-top:0;position:relative}
 body.layout-home .homeBigTitle{
   position:absolute;z-index:5;
-  top:calc(56px + env(safe-area-inset-top) + 10px);
+  top:calc(env(safe-area-inset-top) + 16px);
   left:calc(4px + env(safe-area-inset-left));
   margin:0;padding:4px 12px;border-radius:var(--rPill);
   background:var(--imageChip);color:#fff;
@@ -686,6 +635,8 @@ body.layout-home .homeFeatured .rcBody{padding:16px calc(16px + env(safe-area-in
 
 /* Begrüßung */
 .homeGreeting{margin-top:24px}
+.homeBrand{display:flex;align-items:center;gap:8px;margin-bottom:16px;color:var(--text)}
+.homeBrand img{display:block;width:28px;height:28px}
 .homeGreetingTitle{font-family:var(--fontDisplay);font-size:var(--fs28);font-weight:600;line-height:1.15;letter-spacing:-.02em}
 .homeGreetingSub{margin-top:4px;font-size:var(--fs16);color:var(--sub2)}
 
@@ -740,7 +691,7 @@ body.layout-recipe .section:first-of-type{margin-top:0}
   background:var(--bg);
   border-radius:24px 24px 0 0;
 }
-.recipePageCard > .recipePageBody:first-child{margin-top:calc(56px + env(safe-area-inset-top));border-radius:0}
+.recipePageCard > .recipePageBody:first-child{margin-top:calc(env(safe-area-inset-top) + 24px);border-radius:0}
 .recipePageBody .h1{margin:0 0 16px !important;font-size:var(--fs36);line-height:1.1;letter-spacing:-.02em}
 #statsLine{padding:0 calc(16px + env(safe-area-inset-left)) !important;font-size:var(--fs14)}
 #statsLine:empty{display:none}
@@ -816,7 +767,7 @@ body.layout-recipe .section:first-of-type{margin-top:0}
   .recipeInnerCard{
     grid-column:1;
     align-self:start;
-    position:sticky;top:calc(56px + env(safe-area-inset-top) + 16px);
+    position:sticky;top:calc(env(safe-area-inset-top) + 16px);
     margin:24px 0 0 !important;
   }
   .recipeBody{grid-column:2;padding:0 0 16px !important}
@@ -898,7 +849,7 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 @page{margin:16mm}
 @media print{
   :root{--bg:#fff;--surface:#fff;--surface2:#fff;--text:#000;--sub:#333;--sub2:#555;--line:#ccc}
-  .iosTopbar,.tabbar,.recipeTabbar,.sheetOverlay,.sheet,.cookOverlay,.heroOverlayCat,.favBadge,.recipePortionControls{display:none !important}
+.tabbar,.recipeTabbar,.sheetOverlay,.sheet,.cookOverlay,.heroOverlayCat,.favBadge,.recipePortionControls{display:none !important}
   body{background:#fff !important}
   .appMain{padding:0 !important}
   .container{max-width:100% !important;padding:0 !important}
