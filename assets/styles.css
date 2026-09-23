@@ -583,7 +583,7 @@ body.layout-recipe .appMain{padding-top:0}
 }
 .uEmpty::before{
   content:"";width:48px;height:48px;border-radius:var(--rPill);
-  background:var(--bg) url('logo.svg') center/32px 32px no-repeat;
+  background:var(--bg) url('logo.svg?v=2') center/32px 32px no-repeat;
 }
 .uEmptyTitle{font-weight:600;font-size:var(--fs18);color:var(--text)}
 .uEmptyText{max-width:300px;font-size:var(--fs14);color:var(--sub2)}
