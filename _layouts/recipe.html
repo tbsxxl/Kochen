@@ -18,7 +18,7 @@ layout: default
       <div class="rcImg recipePageHero">
         <img
           class="recipeHeroImg"
-          src="{{ page.image | relative_url }}"
+          src="{{ page.image | relative_url }}?v={{ site.image_version }}"
           alt="{{ page.title | escape }}"
           loading="eager"
           fetchpriority="high"

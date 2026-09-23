@@ -4,6 +4,9 @@ description: "Online-Kochbuch"
 # Gehostet auf Cloudflare Workers (Static Assets) im Root der Domain.
 baseurl: ""
 
+# Hochzählen, wenn Rezeptbilder geändert werden, damit Browser sie neu laden.
+image_version: 2
+
 markdown: kramdown
 encoding: utf-8
 
