@@ -27,7 +27,7 @@ npx wrangler dev                        # lokal wie auf Cloudflare ausliefern
 - Schrift: Fraunces 400/600 nur für Rezeptnamen (36) und große Überschriften (28), sonst Inter.
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
 - Standard-Theme hell; Dunkelmodus nur über den Schalter unter „Mehr“.
-- Logo: `assets/logo.svg` (Buch/Schale + Kräuteröl-Schwung). Keine Kochmütze, kein Besteck.
+- Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot, rechte Kräutergrün. Keine Kochmütze, kein Besteck.
 
 ## Rezepte
 

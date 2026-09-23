@@ -1,5 +1,5 @@
 /* Tobis Kochbuch — Service Worker */
-const VERSION = 'kochbuch-v3';
+const VERSION = 'kochbuch-v4';
 const ASSET_CACHE = `${VERSION}-assets`;
 const PAGE_CACHE = `${VERSION}-pages`;
 
