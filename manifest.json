@@ -2,21 +2,23 @@
   "name": "Tobis Kochbuch",
   "short_name": "Kochbuch",
   "description": "Persönliches Online-Kochbuch",
-  "start_url": "/Kochen/",
-  "scope": "/Kochen/",
+  "lang": "de",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#efece3",
-  "theme_color": "#efece3",
+  "background_color": "#faf7f2",
+  "theme_color": "#faf7f2",
   "icons": [
     {
-      "src": "/Kochen/assets/favicon-512.png",
+      "src": "/assets/favicon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/Kochen/assets/favicon-512.png",
+      "src": "/assets/favicon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
