@@ -14,7 +14,7 @@ layout: default
       <div class="rcImg" id="todayThumbWrap" {% unless featured.image %}style="display:none"{% endunless %}>
         <img
           id="todayImg"
-          src="{% if featured.image %}{{ featured.image | relative_url }}{% endif %}"
+          src="{% if featured.image %}{{ featured.image | relative_url }}?v={{ site.image_version }}{% endif %}"
           alt="{{ featured.title | escape }}"
           loading="eager"
           fetchpriority="high"
@@ -87,7 +87,7 @@ layout: default
     "time": {{ r.time | jsonify }},
     "servings": {{ r.servings | jsonify }},
     "tags": {{ r.tags | jsonify }},
-    "image": "{% if r.image %}{{ r.image | relative_url }}{% endif %}"
+    "image": "{% if r.image %}{{ r.image | relative_url }}?v={{ site.image_version }}{% endif %}"
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]

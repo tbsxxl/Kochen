@@ -32,3 +32,4 @@ npx wrangler dev                        # lokal wie auf Cloudflare ausliefern
 
 Markdown in `_recipes/`, Bilder in `recipes/images/` (Dateinamen ohne Umlaute/Leerzeichen).
 Neue KI-Bilder: rechte 7 % abschneiden, damit das Wasserzeichen verschwindet.
+Wenn bestehende Bilder geändert werden: `image_version` in `_config.yml` hochzählen (Cache-Busting).

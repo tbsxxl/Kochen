@@ -62,7 +62,7 @@ hide_topbar: true
         {% if r.image %}
           <div class="rcImg">
             <img
-              src="{{ r.image | relative_url }}"
+              src="{{ r.image | relative_url }}?v={{ site.image_version }}"
               alt="{{ r.title | escape }}"
               loading="lazy"
               decoding="async"
