@@ -2,6 +2,7 @@
 title: "Interstellar's Michelin Pork Belly (Pfirsich-Glasur)"
 date: 2026-09-17
 category: "Asiatisch"
+categories: ["Fleisch & Schmorgerichte"]
 tags: ["bbq", "schwein", "amerikanisch", "texas-bbq", "low-and-slow", "Fallow Chefs"]
 time: "ca. 20 Min aktiv, plus 6-12 Std. Trockenpökeln und 6-8 Std. Garzeit"
 image: /recipes/images/interstellar-pork-belly.jpg

@@ -419,6 +419,7 @@ body.layout-recipe .appMain{padding-top:0}
   font-size:var(--fs14);font-weight:400;
 }
 .chipMore{color:var(--sub2)}
+.chipLink{text-decoration:none;color:var(--leaf);border-color:var(--leafSoft);background:var(--leafSoft)}
 
 /* Kategorien-Wischleiste */
 .catRow{

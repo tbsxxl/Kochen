@@ -2,6 +2,7 @@
 title: "Pasta al Forno"
 date: 2026-02-20
 category: "Pasta"
+categories: ["Vegetarisch", "Italienisch"]
 tags: ["italienisch", "pasta", "ofen", "pomodoro", "vegetarisch", "Pasta & Cucina Italiana", "Pasta"]
 time: "ca. 1 Std"
 image: /recipes/images/Nudelauflauf.jpg

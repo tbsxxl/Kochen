@@ -2,6 +2,7 @@
 title: "Pollo al Basilico & Mozzarella"
 date: 2026-02-20
 category: "Hähnchen"
+categories: ["Italienisch"]
 tags: ["italienisch", "hähnchen", "basilikum", "mozzarella", "Pollame & Geflügel", "Chicken"]
 time: "ca. 50 Min"
 image: /recipes/images/basilikum.jpg

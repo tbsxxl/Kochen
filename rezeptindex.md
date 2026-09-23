@@ -13,14 +13,16 @@ permalink: /rezeptindex/
     <button id="clearSearch" class="btn btnGhost" type="button" aria-label="Zurücksetzen">↺</button>
   </div>
 
-  {%- assign cat_names = "" | split: "" -%}
-  {%- assign present = site.recipes | map: "category" | uniq -%}
-  {%- for c in site.data.categories -%}{%- if present contains c -%}{%- assign cat_names = cat_names | push: c -%}{%- endif -%}{%- endfor -%}
-  {%- for c in present -%}{%- if c -%}{%- unless site.data.categories contains c -%}{%- assign cat_names = cat_names | push: c -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
+  {%- assign cat_names = site.data.categories -%}
+  {%- assign primaries = site.recipes | map: "category" | uniq -%}
+  {%- for c in primaries -%}{%- if c -%}{%- unless cat_names contains c -%}{%- assign cat_names = cat_names | push: c -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
   <nav class="catRow" id="catRow" aria-label="Kategorie filtern">
     <button class="catChip active" data-cat="" type="button" aria-pressed="true">Alle</button>
     {%- for c in cat_names %}
+    {%- assign hits = site.recipes | where_exp: "r", "r.category == c or r.categories contains c" -%}
+    {%- if hits.size > 0 %}
     <button class="catChip" data-cat="{{ c | escape }}" type="button" aria-pressed="false">{{ c }}</button>
+    {%- endif -%}
     {%- endfor %}
   </nav>
 
@@ -53,8 +55,8 @@ permalink: /rezeptindex/
   {% assign sorted = site.recipes | sort: "title" %}
   {% for r in sorted %}
     {% capture tags %}{% if r.tags %}{{ r.tags | join: " " }}{% endif %}{% endcapture %}
-    {% capture hay %}{{ r.title }} {{ r.category }} {{ r.time }} {{ r.servings }} {{ tags }}{% endcapture %}
-    <a class="linkCard" href="{{ r.url | relative_url }}" data-recipe-card data-recipe-id="{{ r.url | relative_url }}" data-title="{{ r.title | escape }}" data-category="{{ r.category | escape }}" data-haystack="{{ hay | escape }}">
+    {% capture hay %}{{ r.title }} {{ r.categories | join: " " }} {{ r.time }} {{ r.servings }} {{ tags }}{% endcapture %}
+    <a class="linkCard" href="{{ r.url | relative_url }}" data-recipe-card data-recipe-id="{{ r.url | relative_url }}" data-title="{{ r.title | escape }}" data-category="{{ r.category | escape }}" data-categories="|{{ r.categories | join: '|' | escape }}|" data-haystack="{{ hay | escape }}">
       <div class="card recipeCard cardHover">
 
         {% if r.image %}
@@ -115,10 +117,10 @@ permalink: /rezeptindex/
     let visibleCount = 0;
     cards.forEach(c=>{
       const hay = norm(c.getAttribute('data-haystack'));
-      const cat = c.getAttribute('data-category') || '';
+      const cats = c.getAttribute('data-categories') || '';
       const id = c.getAttribute('data-recipe-id');
       const matchesTerm = !term || hay.includes(term);
-      const matchesCat = !activeCat || cat === activeCat;
+      const matchesCat = !activeCat || cats.includes('|' + activeCat + '|');
       const matchesFav = !favOnly || isFavById(id);
       const visible = matchesTerm && matchesCat && matchesFav;
       c.style.display = visible ? '' : 'none';

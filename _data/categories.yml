@@ -1,15 +1,17 @@
 # Reihenfolge der Kategorien (Filter-Chips, Kategorien-Seite, Admin-Vorschläge).
-# Neue Rezepte sollten eine dieser Kategorien verwenden.
+# Jedes Rezept hat eine Hauptkategorie (`category:`) und optional weitere (`categories: [...]`).
 - "Pasta"
 - "Pizza & Brot"
 - "Burger & Sandwiches"
 - "Hähnchen"
 - "Knusprig & Frittiert"
 - "Curry"
+- "Italienisch"
+- "Indisch"
 - "Asiatisch"
+- "Mexikanisch"
 - "Fleisch & Schmorgerichte"
 - "Bowls & Salate"
-- "Mexikanisch"
 - "Vegetarisch"
 - "Süßes & Backen"
 - "Saucen & Basics"

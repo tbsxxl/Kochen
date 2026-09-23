@@ -2,6 +2,7 @@
 title: "Chicken Wings"
 date: 2026-02-20
 category: "Knusprig & Frittiert"
+categories: ["Hähnchen"]
 tags: ["wings", "ofen", "glasiert", "streetfood"]
 time: "ca. 45 Min"
 image: /recipes/images/wings.jpg
