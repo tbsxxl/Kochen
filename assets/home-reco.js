@@ -64,6 +64,7 @@
       <div class="rcImg">
         <img src="${esc(r.image)}" srcset="${esc(r.srcset||'')}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="${esc(r.title)}" loading="lazy" decoding="async">
         ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
+        <span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(r.id)}" hidden title="In der Kühltruhe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="8 4 12 7 16 4"/><polyline points="8 20 12 17 16 20"/><polyline points="4 8 7 12 4 16"/><polyline points="20 8 17 12 20 16"/></svg><span data-count></span></span>
       </div>` : "";
     const fav = `<span class="favBadge rcFavBadge metaFav${showFavState?' isFav':''}" data-fav-badge data-recipe-id="${esc(r.id)}" aria-label="Favorit">♥</span>`;
     return `

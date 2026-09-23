@@ -38,6 +38,7 @@ layout: default
         {% if page.time %}<span class="kv"><span class="kvIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ page.time }}</span></span>{% endif %}
         {% if page.servings %}<span class="kv"><span class="kvIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span>{{ page.servings }}</span></span>{% endif %}
         <span class="kv kvFav" id="favPill" hidden>♥ Favorit</span>
+        <span class="kv kvFreezer" data-freezer-badge data-freezer-format="long" data-recipe-id="{{ page.url | relative_url }}" hidden><span class="kvIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="8 4 12 7 16 4"/><polyline points="8 20 12 17 16 20"/><polyline points="4 8 7 12 4 16"/><polyline points="20 8 17 12 20 16"/></svg></span><span data-count></span></span>
       </div>
 
       {% if page.tags %}

@@ -24,6 +24,7 @@ permalink: /kategorien/
                 loading="lazy"
                 decoding="async"
               >
+            {% include freezer-flag.html id=r.url %}
             </div>
           {% endif %}
           <div class="rcBody">

@@ -236,6 +236,24 @@
       const id = el.getAttribute('data-recipe-id');
       el.classList.toggle('isFav', isFavById(id));
     });
+
+    // Kühltruhe: Markierung auf Karten/Rezeptseite zeigen, sobald Portionen eingefroren sind
+    let freezer = {};
+    try { freezer = JSON.parse(localStorage.getItem("kochbuch.freezer") || "{}") || {}; } catch {}
+    const trimPath = (x)=> String(x || "").replace(/^https?:\/\/[^/]+/i, "").replace(/^\/Kochen(?=\/)/i, "").replace(/\/+$/, "");
+    const portionsById = {};
+    Object.keys(freezer).forEach(k=>{
+      const n = Number(freezer[k] && freezer[k].portions || 0);
+      if(n > 0) portionsById[trimPath(k)] = (portionsById[trimPath(k)] || 0) + n;
+    });
+    document.querySelectorAll('[data-freezer-badge][data-recipe-id]').forEach(el=>{
+      const n = portionsById[trimPath(el.getAttribute('data-recipe-id'))] || 0;
+      el.hidden = !(n > 0);
+      const c = el.querySelector('[data-count]');
+      if(c) c.textContent = el.getAttribute('data-freezer-format') === 'long'
+        ? `${n} ${n === 1 ? 'Portion' : 'Portionen'} eingefroren`
+        : String(n);
+    });
   };
 
   // initial
@@ -250,7 +268,7 @@
 
   // update when another tab changes localStorage
   window.addEventListener("storage", (e)=>{
-    if(e.key === statsKey) window.updateFavBadges();
+    if(!e.key || e.key === statsKey || e.key === "kochbuch.freezer") window.updateFavBadges();
   });
 })();
 

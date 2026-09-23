@@ -48,6 +48,8 @@
   --goldSoft:#F1EAD2;
   --onGold:#252A27;
   --petrol:#28565A;      /* Deep Petrol */
+  --ice:#28565A;         /* Kühltruhe: Petrol */
+  --iceSoft:#E1ECEC;
   --danger:#A23327;
   --dangerSoft:#F8E3DF;
 
@@ -83,38 +85,46 @@
 }
 
 :root[data-theme="dark"]{
+  /* Warmes „Espresso“-Dunkel statt Grüngrau: dieselbe Wärme wie Cream/Apricot, nur gedimmt */
   color-scheme:dark;
-  --bg:#1C1D1B;
-  --surface:#242522;
-  --surface2:#2E2F2B;
-  --line:#383934;
-  --lineStrong:#4A4B45;
-  --text:#EDE6DB;
-  --sub:#A9C2AE;
-  --sub2:#ABA59A;
-  --muted:#8F8A80;
+  --bg:#17140F;
+  --surface:#221E18;
+  --surface2:#2C2720;
+  --line:#3A342B;
+  --lineStrong:#4D463B;
+  --text:#F2EBE0;
+  --sub:#C9BFB0;
+  --sub2:#A69C8D;
+  --muted:#857C6F;
 
   --accent:#E8753D;
-  --accentSoft:#3D2A1F;
+  --accentSoft:#3F2718;
   --onAccent:#252A27;
-  --leaf:#8FB297;
-  --leafSoft:#2A352D;
-  --onLeaf:#1C1D1B;
-  --gold:#CDB86A;
-  --goldSoft:#37321F;
-  --onGold:#1C1D1B;
-  --petrol:#7FB0B3;
+  --leaf:#9DBBA3;
+  --leafSoft:#26302A;
+  --onLeaf:#17140F;
+  --gold:#D4BE6E;
+  --goldSoft:#362F1B;
+  --onGold:#17140F;
+  --petrol:#86BBBE;
+  --ice:#86BBBE;
+  --iceSoft:#1F2E30;
   --danger:#EF8A7D;
   --dangerSoft:#3B2320;
 
-  --glass:rgba(28,29,27,.82);
-  --scrim:rgba(0,0,0,.55);
+  --glass:rgba(23,20,15,.86);
+  --scrim:rgba(0,0,0,.6);
   --imageChip:rgba(0,0,0,.55);
 
-  --sh1:0 1px 2px rgba(0,0,0,.3);
-  --sh2:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.3);
-  --sh3:0 -12px 40px rgba(0,0,0,.5);
+  --sh1:0 1px 2px rgba(0,0,0,.35);
+  --sh2:0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.35);
+  --sh3:0 -12px 40px rgba(0,0,0,.55);
 }
+:root[data-theme="dark"] .rcImg img,
+:root[data-theme="dark"] .recipeHeroImg{filter:brightness(.92) saturate(.96)}
+:root[data-theme="dark"] .card{border-color:transparent}
+:root[data-theme="dark"] .recipePortionControls{background:var(--bg)}
+:root[data-theme="dark"] .recipePortionStep{background:var(--surface2);box-shadow:none}
 
 body.compact{
   --rCard:12px;
@@ -130,11 +140,11 @@ body.highContrast{
   --sub2:#45423C;
 }
 :root[data-theme="dark"] body.highContrast{
-  --line:#5A5B54;
-  --lineStrong:#7A7A70;
+  --line:#5A5146;
+  --lineStrong:#7A7064;
   --text:#FFFFFF;
-  --sub:#D2E3D5;
-  --sub2:#DDD7CC;
+  --sub:#E3D9CB;
+  --sub2:#D6CCBE;
 }
 
 /* ---------- 2. Basis ---------- */
@@ -493,6 +503,20 @@ body.layout-recipe .appMain{padding-top:0}
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   pointer-events:none;
 }
+
+/* Kühltruhe-Markierung (Karte: oben rechts auf dem Foto; Rezeptseite: Pill) */
+.freezerFlag{
+  position:absolute;top:12px;right:12px;z-index:2;
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px 4px 8px;border-radius:var(--rPill);
+  background:rgba(255,255,255,.92);color:#28565A;
+  font-size:var(--fs12);font-weight:600;line-height:1.5;font-variant-numeric:tabular-nums;
+  box-shadow:0 1px 3px rgba(0,0,0,.12);
+  pointer-events:none;
+}
+.freezerFlag svg{width:14px;height:14px;flex-shrink:0}
+.kvFreezer{background:var(--iceSoft);border-color:transparent;color:var(--ice)}
+.kvFreezer .kvIcon{color:var(--ice)}
 
 /* Favoriten-Herz */
 .favBadge{

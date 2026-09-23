@@ -22,6 +22,7 @@ layout: default
           fetchpriority="high"
           decoding="async"
         >
+        <span class="freezerFlag" id="todayFreezer" data-freezer-badge data-recipe-id="{{ featured.url | relative_url }}" hidden title="In der Kühltruhe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="8 4 12 7 16 4"/><polyline points="8 20 12 17 16 20"/><polyline points="4 8 7 12 4 16"/><polyline points="20 8 17 12 20 16"/></svg><span data-count></span></span>
         <div class="heroOverlayCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</div>
       </div>
       <div class="rcBody">
@@ -139,6 +140,7 @@ layout: default
   if(link && r.url) link.href = r.url;
   if(img && r.vt) img.style.viewTransitionName = 'img-' + r.vt;
   if(fav) fav.setAttribute('data-recipe-id', r.id || r.url || '');
+  const fz = el('todayFreezer'); if(fz) fz.setAttribute('data-recipe-id', r.id || r.url || '');
   if(ttl) ttl.textContent = r.title || '—';
   if(cat){ r.category ? (cat.textContent = r.category, cat.style.removeProperty('display')) : (cat.style.display='none'); }
   if(t && tTxt){ r.time ? (tTxt.textContent = r.time, t.style.removeProperty('display')) : (t.style.display='none'); }
@@ -185,6 +187,7 @@ layout: default
       <div class="rcImg">
         <img src="${esc(r.image)}" srcset="${esc(r.srcset||'')}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="${esc(r.title)}" loading="lazy" decoding="async">
         ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
+        <span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(r.id||r.url||'')}" hidden title="In der Kühltruhe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="8 4 12 7 16 4"/><polyline points="8 20 12 17 16 20"/><polyline points="4 8 7 12 4 16"/><polyline points="20 8 17 12 20 16"/></svg><span data-count></span></span>
       </div>` : "";
     const time = r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_CLOCK}</span><span>${esc(r.time)}</span></span>` : '';
     const serv = r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_PEOPLE}</span><span>${esc(r.servings)}</span></span>` : '';

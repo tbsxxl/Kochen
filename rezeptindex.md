@@ -70,6 +70,7 @@ permalink: /rezeptindex/
               decoding="async"
             >
             {% if r.category %}<div class="heroOverlayCat">{{ r.category }}</div>{% endif %}
+          {% include freezer-flag.html id=r.url %}
           </div>
         {% endif %}
 
