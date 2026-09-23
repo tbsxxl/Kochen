@@ -21,6 +21,7 @@ layout: default
           src="{{ page.image | relative_url }}"
           alt="{{ page.title | escape }}"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
         >
         {% if page.category %}<div class="heroOverlayCat">{{ page.category }}</div>{% endif %}

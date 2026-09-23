@@ -27,6 +27,20 @@
     return JSON.stringify(payload, null, 2);
   }
 
+  // Backups von der alten GitHub-Pages-Version enthalten Pfade wie
+  // "/Kochen/rezepte/x/". Auf Cloudflare liegt die Seite im Root.
+  const OLD_BASE = /^(https?:\/\/[^/]+)?\/Kochen(?=\/)/i;
+  function migratePaths(v){
+    if(typeof v === "string") return v.replace(OLD_BASE, "");
+    if(Array.isArray(v)) return v.map(migratePaths);
+    if(v && typeof v === "object"){
+      const out = {};
+      for(const k of Object.keys(v)) out[migratePaths(k)] = migratePaths(v[k]);
+      return out;
+    }
+    return v;
+  }
+
   function parseImport(){
     const txt = String(inp.value || "").trim();
     if(!txt) throw new Error("Import ist leer.");
@@ -37,7 +51,7 @@
 
   function applyImport(mode){
     const obj = parseImport();
-    const data = obj.data;
+    const data = migratePaths(obj.data);
 
     for(const k of Object.keys(data)){
       if(!KEYS.includes(k)) continue;

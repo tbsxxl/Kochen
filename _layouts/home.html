@@ -17,6 +17,7 @@ layout: default
           src="{% if featured.image %}{{ featured.image | relative_url }}{% endif %}"
           alt="{{ featured.title | escape }}"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
         >
         <div class="heroOverlayCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</div>

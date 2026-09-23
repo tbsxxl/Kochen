@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kochbuch",
+  "compatibility_date": "2026-09-01",
+  // Reine statische Seite: Jekyll baut nach _site, Cloudflare liefert es aus.
+  "assets": {
+    "directory": "./_site",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

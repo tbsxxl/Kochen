@@ -1,10 +1,11 @@
 title: "Tobis Kochbuch"
 description: "Online-Kochbuch"
 
-url: "https://tbsxxl.github.io"
-baseurl: "/Kochen"
+# Gehostet auf Cloudflare Workers (Static Assets) im Root der Domain.
+baseurl: ""
 
 markdown: kramdown
+encoding: utf-8
 
 collections:
   recipes:
@@ -17,3 +18,16 @@ defaults:
       type: recipes
     values:
       layout: recipe
+
+include:
+  - _headers
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - wrangler.jsonc
+  - README.md
+  - MaybeRezepte
+  - recipes/images/README.txt

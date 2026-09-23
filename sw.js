@@ -1,13 +1,15 @@
 /* Tobis Kochbuch — Service Worker */
-const VERSION = 'kochbuch-v1';
+const VERSION = 'kochbuch-v2';
 const ASSET_CACHE = `${VERSION}-assets`;
 const PAGE_CACHE = `${VERSION}-pages`;
 
 const PRECACHE = [
-  '/Kochen/',
-  '/Kochen/assets/styles.css',
-  '/Kochen/assets/utils.js',
-  '/Kochen/assets/favicon-512.png'
+  '/',
+  '/rezeptindex/',
+  '/shopping/',
+  '/assets/styles.css',
+  '/assets/utils.js',
+  '/assets/favicon-512.png'
 ];
 
 self.addEventListener('install', (e) => {
@@ -24,32 +26,35 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+function putIfOk(cacheName, req, res){
+  if (res && res.ok) {
+    const clone = res.clone();
+    caches.open(cacheName).then(c => c.put(req, clone));
+  }
+  return res;
+}
+
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
 
-  // Assets (css/js/images): cache-first, then network
-  if (/\.(css|js|png|jpg|jpeg|webp|svg|ico|woff2?)$/.test(url.pathname)) {
+  // Assets (css/js/images): stale-while-revalidate
+  if (/\.(css|js|png|jpg|jpeg|webp|avif|svg|ico|woff2?)$/.test(url.pathname)) {
     e.respondWith(
-      caches.match(req).then(hit => hit || fetch(req).then(res => {
-        const clone = res.clone();
-        caches.open(ASSET_CACHE).then(c => c.put(req, clone));
-        return res;
-      }))
+      caches.match(req).then(hit => {
+        const net = fetch(req).then(res => putIfOk(ASSET_CACHE, req, res)).catch(() => hit);
+        return hit || net;
+      })
     );
     return;
   }
 
   // Pages: network-first, fall back to cache when offline
   e.respondWith(
-    fetch(req).then(res => {
-      const clone = res.clone();
-      caches.open(PAGE_CACHE).then(c => c.put(req, clone));
-      return res;
-    }).catch(() =>
-      caches.match(req).then(hit => hit || caches.match('/Kochen/'))
-    )
+    fetch(req)
+      .then(res => putIfOk(PAGE_CACHE, req, res))
+      .catch(() => caches.match(req).then(hit => hit || caches.match('/')))
   );
 });
