@@ -5,11 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
-  <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#151412" media="(prefers-color-scheme: dark)">
-  <meta name="color-scheme" content="light dark">
-  <link rel="icon" type="image/png" href="{{ '/assets/favicon-512-removebg-preview.png' | relative_url }}">
-  <link rel="apple-touch-icon" href="{{ '/assets/favicon-512.png' | relative_url }}">
+  <meta name="theme-color" content="#FFF9F2">
+  <script>
+    // Theme vor dem ersten Rendern setzen (Standard: hell), damit nichts aufblitzt.
+    (function(){
+      var t = 'light';
+      try { t = JSON.parse(localStorage.getItem('kochbuch.ui.theme')) || 'light'; } catch(e){}
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'dark' ? '#1C1D1B' : '#FFF9F2');
+    })();
+  </script>
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/logo.svg' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
   <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
@@ -18,7 +26,7 @@
   {% if page.image %}<link rel="preload" as="image" href="{{ page.image | relative_url }}" fetchpriority="high">{% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400..700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <script defer src="{{ '/assets/utils.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   <script>
@@ -37,10 +45,10 @@
 
       <div class="iosTopBrand">
         <span class="brandMark iosTopLogo" aria-hidden="true">
-          <img src="{{ '/assets/favicon-512-removebg-preview.png' | relative_url }}" alt="">
+          <img src="{{ '/assets/logo.svg' | relative_url }}" alt="">
         </span>
         <div class="iosTopTitleWrap">
-          <div class="iosTopTitle">{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</div>
+          <div class="iosTopTitle{% if page.layout == 'home' %} brandWordmark{% endif %}">{% if page.layout == 'home' or page.title == nil %}{{ site.title }}{% else %}{{ page.title }}{% endif %}</div>
         </div>
       </div>
 
@@ -91,6 +99,7 @@
       <a class="sheetRow" href="{{ '/admin/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span><span>Admin</span></a>
       <a class="sheetRow" href="{{ '/backup/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/></svg></span><span>Backup / Import</span></a>
       <div class="sheetSep"></div>
+      <button class="sheetRow" id="toggleTheme" type="button" role="switch" aria-checked="false"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></span><span>Dunkler Modus</span><span class="sheetSwitch" aria-hidden="true"></span></button>
       <button class="sheetRow" id="toggleCompact" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg></span><span>Compact Mode</span></button>
       <button class="sheetRow" id="toggleContrast" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18" fill="currentColor" stroke="none" opacity=".3"/></svg></span><span>High Contrast</span></button>
     </div>
@@ -185,12 +194,21 @@
 
     const compactKey="kochbuch.ui.compact";
     const contrastKey="kochbuch.ui.contrast";
+    const themeKey="kochbuch.ui.theme";
+    const themeBtn=document.getElementById('toggleTheme');
 
     function apply(){
       document.body.classList.toggle('compact', !!get(compactKey,false));
       document.body.classList.toggle('highContrast', !!get(contrastKey,false));
+      const dark = get(themeKey,'light') === 'dark';
+      if (dark) document.documentElement.setAttribute('data-theme','dark');
+      else document.documentElement.removeAttribute('data-theme');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#1C1D1B' : '#FFF9F2');
+      themeBtn?.setAttribute('aria-checked', dark ? 'true' : 'false');
     }
     apply();
+
+    themeBtn?.addEventListener('click', ()=>{ set(themeKey, get(themeKey,'light') === 'dark' ? 'light' : 'dark'); apply(); });
 
     document.getElementById('toggleCompact')?.addEventListener('click', ()=>{ set(compactKey,!get(compactKey,false)); apply(); });
     document.getElementById('toggleContrast')?.addEventListener('click', ()=>{ set(contrastKey,!get(contrastKey,false)); apply(); });

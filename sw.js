@@ -1,5 +1,5 @@
 /* Tobis Kochbuch — Service Worker */
-const VERSION = 'kochbuch-v2';
+const VERSION = 'kochbuch-v3';
 const ASSET_CACHE = `${VERSION}-assets`;
 const PAGE_CACHE = `${VERSION}-pages`;
 
@@ -9,7 +9,7 @@ const PRECACHE = [
   '/shopping/',
   '/assets/styles.css',
   '/assets/utils.js',
-  '/assets/favicon-512.png'
+  '/assets/logo.svg'
 ];
 
 self.addEventListener('install', (e) => {
