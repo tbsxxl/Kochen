@@ -3,6 +3,7 @@ description: "Online-Kochbuch"
 
 # Gehostet auf Cloudflare Workers (Static Assets) im Root der Domain.
 baseurl: ""
+url: "https://kochbuch.tobis.workers.dev"
 
 # Hochzählen, wenn Rezeptbilder geändert werden, damit Browser sie neu laden.
 image_version: 2
@@ -33,5 +34,6 @@ exclude:
   - wrangler.jsonc
   - README.md
   - CLAUDE.md
+  - tools
   - MaybeRezepte
   - recipes/images/README.txt

@@ -19,6 +19,8 @@ layout: default
         <img
           class="recipeHeroImg"
           src="{{ page.image | relative_url }}?v={{ site.image_version }}"
+          srcset="{% include srcset.html src=page.image %}"
+          sizes="(min-width:960px) 928px, 100vw"
           alt="{{ page.title | escape }}"
           loading="eager"
           fetchpriority="high"

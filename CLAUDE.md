@@ -23,6 +23,7 @@ npx wrangler dev                        # lokal wie auf Cloudflare ausliefern
 - Farben: Warm White `#FFF9F2`, Cream `#F7F0E6`, Warm Gray `#E5DED4`, Charcoal `#252A27`,
   Warm Apricot `#E8753D` (nur primäre Aktion, dunkler Text), Herb Green `#526B57` (aktiv, Tags),
   Olive Oil `#B8A35A` (Favoriten), Deep Petrol `#28565A` (Links). Metadaten `#716E67`.
+- Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz).
 - Schrift: Fraunces 400/600 nur für Rezeptnamen (36) und große Überschriften (28), sonst Inter.
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
 - Standard-Theme hell; Dunkelmodus nur über den Schalter unter „Mehr“.
@@ -31,5 +32,6 @@ npx wrangler dev                        # lokal wie auf Cloudflare ausliefern
 ## Rezepte
 
 Markdown in `_recipes/`, Bilder in `recipes/images/` (Dateinamen ohne Umlaute/Leerzeichen).
-Neue KI-Bilder: rechte 7 % abschneiden, damit das Wasserzeichen verschwindet.
+Neue Bilder mit `python3 tools/optimize-images.py recipes/images/<bild>.jpg` vorbereiten: schneidet die
+rechten 7 % ab (KI-Wasserzeichen) und erzeugt `-480.webp`/`-960.webp`. Ohne WebP fällt die Seite aufs JPG zurück.
 Wenn bestehende Bilder geändert werden: `image_version` in `_config.yml` hochzählen (Cache-Busting).
