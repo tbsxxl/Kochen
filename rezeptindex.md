@@ -2,7 +2,6 @@
 layout: page
 title: Alle Rezepte
 permalink: /rezeptindex/
-hide_topbar: true
 ---
 
 <div class="section" style="margin-top:6px">
