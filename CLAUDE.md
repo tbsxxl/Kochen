@@ -26,7 +26,9 @@ npx wrangler dev                        # lokal wie auf Cloudflare ausliefern
 - Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz).
 - Schrift: Fraunces 400/600 nur für Rezeptnamen (36) und große Überschriften (28), sonst Inter.
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
-- Standard-Theme hell; Dunkelmodus nur über den Schalter unter „Mehr“.
+- Standard-Theme hell; Dunkelmodus nur über den Schalter unter „Mehr“ (warme Espresso-Töne, kein Grüngrau).
+- Kühltruhe: Rezeptkarten zeigen oben rechts „❄ n“, sobald Portionen eingefroren sind (`_includes/freezer-flag.html`,
+  Logik in `updateFavBadges()` in `assets/utils.js`). Neue Kartenvorlagen brauchen diese Markierung auch.
 - Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot, rechte Kräutergrün. Keine Kochmütze, kein Besteck.
   Bei Logo-Änderungen die Icon-Dateinamen (`-v2` → `-v3`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.

@@ -131,7 +131,7 @@ function renderIngredients(){
   const freezerHint = $("#freezerHint");
   const freezerRemove = $("#freezerRemove");
   function getFreezer(){ return ls.get(freezerKey, {}); }
-  function setFreezer(v){ ls.set(freezerKey, v); }
+  function setFreezer(v){ ls.set(freezerKey, v); if(typeof window.updateFavBadges === "function") window.updateFavBadges(); }
   function freezerEntry(){ const f=getFreezer(); return f[data.id] || null; }
   function renderFreezer(){
     const e = freezerEntry();
