@@ -36,8 +36,21 @@ layout: default
   </a>
 </div>
 
+<!-- Begrüßung -->
+<div class="section homeGreeting">
+  <div class="homeGreetingTitle" id="homeGreeting">Hallo</div>
+  <div class="homeGreetingSub">Was kochst du heute?</div>
+</div>
+<script>
+(function(){
+  var h = new Date().getHours();
+  var t = h < 5 ? 'Gute Nacht' : h < 11 ? 'Guten Morgen' : h < 17 ? 'Guten Tag' : 'Guten Abend';
+  document.getElementById('homeGreeting').textContent = t;
+})();
+</script>
+
 <!-- Schnellsuche -->
-<div class="section">
+<div class="section" style="margin-top:16px">
   <div class="searchRow searchRowCompact">
     <input id="homeSearch" type="search" placeholder="Rezept suchen …" autocomplete="off" />
   </div>
@@ -84,6 +97,7 @@ layout: default
   {
     "id": "{{ r.url | relative_url }}",
     "url": "{{ r.url | relative_url }}",
+    "vt": "{{ r.url | slugify }}",
     "title": {{ r.title | jsonify }},
     "category": {{ r.category | jsonify }},
     "time": {{ r.time | jsonify }},
@@ -122,6 +136,7 @@ layout: default
         s = el('todayServings'), sTxt = el('todayServingsText');
 
   if(link && r.url) link.href = r.url;
+  if(img && r.vt) img.style.viewTransitionName = 'img-' + r.vt;
   if(fav) fav.setAttribute('data-recipe-id', r.id || r.url || '');
   if(ttl) ttl.textContent = r.title || '—';
   if(cat){ r.category ? (cat.textContent = r.category, cat.style.removeProperty('display')) : (cat.style.display='none'); }
@@ -207,7 +222,7 @@ layout: default
     });
 
     if(!favEntries.length){
-      host.innerHTML = `<div class="sub" style="padding:8px 2px;font-size:14px">Noch keine Favoriten — tippe ♥ auf einem Rezept.</div>`;
+      host.innerHTML = `<div class="homeEmpty"><span class="homeEmptyIcon" aria-hidden="true">♥</span><div><div class="homeEmptyTitle">Noch keine Favoriten</div><div class="homeEmptyText">Öffne ein Rezept und merke es dir über „Mehr → Favorit“.</div></div></div>`;
       return;
     }
 

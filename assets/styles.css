@@ -686,6 +686,25 @@ body.layout-home .homeFeatured .rcBody{padding:16px calc(16px + env(safe-area-in
 }
 #homeSearchResults .card{border-radius:var(--rInner)}
 
+/* Begrüßung */
+.homeGreeting{margin-top:24px}
+.homeGreetingTitle{font-family:var(--fontDisplay);font-size:var(--fs28);font-weight:600;line-height:1.15;letter-spacing:-.02em}
+.homeGreetingSub{margin-top:4px;font-size:var(--fs16);color:var(--sub2)}
+
+/* Leerer Favoriten-Zustand */
+.homeEmpty{
+  display:flex;align-items:center;gap:16px;
+  padding:16px;border-radius:var(--rCard);
+  background:var(--surface);border:1px solid var(--line);
+}
+.homeEmptyIcon{
+  display:flex;align-items:center;justify-content:center;flex:0 0 48px;
+  width:48px;height:48px;border-radius:var(--rPill);
+  background:var(--goldSoft);color:var(--gold);font-size:22px;
+}
+.homeEmptyTitle{font-weight:600;font-size:var(--fs16)}
+.homeEmptyText{margin-top:4px;font-size:var(--fs14);color:var(--sub2)}
+
 /* Kühltruhe */
 .freezerRow,.freezerTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .freezerRight{display:flex;align-items:center;gap:8px}
@@ -835,7 +854,27 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 .cookChk{width:22px;height:22px;margin-top:1px;accent-color:#8FB297}
 .cookIngText{font-size:var(--fs18);line-height:1.4}
 
-/* ---------- 8. Bewegung ---------- */
+/* ---------- 8. Bewegung ----------
+   Wenige, zweckgebundene Animationen: Seitenwechsel (View Transitions, Rezeptbild
+   „fliegt“ von der Karte in den Kopf der Rezeptseite), dezentes Einblenden von Karten,
+   Rückmeldung beim Antippen (Druckeffekt). Alles aus bei „Bewegung reduzieren“. */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:var(--ease)}
+::view-transition-group(*){animation-duration:.32s;animation-timing-function:var(--ease)}
+.iosTopbar{view-transition-name:topbar}
+.tabbar:not(.recipeTabbar){view-transition-name:tabbar}
+
+@keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grid > .linkCard,.hScroll > .linkCard,.stack > .linkCard{animation:cardIn .32s var(--ease) both}
+.grid > .linkCard:nth-child(2),.hScroll > .linkCard:nth-child(2){animation-delay:.04s}
+.grid > .linkCard:nth-child(3),.hScroll > .linkCard:nth-child(3){animation-delay:.08s}
+.grid > .linkCard:nth-child(4),.hScroll > .linkCard:nth-child(4){animation-delay:.12s}
+.grid > .linkCard:nth-child(n+5){animation-delay:.16s}
+
+@media (prefers-reduced-motion: reduce){
+  @view-transition{navigation:none}
+}
+
 .pressable,button,.btn,.sheetRow,.tabItem,.recipePortionStep,.stepBtn,.counterBtn,.favBadge,.cookTab,.cookNavBtn,.uRow{
   transition:transform .16s var(--ease), background-color .18s ease, border-color .18s ease, color .18s ease, opacity .18s ease, box-shadow .18s ease;
 }

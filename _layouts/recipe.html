@@ -18,6 +18,7 @@ layout: default
       <div class="rcImg recipePageHero">
         <img
           class="recipeHeroImg"
+          style="view-transition-name: img-{{ page.url | slugify }}"
           src="{{ page.image | relative_url }}?v={{ site.image_version }}"
           srcset="{% include srcset.html src=page.image %}"
           sizes="(min-width:960px) 928px, 100vw"
@@ -40,9 +41,16 @@ layout: default
       </div>
 
       {% if page.tags %}
-      <div class="chips" style="margin-top:10px">
+      {%- assign cat_lc = page.category | downcase -%}
+      <div class="chips" style="margin-top:12px">
+        {%- assign shown = "" -%}
         {% for t in page.tags %}
+          {%- assign t_lc = t | downcase -%}
+          {%- assign key = "|" | append: t_lc | append: "|" -%}
+          {%- unless t_lc == cat_lc or shown contains key -%}
           <span class="chip">{{ t }}</span>
+          {%- assign shown = shown | append: key -%}
+          {%- endunless -%}
         {% endfor %}
       </div>
       {% endif %}

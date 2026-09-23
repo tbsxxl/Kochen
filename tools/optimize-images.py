@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rezeptbilder vorbereiten: Wasserzeichen-Rand abschneiden und WebP-Varianten erzeugen.
+"""Rezeptbilder vorbereiten: links und rechts je 7 % abschneiden (Wasserzeichen weg, Motiv mittig) und WebP-Varianten erzeugen.
 
     pip install pillow
     python3 tools/optimize-images.py recipes/images/neues-bild.jpg [...]
@@ -13,7 +13,7 @@ import sys
 from PIL import Image
 
 IMAGES = "recipes/images"
-CROP_RIGHT = 0.07  # rechte 7 % entfernen (KI-Wasserzeichen unten rechts)
+CROP = 0.07  # je 7 % links und rechts entfernen (KI-Wasserzeichen unten rechts, Motiv bleibt mittig)
 
 
 def webp_variants(path):
@@ -30,7 +30,8 @@ def crop(path):
     im = Image.open(path)
     im.load()
     w, h = im.size
-    im.convert("RGB").crop((0, 0, w - round(w * CROP_RIGHT), h)).save(
+    c = round(w * CROP)
+    im.convert("RGB").crop((c, 0, w - c, h)).save(
         path, "JPEG", quality=82, optimize=True, progressive=True
     )
 
