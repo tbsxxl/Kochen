@@ -1,6 +1,7 @@
 # Tobis Kochbuch
 
-Persönliches Online-Kochbuch als statische Jekyll-Seite, gehostet auf **Cloudflare Workers** (Static Assets).
+Persönliches Online-Kochbuch als statische Jekyll-Seite, gehostet auf **Cloudflare Workers** (Static Assets):
+<https://kochbuch.tobis.workers.dev/>.
 Rezepte liegen als Markdown in `_recipes/`, Bilder in `recipes/images/`. Favoriten, Einkaufsliste und
 Kühltruhe werden nur im Browser gespeichert (localStorage).
 
