@@ -2,6 +2,7 @@
 title: "Geschmorte Rinder-Short-Ribs mit Kartoffelpüree"
 date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
+categories: ["Meal Prep"]
 tags: [  "rind",  "short ribs",  "schmorgericht",  "ofen",  "rotwein",  "hauptgericht",  "kartoffelpüree",  "komfortessen", "beef"]
 time: "ca. 4,5–5 Stunden"
 image: /recipes/images/ribs.jpg

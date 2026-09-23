@@ -223,10 +223,21 @@ layout: default
   moreBtn?.addEventListener('click', ()=>{ openSheet(); setDetent('half'); });
   overlay?.addEventListener('click', closeSheet);
   closeBtn?.addEventListener('click', closeSheet);
+  // Drucken: direkt im Tipp aufrufen (Safari blockiert verzögerte print()-Aufrufe).
+  // Die Homescreen-App (standalone) kann auf dem iPhone nicht drucken → Rezept in Safari öffnen
+  // und dort automatisch den Druckdialog zeigen.
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   printBtn?.addEventListener('click', ()=>{
     closeSheet();
-    setTimeout(()=>window.print(), 50);
+    if(standalone){
+      window.open(location.pathname + '?drucken=1', '_blank');
+      return;
+    }
+    window.print();
   });
+  if(new URLSearchParams(location.search).has('drucken')){
+    window.addEventListener('load', ()=> setTimeout(()=> window.print(), 500));
+  }
 
   // Grabber toggles detents
   const grab = sheet?.querySelector('.sheetGrab');

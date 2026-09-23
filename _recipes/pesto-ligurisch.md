@@ -2,7 +2,7 @@
 title: "Pesto alla Genovese"
 date: 2026-02-20
 category: "Saucen & Basics"
-categories: ["Vegetarisch", "Italienisch"]
+categories: ["Vegetarisch", "Italienisch", "Schnell"]
 tags: ["italienisch", "pesto", "basilikum", "sauce", "vegetarisch", "Pasta & Cucina Italiana", "Sauce"]
 time: "ca. 20 Min"
 image: /recipes/images/pesto.jpg

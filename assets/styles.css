@@ -440,6 +440,12 @@ body.layout-recipe .appMain{padding-top:0}
 }
 .catChip.active{background:var(--leaf);border-color:var(--leaf);color:var(--onLeaf)}
 .catSection{scroll-margin-top:16px}
+.catOption{justify-content:space-between}
+.catOption.active{background:var(--leafSoft);color:var(--leaf);font-weight:600}
+.catOptCount{font-size:var(--fs14);color:var(--sub2);font-variant-numeric:tabular-nums}
+.catOption.active .catOptCount{color:var(--leaf)}
+#catBtn{max-width:60vw}
+#catBtnLabel{overflow:hidden;text-overflow:ellipsis}
 .catCount{font-size:var(--fs14);font-weight:500;color:var(--sub2);margin-left:4px}
 .badge,.kv{
   display:inline-flex;align-items:center;gap:8px;
@@ -906,7 +912,16 @@ body.layout-recipe .section:first-of-type{margin-top:0}
   .card{box-shadow:none !important}
   .recipePageCard{display:block !important;margin:0 !important}
   .recipePageHero::after{display:none}
-  .recipeHeroImg{height:auto !important;max-height:90mm;border-radius:8px}
+  .recipePageHero .recipeHeroImg{height:60mm !important;border-radius:8px}
+  .recipePageHero{margin:0 0 6mm !important}
+  .chips,#statsLine,.ingBase,.uLead,.kvFreezer,.kvFav{display:none !important}
+  .recipePageBody .h1{font-size:24pt !important;margin:0 0 3mm !important}
+  .kv{border:0 !important;padding:0 8px 0 0 !important;background:none !important}
+  .listGroup .uRow{min-height:0 !important;padding:1.5mm 0 !important}
+  .listGroup{border:0 !important}
+  .recipeInnerCard{padding:4mm !important}
+  .recipeBody ol > li{padding:2mm 0 2mm 10mm !important}
+  .recipeBody ol > li::before{top:2mm !important;width:6mm;height:6mm;font-size:9pt}
   .recipeInnerCard{position:static !important;margin:12px 0 !important;border:1px solid #ccc !important}
   .recipePageBody,.recipeBody{padding:0 !important;margin:0 !important}
   .recipeBody{font-size:11.5pt;line-height:1.4}
