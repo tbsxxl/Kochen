@@ -28,6 +28,8 @@ npx wrangler dev                        # lokal wie auf Cloudflare ausliefern
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
 - Standard-Theme hell; Dunkelmodus nur über den Schalter unter „Mehr“.
 - Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot, rechte Kräutergrün. Keine Kochmütze, kein Besteck.
+  Bei Logo-Änderungen die Icon-Dateinamen (`-v2` → `-v3`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
+  sonst zeigen iPhones und der Service Worker weiter das alte Icon.
 
 ## Rezepte
 
