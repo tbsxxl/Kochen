@@ -1,7 +1,7 @@
 ---
 title: "Tacos mit Rinderhack"
 date: 2026-02-20
-category: "Mexican"
+category: "Mexikanisch"
 tags: ["mexikanisch", "tacos", "rindfleisch", "gewürze", "Cocina Mexicana", "Mexican"]
 time: "ca. 50 Min"
 image: /recipes/images/tacos.jpg

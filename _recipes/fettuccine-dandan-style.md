@@ -1,7 +1,7 @@
 ---
 title: "Fettuccine Dandan-Style mit Hackfleisch"
 date: 2026-09-17
-category: "Hauptgericht"
+category: "Pasta"
 tags: ["asiatisch", "pasta", "extra-schnell", "scharf", "HelloFresh"]
 time: "15 - 25 Min"
 image: /recipes/images/fettuccine-dandan.jpg

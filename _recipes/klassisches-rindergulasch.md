@@ -1,7 +1,7 @@
 ---
 title: "Gulasch vom Rind"
 date: 2026-02-20
-category: "Beef"
+category: "Fleisch & Schmorgerichte"
 tags: ["ungarisch", "rindfleisch", "schmorgericht", "paprika", "Carne", "Beef"]
 time: "ca. 2 Std"
 image: /recipes/images/gulasch.jpg

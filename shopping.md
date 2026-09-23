@@ -12,7 +12,7 @@ permalink: /shopping/
 </div>
 
 <div class="section">
-  <div class="listGroup compactList" id="shopList"></div>
+  <div id="shopList"></div>
 </div>
 
 <div class="section">

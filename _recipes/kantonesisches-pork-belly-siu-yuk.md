@@ -1,7 +1,7 @@
 ---
 title: "Kantonesisches Pork Belly (Siu Yuk)"
 date: 2026-09-17
-category: "Hauptgericht"
+category: "Asiatisch"
 tags: ["chinesisch", "kantonesisch", "schwein", "knusprige-schwarte", "Fallow Chefs"]
 time: "ca. 1 Std. aktiv, plus mind. 12 Std. Ruhezeit im Kühlschrank"
 image: /recipes/images/siu-yuk-pork-belly.jpg

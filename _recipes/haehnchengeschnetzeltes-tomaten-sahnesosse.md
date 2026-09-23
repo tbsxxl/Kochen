@@ -1,7 +1,7 @@
 ---
 title: "Hähnchengeschnetzeltes in Tomaten-Sahnesoße auf Kräuterreis und Porree"
 date: 2026-09-17
-category: "Hauptgericht"
+category: "Hähnchen"
 tags: ["deutsch", "klassiker", "familientauglich", "schnell", "HelloFresh"]
 time: "25 - 35 Min"
 image: /recipes/images/haehnchengeschnetzeltes.jpg

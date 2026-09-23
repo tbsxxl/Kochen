@@ -1,7 +1,7 @@
 ---
 title: "Polpette alla Toscana"
 date: 2026-02-20
-category: "Oven"
+category: "Fleisch & Schmorgerichte"
 tags: ["italienisch", "hackfleisch", "ofen", "polpette", "Carne", "Beef"]
 time: "ca. 55 Min"
 image: /recipes/images/Toscana.jpg

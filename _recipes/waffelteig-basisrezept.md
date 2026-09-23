@@ -1,7 +1,7 @@
 ---
 title: "Waffel"
 date: 2026-02-20
-category: "Baking"
+category: "Süßes & Backen"
 tags: ["waffeln", "süßspeise", "backen", "grundrezept", "vegetarisch", "Dessert", "Baking"]
 time: "ca. 20 Min"
 image: /recipes/images/waffel.jpg

@@ -36,7 +36,8 @@ permalink: /admin/
 
       <div style="display:flex;flex-direction:column;gap:10px">
         <input class="fieldInput" id="title" placeholder="Titel" />
-        <input class="fieldInput" id="category" placeholder="Kategorie" />
+        <input class="fieldInput" id="category" placeholder="Kategorie" list="categoryList" autocomplete="off" />
+        <datalist id="categoryList">{% for c in site.data.categories %}<option value="{{ c }}">{% endfor %}</datalist>
         <div style="display:flex;gap:10px">
           <input class="fieldInput" id="time" placeholder="Zeit (z. B. 60–90 Min)" style="flex:1" />
           <input class="fieldInput" id="servings" inputmode="numeric" placeholder="Portionen" style="flex:1;max-width:120px" />

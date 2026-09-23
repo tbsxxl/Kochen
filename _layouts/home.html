@@ -5,9 +5,23 @@ layout: default
 {% assign newest = site.recipes | sort: "date" | reverse %}
 {% assign featured = newest | first %}
 
+<!-- Begrüßung -->
+<div class="section homeGreeting">
+  <div class="homeBrand"><img src="{{ '/assets/logo.svg' | relative_url }}?v=2" alt="" width="28" height="28"><span class="brandWordmark">{{ site.title }}</span></div>
+  <div class="homeGreetingTitle" id="homeGreeting">Hallo</div>
+  <div class="homeGreetingSub">Was kochst du heute?</div>
+</div>
+<script>
+(function(){
+  var h = new Date().getHours();
+  var t = h < 5 ? 'Gute Nacht' : h < 11 ? 'Guten Morgen' : h < 17 ? 'Guten Tag' : 'Guten Abend';
+  document.getElementById('homeGreeting').textContent = t;
+})();
+</script>
+
 <!-- Heute -->
-<div class="section">
-  <div class="homeBigTitle">Heute</div>
+<div class="section homeToday">
+  <div class="homeSectionHead"><div class="homeSectionTitle">Heute für dich</div></div>
 
   <a class="linkCard" id="todayLink" href="{{ featured.url | relative_url }}">
     <div class="card recipeCard cardHover homeFeatured">
@@ -37,22 +51,8 @@ layout: default
   </a>
 </div>
 
-<!-- Begrüßung -->
-<div class="section homeGreeting">
-  <div class="homeBrand"><img src="{{ '/assets/logo.svg' | relative_url }}?v=2" alt="" width="28" height="28"><span class="brandWordmark">{{ site.title }}</span></div>
-  <div class="homeGreetingTitle" id="homeGreeting">Hallo</div>
-  <div class="homeGreetingSub">Was kochst du heute?</div>
-</div>
-<script>
-(function(){
-  var h = new Date().getHours();
-  var t = h < 5 ? 'Gute Nacht' : h < 11 ? 'Guten Morgen' : h < 17 ? 'Guten Tag' : 'Guten Abend';
-  document.getElementById('homeGreeting').textContent = t;
-})();
-</script>
-
 <!-- Schnellsuche -->
-<div class="section" style="margin-top:16px">
+<div class="section">
   <div class="searchRow searchRowCompact">
     <input id="homeSearch" type="search" placeholder="Rezept suchen …" autocomplete="off" />
   </div>

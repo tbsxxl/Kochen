@@ -1,7 +1,7 @@
 ---
 title: "One-Pan: Jambalaya Hähnchenbrustfilet"
 date: 2026-09-17
-category: "Hauptgericht"
+category: "Hähnchen"
 tags: ["amerikanisch", "cajun", "hähnchen", "high-protein", "one-pan", "HelloFresh"]
 time: "35 - 45 Min"
 image: /recipes/images/jambalaya-haehnchen.jpg

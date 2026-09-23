@@ -1,7 +1,7 @@
 ---
 title: "Karibischer Hähnchensalat & Kiwi-Chili-Dressing"
 date: 2026-09-17
-category: "Salat"
+category: "Bowls & Salate"
 tags: ["karibisch", "salat", "high-protein", "schnell", "viel-gemüse", "HelloFresh"]
 time: "20 - 30 Min"
 image: /recipes/images/karibischer-haehnchensalat.jpg

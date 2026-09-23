@@ -1,7 +1,7 @@
 ---
 title: "Rindersteak auf Rigatoni in Kampot-Pfefferrahm"
 date: 2026-08-25
-category: "Fleisch"
+category: "Pasta"
 tags: ["rind", "pasta", "schnell", "HelloFresh"]
 time: "25–35 Min"
 image: /recipes/images/rindersteak-rigatoni-kampot-pfeffer.jpg

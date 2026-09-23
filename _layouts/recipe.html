@@ -57,28 +57,21 @@ layout: default
       {% endif %}
     </div>
 
-    <div class="dim" id="statsLine" style="padding:0 16px"></div>
+    <div class="dim" id="statsLine"></div>
 
-    <div class="hr" style="margin:12px 16px 0 16px"></div>
-
-    <div class="card cardPad recipeInnerCard" style="margin:12px 16px">
-      <div class="recipePortionCard">
-        <div class="recipePortionHead">
-          <div class="recipePortionTitle">Portionen</div>
-          <div class="recipePortionBase">Basis: <span id="baseServings"></span></div>
-        </div>
-        <div class="recipePortionControls" aria-label="Portionen ändern">
+    <div class="card cardPad recipeInnerCard">
+      <div class="ingHead">
+        <h2 class="h2">Zutaten</h2>
+        <div class="portionStepper recipePortionControls" role="group" aria-label="Portionen ändern">
           <button class="recipePortionStep" id="servingsMinus" type="button" aria-label="Portionen verringern">−</button>
-          <div class="recipePortionValueWrap">
-            <input id="servingsInput" class="recipePortionInput" inputmode="numeric" />
-          </div>
+          <label class="portionValue">
+            <input id="servingsInput" class="recipePortionInput" inputmode="numeric" aria-label="Portionen" />
+            <span>Portionen</span>
+          </label>
           <button class="recipePortionStep" id="servingsPlus" type="button" aria-label="Portionen erhöhen">+</button>
         </div>
       </div>
-
-      <div class="hr"></div>
-
-      <div class="h2" style="margin:0 0 8px 0">Zutaten</div>
+      <div class="ingBase" id="ingBase" hidden>Originalrezept: <span id="baseServings"></span> Portionen</div>
       <div class="listGroup" id="ingredientsGroup">
         <div id="ingredientsList"></div>
       </div>
@@ -168,6 +161,7 @@ layout: default
     <div class="cookTitle" id="cookTitle">Kochmodus</div>
     <div class="cookPill" id="cookStepPill">1/1</div>
   </div>
+  <div class="cookProgress" aria-hidden="true"><div class="cookProgressBar" id="cookProgressBar"></div></div>
 
   <div class="cookTabs" role="tablist" aria-label="Kochmodus Tabs">
     <button class="cookTab active" id="cookTabSteps" type="button" role="tab" aria-selected="true">Schritte</button>
@@ -176,7 +170,11 @@ layout: default
 
   <div class="cookBody" id="cookBody">
     <div class="cookPanel" id="cookPanelSteps" role="tabpanel">
-      <div class="cookStep" id="cookStepText"></div>
+      <div class="cookStep" id="cookStepText" title="Tippen für den nächsten Schritt"></div>
+      <div class="cookStepIngs" id="cookStepIngs" hidden>
+        <div class="cookStepIngsLabel">Dafür brauchst du</div>
+        <div class="cookStepIngsList" id="cookStepIngsList"></div>
+      </div>
       <div class="cookNav">
         <button class="cookNavBtn" id="cookPrev" type="button">‹ Zurück</button>
         <button class="cookNavBtn primary" id="cookNext" type="button">Weiter ›</button>

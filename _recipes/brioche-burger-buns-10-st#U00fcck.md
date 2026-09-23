@@ -1,7 +1,7 @@
 ---
 title: "Brioche Buns"
 date: 2026-02-20
-category: "Bread"
+category: "Pizza & Brot"
 tags: ["französisch", "hefeteig", "backen", "brioche", "vegetarisch", "Boulangerie"]
 time: "ca. 2 Std 50 Min"
 image: /recipes/images/Buns.jpg

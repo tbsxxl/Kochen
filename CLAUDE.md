@@ -36,6 +36,9 @@ npx wrangler dev                        # lokal wie auf Cloudflare ausliefern
 ## Rezepte
 
 Markdown in `_recipes/`, Bilder in `recipes/images/` (Dateinamen ohne Umlaute/Leerzeichen).
+Kategorie (`category:`) immer aus `_data/categories.yml` wählen; die Datei bestimmt auch die Reihenfolge der
+Kategorie-Chips. Einkaufsliste sortiert Zutaten per Stichwort nach Supermarkt-Abteilung (`assets/shopping.js`,
+`KEYWORDS`); neue Zutaten, die unter „Sonstiges“ landen, dort ergänzen.
 Neue Bilder mit `python3 tools/optimize-images.py recipes/images/<bild>.jpg` vorbereiten: schneidet links
 und rechts je 7 % ab (KI-Wasserzeichen, Motiv bleibt mittig) und erzeugt `-480.webp`/`-960.webp`. Ohne WebP fällt die Seite aufs JPG zurück.
 Wenn bestehende Bilder geändert werden: `image_version` in `_config.yml` hochzählen (Cache-Busting).

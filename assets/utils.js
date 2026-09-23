@@ -35,10 +35,20 @@
     return { qty: q, unit: u };
   }
 
-  function roundSmart(n){
+  // Küchentaugliche Rundung mit deutschem Komma: 533,33 g → 535 g, 1,333 kg → 1,33 kg, 1,33 Stk → 1,5
+  function roundSmart(n, unit){
     if(typeof n !== "number" || !isFinite(n)) return "";
-    const r = Math.round(n * 100) / 100;
-    return (Math.abs(r - Math.round(r)) < 1e-9) ? String(Math.round(r)) : String(r);
+    const u = String(unit || "").toLowerCase();
+    let r;
+    if(u === "g" || u === "ml"){
+      r = n >= 100 ? Math.round(n / 5) * 5 : n >= 10 ? Math.round(n) : Math.round(n * 10) / 10;
+    }else if(u === "kg" || u === "l"){
+      r = Math.round(n * 100) / 100;
+    }else{
+      r = n >= 10 ? Math.round(n) : Math.round(n * 4) / 4;   // Stück, EL, TL: auf Viertel
+    }
+    const s = (Math.abs(r - Math.round(r)) < 1e-9) ? String(Math.round(r)) : String(r);
+    return s.replace(".", ",");
   }
 
 

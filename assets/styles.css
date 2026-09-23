@@ -123,7 +123,7 @@
 :root[data-theme="dark"] .rcImg img,
 :root[data-theme="dark"] .recipeHeroImg{filter:brightness(.92) saturate(.96)}
 :root[data-theme="dark"] .card{border-color:transparent}
-:root[data-theme="dark"] .recipePortionControls{background:var(--bg)}
+:root[data-theme="dark"] .portionStepper{background:var(--bg)}
 :root[data-theme="dark"] .recipePortionStep{background:var(--surface2);box-shadow:none}
 
 body.compact{
@@ -209,7 +209,6 @@ code{font-family:var(--fontMono)}
   padding-top:calc(env(safe-area-inset-top) + 24px);
   padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 24px);
 }
-body.layout-home .appMain,
 body.layout-recipe .appMain{padding-top:0}
 .layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) + env(safe-area-inset-bottom) + 24px)}
 
@@ -414,12 +413,33 @@ body.layout-recipe .appMain{padding-top:0}
 .chipsCompact{margin-top:8px}
 .chip{
   display:inline-flex;align-items:center;
-  min-height:32px;padding:4px 12px;
+  min-height:28px;padding:2px 10px;
   border-radius:var(--rPill);
-  background:var(--leafSoft);color:var(--leaf);
-  font-size:var(--fs14);font-weight:500;
+  background:transparent;border:1px solid var(--line);color:var(--sub2);
+  font-size:var(--fs14);font-weight:400;
 }
-.chipMore{background:var(--surface2);color:var(--sub2)}
+.chipMore{color:var(--sub2)}
+
+/* Kategorien-Wischleiste */
+.catRow{
+  display:flex;gap:8px;
+  margin:16px calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
+  padding:0 calc(16px + env(safe-area-inset-right)) 4px calc(16px + env(safe-area-inset-left));
+  overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.catRow::-webkit-scrollbar{display:none}
+.catChip{
+  flex:0 0 auto;scroll-snap-align:start;
+  display:inline-flex;align-items:center;
+  min-height:40px;padding:0 16px;
+  border:1px solid var(--line);border-radius:var(--rPill);
+  background:var(--surface);color:var(--text);
+  font-size:var(--fs14);font-weight:500;white-space:nowrap;text-decoration:none;
+  transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+.catChip.active{background:var(--leaf);border-color:var(--leaf);color:var(--onLeaf)}
+.catSection{scroll-margin-top:16px}
+.catCount{font-size:var(--fs14);font-weight:500;color:var(--sub2);margin-left:4px}
 .badge,.kv{
   display:inline-flex;align-items:center;gap:8px;
   min-height:32px;padding:4px 12px;
@@ -584,6 +604,11 @@ body.layout-recipe .appMain{padding-top:0}
 }
 .shopRow{display:flex;align-items:center;gap:10px;min-height:56px;margin:8px 0;padding:10px 12px;border:1px solid var(--line);border-radius:var(--rBtn);background:var(--surface)}
 .shopLeft{flex:1;min-width:0}
+/* Einkaufsliste nach Abteilungen */
+.shopSection + .shopSection{margin-top:24px}
+.shopSectionHead{display:flex;align-items:baseline;justify-content:space-between;margin:0 4px 8px;font-size:var(--fs12);font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--sub2)}
+.shopSectionCount{font-variant-numeric:tabular-nums}
+.shopSectionDone .listGroup{opacity:.7}
 .shopName{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Stepper */
@@ -614,10 +639,6 @@ body.layout-recipe .appMain{padding-top:0}
 
 /* ---------- 6. Seiten ---------- */
 /* Start */
-.homeBigTitle{
-  margin:4px 0 16px;
-  font-family:var(--fontDisplay);font-size:var(--fs36);font-weight:600;letter-spacing:-.02em;line-height:1.1;
-}
 .homeSectionHead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
 .homeSectionTitle{
   margin:0 0 12px;
@@ -627,41 +648,18 @@ body.layout-recipe .appMain{padding-top:0}
 .homeAllLink{color:var(--petrol);font-size:var(--fs14);font-weight:500;text-decoration:none}
 .homeAllLink:hover{text-decoration:underline}
 
-body.layout-home .section:first-of-type{margin-top:0;position:relative}
-body.layout-home .homeBigTitle{
-  position:absolute;z-index:5;
-  top:calc(env(safe-area-inset-top) + 16px);
-  left:calc(4px + env(safe-area-inset-left));
-  margin:0;padding:4px 12px;border-radius:var(--rPill);
-  background:var(--imageChip);color:#fff;
-  font-family:var(--fontUi);font-size:var(--fs12);font-weight:500;letter-spacing:.04em;line-height:1.5;text-transform:uppercase;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  pointer-events:none;
-}
-body.layout-home .homeFeatured{
-  margin:0 calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
-  border:0;border-radius:0 0 24px 24px;
-  box-shadow:var(--sh2);
-}
-body.layout-home .homeFeatured .rcImg{aspect-ratio:auto;height:clamp(300px, 62vw, 460px)}
-body.layout-home .homeFeatured .rcImg::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%);
-  pointer-events:none;
-}
-body.layout-home .homeFeatured .heroOverlayCat{left:calc(16px + env(safe-area-inset-left));bottom:16px}
-body.layout-home .homeFeatured .rcBody{padding:16px calc(16px + env(safe-area-inset-right)) 24px calc(16px + env(safe-area-inset-left))}
+/* „Heute für dich“: große Karte im Seitenraster */
+.homeFeatured{box-shadow:var(--sh2)}
+.homeFeatured .rcImg{aspect-ratio:auto;height:clamp(220px, 58vw, 380px)}
+.homeFeatured .rcBody{padding:16px 16px 20px}
 .homeFeaturedTitle{font-family:var(--fontDisplay);font-size:var(--fs28);font-weight:600;line-height:1.15;letter-spacing:-.02em;-webkit-line-clamp:3}
-@media (min-width:960px){
-  body.layout-home .homeFeatured{margin:0;border-radius:0 0 var(--rCard) var(--rCard)}
-}
 #homeSearchResults .card{border-radius:var(--rInner)}
 
 /* Begrüßung */
-.homeGreeting{margin-top:24px}
+.homeGreeting{margin-top:0}
 .homeBrand{display:flex;align-items:center;gap:8px;margin-bottom:16px;color:var(--text)}
 .homeBrand img{display:block;width:28px;height:28px}
-.homeGreetingTitle{font-family:var(--fontDisplay);font-size:var(--fs28);font-weight:600;line-height:1.15;letter-spacing:-.02em}
+.homeGreetingTitle{font-family:var(--fontDisplay);font-size:var(--fs36);font-weight:600;line-height:1.1;letter-spacing:-.02em}
 .homeGreetingSub{margin-top:4px;font-size:var(--fs16);color:var(--sub2)}
 
 /* Leerer Favoriten-Zustand */
@@ -680,6 +678,15 @@ body.layout-home .homeFeatured .rcBody{padding:16px calc(16px + env(safe-area-in
 
 /* Kühltruhe */
 .freezerRow,.freezerTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.freezerLink{display:flex;align-items:center;gap:12px;min-width:0;flex:1;text-decoration:none;color:inherit}
+.freezerThumb{flex:0 0 64px;width:64px;height:64px;border-radius:12px;object-fit:cover;background:var(--surface2)}
+.freezerThumbEmpty{display:flex;align-items:center;justify-content:center;color:var(--ice)}
+.freezerThumbEmpty svg{width:24px;height:24px}
+.freezerInfo{display:flex;flex-direction:column;gap:4px;min-width:0}
+.freezerInfo .freezerTitle{font-size:var(--fs16);line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.freezerMeta{font-size:var(--fs14);color:var(--sub2)}
+.freezerOld{color:var(--danger);font-weight:500}
+.freezerUnit{margin-left:4px;font-size:var(--fs14);color:var(--sub2)}
 .freezerRight{display:flex;align-items:center;gap:8px}
 .freezerTitle{font-weight:600;text-decoration:none;color:var(--text)}
 .freezerRowTitle{font-weight:600;font-size:var(--fs16);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -717,32 +724,33 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 }
 .recipePageCard > .recipePageBody:first-child{margin-top:calc(env(safe-area-inset-top) + 24px);border-radius:0}
 .recipePageBody .h1{margin:0 0 16px !important;font-size:var(--fs36);line-height:1.1;letter-spacing:-.02em}
-#statsLine{padding:0 calc(16px + env(safe-area-inset-left)) !important;font-size:var(--fs14)}
+#statsLine{padding:4px calc(16px + env(safe-area-inset-left)) 0;font-size:var(--fs14)}
 #statsLine:empty{display:none}
 .recipePageCard > .hr{display:none}
 .recipeInnerCard{
   margin:16px calc(16px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left)) !important;
 }
-.recipePortionCard{padding:0}
-.recipePortionHead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
-.recipePortionTitle{font-size:var(--fs18);font-weight:600;letter-spacing:-.01em}
-.recipePortionBase{font-size:var(--fs14);color:var(--sub2)}
-.recipePortionControls{display:flex;align-items:center;gap:8px;padding:4px;border-radius:var(--rInner);background:var(--surface2)}
-.recipePortionValueWrap{flex:1;min-width:0}
+/* Zutaten-Kopf mit kompaktem Portionen-Stepper */
+.ingHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.ingHead .h2{margin:0}
+.portionStepper{display:inline-flex;align-items:center;gap:4px;padding:4px;border-radius:var(--rPill);background:var(--surface2)}
+.portionValue{display:inline-flex;align-items:baseline;gap:4px;padding:0 4px;cursor:text}
+.portionValue span{font-size:var(--fs14);color:var(--sub2)}
 .recipePortionInput{
-  width:100%;height:48px;padding:0 12px;
-  border:0;border-radius:8px;background:transparent;
-  font-size:var(--fs22);font-weight:600;text-align:center;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+  width:2.2ch;padding:0;border:0;background:transparent;
+  font-size:var(--fs18);font-weight:600;text-align:right;font-variant-numeric:tabular-nums;color:var(--text);
 }
-.recipePortionInput:focus{outline:none;background:var(--bg)}
+.recipePortionInput:focus{outline:none}
+.portionStepper:focus-within{box-shadow:0 0 0 2px var(--accentSoft)}
 .recipePortionStep{
   display:inline-flex;align-items:center;justify-content:center;
-  width:48px;height:48px;min-width:48px;
-  border:0;border-radius:8px;
+  width:36px;height:36px;min-width:36px;
+  border:0;border-radius:var(--rPill);
   background:var(--bg);color:var(--text);
-  font-size:var(--fs22);font-weight:500;line-height:1;
+  font-size:var(--fs18);font-weight:500;line-height:1;
   box-shadow:var(--sh1);
 }
+.ingBase{margin:-4px 0 12px;font-size:var(--fs14);color:var(--sub2);text-align:right}
 .recipeBody{padding:0 calc(16px + env(safe-area-inset-right)) 16px calc(16px + env(safe-area-inset-left)) !important}
 .recipeBody h2{margin:32px 0 12px;font-size:var(--fs22);line-height:1.27;font-weight:600;letter-spacing:-.01em}
 .recipeBody h3{margin:24px 0 8px;font-size:var(--fs18);font-weight:600}
@@ -812,17 +820,34 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 .cookTabs{display:flex;gap:4px;margin:0 16px 12px;padding:4px;border-radius:var(--rInner);background:rgba(255,255,255,.07)}
 .cookTab{flex:1;min-height:40px;border:0;border-radius:8px;background:transparent;color:rgba(255,255,255,.7);font-weight:600}
 .cookTab.active{background:rgba(255,255,255,.14);color:#fff}
-.cookBody{flex:1;overflow:auto;padding:0 16px calc(16px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+.cookProgress{height:4px;margin:0 16px 12px;border-radius:var(--rPill);background:rgba(255,255,255,.1);overflow:hidden}
+.cookProgressBar{height:100%;width:0;border-radius:var(--rPill);background:#E8753D;transition:width .3s var(--ease)}
+.cookBody{flex:1;overflow:auto;padding:0 16px;-webkit-overflow-scrolling:touch}
 .cookPanel{max-width:720px;margin:0 auto}
+#cookPanelSteps{display:flex;flex-direction:column;min-height:100%}
 .cookStep{
-  min-height:44vh;padding:24px;
+  padding:24px;
   border-radius:24px;background:rgba(255,255,255,.06);
   font-size:var(--fs28);font-weight:500;line-height:1.35;letter-spacing:-.01em;
+  cursor:pointer;
 }
-.cookNav{display:flex;gap:12px;margin-top:12px}
-.cookNavBtn{flex:1;min-height:56px;border:0;border-radius:16px;background:rgba(255,255,255,.08);color:#fff;font-size:15px;font-weight:600}
+.cookStepIngs{margin-top:16px}
+.cookStepIngsLabel{margin:0 4px 8px;font-size:var(--fs12);font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.cookStepIngsList{display:flex;flex-direction:column;border-radius:16px;background:rgba(255,255,255,.06);overflow:hidden}
+.cookStepIng{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;font-size:var(--fs18)}
+.cookStepIng + .cookStepIng{border-top:1px solid rgba(255,255,255,.08)}
+.cookStepIng .num{font-weight:600;white-space:nowrap}
+.cookNav{
+  position:sticky;bottom:0;margin-top:auto;
+  display:flex;gap:12px;
+  padding:16px 0 calc(16px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg, rgba(28,29,27,0) 0%, #1C1D1B 30%);
+}
+.cookNavBtn{flex:1;min-height:64px;border:0;border-radius:20px;background:rgba(255,255,255,.1);color:#fff;font-size:var(--fs18);font-weight:600}
+.cookNavBtn:disabled{opacity:.35}
+#cookPrev{flex:0 0 35%}
 .cookNavBtn.primary{background:#E8753D;color:#252A27}
-.cookIngs{display:flex;flex-direction:column;gap:8px}
+.cookIngs{display:flex;flex-direction:column;gap:8px;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
 .cookIngRow{display:flex;align-items:flex-start;gap:12px;padding:16px;border-radius:16px;background:rgba(255,255,255,.06)}
 .cookChk{width:22px;height:22px;margin-top:1px;accent-color:#8FB297}
 .cookIngText{font-size:var(--fs18);line-height:1.4}
@@ -873,7 +898,7 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 @page{margin:16mm}
 @media print{
   :root{--bg:#fff;--surface:#fff;--surface2:#fff;--text:#000;--sub:#333;--sub2:#555;--line:#ccc}
-.tabbar,.recipeTabbar,.sheetOverlay,.sheet,.cookOverlay,.heroOverlayCat,.favBadge,.recipePortionControls{display:none !important}
+.tabbar,.recipeTabbar,.sheetOverlay,.sheet,.cookOverlay,.heroOverlayCat,.favBadge,.portionStepper,.freezerFlag{display:none !important}
   body{background:#fff !important}
   .appMain{padding:0 !important}
   .container{max-width:100% !important;padding:0 !important}
