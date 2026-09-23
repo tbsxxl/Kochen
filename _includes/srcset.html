@@ -1,0 +1,12 @@
+{%- comment -%}
+  WebP-Varianten eines Rezeptbilds (liegen neben dem JPG: name-480.webp, name-960.webp,
+  erzeugt mit tools/optimize-images.py). Fehlen sie, bleibt srcset leer und das JPG wird genutzt.
+  Aufruf: srcset="{% include srcset.html src=r.image %}"
+{%- endcomment -%}
+{%- assign _stem = include.src | replace: '.jpg', '' | replace: '.jpeg', '' | replace: '.png', '' -%}
+{%- assign _small = _stem | append: '-480.webp' -%}
+{%- assign _hit = site.static_files | where: 'path', _small | first -%}
+{%- if _hit -%}
+{%- assign _url = _stem | relative_url -%}
+{{ _url }}-480.webp?v={{ site.image_version }} 480w, {{ _url }}-960.webp?v={{ site.image_version }} 930w
+{%- endif -%}

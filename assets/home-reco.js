@@ -62,7 +62,7 @@
     const meta = metaLine(r);
     const img = r.image ? `
       <div class="rcImg">
-        <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
+        <img src="${esc(r.image)}" srcset="${esc(r.srcset||'')}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="${esc(r.title)}" loading="lazy" decoding="async">
         ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
       </div>` : "";
     const fav = `<span class="favBadge rcFavBadge metaFav${showFavState?' isFav':''}" data-fav-badge data-recipe-id="${esc(r.id)}" aria-label="Favorit">♥</span>`;

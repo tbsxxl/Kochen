@@ -15,6 +15,8 @@ layout: default
         <img
           id="todayImg"
           src="{% if featured.image %}{{ featured.image | relative_url }}?v={{ site.image_version }}{% endif %}"
+          {% if featured.image %}srcset="{% include srcset.html src=featured.image %}"{% endif %}
+          sizes="(min-width:960px) 928px, 100vw"
           alt="{{ featured.title | escape }}"
           loading="eager"
           fetchpriority="high"
@@ -87,7 +89,8 @@ layout: default
     "time": {{ r.time | jsonify }},
     "servings": {{ r.servings | jsonify }},
     "tags": {{ r.tags | jsonify }},
-    "image": "{% if r.image %}{{ r.image | relative_url }}?v={{ site.image_version }}{% endif %}"
+    "image": "{% if r.image %}{{ r.image | relative_url }}?v={{ site.image_version }}{% endif %}",
+    "srcset": "{% if r.image %}{% include srcset.html src=r.image %}{% endif %}"
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]
@@ -125,7 +128,7 @@ layout: default
   if(t && tTxt){ r.time ? (tTxt.textContent = r.time, t.style.removeProperty('display')) : (t.style.display='none'); }
   if(s && sTxt){ r.servings ? (sTxt.textContent = r.servings, s.style.removeProperty('display')) : (s.style.display='none'); }
   if(imgW && img){
-    r.image ? (img.src = r.image, img.alt = r.title||'', imgW.style.removeProperty('display')) : (imgW.style.display='none');
+    r.image ? (img.srcset = r.srcset || '', img.src = r.image, img.alt = r.title||'', imgW.style.removeProperty('display')) : (imgW.style.display='none');
   }
   window.dispatchEvent(new Event('storage'));
 })();
@@ -164,7 +167,7 @@ layout: default
     const href = r.url||r.id||'#';
     const img = r.image ? `
       <div class="rcImg">
-        <img src="${esc(r.image)}" alt="${esc(r.title)}" loading="lazy" decoding="async">
+        <img src="${esc(r.image)}" srcset="${esc(r.srcset||'')}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="${esc(r.title)}" loading="lazy" decoding="async">
         ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
       </div>` : "";
     const time = r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_CLOCK}</span><span>${esc(r.time)}</span></span>` : '';
@@ -262,7 +265,7 @@ layout: default
     results.innerHTML = hits.map(r=>`
       <a class="linkCard" href="${esc(r.url)}">
         <div class="card cardPad cardHover" style="display:flex;align-items:center;gap:12px">
-          ${r.image ? `<img src="${esc(r.image)}" alt="" loading="lazy" style="width:56px;height:56px;object-fit:cover;border-radius:12px;flex-shrink:0">` : ''}
+          ${r.image ? `<img src="${esc(r.image)}" srcset="${esc(r.srcset||'')}" sizes="56px" alt="" loading="lazy" style="width:56px;height:56px;object-fit:cover;border-radius:12px;flex-shrink:0">` : ''}
           <div style="min-width:0">
             <div style="font-weight:650;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.title)}</div>
             ${r.category ? `<div class="dim" style="margin-top:2px;font-size:12.5px">${esc(r.category)}</div>` : ''}
