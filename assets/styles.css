@@ -216,7 +216,7 @@ body.no-topbar .subtleRule{display:none}
 /* ---------- 4. Navigation ---------- */
 /* Topbar */
 .iosTopbar{
-  position:fixed;top:0;left:0;right:0;z-index:1200;
+  position:absolute;top:0;left:0;right:0;z-index:1200;
   padding:calc(8px + env(safe-area-inset-top)) 0 8px;
   background:var(--glass);
   border-bottom:1px solid transparent;
@@ -274,8 +274,6 @@ body.no-topbar .iosTopbar:not(.scrolled) .iosTopTitle{
 }
 body.layout-page .iosTopTitle,
 body.layout-page .iosTopLogo{opacity:0}
-body.layout-page .iosTopbar.scrolled .iosTopLogo{opacity:1}
-body.layout-page .iosTopbar.scrolled .iosTopTitle{opacity:1}
 
 .brandMark{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
 .brandMark img{width:100%;height:100%;object-fit:contain}
@@ -861,7 +859,6 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 @view-transition{navigation:auto}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:var(--ease)}
 ::view-transition-group(*){animation-duration:.32s;animation-timing-function:var(--ease)}
-.iosTopbar{view-transition-name:topbar}
 .tabbar:not(.recipeTabbar){view-transition-name:tabbar}
 
 @keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}

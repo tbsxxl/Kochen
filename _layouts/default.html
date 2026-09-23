@@ -127,27 +127,7 @@
     if (history.length > 1) backBtn.addEventListener('click', ()=>history.back());
     else backBtn.style.visibility = 'hidden';
 
-    // Topbar: transparent over hero at top, hides on scroll-down, reappears (solid) on scroll-up
-    const topbar = document.getElementById('iosTopbar');
-    const heroPages = document.body.classList.contains('layout-home') || document.body.classList.contains('layout-recipe');
-    const noTopbarPage = document.body.classList.contains('no-topbar');
-    const scrollThreshold = heroPages ? 140 : (noTopbarPage ? 90 : 4);
-    let lastY = window.scrollY || 0;
-    const onScroll = ()=>{
-      const y = window.scrollY || 0;
-      const goingDown = y > lastY + 2;
-      const goingUp = y < lastY - 2;
-      if (y <= scrollThreshold){
-        topbar?.classList.remove('scrolled','hide');
-      } else {
-        topbar?.classList.add('scrolled');
-        if (goingDown) topbar?.classList.add('hide');
-        else if (goingUp) topbar?.classList.remove('hide');
-      }
-      lastY = y;
-    };
-    window.addEventListener('scroll', onScroll, { passive:true });
-    onScroll();
+    // Topbar: liegt oben auf der Seite und scrollt mit weg (keine einblendende Leiste).
 
     // Active Tab Highlight
     const path = location.pathname.replace(/\/+$/,'') || "/";
