@@ -16,20 +16,17 @@ permalink: /rezeptindex/
   {%- assign cat_names = site.data.categories -%}
   {%- assign primaries = site.recipes | map: "category" | uniq -%}
   {%- for c in primaries -%}{%- if c -%}{%- unless cat_names contains c -%}{%- assign cat_names = cat_names | push: c -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
-  <nav class="catRow" id="catRow" aria-label="Kategorie filtern">
-    <button class="catChip active" data-cat="" type="button" aria-pressed="true">Alle</button>
-    {%- for c in cat_names %}
-    {%- assign hits = site.recipes | where_exp: "r", "r.category == c or r.categories contains c" -%}
-    {%- if hits.size > 0 %}
-    <button class="catChip" data-cat="{{ c | escape }}" type="button" aria-pressed="false">{{ c }}</button>
-    {%- endif -%}
-    {%- endfor %}
-  </nav>
 
   <div class="filterBar">
-    <button id="favToggle" class="pillToggle" type="button" aria-pressed="false" aria-label="Nur Favoriten anzeigen">
-      <span aria-hidden="true">♡</span> Favoriten
-    </button>
+    <div class="filterBarLeft">
+      <button id="catBtn" class="pillToggle" type="button" aria-haspopup="dialog" aria-controls="catSheet">
+        <span id="catBtnLabel">Kategorie</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <button id="favToggle" class="pillToggle" type="button" aria-pressed="false" aria-label="Nur Favoriten anzeigen">
+        <span aria-hidden="true">♡</span> Favoriten
+      </button>
+    </div>
     <div class="sortMenuWrap">
       <button id="sortBtn" class="pillToggle sortToggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Sortieren">
         Sortieren
@@ -44,6 +41,25 @@ permalink: /rezeptindex/
     </div>
   </div>
 </div>
+
+<!-- Kategorie-Auswahl -->
+<div class="sheetOverlay" id="catSheetOverlay"></div>
+<section class="sheet" id="catSheet" aria-label="Kategorie wählen" aria-hidden="true">
+  <div class="sheetGrab"></div>
+  <div class="sheetHead">
+    <div class="sheetTitle">Kategorie</div>
+    <button class="navIconBtn pressable" id="catSheetClose" aria-label="Schließen" type="button">✕</button>
+  </div>
+  <div class="sheetBody">
+    <button class="sheetRow catOption active" data-cat="" type="button" aria-pressed="true"><span>Alle Rezepte</span><span class="catOptCount">{{ site.recipes | size }}</span></button>
+    {%- for c in cat_names %}
+    {%- assign hits = site.recipes | where_exp: "r", "r.category == c or r.categories contains c" -%}
+    {%- if hits.size > 0 %}
+    <button class="sheetRow catOption" data-cat="{{ c | escape }}" type="button" aria-pressed="false"><span>{{ c }}</span><span class="catOptCount">{{ hits.size }}</span></button>
+    {%- endif -%}
+    {%- endfor %}
+  </div>
+</section>
 
 <div class="section">
   <div id="emptyState" class="uEmpty" hidden>
@@ -97,7 +113,16 @@ permalink: /rezeptindex/
   const clearBtn = document.querySelector('#clearSearch');
   const grid = document.querySelector('#recipeGrid');
   const cards = Array.from(document.querySelectorAll('[data-recipe-card]'));
-  const catChips = Array.from(document.querySelectorAll('#catRow .catChip'));
+  const catOptions = Array.from(document.querySelectorAll('#catSheet .catOption'));
+  const catBtn = document.querySelector('#catBtn');
+  const catBtnLabel = document.querySelector('#catBtnLabel');
+  const catSheet = document.querySelector('#catSheet');
+  const catOverlay = document.querySelector('#catSheetOverlay');
+  function openCatSheet(){ catOverlay.classList.add('open'); catSheet.classList.add('open','half'); catSheet.setAttribute('aria-hidden','false'); document.body.classList.add('noScroll'); }
+  function closeCatSheet(){ catOverlay.classList.remove('open'); catSheet.classList.remove('open'); catSheet.setAttribute('aria-hidden','true'); document.body.classList.remove('noScroll'); }
+  catBtn?.addEventListener('click', openCatSheet);
+  catOverlay?.addEventListener('click', closeCatSheet);
+  document.querySelector('#catSheetClose')?.addEventListener('click', closeCatSheet);
   const favToggle = document.querySelector('#favToggle');
   const sortBtn = document.querySelector('#sortBtn');
   const sortMenu = document.querySelector('#sortMenu');
@@ -169,18 +194,19 @@ permalink: /rezeptindex/
 
   function setCat(cat){
     activeCat = cat || '';
-    catChips.forEach(x=>{
+    catOptions.forEach(x=>{
       const on = (x.getAttribute('data-cat') || '') === activeCat;
       x.classList.toggle('active', on);
       x.setAttribute('aria-pressed', String(on));
-      if(on) x.scrollIntoView({ block:'nearest', inline:'center', behavior:'smooth' });
     });
+    if(catBtnLabel) catBtnLabel.textContent = activeCat || 'Kategorie';
+    catBtn?.classList.toggle('pillToggleActive', !!activeCat);
     apply();
   }
-  catChips.forEach(chip=> chip.addEventListener('click', ()=> setCat(chip.getAttribute('data-cat'))));
+  catOptions.forEach(opt=> opt.addEventListener('click', ()=>{ setCat(opt.getAttribute('data-cat')); closeCatSheet(); }));
   // Direktlink auf eine Kategorie: /rezeptindex/?kategorie=Pasta
   const urlCat = new URLSearchParams(location.search).get('kategorie');
-  if(urlCat && catChips.some(x=>x.getAttribute('data-cat') === urlCat)) setCat(urlCat);
+  if(urlCat && catOptions.some(x=>x.getAttribute('data-cat') === urlCat)) setCat(urlCat);
 
   favToggle?.addEventListener('click', ()=>{
     favOnly = !favOnly;

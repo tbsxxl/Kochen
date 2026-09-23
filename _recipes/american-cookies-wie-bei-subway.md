@@ -2,6 +2,7 @@
 title: "Chocolate Chip Cookies"
 date: 2026-02-20
 category: "Süßes & Backen"
+categories: ["Schnell"]
 tags: ["amerikanisch", "gebäck", "backen", "cookies", "Dessert & Pâtisserie", "Desserts"]
 time: "ca. 29 Min"
 image: /recipes/images/Cookies.jpg

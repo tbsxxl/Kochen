@@ -2,6 +2,7 @@
 title: "Türkische Rinderhackfleisch-Pasta in Mezze-Tomatensoße mit Minz-Joghurt-Topping"
 date: 2026-09-17
 category: "Pasta"
+categories: ["Schnell"]
 tags: ["türkisch", "mediterran", "pasta", "schnell", "high-protein", "HelloFresh"]
 time: "20 - 30 Min"
 image: /recipes/images/tuerkische-hack-pasta.jpg

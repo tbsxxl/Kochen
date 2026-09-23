@@ -1,5 +1,7 @@
 # Reihenfolge der Kategorien (Filter-Chips, Kategorien-Seite, Admin-Vorschläge).
 # Jedes Rezept hat eine Hauptkategorie (`category:`) und optional weitere (`categories: [...]`).
+- "Schnell"
+- "Meal Prep"
 - "Pasta"
 - "Pizza & Brot"
 - "Burger & Sandwiches"

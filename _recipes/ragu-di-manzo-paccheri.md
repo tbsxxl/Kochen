@@ -2,7 +2,7 @@
 title: "Ragù di Manzo: Schmorfleisch vom Weiderind auf Paccheri in Tomatensoße"
 date: 2026-09-17
 category: "Pasta"
-categories: ["Italienisch", "Fleisch & Schmorgerichte"]
+categories: ["Italienisch", "Fleisch & Schmorgerichte", "Meal Prep"]
 tags: ["italienisch", "schmorgericht", "pasta", "high-protein", "HelloFresh"]
 time: "110 - 120 Min"
 image: /recipes/images/ragu-di-manzo.jpg
