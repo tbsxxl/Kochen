@@ -2,6 +2,7 @@
 title: "Keto-Bowl mit Chipotle-Hackfleisch"
 date: 2026-08-25
 category: "Bowls & Salate"
+categories: ["Mexikanisch"]
 tags: ["hackfleisch", "bowl", "keto", "high-protein", "mexikanisch", "HelloFresh"]
 time: "20–30 Min"
 image: /recipes/images/keto-bowl-chipotle-hackfleisch.jpg

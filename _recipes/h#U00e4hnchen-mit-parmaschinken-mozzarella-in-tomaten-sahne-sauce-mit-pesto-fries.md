@@ -2,6 +2,7 @@
 title: "Hähnchen mit Prosciutto & Mozzarella"
 date: 2026-02-20
 category: "Hähnchen"
+categories: ["Italienisch"]
 tags: ["italienisch", "hähnchen", "prosciutto", "mozzarella", "Pollame & Geflügel", "Chicken"]
 time: "ca. 50–60 Min"
 image: /recipes/images/parmahähnchen.jpg

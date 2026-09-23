@@ -2,6 +2,7 @@
 title: "Tiramisù"
 date: 2026-03-08
 category: "Süßes & Backen"
+categories: ["Italienisch"]
 tags: ["tiramisu","italienisch","dessert","mascarpone","kaffee","klassiker"]
 time: "ca. 30 Min + 2 Std Kühlzeit"
 image: /recipes/images/tiramisu.jpg

@@ -2,6 +2,7 @@
 title: "Naan"
 date: 2026-02-20
 category: "Pizza & Brot"
+categories: ["Indisch"]
 tags: ["indisch", "fladenbrot", "hefeteig", "pfanne", "vegetarisch", "Boulangerie"]
 time: "ca. 1 Std 55 Min"
 image: /recipes/images/naan.jpg

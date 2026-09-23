@@ -2,6 +2,7 @@
 title: "Lasagne al Forno"
 date: 2026-02-20
 category: "Pasta"
+categories: ["Italienisch"]
 tags: ["italienisch", "lasagne", "ragù", "ofen", "Pasta & Cucina Italiana", "Pasta"]
 time: "ca. 1 Std 40 Min"
 image: /recipes/images/lasagne.jpg

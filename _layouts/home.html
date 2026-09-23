@@ -105,6 +105,7 @@ layout: default
     "time": {{ r.time | jsonify }},
     "servings": {{ r.servings | jsonify }},
     "tags": {{ r.tags | jsonify }},
+    "categories": {{ r.categories | jsonify }},
     "image": "{% if r.image %}{{ r.image | relative_url }}?v={{ site.image_version }}{% endif %}",
     "srcset": "{% if r.image %}{% include srcset.html src=r.image %}{% endif %}"
   }{% unless forloop.last %},{% endunless %}
@@ -271,7 +272,7 @@ layout: default
     const nq = norm(q).trim();
     if(nq.length < 2){ results.hidden = true; results.innerHTML=''; return; }
     const hits = recipes.filter(r=>{
-      const hay = norm([r.title, r.category, ...(r.tags||[])].join(' '));
+      const hay = norm([r.title, r.category, ...(r.categories||[]), ...(r.tags||[])].join(' '));
       return nq.split(/\s+/).every(w => hay.includes(w));
     }).slice(0, 6);
 

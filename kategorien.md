@@ -4,25 +4,26 @@ title: Kategorien
 permalink: /kategorien/
 ---
 
-{% assign grouped = site.recipes | group_by: "category" %}
-{%- assign ordered = "" | split: "" -%}
-{%- for c in site.data.categories -%}
-  {%- assign hit = grouped | where: "name", c | first -%}
-  {%- if hit -%}{%- assign ordered = ordered | push: hit -%}{%- endif -%}
-{%- endfor -%}
-{%- for g in grouped -%}
-  {%- unless site.data.categories contains g.name -%}{%- assign ordered = ordered | push: g -%}{%- endunless -%}
-{%- endfor -%}
+{%- comment -%} Alle Kategorien: Reihenfolge aus _data/categories.yml, danach unbekannte Hauptkategorien.
+  Ein Rezept erscheint in seiner Hauptkategorie (category) und in allen weiteren (categories). {%- endcomment -%}
+{%- assign cat_names = site.data.categories -%}
+{%- assign primaries = site.recipes | map: "category" | uniq -%}
+{%- for c in primaries -%}{%- if c -%}{%- unless cat_names contains c -%}{%- assign cat_names = cat_names | push: c -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
 
 <nav class="catRow" aria-label="Kategorien">
-  {% for g in ordered %}<a class="catChip" href="#cat-{{ g.name | slugify }}">{{ g.name }}</a>{% endfor %}
+  {%- for c in cat_names -%}
+    {%- assign hits = site.recipes | where_exp: "r", "r.category == c or r.categories contains c" -%}
+    {%- if hits.size > 0 %}<a class="catChip" href="#cat-{{ c | slugify }}">{{ c }}</a>{% endif -%}
+  {%- endfor %}
 </nav>
 
-{% for g in ordered %}
-<div class="section catSection" id="cat-{{ g.name | slugify }}">
-  <div class="homeSectionTitle">{{ g.name }} <span class="catCount">{{ g.items | size }}</span></div>
+{% for c in cat_names %}
+{%- assign hits = site.recipes | where_exp: "r", "r.category == c or r.categories contains c" -%}
+{%- if hits.size > 0 %}
+<div class="section catSection" id="cat-{{ c | slugify }}">
+  <div class="homeSectionTitle">{{ c }} <span class="catCount">{{ hits.size }}</span></div>
   <div class="grid">
-    {% assign rs = g.items | sort: "title" %}
+    {% assign rs = hits | sort: "title" %}
     {% for r in rs %}
       <a class="linkCard" href="{{ r.url | relative_url }}">
         <div class="card recipeCard cardHover">
@@ -30,7 +31,6 @@ permalink: /kategorien/
             <div class="rcImg">
               <img
                 src="{{ r.image | relative_url }}?v={{ site.image_version }}"
-                style="view-transition-name: img-{{ r.url | slugify }}"
                 srcset="{% include srcset.html src=r.image %}"
                 sizes="(min-width:900px) 300px, (min-width:641px) 45vw, 92vw"
                 alt="{{ r.title | escape }}"
@@ -53,4 +53,5 @@ permalink: /kategorien/
     {% endfor %}
   </div>
 </div>
+{% endif %}
 {% endfor %}
