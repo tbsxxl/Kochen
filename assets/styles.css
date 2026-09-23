@@ -441,6 +441,8 @@ body.layout-recipe .appMain{padding-top:0}
 .catChip.active{background:var(--leaf);border-color:var(--leaf);color:var(--onLeaf)}
 .catSection{scroll-margin-top:16px}
 .catOption{justify-content:space-between}
+/* Drucken nur am Computer; auf Handys gibt es „Als PDF speichern“ */
+@media (pointer:coarse){ #printBtn{display:none} }
 .catOption.active{background:var(--leafSoft);color:var(--leaf);font-weight:600}
 .catOptCount{font-size:var(--fs14);color:var(--sub2);font-variant-numeric:tabular-nums}
 .catOption.active .catOptCount{color:var(--leaf)}
