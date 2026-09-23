@@ -6,7 +6,7 @@ baseurl: ""
 url: "https://kochbuch.tobis.workers.dev"
 
 # Hochzählen, wenn Rezeptbilder geändert werden, damit Browser sie neu laden.
-image_version: 2
+image_version: 3
 
 markdown: kramdown
 encoding: utf-8

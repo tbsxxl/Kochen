@@ -8,5 +8,5 @@
 {%- assign _hit = site.static_files | where: 'path', _small | first -%}
 {%- if _hit -%}
 {%- assign _url = _stem | relative_url -%}
-{{ _url }}-480.webp?v={{ site.image_version }} 480w, {{ _url }}-960.webp?v={{ site.image_version }} 930w
+{{ _url }}-480.webp?v={{ site.image_version }} 480w, {{ _url }}-960.webp?v={{ site.image_version }} 860w
 {%- endif -%}

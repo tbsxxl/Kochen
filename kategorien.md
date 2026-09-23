@@ -18,6 +18,7 @@ hide_topbar: true
             <div class="rcImg">
               <img
                 src="{{ r.image | relative_url }}?v={{ site.image_version }}"
+                style="view-transition-name: img-{{ r.url | slugify }}"
                 srcset="{% include srcset.html src=r.image %}"
                 sizes="(min-width:900px) 300px, (min-width:641px) 45vw, 92vw"
                 alt="{{ r.title | escape }}"
