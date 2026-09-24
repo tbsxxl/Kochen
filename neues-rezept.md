@@ -40,7 +40,7 @@ permalink: /neues-rezept/
     <div class="fieldRow">
       <div style="flex:1">
         <label class="fieldLabel" for="timeIn">Zeit</label>
-        <input class="fieldInput" id="timeIn" maxlength="40" placeholder="z. B. 30 Min">
+        <input class="fieldInput" id="timeIn" maxlength="160" placeholder="z. B. 30 Min">
       </div>
       <div style="flex:0 0 120px">
         <label class="fieldLabel" for="servIn">Portionen</label>
@@ -56,6 +56,8 @@ permalink: /neues-rezept/
     <label class="fieldLabel" for="ingIn">Zutaten – eine pro Zeile</label>
     <textarea class="codeArea uploadArea" id="ingIn" rows="8" placeholder="400 g Gnocchi&#10;1 Dose stückige Tomaten&#10;2 Zehen Knoblauch&#10;1 Prise Salz&#10;Parmesan nach Bedarf"></textarea>
     <div class="ingPreview" id="ingPreview"></div>
+    <div class="ingRows" id="ingRows" hidden></div>
+    <button class="btn accountBtn" id="ingRowAdd" type="button" hidden>+ Zutat</button>
   </div>
 
   <div class="section card cardPad uploadCard">
@@ -69,7 +71,11 @@ permalink: /neues-rezept/
   <div class="section">
     <p class="accountError" id="uploadErr" hidden></p>
     <button class="btn action" id="uploadBtn" type="submit" style="width:100%">Rezept veröffentlichen</button>
-    <p class="sub uploadHint">Das Rezept wird direkt ins Kochbuch übernommen und ist nach ca. 2 Minuten online. Dein Entwurf bleibt bis dahin auf diesem Gerät gespeichert.</p>
+    <p class="sub uploadHint" id="uploadHint">Das Rezept wird direkt ins Kochbuch übernommen und ist nach ca. 2 Minuten online. Dein Entwurf bleibt bis dahin auf diesem Gerät gespeichert.</p>
+  </div>
+
+  <div class="section" id="deleteSection" hidden>
+    <button class="btn btnDangerOutline" id="deleteBtn" type="button" style="width:100%">Rezept löschen</button>
   </div>
 </form>
 

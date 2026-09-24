@@ -7,6 +7,12 @@
   const form = $("#uploadForm"), gate = $("#uploadGate"), done = $("#uploadDone");
   const esc = (s)=>String(s??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   if(!form || !A) return;
+  const params = new URLSearchParams(location.search);
+  const EDIT_PATH = params.get("bearbeiten") || "";        // z. B. _recipes/xyz.md
+  const EDIT_PDF = params.get("pdf") || "";
+  const BACK_URL = /^\/rezepte\//.test(params.get("zurueck") || "") ? params.get("zurueck") : "/";
+  const editing = !!EDIT_PATH;
+  let editSha = null;
 
   // ---------- Zutaten erkennen ----------
   const UNITS = ["g","kg","mg","ml","l","cl","dl","el","tl","prise","prisen","stück","stk","stk.","dose","dosen","bund","zehe","zehen",
@@ -46,8 +52,32 @@
     s = s.replace(/^(von|vom)\s+/i, "");
     return { qty, unit, item: s };
   }
-  const ingredients = ()=> $("#ingIn").value.split(/\n+/).map(parseIngredient).filter(i=>i && i.item);
-  const steps = ()=> $("#stepsIn").value.split(/\n+/).map(s=>s.replace(/^\s*(\d+[.)]|[-•*])\s*/, "").trim()).filter(Boolean);
+  const ingredients = ()=> editing ? rowIngredients() : $("#ingIn").value.split(/\n+/).map(parseIngredient).filter(i=>i && i.item);
+
+  // ---------- Zutaten als Zeilen (Bearbeiten) ----------
+  const rowsEl = $("#ingRows");
+  function fmtQty(q){ return typeof q === "number" ? String(Math.round(q*1000)/1000).replace(".", ",") : String(q ?? ""); }
+  function addRow(i = { qty:"", unit:"", item:"" }){
+    const row = document.createElement("div");
+    row.className = "ingRow";
+    row.innerHTML = `<input class="fieldInput ingQty" placeholder="Menge" value="${esc(fmtQty(i.qty))}" aria-label="Menge">
+      <input class="fieldInput ingUnit" placeholder="Einheit" value="${esc(i.unit || "")}" aria-label="Einheit">
+      <input class="fieldInput ingItem" placeholder="Zutat" value="${esc(i.item || "")}" aria-label="Zutat">
+      <button type="button" class="ingRowDel" aria-label="Zutat entfernen">✕</button>`;
+    row.querySelector(".ingRowDel").addEventListener("click", ()=> row.remove());
+    rowsEl.appendChild(row);
+    return row;
+  }
+  function rowIngredients(){
+    return Array.from(rowsEl.querySelectorAll(".ingRow")).map(r=>{
+      const raw = r.querySelector(".ingQty").value.trim();
+      const n = Number(raw.replace(",", "."));
+      return { qty: raw !== "" && isFinite(n) ? n : raw, unit: r.querySelector(".ingUnit").value.trim(), item: r.querySelector(".ingItem").value.trim() };
+    }).filter(i=>i.item);
+  }
+  $("#ingRowAdd").addEventListener("click", ()=> addRow().querySelector(".ingQty").focus());
+  // Nummern/Aufzählungszeichen am Zeilenanfang entfernen (aber **fett** am Anfang behalten)
+  const steps = ()=> $("#stepsIn").value.split(/\n+/).map(s=>s.replace(/^\s*(?:\d+[.)]\s+|[-•*]\s+)/, "").trim()).filter(Boolean);
 
   function renderIngPreview(){
     const list = ingredients();
@@ -125,6 +155,7 @@
   // ---------- Entwurf ----------
   const FIELDS = ["titleIn","catIn","timeIn","servIn","tagsIn","ingIn","stepsIn","notesIn"];
   function saveDraft(){
+    if(editing) return;
     const d = { extra: [...extra] };
     FIELDS.forEach(id=> d[id] = $("#"+id).value);
     try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }catch{}
@@ -155,19 +186,25 @@
       servings: Number($("#servIn").value),
       tags: $("#tagsIn").value.split(",").map(s=>s.trim()).filter(Boolean),
       ingredients: ingredients(),
-      steps: steps(),
-      notes: $("#notesIn").value.trim(),
+      steps: editing ? [] : steps(),
+      markdown: editing ? $("#stepsIn").value.trim() : undefined,
+      notes: editing ? "" : $("#notesIn").value.trim(),
       image: photo || undefined
     };
     if(!payload.title) return showErr("Bitte einen Titel angeben.");
     if(!payload.category) return showErr("Bitte eine Kategorie wählen.");
     if(!payload.ingredients.length) return showErr("Bitte Zutaten eintragen.");
-    if(!payload.steps.length) return showErr("Bitte die Schritte eintragen.");
-    if(!photo && !confirm("Ohne Foto hochladen?")) return;
+    if(!payload.steps.length && !payload.markdown) return showErr("Bitte die Schritte eintragen.");
+    if(!photo && !editing && !confirm("Ohne Foto hochladen?")) return;
 
     const btn = $("#uploadBtn");
-    btn.disabled = true; btn.textContent = "Wird hochgeladen …";
+    btn.disabled = true; btn.textContent = editing ? "Wird gespeichert …" : "Wird hochgeladen …";
     try{
+      if(editing){
+        await A.api("/api/recipe", { method: "PUT", body: { ...payload, path: EDIT_PATH, sha: editSha, pdf: EDIT_PDF } });
+        showDone(`„${payload.title}“ ist gespeichert`, "Cloudflare baut die Seite jetzt neu. In etwa 2 Minuten ist die Änderung online.", BACK_URL, "Zum Rezept");
+        return;
+      }
       const res = await A.api("/api/recipes", { method: "POST", body: payload });
       try{ localStorage.removeItem(DRAFT_KEY); }catch{}
       form.hidden = true;
@@ -183,15 +220,102 @@
     }catch(err){
       showErr(err);
     }finally{
-      btn.disabled = false; btn.textContent = "Rezept veröffentlichen";
+      btn.disabled = false; btn.textContent = editing ? "Änderungen speichern" : "Rezept veröffentlichen";
     }
+  });
+
+  function showDone(title, text, href, label){
+    form.hidden = true;
+    $("#deleteSection").hidden = true;
+    done.hidden = false;
+    done.innerHTML = `<div class="card cardPad accountCard uploadSuccess">
+      <div class="accountIcon" aria-hidden="true">✓</div>
+      <h2 class="h2 accountTitle">${esc(title)}</h2>
+      <p class="sub">${esc(text)}</p>
+      <a class="btn action accountBtn" href="${esc(href)}">${esc(label)}</a>
+    </div>`;
+    window.scrollTo({ top: 0 });
+    try{ UI.haptic?.("success"); }catch{}
+  }
+
+  // ---------- Bearbeiten: vorhandenes Rezept laden ----------
+  function loadScript(src){
+    return new Promise((resolve, reject)=>{
+      const s = document.createElement("script");
+      s.src = src; s.onload = resolve; s.onerror = ()=>reject(new Error("Bibliothek konnte nicht geladen werden."));
+      document.head.appendChild(s);
+    });
+  }
+  async function loadForEdit(){
+    document.querySelector(".pageTitleBlock .h1").textContent = "Rezept bearbeiten";
+    document.title = "Rezept bearbeiten · " + document.title.split("·").pop().trim();
+    $("#uploadBtn").textContent = "Änderungen speichern";
+    $("#uploadHint").textContent = "Die Änderung wird direkt übernommen und ist nach ca. 2 Minuten online.";
+    $("#ingIn").hidden = true; $("#ingPreview").hidden = true;
+    rowsEl.hidden = false; $("#ingRowAdd").hidden = false;
+    document.querySelector('label[for="ingIn"]').textContent = "Zutaten";
+    document.querySelector('label[for="stepsIn"]').textContent = "Zubereitung (so wie im Rezept: „## Schritte“, dann 1., 2., …)";
+    $("#stepsIn").rows = 16;
+    $("#notesIn").hidden = true; document.querySelector('label[for="notesIn"]').hidden = true;
+    $("#cropIn").checked = false;
+    $("#photoEmpty").lastChild.textContent = "Foto ersetzen";
+
+    const [res] = await Promise.all([
+      A.api(`/api/recipe?path=${encodeURIComponent(EDIT_PATH)}`),
+      window.jsyaml ? null : loadScript("/assets/vendor/js-yaml.min.js")
+    ]);
+    editSha = res.sha;
+    const m = res.content.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+    if(!m) throw new Error("Das Rezept hat ein unbekanntes Format.");
+    const fm = window.jsyaml.load(m[1]) || {};
+    $("#titleIn").value = fm.title || "";
+    const cat = $("#catIn");
+    if(fm.category && !Array.from(cat.options).some(o=>o.value === fm.category)) cat.add(new Option(fm.category, fm.category));
+    cat.value = fm.category || "";
+    (fm.categories || []).forEach(c=>{
+      const b = document.querySelector(`#extraCats [data-cat="${CSS.escape(c)}"]`);
+      if(b){ extra.add(c); b.setAttribute("aria-pressed","true"); b.classList.add("pillToggleActive"); }
+    });
+    $("#timeIn").value = fm.time || "";
+    $("#servIn").value = fm.servings || "";
+    $("#tagsIn").value = (fm.tags || []).join(", ");
+    (fm.ingredients || []).forEach(i=> addRow(i));
+    $("#stepsIn").value = m[2].trim();
+    if(fm.image){
+      const prev = $("#photoPreview");
+      prev.src = fm.image; prev.hidden = false;
+      $("#photoEmpty").hidden = true;
+    }
+    $("#deleteSection").hidden = false;
+    const hint = document.createElement("p");
+    hint.className = "sub"; hint.style.margin = "8px 4px 0";
+    hint.textContent = "Tippe aufs Foto, um es zu ersetzen.";
+    $("#photoPick").after(hint);
+  }
+
+  $("#deleteBtn").addEventListener("click", async ()=>{
+    const title = $("#titleIn").value.trim() || "dieses Rezept";
+    if(!confirm(`„${title}“ wirklich löschen? Das lässt sich hier nicht rückgängig machen.`)) return;
+    const btn = $("#deleteBtn");
+    btn.disabled = true; btn.textContent = "Wird gelöscht …";
+    try{
+      await A.api("/api/recipe/delete", { method: "POST", body: { path: EDIT_PATH, sha: editSha, pdf: EDIT_PDF } });
+      showDone(`„${title}“ ist gelöscht`, "In etwa 2 Minuten ist das Rezept aus dem Kochbuch verschwunden.", "/", "Zur Startseite");
+    }catch(err){ showErr(err); btn.disabled = false; btn.textContent = "Rezept löschen"; }
   });
 
   // ---------- Start ----------
   (async function(){
     try{
       const me = await A.me();
-      if(me.loggedIn && me.canUpload){ form.hidden = false; loadDraft(); renderIngPreview(); return; }
+      if(me.loggedIn && me.canUpload){
+        if(editing){
+          try{ await loadForEdit(); form.hidden = false; }
+          catch(err){ gate.hidden = false; gate.querySelector(".uEmptyTitle").textContent = "Rezept konnte nicht geladen werden"; gate.querySelector(".uEmptyText").textContent = err.message || String(err); gate.querySelector("a.btn")?.remove(); }
+          return;
+        }
+        form.hidden = false; loadDraft(); renderIngPreview(); return;
+      }
       gate.hidden = false;
       if(me.loggedIn && me.role !== "owner"){
         gate.querySelector(".uEmptyTitle").textContent = "Nur für den Besitzer";

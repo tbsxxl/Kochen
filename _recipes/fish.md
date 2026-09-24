@@ -7,25 +7,25 @@ time: "ca. 90 Min"
 image: /recipes/images/fish.jpg
 servings: 4
 ingredients:
-- { qty: 7, unit: “EL”, item: “Weizenmehl, aufgeteilt” }
-- { qty: 7, unit: “EL”, item: “Speisestärke” }
-- { qty: 1, unit: “TL”, item: “Backpulver” }
-- { qty: “n. B.”, unit: “”, item: “Feines Salz” }
-- { qty: “n. B.”, unit: “”, item: “Schwarzer Pfeffer, frisch gemahlen” }
-- { qty: 80, unit: “ml”, item: “Dunkles Bier, kalt” }
-- { qty: 80, unit: “ml”, item: “Mineralwasser mit Kohlensäure, kalt” }
-- { qty: 4, unit: “Stk.”, item: “Weiße Fischfilets (je ca. 200 g)” }
-- { qty: 900, unit: “g”, item: “Kartoffeln, geschält” }
-- { qty: “n. B.”, unit: “”, item: “Pflanzenöl zum Frittieren” }
-- { qty: 120, unit: “ml”, item: “Mayonnaise” }
-- { qty: 1.5, unit: “EL”, item: “Dillgurken oder Cornichons, fein gehackt” }
-- { qty: 1, unit: “EL”, item: “Frischer Dill (oder 1 TL getrocknet)” }
-- { qty: 1, unit: “EL”, item: “Zitronensaft” }
-- { qty: 2, unit: “TL”, item: “Körniger Senf” }
-- { qty: 2, unit: “TL”, item: “Zwiebel, fein gehackt (optional)” }
-- { qty: 1, unit: “TL”, item: “Kapern, gehackt” }
-- { qty: “Prise”, unit: “”, item: “Salz (Sauce)” }
-- { qty: “Prise”, unit: “”, item: “Schwarzer Pfeffer (Sauce)” }
+- { qty: 7, unit: "EL", item: "Weizenmehl, aufgeteilt" }
+- { qty: 7, unit: "EL", item: "Speisestärke" }
+- { qty: 1, unit: "TL", item: "Backpulver" }
+- { qty: "n. B.", unit: "", item: "Feines Salz" }
+- { qty: "n. B.", unit: "", item: "Schwarzer Pfeffer, frisch gemahlen" }
+- { qty: 80, unit: "ml", item: "Dunkles Bier, kalt" }
+- { qty: 80, unit: "ml", item: "Mineralwasser mit Kohlensäure, kalt" }
+- { qty: 4, unit: "Stk.", item: "Weiße Fischfilets (je ca. 200 g)" }
+- { qty: 900, unit: "g", item: "Kartoffeln, geschält" }
+- { qty: "n. B.", unit: "", item: "Pflanzenöl zum Frittieren" }
+- { qty: 120, unit: "ml", item: "Mayonnaise" }
+- { qty: 1.5, unit: "EL", item: "Dillgurken oder Cornichons, fein gehackt" }
+- { qty: 1, unit: "EL", item: "Frischer Dill (oder 1 TL getrocknet)" }
+- { qty: 1, unit: "EL", item: "Zitronensaft" }
+- { qty: 2, unit: "TL", item: "Körniger Senf" }
+- { qty: 2, unit: "TL", item: "Zwiebel, fein gehackt (optional)" }
+- { qty: 1, unit: "TL", item: "Kapern, gehackt" }
+- { qty: "Prise", unit: "", item: "Salz (Sauce)" }
+- { qty: "Prise", unit: "", item: "Schwarzer Pfeffer (Sauce)" }
 
 ---
 

@@ -260,6 +260,9 @@
   function renderBadges(){
     const p = profile();
     document.querySelectorAll("[data-owner-only]").forEach(el=>{ el.hidden = !(p && p.role === "owner"); });
+    let edit = false;
+    try{ edit = !!(p && p.role === "owner" && localStorage.getItem("kochbuch.ui.editMode") === "1"); }catch{}
+    document.querySelectorAll("[data-edit-only]").forEach(el=>{ el.hidden = !edit; });
     document.querySelectorAll("[data-profile-badge]").forEach(el=>{
       const initial = p && p.name ? p.name.trim().charAt(0).toUpperCase() : "";
       el.classList.toggle("isIn", !!p);
@@ -270,7 +273,7 @@
     });
   }
 
-  window.KOCHBUCH_ACCOUNT = { me: (query)=>api("/api/me" + (query || "")), api, register, login, logout, syncNow, profile, passkeySupported, deviceName };
+  window.KOCHBUCH_ACCOUNT = { renderBadges, me: (query)=>api("/api/me" + (query || "")), api, register, login, logout, syncNow, profile, passkeySupported, deviceName };
 
   // Name/Rolle aktuell halten (z. B. nach Umstellung auf mehrere Profile)
   async function refreshProfile(){

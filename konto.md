@@ -17,6 +17,7 @@ permalink: /konto/
   const invite = new URLSearchParams(location.search).get('einladung') || '';
 
   function A(){ return window.KOCHBUCH_ACCOUNT; }
+  function editOn(){ try{ return localStorage.getItem('kochbuch.ui.editMode') === '1'; }catch{ return false; } }
   const toast = (t)=>{ try{ window.KOCHBUCH_UI?.toast?.(t); }catch{} };
 
   function busy(btn, on, text){
@@ -112,6 +113,7 @@ permalink: /konto/
         ${invite ? '<p class="sub">Du bist schon angemeldet. Den Einladungslink kann jemand anderes auf seinem Gerät öffnen.</p>' : ''}
         <button class="btn accountBtn" id="syncBtn" type="button">Jetzt synchronisieren</button>
         ${owner ? (me.canUpload ? `<a class="btn action accountBtn" href="{{ '/neues-rezept/' | relative_url }}">Rezept hochladen</a>` : `<p class="sub">Zum Hochladen fehlt in Cloudflare noch das GITHUB_TOKEN.</p>`) : ''}
+        ${owner ? `<button class="sheetRow editSwitch" id="editModeBtn" type="button" role="switch" aria-checked="${editOn() ? 'true' : 'false'}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg></span><span class="editSwitchText"><span>Bearbeiten-Modus</span><span class="sub">Zeigt auf Rezeptseiten unter „Mehr“ „Rezept bearbeiten“. Nur auf diesem Gerät und nur für dich.</span></span><span class="sheetSwitch" aria-hidden="true"></span></button>` : ''}
         <p class="accountError" id="err" hidden></p>
       </div>
 
@@ -143,6 +145,13 @@ permalink: /konto/
         <button class="btn btnDangerOutline accountBtn" id="logoutAllBtn" type="button">Auf allen Geräten abmelden</button>
       </div>`;
 
+    document.getElementById('editModeBtn')?.addEventListener('click', (e)=>{
+      const on = !editOn();
+      try{ localStorage.setItem('kochbuch.ui.editMode', on ? '1' : '0'); }catch{}
+      e.currentTarget.setAttribute('aria-checked', on ? 'true' : 'false');
+      A().renderBadges?.();
+      toast(on ? 'Bearbeiten-Modus an' : 'Bearbeiten-Modus aus');
+    });
     document.getElementById('syncBtn').addEventListener('click', async (e)=>{
       const btn = e.currentTarget; busy(btn, true, 'Synchronisiere …');
       try{ await A().syncNow(); document.getElementById('syncInfo').textContent = `${owner ? 'Besitzer · ' : ''}Synchronisiert · ${fmt(Date.now())}`; toast('Alles aktuell'); }
