@@ -3,6 +3,7 @@
   if(!data) return;
   const U = window.KOCHBUCH_UTILS;
   const UI = window.KOCHBUCH_UI || {};
+  const T = window.KOCHBUCH_TIMER;
   const $ = (s)=>document.querySelector(s);
   const ls = {
     get(k, fb){ try{ const v = localStorage.getItem(k); return v?JSON.parse(v):fb; }catch{return fb;} },
@@ -398,7 +399,8 @@ const cookOverlay = $("#cookOverlay");
     if(!cookStepText || !cookStepPill) return;
     const total = steps.length || 1;
     stepIdx = Math.max(0, Math.min(total-1, stepIdx));
-    cookStepText.textContent = steps[stepIdx] || '—';
+    if(T) cookStepText.innerHTML = T.linkify(steps[stepIdx] || '—');
+    else cookStepText.textContent = steps[stepIdx] || '—';
     cookStepPill.textContent = `${stepIdx+1}/${total}`;
     if(cookProgressBar) cookProgressBar.style.width = `${((stepIdx+1)/total)*100}%`;
     if(cookStepIngs && cookStepIngsList){
@@ -455,12 +457,14 @@ const cookOverlay = $("#cookOverlay");
     renderCookIngredients();
     renderCookStep();
     requestWakeLock();
+    if(timerPill) timerPill.hidden = true;
   }
   function closeCook(){
     cookOverlay?.classList.remove('open');
     cookOverlay?.setAttribute('aria-hidden','true');
     document.body.classList.remove('noScroll');
     releaseWakeLock();
+    if(timerPill && T) timerPill.hidden = !T.list().length;
   }
 
   function setTab(which){
@@ -482,7 +486,10 @@ const cookOverlay = $("#cookOverlay");
     if(cookNext.dataset.last){ closeCook(); successTap(); return; }
     stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText);
   });
-  cookStepText?.addEventListener('click', ()=>{ if(stepIdx < steps.length-1){ stepIdx++; renderCookStep(); lightTap(); } });
+  cookStepText?.addEventListener('click', (e)=>{
+    const tb = e.target.closest('.cookTime');
+    if(tb){ T?.start(Number(tb.dataset.secs), `Schritt ${stepIdx+1} · ${tb.dataset.label}`); successTap(); pop(tb); return; }
+    if(stepIdx < steps.length-1){ stepIdx++; renderCookStep(); lightTap(); } });
   cookTabSteps?.addEventListener('click', ()=>{ setTab('steps'); lightTap(); pulse(cookTabSteps); });
   cookTabIngs?.addEventListener('click', ()=>{ setTab('ings'); lightTap(); pulse(cookTabIngs); });
 
@@ -492,6 +499,25 @@ const cookOverlay = $("#cookOverlay");
     if(e.key === 'ArrowRight') { stepIdx++; renderCookStep(); }
     if(e.key === 'ArrowLeft') { stepIdx--; renderCookStep(); }
   });
+
+  // Timer: Leiste im Kochmodus + kleiner Hinweis auf der Rezeptseite, solange einer läuft
+  const cookTimers = $("#cookTimers");
+  const timerPill = $("#timerPill");
+  T?.bind(cookTimers);
+  T?.onChange((items)=>{
+    T.render(cookTimers);
+    if(timerPill){
+      const open = cookOverlay?.classList.contains('open');
+      timerPill.hidden = open || !items.length;
+      if(items.length){
+        const next = items.slice().sort((a,b)=>a.left-b.left)[0];
+        const done = items.some(t=>t.done);
+        timerPill.classList.toggle('isDone', done);
+        timerPill.textContent = `⏱ ${done ? 'Timer fertig' : T.fmt(next.left)}${items.length>1 ? ` · ${items.length}` : ''}`;
+      }
+    }
+  });
+  timerPill?.addEventListener('click', openCook);
 
   renderIngredients();
   renderFreezer();

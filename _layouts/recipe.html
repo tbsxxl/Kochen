@@ -178,6 +178,8 @@ layout: default
     <button class="cookTab" id="cookTabIngs" type="button" role="tab" aria-selected="false">Zutaten</button>
   </div>
 
+  <div class="cookTimers" id="cookTimers" hidden aria-live="polite"></div>
+
   <div class="cookBody" id="cookBody">
     <div class="cookPanel" id="cookPanelSteps" role="tabpanel">
       <div class="cookStep" id="cookStepText" title="Tippen für den nächsten Schritt"></div>
@@ -196,6 +198,9 @@ layout: default
   </div>
 </div>
 
+<button class="timerPill pressable" id="timerPill" type="button" hidden aria-label="Laufende Timer im Kochmodus anzeigen"></button>
+
+<script defer src="{{ '/assets/cook-timer.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script defer src="{{ '/assets/recipe.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script defer src="{{ '/assets/recipe-pdf.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
