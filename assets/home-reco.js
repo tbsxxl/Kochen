@@ -59,7 +59,9 @@
 
   function miniCard(r, opts){
     const showFavState = !!(opts && opts.favState && r.favorite);
-    const meta = metaLine(r);
+    const meta = (opts && opts.ago && r.daysSince !== null)
+      ? `<span class="metaItem">${r.daysSince >= 60 ? `vor ${Math.round(r.daysSince/30)} Monaten` : `vor ${r.daysSince} Tagen`}</span>`
+      : metaLine(r);
     const img = r.image ? `
       <div class="rcImg">
         <img src="${esc(r.image)}" srcset="${esc(r.srcset||'')}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="${esc(r.title)}" loading="lazy" decoding="async">
@@ -118,6 +120,20 @@
       recentHost.innerHTML = recent.map(r => miniCard(r, {favState:true})).join("");
     } else {
       recentSection.hidden = true;
+    }
+  }
+
+  // Lange nicht gekocht: schon mal gekocht, aber seit mindestens 30 Tagen nicht mehr
+  const longAgoHost = document.querySelector("#longAgoRow");
+  const longAgoSection = document.querySelector("#longAgoSection");
+  if(longAgoHost && longAgoSection){
+    const longAgo = enriched
+      .filter(r => r.daysSince !== null && r.daysSince >= 30)
+      .sort((a,b) => (b.cookedCount - a.cookedCount) || (b.daysSince - a.daysSince))
+      .slice(0, 6);
+    longAgoSection.hidden = !longAgo.length;
+    if(longAgo.length){
+      longAgoHost.innerHTML = longAgo.map(r => miniCard(r, {favState:true, ago:true})).join("");
     }
   }
 

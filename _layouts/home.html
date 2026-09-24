@@ -57,6 +57,10 @@ layout: default
     <input id="homeSearch" type="search" placeholder="Rezept suchen …" autocomplete="off" />
   </div>
   <div class="stack" id="homeSearchResults" hidden style="margin-top:10px"></div>
+  <div class="homeQuick">
+    <a class="homeQuickBtn pressable" href="{{ '/was-koche-ich/' | relative_url }}"><span aria-hidden="true">🥕</span>Zutaten suchen</a>
+    <a class="homeQuickBtn pressable" href="{{ '/was-koche-ich/?zufall=1' | relative_url }}"><span aria-hidden="true">🎲</span>Überrasch mich</a>
+  </div>
 </div>
 
 <!-- Favoriten -->
@@ -83,6 +87,14 @@ layout: default
     <div class="homeSectionTitle">Zuletzt gekocht</div>
   </div>
   <div class="hScroll" id="recentRow"></div>
+</div>
+
+<!-- Lange nicht gekocht -->
+<div class="section" id="longAgoSection" hidden>
+  <div class="homeSectionHead">
+    <div class="homeSectionTitle">Lange nicht gekocht</div>
+  </div>
+  <div class="hScroll" id="longAgoRow"></div>
 </div>
 
 <!-- Kühltruhe -->
@@ -130,7 +142,27 @@ layout: default
     for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h,16777619); }
     return h >>> 0;
   }
-  const r = recipes[hashStr(dayKey) % recipes.length];
+  // Steht für heute etwas im Wochenplan, wird das gezeigt, sonst ein Tagesvorschlag
+  // (utils.js ist hier noch nicht geladen, daher direkt aus dem Speicher lesen)
+  let planned = [];
+  try{
+    const n = new Date();
+    const k = `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;
+    const plan = JSON.parse(localStorage.getItem('kochbuch.plan') || '{}');
+    planned = (plan[k] || []).map(e=>recipes.find(x=>x.id===e.id)).filter(Boolean);
+  }catch(e){}
+  const r = planned[0] || recipes[hashStr(dayKey) % recipes.length];
+  if(planned.length){
+    const head = document.querySelector('.homeToday .homeSectionTitle');
+    if(head) head.textContent = 'Heute geplant';
+    const hd = document.querySelector('.homeToday .homeSectionHead');
+    if(hd && !hd.querySelector('.homeAllLink')){
+      const a = document.createElement('a');
+      a.className = 'homeAllLink'; a.href = "{{ '/wochenplan/' | relative_url }}";
+      a.textContent = planned.length > 1 ? `+${planned.length-1} weitere →` : 'Wochenplan →';
+      hd.appendChild(a);
+    }
+  }
 
   const el = id => document.getElementById(id);
   const link = el('todayLink'), fav = el('todayFav'), imgW = el('todayThumbWrap'),

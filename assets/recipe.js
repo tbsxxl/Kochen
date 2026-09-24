@@ -3,6 +3,7 @@
   if(!data) return;
   const U = window.KOCHBUCH_UTILS;
   const UI = window.KOCHBUCH_UI || {};
+  const T = window.KOCHBUCH_TIMER;
   const $ = (s)=>document.querySelector(s);
   const ls = {
     get(k, fb){ try{ const v = localStorage.getItem(k); return v?JSON.parse(v):fb; }catch{return fb;} },
@@ -258,7 +259,7 @@ function renderIngredients(){
     if(typeof window.updateFavBadges === "function") window.updateFavBadges();
     window.dispatchEvent(new Event("kochbuch:stats"));
   });
-  cookedBtn?.addEventListener("click", ()=>{
+  function markCooked(){
     const e=getEntry();
     const now=new Date().toISOString();
     e.cookedCount=(e.cookedCount||0)+1;
@@ -267,11 +268,14 @@ function renderIngredients(){
     e.history.unshift(now);
     e.history=e.history.slice(0,50);
     setEntry(e);
-    cookedBtn.classList.add("saved"); setTimeout(()=>cookedBtn.classList.remove("saved"),600);
     renderStats();
+    flash(statsLine);
+  }
+  cookedBtn?.addEventListener("click", ()=>{
+    markCooked();
+    cookedBtn.classList.add("saved"); setTimeout(()=>cookedBtn.classList.remove("saved"),600);
     successTap();
     pop(cookedBtn);
-    flash(statsLine);
   });
   undoBtn?.addEventListener("click", ()=>{
     const e=getEntry();
@@ -289,42 +293,69 @@ function renderIngredients(){
   });
 
   // Shopping add
-  const shopKey = "kochbuch.shopping";
   const addBtn = $("#addToShopping");
-  function normKey(s){ return String(s||"").trim().toLowerCase(); }
-  function mergeIntoShopping(ings){
-    const list = ls.get(shopKey, []);
-    const map = new Map();
-    for(const e of list) map.set(`${normKey(e.item)}|${normKey(e.unit)}`, e);
-    for(const i of ings){
-      const item=String(i.item||"").trim(); if(!item) continue;
-      const unit=U.normUnit(i.unit||"");
-      const q0=num(i.qty);
-      const conv=(q0!==null)?U.autoConvert(q0, unit):{qty:null,unit};
-      const k=`${normKey(item)}|${normKey(conv.unit)}`;
-      const ex=map.get(k);
-      if(ex){
-        if(typeof ex.qty==="number" && typeof conv.qty==="number"){
-          const sum=ex.qty+conv.qty;
-          const c2=U.autoConvert(sum, conv.unit);
-          ex.qty=c2.qty; ex.unit=c2.unit;
-        }else if(ex.qty==null && typeof conv.qty==="number"){
-          ex.qty=conv.qty; ex.unit=conv.unit;
-        }
-        ex.checked=false;
-      }else{
-        const label = (q0===null && i.qty!=null && !/^n\.?\s*b\.?$|nach bedarf/i.test(String(i.qty).trim())) ? String(i.qty).trim() : "";
-        map.set(k,{item,unit:conv.unit,qty:(typeof conv.qty==="number"?conv.qty:null),qtyLabel:label,from:data.title||"",checked:false});
-      }
-    }
-    const out = Array.from(map.values()).sort((a,b)=>String(a.item).localeCompare(String(b.item),"de"));
-    ls.set(shopKey,out);
-  }
   addBtn?.addEventListener("click", ()=>{
-    mergeIntoShopping(scaledIngredients());
+    U.mergeIntoShopping(scaledIngredients(), data.title || "");
+    UI.toast?.("Zutaten auf der Einkaufsliste");
     addBtn.classList.add("saved"); setTimeout(()=>addBtn.classList.remove("saved"),600);
     successTap();
     pop(addBtn);
+  });
+
+  // Wochenplan: Tag wählen (nächste 10 Tage)
+  const planOverlay = $("#planSheetOverlay");
+  const planSheet = $("#planSheet");
+  const planDays = $("#planDays");
+  const WD = ["So","Mo","Di","Mi","Do","Fr","Sa"];
+  function dayLabel(d, i){
+    if(i === 0) return "Heute";
+    if(i === 1) return "Morgen";
+    return ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"][d.getDay()];
+  }
+  function openPlanSheet(){
+    document.getElementById('recipeSheetOverlay')?.classList.remove('open');
+    const rs = document.getElementById('recipeSheet');
+    rs?.classList.remove('open'); rs?.setAttribute('aria-hidden','true');
+    const plan = U.plan.get();
+    const today = new Date(); today.setHours(12,0,0,0);
+    let html = "";
+    for(let i=0;i<10;i++){
+      const d = new Date(today.getTime() + i*86400000);
+      const k = U.plan.key(d);
+      const entries = plan[k] || [];
+      const already = entries.some(e=>e.id === data.id);
+      const others = entries.length - (already ? 1 : 0);
+      html += `<button class="sheetRow planDay${already ? " isPlanned" : ""}" type="button" data-day="${k}">
+        <span class="planDayDate"><b>${WD[d.getDay()]}</b>${d.getDate()}.${d.getMonth()+1}.</span>
+        <span class="planDayName">${dayLabel(d, i)}</span>
+        <span class="planDayInfo">${already ? "✓ geplant" : others ? `${others} Gericht${others>1?"e":""}` : ""}</span>
+      </button>`;
+    }
+    if(planDays) planDays.innerHTML = html;
+    planOverlay?.classList.add('open');
+    planSheet?.classList.add('open');
+    planSheet?.setAttribute('aria-hidden','false');
+  }
+  function closePlanSheet(){
+    planOverlay?.classList.remove('open');
+    planSheet?.classList.remove('open');
+    planSheet?.setAttribute('aria-hidden','true');
+  }
+  $("#sheetPlanBtn")?.addEventListener('click', openPlanSheet);
+  $("#planSheetClose")?.addEventListener('click', closePlanSheet);
+  planOverlay?.addEventListener('click', closePlanSheet);
+  planDays?.addEventListener('click', (e)=>{
+    const b = e.target.closest('[data-day]'); if(!b) return;
+    const k = b.dataset.day;
+    if(b.classList.contains('isPlanned')){
+      U.plan.remove(k, data.id);
+      UI.toast?.("Aus dem Wochenplan entfernt");
+    }else{
+      U.plan.add(k, data.id, currentServings());
+      UI.toast?.(`Eingeplant: ${b.querySelector('.planDayName')?.textContent || ""}`);
+    }
+    successTap();
+    closePlanSheet();
   });
 
   // Cooking mode
@@ -398,7 +429,8 @@ const cookOverlay = $("#cookOverlay");
     if(!cookStepText || !cookStepPill) return;
     const total = steps.length || 1;
     stepIdx = Math.max(0, Math.min(total-1, stepIdx));
-    cookStepText.textContent = steps[stepIdx] || '—';
+    if(T) cookStepText.innerHTML = T.linkify(steps[stepIdx] || '—');
+    else cookStepText.textContent = steps[stepIdx] || '—';
     cookStepPill.textContent = `${stepIdx+1}/${total}`;
     if(cookProgressBar) cookProgressBar.style.width = `${((stepIdx+1)/total)*100}%`;
     if(cookStepIngs && cookStepIngsList){
@@ -455,12 +487,14 @@ const cookOverlay = $("#cookOverlay");
     renderCookIngredients();
     renderCookStep();
     requestWakeLock();
+    if(timerPill) timerPill.hidden = true;
   }
   function closeCook(){
     cookOverlay?.classList.remove('open');
     cookOverlay?.setAttribute('aria-hidden','true');
     document.body.classList.remove('noScroll');
     releaseWakeLock();
+    if(timerPill && T) timerPill.hidden = !T.list().length;
   }
 
   function setTab(which){
@@ -479,10 +513,13 @@ const cookOverlay = $("#cookOverlay");
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
   cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); pulse(cookStepText); });
   cookNext?.addEventListener('click', ()=>{
-    if(cookNext.dataset.last){ closeCook(); successTap(); return; }
+    if(cookNext.dataset.last){ closeCook(); markCooked(); successTap(); UI.toast?.('Als gekocht gespeichert'); return; }
     stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText);
   });
-  cookStepText?.addEventListener('click', ()=>{ if(stepIdx < steps.length-1){ stepIdx++; renderCookStep(); lightTap(); } });
+  cookStepText?.addEventListener('click', (e)=>{
+    const tb = e.target.closest('.cookTime');
+    if(tb){ T?.start(Number(tb.dataset.secs), `Schritt ${stepIdx+1} · ${tb.dataset.label}`); successTap(); pop(tb); return; }
+    if(stepIdx < steps.length-1){ stepIdx++; renderCookStep(); lightTap(); } });
   cookTabSteps?.addEventListener('click', ()=>{ setTab('steps'); lightTap(); pulse(cookTabSteps); });
   cookTabIngs?.addEventListener('click', ()=>{ setTab('ings'); lightTap(); pulse(cookTabIngs); });
 
@@ -492,6 +529,25 @@ const cookOverlay = $("#cookOverlay");
     if(e.key === 'ArrowRight') { stepIdx++; renderCookStep(); }
     if(e.key === 'ArrowLeft') { stepIdx--; renderCookStep(); }
   });
+
+  // Timer: Leiste im Kochmodus + kleiner Hinweis auf der Rezeptseite, solange einer läuft
+  const cookTimers = $("#cookTimers");
+  const timerPill = $("#timerPill");
+  T?.bind(cookTimers);
+  T?.onChange((items)=>{
+    T.render(cookTimers);
+    if(timerPill){
+      const open = cookOverlay?.classList.contains('open');
+      timerPill.hidden = open || !items.length;
+      if(items.length){
+        const next = items.slice().sort((a,b)=>a.left-b.left)[0];
+        const done = items.some(t=>t.done);
+        timerPill.classList.toggle('isDone', done);
+        timerPill.textContent = `⏱ ${done ? 'Timer fertig' : T.fmt(next.left)}${items.length>1 ? ` · ${items.length}` : ''}`;
+      }
+    }
+  });
+  timerPill?.addEventListener('click', openCook);
 
   renderIngredients();
   renderFreezer();

@@ -139,8 +139,72 @@
     });
   }
 
+  // Zutaten (bereits auf die Portionen umgerechnet) in die Einkaufsliste übernehmen.
+  // Gleiche Zutat + Einheit wird zusammengezählt; „from“ sammelt die Rezeptnamen.
+  function mergeIntoShopping(ings, from){
+    const key = "kochbuch.shopping";
+    let list = [];
+    try{ list = JSON.parse(localStorage.getItem(key) || "[]"); }catch{}
+    const nk = (s)=>String(s||"").trim().toLowerCase();
+    const map = new Map();
+    for(const e of list) map.set(`${nk(e.item)}|${nk(e.unit)}`, e);
+    for(const i of ings || []){
+      const item = String(i.item||"").trim(); if(!item) continue;
+      const unit = normUnit(i.unit||"");
+      const q0 = tryNum(i.qty);
+      const conv = (q0!==null) ? autoConvert(q0, unit) : { qty:null, unit };
+      const k = `${nk(item)}|${nk(conv.unit)}`;
+      const ex = map.get(k);
+      if(ex){
+        if(typeof ex.qty==="number" && typeof conv.qty==="number"){
+          const c2 = autoConvert(ex.qty + conv.qty, conv.unit);
+          ex.qty = c2.qty; ex.unit = c2.unit;
+        }else if(ex.qty==null && typeof conv.qty==="number"){
+          ex.qty = conv.qty; ex.unit = conv.unit;
+        }
+        if(from && ex.from && !ex.from.split(", ").includes(from)) ex.from = `${ex.from}, ${from}`;
+        else if(from && !ex.from) ex.from = from;
+        ex.checked = false;
+      }else{
+        const label = (q0===null && i.qty!=null && !/^n\.?\s*b\.?$|nach bedarf/i.test(String(i.qty).trim())) ? String(i.qty).trim() : "";
+        map.set(k, { item, unit:conv.unit, qty:(typeof conv.qty==="number" ? conv.qty : null), qtyLabel:label, from:from||"", checked:false });
+      }
+    }
+    const out = Array.from(map.values()).sort((a,b)=>String(a.item).localeCompare(String(b.item),"de"));
+    try{ localStorage.setItem(key, JSON.stringify(out)); }catch{}
+  }
 
-  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum, renderToggleList };
+  // Wochenplan: { "YYYY-MM-DD": [{ id, servings }] }
+  const PLAN_KEY = "kochbuch.plan";
+  function dateKey(d){
+    const x = d instanceof Date ? d : new Date(d);
+    return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,"0")}-${String(x.getDate()).padStart(2,"0")}`;
+  }
+  const plan = {
+    key: dateKey,
+    get(){ try{ const v = JSON.parse(localStorage.getItem(PLAN_KEY) || "{}"); return (v && typeof v === "object") ? v : {}; }catch{ return {}; } },
+    set(v){
+      // Tage, die länger als 4 Wochen vorbei sind, aufräumen
+      const cutoff = dateKey(new Date(Date.now() - 28*86400000));
+      Object.keys(v).forEach(k=>{ if(k < cutoff || !Array.isArray(v[k]) || !v[k].length) delete v[k]; });
+      try{ localStorage.setItem(PLAN_KEY, JSON.stringify(v)); }catch{}
+      window.dispatchEvent(new Event("kochbuch:plan"));
+    },
+    add(day, id, servings){
+      const v = plan.get();
+      const k = dateKey(day);
+      v[k] = Array.isArray(v[k]) ? v[k] : [];
+      if(!v[k].some(e=>e.id === id)) v[k].push({ id, servings: Number(servings) || null });
+      plan.set(v);
+    },
+    remove(dayKey, id){
+      const v = plan.get();
+      v[dayKey] = (v[dayKey] || []).filter(e=>e.id !== id);
+      plan.set(v);
+    }
+  };
+
+  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum, renderToggleList, mergeIntoShopping, plan };
 })();
 
 // Favorite badge indicator on list cards (uses kochbuch.stats)
@@ -324,8 +388,24 @@
     scope.addEventListener('pointerleave', clear, true);
   }
 
+  // Kurze Meldung unten am Bildschirm
+  let toastTimer = null;
+  function toast(text){
+    let el = document.getElementById('uiToast');
+    if(!el){
+      el = document.createElement('div');
+      el.id = 'uiToast'; el.className = 'uiToast'; el.setAttribute('role','status');
+      document.body.appendChild(el);
+    }
+    el.textContent = text;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> el.classList.remove('show'), 2400);
+  }
+
   window.KOCHBUCH_UI = {
     haptic,
+    toast,
     pop(el){ replayClass(el, 'uiPop'); },
     pulse(el){ replayClass(el, 'uiPulse'); },
     flash(el){ replayClass(el, 'uiFlash'); },

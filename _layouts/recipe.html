@@ -129,6 +129,7 @@ layout: default
     <button class="sheetRow" id="cookingModeBtn" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:18px;height:18px"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg></span><span>Kochmodus</span></button>
     <button class="sheetRow" id="sheetFavoriteBtn" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span>Favorit</span></button>
     <button class="sheetRow" id="sheetCookedBtn" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg></span><span>Gekocht</span></button>
+    <button class="sheetRow" id="sheetPlanBtn" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span>Zum Wochenplan</span></button>
     <button class="sheetRow" id="sheetFreezerBtn" type="button"><span class="rowGlyph" aria-hidden="true">❄︎</span><span>Kühltruhe</span></button>
     <button class="sheetRow" id="undoCookedBtn" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span><span>Undo „Gekocht“</span></button>
     {%- assign pdf_name = page.url | slugify | remove_first: "rezepte-" | append: ".pdf" -%}
@@ -164,6 +165,17 @@ layout: default
   </div>
 </section>
 
+<!-- Wochenplan: Tag wählen -->
+<div class="sheetOverlay" id="planSheetOverlay"></div>
+<section class="sheet" id="planSheet" aria-label="Zum Wochenplan" aria-hidden="true">
+  <div class="sheetGrab"></div>
+  <div class="sheetHead">
+    <div class="sheetTitle">Wann kochst du das?</div>
+    <button class="navIconBtn pressable" id="planSheetClose" aria-label="Schließen" type="button">✕</button>
+  </div>
+  <div class="sheetBody" id="planDays"></div>
+</section>
+
 <!-- Cooking Mode Overlay -->
 <div class="cookOverlay" id="cookOverlay" aria-hidden="true">
   <div class="cookTop">
@@ -177,6 +189,8 @@ layout: default
     <button class="cookTab active" id="cookTabSteps" type="button" role="tab" aria-selected="true">Schritte</button>
     <button class="cookTab" id="cookTabIngs" type="button" role="tab" aria-selected="false">Zutaten</button>
   </div>
+
+  <div class="cookTimers" id="cookTimers" hidden aria-live="polite"></div>
 
   <div class="cookBody" id="cookBody">
     <div class="cookPanel" id="cookPanelSteps" role="tabpanel">
@@ -196,6 +210,9 @@ layout: default
   </div>
 </div>
 
+<button class="timerPill pressable" id="timerPill" type="button" hidden aria-label="Laufende Timer im Kochmodus anzeigen"></button>
+
+<script defer src="{{ '/assets/cook-timer.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script defer src="{{ '/assets/recipe.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script defer src="{{ '/assets/recipe-pdf.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
