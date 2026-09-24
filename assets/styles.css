@@ -717,6 +717,44 @@ body.layout-recipe .appMain{padding-top:0}
 .pantryMissing.isComplete{color:var(--leaf);font-weight:600}
 #randomFilters{gap:8px}
 
+/* Wochenplan: Tagesauswahl im Rezept */
+.planDay{gap:12px}
+.planDayDate{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 48px;height:48px;border-radius:12px;background:var(--surface2);font-size:var(--fs12);line-height:1.2;color:var(--sub2);font-variant-numeric:tabular-nums}
+.planDayDate b{font-size:var(--fs14);color:var(--text)}
+.planDayName{flex:1;font-weight:500}
+.planDayInfo{font-size:var(--fs14);color:var(--sub2)}
+.planDay.isPlanned .planDayDate{background:var(--leaf);color:var(--onLeaf)}
+.planDay.isPlanned .planDayDate b{color:var(--onLeaf)}
+.planDay.isPlanned .planDayInfo{color:var(--leaf);font-weight:600}
+
+/* Wochenplan-Seite */
+.weekNav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.weekNav .navIconBtn{font-size:var(--fs22)}
+.weekNavLabel{text-align:center;font-weight:600;font-size:var(--fs18)}
+.weekNavRange{margin-top:2px;font-size:var(--fs14);font-weight:400;color:var(--sub2)}
+.planDayCard{padding:12px 12px 8px}
+.planDayCard.isToday{border-color:var(--leaf);box-shadow:0 0 0 1px var(--leaf)}
+.planDayCard.isPast{opacity:.6}
+.planDayHead{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 4px 4px}
+.planDayWd{font-weight:600}
+.isToday .planDayWd{color:var(--leaf)}
+.planDayNum{color:var(--sub2);font-size:var(--fs14)}
+.planAdd{min-height:36px;padding:0 12px;border:0;border-radius:var(--rPill);background:transparent;color:var(--petrol);font-size:var(--fs14);font-weight:600}
+.planEntry{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.planEntryLink{display:flex;align-items:center;gap:12px;flex:1;min-width:0;color:inherit;text-decoration:none}
+.planThumb{flex:0 0 48px;width:48px;height:48px;border-radius:10px;object-fit:cover;background:var(--surface2)}
+.planEntryTitle{font-weight:500;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.planServ{display:flex;align-items:center;border-radius:var(--rPill);background:var(--surface2)}
+.planServBtn{width:32px;height:32px;border:0;border-radius:var(--rPill);background:transparent;color:var(--text);font-size:var(--fs18)}
+.planServVal{min-width:18px;text-align:center;font-size:var(--fs14);font-weight:600;font-variant-numeric:tabular-nums}
+.planRemove{width:36px;height:36px;border:0;border-radius:var(--rPill);background:transparent;color:var(--muted)}
+.weekHint{margin:8px 4px 0;font-size:var(--fs14)}
+#weekToShopping:disabled{opacity:.5}
+.pickRow{gap:12px}
+.pickInfo{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pickTitle{font-weight:500;line-height:1.3}
+.pickMeta{font-size:var(--fs12);color:var(--sub2);font-weight:400}
+
 /* Kühltruhe */
 .freezerRow,.freezerTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .freezerLink{display:flex;align-items:center;gap:12px;min-width:0;flex:1;text-decoration:none;color:inherit}

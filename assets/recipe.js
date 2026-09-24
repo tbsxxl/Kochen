@@ -293,42 +293,69 @@ function renderIngredients(){
   });
 
   // Shopping add
-  const shopKey = "kochbuch.shopping";
   const addBtn = $("#addToShopping");
-  function normKey(s){ return String(s||"").trim().toLowerCase(); }
-  function mergeIntoShopping(ings){
-    const list = ls.get(shopKey, []);
-    const map = new Map();
-    for(const e of list) map.set(`${normKey(e.item)}|${normKey(e.unit)}`, e);
-    for(const i of ings){
-      const item=String(i.item||"").trim(); if(!item) continue;
-      const unit=U.normUnit(i.unit||"");
-      const q0=num(i.qty);
-      const conv=(q0!==null)?U.autoConvert(q0, unit):{qty:null,unit};
-      const k=`${normKey(item)}|${normKey(conv.unit)}`;
-      const ex=map.get(k);
-      if(ex){
-        if(typeof ex.qty==="number" && typeof conv.qty==="number"){
-          const sum=ex.qty+conv.qty;
-          const c2=U.autoConvert(sum, conv.unit);
-          ex.qty=c2.qty; ex.unit=c2.unit;
-        }else if(ex.qty==null && typeof conv.qty==="number"){
-          ex.qty=conv.qty; ex.unit=conv.unit;
-        }
-        ex.checked=false;
-      }else{
-        const label = (q0===null && i.qty!=null && !/^n\.?\s*b\.?$|nach bedarf/i.test(String(i.qty).trim())) ? String(i.qty).trim() : "";
-        map.set(k,{item,unit:conv.unit,qty:(typeof conv.qty==="number"?conv.qty:null),qtyLabel:label,from:data.title||"",checked:false});
-      }
-    }
-    const out = Array.from(map.values()).sort((a,b)=>String(a.item).localeCompare(String(b.item),"de"));
-    ls.set(shopKey,out);
-  }
   addBtn?.addEventListener("click", ()=>{
-    mergeIntoShopping(scaledIngredients());
+    U.mergeIntoShopping(scaledIngredients(), data.title || "");
+    UI.toast?.("Zutaten auf der Einkaufsliste");
     addBtn.classList.add("saved"); setTimeout(()=>addBtn.classList.remove("saved"),600);
     successTap();
     pop(addBtn);
+  });
+
+  // Wochenplan: Tag wählen (nächste 10 Tage)
+  const planOverlay = $("#planSheetOverlay");
+  const planSheet = $("#planSheet");
+  const planDays = $("#planDays");
+  const WD = ["So","Mo","Di","Mi","Do","Fr","Sa"];
+  function dayLabel(d, i){
+    if(i === 0) return "Heute";
+    if(i === 1) return "Morgen";
+    return ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"][d.getDay()];
+  }
+  function openPlanSheet(){
+    document.getElementById('recipeSheetOverlay')?.classList.remove('open');
+    const rs = document.getElementById('recipeSheet');
+    rs?.classList.remove('open'); rs?.setAttribute('aria-hidden','true');
+    const plan = U.plan.get();
+    const today = new Date(); today.setHours(12,0,0,0);
+    let html = "";
+    for(let i=0;i<10;i++){
+      const d = new Date(today.getTime() + i*86400000);
+      const k = U.plan.key(d);
+      const entries = plan[k] || [];
+      const already = entries.some(e=>e.id === data.id);
+      const others = entries.length - (already ? 1 : 0);
+      html += `<button class="sheetRow planDay${already ? " isPlanned" : ""}" type="button" data-day="${k}">
+        <span class="planDayDate"><b>${WD[d.getDay()]}</b>${d.getDate()}.${d.getMonth()+1}.</span>
+        <span class="planDayName">${dayLabel(d, i)}</span>
+        <span class="planDayInfo">${already ? "✓ geplant" : others ? `${others} Gericht${others>1?"e":""}` : ""}</span>
+      </button>`;
+    }
+    if(planDays) planDays.innerHTML = html;
+    planOverlay?.classList.add('open');
+    planSheet?.classList.add('open');
+    planSheet?.setAttribute('aria-hidden','false');
+  }
+  function closePlanSheet(){
+    planOverlay?.classList.remove('open');
+    planSheet?.classList.remove('open');
+    planSheet?.setAttribute('aria-hidden','true');
+  }
+  $("#sheetPlanBtn")?.addEventListener('click', openPlanSheet);
+  $("#planSheetClose")?.addEventListener('click', closePlanSheet);
+  planOverlay?.addEventListener('click', closePlanSheet);
+  planDays?.addEventListener('click', (e)=>{
+    const b = e.target.closest('[data-day]'); if(!b) return;
+    const k = b.dataset.day;
+    if(b.classList.contains('isPlanned')){
+      U.plan.remove(k, data.id);
+      UI.toast?.("Aus dem Wochenplan entfernt");
+    }else{
+      U.plan.add(k, data.id, currentServings());
+      UI.toast?.(`Eingeplant: ${b.querySelector('.planDayName')?.textContent || ""}`);
+    }
+    successTap();
+    closePlanSheet();
   });
 
   // Cooking mode
