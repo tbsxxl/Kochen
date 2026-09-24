@@ -781,6 +781,11 @@ body.layout-recipe .appMain{padding-top:0}
 .accountDevices{display:flex;flex-direction:column}
 .accountDevice{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
 .accountDevice:first-child{border-top:0}
+.accountDevice{align-items:center}
+.memberRemove{min-height:36px;padding:0 12px;border:0;border-radius:var(--rPill);background:var(--dangerSoft);color:var(--danger);font-size:var(--fs14);font-weight:600}
+.inviteBox{display:flex;flex-direction:column;gap:8px}
+.inviteBox[hidden]{display:none}
+#inviteUrl{font-size:var(--fs14);color:var(--sub2)}
 .fieldLabel{display:block;margin:4px 0 -4px;font-size:var(--fs14);font-weight:600;color:var(--sub)}
 .fieldRow{display:flex;gap:12px}
 .fieldRow .fieldLabel{margin-bottom:8px}

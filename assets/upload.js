@@ -193,7 +193,11 @@
       const me = await A.me();
       if(me.loggedIn && me.canUpload){ form.hidden = false; loadDraft(); renderIngPreview(); return; }
       gate.hidden = false;
-      if(me.loggedIn && !me.canUpload){
+      if(me.loggedIn && me.role !== "owner"){
+        gate.querySelector(".uEmptyTitle").textContent = "Nur für den Besitzer";
+        gate.querySelector(".uEmptyText").textContent = "Rezepte hochladen kann nur der Besitzer des Kochbuchs.";
+        gate.querySelector("a.btn")?.remove();
+      }else if(me.loggedIn && !me.canUpload){
         gate.querySelector(".uEmptyTitle").textContent = "Hochladen noch nicht eingerichtet";
         gate.querySelector(".uEmptyText").textContent = "In Cloudflare fehlt noch das GITHUB_TOKEN (siehe Anleitung).";
       }
