@@ -811,6 +811,18 @@ select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linea
 .ingPrevRow + .ingPrevRow{border-top:1px solid var(--line)}
 .ingPrevQty{flex:0 0 96px;font-weight:600;color:var(--leaf)}
 .uploadSuccess .accountIcon{font-size:28px}
+.ingRows{display:flex;flex-direction:column;gap:8px}
+.ingRow{display:flex;gap:6px;align-items:center}
+.ingRow .fieldInput{min-height:44px;padding:8px 10px;font-size:var(--fs16)}
+.ingRow .ingQty{flex:0 0 64px}
+.ingRow .ingUnit{flex:0 0 72px}
+.ingRow .ingItem{flex:1;min-width:0}
+.ingRowDel{flex:0 0 36px;height:36px;border:0;border-radius:var(--rPill);background:transparent;color:var(--muted)}
+.editSwitch{margin:0;padding:12px 0;align-items:flex-start}
+.editSwitch:hover{background:transparent}
+.editSwitchText{flex:1;display:flex;flex-direction:column;gap:4px}
+.editSwitchText .sub{font-size:var(--fs14);font-weight:400}
+.editSwitch .sheetSwitch{margin-top:2px}
 
 /* Kühltruhe */
 .freezerRow,.freezerTop{display:flex;align-items:center;justify-content:space-between;gap:12px}

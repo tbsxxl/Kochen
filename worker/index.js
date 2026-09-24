@@ -48,6 +48,9 @@ async function route(request, env, url){
   if(p === "/api/sync" && m === "GET") return syncGet(request, env);
   if(p === "/api/sync" && m === "PUT") return syncPut(request, env);
   if(p === "/api/recipes" && m === "POST") return recipeUpload(request, env, url);
+  if(p === "/api/recipe" && m === "GET") return recipeGet(request, env, url);
+  if(p === "/api/recipe" && m === "PUT") return recipeUpdate(request, env);
+  if(p === "/api/recipe/delete" && m === "POST") return recipeDelete(request, env);
   return json({ error: "Nicht gefunden" }, 404);
 }
 
@@ -367,10 +370,10 @@ function clean(s, max = 500){
 }
 const q = (s) => JSON.stringify(s);
 
-function buildMarkdown(r, imagePath){
+function buildMarkdown(r, imagePath, date){
   const lines = ["---"];
   lines.push(`title: ${q(r.title)}`);
-  lines.push(`date: ${new Date().toISOString().slice(0, 10)}`);
+  lines.push(`date: ${date || new Date().toISOString().slice(0, 10)}`);
   lines.push(`category: ${q(r.category)}`);
   if(r.categories.length) lines.push(`categories: [${r.categories.map(q).join(", ")}]`);
   if(r.tags.length) lines.push(`tags: [${r.tags.map(q).join(", ")}]`);
@@ -382,9 +385,12 @@ function buildMarkdown(r, imagePath){
     const qty = typeof i.qty === "number" ? String(i.qty) : q(i.qty);
     lines.push(`  - { qty: ${qty}, unit: ${q(i.unit)}, item: ${q(i.item)} }`);
   }
+  // Bearbeiten: Zubereitung wird als Markdown-Text 1:1 übernommen
+  if(r.markdown){ lines.push("---", "", r.markdown, ""); return lines.join("\n"); }
   lines.push("---", "", "## Schritte");
   r.steps.forEach((s, i) => lines.push(`${i + 1}. ${s}`));
-  if(r.notes){ lines.push("", "## Tipps", "", r.notes); }
+  // Tipps: eigener Abschnitt; beginnt der Text schon mit einer Überschrift (z. B. „## Hinweise“), bleibt sie
+  if(r.notes){ lines.push("", /^(#{2,3} |---)/.test(r.notes) ? r.notes : `## Tipps\n\n${r.notes}`); }
   lines.push("");
   return lines.join("\n");
 }
@@ -403,25 +409,116 @@ function validateRecipe(b){
   }).filter(i => i.item);
   if(!ingredients.length) fail("Bitte mindestens eine Zutat angeben.");
   const steps = (Array.isArray(b.steps) ? b.steps : []).map(s => clean(s, 1000).replace(/\s*\n\s*/g, " ")).filter(Boolean).slice(0, 60);
-  if(!steps.length) fail("Bitte mindestens einen Schritt angeben.");
+  const markdown = clean(String(b.markdown || "").replace(/\r\n?/g, "\n"), 30000);
+  if(!steps.length && !markdown) fail("Bitte mindestens einen Schritt angeben.");
   const list = (a, n, max) => (Array.isArray(a) ? a : []).map(x => clean(x, max)).filter(Boolean).slice(0, n);
   return {
-    title, category, servings, ingredients, steps,
+    title, category, servings, ingredients, steps, markdown,
     categories: list(b.categories, 10, 60).filter(c => c !== category),
     tags: list(b.tags, 20, 40),
-    time: clean(b.time, 40),
+    time: clean(b.time, 160),
     notes: clean(b.notes, 3000)
   };
 }
 
 function b64Size(s){ return Math.floor(String(s || "").length * 3 / 4); }
 
+function imageFiles(img, stem){
+  const files = [];
+  if(!img || !img.jpg) return { files, imagePath: "" };
+  if(b64Size(img.jpg) > 8_000_000) fail("Das Foto ist zu groß.");
+  files.push({ path: `recipes/images/${stem}.jpg`, content: img.jpg });
+  if(img.webp480 && img.webp960 && b64Size(img.webp480) < 2_000_000 && b64Size(img.webp960) < 4_000_000){
+    files.push({ path: `recipes/images/${stem}-480.webp`, content: img.webp480 });
+    files.push({ path: `recipes/images/${stem}-960.webp`, content: img.webp960 });
+  }
+  return { files, imagePath: `/recipes/images/${stem}.jpg` };
+}
+
+function github(env){
+  if(!env.GITHUB_TOKEN) fail("GITHUB_TOKEN ist in Cloudflare noch nicht hinterlegt.", 503);
+  return new GitHub(env.GITHUB_TOKEN, env.GITHUB_REPO || "tbsxxl/Kochen", env.GITHUB_BRANCH || "main", env.GITHUB_API);
+}
+function checkRecipePath(path){
+  path = String(path || "");
+  if(!/^_recipes\/[^/\\]+\.md$/.test(path) || path.includes("..")) fail("Ungültiger Rezeptpfad.");
+  return path;
+}
+function checkPdfPath(path){
+  path = String(path || "");
+  return /^assets\/pdf\/[a-z0-9-]+\.pdf$/.test(path) ? path : "";
+}
+// Zum Rezept gehörende Bilddateien (JPG + WebP-Varianten) aus dem Markdown ermitteln
+function imagePathsOf(md){
+  const m = String(md).match(/^image:\s*"?\/?(recipes\/images\/[^"\s]+)"?\s*$/m);
+  if(!m || m[1].includes("..")) return [];
+  const stem = m[1].replace(/\.(jpe?g|png)$/i, "");
+  return [m[1], `${stem}-480.webp`, `${stem}-960.webp`];
+}
+
+// ---------- Rezept bearbeiten / löschen (nur Besitzer) ----------
+async function recipeGet(request, env, url){
+  await requireOwner(request, env);
+  const path = checkRecipePath(url.searchParams.get("path"));
+  const file = await github(env).read(path);
+  if(!file) fail("Rezept nicht gefunden.", 404);
+  return json({ path, sha: file.sha, content: file.text });
+}
+
+async function recipeUpdate(request, env){
+  await requireOwner(request, env);
+  const body = await readJson(request, 15_000_000);
+  const path = checkRecipePath(body.path);
+  const gh = github(env);
+  const current = await gh.read(path);
+  if(!current) fail("Rezept nicht gefunden.", 404);
+  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen geändert. Bitte die Seite neu laden.", 409);
+  const r = validateRecipe(body);
+
+  const files = [];
+  const oldImages = imagePathsOf(current.text);
+  let imagePath = oldImages.length ? "/" + oldImages[0] : "";
+  if(body.removeImage) imagePath = "";
+  if(body.image && body.image.jpg){
+    // Neuer Dateiname, damit Browser und Service Worker nicht das alte Bild aus dem Cache zeigen
+    const res = imageFiles(body.image, `${slugify(r.title)}-${Date.now().toString(36)}`);
+    files.push(...res.files);
+    imagePath = res.imagePath;
+  }
+  if(imagePath !== (oldImages.length ? "/" + oldImages[0] : "")){
+    for(const p of oldImages) if(await gh.exists(p)) files.push({ path: p, delete: true });
+  }
+  const date = (current.text.match(/^date:\s*(\S+)/m) || [])[1];
+  files.unshift({ path, content: b64FromText(buildMarkdown(r, imagePath, date)) });
+  // Vorab erzeugtes PDF ist jetzt veraltet → entfernen (die Seite erzeugt es dann live)
+  const pdf = checkPdfPath(body.pdf);
+  if(pdf && await gh.exists(pdf)) files.push({ path: pdf, delete: true });
+  const sha = await gh.commit(files, `Rezept bearbeitet: ${r.title}\n\nÜber die Kochbuch-Seite geändert.`);
+  return json({ ok: true, commit: sha });
+}
+
+async function recipeDelete(request, env){
+  await requireOwner(request, env);
+  const body = await readJson(request);
+  const path = checkRecipePath(body.path);
+  const gh = github(env);
+  const current = await gh.read(path);
+  if(!current) fail("Rezept nicht gefunden.", 404);
+  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen geändert. Bitte die Seite neu laden.", 409);
+  const files = [{ path, delete: true }];
+  for(const p of imagePathsOf(current.text)) if(await gh.exists(p)) files.push({ path: p, delete: true });
+  const pdf = checkPdfPath(body.pdf);
+  if(pdf && await gh.exists(pdf)) files.push({ path: pdf, delete: true });
+  const title = (current.text.match(/^title:\s*"?(.*?)"?\s*$/m) || [])[1] || path;
+  const sha = await gh.commit(files, `Rezept gelöscht: ${title}\n\nÜber die Kochbuch-Seite gelöscht.`);
+  return json({ ok: true, commit: sha });
+}
+
 async function recipeUpload(request, env){
   await requireOwner(request, env);
-  if(!env.GITHUB_TOKEN) fail("GITHUB_TOKEN ist in Cloudflare noch nicht hinterlegt.", 503);
   const body = await readJson(request, 15_000_000);
   const r = validateRecipe(body);
-  const gh = new GitHub(env.GITHUB_TOKEN, env.GITHUB_REPO || "tbsxxl/Kochen", env.GITHUB_BRANCH || "main", env.GITHUB_API);
+  const gh = github(env);
 
   let slug = slugify(r.title);
   for(let i = 2; await gh.exists(`_recipes/${slug}.md`); i++){
@@ -429,18 +526,7 @@ async function recipeUpload(request, env){
     slug = `${slugify(r.title)}-${i}`;
   }
 
-  const files = [];
-  let imagePath = "";
-  const img = body.image || {};
-  if(img.jpg){
-    if(b64Size(img.jpg) > 8_000_000) fail("Das Foto ist zu groß.");
-    imagePath = `/recipes/images/${slug}.jpg`;
-    files.push({ path: `recipes/images/${slug}.jpg`, content: img.jpg });
-    if(img.webp480 && img.webp960 && b64Size(img.webp480) < 2_000_000 && b64Size(img.webp960) < 4_000_000){
-      files.push({ path: `recipes/images/${slug}-480.webp`, content: img.webp480 });
-      files.push({ path: `recipes/images/${slug}-960.webp`, content: img.webp960 });
-    }
-  }
+  const { files, imagePath } = imageFiles(body.image, slug);
   const md = buildMarkdown(r, imagePath);
   files.unshift({ path: `_recipes/${slug}.md`, content: b64FromText(md) });
   const sha = await gh.commit(files, `Neues Rezept: ${r.title}\n\nÜber die Kochbuch-Seite hochgeladen.`);

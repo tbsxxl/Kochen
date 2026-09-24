@@ -5,6 +5,7 @@ layout: default
 <script>
   window.RECIPE_DATA = {
     id: "{{ page.url | relative_url }}",
+    path: {{ page.path | jsonify }},
     title: {{ page.title | jsonify }},
     baseServings: {{ page.servings | default: 1 | jsonify }},
     ingredients: {{ page.ingredients | jsonify }}
@@ -137,6 +138,7 @@ layout: default
     {%- assign pdf_file = site.static_files | where: "path", pdf_path | first -%}
     <button class="sheetRow" id="pdfBtn" type="button" data-lib="{{ '/assets/vendor/jspdf.umd.min.js' | relative_url }}" data-pdf-name="{{ pdf_name }}"{% if pdf_file %} data-pdf="{{ pdf_path | relative_url }}?v={{ site.image_version }}"{% endif %}><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><polyline points="9 15 12 18 15 15"/></svg></span><span data-label>Als PDF speichern</span></button>
     <button class="sheetRow" id="printBtn" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></span><span>Drucken</span></button>
+    <a class="sheetRow" data-edit-only hidden href="{{ '/neues-rezept/' | relative_url }}?bearbeiten={{ page.path | url_encode }}&amp;pdf={{ pdf_path | remove_first: '/' | url_encode }}&amp;zurueck={{ page.url | relative_url | url_encode }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg></span><span>Rezept bearbeiten</span></a>
   </div>
 </section>
 

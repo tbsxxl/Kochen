@@ -29,18 +29,30 @@ export class GitHub {
     return res.status === 204 ? null : res.json();
   }
 
+  static encPath(path){ return String(path).split("/").map(encodeURIComponent).join("/"); }
+
   async exists(path){
-    const r = await this.api(`/contents/${encodeURI(path)}?ref=${encodeURIComponent(this.branch)}`, { allow404: true });
+    const r = await this.api(`/contents/${GitHub.encPath(path)}?ref=${encodeURIComponent(this.branch)}`, { allow404: true });
     return !!r;
   }
 
-  // files: [{ path, content (base64) }]
+  // Textdatei lesen → { text, sha } oder null
+  async read(path){
+    const r = await this.api(`/contents/${GitHub.encPath(path)}?ref=${encodeURIComponent(this.branch)}`, { allow404: true });
+    if(!r || Array.isArray(r)) return null;
+    const bin = atob(String(r.content || "").replace(/\n/g, ""));
+    const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+    return { text: new TextDecoder().decode(bytes), sha: r.sha };
+  }
+
+  // files: [{ path, content (base64) }] oder [{ path, delete: true }]
   async commit(files, message){
     const ref = await this.api(`/git/ref/heads/${encodeURIComponent(this.branch)}`);
     const parent = ref.object.sha;
     const parentCommit = await this.api(`/git/commits/${parent}`);
     const tree = [];
     for(const f of files){
+      if(f.delete){ tree.push({ path: f.path, mode: "100644", type: "blob", sha: null }); continue; }
       const blob = await this.api(`/git/blobs`, { method: "POST", body: JSON.stringify({ content: f.content, encoding: "base64" }) });
       tree.push({ path: f.path, mode: "100644", type: "blob", sha: blob.sha });
     }
