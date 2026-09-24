@@ -57,6 +57,10 @@ layout: default
     <input id="homeSearch" type="search" placeholder="Rezept suchen …" autocomplete="off" />
   </div>
   <div class="stack" id="homeSearchResults" hidden style="margin-top:10px"></div>
+  <div class="homeQuick">
+    <a class="homeQuickBtn pressable" href="{{ '/was-koche-ich/' | relative_url }}"><span aria-hidden="true">🥕</span>Zutaten suchen</a>
+    <a class="homeQuickBtn pressable" href="{{ '/was-koche-ich/?zufall=1' | relative_url }}"><span aria-hidden="true">🎲</span>Überrasch mich</a>
+  </div>
 </div>
 
 <!-- Favoriten -->
@@ -83,6 +87,14 @@ layout: default
     <div class="homeSectionTitle">Zuletzt gekocht</div>
   </div>
   <div class="hScroll" id="recentRow"></div>
+</div>
+
+<!-- Lange nicht gekocht -->
+<div class="section" id="longAgoSection" hidden>
+  <div class="homeSectionHead">
+    <div class="homeSectionTitle">Lange nicht gekocht</div>
+  </div>
+  <div class="hScroll" id="longAgoRow"></div>
 </div>
 
 <!-- Kühltruhe -->

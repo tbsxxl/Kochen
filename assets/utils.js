@@ -324,8 +324,24 @@
     scope.addEventListener('pointerleave', clear, true);
   }
 
+  // Kurze Meldung unten am Bildschirm
+  let toastTimer = null;
+  function toast(text){
+    let el = document.getElementById('uiToast');
+    if(!el){
+      el = document.createElement('div');
+      el.id = 'uiToast'; el.className = 'uiToast'; el.setAttribute('role','status');
+      document.body.appendChild(el);
+    }
+    el.textContent = text;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> el.classList.remove('show'), 2400);
+  }
+
   window.KOCHBUCH_UI = {
     haptic,
+    toast,
     pop(el){ replayClass(el, 'uiPop'); },
     pulse(el){ replayClass(el, 'uiPulse'); },
     flash(el){ replayClass(el, 'uiFlash'); },

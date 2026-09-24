@@ -259,7 +259,7 @@ function renderIngredients(){
     if(typeof window.updateFavBadges === "function") window.updateFavBadges();
     window.dispatchEvent(new Event("kochbuch:stats"));
   });
-  cookedBtn?.addEventListener("click", ()=>{
+  function markCooked(){
     const e=getEntry();
     const now=new Date().toISOString();
     e.cookedCount=(e.cookedCount||0)+1;
@@ -268,11 +268,14 @@ function renderIngredients(){
     e.history.unshift(now);
     e.history=e.history.slice(0,50);
     setEntry(e);
-    cookedBtn.classList.add("saved"); setTimeout(()=>cookedBtn.classList.remove("saved"),600);
     renderStats();
+    flash(statsLine);
+  }
+  cookedBtn?.addEventListener("click", ()=>{
+    markCooked();
+    cookedBtn.classList.add("saved"); setTimeout(()=>cookedBtn.classList.remove("saved"),600);
     successTap();
     pop(cookedBtn);
-    flash(statsLine);
   });
   undoBtn?.addEventListener("click", ()=>{
     const e=getEntry();
@@ -483,7 +486,7 @@ const cookOverlay = $("#cookOverlay");
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
   cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); pulse(cookStepText); });
   cookNext?.addEventListener('click', ()=>{
-    if(cookNext.dataset.last){ closeCook(); successTap(); return; }
+    if(cookNext.dataset.last){ closeCook(); markCooked(); successTap(); UI.toast?.('Als gekocht gespeichert'); return; }
     stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText);
   });
   cookStepText?.addEventListener('click', (e)=>{
