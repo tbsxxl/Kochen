@@ -22,10 +22,14 @@ npx wrangler dev                        # lokal wie auf Cloudflare ausliefern
 
 Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind statische Dateien. Keine npm-Abhängigkeiten
 (Passkey-Prüfung selbst geschrieben in `worker/webauthn.js`, nur WebCrypto).
-- Anmeldung per Passkey (Face ID), genau ein Besitzer. Erste Einrichtung nur mit Secret `SETUP_CODE`, weitere Passkeys nur angemeldet.
-  Sitzung = signiertes Cookie (Schlüssel im KV), „Überall abmelden“ erhöht `auth:epoch`.
-- Sync (`assets/account.js`): `kochbuch.stats/freezer/shopping/plan`, pro Schlüssel gewinnt der neueste Stand; beim ersten
-  Anmelden eines Geräts werden lokale Daten mit dem Server zusammengeführt.
+- Anmeldung per Passkey (Face ID). Ein Besitzer (erste Einrichtung nur mit Secret `SETUP_CODE`; darf hochladen,
+  einladen, Mitglieder entfernen) und Mitglieder, die nur per Einladungslink (7 Tage, einmalig) ein Profil anlegen und
+  nur ihre eigenen Daten synchronisieren. KV-Schlüssel stehen oben in `worker/index.js` (`user:`, `creds:`, `credmap:`,
+  `sync:<uid>`, `invite:`); alte Einzelprofil-Daten werden per `migrate()` übernommen.
+  Sitzung = signiertes Cookie mit uid (Schlüssel im KV), „Überall abmelden“ erhöht `epoch:<uid>`.
+  Menüpunkte nur für den Besitzer tragen `data-owner-only` (von `assets/account.js` ein-/ausgeblendet).
+- Sync (`assets/account.js`): `kochbuch.stats/freezer/shopping/plan` pro Profil, pro Schlüssel gewinnt der neueste Stand; beim ersten
+  Anmelden eines Geräts werden lokale Daten zusammengeführt, meldet sich dort später ein anderes Profil an, werden sie ersetzt.
 - Upload (`/neues-rezept/`, `assets/upload.js`): Worker committet Markdown + Bild (JPG, WebP 480/960) per GitHub-API
   (Secret `GITHUB_TOKEN`, fine-grained, nur dieses Repo, Contents read/write) direkt auf `main`. Danach Branch neu holen!
 - Speicher: KV-Binding `KV` (ohne id, Wrangler legt es beim Deploy an).

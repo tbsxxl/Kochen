@@ -7,7 +7,7 @@ permalink: /neues-rezept/
 <div class="section" style="margin-top:6px" id="uploadGate" hidden>
   <div class="uEmpty">
     <div class="uEmptyTitle">Bitte zuerst anmelden</div>
-    <div class="uEmptyText">Rezepte hochladen kannst nur du. Melde dich mit Face ID an.</div>
+    <div class="uEmptyText">Rezepte hochladen kann nur der Besitzer. Bitte mit Face ID anmelden.</div>
     <a class="btn action" href="{{ '/konto/' | relative_url }}" style="margin-top:12px">Zum Profil</a>
   </div>
 </div>

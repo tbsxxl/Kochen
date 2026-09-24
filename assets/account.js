@@ -139,6 +139,7 @@
           meta[k] = Date.now();
         }
         meta.__joined = 1;
+        meta.__uid = (profile() || {}).uid;
         write(META_KEY, meta);
       }finally{ applying = false; }
       await push();
@@ -192,9 +193,9 @@
     return (err && err.message) || String(err);
   }
 
-  async function register({ setupCode, name } = {}){
+  async function register({ setupCode, name, invite } = {}){
     if(!passkeySupported()) throw new Error("Dieser Browser unterstützt keine Passkeys.");
-    const opts = await api("/api/auth/register/options", { method: "POST", body: { setupCode, name } });
+    const opts = await api("/api/auth/register/options", { method: "POST", body: { setupCode, name, invite } });
     let cred;
     try{
       cred = await navigator.credentials.create({ publicKey: {
@@ -211,7 +212,7 @@
         attestationObject: b64.enc(cred.response.attestationObject)
       }
     }});
-    await loggedInAs(res.name);
+    await loggedInAs(res);
     return res;
   }
 
@@ -230,12 +231,21 @@
         signature: b64.enc(cred.response.signature)
       }
     }});
-    await loggedInAs(res.name);
+    await loggedInAs(res);
     return res;
   }
 
-  async function loggedInAs(name){
-    write(PROFILE_KEY, { name: name || "", lastSync: null });
+  async function loggedInAs(res){
+    // Anderes Profil als zuletzt auf diesem Gerät: dessen Daten nicht übernehmen, sondern frisch vom Server laden
+    const meta = read(META_KEY, {});
+    if(meta.__uid && res.uid && meta.__uid !== res.uid){
+      applying = true;
+      try{ SYNC_KEYS.forEach(k=>rawRemove.call(store, k)); }finally{ applying = false; }
+      write(META_KEY, { __joined: 1, __uid: res.uid });
+    }else if(res.uid && meta.__joined && !meta.__uid){
+      meta.__uid = res.uid; write(META_KEY, meta);
+    }
+    write(PROFILE_KEY, { name: res.name || "", uid: res.uid, role: res.role, lastSync: null });
     renderBadges();
     try{ await syncNow(); }catch{}
   }
@@ -243,13 +253,13 @@
   async function logout(everywhere){
     try{ await api("/api/auth/logout", { method: "POST", body: { everywhere: !!everywhere } }); }catch{}
     rawRemove.call(store, PROFILE_KEY);
-    const meta = read(META_KEY, {}); delete meta.__joined; write(META_KEY, meta);
     renderBadges();
   }
 
   // ---------- Profil-Knopf (Startseite oben rechts) ----------
   function renderBadges(){
     const p = profile();
+    document.querySelectorAll("[data-owner-only]").forEach(el=>{ el.hidden = !(p && p.role === "owner"); });
     document.querySelectorAll("[data-profile-badge]").forEach(el=>{
       const initial = p && p.name ? p.name.trim().charAt(0).toUpperCase() : "";
       el.classList.toggle("isIn", !!p);
@@ -260,11 +270,27 @@
     });
   }
 
-  window.KOCHBUCH_ACCOUNT = { me: ()=>api("/api/me"), api, register, login, logout, syncNow, profile, passkeySupported, deviceName };
+  window.KOCHBUCH_ACCOUNT = { me: (query)=>api("/api/me" + (query || "")), api, register, login, logout, syncNow, profile, passkeySupported, deviceName };
+
+  // Name/Rolle aktuell halten (z. B. nach Umstellung auf mehrere Profile)
+  async function refreshProfile(){
+    const me = await api("/api/me");
+    const p = profile();
+    if(!me.loggedIn){ rawRemove.call(store, PROFILE_KEY); }
+    else if(p && (p.role !== me.role || p.uid !== me.uid || p.name !== me.name)){
+      write(PROFILE_KEY, { ...p, name: me.name, uid: me.uid, role: me.role });
+      const meta = read(META_KEY, {});
+      if(meta.__joined && !meta.__uid){ meta.__uid = me.uid; write(META_KEY, meta); }
+    }
+    renderBadges();
+  }
 
   function init(){
     renderBadges();
-    if(loggedIn()) syncNow().catch(()=>{});
+    if(loggedIn()){
+      syncNow().catch(()=>{});
+      if(!location.pathname.startsWith("/konto/")) refreshProfile().catch(()=>{});
+    }
   }
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 

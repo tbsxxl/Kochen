@@ -1,9 +1,10 @@
 // Tobis Kochbuch – Worker für /api/*: Anmeldung per Passkey (Face ID), Sync der Browserdaten
-// und Hochladen neuer Rezepte ins GitHub-Repository. Alle anderen Pfade liefert Cloudflare
+// und Hochladen neuer Rezepte ins GitHub-Repository. Ein Besitzer (lädt hoch, lädt ein) und
+// eingeladene Mitglieder (nur eigene Favoriten, Listen usw.). Alle anderen Pfade liefert Cloudflare
 // direkt als statische Dateien aus (siehe run_worker_first in wrangler.jsonc).
 //
 // Einstellungen (Cloudflare → Worker „kochbuch“ → Settings → Variables and Secrets):
-//   SETUP_CODE    Secret: Code für die allererste Einrichtung des Passkeys
+//   SETUP_CODE    Secret: Code für die allererste Einrichtung (Besitzer-Profil)
 //   GITHUB_TOKEN  Secret: Fine-grained Token, nur dieses Repo, „Contents: Read and write“
 //   GITHUB_REPO / GITHUB_BRANCH stehen als vars in wrangler.jsonc.
 // Speicher: KV-Namespace mit Binding KV (wird beim Deploy automatisch angelegt).
@@ -26,6 +27,7 @@ export default {
         const origin = request.headers.get("Origin");
         if(origin !== url.origin) return json({ error: "Ungültige Herkunft" }, 403);
       }
+      await migrate(env);
       return await route(request, env, url);
     }catch(err){
       return json({ error: String(err && err.message || err) }, err && err.status || 500);
@@ -35,7 +37,9 @@ export default {
 
 async function route(request, env, url){
   const p = url.pathname, m = request.method;
-  if(p === "/api/me" && m === "GET") return me(request, env);
+  if(p === "/api/me" && m === "GET") return me(request, env, url);
+  if(p === "/api/invites" && m === "POST") return inviteCreate(request, env, url);
+  if(p === "/api/members/remove" && m === "POST") return memberRemove(request, env);
   if(p === "/api/auth/register/options" && m === "POST") return registerOptions(request, env, url);
   if(p === "/api/auth/register/verify" && m === "POST") return registerVerify(request, env, url);
   if(p === "/api/auth/login/options" && m === "POST") return loginOptions(request, env, url);
@@ -97,19 +101,59 @@ async function unsign(env, token){
   }catch{ return null; }
 }
 
-async function getCredentials(env){ return (await env.KV.get("auth:credentials", "json")) || []; }
-async function getProfile(env){ return (await env.KV.get("auth:profile", "json")) || { name: "" }; }
-async function sessionEpoch(env){ return Number(await env.KV.get("auth:epoch")) || 0; }
+// ---------- Nutzer ----------
+// KV-Schlüssel:
+//   auth:owner            uid des Besitzers (darf Rezepte hochladen und einladen)
+//   auth:users            [uid, …]
+//   user:<uid>            { uid, name, role: "owner"|"member", created }
+//   creds:<uid>           [{ id, jwk, counter, name, created, lastUsed }]
+//   credmap:<credId>      uid
+//   epoch:<uid>           Zähler für „überall abmelden“
+//   sync:<uid>            { key: { v, t } }
+//   invite:<token>        { created, expires } (läuft nach 7 Tagen ab, nur einmal nutzbar)
+
+// Alte Einzelprofil-Daten (erste Version) in das neue Format übernehmen
+async function migrate(env){
+  if(await env.KV.get("auth:migrated")) return;
+  const oldCreds = await env.KV.get("auth:credentials", "json");
+  if(oldCreds && oldCreds.length && !(await env.KV.get("auth:owner"))){
+    const profile = (await env.KV.get("auth:profile", "json")) || {};
+    const uid = profile.userId || b64url.encode(randomBytes(16));
+    await env.KV.put(`user:${uid}`, JSON.stringify({ uid, name: profile.name || "Ich", role: "owner", created: oldCreds[0].created || new Date().toISOString() }));
+    await env.KV.put(`creds:${uid}`, JSON.stringify(oldCreds));
+    for(const c of oldCreds) await env.KV.put(`credmap:${c.id}`, uid);
+    const sync = await env.KV.get("sync:data");
+    if(sync) await env.KV.put(`sync:${uid}`, sync);
+    const epoch = await env.KV.get("auth:epoch");
+    if(epoch) await env.KV.put(`epoch:${uid}`, epoch);
+    await env.KV.put("auth:users", JSON.stringify([uid]));
+    await env.KV.put("auth:owner", uid);
+  }
+  await env.KV.put("auth:migrated", "1");
+}
+
+const getUser = async (env, uid)=> uid ? await env.KV.get(`user:${uid}`, "json") : null;
+const getCreds = async (env, uid)=> (await env.KV.get(`creds:${uid}`, "json")) || [];
+const getUsers = async (env)=> (await env.KV.get("auth:users", "json")) || [];
+const epochOf = async (env, uid)=> Number(await env.KV.get(`epoch:${uid}`)) || 0;
 
 async function session(request, env){
   const data = await unsign(env, cookies(request)[SESSION_COOKIE]);
   if(!data || data.kind !== "session") return null;
-  if(data.epoch !== await sessionEpoch(env)) return null;
-  return data;
+  const uid = data.uid || await env.KV.get("auth:owner");   // Sitzungen aus der ersten Version
+  const user = await getUser(env, uid);
+  if(!user) return null;
+  if((data.epoch || 0) !== await epochOf(env, uid)) return null;
+  return { uid, user };
 }
 async function requireSession(request, env){
   const s = await session(request, env);
   if(!s) fail("Bitte zuerst anmelden.", 401);
+  return s;
+}
+async function requireOwner(request, env){
+  const s = await requireSession(request, env);
+  if(s.user.role !== "owner") fail("Das darf nur der Besitzer des Kochbuchs.", 403);
   return s;
 }
 
@@ -127,17 +171,52 @@ async function readJson(request, limit = 1_000_000){
 }
 
 // ---------- Profil ----------
-async function me(request, env){
+async function me(request, env, url){
   const s = await session(request, env);
-  const creds = await getCredentials(env);
-  const profile = await getProfile(env);
-  return json({
-    loggedIn: !!s,
-    name: s ? profile.name : undefined,
-    devices: s ? creds.map(c => ({ name: c.name, created: c.created, lastUsed: c.lastUsed })) : undefined,
-    setupDone: creds.length > 0,
-    canUpload: !!s && !!env.GITHUB_TOKEN
+  const out = { loggedIn: !!s, setupDone: !!(await env.KV.get("auth:owner")) };
+  const invite = url.searchParams.get("einladung");
+  if(invite) out.inviteValid = !!(await validInvite(env, invite));
+  if(!s) return json(out);
+  const creds = await getCreds(env, s.uid);
+  Object.assign(out, {
+    uid: s.uid,
+    name: s.user.name,
+    role: s.user.role,
+    devices: creds.map(c => ({ name: c.name, created: c.created, lastUsed: c.lastUsed })),
+    canUpload: s.user.role === "owner" && !!env.GITHUB_TOKEN
   });
+  if(s.user.role === "owner"){
+    const users = await Promise.all((await getUsers(env)).map(uid => getUser(env, uid)));
+    out.members = users.filter(u => u && u.role !== "owner").map(u => ({ uid: u.uid, name: u.name, created: u.created }));
+  }
+  return json(out);
+}
+
+// ---------- Einladungen ----------
+async function validInvite(env, token){
+  if(!/^[A-Za-z0-9_-]{16,64}$/.test(String(token || ""))) return null;
+  const inv = await env.KV.get(`invite:${token}`, "json");
+  if(!inv || inv.expires < Date.now()) return null;
+  return inv;
+}
+async function inviteCreate(request, env, url){
+  await requireOwner(request, env);
+  const token = b64url.encode(randomBytes(18));
+  const expires = Date.now() + 7 * 86400000;
+  await env.KV.put(`invite:${token}`, JSON.stringify({ created: Date.now(), expires }), { expirationTtl: 7 * 86400 });
+  return json({ url: `${url.origin}/konto/?einladung=${token}`, expires });
+}
+async function memberRemove(request, env){
+  const s = await requireOwner(request, env);
+  const { uid } = await readJson(request);
+  if(!uid || uid === s.uid) fail("Dieses Profil kann nicht entfernt werden.");
+  const user = await getUser(env, uid);
+  if(!user) fail("Profil nicht gefunden.", 404);
+  for(const c of await getCreds(env, uid)) await env.KV.delete(`credmap:${c.id}`);
+  await Promise.all([`user:${uid}`, `creds:${uid}`, `sync:${uid}`].map(k => env.KV.delete(k)));
+  await env.KV.put(`epoch:${uid}`, String((await epochOf(env, uid)) + 1));
+  await env.KV.put("auth:users", JSON.stringify((await getUsers(env)).filter(x => x !== uid)));
+  return json({ ok: true });
 }
 
 // ---------- Passkey registrieren ----------
@@ -152,23 +231,30 @@ async function readChallenge(request, env, kind){
   return data;
 }
 
+// Drei Wege: erste Einrichtung (SETUP_CODE → Besitzer), Einladung (→ Mitglied),
+// angemeldet (weiterer Passkey für das eigene Profil)
 async function registerOptions(request, env, url){
   const body = await readJson(request);
-  const creds = await getCredentials(env);
   const s = await session(request, env);
-  if(!s){
-    // Ohne Anmeldung nur die allererste Einrichtung – und nur mit dem Einrichtungscode
-    if(creds.length) fail("Es ist bereits ein Profil eingerichtet. Melde dich mit deinem Passkey an.", 403);
+  let mode, uid, name, creds = [];
+  if(s){
+    mode = "add"; uid = s.uid; name = s.user.name; creds = await getCreds(env, uid);
+  }else if(body.invite){
+    if(!(await validInvite(env, body.invite))) fail("Die Einladung ist ungültig oder abgelaufen. Bitte um einen neuen Link.", 403);
+    mode = "invite"; uid = b64url.encode(randomBytes(16));
+  }else{
+    if(await env.KV.get("auth:owner")) fail("Es ist bereits ein Profil eingerichtet. Melde dich mit deinem Passkey an oder nutze einen Einladungslink.", 403);
     if(!env.SETUP_CODE) fail("SETUP_CODE ist in Cloudflare noch nicht hinterlegt.", 503);
     if(!safeEqual(String(body.setupCode || "").trim(), env.SETUP_CODE)) fail("Der Einrichtungscode stimmt nicht.", 403);
+    mode = "setup"; uid = b64url.encode(randomBytes(16));
   }
-  const profile = await getProfile(env);
-  const name = String(body.name || profile.name || "Ich").trim().slice(0, 40) || "Ich";
-  let userId = profile.userId;
-  if(!userId) userId = b64url.encode(randomBytes(16));
-  return challengeResponse(env, "register", { name, userId }, {
+  if(mode !== "add"){
+    name = String(body.name || "").trim().slice(0, 40);
+    if(!name) fail("Bitte einen Namen eingeben.");
+  }
+  return challengeResponse(env, "register", { mode, uid, name, invite: mode === "invite" ? body.invite : undefined }, {
     rp: { id: url.hostname, name: "Tobis Kochbuch" },
-    user: { id: userId, name, displayName: name },
+    user: { id: uid, name, displayName: name },
     pubKeyCredParams: [{ type: "public-key", alg: -7 }, { type: "public-key", alg: -257 }],
     timeout: 120000,
     attestation: "none",
@@ -180,23 +266,33 @@ async function registerOptions(request, env, url){
 async function registerVerify(request, env, url){
   const body = await readJson(request);
   const chal = await readChallenge(request, env, "register");
-  const creds = await getCredentials(env);
   const s = await session(request, env);
-  if(!s && creds.length) fail("Es ist bereits ein Profil eingerichtet.", 403);
+  if(chal.mode === "add" && (!s || s.uid !== chal.uid)) fail("Bitte zuerst anmelden.", 401);
+  if(chal.mode === "setup" && await env.KV.get("auth:owner")) fail("Es ist bereits ein Profil eingerichtet.", 403);
+  if(chal.mode === "invite" && !(await validInvite(env, chal.invite))) fail("Die Einladung wurde schon benutzt oder ist abgelaufen.", 403);
+
   const cred = await verifyRegistration({ response: body.response || {}, challenge: chal.c, origins: [url.origin], rpId: url.hostname });
-  if(creds.some(c => c.id === cred.id)) fail("Dieser Passkey ist schon gespeichert.");
+  if(await env.KV.get(`credmap:${cred.id}`)) fail("Dieser Passkey ist schon gespeichert.");
   const now = new Date().toISOString();
+
+  if(chal.mode !== "add"){
+    if(chal.mode === "invite") await env.KV.delete(`invite:${chal.invite}`);
+    const role = chal.mode === "setup" ? "owner" : "member";
+    await env.KV.put(`user:${chal.uid}`, JSON.stringify({ uid: chal.uid, name: chal.name, role, created: now }));
+    await env.KV.put("auth:users", JSON.stringify([...(await getUsers(env)), chal.uid]));
+    if(role === "owner") await env.KV.put("auth:owner", chal.uid);
+  }
+  const creds = await getCreds(env, chal.uid);
   creds.push({ ...cred, name: String(body.deviceName || "Gerät").slice(0, 40), created: now, lastUsed: now });
-  await env.KV.put("auth:credentials", JSON.stringify(creds));
-  const profile = await getProfile(env);
-  await env.KV.put("auth:profile", JSON.stringify({ ...profile, name: chal.name, userId: chal.userId }));
-  return newSession(env, { ok: true, name: chal.name });
+  await env.KV.put(`creds:${chal.uid}`, JSON.stringify(creds));
+  await env.KV.put(`credmap:${cred.id}`, chal.uid);
+  const user = await getUser(env, chal.uid);
+  return newSession(env, user);
 }
 
 // ---------- Anmelden ----------
 async function loginOptions(request, env, url){
-  const creds = await getCredentials(env);
-  if(!creds.length) fail("Es ist noch kein Profil eingerichtet.", 404);
+  if(!(await env.KV.get("auth:owner"))) fail("Es ist noch kein Profil eingerichtet.", 404);
   return challengeResponse(env, "login", {}, {
     rpId: url.hostname,
     timeout: 120000,
@@ -208,30 +304,32 @@ async function loginOptions(request, env, url){
 async function loginVerify(request, env, url){
   const body = await readJson(request);
   const chal = await readChallenge(request, env, "login");
-  const creds = await getCredentials(env);
+  const uid = await env.KV.get(`credmap:${String(body.id || "")}`);
+  const user = await getUser(env, uid);
+  if(!user) fail("Dieser Passkey ist hier nicht (mehr) bekannt.", 403);
+  const creds = await getCreds(env, uid);
   const cred = creds.find(c => c.id === body.id);
   if(!cred) fail("Dieser Passkey ist hier nicht bekannt.", 403);
   const { counter } = await verifyAuthentication({ response: body.response || {}, challenge: chal.c, origins: [url.origin], rpId: url.hostname, credential: cred });
   cred.counter = counter;
   cred.lastUsed = new Date().toISOString();
-  await env.KV.put("auth:credentials", JSON.stringify(creds));
-  const profile = await getProfile(env);
-  return newSession(env, { ok: true, name: profile.name });
+  await env.KV.put(`creds:${uid}`, JSON.stringify(creds));
+  return newSession(env, user);
 }
 
-async function newSession(env, data){
-  const token = await sign(env, { kind: "session", epoch: await sessionEpoch(env), exp: Date.now() + SESSION_DAYS * 86400000 });
+async function newSession(env, user){
+  const token = await sign(env, { kind: "session", uid: user.uid, epoch: await epochOf(env, user.uid), exp: Date.now() + SESSION_DAYS * 86400000 });
   const headers = new Headers({ "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
   headers.append("Set-Cookie", cookie(SESSION_COOKIE, token, SESSION_DAYS * 86400));
   headers.append("Set-Cookie", cookie(CHALLENGE_COOKIE, "", 0, "/api/auth"));
-  return new Response(JSON.stringify(data), { headers });
+  return new Response(JSON.stringify({ ok: true, uid: user.uid, name: user.name, role: user.role }), { headers });
 }
 
 async function logout(request, env){
   const body = await readJson(request);
   if(body.everywhere){
-    await requireSession(request, env);
-    await env.KV.put("auth:epoch", String((await sessionEpoch(env)) + 1));
+    const s = await requireSession(request, env);
+    await env.KV.put(`epoch:${s.uid}`, String((await epochOf(env, s.uid)) + 1));
   }
   return json({ ok: true }, 200, { "Set-Cookie": cookie(SESSION_COOKIE, "", 0) });
 }
@@ -239,20 +337,20 @@ async function logout(request, env){
 // ---------- Sync ----------
 // Pro Schlüssel gewinnt der neueste Stand: { "kochbuch.stats": { v: <Wert>, t: <ms> }, … }
 async function syncGet(request, env){
-  await requireSession(request, env);
-  return json({ data: (await env.KV.get("sync:data", "json")) || {} });
+  const s = await requireSession(request, env);
+  return json({ data: (await env.KV.get(`sync:${s.uid}`, "json")) || {} });
 }
 
 async function syncPut(request, env){
-  await requireSession(request, env);
+  const s = await requireSession(request, env);
   const body = await readJson(request, 2_000_000);
-  const data = (await env.KV.get("sync:data", "json")) || {};
+  const data = (await env.KV.get(`sync:${s.uid}`, "json")) || {};
   let changed = false;
   for(const [k, entry] of Object.entries(body.changes || {})){
     if(!SYNC_KEYS.includes(k) || !entry || typeof entry.t !== "number") continue;
     if(!data[k] || entry.t > data[k].t){ data[k] = { v: entry.v, t: Math.min(entry.t, Date.now() + 60000) }; changed = true; }
   }
-  if(changed) await env.KV.put("sync:data", JSON.stringify(data));
+  if(changed) await env.KV.put(`sync:${s.uid}`, JSON.stringify(data));
   return json({ data });
 }
 
@@ -319,7 +417,7 @@ function validateRecipe(b){
 function b64Size(s){ return Math.floor(String(s || "").length * 3 / 4); }
 
 async function recipeUpload(request, env){
-  await requireSession(request, env);
+  await requireOwner(request, env);
   if(!env.GITHUB_TOKEN) fail("GITHUB_TOKEN ist in Cloudflare noch nicht hinterlegt.", 503);
   const body = await readJson(request, 15_000_000);
   const r = validateRecipe(body);

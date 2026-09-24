@@ -45,6 +45,8 @@ Variables and Secrets → Add**, Typ **Secret**:
 
 Danach auf dem iPhone **Mehr → Profil & Sync** öffnen, Name und Einrichtungscode eingeben, mit Face ID bestätigen.
 Neue Rezepte über **Mehr → Rezept hochladen**. Sie sind nach ca. 2 Minuten online.
+Andere Personen lädst du unter **Profil & Sync → Einladungslink erstellen** ein. Sie bekommen ein eigenes Profil für
+Favoriten, Einkaufsliste, Kühltruhe und Wochenplan, können aber keine Rezepte hochladen oder ändern.
 
 ## Daten von der alten GitHub-Pages-Version übernehmen
 
