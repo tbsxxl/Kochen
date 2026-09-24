@@ -7,9 +7,12 @@
   if(!data || !btn) return;
 
   const LIB = btn.getAttribute('data-lib');
+  const STATIC_PDF = btn.getAttribute('data-pdf');          // vorab erzeugtes PDF (Originalportionen)
+  const BASE = String(data.baseServings || "");
   let libPromise = null;
   let prepared = null;        // { key, file }
   let preparing = null;
+  let lastError = null;
 
   function loadLib(){
     if(window.jspdf) return Promise.resolve();
@@ -166,19 +169,33 @@
   }
 
   function fileName(){
-    const slug = (data.id || 'rezept').split('/').filter(Boolean).pop() || 'rezept';
-    return `${slug}.pdf`;
+    return btn.getAttribute('data-pdf-name') || 'rezept.pdf';
+  }
+
+  // Vorab erzeugtes PDF laden (kein jsPDF nötig; funktioniert in jedem Browser)
+  function staticFile(){
+    return fetch(STATIC_PDF, { cache:'no-cache' })
+      .then(r => { if(!r.ok) throw new Error('PDF ' + r.status); return r.blob(); })
+      .then(b => new File([b], fileName(), { type:'application/pdf' }));
   }
 
   function prepare(){
     const key = currentKey();
     if(prepared && prepared.key === key) return Promise.resolve(prepared);
     if(preparing) return preparing;
-    preparing = loadLib().then(()=>{
-      const blob = build(collect());
-      prepared = { key, file: new File([blob], fileName(), { type:'application/pdf' }) };
-      return prepared;
-    }).finally(()=>{ preparing = null; });
+    const useStatic = STATIC_PDF && (key === BASE || !key);
+    const make = useStatic
+      ? staticFile()
+      : loadLib().then(()=> new File([build(collect())], fileName(), { type:'application/pdf' }))
+          .catch(err => {
+            // Live-Erzeugung fehlgeschlagen → fertiges PDF mit Originalportionen
+            console.error('PDF live:', err);
+            lastError = err;
+            if(!STATIC_PDF) throw err;
+            return staticFile();
+          });
+    preparing = make.then(file => (prepared = { key, file }))
+      .finally(()=>{ preparing = null; });
     return preparing;
   }
 
@@ -209,9 +226,13 @@
     if(prepared && prepared.key === key){ deliver(prepared.file); return; }   // direkt im Tipp → Teilen-Menü darf aufgehen
     setBusy(true);
     try{ const p = await prepare(); await deliver(p.file); }
-    catch{ alert('Das PDF konnte nicht erstellt werden. Bitte später noch einmal versuchen.'); }
+    catch(err){
+      console.error('PDF:', err);
+      alert('Das PDF konnte nicht erstellt werden.\n\nFehler: ' + String(err && (err.message || err)).slice(0, 160));
+    }
     finally{ setBusy(false); }
   });
 
-  window.KOCHBUCH_PDF = { prepare, collect };
+  // buildLive: für tools/build-pdfs.js (erzeugt die vorab gespeicherten PDFs)
+  window.KOCHBUCH_PDF = { prepare, collect, buildLive: ()=> loadLib().then(()=> build(collect())) };
 })();
