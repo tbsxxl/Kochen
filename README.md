@@ -34,6 +34,18 @@ LANG=C.UTF-8 bundle exec jekyll build
 npx wrangler deploy
 ```
 
+## Profil, Sync und Rezept-Upload einrichten
+
+Der Worker (`worker/`) braucht zwei Secrets. Im Cloudflare-Dashboard: **Workers & Pages → kochbuch → Settings →
+Variables and Secrets → Add**, Typ **Secret**:
+
+- `SETUP_CODE`: ein langer, zufälliger Code. Er wird nur einmal für die erste Einrichtung auf `/konto/` gebraucht.
+- `GITHUB_TOKEN`: ein Fine-grained Token von GitHub (Settings → Developer settings → Fine-grained tokens):
+  nur Repository `tbsxxl/Kochen`, Berechtigung **Contents: Read and write**.
+
+Danach auf dem iPhone **Mehr → Profil & Sync** öffnen, Name und Einrichtungscode eingeben, mit Face ID bestätigen.
+Neue Rezepte über **Mehr → Rezept hochladen**. Sie sind nach ca. 2 Minuten online.
+
 ## Daten von der alten GitHub-Pages-Version übernehmen
 
 Browserdaten hängen an der Adresse und ziehen nicht automatisch mit um.

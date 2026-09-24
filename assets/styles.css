@@ -670,6 +670,16 @@ body.layout-recipe .appMain{padding-top:0}
 .homeGreetingTitle{font-family:var(--fontDisplay);font-size:var(--fs36);font-weight:600;line-height:1.1;letter-spacing:-.02em}
 .homeGreetingSub{margin-top:4px;font-size:var(--fs16);color:var(--sub2)}
 
+/* Profil-Knopf oben rechts */
+.profileBadge{
+  display:flex;align-items:center;justify-content:center;margin-left:auto;
+  width:40px;height:40px;border-radius:var(--rPill);
+  border:1px solid var(--line);background:var(--surface);color:var(--sub2);text-decoration:none;
+}
+.profileBadge svg{width:20px;height:20px}
+.profileBadge.isIn{border-color:var(--leaf);background:var(--leaf);color:var(--onLeaf)}
+.profileInitial{font-weight:600;font-size:var(--fs16)}
+
 /* Leerer Favoriten-Zustand */
 .homeEmpty{
   display:flex;align-items:center;gap:16px;
@@ -754,6 +764,48 @@ body.layout-recipe .appMain{padding-top:0}
 .pickInfo{display:flex;flex-direction:column;gap:2px;min-width:0}
 .pickTitle{font-weight:500;line-height:1.3}
 .pickMeta{font-size:var(--fs12);color:var(--sub2);font-weight:400}
+
+/* Profil & Upload */
+.accountCard{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.accountCard .sub{margin:0}
+.accountIcon{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:var(--rPill);background:var(--leafSoft);color:var(--leaf);font-size:var(--fs22);font-weight:600}
+.accountIcon svg{width:30px;height:30px}
+.accountTitle{margin:0}
+.accountBtn{width:100%}
+.accountError{margin:0;padding:12px 16px;border-radius:var(--rInner);background:var(--dangerSoft);color:var(--danger);font-size:var(--fs14)}
+.accountError[hidden]{display:none}
+.accountHead{display:flex;align-items:center;gap:12px}
+.accountAvatar{width:56px;height:56px;margin:0}
+.accountAvatar .profileInitial{font-size:var(--fs22)}
+.accountName{font-weight:600;font-size:var(--fs18)}
+.accountDevices{display:flex;flex-direction:column}
+.accountDevice{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.accountDevice:first-child{border-top:0}
+.fieldLabel{display:block;margin:4px 0 -4px;font-size:var(--fs14);font-weight:600;color:var(--sub)}
+.fieldRow{display:flex;gap:12px}
+.fieldRow .fieldLabel{margin-bottom:8px}
+select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--sub2) 50%),linear-gradient(135deg,var(--sub2) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:40px}
+.uploadCard{display:flex;flex-direction:column;gap:12px}
+.uploadArea{min-height:140px;font-family:var(--fontUi);font-size:var(--fs16)}
+.uploadHint{margin:12px 4px 0;font-size:var(--fs14)}
+#extraCats{gap:8px}
+#extraCats .pillToggle[aria-pressed="true"],#randomFilters .pillToggle[data-filter]:not([data-filter="fav"])[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--onLeaf)}
+#extraCats .pillToggle{min-height:36px;padding:0 12px}
+.photoPick{
+  display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;
+  aspect-ratio:16/10;border:1px dashed var(--lineStrong);border-radius:var(--rCard);background:var(--surface);
+}
+.photoPick img{width:100%;height:100%;object-fit:cover}
+.photoPickEmpty{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--sub2);font-weight:600}
+.photoPickEmpty span{font-size:32px}
+.checkRow{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:var(--fs14);color:var(--sub2)}
+.checkRow input{width:20px;height:20px;accent-color:var(--leaf)}
+.ingPreview{display:flex;flex-direction:column;border-radius:var(--rInner);overflow:hidden}
+.ingPreview:empty{display:none}
+.ingPrevRow{display:flex;gap:12px;padding:8px 12px;background:var(--bg);font-size:var(--fs14)}
+.ingPrevRow + .ingPrevRow{border-top:1px solid var(--line)}
+.ingPrevQty{flex:0 0 96px;font-weight:600;color:var(--leaf)}
+.uploadSuccess .accountIcon{font-size:28px}
 
 /* Kühltruhe */
 .freezerRow,.freezerTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
