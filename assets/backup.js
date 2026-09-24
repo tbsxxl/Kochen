@@ -3,7 +3,7 @@
     "kochbuch.stats",
     "kochbuch.freezer",
     "kochbuch.shopping",
-    "kochbuch.localRecipes",
+    "kochbuch.plan",
     "kochbuch.pantry"
   ];
 

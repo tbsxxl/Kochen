@@ -18,6 +18,20 @@ LANG=C.UTF-8 bundle exec jekyll build   # ohne UTF-8-Locale bricht der Build ab
 npx wrangler dev                        # lokal wie auf Cloudflare ausliefern
 ```
 
+## Worker (`worker/`): Anmeldung, Sync, Rezept-Upload
+
+Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind statische Dateien. Keine npm-Abhängigkeiten
+(Passkey-Prüfung selbst geschrieben in `worker/webauthn.js`, nur WebCrypto).
+- Anmeldung per Passkey (Face ID), genau ein Besitzer. Erste Einrichtung nur mit Secret `SETUP_CODE`, weitere Passkeys nur angemeldet.
+  Sitzung = signiertes Cookie (Schlüssel im KV), „Überall abmelden“ erhöht `auth:epoch`.
+- Sync (`assets/account.js`): `kochbuch.stats/freezer/shopping/plan`, pro Schlüssel gewinnt der neueste Stand; beim ersten
+  Anmelden eines Geräts werden lokale Daten mit dem Server zusammengeführt.
+- Upload (`/neues-rezept/`, `assets/upload.js`): Worker committet Markdown + Bild (JPG, WebP 480/960) per GitHub-API
+  (Secret `GITHUB_TOKEN`, fine-grained, nur dieses Repo, Contents read/write) direkt auf `main`. Danach Branch neu holen!
+- Speicher: KV-Binding `KV` (ohne id, Wrangler legt es beim Deploy an).
+- Lokal testen: `.dev.vars` mit `SETUP_CODE`, `GITHUB_TOKEN`, optional `GITHUB_API` (Mock), dann `npx wrangler dev`
+  und in Playwright einen virtuellen Authenticator (CDP `WebAuthn.addVirtualAuthenticator`) nutzen; Adresse `localhost`, nicht 127.0.0.1.
+
 ## Design-System (in `assets/styles.css` als Tokens)
 
 - Farben: Warm White `#FFF9F2`, Cream `#F7F0E6`, Warm Gray `#E5DED4`, Charcoal `#252A27`,

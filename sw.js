@@ -1,5 +1,5 @@
 /* Tobis Kochbuch — Service Worker */
-const VERSION = 'kochbuch-v5';
+const VERSION = 'kochbuch-v6';
 const ASSET_CACHE = `${VERSION}-assets`;
 const PAGE_CACHE = `${VERSION}-pages`;
 
@@ -39,6 +39,7 @@ self.addEventListener('fetch', (e) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
+  if (url.pathname.startsWith('/api/')) return;   // Anmeldung, Sync, Upload nie cachen
 
   // Assets (css/js/images): stale-while-revalidate
   if (/\.(css|js|png|jpg|jpeg|webp|avif|svg|ico|woff2?)$/.test(url.pathname)) {

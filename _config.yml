@@ -32,6 +32,11 @@ exclude:
   - vendor
   - node_modules
   - wrangler.jsonc
+  - worker
+  - package.json
+  - package-lock.json
+  - .dev.vars
+  - .wrangler
   - README.md
   - CLAUDE.md
   - tools
