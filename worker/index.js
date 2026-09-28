@@ -13,7 +13,6 @@
 import { b64url, randomBytes, verifyRegistration, verifyAuthentication } from "./webauthn.js";
 import { GitHub } from "./github.js";
 import { sendPush, vapidKeys } from "./push.js";
-import { DurableObject } from "cloudflare:workers";
 
 const SESSION_COOKIE = "kb_session";
 const CHALLENGE_COOKIE = "kb_chal";
@@ -885,7 +884,11 @@ async function pushTest(request, env, url){
 // Das Gerät meldet gestartete Timer; bemerkt es den Ablauf selbst (Seite sichtbar), sagt es ab.
 // Sonst (Bildschirm gesperrt, App im Hintergrund) schickt das Durable Object kurz nach Ablauf eine Push-Mitteilung.
 const TIMER_GRACE = 4000;   // ms Vorsprung fürs Gerät, damit bei offener Seite keine doppelte Meldung kommt
-function timerStub(env, uid){ return env.TIMERS.get(env.TIMERS.idFromName(uid)); }
+// Aufruf ans Durable Object über fetch (ohne „cloudflare:workers“-Import, damit Node den Worker laden kann)
+function timerCall(env, uid, action, data){
+  const stub = env.TIMERS.get(env.TIMERS.idFromName(uid));
+  return stub.fetch("https://timers/" + action, { method: "POST", body: JSON.stringify(data) });
+}
 async function timerSet(request, env, url){
   const s = await requireSession(request, env);
   if(!env.TIMERS) return json({ ok: false });
@@ -902,17 +905,25 @@ async function timerSet(request, env, url){
     url: /^\/(?!\/)[^\s]{0,300}$/.test(path) ? path : "/",
     origin: url.origin
   };
-  await timerStub(env, s.uid).set(s.uid, timer);
+  await timerCall(env, s.uid, "set", { uid: s.uid, timer });
   return json({ ok: true });
 }
 async function timerCancel(request, env){
   const s = await requireSession(request, env);
   if(!env.TIMERS) return json({ ok: false });
   const b = await readJson(request, 1000);
-  await timerStub(env, s.uid).cancel(String(b.id || "").slice(0, 24));
+  await timerCall(env, s.uid, "cancel", { id: String(b.id || "").slice(0, 24) });
   return json({ ok: true });
 }
-export class TimerAlarms extends DurableObject {
+export class TimerAlarms {
+  constructor(ctx, env){ this.ctx = ctx; this.env = env; }
+  async fetch(request){
+    const action = new URL(request.url).pathname.slice(1);
+    const d = await request.json();
+    if(action === "set") await this.set(d.uid, d.timer);
+    else if(action === "cancel") await this.cancel(d.id);
+    return new Response("ok");
+  }
   async list(){ return (await this.ctx.storage.get("timers")) || []; }
   async save(list){
     await this.ctx.storage.put("timers", list);
