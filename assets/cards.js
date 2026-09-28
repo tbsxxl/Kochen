@@ -25,7 +25,7 @@
         <div class="card recipeCard cardHover">
           ${img}
           <div class="rcBody">
-            <h3 class="recipeTitle">${esc(r.title)}</h3>
+            <h2 class="recipeTitle">${esc(r.title)}</h2>
             <div class="recipeMeta">${opts.meta != null ? opts.meta : metaLine(r)}<span class="metaRating" data-rating-badge data-recipe-id="${esc(id)}" hidden></span><span class="favBadge rcFavBadge metaFav${opts.fav ? " isFav" : ""}" data-fav-badge data-recipe-id="${esc(id)}" aria-label="Favorit">♥</span></div>
           </div>
         </div>

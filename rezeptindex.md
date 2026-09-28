@@ -97,7 +97,7 @@ permalink: /rezeptindex/
   <div class="grid" id="recipeGrid">
   {% assign sorted = site.recipes | sort: "title" %}
   {% for r in sorted %}
-    {% include recipe-card.html r=r index=true %}
+    {%- if forloop.index <= 2 -%}{% include recipe-card.html r=r index=true eager=true %}{%- else -%}{% include recipe-card.html r=r index=true %}{%- endif %}
   {% endfor %}
   </div>
 </div>

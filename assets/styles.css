@@ -35,7 +35,7 @@
   --lineStrong:#D3C9BB;
   --text:#252A27;        /* Charcoal */
   --sub:#526B57;         /* Sekundärer Text */
-  --sub2:#716E67;        /* Metadaten (Mid Gray, für kleinen Text abgedunkelt) */
+  --sub2:#68655E;        /* Metadaten (Mid Gray #716E67, für kleinen Text auf Cream abgedunkelt: Kontrast ≥ 4,5) */
   --muted:#8A8780;       /* Mid Gray: Platzhalter, Icons */
 
   --accent:#E8753D;      /* Warm Apricot */
@@ -300,9 +300,10 @@ body.layout-recipe .appMain{padding-top:0}
   border-radius:24px 24px 0 0;
   box-shadow:var(--sh3);
   transform:translateY(110%);
-  transition:transform .28s var(--ease), height .28s var(--ease);
+  visibility:hidden;   /* geschlossen: nicht per Tab/VoiceOver erreichbar */
+  transition:transform .28s var(--ease), height .28s var(--ease), visibility 0s linear .28s;
 }
-.sheet.open{transform:translateY(0)}
+.sheet.open{transform:translateY(0);visibility:visible;transition:transform .28s var(--ease), height .28s var(--ease), visibility 0s}
 .sheet.half{height:62vh}
 .sheet.full{height:92vh}
 .sheetGrab{flex-shrink:0;width:40px;height:4px;margin:12px auto 8px;border-radius:var(--rPill);background:var(--lineStrong);cursor:pointer}
@@ -621,6 +622,8 @@ body.layout-recipe .appMain{padding-top:0}
 .uSub,.shopSub{margin-top:4px;font-size:var(--fs14);color:var(--sub2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .uRight,.shopRight{display:flex;align-items:center;gap:10px;flex:0 0 auto}
 .uRow{cursor:pointer}
+#ingredientsList:empty{min-height:calc(var(--ingN, 0) * var(--ingRowH, 56px))}
+body.compact{--ingRowH:49px}
 .uRow.checked .uName,.ingRow.checked .ingName{text-decoration:line-through;color:var(--sub2)}
 .uRow.checked .uQty,.ingRow.checked .ingQty{color:var(--sub2)}
 .compactList .uRow{min-height:48px;padding:12px 16px}
