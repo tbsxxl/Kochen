@@ -415,9 +415,23 @@
     toastTimer = setTimeout(()=> el.classList.remove('show'), 2400);
   }
 
+  // Datei speichern: iPhone → Teilen-Menü („In Dateien sichern“), sonst normaler Download
+  async function saveFile(name, content, type){
+    const file = new File([content], name, { type: type || "application/json" });
+    if(navigator.canShare && navigator.canShare({ files: [file] })){
+      try{ await navigator.share({ files: [file], title: name }); return; }
+      catch(e){ if(e && e.name === "AbortError") return; }
+    }
+    const url = URL.createObjectURL(file);
+    const a = document.createElement("a");
+    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 60000);
+  }
+
   window.KOCHBUCH_UI = {
     haptic,
     toast,
+    saveFile,
     pop(el){ replayClass(el, 'uiPop'); },
     pulse(el){ replayClass(el, 'uiPulse'); },
     flash(el){ replayClass(el, 'uiFlash'); },

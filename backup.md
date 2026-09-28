@@ -5,26 +5,33 @@ permalink: /backup/
 ---
 
 <div class="section" style="margin-top:6px">
-  <div class="card cardPad">
-    <div class="h2" style="margin:0 0 10px 0">Export</div>
-    <div style="display:flex;gap:10px;margin-bottom:12px">
-      <button class="btn action" id="doExport" style="flex:1" type="button">Backup erzeugen</button>
-      <button class="btn btnGhost" id="copyExport" style="flex:1" type="button">Kopieren</button>
+  <p class="sub" style="margin:0">Sichert Favoriten, Kochstatistik, Notizen & Bewertungen, Kühltruhe, Einkaufsliste und Wochenplan von diesem Gerät. Mit Profil sind diese Daten zusätzlich automatisch auf dem Server gespeichert.</p>
+</div>
+
+<div class="section">
+  <div class="card cardPad accountCard">
+    <h2 class="h2 accountTitle">Sichern</h2>
+    <button class="btn action accountBtn" id="saveFile" type="button">Als Datei sichern</button>
+    <button class="btn btnGhost accountBtn" id="doExport" type="button">Als Text anzeigen</button>
+    <div id="exportBox" hidden>
+      <textarea id="exportOut" class="codeArea" readonly></textarea>
+      <button class="btn accountBtn" id="copyExport" type="button" style="margin-top:8px">Kopieren</button>
     </div>
-    <textarea id="exportOut" class="codeArea" placeholder="Hier erscheint dein Backup-JSON …"></textarea>
   </div>
 </div>
 
 <div class="section">
-  <div class="card cardPad">
-    <div class="h2" style="margin:0 0 6px 0">Import</div>
-    <p class="dim" style="margin-bottom:12px">„Anwenden" überschreibt alle Daten. „Mergen" ist sicherer — neue Werte werden kombiniert.</p>
-    <textarea id="importIn" class="codeArea" placeholder="Backup-JSON hier einfügen …"></textarea>
-    <div style="display:flex;gap:10px;margin-top:12px">
-      <button class="btn action" id="mergeImport" style="flex:1" type="button">Mergen</button>
-      <button class="btn btnDangerOutline" id="doImport" style="flex:1" type="button">Überschreiben</button>
+  <div class="card cardPad accountCard">
+    <h2 class="h2 accountTitle">Wiederherstellen</h2>
+    <label class="btn accountBtn" for="importFile">Sicherungsdatei auswählen</label>
+    <input id="importFile" type="file" accept="application/json,.json" hidden>
+    <textarea id="importIn" class="codeArea" placeholder="… oder den Text einer Sicherung hier einfügen"></textarea>
+    <p class="sub">„Zusammenführen“ behält deine jetzigen Daten und ergänzt sie. „Ersetzen“ überschreibt sie.</p>
+    <div class="fieldRow">
+      <button class="btn action accountBtn" id="mergeImport" type="button">Zusammenführen</button>
+      <button class="btn btnDangerOutline accountBtn" id="doImport" type="button">Ersetzen</button>
     </div>
   </div>
 </div>
 
-<script defer src="{{ '/assets/backup.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/backup.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>

@@ -4,7 +4,8 @@
     "kochbuch.freezer",
     "kochbuch.shopping",
     "kochbuch.plan",
-    "kochbuch.pantry"
+    "kochbuch.notes",
+    "kochbuch.ui.pantry"
   ];
 
   const $ = (s)=>document.querySelector(s);
@@ -80,22 +81,34 @@
     }
   }
 
+  const toast = (t)=>{ try{ window.KOCHBUCH_UI?.toast?.(t); }catch{} };
+  $("#saveFile")?.addEventListener("click", ()=>{
+    const day = new Date().toISOString().slice(0, 10);
+    window.KOCHBUCH_UI?.saveFile?.(`kochbuch-backup-${day}.json`, exportAll());
+  });
   $("#doExport")?.addEventListener("click", ()=>{
+    $("#exportBox").hidden = false;
     out.value = exportAll();
     out.focus(); out.select();
   });
+  $("#importFile")?.addEventListener("change", async (e)=>{
+    const f = e.target.files && e.target.files[0];
+    if(!f) return;
+    inp.value = await f.text();
+    toast("Datei geladen – jetzt „Zusammenführen“ oder „Ersetzen“");
+  });
 
   $("#copyExport")?.addEventListener("click", async ()=>{
-    try{ await navigator.clipboard.writeText(out.value || ""); alert("Kopiert."); }
+    try{ await navigator.clipboard.writeText(out.value || ""); toast("Kopiert"); }
     catch{ alert("Clipboard nicht verfügbar. Manuell kopieren."); }
   });
 
   $("#doImport")?.addEventListener("click", ()=>{
     if(!confirm("Import anwenden und vorhandene Daten überschreiben?")) return;
-    try{ applyImport("overwrite"); alert("Import angewendet."); }catch(e){ alert(e.message || "Fehler."); }
+    try{ applyImport("overwrite"); toast("Daten ersetzt"); }catch(e){ alert(e.message || "Fehler."); }
   });
 
   $("#mergeImport")?.addEventListener("click", ()=>{
-    try{ applyImport("merge"); alert("Import gemerged."); }catch(e){ alert(e.message || "Fehler."); }
+    try{ applyImport("merge"); toast("Daten zusammengeführt"); }catch(e){ alert(e.message || "Fehler."); }
   });
 })();
