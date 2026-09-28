@@ -56,7 +56,7 @@
   --glass:rgba(255,249,242,.84);
   --scrim:rgba(37,42,39,.36);
   --onImage:#FFFFFF;
-  --imageChip:rgba(37,42,39,.5);
+  --imageChip:rgba(37,42,39,.62);
 
   --sh1:0 1px 2px rgba(37,42,39,.05);
   --sh2:0 1px 2px rgba(37,42,39,.04), 0 8px 24px rgba(37,42,39,.07);
@@ -81,7 +81,9 @@
   --imgRatio:4/3;
   --heroMaxH:320px;
 
-  --ease:cubic-bezier(.2,.8,.2,1);
+  --ease:cubic-bezier(.2,.8,.2,1);       /* kleine Rückmeldungen */
+  --easeSheet:cubic-bezier(.32,.72,0,1); /* Sheets/Überlagerungen: wie iOS, schnell los, weich aus */
+  --easeIn:cubic-bezier(.4,0,1,1);       /* Schließen */
 }
 
 :root[data-theme="dark"]{
@@ -114,7 +116,7 @@
 
   --glass:rgba(23,20,15,.86);
   --scrim:rgba(0,0,0,.6);
-  --imageChip:rgba(0,0,0,.55);
+  --imageChip:rgba(0,0,0,.62);
 
   --sh1:0 1px 2px rgba(0,0,0,.35);
   --sh2:0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.35);
@@ -286,9 +288,9 @@ body.layout-recipe .appMain{padding-top:0}
   position:fixed;inset:0;z-index:2000;
   background:var(--scrim);
   opacity:0;pointer-events:none;
-  transition:opacity .2s ease;
+  transition:opacity .22s var(--easeIn);
 }
-.sheetOverlay.open{opacity:1;pointer-events:auto}
+.sheetOverlay.open{opacity:1;pointer-events:auto;transition:opacity .32s var(--easeSheet)}
 .sheet{
   position:fixed;left:0;right:0;bottom:0;z-index:2100;
   display:flex;flex-direction:column;overflow:hidden;
@@ -299,11 +301,12 @@ body.layout-recipe .appMain{padding-top:0}
   border:1px solid var(--line);border-bottom:0;
   border-radius:24px 24px 0 0;
   box-shadow:var(--sh3);
-  transform:translateY(110%);
+  transform:translate3d(0,105%,0);
   visibility:hidden;   /* geschlossen: nicht per Tab/VoiceOver erreichbar */
-  transition:transform .28s var(--ease), height .28s var(--ease), visibility 0s linear .28s;
+  will-change:transform;
+  transition:transform .26s var(--easeIn), visibility 0s linear .26s;
 }
-.sheet.open{transform:translateY(0);visibility:visible;transition:transform .28s var(--ease), height .28s var(--ease), visibility 0s}
+.sheet.open{transform:translate3d(0,0,0);visibility:visible;transition:transform .42s var(--easeSheet), visibility 0s}
 .sheet.half{height:62vh}
 .sheet.full{height:92vh}
 .sheetGrab{flex-shrink:0;width:40px;height:4px;margin:12px auto 8px;border-radius:var(--rPill);background:var(--lineStrong);cursor:pointer}
@@ -546,7 +549,6 @@ body.layout-recipe .appMain{padding-top:0}
   padding:4px 12px;border-radius:var(--rPill);
   background:var(--imageChip);color:var(--onImage);
   font-size:var(--fs12);font-weight:500;letter-spacing:.02em;line-height:1.5;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   pointer-events:none;
 }
 
@@ -1032,10 +1034,16 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 /* ---------- 7. Kochmodus ---------- */
 .cookOverlay{
   position:fixed;inset:0;z-index:5000;
-  display:none;flex-direction:column;
+  display:flex;flex-direction:column;
   background:#1C1D1B;color:#EDE6DB;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translate3d(0,24px,0);
+  transition:opacity .2s var(--easeIn), transform .24s var(--easeIn), visibility 0s linear .24s;
 }
-.cookOverlay.open{display:flex}
+.cookOverlay.open{
+  opacity:1;visibility:visible;pointer-events:auto;transform:none;
+  transition:opacity .28s var(--easeSheet), transform .42s var(--easeSheet), visibility 0s;
+}
 .cookOverlay .navIconBtn{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:#fff}
 .cookTop{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(12px + env(safe-area-inset-top)) 16px 12px}
 .cookTitle{flex:1;text-align:center;font-weight:600;font-size:var(--fs16);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1123,10 +1131,10 @@ body.layout-recipe .section:first-of-type{margin-top:0}
   width:max-content;max-width:calc(100vw - 32px);padding:12px 20px;border-radius:var(--rPill);
   background:var(--text);color:var(--bg);font-size:var(--fs14);font-weight:600;
   box-shadow:0 8px 24px rgba(0,0,0,.18);
-  opacity:0;transform:translate(-50%,8px);pointer-events:none;
-  transition:opacity .2s ease, transform .2s var(--ease);
+  opacity:0;transform:translate3d(-50%,12px,0) scale(.98);pointer-events:none;
+  transition:opacity .2s var(--easeIn), transform .2s var(--easeIn);
 }
-.uiToast.show{opacity:1;transform:translate(-50%,0)}
+.uiToast.show{opacity:1;transform:translate3d(-50%,0,0);transition:opacity .28s var(--easeSheet), transform .42s var(--easeSheet)}
 .timerPill.isDone{background:var(--accent);color:var(--onAccent)}
 
 /* ---------- 8. Bewegung ----------
@@ -1152,22 +1160,26 @@ body.layout-recipe .section:first-of-type{margin-top:0}
   @view-transition{navigation:none}
 }
 
-.pressable,button,.btn,.sheetRow,.tabItem,.recipePortionStep,.stepBtn,.counterBtn,.favBadge,.cookTab,.cookNavBtn,.uRow{
-  transition:transform .16s var(--ease), background-color .18s ease, border-color .18s ease, color .18s ease, opacity .18s ease, box-shadow .18s ease;
+/* Druck-Effekt: Klasse .isPressed setzt utils.js erst nach kurzer Verzögerung und nimmt sie beim Scrollen
+   sofort zurück – so zuckt beim Wischen durch Listen nichts. :active nur für Maus/Trackpad. */
+.pressable,button,.btn,.sheetRow,.tabItem,.recipePortionStep,.stepBtn,.counterBtn,.favBadge,.cookTab,.cookNavBtn,.uRow,.cardHover{
+  transition:transform .32s var(--easeSheet), background-color .18s ease, border-color .18s ease, color .18s ease, opacity .18s ease, box-shadow .2s ease;
 }
-.pressable:active,button:active,.btn:active,.sheetRow:active,.tabItem:active,.recipePortionStep:active,.stepBtn:active,.counterBtn:active,.cookTab:active,.cookNavBtn:active,.uRow:active,
-.pressable.isPressed,button.isPressed,.btn.isPressed,.sheetRow.isPressed,.tabItem.isPressed,.recipePortionStep.isPressed,.stepBtn.isPressed,.counterBtn.isPressed,.cookTab.isPressed,.cookNavBtn.isPressed,.uRow.isPressed{
-  transform:scale(.97);
+.pressable.isPressed,button.isPressed,.btn.isPressed,.sheetRow.isPressed,.tabItem.isPressed,.recipePortionStep.isPressed,.stepBtn.isPressed,.counterBtn.isPressed,.cookTab.isPressed,.cookNavBtn.isPressed{
+  transform:scale(.96);transition-duration:.12s;
 }
-.uRow:active,.uRow.isPressed{transform:none;background:var(--surface2)}
-.cardHover:active{transform:scale(.985)}
+.uRow.isPressed,.sheetRow.isPressed{transform:none;background:var(--surface2)}
+.isPressed > .cardHover,.cardHover.isPressed{transform:scale(.98);transition-duration:.14s}
+@media (hover:hover) and (pointer:fine){
+  .pressable:active,button:active,.btn:active,.tabItem:active,.stepBtn:active,.counterBtn:active,.cookNavBtn:active{transform:scale(.97)}
+}
 
-.uiPop{animation:uiPop .28s cubic-bezier(.18,.89,.32,1.28)}
-.uiPulse{animation:uiPulse .42s ease}
-.uiFlash,.saved{animation:uiFlash .44s ease}
-@keyframes uiPop{0%{transform:scale(.92)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
-@keyframes uiPulse{0%{transform:scale(1)}35%{transform:scale(1.04)}100%{transform:scale(1)}}
-@keyframes uiFlash{0%{filter:brightness(1)}40%{filter:brightness(1.08)}100%{filter:brightness(1)}}
+.uiPop{animation:uiPop .34s var(--easeSheet)}
+.uiPulse{animation:uiPulse .36s var(--ease)}
+.uiFlash,.saved{animation:uiFlash .5s ease}
+@keyframes uiPop{0%{transform:scale(.9)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes uiPulse{0%{transform:scale(1)}40%{transform:scale(1.025)}100%{transform:scale(1)}}
+@keyframes uiFlash{0%{opacity:1}35%{opacity:.72}100%{opacity:1}}
 @keyframes menuIn{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}
 
 @media (prefers-reduced-motion: reduce){
@@ -1226,7 +1238,7 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 /* Einkaufsliste: Wischen, Bearbeiten, Vorschläge */
 .shopSection .uRow{touch-action:pan-y;position:relative;background:var(--surface)}
 .listGroup.swipeHost{background:var(--danger)}
-.uRow.swiping{z-index:1}
+.uRow.swiping{z-index:1;transition:none}
 .uRow.swipeArmed{opacity:.85}
 .shopQtyBtn{min-height:32px;padding:0 8px;margin-right:-8px;border-radius:var(--rBtn);color:inherit}
 .shopQtyBtn:empty::before{content:"+ Menge";font-weight:400;font-size:var(--fs14);color:var(--sub2)}
@@ -1278,10 +1290,10 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 }
 /* Hinweis „Timer abgelaufen“ (auf jeder Seite, über dem Kochmodus) */
 .timerAlert{position:fixed;inset:0;z-index:7000;display:flex;align-items:center;justify-content:center;padding:24px;
-  background:rgba(12,12,11,.72);opacity:0;transition:opacity .2s ease}
+  background:rgba(12,12,11,.72);opacity:0;transition:opacity .28s var(--easeSheet)}
 .timerAlert.open{opacity:1}
 .timerAlertCard{width:100%;max-width:420px;padding:32px 24px 24px;border-radius:24px;background:#252624;color:#EDE6DB;
-  text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.45);transform:scale(.96);transition:transform .25s var(--ease)}
+  text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.45);transform:scale(.94);transition:transform .42s var(--easeSheet)}
 .timerAlert.open .timerAlertCard{transform:none}
 .timerAlertIcon{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:var(--rPill);
   background:#E8753D;color:#252A27;animation:timerBlink 1s ease-in-out infinite}
