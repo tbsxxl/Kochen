@@ -5,6 +5,7 @@
     "kochbuch.shopping",
     "kochbuch.plan",
     "kochbuch.notes",
+    "kochbuch.shopsections",
     "kochbuch.ui.pantry"
   ];
 

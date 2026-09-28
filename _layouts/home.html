@@ -19,6 +19,39 @@ layout: default
 })();
 </script>
 
+<!-- Weiter kochen (Kochmodus wurde mitten im Rezept verlassen) -->
+<div class="section" id="resumeCookSection" hidden>
+  <a class="card resumeCook pressable" id="resumeCookLink" href="#">
+    <img class="resumeCookImg" id="resumeCookImg" alt="" hidden>
+    <span class="resumeCookText">
+      <span class="resumeCookKicker">Weiter kochen</span>
+      <span class="resumeCookTitle" id="resumeCookTitle"></span>
+      <span class="resumeCookStep" id="resumeCookStep"></span>
+      <span class="resumeCookBar"><span id="resumeCookBar"></span></span>
+    </span>
+    <button type="button" class="resumeCookClose" id="resumeCookClose" aria-label="Ausblenden">✕</button>
+  </a>
+</div>
+<script>
+(function(){
+  let c = null;
+  try{ c = JSON.parse(localStorage.getItem('kochbuch.ui.cooking') || 'null'); }catch(e){}
+  if(!c || !c.id || !c.total || Date.now() - c.t > 12 * 3600e3) return;
+  const $ = id => document.getElementById(id);
+  $('resumeCookLink').href = c.id + '?kochen=1';
+  $('resumeCookTitle').textContent = c.title || '';
+  $('resumeCookStep').textContent = `Schritt ${c.step + 1} von ${c.total}`;
+  $('resumeCookBar').style.width = Math.round((c.step + 1) / c.total * 100) + '%';
+  if(c.image){ $('resumeCookImg').src = c.image; $('resumeCookImg').hidden = false; }
+  $('resumeCookClose').addEventListener('click', (e)=>{
+    e.preventDefault(); e.stopPropagation();
+    try{ localStorage.removeItem('kochbuch.ui.cooking'); }catch(err){}
+    $('resumeCookSection').hidden = true;
+  });
+  $('resumeCookSection').hidden = false;
+})();
+</script>
+
 <!-- Heute -->
 <div class="section homeToday">
   <div class="homeSectionHead"><div class="homeSectionTitle">Heute für dich</div></div>

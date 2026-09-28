@@ -6,6 +6,7 @@ layout: default
   window.RECIPE_DATA = {
     id: "{{ page.url | relative_url }}",
     path: {{ page.path | jsonify }},
+    image: "{% if page.image %}{{ page.image | relative_url }}?v={{ site.image_version }}{% endif %}",
     title: {{ page.title | jsonify }},
     baseServings: {{ page.servings | default: 1 | jsonify }},
     ingredients: {{ page.ingredients | jsonify }}
@@ -102,6 +103,16 @@ layout: default
     </div>
   </div>
 </div>
+
+{%- assign similar = site.recipes | where_exp: "r", "r.url != page.url" | where_exp: "r", "r.category == page.category or r.categories contains page.category" | sample: 6 -%}
+{%- if similar.size > 0 %}
+<div class="section similarSection">
+  <div class="homeSectionHead"><h2 class="homeSectionTitle">Ähnliche Rezepte</h2></div>
+  <div class="hScroll">
+    {%- for r in similar %}{% include recipe-card.html r=r hcard=true %}{% endfor %}
+  </div>
+</div>
+{%- endif %}
 
 <!-- Sticky Bottom Action Bar -->
 <nav class="tabbar bottomRail recipeTabbar" aria-label="Rezept Aktionen">

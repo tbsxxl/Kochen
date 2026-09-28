@@ -9,7 +9,7 @@ permalink: /rezeptindex/
     <span class="searchIcon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </span>
-    <input id="searchInput" placeholder="z. B. Pasta, Curry, Schnell …" />
+    <input id="searchInput" placeholder="Rezept oder Zutat, z. B. Pasta, Feta …" />
     <button id="clearSearch" class="btn btnGhost" type="button" aria-label="Zurücksetzen">↺</button>
   </div>
 
@@ -19,6 +19,12 @@ permalink: /rezeptindex/
 
   {%- assign authors = "" | split: "" -%}
   {%- for r in site.recipes -%}{%- assign a = r.author | default: site.owner_name -%}{%- unless authors contains a -%}{%- assign authors = authors | push: a -%}{%- endunless -%}{%- endfor -%}
+
+  <div class="quickFilters" role="group" aria-label="Schnellfilter">
+    <button class="filterChip" type="button" data-quick="schnell" aria-pressed="false">Schnell</button>
+    <button class="filterChip" type="button" data-quick="veg" aria-pressed="false">Vegetarisch</button>
+    <button class="filterChip" type="button" data-quick="never" aria-pressed="false">Nie gekocht</button>
+  </div>
 
   <div class="filterBar">
     <div class="filterBarLeft">
@@ -127,24 +133,38 @@ permalink: /rezeptindex/
   let activeCat = "";
   let activePerson = "";
   let favOnly = false;
+  const quick = new Set();
+  const quickBtns = Array.from(document.querySelectorAll('[data-quick]'));
+  quickBtns.forEach(b=> b.addEventListener('click', ()=>{
+    const k = b.dataset.quick;
+    quick.has(k) ? quick.delete(k) : quick.add(k);
+    b.classList.toggle('active', quick.has(k));
+    b.setAttribute('aria-pressed', String(quick.has(k)));
+    apply();
+  }));
   const emptyState = document.querySelector('#emptyState');
   const resetBtn = document.querySelector('#resetFilters');
 
   function getStats(){ try{ return JSON.parse(localStorage.getItem('kochbuch.stats')||'{}'); }catch{ return {}; } }
-  function isFavById(id){ const s = getStats(); return !!(s[id] && s[id].favorite); }
 
   function apply(){
-    const term = norm(q?.value);
+    // Mehrere Wörter: alle müssen vorkommen (z. B. „feta tomate“)
+    const terms = norm(q?.value).split(/\s+/).filter(Boolean);
+    const stats = getStats();
     let visibleCount = 0;
     cards.forEach(c=>{
       const hay = norm(c.getAttribute('data-haystack'));
       const cats = c.getAttribute('data-categories') || '';
       const id = c.getAttribute('data-recipe-id');
-      const matchesTerm = !term || hay.includes(term);
+      const matchesTerm = terms.every(t => hay.includes(t));
+      const flags = ' ' + (c.getAttribute('data-flags') || '') + ' ';
+      const matchesQuick = (!quick.has('schnell') || flags.includes(' schnell '))
+        && (!quick.has('veg') || flags.includes(' veg '))
+        && (!quick.has('never') || !Number((stats[id] || {}).cookedCount || 0));
       const matchesCat = !activeCat || cats.includes('|' + activeCat + '|');
-      const matchesFav = !favOnly || isFavById(id);
+      const matchesFav = !favOnly || !!(stats[id] && stats[id].favorite);
       const matchesPerson = !activePerson || c.getAttribute('data-author') === activePerson;
-      const visible = matchesTerm && matchesCat && matchesFav && matchesPerson;
+      const visible = matchesTerm && matchesQuick && matchesCat && matchesFav && matchesPerson;
       c.style.display = visible ? '' : 'none';
       if (visible) visibleCount++;
     });
@@ -247,6 +267,7 @@ permalink: /rezeptindex/
     favToggle.setAttribute('aria-pressed','false');
     favToggle.classList.remove('pillToggleActive');
     favToggle.innerHTML = '<span aria-hidden="true">♡</span> <span class="favLabel">Favoriten</span>';
+    quick.clear(); quickBtns.forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
     activePerson = ''; if(personOptions.length) setPerson('');
     setCat('');
   });

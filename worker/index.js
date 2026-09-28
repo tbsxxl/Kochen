@@ -16,7 +16,7 @@ import { sendPush, vapidKeys } from "./push.js";
 const SESSION_COOKIE = "kb_session";
 const CHALLENGE_COOKIE = "kb_chal";
 const SESSION_DAYS = 180;
-const SYNC_KEYS = ["kochbuch.stats", "kochbuch.freezer", "kochbuch.shopping", "kochbuch.plan", "kochbuch.notes"];
+const SYNC_KEYS = ["kochbuch.stats", "kochbuch.freezer", "kochbuch.shopping", "kochbuch.plan", "kochbuch.notes", "kochbuch.shopsections"];
 
 // Hintergrundarbeit (z. B. Mitteilungen) pro Anfrage: request → ctx
 const BG = new WeakMap();
