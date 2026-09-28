@@ -377,27 +377,42 @@
     el.addEventListener('animationend', clear, { once:true });
   }
 
+  // Druck-Effekt wie bei nativen Apps: erst nach kurzer Verzögerung (bei Touch), damit beim Scrollen
+  // nichts zuckt; bewegt sich der Finger, wird abgebrochen. Kurzes Antippen zeigt den Effekt kurz nach.
   function bindPressables(root){
     const scope = root || document;
-    let active = null;
-    const sel = '.pressable, .btn, .sheetRow, .tabItem, .recipePortionStep, .stepBtn, .counterBtn, .favBadge, .cookTab, .cookNavBtn, .uRow';
+    const sel = '.pressable, .btn, .sheetRow, .tabItem, .recipePortionStep, .stepBtn, .counterBtn, .favBadge, .cookTab, .cookNavBtn, .uRow, .linkCard';
+    let active = null, timer = null, x0 = 0, y0 = 0, shown = false;
 
     function clear(){
+      clearTimeout(timer); timer = null;
       if(active) active.classList.remove('isPressed');
-      active = null;
+      active = null; shown = false;
     }
+    function show(){ if(active){ active.classList.add('isPressed'); shown = true; } }
 
     scope.addEventListener('pointerdown', (e)=>{
+      clear();
       const el = e.target.closest(sel);
-      if(!el) return;
-      active = el;
-      el.classList.add('isPressed');
+      if(!el || el.disabled) return;
+      active = el; x0 = e.clientX; y0 = e.clientY;
+      if(e.pointerType === 'mouse') show(); else timer = setTimeout(show, 70);
     }, true);
-
-    ['pointerup','pointercancel','dragstart','scroll'].forEach(name=>{
-      scope.addEventListener(name, clear, true);
-    });
-    scope.addEventListener('pointerleave', clear, true);
+    scope.addEventListener('pointermove', (e)=>{
+      if(active && (Math.abs(e.clientX - x0) > 8 || Math.abs(e.clientY - y0) > 8)) clear();
+    }, true);
+    scope.addEventListener('pointerup', ()=>{
+      if(!active) return;
+      if(!shown){               // schnelles Antippen: Effekt kurz zeigen
+        clearTimeout(timer); timer = null;
+        const el = active; active = null;
+        el.classList.add('isPressed');
+        setTimeout(()=> el.classList.remove('isPressed'), 110);
+        return;
+      }
+      clear();
+    }, true);
+    ['pointercancel','dragstart','scroll'].forEach(name=> scope.addEventListener(name, clear, true));
   }
 
   // Kurze Meldung unten am Bildschirm

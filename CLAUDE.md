@@ -102,6 +102,12 @@ Das Rezeptfoto fliegt nur zwischen Karte und Rezeptseite: Listen haben **keine**
 das Skript im Kopf von `_layouts/default.html` vergibt den Namen bei `pageswap`/`pagereveal` an die angetippte,
 sichtbare Karte (Name = `img-` + slugify der Rezeptadresse, wie auf der Rezeptseite).
 
+Bewegung allgemein: nur `transform`/`opacity` animieren (keine Höhe/Breite/Filter), Kurven als Tokens
+(`--easeSheet` für Sheets/Überlagerungen, `--easeIn` fürs Schließen, `--ease` für kleine Rückmeldungen).
+Druck-Effekt `.isPressed` setzt `bindPressables()` in `assets/utils.js` bei Touch erst nach 70 ms und bricht bei
+Fingerbewegung ab (kein Zucken beim Scrollen); `:active` nur für Maus. Kein `backdrop-filter` auf wiederholten
+Elementen (nur die untere Leiste).
+
 ## Umbenannte Rezepte
 
 Neue Rezeptdateinamen nur mit a–z, 0–9 und Bindestrich (keine Umlaute). Wird ein Rezept umbenannt, alte → neue Adresse
