@@ -175,6 +175,12 @@ permalink: /konto/
         <button class="btn accountBtn" id="addDeviceBtn" type="button">Passkey auf diesem Gerät hinzufügen</button>
       </div>
 
+      <div class="card cardPad accountCard" id="pushCard">
+        <h2 class="h2 accountTitle">Mitteilungen</h2>
+        <p class="sub">${owner ? 'Du bekommst eine Mitteilung bei neuen Rezeptvorschlägen' : 'Du bekommst eine Mitteilung, wenn dein Vorschlag angeschaut wurde'}${me.household ? ' und wenn jemand etwas auf die gemeinsame Einkaufsliste setzt' : ''}.</p>
+        <div id="pushState"></div>
+      </div>
+
       <div class="card cardPad accountCard">
         <h2 class="h2 accountTitle">Datensicherung</h2>
         <p class="sub">Deine Daten liegen auf diesem Gerät und auf dem Server. Eine Sicherung als Datei schadet trotzdem nie.</p>
@@ -233,6 +239,8 @@ permalink: /konto/
       try{ await navigator.clipboard.writeText(inp.value); toast('Link kopiert'); }
       catch{ inp.select(); document.execCommand('copy'); toast('Link kopiert'); }
     });
+    renderPush();
+
     document.getElementById('exportAllBtn')?.addEventListener('click', async (e)=>{
       const btn = e.currentTarget; busy(btn, true, 'Wird erstellt …');
       try{
@@ -281,6 +289,62 @@ permalink: /konto/
       try{ await A().api('/api/members/remove', { method: 'POST', body: { uid: b.dataset.uid } }); toast(`${b.dataset.name} entfernt`); load(); }
       catch(ex){ showError(ex); }
     }));
+  }
+
+  // ---------- Mitteilungen (Web Push) ----------
+  const isIOS = /iPhone|iPad/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  function b64ToBytes(s){ s = s.replace(/-/g,'+').replace(/_/g,'/'); const bin = atob(s + '==='.slice((s.length + 3) % 4)); return Uint8Array.from(bin, c=>c.charCodeAt(0)); }
+  async function currentSub(){
+    if(!('serviceWorker' in navigator) || !('PushManager' in window)) return null;
+    const reg = await navigator.serviceWorker.ready;
+    return reg.pushManager.getSubscription();
+  }
+  async function renderPush(){
+    const host = document.getElementById('pushState');
+    if(!host) return;
+    if(!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)){
+      host.innerHTML = isIOS && !standalone
+        ? '<p class="sub">Auf dem iPhone gehen Mitteilungen nur in der App vom Home-Bildschirm: In Safari „Teilen → Zum Home-Bildschirm“, dann dort öffnen.</p>'
+        : '<p class="sub">Dieser Browser unterstützt keine Mitteilungen.</p>';
+      return;
+    }
+    const sub = await currentSub().catch(()=>null);
+    if(Notification.permission === 'denied'){
+      host.innerHTML = '<p class="sub">Mitteilungen sind für das Kochbuch blockiert. Du kannst sie in den Einstellungen des Geräts wieder erlauben.</p>';
+      return;
+    }
+    host.innerHTML = sub
+      ? `<div class="pushOn"><span class="pushDot" aria-hidden="true"></span>Auf diesem Gerät aktiv</div>
+         <div class="fieldRow"><button class="btn accountBtn" id="pushTestBtn" type="button">Test senden</button><button class="btn btnGhost accountBtn" id="pushOffBtn" type="button">Ausschalten</button></div>`
+      : `<button class="btn secondary accountBtn" id="pushOnBtn" type="button">Mitteilungen aktivieren</button>`;
+    document.getElementById('pushOnBtn')?.addEventListener('click', async (e)=>{
+      const btn = e.currentTarget; busy(btn, true, 'Einen Moment …');
+      try{
+        const perm = await Notification.requestPermission();
+        if(perm !== 'granted') throw new Error('Mitteilungen wurden nicht erlaubt.');
+        const { key } = await A().api('/api/push/key');
+        const reg = await navigator.serviceWorker.ready;
+        const s = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(key) });
+        await A().api('/api/push/subscribe', { method: 'POST', body: { subscription: s.toJSON() } });
+        toast('Mitteilungen aktiviert');
+      }catch(ex){ showError(ex); }
+      renderPush();
+    });
+    document.getElementById('pushTestBtn')?.addEventListener('click', async (e)=>{
+      const btn = e.currentTarget; busy(btn, true, 'Wird gesendet …');
+      try{ await A().api('/api/push/test', { method: 'POST', body: {} }); toast('Test gesendet'); }
+      catch(ex){ showError(ex); }
+      busy(btn, false);
+    });
+    document.getElementById('pushOffBtn')?.addEventListener('click', async ()=>{
+      try{
+        const s = await currentSub();
+        if(s){ await A().api('/api/push/unsubscribe', { method: 'POST', body: { endpoint: s.endpoint } }).catch(()=>{}); await s.unsubscribe(); }
+        toast('Mitteilungen aus');
+      }catch(ex){ showError(ex); }
+      renderPush();
+    });
   }
 
   async function load(){

@@ -875,6 +875,8 @@ select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linea
 .sugStatus.isRejected{background:var(--dangerSoft);color:var(--danger)}
 .sugWithdraw{padding:0;border:0;background:none;color:var(--sub2);font-size:var(--fs14);text-decoration:underline}
 .reviewBanner{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:var(--rInner);background:var(--leafSoft);font-size:var(--fs14)}
+.pushOn{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--leaf)}
+.pushDot{width:10px;height:10px;border-radius:50%;background:var(--leaf)}
 .countBadge{margin-left:auto;min-width:22px;padding:2px 7px;border-radius:var(--rPill);background:var(--accent);color:var(--onAccent);font-size:var(--fs12);font-weight:700;text-align:center}
 .profileBadge{position:relative}
 .profileBadge.hasPending::after{content:"";position:absolute;top:0;right:0;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
