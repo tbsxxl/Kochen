@@ -1,7 +1,8 @@
 {%- comment -%}
   Rezeptkarte für Listen (Liquid). Gleiches Markup wie assets/cards.js (Karten, die per JS entstehen).
   Aufruf: {% include recipe-card.html r=r index=true %}
-  index=true: Filterdaten für die Rezeptliste, Kategorie auf dem Foto, Bildübergang zur Rezeptseite.
+  index=true: Filterdaten für die Rezeptliste, Kategorie auf dem Foto.
+  Bildübergang zur Rezeptseite: Name vergibt das Skript im Kopf von _layouts/default.html beim Antippen.
   hcard=true: Karte in waagerechter Leiste (z. B. „Ähnliche Rezepte“).
 {%- endcomment -%}
 {%- assign r = include.r -%}
@@ -17,7 +18,7 @@
   <div class="card recipeCard cardHover">
     {%- if r.image %}
     <div class="rcImg">
-      <img src="{{ r.image | relative_url }}?v={{ site.image_version }}"{% if include.index %} style="view-transition-name: img-{{ r.url | slugify }}"{% endif %} srcset="{% include srcset.html src=r.image %}" sizes="(min-width:900px) 300px, (min-width:641px) 45vw, 92vw" alt="{{ r.title | escape }}"{% if include.eager %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
+      <img src="{{ r.image | relative_url }}?v={{ site.image_version }}" srcset="{% include srcset.html src=r.image %}" sizes="(min-width:900px) 300px, (min-width:641px) 45vw, 92vw" alt="{{ r.title | escape }}"{% if include.eager %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
       {%- if include.index and r.category %}<div class="heroOverlayCat">{{ r.category }}</div>{% endif %}
       {% include freezer-flag.html id=r.url %}
     </div>

@@ -174,7 +174,7 @@
     randomHost.innerHTML = `
       <a class="linkCard randomCard" href="${esc(r.id)}">
         <div class="card recipeCard cardHover homeFeatured">
-          ${r.image ? `<div class="rcImg"><img src="${esc(r.image)}" srcset="${esc(r.srcset||"")}" sizes="(min-width:960px) 928px, 100vw" alt="${esc(r.title)}" decoding="async" style="view-transition-name:img-${esc(r.vt)}">${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}</div>` : ""}
+          ${r.image ? `<div class="rcImg"><img src="${esc(r.image)}" srcset="${esc(r.srcset||"")}" sizes="(min-width:960px) 928px, 100vw" alt="${esc(r.title)}" decoding="async">${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}</div>` : ""}
           <div class="rcBody">
             <h2 class="recipeTitle homeFeaturedTitle">${esc(r.title)}</h2>
             <div class="recipeMeta">

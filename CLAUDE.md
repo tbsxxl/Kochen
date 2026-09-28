@@ -95,6 +95,13 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   lange drücken/Menge antippen = Blatt für Menge, Abteilung, Löschen. Korrigierte Abteilungen in
   `kochbuch.shopsections` (synchronisiert), Vorschläge beim Tippen aus `kochbuch.ui.shopfreq`.
 
+## Seitenwechsel (View Transitions)
+
+Tab-Wechsel: alte Seite blendet aus, neue ein (`vtOut`/`vtIn` in `assets/styles.css`), untere Leiste steht still.
+Das Rezeptfoto fliegt nur zwischen Karte und Rezeptseite: Listen haben **keine** festen `view-transition-name`s;
+das Skript im Kopf von `_layouts/default.html` vergibt den Namen bei `pageswap`/`pagereveal` an die angetippte,
+sichtbare Karte (Name = `img-` + slugify der Rezeptadresse, wie auf der Rezeptseite).
+
 ## Umbenannte Rezepte
 
 Neue Rezeptdateinamen nur mit a–z, 0–9 und Bindestrich (keine Umlaute). Wird ein Rezept umbenannt, alte → neue Adresse

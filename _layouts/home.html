@@ -205,7 +205,6 @@ layout: default
         s = el('todayServings'), sTxt = el('todayServingsText');
 
   if(link && r.url) link.href = r.url;
-  if(img && r.vt) img.style.viewTransitionName = 'img-' + r.vt;
   if(fav) fav.setAttribute('data-recipe-id', r.id || r.url || '');
   const tr = el('todayRating'); if(tr) tr.setAttribute('data-recipe-id', r.id || r.url || '');
   const fz = el('todayFreezer'); if(fz) fz.setAttribute('data-recipe-id', r.id || r.url || '');
