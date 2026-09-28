@@ -37,6 +37,7 @@ permalink: /rezeptindex/
         <button class="sortMenuItem" data-sort="recent" type="button" role="menuitemradio" aria-checked="false">Zuletzt gekocht</button>
         <button class="sortMenuItem" data-sort="often" type="button" role="menuitemradio" aria-checked="false">Am häufigsten</button>
         <button class="sortMenuItem" data-sort="fav" type="button" role="menuitemradio" aria-checked="false">Favoriten zuerst</button>
+        <button class="sortMenuItem" data-sort="rating" type="button" role="menuitemradio" aria-checked="false">Beste Bewertung</button>
       </div>
     </div>
   </div>
@@ -97,7 +98,7 @@ permalink: /rezeptindex/
           <div class="recipeMeta">
             {% if r.time %}<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ r.time }}</span></span>{% endif %}
             {% if r.servings %}<span class="metaItem"><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span>{{ r.servings }}</span></span>{% endif %}
-            <span class="favBadge rcFavBadge metaFav" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-label="Favorit">♥</span>
+            <span class="metaRating" data-rating-badge data-recipe-id="{{ r.url | relative_url }}" hidden></span><span class="favBadge rcFavBadge metaFav" data-fav-badge data-recipe-id="{{ r.url | relative_url }}" aria-label="Favorit">♥</span>
           </div>
         </div>
 
@@ -157,12 +158,15 @@ permalink: /rezeptindex/
 
   function sortBy(mode){
     const stats = getStats();
+    let notes = {};
+    try{ notes = JSON.parse(localStorage.getItem('kochbuch.notes') || '{}') || {}; }catch{}
     const val = (c) => {
       const id = c.getAttribute('data-recipe-id');
       const e = stats[id] || {};
       if(mode === 'recent'){ const t = e.lastCooked ? Date.parse(e.lastCooked) : 0; return -t; }
       if(mode === 'often'){ return -(Number(e.cookedCount||0)); }
       if(mode === 'fav'){ return e.favorite ? 0 : 1; }
+      if(mode === 'rating'){ return -(Number((notes[id] || {}).rating) || 0); }
       return 0;
     };
     const sorted = cards.slice().sort((a,b)=>{

@@ -1,0 +1,11 @@
+# Umbenannte Rezepte: alte Adresse → neue Adresse.
+# Wird für Weiterleitungen (_redirects) und zum Umstellen gespeicherter Favoriten,
+# Kühltruhe, Wochenplan und Notizen im Browser genutzt (assets/account.js).
+"/rezepte/schaschlik-mit-selbstgemachter-schaschlikso-u00dfe/": "/rezepte/schaschlik-mit-selbstgemachter-schaschliksosse/"
+"/rezepte/h-u00e4hnchen-quesadilla-mit-karotten-brokkoli/": "/rezepte/haehnchen-quesadilla-mit-karotten-brokkoli/"
+"/rezepte/hackb-u00e4llchen-toscana/": "/rezepte/hackbaellchen-toscana/"
+"/rezepte/mozzarella-h-u00e4hnchen-in-basilikum-sahnesauce/": "/rezepte/mozzarella-haehnchen-in-basilikum-sahnesauce/"
+"/rezepte/h-u00e4hnchen-mit-parmaschinken-mozzarella-in-tomaten-sahne-sauce-mit-pesto-fries/": "/rezepte/haehnchen-mit-parmaschinken-mozzarella-in-tomaten-sahne-sauce-mit-pesto-fries/"
+"/rezepte/brioche-burger-buns-10-st-u00fcck/": "/rezepte/brioche-burger-buns-10-stueck/"
+"/rezepte/currywurstso-u00dfe-mit-cola/": "/rezepte/currywurstsosse-mit-cola/"
+"/rezepte/marry-me-p-u00fcree-mit-geschmorten-rinder-short-ribs/": "/rezepte/marry-me-pueree-mit-geschmorten-rinder-short-ribs/"

@@ -165,4 +165,14 @@
 
   window.KOCHBUCH_SHOP = { sectionOf };
   render();
+
+  // Sync: neue Einträge vom anderen Gerät bzw. aus der gemeinsamen Liste ohne Neuladen anzeigen.
+  // Bei einer gemeinsamen Liste regelmäßig nachsehen, solange die Seite offen ist.
+  window.KOCHBUCH_LIVE_REFRESH = true;
+  window.addEventListener("kochbuch:synced", render);
+  setInterval(()=>{
+    const A = window.KOCHBUCH_ACCOUNT;
+    const p = A && A.profile && A.profile();
+    if(p && p.household && document.visibilityState === "visible") A.syncNow().catch(()=>{});
+  }, 15000);
 })();

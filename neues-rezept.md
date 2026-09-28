@@ -13,7 +13,16 @@ permalink: /neues-rezept/
 </div>
 
 <form id="uploadForm" class="uploadForm" hidden autocomplete="off" novalidate>
-  <div class="section" style="margin-top:6px">
+  <div class="section card cardPad uploadCard importCard" id="importCard" style="margin-top:6px">
+    <label class="fieldLabel" for="importUrl">Von einer Webseite übernehmen (optional)</label>
+    <div class="searchRow searchRowCompact">
+      <input id="importUrl" type="url" inputmode="url" placeholder="Link zum Rezept einfügen" autocomplete="off">
+      <button class="btn secondary" id="importBtn" type="button">Laden</button>
+    </div>
+    <p class="sub importHint" id="importHint">Klappt bei den meisten großen Rezeptseiten. Danach alles prüfen und bei Bedarf anpassen.</p>
+  </div>
+
+  <div class="section">
     <label class="photoPick" id="photoPick">
       <input type="file" id="photoIn" accept="image/*" hidden>
       <img id="photoPreview" alt="" hidden>

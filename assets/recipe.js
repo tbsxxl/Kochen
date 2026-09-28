@@ -549,6 +549,58 @@ const cookOverlay = $("#cookOverlay");
   });
   timerPill?.addEventListener('click', openCook);
 
+  // Eigene Notizen & Bewertung (kochbuch.notes, wird mit dem Profil synchronisiert)
+  const NOTES_KEY = "kochbuch.notes";
+  const notesText = $("#notesText");
+  const starsEl = $("#ratingStars");
+  const ratingPill = $("#ratingPill");
+  const notesHint = $("#notesHint");
+  function noteEntry(){ return (ls.get(NOTES_KEY, {}) || {})[data.id] || {}; }
+  function saveNote(patch){
+    const all = ls.get(NOTES_KEY, {}) || {};
+    const e = { ...(all[data.id] || {}), ...patch, t: Date.now() };
+    if(!e.text && !e.rating) delete all[data.id]; else all[data.id] = e;
+    ls.set(NOTES_KEY, all);
+  }
+  function renderNotes(){
+    const e = noteEntry();
+    if(notesText && document.activeElement !== notesText) notesText.value = e.text || "";
+    autoGrow();
+    starsEl?.querySelectorAll(".star").forEach(b=>{
+      const on = Number(b.dataset.star) <= (e.rating || 0);
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-checked", Number(b.dataset.star) === e.rating ? "true" : "false");
+    });
+    if(ratingPill){
+      ratingPill.hidden = !e.rating;
+      ratingPill.textContent = e.rating ? `★ ${e.rating}` : "";
+      ratingPill.setAttribute("aria-label", e.rating ? `Deine Bewertung: ${e.rating} von 5` : "");
+    }
+  }
+  function autoGrow(){
+    if(!notesText) return;
+    notesText.style.height = "auto";
+    notesText.style.height = Math.max(56, notesText.scrollHeight) + "px";
+  }
+  starsEl?.addEventListener("click", (ev)=>{
+    const b = ev.target.closest(".star"); if(!b) return;
+    const n = Number(b.dataset.star);
+    saveNote({ rating: noteEntry().rating === n ? 0 : n });   // gleicher Stern nochmal = Bewertung entfernen
+    renderNotes(); lightTap(); pop(b);
+  });
+  let noteTimer = null;
+  notesText?.addEventListener("input", ()=>{
+    autoGrow();
+    clearTimeout(noteTimer);
+    if(notesHint) notesHint.textContent = "Wird gespeichert …";
+    noteTimer = setTimeout(()=>{
+      saveNote({ text: notesText.value.trim() });
+      if(notesHint) notesHint.textContent = "Gespeichert · nur für dich sichtbar.";
+    }, 600);
+  });
+  window.addEventListener("kochbuch:synced", renderNotes);
+  renderNotes();
+
   renderIngredients();
   renderFreezer();
   renderStats();

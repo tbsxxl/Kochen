@@ -1,0 +1,38 @@
+# Prüft jeden Pull Request: Seite bauen, wichtige Seiten im Browser öffnen, JS-Fehler und fehlende Dateien melden.
+name: Seite prüfen
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Jekyll bauen
+        run: LANG=C.UTF-8 bundle exec jekyll build
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Playwright installieren
+        run: |
+          npm i --no-save playwright@1
+          npx playwright install --with-deps chromium
+
+      - name: Worker-Code prüfen
+        run: node -e "import('./worker/index.js').then(()=>console.log('Worker ok'))"
+
+      - name: Seiten testen
+        run: |
+          python3 -m http.server 8411 --directory _site >/dev/null 2>&1 &
+          sleep 1
+          node tools/smoke.js http://localhost:8411

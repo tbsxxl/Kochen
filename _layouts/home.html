@@ -44,7 +44,7 @@ layout: default
         <div class="recipeMeta">
           <span class="metaItem" id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span id="todayTimeText">{{ featured.time }}</span></span>
           <span class="metaItem" id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span id="todayServingsText">{{ featured.servings }}</span></span>
-          <span class="favBadge rcFavBadge metaFav" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-label="Favorit">♥</span>
+          <span class="metaRating" id="todayRating" data-rating-badge data-recipe-id="{{ featured.url | relative_url }}" hidden></span><span class="favBadge rcFavBadge metaFav" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-label="Favorit">♥</span>
         </div>
       </div>
     </div>
@@ -173,6 +173,7 @@ layout: default
   if(link && r.url) link.href = r.url;
   if(img && r.vt) img.style.viewTransitionName = 'img-' + r.vt;
   if(fav) fav.setAttribute('data-recipe-id', r.id || r.url || '');
+  const tr = el('todayRating'); if(tr) tr.setAttribute('data-recipe-id', r.id || r.url || '');
   const fz = el('todayFreezer'); if(fz) fz.setAttribute('data-recipe-id', r.id || r.url || '');
   if(ttl) ttl.textContent = r.title || '—';
   if(cat){ r.category ? (cat.textContent = r.category, cat.style.removeProperty('display')) : (cat.style.display='none'); }
@@ -230,7 +231,7 @@ layout: default
           ${img}
           <div class="rcBody">
             <h3 class="recipeTitle">${esc(r.title)}</h3>
-            <div class="recipeMeta">${time}${serv}<span class="favBadge rcFavBadge metaFav isFav" aria-label="Favorit">♥</span></div>
+            <div class="recipeMeta">${time}${serv}<span class="metaRating" data-rating-badge data-recipe-id="${esc(r.id||r.url||'')}" hidden></span><span class="favBadge rcFavBadge metaFav isFav" aria-label="Favorit">♥</span></div>
           </div>
         </div>
       </a>`;

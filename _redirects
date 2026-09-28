@@ -1,0 +1,8 @@
+---
+layout: null
+sitemap: false
+---
+# Weiterleitungen für Cloudflare (wird aus _data/renamed.yml erzeugt)
+{% for r in site.data.renamed %}{{ r[0] }} {{ r[1] }} 301
+{{ r[0] | split: "/" | join: "/" }} {{ r[1] }} 301
+{% endfor %}

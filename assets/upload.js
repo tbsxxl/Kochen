@@ -248,6 +248,7 @@
   }
   async function loadForEdit(){
     document.querySelector(".pageTitleBlock .h1").textContent = "Rezept bearbeiten";
+    $("#importCard").hidden = true;
     document.title = "Rezept bearbeiten · " + document.title.split("·").pop().trim();
     $("#uploadBtn").textContent = "Änderungen speichern";
     $("#uploadHint").textContent = "Die Änderung wird direkt übernommen und ist nach ca. 2 Minuten online.";
@@ -303,6 +304,45 @@
       showDone(`„${title}“ ist gelöscht`, "In etwa 2 Minuten ist das Rezept aus dem Kochbuch verschwunden.", "/", "Zur Startseite");
     }catch(err){ showErr(err); btn.disabled = false; btn.textContent = "Rezept löschen"; }
   });
+
+  // ---------- Von einer Webseite übernehmen ----------
+  async function importFromUrl(){
+    const url = $("#importUrl").value.trim();
+    const hint = $("#importHint");
+    if(!url){ $("#importUrl").focus(); return; }
+    const btn = $("#importBtn");
+    btn.disabled = true; btn.textContent = "Lädt …";
+    hint.classList.remove("isError");
+    try{
+      const r = await A.api("/api/import", { method: "POST", body: { url } });
+      if(r.title) $("#titleIn").value = r.title;
+      if(r.time) $("#timeIn").value = r.time;
+      if(r.servings) $("#servIn").value = r.servings;
+      if(r.tags && r.tags.length && !$("#tagsIn").value) $("#tagsIn").value = r.tags.join(", ");
+      if(r.ingredients && r.ingredients.length) $("#ingIn").value = r.ingredients.join("\n");
+      if(r.steps && r.steps.length) $("#stepsIn").value = r.steps.join("\n");
+      if(r.source && !$("#notesIn").value) $("#notesIn").value = `Quelle: ${r.source}`;
+      if(r.image && r.image.data){
+        const bin = atob(r.image.data);
+        photoFile = new Blob([Uint8Array.from(bin, c=>c.charCodeAt(0))], { type: r.image.type });
+        $("#cropIn").checked = false;   // fremde Fotos haben kein KI-Wasserzeichen
+        await processPhoto();
+      }
+      renderIngPreview(); saveDraft();
+      hint.textContent = `Übernommen: ${r.ingredients.length} Zutaten, ${r.steps.length} Schritte${r.image ? ", Foto" : ""}. Bitte noch Kategorie wählen und alles prüfen.`;
+      try{ UI.haptic?.("success"); }catch{}
+      $("#catIn").focus();
+    }catch(err){
+      hint.textContent = (err && err.message) || String(err);
+      hint.classList.add("isError");
+    }finally{
+      btn.disabled = false; btn.textContent = "Laden";
+    }
+  }
+  $("#importBtn").addEventListener("click", importFromUrl);
+  $("#importUrl").addEventListener("keydown", (e)=>{ if(e.key === "Enter"){ e.preventDefault(); importFromUrl(); } });
+  // Über das Teilen-Menü oder einen Link direkt mit Adresse geöffnet: /neues-rezept/?import=https://…
+  if(params.get("import") && !editing) $("#importUrl").value = params.get("import");
 
   // ---------- Start ----------
   (async function(){
