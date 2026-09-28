@@ -11,14 +11,19 @@
 
 import { b64url, randomBytes, verifyRegistration, verifyAuthentication } from "./webauthn.js";
 import { GitHub } from "./github.js";
+import { sendPush, vapidKeys } from "./push.js";
 
 const SESSION_COOKIE = "kb_session";
 const CHALLENGE_COOKIE = "kb_chal";
 const SESSION_DAYS = 180;
 const SYNC_KEYS = ["kochbuch.stats", "kochbuch.freezer", "kochbuch.shopping", "kochbuch.plan", "kochbuch.notes"];
 
+// Hintergrundarbeit (z. B. Mitteilungen) pro Anfrage: request → ctx
+const BG = new WeakMap();
+
 export default {
-  async fetch(request, env){
+  async fetch(request, env, ctx){
+    if(ctx) BG.set(request, ctx);
     const url = new URL(request.url);
     if(!url.pathname.startsWith("/api/")) return env.ASSETS.fetch(request);
     try{
@@ -46,6 +51,10 @@ async function route(request, env, url){
   if(p === "/api/household/leave" && m === "POST") return householdLeave(request, env);
   if(p === "/api/import" && m === "POST") return recipeImport(request, env);
   if(p === "/api/export" && m === "GET") return exportAll(request, env);
+  if(p === "/api/push/key" && m === "GET") return json({ key: (await vapidKeys(env)).publicKey });
+  if(p === "/api/push/subscribe" && m === "POST") return pushSubscribe(request, env);
+  if(p === "/api/push/unsubscribe" && m === "POST") return pushUnsubscribe(request, env);
+  if(p === "/api/push/test" && m === "POST") return pushTest(request, env, url);
   if(p === "/api/suggestions" && m === "POST") return suggestionCreate(request, env);
   if(p === "/api/suggestions" && m === "GET") return suggestionList(request, env);
   const sm = p.match(/^\/api\/suggestions\/([A-Za-z0-9_-]{8,40})(?:\/(image|reject|withdraw))?$/);
@@ -238,7 +247,7 @@ async function memberRemove(request, env){
   const hh = await household(env, user);
   if(hh) await leaveHousehold(env, user, hh);
   for(const c of await getCreds(env, uid)) await env.KV.delete(`credmap:${c.id}`);
-  await Promise.all([`user:${uid}`, `creds:${uid}`, `sync:${uid}`].map(k => env.KV.delete(k)));
+  await Promise.all([`user:${uid}`, `creds:${uid}`, `sync:${uid}`, `push:${uid}`].map(k => env.KV.delete(k)));
   await env.KV.put(`epoch:${uid}`, String((await epochOf(env, uid)) + 1));
   await env.KV.put("auth:users", JSON.stringify((await getUsers(env)).filter(x => x !== uid)));
   return json({ ok: true });
@@ -404,9 +413,13 @@ async function syncPut(request, env){
   for(const [k, entry] of Object.entries(body.changes || {})){
     if(!SYNC_KEYS.includes(k) || !entry || typeof entry.base !== "number") continue;
     if(verOf(data[k]) !== entry.base){ conflicts.push(k); continue; }
+    const prev = data[k];
     const next = { v: entry.v, ver: verOf(data[k]) + 1, t: Date.now() };
     data[k] = next;
-    if(k === SHOP && hh) await env.KV.put(`hhsync:${hh.id}`, JSON.stringify(next));
+    if(k === SHOP && hh){
+      await env.KV.put(`hhsync:${hh.id}`, JSON.stringify(next));
+      await notifyShoppingAdded(request, env, s, hh, prev && prev.v, next.v);
+    }
     else personalChanged = true;
   }
   if(personalChanged){
@@ -535,6 +548,21 @@ async function recipeImport(request, env){
     }catch{}
   }
   return json(out);
+}
+
+async function notifyShoppingAdded(request, env, s, hh, before, after){
+  const key = (i) => `${String(i && i.item || "").trim().toLowerCase()}|${String(i && i.unit || "").trim().toLowerCase()}`;
+  const had = new Set((Array.isArray(before) ? before : []).map(key));
+  const added = (Array.isArray(after) ? after : []).filter(i => !had.has(key(i)) && !i.checked).map(i => String(i.item || "").trim()).filter(Boolean);
+  if(!added.length) return;
+  const throttle = `pushthrottle:${hh.id}:${s.uid}`;
+  if(await env.KV.get(throttle)) return;
+  await env.KV.put(throttle, "1", { expirationTtl: 600 });
+  const list = added.slice(0, 4).join(", ") + (added.length > 4 ? " …" : "");
+  for(const uid of hh.members){
+    if(uid === s.uid) continue;
+    notifyLater(request, env, uid, { title: "Einkaufsliste", body: `${s.user.name} hat ${added.length === 1 ? "etwas" : `${added.length} Sachen`} hinzugefügt: ${list}`, url: "/shopping/", tag: `shop-${hh.id}` });
+  }
 }
 
 // ---------- Haushalt: gemeinsame Einkaufsliste ----------
@@ -793,8 +821,59 @@ async function recipeUpload(request, env){
   const sha = await gh.commit(files, msg);
   if(sug){
     await env.KV.put(`sug:${sug.id}`, JSON.stringify({ ...sug, image: null, status: "approved", url: `/rezepte/${slug}/`, decided: Date.now() }), { expirationTtl: 30 * 86400 });
+    notifyLater(request, env, sug.uid, { title: "Dein Rezept ist im Kochbuch 🎉", body: `${r.title} – in ein paar Minuten online`, url: `/rezepte/${slug}/`, tag: `sug-${sug.id}` });
   }
   return json({ ok: true, slug, url: `/rezepte/${slug}/`, commit: sha });
+}
+
+// ---------- Mitteilungen (Web Push) ----------
+// push:<uid> = [{ endpoint, keys: { p256dh, auth }, created }]
+async function pushSubscribe(request, env){
+  const s = await requireSession(request, env);
+  const { subscription } = await readJson(request);
+  const ep = String(subscription && subscription.endpoint || "");
+  if(!(/^https:\/\//.test(ep) || (env.ALLOW_LOCAL_IMPORT && /^http:\/\/127\.0\.0\.1:/.test(ep))) || !subscription.keys || !subscription.keys.p256dh || !subscription.keys.auth) fail("Ungültiges Abo.");
+  const list = ((await env.KV.get(`push:${s.uid}`, "json")) || []).filter(x => x.endpoint !== ep);
+  list.push({ endpoint: ep, keys: { p256dh: String(subscription.keys.p256dh), auth: String(subscription.keys.auth) }, created: Date.now() });
+  await env.KV.put(`push:${s.uid}`, JSON.stringify(list.slice(-10)));
+  return json({ ok: true });
+}
+async function pushUnsubscribe(request, env){
+  const s = await requireSession(request, env);
+  const { endpoint } = await readJson(request);
+  const list = ((await env.KV.get(`push:${s.uid}`, "json")) || []).filter(x => x.endpoint !== endpoint);
+  await env.KV.put(`push:${s.uid}`, JSON.stringify(list));
+  return json({ ok: true });
+}
+// Mitteilung an alle Geräte eines Profils; tote Abos werden entfernt
+async function notifyUser(env, uid, message, subject){
+  const list = (await env.KV.get(`push:${uid}`, "json")) || [];
+  if(!list.length) return 0;
+  const keep = [];
+  let sent = 0;
+  for(const sub of list){
+    try{
+      const status = await sendPush(env, sub, message, subject);
+      if(status === 404 || status === 410) continue;
+      if(status < 300) sent++;
+      keep.push(sub);
+    }catch{ keep.push(sub); }
+  }
+  if(keep.length !== list.length) await env.KV.put(`push:${uid}`, JSON.stringify(keep));
+  return sent;
+}
+// Im Hintergrund senden, damit die eigentliche Antwort nicht wartet
+function notifyLater(request, env, uid, message){
+  const subject = new URL(request.url).origin;
+  const job = notifyUser(env, uid, message, subject).catch(() => {});
+  const ctx = BG.get(request);
+  if(ctx) ctx.waitUntil(job);
+}
+async function pushTest(request, env, url){
+  const s = await requireSession(request, env);
+  const sent = await notifyUser(env, s.uid, { title: "Tobis Kochbuch", body: "Mitteilungen sind eingerichtet 👍", url: "/konto/" }, url.origin);
+  if(!sent) fail("Keine Mitteilung zugestellt. Sind Mitteilungen auf diesem Gerät erlaubt?");
+  return json({ ok: true, sent });
 }
 
 // ---------- Komplettsicherung (nur Besitzer) ----------
@@ -844,6 +923,8 @@ async function suggestionCreate(request, env){
   if(mine.length >= 20) fail("Du hast schon 20 offene Vorschläge. Warte, bis sie angeschaut wurden.");
   const id = b64url.encode(randomBytes(12));
   await env.KV.put(`sug:${id}`, JSON.stringify({ id, uid: s.uid, name: s.user.name, created: Date.now(), status: "pending", recipe, image: img }));
+  const owner = await env.KV.get("auth:owner");
+  if(owner && owner !== s.uid) notifyLater(request, env, owner, { title: "Neuer Rezeptvorschlag", body: `${s.user.name}: ${recipe.title}`, url: "/vorschlaege/", tag: `sug-${id}` });
   return json({ ok: true, id });
 }
 async function suggestionList(request, env){
@@ -869,6 +950,7 @@ async function suggestionReject(request, env, id){
   const x = await env.KV.get(`sug:${id}`, "json");
   if(!x || x.status !== "pending") fail("Dieser Vorschlag ist nicht mehr offen.", 404);
   await env.KV.put(`sug:${id}`, JSON.stringify({ ...x, image: null, status: "rejected", reason: clean(reason, 300), decided: Date.now() }), { expirationTtl: 30 * 86400 });
+  notifyLater(request, env, x.uid, { title: "Vorschlag nicht übernommen", body: reason ? `${x.recipe.title}: ${clean(reason, 120)}` : x.recipe.title, url: "/vorschlaege/", tag: `sug-${id}` });
   return json({ ok: true });
 }
 async function suggestionWithdraw(request, env, id){

@@ -1,7 +1,7 @@
 /* Tobis Kochbuch — Service Worker
    Offline: Seiten „netzwerk-zuerst“, aber nach 3 s Warten (schlechter Empfang im Supermarkt) aus dem Cache.
    CSS/JS/Bilder „Cache zuerst“, im Hintergrund aktualisieren. /api/ nie cachen. */
-const VERSION = 'kochbuch-v7';
+const VERSION = 'kochbuch-v8';
 const ASSET_CACHE = `${VERSION}-assets`;
 const IMAGE_CACHE = `${VERSION}-images`;
 const PAGE_CACHE = `${VERSION}-pages`;
@@ -99,5 +99,30 @@ self.addEventListener('fetch', (e) => {
     const hit = await cached(req);
     if (hit) { e.waitUntil(net); return hit; }
     return (await net) || (await caches.match('/')) || Response.error();
+  })());
+});
+
+// ---------- Mitteilungen ----------
+self.addEventListener('push', (e) => {
+  let m = {};
+  try { m = e.data ? e.data.json() : {}; } catch { m = { body: e.data && e.data.text() }; }
+  e.waitUntil(self.registration.showNotification(m.title || 'Tobis Kochbuch', {
+    body: m.body || '',
+    icon: '/assets/icon-512-v2.png',
+    badge: '/assets/icon-512-v2.png',
+    tag: m.tag || undefined,
+    data: { url: m.url || '/' }
+  }));
+});
+
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  const url = new URL((e.notification.data && e.notification.data.url) || '/', self.location.origin).href;
+  e.waitUntil((async () => {
+    const wins = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    for (const w of wins) {
+      if ('focus' in w) { await w.focus(); if ('navigate' in w) await w.navigate(url); return; }
+    }
+    await self.clients.openWindow(url);
   })());
 });
