@@ -477,6 +477,13 @@ const cookOverlay = $("#cookOverlay");
       cookStepIngs.hidden = !hits.length;
       cookStepIngsList.innerHTML = hits.map(i=>`<div class="cookStepIng"><span>${escHtml(i.item)}</span><span class="num">${escHtml(fmtQty(i))}</span></div>`).join('');
     }
+    markStepIngredients();
+    const nextPrev = $("#cookNextPreview"), nextText = $("#cookNextText");
+    if(nextPrev && nextText){
+      const nx = steps[stepIdx + 1];
+      nextPrev.hidden = !nx;
+      nextText.textContent = nx || '';
+    }
     if(cookPrev) cookPrev.disabled = stepIdx===0;
     if(cookNext){
       const last = stepIdx>=total-1;
@@ -493,9 +500,24 @@ const cookOverlay = $("#cookOverlay");
       const qty = fmtQty(i);
       const row = document.createElement('label');
       row.className = 'cookIngRow';
+      row.dataset.item = i.item || '';
       row.innerHTML = `<input class="cookChk" type="checkbox" /> <div class="cookIngText"><div style="font-weight:700">${escHtml(i.item||'—')}</div><div style="opacity:.85;margin-top:2px">${escHtml(qty)}</div></div>`;
       cookIngredients.appendChild(row);
     }
+    markStepIngredients();
+  }
+
+  // Zutaten des aktuellen Schritts in der Gesamtliste hervorheben (Tablet: Liste steht rechts daneben)
+  function markStepIngredients(){
+    if(!cookIngredients) return;
+    const names = new Set(ingredientsForStep(steps[stepIdx] || '').map(i=>i.item));
+    let first = null;
+    cookIngredients.querySelectorAll('.cookIngRow').forEach(r=>{
+      const on = names.has(r.dataset.item);
+      r.classList.toggle('isStep', on);
+      if(on && !first) first = r;
+    });
+    if(first && cookOverlay?.classList.contains('open') && cookPanelIngs?.offsetParent) first.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 
   async function requestWakeLock(){

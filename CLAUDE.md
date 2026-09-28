@@ -83,6 +83,8 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   „Ähnliche Rezepte“ (gleiche Kategorie, Liquid `sample`, Karten mit `hcard=true`).
 - Kochmodus: Wischen links/rechts; Fortschritt in `cooking` → Startseite zeigt „Weiter kochen“ (12 Std),
   Link `?kochen=1` öffnet den Kochmodus beim gespeicherten Schritt.
+  Ab 768 px (iPad) kein Reiter: Schritt links (+ „Danach“-Vorschau), alle Zutaten rechts, die des aktuellen
+  Schritts hervorgehoben (`.isStep`). Auf dem Handy bleibt es bei den Reitern „Schritte/Zutaten“.
 - Rezeptliste: Suche auch in Zutaten (mehrere Wörter = alle), Schnellfilter über `data-flags` der Karte
   (`schnell`, `veg` aus Kategorien/Tags) und „Nie gekocht“ (aus `kochbuch.stats`).
 - Einkaufsliste: nach links wischen = löschen (Rückgängig über `KOCHBUCH_UI.toast(text, {label, run})`),
