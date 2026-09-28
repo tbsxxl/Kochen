@@ -364,6 +364,10 @@
   }
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 
+  // Offline: Änderungen bleiben auf dem Gerät und werden abgeglichen, sobald wieder Netz da ist
+  window.addEventListener("offline", ()=>{ try{ window.KOCHBUCH_UI?.toast?.("Offline – Änderungen werden später abgeglichen"); }catch{} });
+  window.addEventListener("online", ()=>{ if(loggedIn()) syncNow().catch(()=>{}); });
+
   // App wieder im Vordergrund → neuen Stand holen; beim Verlassen noch schnell senden
   document.addEventListener("visibilitychange", ()=>{
     if(!loggedIn()) return;

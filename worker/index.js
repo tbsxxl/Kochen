@@ -45,6 +45,7 @@ async function route(request, env, url){
   if(p === "/api/household/join" && m === "POST") return householdJoin(request, env);
   if(p === "/api/household/leave" && m === "POST") return householdLeave(request, env);
   if(p === "/api/import" && m === "POST") return recipeImport(request, env);
+  if(p === "/api/export" && m === "GET") return exportAll(request, env);
   if(p === "/api/suggestions" && m === "POST") return suggestionCreate(request, env);
   if(p === "/api/suggestions" && m === "GET") return suggestionList(request, env);
   const sm = p.match(/^\/api\/suggestions\/([A-Za-z0-9_-]{8,40})(?:\/(image|reject|withdraw))?$/);
@@ -69,7 +70,7 @@ async function route(request, env, url){
 function json(data, status = 200, headers = {}){
   return new Response(JSON.stringify(data), {
     status,
-    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", ...headers }
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", ...headers }
   });
 }
 function fail(msg, status = 400){ const e = new Error(msg); e.status = status; throw e; }
@@ -480,12 +481,25 @@ async function fetchLimited(target, limit, accept){
   return { buf, type: res.headers.get("Content-Type") || "" };
 }
 
+// Keine Anfragen an lokale/interne Adressen (nur öffentliche Rezeptseiten)
+function isPrivateHost(u){
+  const h = u.hostname.toLowerCase().replace(/^\[|\]$/g, "");
+  if(h === "localhost" || h.endsWith(".localhost") || h.endsWith(".local") || h.endsWith(".internal")) return true;
+  if(/^\d+\.\d+\.\d+\.\d+$/.test(h)){
+    const [a, b] = h.split(".").map(Number);
+    return a === 10 || a === 127 || a === 0 || (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) || (a === 100 && b >= 64 && b <= 127);
+  }
+  if(h.includes(":")) return h === "::1" || h.startsWith("fc") || h.startsWith("fd") || h.startsWith("fe80");
+  return !!u.port && u.port !== "80" && u.port !== "443";
+}
+
 async function recipeImport(request, env){
   await requireSession(request, env);
   const { url: target } = await readJson(request);
   let u;
   try{ u = new URL(String(target || "").trim()); }catch{ fail("Bitte einen gültigen Link einfügen."); }
   if(!/^https?:$/.test(u.protocol)) fail("Nur http- und https-Links.");
+  if(!env.ALLOW_LOCAL_IMPORT && isPrivateHost(u)) fail("Diese Adresse ist nicht erlaubt.");
   const { buf } = await fetchLimited(u.toString(), 4_000_000, "text/html");
   const html = new TextDecoder().decode(buf);
   let recipe = null;
@@ -586,8 +600,17 @@ function slugify(s){
     .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60).replace(/-+$/, "") || "rezept";
 }
 // Liquid-Tags im Text entschärfen, damit Jekyll nichts ausführt
+// Texte aus Formular/Import entschärfen, bevor sie ins Repository gehen:
+// - Liquid-Tags ({{ }}, {% %}) würde Jekyll ausführen
+// - < und > würden als HTML ausgegeben (Titel, Zutaten, Markdown) → durch ähnlich aussehende Zeichen ersetzen
+// - javascript:/data:-Links in Markdown unschädlich machen
 function clean(s, max = 500){
-  return String(s ?? "").replace(/\{\{|\}\}|\{%|%\}/g, m => m.split("").join(" ")).replace(/[\u0000-\u0008\u000b-\u001f]/g, "").trim().slice(0, max);
+  return String(s ?? "")
+    .replace(/\{\{|\}\}|\{%|%\}/g, m => m.split("").join(" "))
+    .replace(/</g, "‹").replace(/>/g, "›")
+    .replace(/\b(javascript|vbscript|data)\s*:/gi, "$1 :")
+    .replace(/[\u0000-\u0008\u000b-\u001f]/g, "")
+    .trim().slice(0, max);
 }
 const q = (s) => JSON.stringify(s);
 
@@ -774,6 +797,29 @@ async function recipeUpload(request, env){
   return json({ ok: true, slug, url: `/rezepte/${slug}/`, commit: sha });
 }
 
+// ---------- Komplettsicherung (nur Besitzer) ----------
+// Alle Profile mit ihren synchronisierten Daten, Haushalte und offene Vorschläge (ohne Fotos).
+async function exportAll(request, env){
+  await requireOwner(request, env);
+  const users = [];
+  for(const uid of await getUsers(env)){
+    const u = await getUser(env, uid);
+    if(!u) continue;
+    users.push({ ...u, credentials: await getCreds(env, uid), sync: (await env.KV.get(`sync:${uid}`, "json")) || {} });
+  }
+  const households = [];
+  const seen = new Set();
+  for(const u of users){
+    if(!u.household || seen.has(u.household)) continue;
+    seen.add(u.household);
+    households.push({ ...(await env.KV.get(`hh:${u.household}`, "json")), shopping: await env.KV.get(`hhsync:${u.household}`, "json") });
+  }
+  const suggestions = (await listSuggestions(env)).map(x => ({ ...x, image: x.image ? "(Foto nicht enthalten)" : null }));
+  const day = new Date().toISOString().slice(0, 10);
+  return json({ version: 1, created: new Date().toISOString(), owner: await env.KV.get("auth:owner"), users, households, suggestions }, 200,
+    { "Content-Disposition": `attachment; filename="kochbuch-komplettsicherung-${day}.json"` });
+}
+
 // ---------- Vorschläge von Mitgliedern ----------
 // sug:<id> = { id, uid, name, created, status: pending|approved|rejected, recipe, image, url?, reason? }
 async function listSuggestions(env){
@@ -813,7 +859,7 @@ async function suggestionGet(request, env, id, part){
   if(part === "image"){
     if(!x.image || !x.image.jpg) fail("Kein Foto.", 404);
     const bin = atob(x.image.jpg);
-    return new Response(Uint8Array.from(bin, c => c.charCodeAt(0)), { headers: { "Content-Type": "image/jpeg", "Cache-Control": "private, max-age=3600" } });
+    return new Response(Uint8Array.from(bin, c => c.charCodeAt(0)), { headers: { "Content-Type": "image/jpeg", "Cache-Control": "private, max-age=3600", "X-Content-Type-Options": "nosniff", "Content-Security-Policy": "default-src 'none'" } });
   }
   return json({ ...sugMeta(x), recipe: x.recipe, image: x.image });
 }

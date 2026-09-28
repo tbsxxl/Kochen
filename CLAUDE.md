@@ -49,6 +49,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   Front Matter per `assets/vendor/js-yaml.min.js`, Zutaten als Zeilen, Zubereitung als Markdown 1:1. Der Worker
   (`/api/recipe`) prüft den sha (409 bei gleichzeitiger Änderung), ersetzt Bilder unter neuem Namen und löscht das
   veraltete vorab erzeugte PDF.
+- Sicherheit: `clean()` im Worker entschärft alle Texte vor dem Commit (Liquid, `<`/`>` → ‹/›, `javascript:`-Links);
+  Import nur an öffentliche Adressen (lokal testen mit `ALLOW_LOCAL_IMPORT=1` in `.dev.vars`). Security-Header in `_headers`.
+- Datensicherung: `/backup/` (Datei sichern/wiederherstellen, lokale Daten), Besitzer: Komplettsicherung `/api/export`.
 - Speicher: KV-Binding `KV` (ohne id, Wrangler legt es beim Deploy an).
 - Lokal testen: `.dev.vars` mit `SETUP_CODE`, `GITHUB_TOKEN`, optional `GITHUB_API` (Mock), dann `npx wrangler dev`
   und in Playwright einen virtuellen Authenticator (CDP `WebAuthn.addVirtualAuthenticator`) nutzen; Adresse `localhost`, nicht 127.0.0.1.
@@ -62,8 +65,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 - Schrift: Fraunces 400/600 nur für Rezeptnamen (36) und große Überschriften (28), sonst Inter.
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
 - Standard-Theme hell; Dunkelmodus nur über den Schalter unter „Mehr“ (warme Espresso-Töne, kein Grüngrau).
-- Kühltruhe: Rezeptkarten zeigen oben rechts „❄ n“, sobald Portionen eingefroren sind (`_includes/freezer-flag.html`,
-  Logik in `updateFavBadges()` in `assets/utils.js`). Neue Kartenvorlagen brauchen diese Markierung auch.
+- Rezeptkarten gibt es genau zweimal: `_includes/recipe-card.html` (Liquid, Rezeptliste/Kategorien) und
+  `assets/cards.js` (`KOCHBUCH_CARDS.recipeCard`, Startseite). Beide mit Kühltruhen-Markierung „❄ n“, Bewertung ★ und
+  Favoriten-Herz (befüllt von `updateFavBadges()` in `assets/utils.js`). Änderungen an Karten in beiden Dateien machen.
 - Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot, rechte Kräutergrün. Keine Kochmütze, kein Besteck.
   Bei Logo-Änderungen die Icon-Dateinamen (`-v2` → `-v3`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.
@@ -79,6 +83,12 @@ gespeicherte Favoriten, Kühltruhe, Wochenplan und Notizen im Browser um. PDF in
 - `check.yml`: bei jedem Pull Request bauen und `tools/smoke.js` (Seiten öffnen, JS-Fehler/fehlende Dateien) ausführen.
   Lokal: Seite bauen, `python3 -m http.server 8411 --directory _site`, `node tools/smoke.js`.
 - `pdfs.yml`: nach Änderungen an Rezepten auf `main` fehlende PDFs erzeugen (`tools/build-pdfs.js --missing`) und committen.
+
+## Offline (`sw.js`)
+
+Seiten netzwerk-zuerst mit 3-s-Zeitlimit, danach aus dem Cache; CSS/JS/Bilder Cache-zuerst (Treffer auch mit anderem `?v=`).
+Beim Aktivieren werden alle Rezeptseiten aus `/offline.json` vorgeladen (ohne Bilder). Bei Änderungen an `sw.js`
+`VERSION` hochzählen. Offline-Test: Server beenden statt Playwright-`setOffline` (gilt nicht für den Service Worker).
 
 ## PDF-Export
 

@@ -454,7 +454,7 @@ const cookOverlay = $("#cookOverlay");
       const qty = fmtQty(i);
       const row = document.createElement('label');
       row.className = 'cookIngRow';
-      row.innerHTML = `<input class="cookChk" type="checkbox" /> <div class="cookIngText"><div style="font-weight:700">${i.item||'—'}</div><div style="opacity:.85;margin-top:2px">${qty}</div></div>`;
+      row.innerHTML = `<input class="cookChk" type="checkbox" /> <div class="cookIngText"><div style="font-weight:700">${escHtml(i.item||'—')}</div><div style="opacity:.85;margin-top:2px">${escHtml(qty)}</div></div>`;
       cookIngredients.appendChild(row);
     }
   }

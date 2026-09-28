@@ -125,6 +125,7 @@ layout: default
 ]
 </script>
 
+<script defer src="{{ '/assets/cards.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script defer src="{{ '/assets/home-reco.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
 <!-- Tägliche deterministische Heute-Auswahl -->
@@ -188,7 +189,8 @@ layout: default
 
 <!-- Favoriten: sortiert nach favoriteAt, alphabetischer Fallback -->
 <script>
-(function(){
+// Läuft nach den defer-Skripten (cards.js), daher DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function(){
   const host = document.getElementById('favoritesRow');
   const section = document.getElementById('favoritesSection');
   const elJson = document.getElementById('allRecipesJson');
@@ -212,30 +214,8 @@ layout: default
   const byId = new Map();
   recipes.forEach(r=>{ const k=r.id||r.url||''; byId.set(withSlash(k),r); byId.set(normPath(k),r); });
 
-  const SVG_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>';
-  const SVG_PEOPLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
-
-  function favCard(r){
-    const href = r.url||r.id||'#';
-    const img = r.image ? `
-      <div class="rcImg">
-        <img src="${esc(r.image)}" srcset="${esc(r.srcset||'')}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="${esc(r.title)}" loading="lazy" decoding="async">
-        ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
-        <span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(r.id||r.url||'')}" hidden title="In der Kühltruhe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="8 4 12 7 16 4"/><polyline points="8 20 12 17 16 20"/><polyline points="4 8 7 12 4 16"/><polyline points="20 8 17 12 20 16"/></svg><span data-count></span></span>
-      </div>` : "";
-    const time = r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_CLOCK}</span><span>${esc(r.time)}</span></span>` : '';
-    const serv = r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_PEOPLE}</span><span>${esc(r.servings)}</span></span>` : '';
-    return `
-      <a class="linkCard hCard homeFavCard" href="${esc(href)}">
-        <div class="card recipeCard cardHover">
-          ${img}
-          <div class="rcBody">
-            <h3 class="recipeTitle">${esc(r.title)}</h3>
-            <div class="recipeMeta">${time}${serv}<span class="metaRating" data-rating-badge data-recipe-id="${esc(r.id||r.url||'')}" hidden></span><span class="favBadge rcFavBadge metaFav isFav" aria-label="Favorit">♥</span></div>
-          </div>
-        </div>
-      </a>`;
-  }
+  const C = window.KOCHBUCH_CARDS;
+  const favCard = (r)=> C.recipeCard(r, { hCard: true, fav: true });
 
   function render(){
     const stats = getStats();
@@ -284,7 +264,7 @@ layout: default
   render();
   window.addEventListener('storage', e=>{ if(!e.key||e.key===STATS_KEY) render(); });
   window.addEventListener('kochbuch:stats', render);
-})();
+});
 </script>
 
 <!-- Schnellsuche -->

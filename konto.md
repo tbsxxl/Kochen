@@ -176,6 +176,13 @@ permalink: /konto/
       </div>
 
       <div class="card cardPad accountCard">
+        <h2 class="h2 accountTitle">Datensicherung</h2>
+        <p class="sub">Deine Daten liegen auf diesem Gerät und auf dem Server. Eine Sicherung als Datei schadet trotzdem nie.</p>
+        <a class="btn accountBtn" href="{{ '/backup/' | relative_url }}">Meine Daten sichern</a>
+        ${owner ? `<button class="btn secondary accountBtn" id="exportAllBtn" type="button">Komplettsicherung aller Profile</button>` : ''}
+      </div>
+
+      <div class="card cardPad accountCard">
         <button class="btn btnGhost accountBtn" id="logoutBtn" type="button">Abmelden</button>
         <button class="btn btnDangerOutline accountBtn" id="logoutAllBtn" type="button">Auf allen Geräten abmelden</button>
       </div>`;
@@ -226,6 +233,15 @@ permalink: /konto/
       try{ await navigator.clipboard.writeText(inp.value); toast('Link kopiert'); }
       catch{ inp.select(); document.execCommand('copy'); toast('Link kopiert'); }
     });
+    document.getElementById('exportAllBtn')?.addEventListener('click', async (e)=>{
+      const btn = e.currentTarget; busy(btn, true, 'Wird erstellt …');
+      try{
+        const data = await A().api('/api/export');
+        await window.KOCHBUCH_UI?.saveFile?.(`kochbuch-komplettsicherung-${new Date().toISOString().slice(0,10)}.json`, JSON.stringify(data, null, 2));
+      }catch(ex){ showError(ex); }
+      busy(btn, false);
+    });
+
     // Gemeinsame Einkaufsliste
     async function hhCall(path, body, done){
       try{ const r = await A().api(path, { method: 'POST', body: body || {} }); await A().syncNow().catch(()=>{}); if(done) done(r); }
