@@ -217,7 +217,7 @@ async function me(request, env, url){
     out.householdInvite = hh ? await householdInfo(env, hh) : false;
   }
   if(s.user.role === "owner"){
-    out.pendingSuggestions = (await listSuggestions(env)).filter(x => x.status === "pending").length;
+    out.pendingSuggestions = await pendingCount(env);
     const users = await Promise.all((await getUsers(env)).map(uid => getUser(env, uid)));
     out.members = users.filter(u => u && u.role !== "owner").map(u => ({ uid: u.uid, name: u.name, created: u.created }));
   }
@@ -821,6 +821,7 @@ async function recipeUpload(request, env){
   const sha = await gh.commit(files, msg);
   if(sug){
     await env.KV.put(`sug:${sug.id}`, JSON.stringify({ ...sug, image: null, status: "approved", url: `/rezepte/${slug}/`, decided: Date.now() }), { expirationTtl: 30 * 86400 });
+    await changePending(env, -1);
     notifyLater(request, env, sug.uid, { title: "Dein Rezept ist im Kochbuch 🎉", body: `${r.title} – in ein paar Minuten online`, url: `/rezepte/${slug}/`, tag: `sug-${sug.id}` });
   }
   return json({ ok: true, slug, url: `/rezepte/${slug}/`, commit: sha });
@@ -901,6 +902,21 @@ async function exportAll(request, env){
 
 // ---------- Vorschläge von Mitgliedern ----------
 // sug:<id> = { id, uid, name, created, status: pending|approved|rejected, recipe, image, url?, reason? }
+// Anzahl offener Vorschläge als gespeicherter Zähler: /api/me wird bei jedem Seitenaufruf des Besitzers
+// abgefragt, eine KV-Auflistung dort würde das Gratis-Kontingent (1.000 Auflistungen/Tag) schnell aufbrauchen.
+// Er wird beim Einreichen/Entscheiden hoch- bzw. runtergezählt (KV-Auflistungen sind bis zu 60 s verzögert)
+// und jedes Mal richtiggestellt, wenn der Besitzer die Vorschläge-Seite öffnet.
+async function pendingCount(env){
+  const v = await env.KV.get("sugcount:pending");
+  if(v !== null) return Math.max(0, Number(v) || 0);
+  const n = (await listSuggestions(env)).filter(x => x.status === "pending").length;
+  await env.KV.put("sugcount:pending", String(n));
+  return n;
+}
+async function changePending(env, delta){
+  await env.KV.put("sugcount:pending", String(Math.max(0, (await pendingCount(env)) + delta)));
+}
+
 async function listSuggestions(env){
   const out = [];
   let cursor;
@@ -923,6 +939,7 @@ async function suggestionCreate(request, env){
   if(mine.length >= 20) fail("Du hast schon 20 offene Vorschläge. Warte, bis sie angeschaut wurden.");
   const id = b64url.encode(randomBytes(12));
   await env.KV.put(`sug:${id}`, JSON.stringify({ id, uid: s.uid, name: s.user.name, created: Date.now(), status: "pending", recipe, image: img }));
+  await changePending(env, +1);
   const owner = await env.KV.get("auth:owner");
   if(owner && owner !== s.uid) notifyLater(request, env, owner, { title: "Neuer Rezeptvorschlag", body: `${s.user.name}: ${recipe.title}`, url: "/vorschlaege/", tag: `sug-${id}` });
   return json({ ok: true, id });
@@ -931,6 +948,7 @@ async function suggestionList(request, env){
   const s = await requireSession(request, env);
   const all = await listSuggestions(env);
   const list = s.user.role === "owner" ? all.filter(x => x.status === "pending") : all.filter(x => x.uid === s.uid);
+  if(s.user.role === "owner") await env.KV.put("sugcount:pending", String(list.length));
   return json({ suggestions: list.map(sugMeta) });
 }
 async function suggestionGet(request, env, id, part){
@@ -950,6 +968,7 @@ async function suggestionReject(request, env, id){
   const x = await env.KV.get(`sug:${id}`, "json");
   if(!x || x.status !== "pending") fail("Dieser Vorschlag ist nicht mehr offen.", 404);
   await env.KV.put(`sug:${id}`, JSON.stringify({ ...x, image: null, status: "rejected", reason: clean(reason, 300), decided: Date.now() }), { expirationTtl: 30 * 86400 });
+  await changePending(env, -1);
   notifyLater(request, env, x.uid, { title: "Vorschlag nicht übernommen", body: reason ? `${x.recipe.title}: ${clean(reason, 120)}` : x.recipe.title, url: "/vorschlaege/", tag: `sug-${id}` });
   return json({ ok: true });
 }
@@ -958,6 +977,7 @@ async function suggestionWithdraw(request, env, id){
   const x = await env.KV.get(`sug:${id}`, "json");
   if(!x || x.uid !== s.uid) fail("Vorschlag nicht gefunden.", 404);
   await env.KV.delete(`sug:${id}`);
+  if(x.status === "pending") await changePending(env, -1);
   return json({ ok: true });
 }
 
