@@ -7,7 +7,7 @@
 // (3-Wege-Merge) – so gehen gleichzeitige Änderungen auf zwei Geräten oder in der gemeinsamen
 // Einkaufsliste nicht verloren.
 (function(){
-  const SYNC_KEYS = ["kochbuch.stats", "kochbuch.freezer", "kochbuch.shopping", "kochbuch.plan", "kochbuch.notes"];
+  const SYNC_KEYS = ["kochbuch.stats", "kochbuch.freezer", "kochbuch.shopping", "kochbuch.plan", "kochbuch.notes", "kochbuch.shopsections"];
   const META_KEY = "kochbuch.sync.meta";      // { v:2, uid, hh, base:{ key:{ ver, v } }, dirty:{ key:true } }
   const PROFILE_KEY = "kochbuch.profile";     // { name, uid, role, lastSync }
   const store = window.localStorage;

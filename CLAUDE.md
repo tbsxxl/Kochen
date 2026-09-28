@@ -28,7 +28,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   `sync:<uid>`, `invite:`); alte Einzelprofil-Daten werden per `migrate()` übernommen.
   Sitzung = signiertes Cookie mit uid (Schlüssel im KV), „Überall abmelden“ erhöht `epoch:<uid>`.
   Menüpunkte nur für den Besitzer tragen `data-owner-only` (von `assets/account.js` ein-/ausgeblendet).
-- Sync (`assets/account.js`): `kochbuch.stats/freezer/shopping/plan/notes` pro Profil. Versionsnummer pro Schlüssel; das Gerät
+- Sync (`assets/account.js`): `kochbuch.stats/freezer/shopping/plan/notes/shopsections` pro Profil (Liste `SYNC_KEYS` im Worker und in account.js). Versionsnummer pro Schlüssel; das Gerät
   merkt sich den zuletzt abgeglichenen Stand („base“) und führt bei Änderungen auf beiden Seiten Eintrag für Eintrag zusammen
   (3-Wege-Merge, `merge3`). Der Server lehnt veraltete Stände ab (`conflicts`), das Gerät führt dann erneut zusammen.
   Meldet sich auf einem Gerät ein anderes Profil an, werden dessen lokale Daten ersetzt.
@@ -76,6 +76,18 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 - Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot, rechte Kräutergrün. Keine Kochmütze, kein Besteck.
   Bei Logo-Änderungen die Icon-Dateinamen (`-v2` → `-v3`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.
+
+## Bedienhilfen (nur im Browser gespeichert, `kochbuch.ui.*`)
+
+- Rezeptseite: Schritte antippen = abhaken (`stepsDone`, 12 Std), Portionen pro Rezept (`servings`),
+  „Ähnliche Rezepte“ (gleiche Kategorie, Liquid `sample`, Karten mit `hcard=true`).
+- Kochmodus: Wischen links/rechts; Fortschritt in `cooking` → Startseite zeigt „Weiter kochen“ (12 Std),
+  Link `?kochen=1` öffnet den Kochmodus beim gespeicherten Schritt.
+- Rezeptliste: Suche auch in Zutaten (mehrere Wörter = alle), Schnellfilter über `data-flags` der Karte
+  (`schnell`, `veg` aus Kategorien/Tags) und „Nie gekocht“ (aus `kochbuch.stats`).
+- Einkaufsliste: nach links wischen = löschen (Rückgängig über `KOCHBUCH_UI.toast(text, {label, run})`),
+  lange drücken/Menge antippen = Blatt für Menge, Abteilung, Löschen. Korrigierte Abteilungen in
+  `kochbuch.shopsections` (synchronisiert), Vorschläge beim Tippen aus `kochbuch.ui.shopfreq`.
 
 ## Umbenannte Rezepte
 

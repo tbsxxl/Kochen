@@ -402,7 +402,8 @@
 
   // Kurze Meldung unten am Bildschirm
   let toastTimer = null;
-  function toast(text){
+  // action (optional): { label, run } → Knopf in der Meldung, z. B. „Rückgängig“
+  function toast(text, action){
     let el = document.getElementById('uiToast');
     if(!el){
       el = document.createElement('div');
@@ -410,9 +411,16 @@
       document.body.appendChild(el);
     }
     el.textContent = text;
+    el.classList.toggle('hasAction', !!action);
+    if(action){
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'uiToastBtn'; b.textContent = action.label;
+      b.addEventListener('click', ()=>{ el.classList.remove('show'); try{ action.run(); }catch{} });
+      el.appendChild(b);
+    }
     el.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(()=> el.classList.remove('show'), 2400);
+    toastTimer = setTimeout(()=> el.classList.remove('show'), action ? 5000 : 2400);
   }
 
   // Datei speichern: iPhone → Teilen-Menü („In Dateien sichern“), sonst normaler Download

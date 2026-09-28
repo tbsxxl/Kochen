@@ -22,7 +22,15 @@
   const baseServingsEl = $("#baseServings");
   const listEl = $("#ingredientsList");
   if(baseServingsEl) baseServingsEl.textContent = String(baseServings);
-  if(servingsInput) servingsInput.value = String(baseServings);
+  // Zuletzt gewählte Portionen pro Rezept merken
+  const SERV_KEY = "kochbuch.ui.servings";
+  const savedServ = Number((ls.get(SERV_KEY, {}) || {})[data.id]) || 0;
+  if(servingsInput) servingsInput.value = String(savedServ > 0 ? savedServ : baseServings);
+  function rememberServings(n){
+    const all = ls.get(SERV_KEY, {}) || {};
+    if(n === baseServings) delete all[data.id]; else all[data.id] = n;
+    ls.set(SERV_KEY, all);
+  }
 
   const num = (x)=>U.tryNum(x);
   function currentServings(){
@@ -109,6 +117,7 @@ function renderIngredients(){
     const prev = currentServings();
     const n = Math.max(1, Math.min(999, Math.round(Number(v) || baseServings)));
     if(servingsInput) servingsInput.value = String(n);
+    rememberServings(n);
     renderIngredients();
     showBase();
     if(n !== prev){
@@ -121,6 +130,35 @@ function renderIngredients(){
   servingsInput?.addEventListener("blur", ()=>{ setServings(currentServings()); pulse(servingsInput); });
   servingsPlus?.addEventListener("click", ()=> setServings(currentServings() + 1));
   servingsMinus?.addEventListener("click", ()=> setServings(currentServings() - 1));
+  showBase();
+
+  // 1) Schritte auf der Rezeptseite abhaken (antippen); gilt 12 Stunden
+  const STEPS_KEY = "kochbuch.ui.stepsDone";
+  const stepEls = Array.from(document.querySelectorAll(".recipeBody > ol > li"));
+  function doneSteps(){
+    const e = (ls.get(STEPS_KEY, {}) || {})[data.id];
+    return e && Date.now() - e.t < 12 * 3600e3 ? e.done : [];
+  }
+  function renderSteps(){
+    const done = new Set(doneSteps());
+    stepEls.forEach((li, i)=>{ li.classList.toggle("stepDone", done.has(i)); li.setAttribute("aria-checked", done.has(i) ? "true" : "false"); });
+  }
+  stepEls.forEach((li, i)=>{
+    li.setAttribute("role", "checkbox");
+    li.tabIndex = 0;
+    const toggle = (ev)=>{
+      if(ev.target.closest("a, button")) return;
+      const all = ls.get(STEPS_KEY, {}) || {};
+      const set = new Set(doneSteps());
+      set.has(i) ? set.delete(i) : set.add(i);
+      if(set.size) all[data.id] = { t: Date.now(), done: [...set] }; else delete all[data.id];
+      ls.set(STEPS_KEY, all);
+      renderSteps(); lightTap();
+    };
+    li.addEventListener("click", toggle);
+    li.addEventListener("keydown", (ev)=>{ if(ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); toggle(ev); } });
+  });
+  renderSteps();
 
   // Freezer
   const freezerKey = "kochbuch.freezer";
@@ -432,6 +470,7 @@ const cookOverlay = $("#cookOverlay");
     if(T) cookStepText.innerHTML = T.linkify(steps[stepIdx] || '—');
     else cookStepText.textContent = steps[stepIdx] || '—';
     cookStepPill.textContent = `${stepIdx+1}/${total}`;
+    if(cookOverlay?.classList.contains('open')) saveCookProgress();
     if(cookProgressBar) cookProgressBar.style.width = `${((stepIdx+1)/total)*100}%`;
     if(cookStepIngs && cookStepIngsList){
       const hits = ingredientsForStep(steps[stepIdx]);
@@ -471,6 +510,16 @@ const cookOverlay = $("#cookOverlay");
     wakeLock = null;
   }
 
+  // 3) Fortschritt im Kochmodus merken → Startseite zeigt „Weiter kochen“
+  const COOK_KEY = "kochbuch.ui.cooking";
+  function saveCookProgress(){
+    ls.set(COOK_KEY, { id: data.id, url: data.id, title: data.title, image: data.image || "", step: stepIdx, total: steps.length, t: Date.now() });
+  }
+  function savedCookStep(){
+    const c = ls.get(COOK_KEY, null);
+    return c && c.id === data.id && Date.now() - c.t < 12 * 3600e3 ? c.step : 0;
+  }
+
   function openCook(){
     if(!cookOverlay) return;
     // close recipe sheet if open
@@ -479,7 +528,8 @@ const cookOverlay = $("#cookOverlay");
     rs?.classList.remove('open');
     rs?.setAttribute('aria-hidden','true');
     steps = collectSteps();
-    stepIdx = 0;
+    stepIdx = Math.min(savedCookStep(), Math.max(0, steps.length - 1));
+    if(stepIdx > 0) UI.toast?.(`Weiter bei Schritt ${stepIdx + 1}`);
     if(cookTitle) cookTitle.textContent = data.title || 'Kochmodus';
     cookOverlay.classList.add('open');
     cookOverlay.setAttribute('aria-hidden','false');
@@ -513,13 +563,26 @@ const cookOverlay = $("#cookOverlay");
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
   cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); pulse(cookStepText); });
   cookNext?.addEventListener('click', ()=>{
-    if(cookNext.dataset.last){ closeCook(); markCooked(); successTap(); UI.toast?.('Als gekocht gespeichert'); return; }
+    if(cookNext.dataset.last){ closeCook(); try{ localStorage.removeItem(COOK_KEY); }catch{} markCooked(); successTap(); UI.toast?.('Als gekocht gespeichert'); return; }
     stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText);
   });
   cookStepText?.addEventListener('click', (e)=>{
     const tb = e.target.closest('.cookTime');
     if(tb){ T?.start(Number(tb.dataset.secs), `Schritt ${stepIdx+1} · ${tb.dataset.label}`); successTap(); pop(tb); return; }
     if(stepIdx < steps.length-1){ stepIdx++; renderCookStep(); lightTap(); } });
+  // 2) Wischen: nach links = weiter, nach rechts = zurück
+  let swipeX = null, swipeY = null;
+  cookPanelSteps?.addEventListener('touchstart', (e)=>{ const t = e.touches[0]; swipeX = t.clientX; swipeY = t.clientY; }, { passive: true });
+  cookPanelSteps?.addEventListener('touchend', (e)=>{
+    if(swipeX === null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - swipeX, dy = t.clientY - swipeY;
+    swipeX = null;
+    if(Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if(dx < 0 && stepIdx < steps.length - 1){ stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText); }
+    else if(dx > 0 && stepIdx > 0){ stepIdx--; renderCookStep(); lightTap(); pulse(cookStepText); }
+  }, { passive: true });
+
   cookTabSteps?.addEventListener('click', ()=>{ setTab('steps'); lightTap(); pulse(cookTabSteps); });
   cookTabIngs?.addEventListener('click', ()=>{ setTab('ings'); lightTap(); pulse(cookTabIngs); });
 
@@ -600,6 +663,11 @@ const cookOverlay = $("#cookOverlay");
   });
   window.addEventListener("kochbuch:synced", renderNotes);
   renderNotes();
+
+  if(new URLSearchParams(location.search).get('kochen') === '1'){
+    history.replaceState(null, '', location.pathname);
+    setTimeout(openCook, 50);
+  }
 
   renderIngredients();
   renderFreezer();
