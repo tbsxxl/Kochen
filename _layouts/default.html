@@ -31,6 +31,40 @@
       document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'dark' ? '#1C1D1B' : '#FFF9F2');
     })();
     window.KOCHBUCH_RENAMED = {{ site.data.renamed | jsonify }};
+
+    // Seitenwechsel: Das Rezeptfoto „fliegt“ nur zwischen einer Karte und ihrer Rezeptseite (hin und zurück).
+    // Der Übergangsname wird erst beim Wechsel an genau die angetippte, sichtbare Karte vergeben – feste Namen
+    // auf Listen ließen sonst z. B. das „Heute“-Foto beim Tab-Wechsel quer über den Bildschirm fliegen.
+    (function(){
+      var isRecipe = function(path){ return /^\/rezepte\/[^/]+\/$/.test(path); };
+      var slug = function(path){ return 'img-' + path.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); };
+      function cardImage(path){
+        var vh = window.innerHeight, list = document.querySelectorAll('a[href="' + path + '"] img');
+        for (var i = 0; i < list.length; i++){
+          var r = list[i].getBoundingClientRect();
+          if (r.bottom > 0 && r.top < vh && r.width) return list[i];
+        }
+        return null;
+      }
+      var named = null;
+      window.addEventListener('pageswap', function(e){
+        if (!e.viewTransition || !e.activation || !e.activation.entry) return;
+        var to = new URL(e.activation.entry.url).pathname;
+        if (!isRecipe(to) || location.pathname === to) return;
+        var img = cardImage(to);
+        if (img){ img.style.viewTransitionName = slug(to); named = img; }
+      });
+      window.addEventListener('pagereveal', function(e){
+        if (named){ named.style.viewTransitionName = ''; named = null; }   // zurück aus dem Cache
+        if (!e.viewTransition || !window.navigation || !navigation.activation || !navigation.activation.from) return;
+        var from = new URL(navigation.activation.from.url).pathname;
+        if (!isRecipe(from) || location.pathname === from) return;
+        var img = cardImage(from);
+        if (!img) return;
+        img.style.viewTransitionName = slug(from);
+        e.viewTransition.finished.finally(function(){ img.style.viewTransitionName = ''; });
+      });
+    })();
   </script>
   <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=2" sizes="any">
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/logo.svg' | relative_url }}?v=2">

@@ -1130,20 +1130,23 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 .timerPill.isDone{background:var(--accent);color:var(--onAccent)}
 
 /* ---------- 8. Bewegung ----------
-   Wenige, zweckgebundene Animationen: Seitenwechsel (View Transitions, Rezeptbild
-   „fliegt“ von der Karte in den Kopf der Rezeptseite), dezentes Einblenden von Karten,
-   Rückmeldung beim Antippen (Druckeffekt). Alles aus bei „Bewegung reduzieren“. */
+   Wenige, zweckgebundene Animationen: Seitenwechsel (View Transitions: ruhige Überblendung,
+   die untere Leiste bleibt stehen; nur beim Öffnen eines Rezepts „fliegt“ das Foto von der Karte
+   in den Kopf der Rezeptseite, siehe Skript in _layouts/default.html), Rückmeldung beim Antippen
+   (Druckeffekt). Alles aus bei „Bewegung reduzieren“. */
 @view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:var(--ease)}
-::view-transition-group(*){animation-duration:.32s;animation-timing-function:var(--ease)}
+/* Alte Seite blendet schnell aus, neue kommt kurz danach mit einem Hauch Bewegung – nie beide halb sichtbar */
+::view-transition-old(root){animation:vtOut .12s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(root){animation:vtIn .24s cubic-bezier(0,0,.2,1) .1s both}
+@keyframes vtOut{to{opacity:0}}
+@keyframes vtIn{from{opacity:0;transform:translateY(8px)}}
+/* Rezeptfoto: weicher Flug */
+::view-transition-group(*){animation-duration:.34s;animation-timing-function:cubic-bezier(.2,0,0,1)}
+/* Untere Leiste steht still, nur der aktive Reiter wechselt */
 .tabbar:not(.recipeTabbar){view-transition-name:tabbar}
-
-@keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.grid > .linkCard,.hScroll > .linkCard,.stack > .linkCard{animation:cardIn .32s var(--ease) both}
-.grid > .linkCard:nth-child(2),.hScroll > .linkCard:nth-child(2){animation-delay:.04s}
-.grid > .linkCard:nth-child(3),.hScroll > .linkCard:nth-child(3){animation-delay:.08s}
-.grid > .linkCard:nth-child(4),.hScroll > .linkCard:nth-child(4){animation-delay:.12s}
-.grid > .linkCard:nth-child(n+5){animation-delay:.16s}
+::view-transition-group(tabbar){animation:none}
+::view-transition-old(tabbar){display:none}
+::view-transition-new(tabbar){animation:none}
 
 @media (prefers-reduced-motion: reduce){
   @view-transition{navigation:none}
