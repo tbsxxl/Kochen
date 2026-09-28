@@ -55,6 +55,10 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 - Mitteilungen (Web Push, `worker/push.js`, ohne Abhängigkeiten): VAPID-Schlüssel erzeugt der Worker selbst (`push:vapid`),
   Abos unter `push:<uid>`. Auslöser: neuer Vorschlag → Besitzer; freigegeben/abgelehnt → Mitglied; neue Einträge in der
   gemeinsamen Einkaufsliste → andere Haushaltsmitglieder (höchstens alle 10 Min). Anzeige/Klick in `sw.js`.
+  Timer im Kochmodus: `assets/cook-timer.js` (auf jeder Seite geladen) zeigt beim Ablauf einen Hinweis mit Ton
+  (bis „OK“) und meldet Timer an `/api/timers` (nur mit Profil + Push-Abo). Durable Object `TimerAlarms`
+  (Binding `TIMERS`, eins pro Profil, Migration in `wrangler.jsonc`) schickt 4 s nach Ablauf die Mitteilung,
+  außer das Gerät hat den Ablauf bei sichtbarer Seite schon selbst bemerkt (`/api/timers/cancel`).
   iPhone: nur in der Homescreen-App. Lokal testen: Push-Mock mit `http_ece` entschlüsseln (`ALLOW_LOCAL_IMPORT` erlaubt
   http://127.0.0.1-Endpunkte); headless Chromium blockiert Mitteilungen immer.
 - Speicher: KV-Binding `KV` (ohne id, Wrangler legt es beim Deploy an).

@@ -73,8 +73,9 @@ export async function sendPush(env, subscription, message, subject){
       "Authorization": await vapidHeader(env, subscription.endpoint, subject),
       "Content-Encoding": "aes128gcm",
       "Content-Type": "application/octet-stream",
-      "TTL": "86400",
-      "Urgency": "normal"
+      // Timer: nur kurz zustellbar (später nutzlos) und mit Vorrang
+      "TTL": message.timer ? "900" : "86400",
+      "Urgency": message.timer ? "high" : "normal"
     },
     body
   });
