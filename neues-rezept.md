@@ -26,7 +26,7 @@ permalink: /neues-rezept/
     <label class="photoPick" id="photoPick">
       <input type="file" id="photoIn" accept="image/*" hidden>
       <img id="photoPreview" alt="" hidden>
-      <span class="photoPickEmpty" id="photoEmpty"><span aria-hidden="true">📷</span>Foto auswählen</span>
+      <span class="photoPickEmpty" id="photoEmpty"><svg class="uiIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 00-2 2v9a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2h-3z"/><circle cx="12" cy="13" r="3.5"/></svg>Foto auswählen</span>
     </label>
     <label class="checkRow"><input type="checkbox" id="cropIn" checked> Ränder links und rechts abschneiden (KI-Wasserzeichen)</label>
   </div>

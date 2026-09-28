@@ -717,6 +717,7 @@ body.compact{--ingRowH:49px}
 .homeEmptyText{margin-top:4px;font-size:var(--fs14);color:var(--sub2)}
 
 /* Einstieg „Was koche ich?“ auf der Startseite */
+.uiIcon{display:inline-block;flex-shrink:0;width:1.15em;height:1.15em;vertical-align:-.2em}
 .homeQuick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .homeQuickBtn{
   display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 12px;
@@ -724,7 +725,7 @@ body.compact{--ingRowH:49px}
   background:var(--surface);color:var(--text);text-decoration:none;
   font-size:var(--fs14);font-weight:600;
 }
-.homeQuickBtn span[aria-hidden]{font-size:var(--fs18)}
+.homeQuickBtn .uiIcon{width:20px;height:20px;flex:0 0 20px;color:var(--leaf)}
 
 /* Segment-Umschalter */
 .segmented{display:flex;gap:4px;padding:4px;border-radius:var(--rInner);background:var(--surface2)}
@@ -824,7 +825,7 @@ select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linea
 }
 .photoPick img{width:100%;height:100%;object-fit:cover}
 .photoPickEmpty{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--sub2);font-weight:600}
-.photoPickEmpty span{font-size:32px}
+.photoPickEmpty .uiIcon{width:36px;height:36px}
 .checkRow{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:var(--fs14);color:var(--sub2)}
 .checkRow input{width:20px;height:20px;accent-color:var(--leaf)}
 .ingPreview{display:flex;flex-direction:column;border-radius:var(--rInner);overflow:hidden}
@@ -863,7 +864,8 @@ select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linea
 /* Vorschläge */
 .sugRow{display:flex;gap:12px;align-items:flex-start}
 .sugThumb{flex:0 0 72px;width:72px;height:72px;border-radius:12px;object-fit:cover;background:var(--surface2)}
-.sugThumbEmpty{display:flex;align-items:center;justify-content:center;font-size:28px}
+.sugThumbEmpty{display:flex;align-items:center;justify-content:center;color:var(--sub2)}
+.sugThumbEmpty .uiIcon{width:30px;height:30px}
 .sugInfo{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .sugTitle{font-weight:600;font-size:var(--fs16);line-height:1.3}
 .sugMeta{display:flex;align-items:center;gap:6px;font-size:var(--fs14);color:var(--sub2)}
@@ -1075,7 +1077,7 @@ body.layout-recipe .section:first-of-type{margin-top:0}
   border:0;border-radius:var(--rPill);background:rgba(232,117,61,.2);color:#FFB48C;
   font:inherit;font-weight:600;line-height:1.3;vertical-align:baseline;cursor:pointer;
 }
-.cookTime span{font-size:.75em}
+.cookTime .uiIcon{width:.8em;height:.8em}
 .cookTimers{display:flex;flex-direction:column;gap:8px;margin:0 16px 12px}
 .cookTimers[hidden]{display:none}
 .cookTimer{
@@ -1098,6 +1100,8 @@ body.layout-recipe .section:first-of-type{margin-top:0}
   background:var(--text);color:var(--bg);font-weight:600;font-variant-numeric:tabular-nums;
   box-shadow:0 8px 24px rgba(0,0,0,.18);
 }
+.timerPill{display:inline-flex;align-items:center;gap:6px}
+.timerPill .uiIcon{width:16px;height:16px}
 .timerPill[hidden]{display:none}
 .uiToast{
   position:fixed;z-index:6000;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));

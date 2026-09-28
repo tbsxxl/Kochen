@@ -142,8 +142,8 @@ function renderIngredients(){
     // Update label inside the recipe "Mehr" sheet
     if(freezerSheetOpenBtn){
       freezerSheetOpenBtn.innerHTML = e?.portions
-        ? `<span class="rowGlyph" aria-hidden="true">❄︎</span><span>Kühltruhe · ${e.portions} Portion${e.portions===1?"":"en"}</span>`
-        : `<span class="rowGlyph" aria-hidden="true">❄︎</span><span>Kühltruhe</span>`;
+        ? `<span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px" aria-hidden="true"><path d="M12 2v20M3.3 7l17.4 10M20.7 7L3.3 17"/><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5M4 10.3l3.4.9-.9-3.4M20 13.7l-3.4-.9.9 3.4M17.5 7.8l-.9 3.4 3.4-.9M6.5 16.2l.9-3.4-3.4.9"/></svg></span><span>Kühltruhe · ${e.portions} Portion${e.portions===1?"":"en"}</span>`
+        : `<span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px" aria-hidden="true"><path d="M12 2v20M3.3 7l17.4 10M20.7 7L3.3 17"/><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5M4 10.3l3.4.9-.9-3.4M20 13.7l-3.4-.9.9 3.4M17.5 7.8l-.9 3.4 3.4-.9M6.5 16.2l.9-3.4-3.4.9"/></svg></span><span>Kühltruhe</span>`;
     }
   }
 
@@ -543,7 +543,7 @@ const cookOverlay = $("#cookOverlay");
         const next = items.slice().sort((a,b)=>a.left-b.left)[0];
         const done = items.some(t=>t.done);
         timerPill.classList.toggle('isDone', done);
-        timerPill.textContent = `⏱ ${done ? 'Timer fertig' : T.fmt(next.left)}${items.length>1 ? ` · ${items.length}` : ''}`;
+        timerPill.innerHTML = `${T.CLOCK}<span>${done ? 'Timer fertig' : T.fmt(next.left)}${items.length>1 ? ` · ${items.length}` : ''}</span>`;
       }
     }
   });

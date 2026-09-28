@@ -38,7 +38,7 @@ permalink: /was-koche-ich/
   </div>
   <div class="section" id="randomHost"></div>
   <div class="section">
-    <button class="btn action" id="randomAgain" type="button" style="width:100%">🎲 Nochmal würfeln</button>
+    <button class="btn action" id="randomAgain" type="button" style="width:100%"><svg class="uiIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01" stroke-width="2.6"/></svg> Nochmal würfeln</button>
   </div>
 </div>
 

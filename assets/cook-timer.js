@@ -4,6 +4,7 @@
 (function(){
   const KEY = "kochbuch.timers";
   const TIME_RE = /(\d+(?:[.,]\d+)?)(?:\s*(?:–|-|bis)\s*(\d+(?:[.,]\d+)?))?\s*(Minuten|Minute|Min\.?|Stunden|Stunde|Std\.?|Sekunden|Sek\.?)(?![a-zäöüß])/gi;
+  const CLOCK = '<svg class="uiIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M10 2h4"/></svg>';
   const listeners = new Set();
   let timers = load();
   let tick = null;
@@ -28,7 +29,7 @@
       const secs = Math.round(n(a) * unitSeconds(u));
       out += esc(text.slice(last, idx));
       if(secs > 0 && secs <= 48*3600){
-        out += `<button type="button" class="cookTime" data-secs="${secs}" data-label="${esc(m)}"><span aria-hidden="true">⏱</span> ${esc(m)}</button>`;
+        out += `<button type="button" class="cookTime" data-secs="${secs}" data-label="${esc(m)}">${CLOCK} ${esc(m)}</button>`;
       }else{
         out += esc(m);
       }
@@ -126,7 +127,7 @@
   }
 
   window.KOCHBUCH_TIMER = {
-    linkify, start, remove, addTime, list, fmt, render, bind,
+    CLOCK, linkify, start, remove, addTime, list, fmt, render, bind,
     onChange(fn){ listeners.add(fn); fn(list()); return ()=>listeners.delete(fn); }
   };
 
