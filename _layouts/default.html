@@ -97,13 +97,14 @@
       <a class="sheetRow" href="{{ '/was-koche-ich/' | relative_url }}"><span class="rowGlyph" aria-hidden="true">🥕</span><span>Was koche ich?</span></a>
       <a class="sheetRow" href="{{ '/kuehltruhe/' | relative_url }}"><span class="rowGlyph" aria-hidden="true">❄︎</span><span>Kühltruhe</span></a>
       <a class="sheetRow" href="{{ '/kategorien/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span>Kategorien</span></a>
+      <a class="sheetRow" data-login-only hidden href="{{ '/vorschlaege/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span><span>Vorschläge</span><span class="countBadge" data-pending-count hidden></span></a>
       <a class="sheetRow" data-owner-only hidden href="{{ '/neues-rezept/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg></span><span>Rezept hochladen</span></a>
       <a class="sheetRow" href="{{ '/konto/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg></span><span>Profil &amp; Sync</span></a>
       <a class="sheetRow" href="{{ '/backup/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/></svg></span><span>Backup / Import</span></a>
       <div class="sheetSep"></div>
       <button class="sheetRow" id="toggleTheme" type="button" role="switch" aria-checked="false"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></span><span>Dunkler Modus</span><span class="sheetSwitch" aria-hidden="true"></span></button>
-      <button class="sheetRow" id="toggleCompact" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg></span><span>Compact Mode</span></button>
-      <button class="sheetRow" id="toggleContrast" type="button"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18" fill="currentColor" stroke="none" opacity=".3"/></svg></span><span>High Contrast</span></button>
+      <button class="sheetRow" id="toggleCompact" type="button" role="switch" aria-checked="false"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg></span><span>Kompakte Ansicht</span><span class="sheetSwitch" aria-hidden="true"></span></button>
+      <button class="sheetRow" id="toggleContrast" type="button" role="switch" aria-checked="false"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18" fill="currentColor" stroke="none" opacity=".3"/></svg></span><span>Hoher Kontrast</span><span class="sheetSwitch" aria-hidden="true"></span></button>
     </div>
   </section>
 
@@ -129,6 +130,7 @@
       "{{ '/wochenplan/' | relative_url }}",
       "{{ '/kategorien/' | relative_url }}",
       "{{ '/neues-rezept/' | relative_url }}",
+      "{{ '/vorschlaege/' | relative_url }}",
       "{{ '/konto/' | relative_url }}",
       "{{ '/backup/' | relative_url }}"
     ].map(p=>p.replace(/\/+$/,''));
@@ -177,8 +179,11 @@
     const themeBtn=document.getElementById('toggleTheme');
 
     function apply(){
-      document.body.classList.toggle('compact', !!get(compactKey,false));
-      document.body.classList.toggle('highContrast', !!get(contrastKey,false));
+      const compact = !!get(compactKey,false), contrast = !!get(contrastKey,false);
+      document.body.classList.toggle('compact', compact);
+      document.body.classList.toggle('highContrast', contrast);
+      document.getElementById('toggleCompact')?.setAttribute('aria-checked', compact ? 'true' : 'false');
+      document.getElementById('toggleContrast')?.setAttribute('aria-checked', contrast ? 'true' : 'false');
       const dark = get(themeKey,'light') === 'dark';
       if (dark) document.documentElement.setAttribute('data-theme','dark');
       else document.documentElement.removeAttribute('data-theme');

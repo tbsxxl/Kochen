@@ -12,7 +12,7 @@ try { ({ chromium } = require('playwright')); }
 catch { ({ chromium } = require(path.join(require('child_process').execSync('npm root -g').toString().trim(), 'playwright'))); }
 
 const BASE = (process.argv[2] || 'http://localhost:8411').replace(/\/$/, '');
-const PAGES = ['/', '/rezeptindex/', '/kategorien/', '/shopping/', '/wochenplan/', '/was-koche-ich/', '/kuehltruhe/', '/konto/', '/neues-rezept/', '/backup/'];
+const PAGES = ['/', '/rezeptindex/', '/kategorien/', '/shopping/', '/wochenplan/', '/was-koche-ich/', '/kuehltruhe/', '/konto/', '/neues-rezept/', '/vorschlaege/', '/backup/'];
 const FILES = ['/assets/vendor/jspdf.umd.min.js', '/assets/vendor/js-yaml.min.js', '/sw.js', '/manifest.json', '/_redirects'];
 
 (async () => {

@@ -12,6 +12,10 @@
   const EDIT_PDF = params.get("pdf") || "";
   const BACK_URL = /^\/rezepte\//.test(params.get("zurueck") || "") ? params.get("zurueck") : "/";
   const editing = !!EDIT_PATH;
+  const SUG_ID = params.get("vorschlag") || "";               // Besitzer prüft einen Vorschlag
+  const reviewing = !editing && !!SUG_ID;
+  const rowsMode = editing || reviewing;                      // Zutaten als Zeilen statt Freitext
+  let suggesting = false;                                     // Mitglied schlägt ein Rezept vor
   let editSha = null;
 
   // ---------- Zutaten erkennen ----------
@@ -52,7 +56,7 @@
     s = s.replace(/^(von|vom)\s+/i, "");
     return { qty, unit, item: s };
   }
-  const ingredients = ()=> editing ? rowIngredients() : $("#ingIn").value.split(/\n+/).map(parseIngredient).filter(i=>i && i.item);
+  const ingredients = ()=> rowsMode ? rowIngredients() : $("#ingIn").value.split(/\n+/).map(parseIngredient).filter(i=>i && i.item);
 
   // ---------- Zutaten als Zeilen (Bearbeiten) ----------
   const rowsEl = $("#ingRows");
@@ -155,7 +159,7 @@
   // ---------- Entwurf ----------
   const FIELDS = ["titleIn","catIn","timeIn","servIn","tagsIn","ingIn","stepsIn","notesIn"];
   function saveDraft(){
-    if(editing) return;
+    if(rowsMode) return;
     const d = { extra: [...extra] };
     FIELDS.forEach(id=> d[id] = $("#"+id).value);
     try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }catch{}
@@ -195,11 +199,19 @@
     if(!payload.category) return showErr("Bitte eine Kategorie wählen.");
     if(!payload.ingredients.length) return showErr("Bitte Zutaten eintragen.");
     if(!payload.steps.length && !payload.markdown) return showErr("Bitte die Schritte eintragen.");
-    if(!photo && !editing && !confirm("Ohne Foto hochladen?")) return;
+    if(!photo && !editing && !confirm(suggesting ? "Ohne Foto vorschlagen?" : "Ohne Foto hochladen?")) return;
 
     const btn = $("#uploadBtn");
-    btn.disabled = true; btn.textContent = editing ? "Wird gespeichert …" : "Wird hochgeladen …";
+    const label = btn.textContent;
+    btn.disabled = true; btn.textContent = editing ? "Wird gespeichert …" : suggesting ? "Wird gesendet …" : "Wird hochgeladen …";
     try{
+      if(suggesting){
+        await A.api("/api/suggestions", { method: "POST", body: payload });
+        try{ localStorage.removeItem(DRAFT_KEY); }catch{}
+        showDone("Danke für deinen Vorschlag!", "Er wird angeschaut und dann freigegeben. Den Stand siehst du unter „Vorschläge“.", "/vorschlaege/", "Meine Vorschläge");
+        return;
+      }
+      if(reviewing) payload.suggestion = SUG_ID;
       if(editing){
         await A.api("/api/recipe", { method: "PUT", body: { ...payload, path: EDIT_PATH, sha: editSha, pdf: EDIT_PDF } });
         showDone(`„${payload.title}“ ist gespeichert`, "Cloudflare baut die Seite jetzt neu. In etwa 2 Minuten ist die Änderung online.", BACK_URL, "Zum Rezept");
@@ -220,7 +232,7 @@
     }catch(err){
       showErr(err);
     }finally{
-      btn.disabled = false; btn.textContent = editing ? "Änderungen speichern" : "Rezept veröffentlichen";
+      btn.disabled = false; btn.textContent = label;
     }
   });
 
@@ -295,6 +307,7 @@
   }
 
   $("#deleteBtn").addEventListener("click", async ()=>{
+    if(!editing) return;
     const title = $("#titleIn").value.trim() || "dieses Rezept";
     if(!confirm(`„${title}“ wirklich löschen? Das lässt sich hier nicht rückgängig machen.`)) return;
     const btn = $("#deleteBtn");
@@ -344,10 +357,79 @@
   // Über das Teilen-Menü oder einen Link direkt mit Adresse geöffnet: /neues-rezept/?import=https://…
   if(params.get("import") && !editing) $("#importUrl").value = params.get("import");
 
+  // ---------- Vorschlag prüfen (Besitzer) ----------
+  function setupRowsUi(){
+    $("#ingIn").hidden = true; $("#ingPreview").hidden = true;
+    rowsEl.hidden = false; $("#ingRowAdd").hidden = false;
+    document.querySelector('label[for="ingIn"]').textContent = "Zutaten";
+  }
+  async function loadSuggestion(){
+    const x = await A.api(`/api/suggestions/${encodeURIComponent(SUG_ID)}`);
+    if(x.status !== "pending") throw new Error("Dieser Vorschlag wurde schon bearbeitet.");
+    const r = x.recipe;
+    document.querySelector(".pageTitleBlock .h1").textContent = "Vorschlag prüfen";
+    $("#importCard").hidden = true;
+    const who = document.createElement("div");
+    who.className = "section reviewBanner";
+    who.innerHTML = `<span class="authorAvatar" aria-hidden="true">${esc((x.name || "?").charAt(0).toUpperCase())}</span><span>Vorschlag von <b>${esc(x.name)}</b> · ${new Date(x.created).toLocaleDateString("de-DE", { day:"numeric", month:"long" })}. Du kannst alles anpassen, bevor du ihn freigibst.</span>`;
+    form.prepend(who);
+    setupRowsUi();
+    $("#titleIn").value = r.title || "";
+    $("#catIn").value = r.category || "";
+    (r.categories || []).forEach(c=>{
+      const b = document.querySelector(`#extraCats [data-cat="${CSS.escape(c)}"]`);
+      if(b){ extra.add(c); b.setAttribute("aria-pressed","true"); b.classList.add("pillToggleActive"); }
+    });
+    $("#timeIn").value = r.time || "";
+    $("#servIn").value = r.servings || "";
+    $("#tagsIn").value = (r.tags || []).join(", ");
+    (r.ingredients || []).forEach(i=> addRow(i));
+    $("#stepsIn").value = (r.steps || []).join("\n");
+    $("#notesIn").value = r.notes || "";
+    if(x.image && x.image.jpg){
+      photo = x.image;                                    // schon aufbereitet → unverändert übernehmen
+      const prev = $("#photoPreview");
+      prev.src = `/api/suggestions/${encodeURIComponent(SUG_ID)}/image`; prev.hidden = false;
+      $("#photoEmpty").hidden = true;
+      $("#cropIn").checked = false;
+    }
+    $("#uploadBtn").textContent = "Freigeben & veröffentlichen";
+    $("#uploadHint").textContent = `Das Rezept erscheint im Kochbuch mit „von ${x.name}“ und ist nach ca. 2 Minuten online.`;
+    const del = $("#deleteBtn");
+    del.textContent = "Vorschlag ablehnen";
+    $("#deleteSection").hidden = false;
+    del.onclick = async (ev)=>{
+      ev.stopImmediatePropagation();
+      const reason = prompt(`Vorschlag von ${x.name} ablehnen? Optional eine kurze Begründung:`, "");
+      if(reason === null) return;
+      try{
+        await A.api(`/api/suggestions/${encodeURIComponent(SUG_ID)}/reject`, { method: "POST", body: { reason } });
+        showDone("Vorschlag abgelehnt", `${x.name} sieht das unter „Vorschläge“.`, "/vorschlaege/", "Zu den Vorschlägen");
+      }catch(err){ showErr(err); }
+    };
+  }
+
+  function setupSuggesting(me){
+    suggesting = true;
+    document.querySelector(".pageTitleBlock .h1").textContent = "Rezept vorschlagen";
+    document.title = "Rezept vorschlagen · " + document.title.split("·").pop().trim();
+    $("#uploadBtn").textContent = "Vorschlag einreichen";
+    $("#uploadHint").textContent = "Dein Vorschlag wird angeschaut und dann mit „von " + (me.name || "dir") + "“ ins Kochbuch übernommen. Dein Entwurf bleibt bis dahin auf diesem Gerät gespeichert.";
+  }
+
   // ---------- Start ----------
   (async function(){
     try{
       const me = await A.me();
+      if(me.loggedIn && me.role !== "owner" && !rowsMode){
+        setupSuggesting(me);
+        form.hidden = false; loadDraft(); renderIngPreview(); return;
+      }
+      if(me.loggedIn && me.canUpload && reviewing){
+        try{ await loadSuggestion(); form.hidden = false; }
+        catch(err){ gate.hidden = false; gate.querySelector(".uEmptyTitle").textContent = "Vorschlag nicht verfügbar"; gate.querySelector(".uEmptyText").textContent = err.message || String(err); gate.querySelector("a.btn")?.remove(); }
+        return;
+      }
       if(me.loggedIn && me.canUpload){
         if(editing){
           try{ await loadForEdit(); form.hidden = false; }

@@ -45,6 +45,12 @@ async function route(request, env, url){
   if(p === "/api/household/join" && m === "POST") return householdJoin(request, env);
   if(p === "/api/household/leave" && m === "POST") return householdLeave(request, env);
   if(p === "/api/import" && m === "POST") return recipeImport(request, env);
+  if(p === "/api/suggestions" && m === "POST") return suggestionCreate(request, env);
+  if(p === "/api/suggestions" && m === "GET") return suggestionList(request, env);
+  const sm = p.match(/^\/api\/suggestions\/([A-Za-z0-9_-]{8,40})(?:\/(image|reject|withdraw))?$/);
+  if(sm && m === "GET") return suggestionGet(request, env, sm[1], sm[2]);
+  if(sm && sm[2] === "reject" && m === "POST") return suggestionReject(request, env, sm[1]);
+  if(sm && sm[2] === "withdraw" && m === "POST") return suggestionWithdraw(request, env, sm[1]);
   if(p === "/api/auth/register/options" && m === "POST") return registerOptions(request, env, url);
   if(p === "/api/auth/register/verify" && m === "POST") return registerVerify(request, env, url);
   if(p === "/api/auth/login/options" && m === "POST") return loginOptions(request, env, url);
@@ -201,6 +207,7 @@ async function me(request, env, url){
     out.householdInvite = hh ? await householdInfo(env, hh) : false;
   }
   if(s.user.role === "owner"){
+    out.pendingSuggestions = (await listSuggestions(env)).filter(x => x.status === "pending").length;
     const users = await Promise.all((await getUsers(env)).map(uid => getUser(env, uid)));
     out.members = users.filter(u => u && u.role !== "owner").map(u => ({ uid: u.uid, name: u.name, created: u.created }));
   }
@@ -474,7 +481,7 @@ async function fetchLimited(target, limit, accept){
 }
 
 async function recipeImport(request, env){
-  await requireOwner(request, env);
+  await requireSession(request, env);
   const { url: target } = await readJson(request);
   let u;
   try{ u = new URL(String(target || "").trim()); }catch{ fail("Bitte einen gültigen Link einfügen."); }
@@ -584,10 +591,11 @@ function clean(s, max = 500){
 }
 const q = (s) => JSON.stringify(s);
 
-function buildMarkdown(r, imagePath, date){
+function buildMarkdown(r, imagePath, date, author){
   const lines = ["---"];
   lines.push(`title: ${q(r.title)}`);
   lines.push(`date: ${date || new Date().toISOString().slice(0, 10)}`);
+  if(author) lines.push(`author: ${q(clean(author, 40))}`);
   lines.push(`category: ${q(r.category)}`);
   if(r.categories.length) lines.push(`categories: [${r.categories.map(q).join(", ")}]`);
   if(r.tags.length) lines.push(`tags: [${r.tags.map(q).join(", ")}]`);
@@ -703,7 +711,8 @@ async function recipeUpdate(request, env){
     for(const p of oldImages) if(await gh.exists(p)) files.push({ path: p, delete: true });
   }
   const date = (current.text.match(/^date:\s*(\S+)/m) || [])[1];
-  files.unshift({ path, content: b64FromText(buildMarkdown(r, imagePath, date)) });
+  const author = fmString(current.text, "author");
+  files.unshift({ path, content: b64FromText(buildMarkdown(r, imagePath, date, author)) });
   // Vorab erzeugtes PDF ist jetzt veraltet → entfernen (die Seite erzeugt es dann live)
   const pdf = checkPdfPath(body.pdf);
   if(pdf && await gh.exists(pdf)) files.push({ path: pdf, delete: true });
@@ -728,11 +737,25 @@ async function recipeDelete(request, env){
   return json({ ok: true, commit: sha });
 }
 
+// Einfacher Text-Wert aus dem Front Matter (title/author …), auch in Anführungszeichen
+function fmString(md, key){
+  const m = String(md).match(new RegExp(`^${key}:\\s*(.*?)\\s*$`, "m"));
+  if(!m) return "";
+  try{ return m[1].startsWith('"') ? JSON.parse(m[1]) : m[1]; }catch{ return m[1].replace(/^"|"$/g, ""); }
+}
+
 async function recipeUpload(request, env){
-  await requireOwner(request, env);
+  const s = await requireOwner(request, env);
   const body = await readJson(request, 15_000_000);
   const r = validateRecipe(body);
   const gh = github(env);
+  // Freigabe eines Vorschlags: Autor ist die Person, die ihn eingereicht hat
+  let sug = null;
+  if(body.suggestion){
+    sug = await env.KV.get(`sug:${String(body.suggestion)}`, "json");
+    if(!sug || sug.status !== "pending") fail("Dieser Vorschlag ist nicht mehr offen.", 404);
+  }
+  const author = sug ? sug.name : s.user.name;
 
   let slug = slugify(r.title);
   for(let i = 2; await gh.exists(`_recipes/${slug}.md`); i++){
@@ -741,10 +764,73 @@ async function recipeUpload(request, env){
   }
 
   const { files, imagePath } = imageFiles(body.image, slug);
-  const md = buildMarkdown(r, imagePath);
+  const md = buildMarkdown(r, imagePath, null, author);
   files.unshift({ path: `_recipes/${slug}.md`, content: b64FromText(md) });
-  const sha = await gh.commit(files, `Neues Rezept: ${r.title}\n\nÜber die Kochbuch-Seite hochgeladen.`);
+  const msg = sug ? `Neues Rezept: ${r.title}\n\nVorschlag von ${sug.name}, über die Kochbuch-Seite freigegeben.` : `Neues Rezept: ${r.title}\n\nÜber die Kochbuch-Seite hochgeladen.`;
+  const sha = await gh.commit(files, msg);
+  if(sug){
+    await env.KV.put(`sug:${sug.id}`, JSON.stringify({ ...sug, image: null, status: "approved", url: `/rezepte/${slug}/`, decided: Date.now() }), { expirationTtl: 30 * 86400 });
+  }
   return json({ ok: true, slug, url: `/rezepte/${slug}/`, commit: sha });
+}
+
+// ---------- Vorschläge von Mitgliedern ----------
+// sug:<id> = { id, uid, name, created, status: pending|approved|rejected, recipe, image, url?, reason? }
+async function listSuggestions(env){
+  const out = [];
+  let cursor;
+  do{
+    const page = await env.KV.list({ prefix: "sug:", cursor });
+    for(const k of page.keys){ const v = await env.KV.get(k.name, "json"); if(v) out.push(v); }
+    cursor = page.list_complete ? null : page.cursor;
+  }while(cursor);
+  return out.sort((a, b) => b.created - a.created);
+}
+const sugMeta = (x)=> ({ id: x.id, name: x.name, uid: x.uid, created: x.created, status: x.status, url: x.url, reason: x.reason, title: x.recipe.title, category: x.recipe.category, time: x.recipe.time, ingredients: x.recipe.ingredients.length, hasImage: !!(x.image && x.image.jpg) });
+
+async function suggestionCreate(request, env){
+  const s = await requireSession(request, env);
+  const body = await readJson(request, 15_000_000);
+  const recipe = validateRecipe(body);
+  const img = body.image && body.image.jpg ? body.image : null;
+  if(img && b64Size(img.jpg) > 8_000_000) fail("Das Foto ist zu groß.");
+  const mine = (await listSuggestions(env)).filter(x => x.uid === s.uid && x.status === "pending");
+  if(mine.length >= 20) fail("Du hast schon 20 offene Vorschläge. Warte, bis sie angeschaut wurden.");
+  const id = b64url.encode(randomBytes(12));
+  await env.KV.put(`sug:${id}`, JSON.stringify({ id, uid: s.uid, name: s.user.name, created: Date.now(), status: "pending", recipe, image: img }));
+  return json({ ok: true, id });
+}
+async function suggestionList(request, env){
+  const s = await requireSession(request, env);
+  const all = await listSuggestions(env);
+  const list = s.user.role === "owner" ? all.filter(x => x.status === "pending") : all.filter(x => x.uid === s.uid);
+  return json({ suggestions: list.map(sugMeta) });
+}
+async function suggestionGet(request, env, id, part){
+  const s = await requireSession(request, env);
+  const x = await env.KV.get(`sug:${id}`, "json");
+  if(!x || (s.user.role !== "owner" && x.uid !== s.uid)) fail("Vorschlag nicht gefunden.", 404);
+  if(part === "image"){
+    if(!x.image || !x.image.jpg) fail("Kein Foto.", 404);
+    const bin = atob(x.image.jpg);
+    return new Response(Uint8Array.from(bin, c => c.charCodeAt(0)), { headers: { "Content-Type": "image/jpeg", "Cache-Control": "private, max-age=3600" } });
+  }
+  return json({ ...sugMeta(x), recipe: x.recipe, image: x.image });
+}
+async function suggestionReject(request, env, id){
+  await requireOwner(request, env);
+  const { reason } = await readJson(request);
+  const x = await env.KV.get(`sug:${id}`, "json");
+  if(!x || x.status !== "pending") fail("Dieser Vorschlag ist nicht mehr offen.", 404);
+  await env.KV.put(`sug:${id}`, JSON.stringify({ ...x, image: null, status: "rejected", reason: clean(reason, 300), decided: Date.now() }), { expirationTtl: 30 * 86400 });
+  return json({ ok: true });
+}
+async function suggestionWithdraw(request, env, id){
+  const s = await requireSession(request, env);
+  const x = await env.KV.get(`sug:${id}`, "json");
+  if(!x || x.uid !== s.uid) fail("Vorschlag nicht gefunden.", 404);
+  await env.KV.delete(`sug:${id}`);
+  return json({ ok: true });
 }
 
 function b64FromText(text){

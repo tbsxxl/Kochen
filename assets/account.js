@@ -319,12 +319,16 @@
   function renderBadges(){
     const p = profile();
     document.querySelectorAll("[data-owner-only]").forEach(el=>{ el.hidden = !(p && p.role === "owner"); });
+    document.querySelectorAll("[data-login-only]").forEach(el=>{ el.hidden = !p; });
+    const pending = p && p.role === "owner" ? Number(p.pending || 0) : 0;
+    document.querySelectorAll("[data-pending-count]").forEach(el=>{ el.hidden = !pending; el.textContent = pending ? String(pending) : ""; });
     let edit = false;
     try{ edit = !!(p && p.role === "owner" && localStorage.getItem("kochbuch.ui.editMode") === "1"); }catch{}
     document.querySelectorAll("[data-edit-only]").forEach(el=>{ el.hidden = !edit; });
     document.querySelectorAll("[data-profile-badge]").forEach(el=>{
       const initial = p && p.name ? p.name.trim().charAt(0).toUpperCase() : "";
       el.classList.toggle("isIn", !!p);
+      el.classList.toggle("hasPending", !!pending);
       el.setAttribute("aria-label", p ? `Profil: ${p.name || "angemeldet"}` : "Anmelden");
       el.innerHTML = p
         ? `<span class="profileInitial">${initial || "✓"}</span>`
@@ -345,8 +349,8 @@
     const me = await api("/api/me");
     const p = profile();
     if(!me.loggedIn){ rawRemove.call(store, PROFILE_KEY); }
-    else if(p && (p.role !== me.role || p.uid !== me.uid || p.name !== me.name)){
-      write(PROFILE_KEY, { ...p, name: me.name, uid: me.uid, role: me.role });
+    else if(p){
+      write(PROFILE_KEY, { ...p, name: me.name, uid: me.uid, role: me.role, pending: me.pendingSuggestions || 0 });
     }
     renderBadges();
   }

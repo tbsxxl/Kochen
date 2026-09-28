@@ -34,6 +34,8 @@ layout: default
 
     <div class="recipePageBody">
       <h1 class="h1" style="margin:0 0 12px 0">{{ page.title }}</h1>
+      {%- assign recipe_author = page.author | default: site.owner_name -%}
+      <a class="recipeAuthor" href="{{ '/rezeptindex/' | relative_url }}?person={{ recipe_author | url_encode }}"><span class="authorAvatar" aria-hidden="true">{{ recipe_author | slice: 0 | upcase }}</span><span>von {{ recipe_author }}</span></a>
 
       <div class="kvRow" style="margin-bottom:0">
         {% if page.time %}<span class="kv"><span class="kvIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ page.time }}</span></span>{% endif %}
