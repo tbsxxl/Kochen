@@ -126,12 +126,29 @@
 :root[data-theme="dark"] .portionStepper{background:var(--bg)}
 :root[data-theme="dark"] .recipePortionStep{background:var(--surface2);box-shadow:none}
 
+/* Kompakte Ansicht (Mehr → Kompakte Ansicht): mehr Rezepte auf einen Blick */
 body.compact{
   --rCard:12px;
-  --rInner:8px;
-  --rBtn:8px;
+  --rInner:10px;
+  --rBtn:10px;
   --heroMaxH:260px;
 }
+body.compact .section{margin-top:16px}
+body.compact .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (min-width:640px){ body.compact .grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (min-width:900px){ body.compact .grid{grid-template-columns:repeat(4,minmax(0,1fr))} }
+body.compact .rcImg{aspect-ratio:4/3}
+body.compact .rcBody{gap:4px;padding:8px 10px 10px}
+body.compact .recipeTitle{font-size:var(--fs14);line-height:1.3;-webkit-line-clamp:2}
+body.compact .recipeMeta{gap:8px;font-size:var(--fs12)}
+body.compact .recipeMeta .metaItem:nth-child(2){display:none}
+body.compact .heroOverlayCat{left:6px;bottom:6px;padding:3px 8px;font-size:11px}
+body.compact .hCard,body.compact .hCard.homeFavCard{flex-basis:46%}
+body.compact .homeFeatured .rcImg{height:clamp(160px, 42vw, 280px)}
+body.compact .homeFeaturedTitle{font-size:var(--fs22)}
+body.compact .uRow{min-height:44px;padding:10px 14px}
+body.compact .recipePageHero .recipeHeroImg{height:clamp(200px, 48vw, 340px)}
+body.compact .homeGreetingTitle{font-size:var(--fs28)}
 body.highContrast{
   --line:#BFB3A2;
   --lineStrong:#8F836F;
@@ -836,6 +853,33 @@ select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linea
 .notesArea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accentSoft)}
 .notesHint{margin-top:8px;font-size:var(--fs12);color:var(--sub2)}
 .kvRating{background:var(--goldSoft);border-color:transparent;color:var(--text)}
+/* Autor */
+.recipeAuthor{display:inline-flex;align-items:center;gap:8px;margin:-4px 0 12px;color:var(--sub2);font-size:var(--fs14);text-decoration:none}
+.authorAvatar{display:inline-flex;align-items:center;justify-content:center;flex:0 0 24px;width:24px;height:24px;border-radius:var(--rPill);background:var(--leafSoft);color:var(--leaf);font-size:var(--fs12);font-weight:600}
+.personOptName{display:flex;align-items:center;gap:12px}
+/* Vorschläge */
+.sugRow{display:flex;gap:12px;align-items:flex-start}
+.sugThumb{flex:0 0 72px;width:72px;height:72px;border-radius:12px;object-fit:cover;background:var(--surface2)}
+.sugThumbEmpty{display:flex;align-items:center;justify-content:center;font-size:28px}
+.sugInfo{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.sugTitle{font-weight:600;font-size:var(--fs16);line-height:1.3}
+.sugMeta{display:flex;align-items:center;gap:6px;font-size:var(--fs14);color:var(--sub2)}
+.sugMeta .authorAvatar{flex-basis:20px;width:20px;height:20px;font-size:11px}
+.sugBtn{min-height:40px;padding:8px 14px;font-size:var(--fs14)}
+.sugStatus{padding:4px 10px;border-radius:var(--rPill);font-size:var(--fs12);font-weight:600}
+.sugStatus.isPending{background:var(--goldSoft);color:var(--text)}
+.sugStatus.isApproved{background:var(--leafSoft);color:var(--leaf)}
+.sugStatus.isRejected{background:var(--dangerSoft);color:var(--danger)}
+.sugWithdraw{padding:0;border:0;background:none;color:var(--sub2);font-size:var(--fs14);text-decoration:underline}
+.reviewBanner{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:var(--rInner);background:var(--leafSoft);font-size:var(--fs14)}
+.countBadge{margin-left:auto;min-width:22px;padding:2px 7px;border-radius:var(--rPill);background:var(--accent);color:var(--onAccent);font-size:var(--fs12);font-weight:700;text-align:center}
+.profileBadge{position:relative}
+.profileBadge.hasPending::after{content:"";position:absolute;top:0;right:0;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.filterBarLeft{min-width:0;overflow-x:auto;scrollbar-width:none}
+.filterBarLeft::-webkit-scrollbar{display:none}
+/* Mit Personen-Filter wird es eng: „Sortieren“ auf dem Handy nur als Symbol */
+@media (max-width:480px){ .filterBar:has(#personBtn) .sortLabel,.filterBar:has(#personBtn) .favLabel{display:none} .filterBar:has(#personBtn) .sortToggle,.filterBar:has(#personBtn) #favToggle{padding:0 14px} }
+.reviewBanner .authorAvatar{background:var(--bg)}
 @media print{ .notesCard{display:none} }
 .ingRows{display:flex;flex-direction:column;gap:8px}
 .ingRow{display:flex;gap:6px;align-items:center}

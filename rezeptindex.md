@@ -17,19 +17,28 @@ permalink: /rezeptindex/
   {%- assign primaries = site.recipes | map: "category" | uniq -%}
   {%- for c in primaries -%}{%- if c -%}{%- unless cat_names contains c -%}{%- assign cat_names = cat_names | push: c -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
 
+  {%- assign authors = "" | split: "" -%}
+  {%- for r in site.recipes -%}{%- assign a = r.author | default: site.owner_name -%}{%- unless authors contains a -%}{%- assign authors = authors | push: a -%}{%- endunless -%}{%- endfor -%}
+
   <div class="filterBar">
     <div class="filterBarLeft">
       <button id="catBtn" class="pillToggle" type="button" aria-haspopup="dialog" aria-controls="catSheet">
         <span id="catBtnLabel">Kategorie</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
       </button>
+      {%- if authors.size > 1 %}
+      <button id="personBtn" class="pillToggle" type="button" aria-haspopup="dialog" aria-controls="personSheet">
+        <span id="personBtnLabel">Person</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      {%- endif %}
       <button id="favToggle" class="pillToggle" type="button" aria-pressed="false" aria-label="Nur Favoriten anzeigen">
-        <span aria-hidden="true">♡</span> Favoriten
+        <span aria-hidden="true">♡</span> <span class="favLabel">Favoriten</span>
       </button>
     </div>
     <div class="sortMenuWrap">
       <button id="sortBtn" class="pillToggle sortToggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Sortieren">
-        Sortieren
+        <span class="sortLabel">Sortieren</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>
       </button>
       <div id="sortMenu" class="sortMenu sortMenuRight" hidden role="menu">
@@ -62,6 +71,23 @@ permalink: /rezeptindex/
   </div>
 </section>
 
+<!-- Personen-Auswahl -->
+<div class="sheetOverlay" id="personSheetOverlay"></div>
+<section class="sheet" id="personSheet" aria-label="Person wählen" aria-hidden="true">
+  <div class="sheetGrab"></div>
+  <div class="sheetHead">
+    <div class="sheetTitle">Rezepte von …</div>
+    <button class="navIconBtn pressable" id="personSheetClose" aria-label="Schließen" type="button">✕</button>
+  </div>
+  <div class="sheetBody">
+    <button class="sheetRow catOption personOption active" data-person="" type="button" aria-pressed="true"><span>Alle</span><span class="catOptCount">{{ site.recipes | size }}</span></button>
+    {%- for a in authors %}
+    {%- assign n = 0 -%}{%- for r in site.recipes -%}{%- assign ra = r.author | default: site.owner_name -%}{%- if ra == a -%}{%- assign n = n | plus: 1 -%}{%- endif -%}{%- endfor %}
+    <button class="sheetRow catOption personOption" data-person="{{ a | escape }}" type="button" aria-pressed="false"><span class="personOptName"><span class="authorAvatar" aria-hidden="true">{{ a | slice: 0 | upcase }}</span>{{ a }}</span><span class="catOptCount">{{ n }}</span></button>
+    {%- endfor %}
+  </div>
+</section>
+
 <div class="section">
   <div id="emptyState" class="uEmpty" hidden>
     <div class="uEmptyTitle">Keine Rezepte gefunden</div>
@@ -73,7 +99,7 @@ permalink: /rezeptindex/
   {% for r in sorted %}
     {% capture tags %}{% if r.tags %}{{ r.tags | join: " " }}{% endif %}{% endcapture %}
     {% capture hay %}{{ r.title }} {{ r.categories | join: " " }} {{ r.time }} {{ r.servings }} {{ tags }}{% endcapture %}
-    <a class="linkCard" href="{{ r.url | relative_url }}" data-recipe-card data-recipe-id="{{ r.url | relative_url }}" data-title="{{ r.title | escape }}" data-category="{{ r.category | escape }}" data-categories="|{{ r.categories | join: '|' | escape }}|" data-haystack="{{ hay | escape }}">
+    <a class="linkCard" href="{{ r.url | relative_url }}" data-recipe-card data-recipe-id="{{ r.url | relative_url }}" data-title="{{ r.title | escape }}" data-category="{{ r.category | escape }}" data-categories="|{{ r.categories | join: '|' | escape }}|" data-author="{{ r.author | default: site.owner_name | escape }}" data-haystack="{{ hay | escape }} {{ r.author | default: site.owner_name | escape }}">
       <div class="card recipeCard cardHover">
 
         {% if r.image %}
@@ -131,6 +157,7 @@ permalink: /rezeptindex/
   const norm = (s)=> (s||"").toLowerCase().trim();
 
   let activeCat = "";
+  let activePerson = "";
   let favOnly = false;
   const emptyState = document.querySelector('#emptyState');
   const resetBtn = document.querySelector('#resetFilters');
@@ -148,7 +175,8 @@ permalink: /rezeptindex/
       const matchesTerm = !term || hay.includes(term);
       const matchesCat = !activeCat || cats.includes('|' + activeCat + '|');
       const matchesFav = !favOnly || isFavById(id);
-      const visible = matchesTerm && matchesCat && matchesFav;
+      const matchesPerson = !activePerson || c.getAttribute('data-author') === activePerson;
+      const visible = matchesTerm && matchesCat && matchesFav && matchesPerson;
       c.style.display = visible ? '' : 'none';
       if (visible) visibleCount++;
     });
@@ -208,6 +236,28 @@ permalink: /rezeptindex/
     apply();
   }
   catOptions.forEach(opt=> opt.addEventListener('click', ()=>{ setCat(opt.getAttribute('data-cat')); closeCatSheet(); }));
+  // Personen-Filter (nur sichtbar, wenn es Rezepte von mehreren Personen gibt)
+  const personBtn = document.querySelector('#personBtn');
+  const personSheet = document.querySelector('#personSheet');
+  const personOverlay = document.querySelector('#personSheetOverlay');
+  const personOptions = Array.from(document.querySelectorAll('#personSheet .personOption'));
+  function openPersonSheet(){ personOverlay.classList.add('open'); personSheet.classList.add('open','half'); personSheet.setAttribute('aria-hidden','false'); document.body.classList.add('noScroll'); }
+  function closePersonSheet(){ personOverlay.classList.remove('open'); personSheet.classList.remove('open'); personSheet.setAttribute('aria-hidden','true'); document.body.classList.remove('noScroll'); }
+  function setPerson(name){
+    activePerson = name || '';
+    personOptions.forEach(x=>{ const on = (x.getAttribute('data-person') || '') === activePerson; x.classList.toggle('active', on); x.setAttribute('aria-pressed', String(on)); });
+    const lbl = document.querySelector('#personBtnLabel');
+    if(lbl) lbl.textContent = activePerson ? `von ${activePerson}` : 'Person';
+    personBtn?.classList.toggle('pillToggleActive', !!activePerson);
+    apply();
+  }
+  personBtn?.addEventListener('click', openPersonSheet);
+  personOverlay?.addEventListener('click', closePersonSheet);
+  document.querySelector('#personSheetClose')?.addEventListener('click', closePersonSheet);
+  personOptions.forEach(o=> o.addEventListener('click', ()=>{ setPerson(o.getAttribute('data-person')); closePersonSheet(); }));
+  const urlPerson = new URLSearchParams(location.search).get('person');
+  if(urlPerson && personOptions.some(x=>x.getAttribute('data-person') === urlPerson)) setPerson(urlPerson);
+
   // Direktlink auf eine Kategorie: /rezeptindex/?kategorie=Pasta
   const urlCat = new URLSearchParams(location.search).get('kategorie');
   if(urlCat && catOptions.some(x=>x.getAttribute('data-cat') === urlCat)) setCat(urlCat);
@@ -216,7 +266,7 @@ permalink: /rezeptindex/
     favOnly = !favOnly;
     favToggle.setAttribute('aria-pressed', String(favOnly));
     favToggle.classList.toggle('pillToggleActive', favOnly);
-    favToggle.innerHTML = favOnly ? '<span aria-hidden="true">♥</span> Favoriten' : '<span aria-hidden="true">♡</span> Favoriten';
+    favToggle.innerHTML = favOnly ? '<span aria-hidden="true">♥</span> <span class="favLabel">Favoriten</span>' : '<span aria-hidden="true">♡</span> <span class="favLabel">Favoriten</span>';
     apply();
   });
 
@@ -228,7 +278,8 @@ permalink: /rezeptindex/
     favOnly = false;
     favToggle.setAttribute('aria-pressed','false');
     favToggle.classList.remove('pillToggleActive');
-    favToggle.innerHTML = '<span aria-hidden="true">♡</span> Favoriten';
+    favToggle.innerHTML = '<span aria-hidden="true">♡</span> <span class="favLabel">Favoriten</span>';
+    activePerson = ''; if(personOptions.length) setPerson('');
     setCat('');
   });
 })();

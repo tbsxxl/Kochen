@@ -1,4 +1,6 @@
 title: "Tobis Kochbuch"
+# Rezepte ohne author: gelten als vom Besitzer
+owner_name: "Tobi"
 description: "Online-Kochbuch"
 
 # Gehostet auf Cloudflare Workers (Static Assets) im Root der Domain.
