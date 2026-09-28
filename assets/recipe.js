@@ -501,7 +501,7 @@ const cookOverlay = $("#cookOverlay");
       const row = document.createElement('label');
       row.className = 'cookIngRow';
       row.dataset.item = i.item || '';
-      row.innerHTML = `<input class="cookChk" type="checkbox" /> <div class="cookIngText"><div style="font-weight:700">${escHtml(i.item||'—')}</div><div style="opacity:.85;margin-top:2px">${escHtml(qty)}</div></div>`;
+      row.innerHTML = `<input class="cookChk" type="checkbox" /><span class="cookIngName">${escHtml(i.item||'—')}</span><span class="cookIngQty">${escHtml(qty)}</span>`;
       cookIngredients.appendChild(row);
     }
     markStepIngredients();
@@ -590,7 +590,7 @@ const cookOverlay = $("#cookOverlay");
   });
   cookStepText?.addEventListener('click', (e)=>{
     const tb = e.target.closest('.cookTime');
-    if(tb){ T?.start(Number(tb.dataset.secs), `Schritt ${stepIdx+1} · ${tb.dataset.label}`); successTap(); pop(tb); return; }
+    if(tb){ T?.start(Number(tb.dataset.secs), `Schritt ${stepIdx+1} · ${tb.dataset.label}`, { title: data.title, url: location.pathname + '?kochen=1' }); successTap(); pop(tb); return; }
     if(stepIdx < steps.length-1){ stepIdx++; renderCookStep(); lightTap(); } });
   // 2) Wischen: nach links = weiter, nach rechts = zurück
   let swipeX = null, swipeY = null;

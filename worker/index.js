@@ -8,10 +8,12 @@
 //   GITHUB_TOKEN  Secret: Fine-grained Token, nur dieses Repo, „Contents: Read and write“
 //   GITHUB_REPO / GITHUB_BRANCH stehen als vars in wrangler.jsonc.
 // Speicher: KV-Namespace mit Binding KV (wird beim Deploy automatisch angelegt).
+// Timer-Mitteilungen: Durable Object TimerAlarms (Binding TIMERS), eins pro Profil, weckt sich per Alarm.
 
 import { b64url, randomBytes, verifyRegistration, verifyAuthentication } from "./webauthn.js";
 import { GitHub } from "./github.js";
 import { sendPush, vapidKeys } from "./push.js";
+import { DurableObject } from "cloudflare:workers";
 
 const SESSION_COOKIE = "kb_session";
 const CHALLENGE_COOKIE = "kb_chal";
@@ -55,6 +57,8 @@ async function route(request, env, url){
   if(p === "/api/push/subscribe" && m === "POST") return pushSubscribe(request, env);
   if(p === "/api/push/unsubscribe" && m === "POST") return pushUnsubscribe(request, env);
   if(p === "/api/push/test" && m === "POST") return pushTest(request, env, url);
+  if(p === "/api/timers" && m === "POST") return timerSet(request, env, url);
+  if(p === "/api/timers/cancel" && m === "POST") return timerCancel(request, env);
   if(p === "/api/suggestions" && m === "POST") return suggestionCreate(request, env);
   if(p === "/api/suggestions" && m === "GET") return suggestionList(request, env);
   const sm = p.match(/^\/api\/suggestions\/([A-Za-z0-9_-]{8,40})(?:\/(image|reject|withdraw))?$/);
@@ -875,6 +879,72 @@ async function pushTest(request, env, url){
   const sent = await notifyUser(env, s.uid, { title: "Tobis Kochbuch", body: "Mitteilungen sind eingerichtet 👍", url: "/konto/" }, url.origin);
   if(!sent) fail("Keine Mitteilung zugestellt. Sind Mitteilungen auf diesem Gerät erlaubt?");
   return json({ ok: true, sent });
+}
+
+// ---------- Timer: Mitteilung, wenn ein Kochmodus-Timer abläuft ----------
+// Das Gerät meldet gestartete Timer; bemerkt es den Ablauf selbst (Seite sichtbar), sagt es ab.
+// Sonst (Bildschirm gesperrt, App im Hintergrund) schickt das Durable Object kurz nach Ablauf eine Push-Mitteilung.
+const TIMER_GRACE = 4000;   // ms Vorsprung fürs Gerät, damit bei offener Seite keine doppelte Meldung kommt
+function timerStub(env, uid){ return env.TIMERS.get(env.TIMERS.idFromName(uid)); }
+async function timerSet(request, env, url){
+  const s = await requireSession(request, env);
+  if(!env.TIMERS) return json({ ok: false });
+  const b = await readJson(request, 4000);
+  const id = String(b.id || "");
+  const end = Number(b.end);
+  if(!/^[a-z0-9]{4,24}$/.test(id)) fail("Ungültiger Timer");
+  if(!isFinite(end) || end < Date.now() - 60000 || end > Date.now() + 48 * 3600e3) fail("Ungültige Zeit");
+  const path = String(b.url || "");
+  const timer = {
+    id, end,
+    label: String(b.label || "Timer").slice(0, 80),
+    title: String(b.title || "").slice(0, 120),
+    url: /^\/(?!\/)[^\s]{0,300}$/.test(path) ? path : "/",
+    origin: url.origin
+  };
+  await timerStub(env, s.uid).set(s.uid, timer);
+  return json({ ok: true });
+}
+async function timerCancel(request, env){
+  const s = await requireSession(request, env);
+  if(!env.TIMERS) return json({ ok: false });
+  const b = await readJson(request, 1000);
+  await timerStub(env, s.uid).cancel(String(b.id || "").slice(0, 24));
+  return json({ ok: true });
+}
+export class TimerAlarms extends DurableObject {
+  async list(){ return (await this.ctx.storage.get("timers")) || []; }
+  async save(list){
+    await this.ctx.storage.put("timers", list);
+    if(list.length) await this.ctx.storage.setAlarm(Math.min(...list.map(t => t.end)) + TIMER_GRACE);
+    else await this.ctx.storage.deleteAlarm();
+  }
+  async set(uid, timer){
+    await this.ctx.storage.put("uid", uid);
+    const list = (await this.list()).filter(t => t.id !== timer.id && t.end > Date.now() - 3600e3);
+    list.push(timer);
+    await this.save(list.slice(-20));
+  }
+  async cancel(id){
+    const list = await this.list();
+    const rest = list.filter(t => t.id !== id);
+    if(rest.length !== list.length) await this.save(rest);
+  }
+  async alarm(){
+    const uid = await this.ctx.storage.get("uid");
+    const now = Date.now();
+    const list = await this.list();
+    const due = list.filter(t => t.end + TIMER_GRACE <= now + 1000);
+    await this.save(list.filter(t => !due.includes(t)));
+    for(const t of due){
+      if(!uid) break;
+      await notifyUser(this.env, uid, {
+        title: "Timer abgelaufen",
+        body: t.title ? `${t.label} · ${t.title}` : t.label,
+        url: t.url, tag: `timer-${t.id}`, timer: true
+      }, t.origin).catch(() => {});
+    }
+  }
 }
 
 // ---------- Komplettsicherung (nur Besitzer) ----------
