@@ -19,7 +19,7 @@ permalink: /vorschlaege/
   function thumb(x){
     return x.hasImage
       ? `<img class="sugThumb" src="/api/suggestions/${encodeURIComponent(x.id)}/image" alt="" loading="lazy">`
-      : `<span class="sugThumb sugThumbEmpty" aria-hidden="true">🍽</span>`;
+      : `<span class="sugThumb sugThumbEmpty" aria-hidden="true"><svg class="uiIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></span>`;
   }
 
   async function load(){
