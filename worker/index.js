@@ -15,7 +15,7 @@ import { GitHub } from "./github.js";
 const SESSION_COOKIE = "kb_session";
 const CHALLENGE_COOKIE = "kb_chal";
 const SESSION_DAYS = 180;
-const SYNC_KEYS = ["kochbuch.stats", "kochbuch.freezer", "kochbuch.shopping", "kochbuch.plan"];
+const SYNC_KEYS = ["kochbuch.stats", "kochbuch.freezer", "kochbuch.shopping", "kochbuch.plan", "kochbuch.notes"];
 
 export default {
   async fetch(request, env){
@@ -40,6 +40,11 @@ async function route(request, env, url){
   if(p === "/api/me" && m === "GET") return me(request, env, url);
   if(p === "/api/invites" && m === "POST") return inviteCreate(request, env, url);
   if(p === "/api/members/remove" && m === "POST") return memberRemove(request, env);
+  if(p === "/api/household/create" && m === "POST") return householdCreate(request, env);
+  if(p === "/api/household/invite" && m === "POST") return householdInvite(request, env, url);
+  if(p === "/api/household/join" && m === "POST") return householdJoin(request, env);
+  if(p === "/api/household/leave" && m === "POST") return householdLeave(request, env);
+  if(p === "/api/import" && m === "POST") return recipeImport(request, env);
   if(p === "/api/auth/register/options" && m === "POST") return registerOptions(request, env, url);
   if(p === "/api/auth/register/verify" && m === "POST") return registerVerify(request, env, url);
   if(p === "/api/auth/login/options" && m === "POST") return loginOptions(request, env, url);
@@ -188,6 +193,13 @@ async function me(request, env, url){
     devices: creds.map(c => ({ name: c.name, created: c.created, lastUsed: c.lastUsed })),
     canUpload: s.user.role === "owner" && !!env.GITHUB_TOKEN
   });
+  out.household = await householdInfo(env, await household(env, s.user));
+  const hhToken = url.searchParams.get("haushalt");
+  if(hhToken && /^[A-Za-z0-9_-]{16,64}$/.test(hhToken)){
+    const inv = await env.KV.get(`hhinvite:${hhToken}`, "json");
+    const hh = inv && inv.expires > Date.now() ? await env.KV.get(`hh:${inv.hh}`, "json") : null;
+    out.householdInvite = hh ? await householdInfo(env, hh) : false;
+  }
   if(s.user.role === "owner"){
     const users = await Promise.all((await getUsers(env)).map(uid => getUser(env, uid)));
     out.members = users.filter(u => u && u.role !== "owner").map(u => ({ uid: u.uid, name: u.name, created: u.created }));
@@ -215,6 +227,8 @@ async function memberRemove(request, env){
   if(!uid || uid === s.uid) fail("Dieses Profil kann nicht entfernt werden.");
   const user = await getUser(env, uid);
   if(!user) fail("Profil nicht gefunden.", 404);
+  const hh = await household(env, user);
+  if(hh) await leaveHousehold(env, user, hh);
   for(const c of await getCreds(env, uid)) await env.KV.delete(`credmap:${c.id}`);
   await Promise.all([`user:${uid}`, `creds:${uid}`, `sync:${uid}`].map(k => env.KV.delete(k)));
   await env.KV.put(`epoch:${uid}`, String((await epochOf(env, uid)) + 1));
@@ -338,23 +352,223 @@ async function logout(request, env){
 }
 
 // ---------- Sync ----------
-// Pro Schlüssel gewinnt der neueste Stand: { "kochbuch.stats": { v: <Wert>, t: <ms> }, … }
+// sync:<uid> = { "kochbuch.stats": { v: <Wert>, ver: <Zahl>, t: <ms> }, … }
+// Das Gerät schickt zu jeder Änderung die Version mit, auf der sie beruht („base“). Passt sie nicht mehr,
+// war ein anderes Gerät schneller → Konflikt, das Gerät führt zusammen und sendet erneut.
+// Die Einkaufsliste liegt bei Mitgliedern eines Haushalts gemeinsam unter hhsync:<hid>.
+const SHOP = "kochbuch.shopping";
+const verOf = (e)=> e ? (Number(e.ver) || (e.t ? 1 : 0)) : 0;
+
+async function household(env, user){
+  if(!user || !user.household) return null;
+  const hh = await env.KV.get(`hh:${user.household}`, "json");
+  if(!hh || !hh.members.includes(user.uid)) return null;
+  return hh;
+}
+async function householdInfo(env, hh){
+  if(!hh) return null;
+  const users = await Promise.all(hh.members.map(uid => getUser(env, uid)));
+  return { id: hh.id, members: users.filter(Boolean).map(u => u.name) };
+}
+async function loadSync(env, s){
+  const data = (await env.KV.get(`sync:${s.uid}`, "json")) || {};
+  const hh = await household(env, s.user);
+  if(hh){
+    const shared = await env.KV.get(`hhsync:${hh.id}`, "json");
+    if(shared) data[SHOP] = shared; else delete data[SHOP];
+  }
+  for(const k of Object.keys(data)) data[k] = { v: data[k].v, ver: verOf(data[k]), t: data[k].t };
+  return { data, hh };
+}
+
 async function syncGet(request, env){
   const s = await requireSession(request, env);
-  return json({ data: (await env.KV.get(`sync:${s.uid}`, "json")) || {} });
+  const { data, hh } = await loadSync(env, s);
+  return json({ data, household: await householdInfo(env, hh) });
 }
 
 async function syncPut(request, env){
   const s = await requireSession(request, env);
   const body = await readJson(request, 2_000_000);
-  const data = (await env.KV.get(`sync:${s.uid}`, "json")) || {};
-  let changed = false;
+  const { data, hh } = await loadSync(env, s);
+  const conflicts = [];
+  let personalChanged = false;
   for(const [k, entry] of Object.entries(body.changes || {})){
-    if(!SYNC_KEYS.includes(k) || !entry || typeof entry.t !== "number") continue;
-    if(!data[k] || entry.t > data[k].t){ data[k] = { v: entry.v, t: Math.min(entry.t, Date.now() + 60000) }; changed = true; }
+    if(!SYNC_KEYS.includes(k) || !entry || typeof entry.base !== "number") continue;
+    if(verOf(data[k]) !== entry.base){ conflicts.push(k); continue; }
+    const next = { v: entry.v, ver: verOf(data[k]) + 1, t: Date.now() };
+    data[k] = next;
+    if(k === SHOP && hh) await env.KV.put(`hhsync:${hh.id}`, JSON.stringify(next));
+    else personalChanged = true;
   }
-  if(changed) await env.KV.put(`sync:${s.uid}`, JSON.stringify(data));
-  return json({ data });
+  if(personalChanged){
+    const own = (await env.KV.get(`sync:${s.uid}`, "json")) || {};
+    for(const [k, e] of Object.entries(data)) if(!(k === SHOP && hh)) own[k] = e;
+    await env.KV.put(`sync:${s.uid}`, JSON.stringify(own));
+  }
+  return json({ data, conflicts, household: await householdInfo(env, hh) });
+}
+
+// ---------- Rezept per Link importieren (nur Besitzer) ----------
+// Viele Rezeptseiten (HelloFresh, Chefkoch, Blogs mit WordPress-Rezeptplugins …) beschreiben ihr Rezept
+// maschinenlesbar als schema.org/Recipe in JSON-LD. Das lesen wir aus und geben es fürs Formular zurück.
+function findRecipe(node){
+  if(!node || typeof node !== "object") return null;
+  if(Array.isArray(node)){ for(const n of node){ const r = findRecipe(n); if(r) return r; } return null; }
+  const t = node["@type"];
+  if(t === "Recipe" || (Array.isArray(t) && t.includes("Recipe"))) return node;
+  return findRecipe(node["@graph"]) || findRecipe(node.mainEntity) || null;
+}
+function isoMinutes(d){
+  const m = String(d || "").match(/^P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?/i);
+  if(!m) return 0;
+  return (Number(m[1]) || 0) * 1440 + (Number(m[2]) || 0) * 60 + (Number(m[3]) || 0);
+}
+function fmtMinutes(min){
+  if(!min) return "";
+  if(min < 60) return `ca. ${min} Min`;
+  const h = Math.floor(min / 60), r = min % 60;
+  return `ca. ${h} Std${r ? ` ${r} Min` : ""}`;
+}
+function decodeEntities(s){
+  return String(s || "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
+    .replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/\s+/g, " ").trim();
+}
+function instructionsOf(ins){
+  const steps = [];
+  const walk = (x, section)=>{
+    if(!x) return;
+    if(typeof x === "string"){ x.split(/\n+/).map(decodeEntities).filter(Boolean).forEach(s => steps.push(s)); return; }
+    if(Array.isArray(x)){ x.forEach(y => walk(y, section)); return; }
+    if(x["@type"] === "HowToSection" || x.itemListElement){
+      const before = steps.length;
+      walk(x.itemListElement, x.name);
+      if(x.name && steps.length > before) steps[before] = `**${decodeEntities(x.name)}:** ${steps[before]}`;
+      return;
+    }
+    const text = decodeEntities(x.text || x.name || "");
+    if(text) steps.push(text);
+  };
+  walk(ins);
+  return steps.slice(0, 60);
+}
+function imageUrlOf(img){
+  if(!img) return "";
+  if(typeof img === "string") return img;
+  if(Array.isArray(img)) return imageUrlOf(img[img.length - 1]) || imageUrlOf(img[0]);
+  return img.url || img.contentUrl || "";
+}
+async function fetchLimited(target, limit, accept){
+  const res = await fetch(target, { headers: { "User-Agent": "Mozilla/5.0 (Kochbuch-Import)", "Accept": accept }, redirect: "follow", cf: { cacheTtl: 0 } });
+  if(!res.ok) fail(`Die Seite antwortet mit Fehler ${res.status}.`);
+  const len = Number(res.headers.get("Content-Length") || 0);
+  if(len > limit) fail("Die Seite ist zu groß.");
+  const buf = new Uint8Array(await res.arrayBuffer());
+  if(buf.length > limit) fail("Die Seite ist zu groß.");
+  return { buf, type: res.headers.get("Content-Type") || "" };
+}
+
+async function recipeImport(request, env){
+  await requireOwner(request, env);
+  const { url: target } = await readJson(request);
+  let u;
+  try{ u = new URL(String(target || "").trim()); }catch{ fail("Bitte einen gültigen Link einfügen."); }
+  if(!/^https?:$/.test(u.protocol)) fail("Nur http- und https-Links.");
+  const { buf } = await fetchLimited(u.toString(), 4_000_000, "text/html");
+  const html = new TextDecoder().decode(buf);
+  let recipe = null;
+  for(const m of html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){
+    try{ recipe = findRecipe(JSON.parse(m[1].trim())); }catch{}
+    if(recipe) break;
+  }
+  if(!recipe) fail("Auf dieser Seite wurde kein Rezept gefunden. Nicht jede Seite stellt ihre Rezepte maschinenlesbar bereit.", 404);
+
+  const yieldRaw = Array.isArray(recipe.recipeYield) ? recipe.recipeYield[0] : recipe.recipeYield;
+  const servings = Number(String(yieldRaw || "").match(/\d+/)?.[0]) || 2;
+  const min = isoMinutes(recipe.totalTime) || (isoMinutes(recipe.prepTime) + isoMinutes(recipe.cookTime));
+  const kw = Array.isArray(recipe.keywords) ? recipe.keywords : String(recipe.keywords || "").split(",");
+  const out = {
+    title: decodeEntities(recipe.name).slice(0, 120),
+    servings,
+    time: fmtMinutes(min),
+    ingredients: (Array.isArray(recipe.recipeIngredient) ? recipe.recipeIngredient : []).map(decodeEntities).filter(Boolean).slice(0, 100),
+    steps: instructionsOf(recipe.recipeInstructions),
+    tags: kw.map(decodeEntities).filter(Boolean).slice(0, 10),
+    source: u.toString()
+  };
+  // Foto gleich mitliefern (der Browser darf fremde Bilder wegen CORS nicht direkt verarbeiten)
+  const imgUrl = imageUrlOf(recipe.image);
+  if(imgUrl){
+    try{
+      const { buf: ib, type } = await fetchLimited(new URL(imgUrl, u).toString(), 8_000_000, "image/*");
+      if(/^image\//.test(type)){
+        let s = "";
+        for(let i = 0; i < ib.length; i += 0x8000) s += String.fromCharCode.apply(null, ib.subarray(i, i + 0x8000));
+        out.image = { type, data: btoa(s) };
+      }
+    }catch{}
+  }
+  return json(out);
+}
+
+// ---------- Haushalt: gemeinsame Einkaufsliste ----------
+async function householdCreate(request, env){
+  const s = await requireSession(request, env);
+  if(await household(env, s.user)) fail("Du bist schon in einem Haushalt.");
+  const id = b64url.encode(randomBytes(12));
+  await env.KV.put(`hh:${id}`, JSON.stringify({ id, members: [s.uid], created: Date.now() }));
+  // Die eigene Liste wird zur gemeinsamen
+  const own = (await env.KV.get(`sync:${s.uid}`, "json")) || {};
+  if(own[SHOP]) await env.KV.put(`hhsync:${id}`, JSON.stringify({ v: own[SHOP].v, ver: 1, t: Date.now() }));
+  await env.KV.put(`user:${s.uid}`, JSON.stringify({ ...s.user, household: id }));
+  return json({ ok: true });
+}
+async function householdInvite(request, env, url){
+  const s = await requireSession(request, env);
+  const hh = await household(env, s.user);
+  if(!hh) fail("Erstelle zuerst einen Haushalt.");
+  const token = b64url.encode(randomBytes(18));
+  await env.KV.put(`hhinvite:${token}`, JSON.stringify({ hh: hh.id, expires: Date.now() + 7 * 86400000 }), { expirationTtl: 7 * 86400 });
+  return json({ url: `${url.origin}/konto/?haushalt=${token}` });
+}
+async function householdJoin(request, env){
+  const s = await requireSession(request, env);
+  const { token } = await readJson(request);
+  if(!/^[A-Za-z0-9_-]{16,64}$/.test(String(token || ""))) fail("Ungültiger Link.");
+  const inv = await env.KV.get(`hhinvite:${token}`, "json");
+  const hh = inv && inv.expires > Date.now() ? await env.KV.get(`hh:${inv.hh}`, "json") : null;
+  if(!hh) fail("Der Link ist ungültig oder abgelaufen. Bitte um einen neuen.", 403);
+  const current = await household(env, s.user);
+  if(current && current.id === hh.id) return json({ ok: true });
+  if(current) await leaveHousehold(env, s.user, current);
+  if(!hh.members.includes(s.uid)) hh.members.push(s.uid);
+  await env.KV.put(`hh:${hh.id}`, JSON.stringify(hh));
+  await env.KV.delete(`hhinvite:${token}`);
+  await env.KV.put(`user:${s.uid}`, JSON.stringify({ ...(await getUser(env, s.uid)), household: hh.id }));
+  return json({ ok: true });
+}
+async function leaveHousehold(env, user, hh){
+  // Eine Kopie der gemeinsamen Liste wird wieder zur eigenen
+  const shared = await env.KV.get(`hhsync:${hh.id}`, "json");
+  const own = (await env.KV.get(`sync:${user.uid}`, "json")) || {};
+  own[SHOP] = { v: shared ? shared.v : [], ver: verOf(own[SHOP]) + 1 + verOf(shared), t: Date.now() };
+  await env.KV.put(`sync:${user.uid}`, JSON.stringify(own));
+  hh.members = hh.members.filter(x => x !== user.uid);
+  if(hh.members.length){ await env.KV.put(`hh:${hh.id}`, JSON.stringify(hh)); }
+  else { await env.KV.delete(`hh:${hh.id}`); await env.KV.delete(`hhsync:${hh.id}`); }
+  const fresh = await getUser(env, user.uid);
+  if(fresh){ delete fresh.household; await env.KV.put(`user:${user.uid}`, JSON.stringify(fresh)); }
+}
+async function householdLeave(request, env){
+  const s = await requireSession(request, env);
+  const hh = await household(env, s.user);
+  if(hh) await leaveHousehold(env, s.user, hh);
+  return json({ ok: true });
 }
 
 // ---------- Rezept hochladen ----------

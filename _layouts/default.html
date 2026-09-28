@@ -30,6 +30,7 @@
       if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
       document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'dark' ? '#1C1D1B' : '#FFF9F2');
     })();
+    window.KOCHBUCH_RENAMED = {{ site.data.renamed | jsonify }};
   </script>
   <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=2" sizes="any">
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/logo.svg' | relative_url }}?v=2">

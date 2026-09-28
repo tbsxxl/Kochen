@@ -588,7 +588,9 @@ body.layout-recipe .appMain{padding-top:0}
 .ingRow{border:1px solid var(--line);border-radius:var(--rBtn);margin:8px 0;background:var(--surface)}
 .listGroup .ingRow{border:0;border-radius:0;margin:0;background:transparent}
 .ingLeft{flex:1;min-width:0}
-.ingName,.uName{font-weight:400;overflow-wrap:anywhere}
+.ingName,.uName{font-weight:400;overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
+.metaRating{margin-left:auto;color:var(--gold);font-size:var(--fs12);font-weight:600;white-space:nowrap}
+.metaRating:not([hidden]) + .metaFav{margin-left:8px}
 .ingQty,.uQty,.shopQty{font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
 .uLead{
   display:flex;align-items:center;justify-content:center;flex:0 0 24px;
@@ -811,6 +813,30 @@ select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linea
 .ingPrevRow + .ingPrevRow{border-top:1px solid var(--line)}
 .ingPrevQty{flex:0 0 96px;font-weight:600;color:var(--leaf)}
 .uploadSuccess .accountIcon{font-size:28px}
+.importHint{margin:0;font-size:var(--fs14)}
+.importHint.isError{color:var(--danger)}
+.importCard .searchRow input{font-size:var(--fs16)}
+.hhInvite{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:var(--rInner);background:var(--leafSoft)}
+.hhInvite p{margin:0}
+.householdNote{display:flex;align-items:center;gap:8px;margin:0 0 12px;padding:8px 12px;border-radius:var(--rPill);background:var(--leafSoft);color:var(--leaf);font-size:var(--fs14);font-weight:500;width:fit-content}
+.householdNote::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--leaf)}
+
+/* Notizen & Bewertung auf der Rezeptseite */
+.notesCard{margin-top:24px;padding:16px;border:1px solid var(--line);border-radius:var(--rCard);background:var(--surface)}
+.notesHead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.recipeBody .notesTitle{margin:0;font-family:var(--fontUi);font-size:var(--fs18);font-weight:600}
+.stars{display:flex;gap:2px}
+.star{width:36px;height:36px;border:0;border-radius:var(--rPill);background:transparent;color:var(--lineStrong);font-size:22px;line-height:1}
+.star.on{color:var(--gold)}
+.notesArea{
+  display:block;width:100%;min-height:56px;padding:12px;resize:none;overflow:hidden;
+  border:1px solid var(--line);border-radius:var(--rInner);background:var(--bg);color:var(--text);
+  font:inherit;font-size:var(--fs16);line-height:1.5;outline:none;
+}
+.notesArea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accentSoft)}
+.notesHint{margin-top:8px;font-size:var(--fs12);color:var(--sub2)}
+.kvRating{background:var(--goldSoft);border-color:transparent;color:var(--text)}
+@media print{ .notesCard{display:none} }
 .ingRows{display:flex;flex-direction:column;gap:8px}
 .ingRow{display:flex;gap:6px;align-items:center}
 .ingRow .fieldInput{min-height:44px;padding:8px 10px;font-size:var(--fs16)}

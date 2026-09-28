@@ -5,6 +5,7 @@ permalink: /shopping/
 ---
 
 <div class="section" style="margin-top:6px">
+  <p class="householdNote" data-household-note hidden></p>
   <div class="searchRow searchRowCompact">
     <input id="addShopItem" type="search" placeholder="Artikel hinzufügen …" autocomplete="off" />
     <button class="btn brandBtn" id="addShopBtn" type="button" aria-label="Hinzufügen" style="min-height:48px;min-width:48px;padding:0 16px">+</button>

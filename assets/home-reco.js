@@ -68,7 +68,7 @@
         ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
         <span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(r.id)}" hidden title="In der Kühltruhe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="8 4 12 7 16 4"/><polyline points="8 20 12 17 16 20"/><polyline points="4 8 7 12 4 16"/><polyline points="20 8 17 12 20 16"/></svg><span data-count></span></span>
       </div>` : "";
-    const fav = `<span class="favBadge rcFavBadge metaFav${showFavState?' isFav':''}" data-fav-badge data-recipe-id="${esc(r.id)}" aria-label="Favorit">♥</span>`;
+    const fav = `<span class="metaRating" data-rating-badge data-recipe-id="${esc(r.id)}" hidden></span><span class="favBadge rcFavBadge metaFav${showFavState?' isFav':''}" data-fav-badge data-recipe-id="${esc(r.id)}" aria-label="Favorit">♥</span>`;
     return `
       <a class="linkCard hCard homeFavCard" href="${esc(r.id)}">
         <div class="card recipeCard cardHover">

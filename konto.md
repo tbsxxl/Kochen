@@ -15,6 +15,20 @@ permalink: /konto/
   const fmt = (d)=> d ? new Date(d).toLocaleString('de-DE', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) : '—';
   const fmtDay = (d)=> d ? new Date(d).toLocaleDateString('de-DE', { day:'numeric', month:'long' }) : '—';
   const invite = new URLSearchParams(location.search).get('einladung') || '';
+  let hhToken = new URLSearchParams(location.search).get('haushalt') || '';
+
+  // Einladung zur gemeinsamen Einkaufsliste (Link /konto/?haushalt=…)
+  function hhInviteHtml(me){
+    if(!hhToken) return '';
+    if(me.householdInvite === false) return '<p class="accountError">Dieser Link ist ungültig oder abgelaufen. Bitte um einen neuen.</p>';
+    if(!me.householdInvite) return '';
+    if(me.household && me.household.id === me.householdInvite.id) return '<p class="sub">Du bist schon dabei.</p>';
+    return `<div class="hhInvite">
+      <p><b>${esc(me.householdInvite.members.join(', '))}</b> möchte die Einkaufsliste mit dir teilen.</p>
+      ${me.household ? '<p class="sub">Du verlässt dafür deine bisherige gemeinsame Liste.</p>' : '<p class="sub">Deine jetzige Liste wird mit der gemeinsamen zusammengeführt.</p>'}
+      <button class="btn action accountBtn" id="hhJoinBtn" type="button">Gemeinsame Liste nutzen</button>
+    </div>`;
+  }
 
   function A(){ return window.KOCHBUCH_ACCOUNT; }
   function editOn(){ try{ return localStorage.getItem('kochbuch.ui.editMode') === '1'; }catch{ return false; } }
@@ -133,6 +147,27 @@ permalink: /konto/
         </div>
       </div>` : ''}
 
+      <div class="card cardPad accountCard" id="householdCard">
+        <h2 class="h2 accountTitle">Gemeinsame Einkaufsliste</h2>
+        ${hhInviteHtml(me)}
+        ${me.household ? `
+          <p class="sub">Ihr teilt euch eine Einkaufsliste: Was einer hinzufügt oder abhakt, sehen die anderen sofort.</p>
+          <div class="accountDevices">${me.household.members.map(n=>`<div class="accountDevice"><span>${esc(n)}${n === me.name ? ' <span class="sub">(du)</span>' : ''}</span></div>`).join('')}</div>
+          <button class="btn secondary accountBtn" id="hhInviteBtn" type="button">Jemanden hinzufügen</button>
+          <div class="inviteBox" id="hhInviteBox" hidden>
+            <input class="fieldInput" id="hhInviteUrl" readonly>
+            <div class="fieldRow">
+              <button class="btn accountBtn" id="hhShare" type="button">Teilen</button>
+              <button class="btn accountBtn" id="hhCopy" type="button">Kopieren</button>
+            </div>
+            <p class="sub">Die Person braucht ein Profil im Kochbuch und öffnet den Link angemeldet. Gilt 7 Tage.</p>
+          </div>
+          <button class="btn btnGhost accountBtn" id="hhLeaveBtn" type="button">Gemeinsame Liste verlassen</button>`
+        : (hhToken && me.householdInvite) ? '' : `
+          <p class="sub">Teile deine Einkaufsliste mit jemandem aus deinem Haushalt. Favoriten, Wochenplan und Kühltruhe bleiben weiter getrennt.</p>
+          <button class="btn secondary accountBtn" id="hhCreateBtn" type="button">Einkaufsliste teilen</button>`}
+      </div>
+
       <div class="card cardPad accountCard">
         <h2 class="h2 accountTitle">Geräte mit Passkey</h2>
         <div class="accountDevices">${(me.devices || []).map(d=>`<div class="accountDevice"><span>${esc(d.name)}</span><span class="sub">zuletzt ${fmt(d.lastUsed)}</span></div>`).join('')}</div>
@@ -191,6 +226,40 @@ permalink: /konto/
       try{ await navigator.clipboard.writeText(inp.value); toast('Link kopiert'); }
       catch{ inp.select(); document.execCommand('copy'); toast('Link kopiert'); }
     });
+    // Gemeinsame Einkaufsliste
+    async function hhCall(path, body, done){
+      try{ const r = await A().api(path, { method: 'POST', body: body || {} }); await A().syncNow().catch(()=>{}); if(done) done(r); }
+      catch(ex){ showError(ex); }
+    }
+    document.getElementById('hhCreateBtn')?.addEventListener('click', ()=> hhCall('/api/household/create', {}, ()=>{ toast('Einkaufsliste wird jetzt geteilt'); load(); }));
+    document.getElementById('hhLeaveBtn')?.addEventListener('click', ()=>{
+      if(!confirm('Gemeinsame Einkaufsliste verlassen? Du behältst eine Kopie der Liste.')) return;
+      hhCall('/api/household/leave', {}, ()=>{ toast('Gemeinsame Liste verlassen'); load(); });
+    });
+    document.getElementById('hhJoinBtn')?.addEventListener('click', ()=> hhCall('/api/household/join', { token: hhToken }, ()=>{
+      history.replaceState(null, '', location.pathname); hhToken = ''; toast('Ihr teilt jetzt eine Einkaufsliste'); load();
+    }));
+    document.getElementById('hhInviteBtn')?.addEventListener('click', async (e)=>{
+      const btn = e.currentTarget; busy(btn, true, 'Erstelle Link …');
+      try{
+        const r = await A().api('/api/household/invite', { method: 'POST', body: {} });
+        document.getElementById('hhInviteUrl').value = r.url;
+        document.getElementById('hhInviteBox').hidden = false;
+      }catch(ex){ showError(ex); }
+      busy(btn, false);
+    });
+    document.getElementById('hhShare')?.addEventListener('click', async ()=>{
+      const url = document.getElementById('hhInviteUrl').value;
+      if(navigator.share){ try{ await navigator.share({ title: 'Gemeinsame Einkaufsliste', text: 'Lass uns im Kochbuch eine Einkaufsliste teilen:', url }); }catch{} }
+      else{ try{ await navigator.clipboard.writeText(url); toast('Link kopiert'); }catch{} }
+    });
+    document.getElementById('hhCopy')?.addEventListener('click', async ()=>{
+      const inp = document.getElementById('hhInviteUrl');
+      try{ await navigator.clipboard.writeText(inp.value); toast('Link kopiert'); }
+      catch{ inp.select(); document.execCommand('copy'); toast('Link kopiert'); }
+    });
+    if(hhToken) document.getElementById('householdCard')?.scrollIntoView({ block: 'center' });
+
     host.querySelectorAll('.memberRemove').forEach(b=> b.addEventListener('click', async ()=>{
       if(!confirm(`${b.dataset.name} entfernen? Das Profil und seine gespeicherten Daten werden gelöscht.`)) return;
       try{ await A().api('/api/members/remove', { method: 'POST', body: { uid: b.dataset.uid } }); toast(`${b.dataset.name} entfernt`); load(); }
@@ -200,7 +269,10 @@ permalink: /konto/
 
   async function load(){
     try{
-      const me = await A().me(invite ? `?einladung=${encodeURIComponent(invite)}` : '');
+      const q = new URLSearchParams();
+      if(invite) q.set('einladung', invite);
+      if(hhToken) q.set('haushalt', hhToken);
+      const me = await A().me(q.toString() ? `?${q}` : '');
       if(me.loggedIn){
         const p = A().profile();
         if(p && (p.role !== me.role || p.name !== me.name)) localStorage.setItem('kochbuch.profile', JSON.stringify({ ...p, name: me.name, uid: me.uid, role: me.role }));

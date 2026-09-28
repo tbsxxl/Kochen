@@ -1,0 +1,54 @@
+# Erzeugt fehlende Rezept-PDFs (z. B. nach dem Hochladen oder Bearbeiten über die Seite) und committet sie.
+# Bearbeitete Rezepte verlieren ihr altes PDF beim Speichern, deshalb reicht „nur fehlende erzeugen“.
+name: Rezept-PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "_recipes/**"
+      - "recipes/images/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pdfs
+  cancel-in-progress: false
+
+jobs:
+  pdfs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Playwright installieren
+        run: |
+          npm i --no-save playwright@1
+          npx playwright install --with-deps chromium
+
+      - name: Fehlende PDFs erzeugen
+        run: |
+          LANG=C.UTF-8 bundle exec jekyll build
+          python3 -m http.server 8411 --directory _site >/dev/null 2>&1 &
+          sleep 1
+          node tools/build-pdfs.js http://localhost:8411 --missing
+
+      - name: Committen
+        run: |
+          git add assets/pdf
+          if git diff --cached --quiet; then echo "Keine neuen PDFs."; exit 0; fi
+          git config user.name "kochbuch-bot"
+          git config user.email "kochbuch-bot@users.noreply.github.com"
+          git commit -m "PDFs für neue oder geänderte Rezepte"
+          git push

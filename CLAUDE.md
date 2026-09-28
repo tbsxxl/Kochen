@@ -28,8 +28,15 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   `sync:<uid>`, `invite:`); alte Einzelprofil-Daten werden per `migrate()` übernommen.
   Sitzung = signiertes Cookie mit uid (Schlüssel im KV), „Überall abmelden“ erhöht `epoch:<uid>`.
   Menüpunkte nur für den Besitzer tragen `data-owner-only` (von `assets/account.js` ein-/ausgeblendet).
-- Sync (`assets/account.js`): `kochbuch.stats/freezer/shopping/plan` pro Profil, pro Schlüssel gewinnt der neueste Stand; beim ersten
-  Anmelden eines Geräts werden lokale Daten zusammengeführt, meldet sich dort später ein anderes Profil an, werden sie ersetzt.
+- Sync (`assets/account.js`): `kochbuch.stats/freezer/shopping/plan/notes` pro Profil. Versionsnummer pro Schlüssel; das Gerät
+  merkt sich den zuletzt abgeglichenen Stand („base“) und führt bei Änderungen auf beiden Seiten Eintrag für Eintrag zusammen
+  (3-Wege-Merge, `merge3`). Der Server lehnt veraltete Stände ab (`conflicts`), das Gerät führt dann erneut zusammen.
+  Meldet sich auf einem Gerät ein anderes Profil an, werden dessen lokale Daten ersetzt.
+- Gemeinsame Einkaufsliste (Haushalt): `hh:<id>`, Liste unter `hhsync:<id>`, Beitritt per Link `/konto/?haushalt=…`
+  (nur angemeldet). Die Einkaufsliste aktualisiert sich live (`kochbuch:synced`, alle 15 s bei geteilter Liste).
+- Notizen & Bewertung pro Rezept (`kochbuch.notes`, Abschnitt „Meine Notizen“ auf der Rezeptseite, ★ auf Karten über
+  `data-rating-badge`, Sortierung „Beste Bewertung“).
+- Import per Link (`/api/import`, nur Besitzer): liest schema.org/Recipe (JSON-LD) und das Foto, füllt das Upload-Formular.
 - Upload (`/neues-rezept/`, `assets/upload.js`): Worker committet Markdown + Bild (JPG, WebP 480/960) per GitHub-API
   (Secret `GITHUB_TOKEN`, fine-grained, nur dieses Repo, Contents read/write) direkt auf `main`. Danach Branch neu holen!
 - Bearbeiten/Löschen (nur Besitzer): Schalter „Bearbeiten-Modus“ unter Profil & Sync (`kochbuch.ui.editMode`, pro Gerät)
@@ -55,6 +62,18 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 - Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot, rechte Kräutergrün. Keine Kochmütze, kein Besteck.
   Bei Logo-Änderungen die Icon-Dateinamen (`-v2` → `-v3`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.
+
+## Umbenannte Rezepte
+
+Neue Rezeptdateinamen nur mit a–z, 0–9 und Bindestrich (keine Umlaute). Wird ein Rezept umbenannt, alte → neue Adresse
+in `_data/renamed.yml` eintragen: daraus entstehen die Weiterleitungen (`_redirects`), und `assets/account.js` stellt
+gespeicherte Favoriten, Kühltruhe, Wochenplan und Notizen im Browser um. PDF in `assets/pdf/` mit umbenennen.
+
+## GitHub Actions
+
+- `check.yml`: bei jedem Pull Request bauen und `tools/smoke.js` (Seiten öffnen, JS-Fehler/fehlende Dateien) ausführen.
+  Lokal: Seite bauen, `python3 -m http.server 8411 --directory _site`, `node tools/smoke.js`.
+- `pdfs.yml`: nach Änderungen an Rezepten auf `main` fehlende PDFs erzeugen (`tools/build-pdfs.js --missing`) und committen.
 
 ## PDF-Export
 
