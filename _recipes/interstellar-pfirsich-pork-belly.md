@@ -1,6 +1,6 @@
 ---
 title: "Pork Belly"
-subtitle: "mit Pfirsich-Glasur"
+subtitle: "Schweinebauch mit Pfirsich-Glasur"
 source: "Fallow"
 date: 2026-09-17
 category: "Asiatisch"

@@ -1,5 +1,6 @@
 ---
 title: "Lasagne al Forno"
+subtitle: "mit Ragù und Béchamel"
 date: 2026-02-20
 category: "Pasta"
 categories: ["Italienisch", "Meal Prep"]

@@ -1,5 +1,6 @@
 ---
 title: "Marry-Me-Chicken"
+subtitle: "Hähnchen in Parmesan-Tomaten-Sahnesoße"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Hähnchen"

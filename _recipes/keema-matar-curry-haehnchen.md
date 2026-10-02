@@ -1,5 +1,6 @@
 ---
-title: "Keema Matar mit Hähnchen"
+title: "Keema Matar"
+subtitle: "Indisches Hähnchencurry"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"

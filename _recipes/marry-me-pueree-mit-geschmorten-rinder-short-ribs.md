@@ -1,6 +1,6 @@
 ---
-title: "Geschmorte Short Ribs"
-subtitle: "mit Kartoffelpüree"
+title: "Short Ribs"
+subtitle: "Geschmorte Rinderrippe mit Kartoffelpüree"
 date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
 categories: ["Meal Prep"]

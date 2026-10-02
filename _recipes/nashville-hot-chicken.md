@@ -1,5 +1,6 @@
 ---
 title: "Nashville Hot Chicken"
+subtitle: "Scharfes frittiertes Hähnchen"
 source: "Babish"
 date: 2026-05-04
 category: "Knusprig & Frittiert"

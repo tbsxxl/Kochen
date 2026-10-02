@@ -1,6 +1,6 @@
 ---
 title: "Pad Kra Pao"
-subtitle: "mit knuspriger Ente"
+subtitle: "Thai-Basilikum-Pfanne mit knuspriger Ente"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Asiatisch"

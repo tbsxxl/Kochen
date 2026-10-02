@@ -1,5 +1,6 @@
 ---
-title: "Tacos mit Rinderhack"
+title: "Tacos"
+subtitle: "mit Rinderhack"
 date: 2026-02-20
 category: "Mexikanisch"
 tags: ["rind", "hackfleisch", "streetfood"]

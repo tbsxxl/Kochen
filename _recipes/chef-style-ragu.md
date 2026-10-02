@@ -1,5 +1,6 @@
 ---
 title: "Ragù alla Bolognese"
+subtitle: "Fleischsoße, mehrere Stunden geschmort"
 date: 2026-02-20
 category: "Pasta"
 categories: ["Italienisch", "Fleisch & Schmorgerichte", "Meal Prep"]

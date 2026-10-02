@@ -146,7 +146,9 @@ Markdown in `_recipes/`, Bilder in `recipes/images/` (Dateinamen ohne Umlaute/Le
 **Namen:** `title` = der echte, gängige Name des Gerichts, so wie man es kennt (Philly Cheesesteak, Pad Kra Pao,
 Chicken Korma, Spaghetti Bolognese) – nicht eindeutschen, nichts erfinden, keine Fantasie-Mischungen. Kurz (≤ ~40 Zeichen),
 deutsche Beschreibungen mit „Soße“, keine Werbe-/Quellenzusätze.
-Beilagen in `subtitle:` (z. B. „mit Romanesco und Kartoffelpüree“, steht unter dem Rezeptnamen und im PDF).
+`subtitle:` = kurze deutsche Beschreibung bzw. Beilagen (z. B. „Ragù di Manzo“ – „Schmorfleisch vom Rind auf Paccheri“,
+„Hähnchenbrust in Pfefferrahmsoße“ – „mit Romanesco und Kartoffelpüree“); bei fremdsprachigen Namen immer setzen.
+Steht unter dem Rezeptnamen und im PDF.
 Herkunft in `source:` (z. B. „HelloFresh“, „Fallow“; erscheint als „nach …“), nicht als Tag.
 **Tags:** nur aus `_data/tags.yml` (klein, Deutsch: Hauptzutat, Küche ohne eigene Kategorie, Eigenschaft); nichts,
 was schon `category`/`categories` sagt, keine Gerichtsnamen. „vegetarisch“ als Tag nur, wenn die Kategorie

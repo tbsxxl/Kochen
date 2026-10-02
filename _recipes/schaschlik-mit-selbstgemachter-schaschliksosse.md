@@ -1,6 +1,6 @@
 ---
-title: "Schaschlik vom Schwein"
-subtitle: "mit Schaschliksoße"
+title: "Schaschlik"
+subtitle: "Schweinespieße mit Schaschliksoße"
 date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
 tags: ["schwein", "deutsch", "klassiker"]
