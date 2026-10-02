@@ -1,6 +1,6 @@
 ---
-title: "Dan-Dan-Fettuccine"
-subtitle: "mit Hackfleisch"
+title: "Dan Dan Noodles"
+subtitle: "mit Fettuccine, Hackfleisch und Pak Choi"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Pasta"

@@ -1,6 +1,6 @@
 ---
-title: "Pollo al Basilico e Mozzarella"
-subtitle: "Hähnchen in Basilikum-Sahnesoße"
+title: "Mozzarella-Hähnchen"
+subtitle: "in Basilikum-Sahnesoße"
 date: 2026-02-20
 category: "Hähnchen"
 categories: ["Italienisch"]

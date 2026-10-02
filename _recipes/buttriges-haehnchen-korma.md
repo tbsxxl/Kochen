@@ -1,5 +1,5 @@
 ---
-title: "Buttriges Hähnchen-Korma"
+title: "Chicken Korma"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"

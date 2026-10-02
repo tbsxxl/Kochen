@@ -143,8 +143,9 @@ Nur bei geänderten Portionen wird live mit jsPDF erzeugt; schlägt das fehl, ko
 ## Rezepte
 
 Markdown in `_recipes/`, Bilder in `recipes/images/` (Dateinamen ohne Umlaute/Leerzeichen).
-**Namen:** `title` = nur das Gericht, kurz (≤ ~40 Zeichen), Deutsch außer feste Originalnamen (Butter Chicken,
-Ragù, Pad Kra Pao …), immer „Soße“, „und“ statt „&“ (außer feste Namen wie „Fish & Chips“), keine Werbe-/Quellenzusätze.
+**Namen:** `title` = der echte, gängige Name des Gerichts, so wie man es kennt (Philly Cheesesteak, Pad Kra Pao,
+Chicken Korma, Spaghetti Bolognese) – nicht eindeutschen, nichts erfinden, keine Fantasie-Mischungen. Kurz (≤ ~40 Zeichen),
+deutsche Beschreibungen mit „Soße“, keine Werbe-/Quellenzusätze.
 Beilagen in `subtitle:` (z. B. „mit Romanesco und Kartoffelpüree“, steht unter dem Rezeptnamen und im PDF).
 Herkunft in `source:` (z. B. „HelloFresh“, „Fallow“; erscheint als „nach …“), nicht als Tag.
 **Tags:** nur aus `_data/tags.yml` (klein, Deutsch: Hauptzutat, Küche ohne eigene Kategorie, Eigenschaft); nichts,
