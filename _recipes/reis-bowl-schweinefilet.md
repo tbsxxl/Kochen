@@ -1,5 +1,6 @@
 ---
 title: "Reis-Bowl mit Schweinefilet"
+subtitle: "mit Brokkoli, Gurke und Sweet-Chili-Soße"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"

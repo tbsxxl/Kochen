@@ -1,5 +1,6 @@
 ---
 title: "Hähnchenstreifen in sahnigem Curry"
+subtitle: "mit Wokgemüse und Jasminreis"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"
