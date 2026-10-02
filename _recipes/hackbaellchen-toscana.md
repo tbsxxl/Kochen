@@ -1,9 +1,10 @@
 ---
 title: "Polpette alla Toscana"
+subtitle: "Hackbällchen aus dem Ofen"
 date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
 categories: ["Italienisch"]
-tags: ["italienisch", "hackfleisch", "ofen", "polpette", "Carne", "Beef"]
+tags: ["hackfleisch", "ofen"]
 time: "ca. 55 Min"
 image: /recipes/images/Toscana.jpg
 servings: 3

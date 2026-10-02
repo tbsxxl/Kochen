@@ -143,6 +143,14 @@ Nur bei geänderten Portionen wird live mit jsPDF erzeugt; schlägt das fehl, ko
 ## Rezepte
 
 Markdown in `_recipes/`, Bilder in `recipes/images/` (Dateinamen ohne Umlaute/Leerzeichen).
+**Namen:** `title` = nur das Gericht, kurz (≤ ~40 Zeichen), Deutsch außer feste Originalnamen (Butter Chicken,
+Ragù, Pad Kra Pao …), immer „Soße“, „und“ statt „&“ (außer feste Namen wie „Fish & Chips“), keine Werbe-/Quellenzusätze.
+Beilagen in `subtitle:` (z. B. „mit Romanesco und Kartoffelpüree“, steht unter dem Rezeptnamen und im PDF).
+Herkunft in `source:` (z. B. „HelloFresh“, „Fallow“; erscheint als „nach …“), nicht als Tag.
+**Tags:** nur aus `_data/tags.yml` (klein, Deutsch: Hauptzutat, Küche ohne eigene Kategorie, Eigenschaft); nichts,
+was schon `category`/`categories` sagt, keine Gerichtsnamen. „vegetarisch“ als Tag nur, wenn die Kategorie
+„Vegetarisch“ nicht passt (z. B. Süßes, Brot); der Schnellfilter „Vegetarisch“ wertet beides aus.
+Titel ändern ändert die Adresse nicht (kommt aus dem Dateinamen); danach PDFs neu erzeugen.
 Hauptkategorie (`category:`, steht auf dem Foto) und optionale weitere (`categories: ["Italienisch", …]`) immer aus
 `_data/categories.yml` wählen; die Datei bestimmt auch die Reihenfolge in der Kategorie-Auswahl (Bottom-Sheet).
 „Schnell“ = Zeitangabe höchstens 30 Min ohne Wartezeiten; „Meal Prep“ = lässt sich gut vorkochen und aufwärmen. Einkaufsliste sortiert Zutaten per Stichwort nach Supermarkt-Abteilung (`assets/shopping.js`,

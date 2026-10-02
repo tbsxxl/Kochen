@@ -1,8 +1,10 @@
 ---
-title: "American Double Smash Burger mit Schmelzzwiebeln und Wedges"
+title: "Double Smash Burger"
+subtitle: "mit Schmelzzwiebeln und Wedges"
+source: "HelloFresh"
 date: 2026-09-17
 category: "Burger & Sandwiches"
-tags: ["amerikanisch", "burger", "streetfood", "HelloFresh"]
+tags: ["rind", "hackfleisch", "amerikanisch", "streetfood"]
 time: "30 - 40 Min"
 image: /recipes/images/smash-burger.jpg
 servings: 4

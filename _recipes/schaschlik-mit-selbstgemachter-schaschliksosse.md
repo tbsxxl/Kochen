@@ -1,8 +1,9 @@
 ---
-title: "Schaschlik vom Schwein mit Sauce "
+title: "Schaschlik vom Schwein"
+subtitle: "mit Schaschliksoße"
 date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
-tags: ["italienisch", "schwein", "spieße", "paprikasauce", "Carne", "Pork"]
+tags: ["schwein", "deutsch", "klassiker"]
 time: "ca. 2 Std"
 image: /recipes/images/Schaschlik.jpg
 servings: 4

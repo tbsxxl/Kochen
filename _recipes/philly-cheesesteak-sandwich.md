@@ -1,9 +1,10 @@
 ---
-title: "Philly Cheesesteak mit Rib-Eye & Provolone"
+title: "Philly Cheesesteak"
+subtitle: "mit Rib-Eye und Provolone"
 date: 2026-02-20
 category: "Burger & Sandwiches"
 categories: ["Schnell"]
-tags: ["amerikanisch", "beef", "rib-eye", "sandwich", "streetfood", "pfanne", "Sandwich"]
+tags: ["rind", "amerikanisch", "streetfood", "pfanne"]
 time: "ca. 15–20 Min"
 image: /recipes/images/philly.jpg
 servings: 1

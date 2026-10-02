@@ -11,7 +11,7 @@
 {%- if include.index -%}
 {%- capture tags %}{% if r.tags %}{{ r.tags | join: " " }}{% endif %}{% endcapture -%}
 {%- capture ings %}{% for i in r.ingredients %}{{ i.item }} {% endfor %}{% endcapture -%}
-{%- capture hay %}{{ r.title }} {{ r.category }} {{ r.categories | join: " " }} {{ r.time }} {{ r.servings }} {{ tags }} {{ author }} {{ ings }}{% endcapture -%}
+{%- capture hay %}{{ r.title }} {{ r.subtitle }} {{ r.source }} {{ r.category }} {{ r.categories | join: " " }} {{ r.time }} {{ r.servings }} {{ tags }} {{ author }} {{ ings }}{% endcapture -%}
 {%- capture flags %}{% if r.category == "Schnell" or r.categories contains "Schnell" %} schnell{% endif %}{% assign tagsDown = tags | downcase %}{% if r.category == "Vegetarisch" or r.categories contains "Vegetarisch" or tagsDown contains "vegetarisch" or tagsDown contains "vegan" %} veg{% endif %}{% endcapture -%}
 {%- endif -%}
 <a class="linkCard{% if include.hcard %} hCard homeFavCard{% endif %}" href="{{ rid }}"{% if include.index %} data-flags="{{ flags | strip }}" data-recipe-card data-recipe-id="{{ rid }}" data-title="{{ r.title | escape }}" data-category="{{ r.category | escape }}" data-categories="|{{ r.categories | join: '|' | escape }}|" data-author="{{ author | escape }}" data-haystack="{{ hay | escape }}"{% endif %}>

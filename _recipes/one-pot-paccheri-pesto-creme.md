@@ -1,9 +1,11 @@
 ---
-title: "One Pot Paccheri in Pesto-Creme-Soße mit Babyspinat und Karotte"
+title: "Paccheri in Pesto-Creme-Soße"
+subtitle: "mit Babyspinat und Karotte"
+source: "HelloFresh"
 date: 2026-10-02
 category: "Pasta"
 categories: ["Vegetarisch", "Schnell", "Italienisch"]
-tags: ["vegetarisch", "pasta", "one-pot", "schnell", "HelloFresh"]
+tags: ["one-pot"]
 time: "15–25 Min"
 image: /recipes/images/one-pot-paccheri-in-pesto-creme-sosse-mit-babyspinat-und-kar-mur99zig.jpg
 servings: 2

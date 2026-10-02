@@ -82,7 +82,7 @@
         else if(tag === 'P' || tag === 'BLOCKQUOTE') blocks.push({ type:'p', text: clean(el.textContent) });
       }
     }
-    return { title: clean(data.title), meta: meta.join("  ·  "), ingredients, blocks, image: heroDataUrl() };
+    return { title: clean(data.title), subtitle: clean(data.subtitle || ""), meta: meta.join("  ·  "), ingredients, blocks, image: heroDataUrl() };
   }
 
   function build(r){
@@ -111,6 +111,12 @@
     doc.setFont('times','bold'); doc.setFontSize(22);
     const titleLines = doc.splitTextToSize(r.title, CW);
     doc.text(titleLines, M, y + 6); y += titleLines.length * 8.5 + 2;
+    if(r.subtitle){
+      doc.setFont('times','italic'); doc.setFontSize(13); doc.setTextColor(...SUB);
+      const subLines = doc.splitTextToSize(r.subtitle, CW);
+      doc.text(subLines, M, y + 4); y += subLines.length * 5.5 + 2;
+      doc.setTextColor(...INK);
+    }
 
     if(r.meta){
       doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(...SUB);

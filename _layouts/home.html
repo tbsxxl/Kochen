@@ -146,6 +146,7 @@ layout: default
     "url": "{{ r.url | relative_url }}",
     "vt": "{{ r.url | slugify }}",
     "title": {{ r.title | jsonify }},
+    "subtitle": {{ r.subtitle | default: "" | jsonify }},
     "category": {{ r.category | jsonify }},
     "time": {{ r.time | jsonify }},
     "servings": {{ r.servings | jsonify }},
@@ -317,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const nq = norm(q).trim();
     if(nq.length < 2){ results.hidden = true; results.innerHTML=''; return; }
     const hits = recipes.filter(r=>{
-      const hay = norm([r.title, r.category, ...(r.categories||[]), ...(r.tags||[])].join(' '));
+      const hay = norm([r.title, r.subtitle, r.category, ...(r.categories||[]), ...(r.tags||[])].join(' '));
       return nq.split(/\s+/).every(w => hay.includes(w));
     }).slice(0, 6);
 

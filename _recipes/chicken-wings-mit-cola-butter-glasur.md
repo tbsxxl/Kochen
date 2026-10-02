@@ -1,9 +1,10 @@
 ---
 title: "Chicken Wings"
+subtitle: "mit Cola-Butter-Glasur"
 date: 2026-02-20
 category: "Knusprig & Frittiert"
 categories: ["Hähnchen"]
-tags: ["wings", "ofen", "glasiert", "streetfood"]
+tags: ["hähnchen", "amerikanisch", "ofen", "streetfood"]
 time: "ca. 45 Min"
 image: /recipes/images/wings.jpg
 servings: 3

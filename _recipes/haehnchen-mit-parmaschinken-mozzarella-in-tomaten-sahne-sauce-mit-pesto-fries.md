@@ -1,9 +1,10 @@
 ---
-title: "Hähnchen mit Prosciutto & Mozzarella"
+title: "Hähnchen mit Prosciutto und Mozzarella"
+subtitle: "in Tomaten-Sahnesoße"
 date: 2026-02-20
 category: "Hähnchen"
 categories: ["Italienisch"]
-tags: ["italienisch", "hähnchen", "prosciutto", "mozzarella", "Pollame & Geflügel", "Chicken"]
+tags: ["hähnchen", "ofen"]
 time: "ca. 50–60 Min"
 image: /recipes/images/parmahähnchen.jpg
 servings: 2

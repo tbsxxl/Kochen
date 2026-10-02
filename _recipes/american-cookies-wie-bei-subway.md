@@ -1,9 +1,10 @@
 ---
 title: "Chocolate Chip Cookies"
+subtitle: "wie bei Subway"
 date: 2026-02-20
 category: "Süßes & Backen"
 categories: ["Schnell"]
-tags: ["amerikanisch", "gebäck", "backen", "cookies", "Dessert & Pâtisserie", "Desserts"]
+tags: ["vegetarisch", "amerikanisch", "ofen"]
 time: "ca. 29 Min"
 image: /recipes/images/Cookies.jpg
 servings: 20

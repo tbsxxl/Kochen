@@ -1,9 +1,10 @@
 ---
 title: "Butter Chicken"
+subtitle: "aus dem Ofen"
 date: 2026-02-20
 category: "Curry"
 categories: ["Indisch", "Hähnchen", "Meal Prep"]
-tags: ["indisch", "hähnchen", "tandoori", "ofen", "Pollame & Geflügel", "Chicken"]
+tags: ["hähnchen", "ofen"]
 time: "ca. 2 Std"
 image: /recipes/images/butterchicken.jpg
 servings: 2

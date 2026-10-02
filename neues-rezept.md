@@ -33,7 +33,11 @@ permalink: /neues-rezept/
 
   <div class="section card cardPad uploadCard">
     <label class="fieldLabel" for="titleIn">Titel</label>
-    <input class="fieldInput" id="titleIn" maxlength="120" placeholder="z. B. Cremige Tomaten-Gnocchi" required>
+    <input class="fieldInput" id="titleIn" maxlength="120" placeholder="z. B. Hähnchenbrust in Pfefferrahmsoße" required>
+    <p class="fieldHint">Nur das Gericht, kurz (höchstens etwa 40 Zeichen). Beilagen kommen in die Unterzeile.</p>
+
+    <label class="fieldLabel" for="subtitleIn">Unterzeile (optional)</label>
+    <input class="fieldInput" id="subtitleIn" maxlength="120" placeholder="z. B. mit Romanesco und Kartoffelpüree">
 
     <label class="fieldLabel" for="catIn">Kategorie (steht auf dem Foto)</label>
     <select class="fieldInput" id="catIn" required>
@@ -57,8 +61,14 @@ permalink: /neues-rezept/
       </div>
     </div>
 
-    <label class="fieldLabel" for="tagsIn">Stichwörter (mit Komma getrennt, optional)</label>
-    <input class="fieldInput" id="tagsIn" placeholder="z. B. italienisch, one-pot">
+    <label class="fieldLabel" for="tagsIn">Stichwörter (antippen oder mit Komma getrennt eintragen)</label>
+    <input class="fieldInput" id="tagsIn" placeholder="z. B. hähnchen, ofen">
+    <div class="chips tagPicker" id="tagPicker">
+      {%- for grp in site.data.tags %}{% for t in grp[1] %}<button type="button" class="pillToggle" data-tag="{{ t | escape }}" aria-pressed="false">{{ t }}</button>{% endfor %}{% endfor %}
+    </div>
+
+    <label class="fieldLabel" for="sourceIn">Quelle (optional)</label>
+    <input class="fieldInput" id="sourceIn" maxlength="60" placeholder="z. B. HelloFresh">
   </div>
 
   <div class="section card cardPad uploadCard">

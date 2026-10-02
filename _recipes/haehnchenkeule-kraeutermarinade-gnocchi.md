@@ -1,9 +1,11 @@
 ---
-title: "Hähnchenkeule in Kräutermarinade mit Gnocchi in Tomatensoße und Mozzarella"
+title: "Kräuter-Hähnchenkeulen"
+subtitle: "mit Gnocchi in Tomatensoße und Mozzarella"
+source: "HelloFresh"
 date: 2026-10-02
 category: "Hähnchen"
 categories: ["Italienisch"]
-tags: ["hähnchen", "gnocchi", "ofen", "high-protein", "HelloFresh"]
+tags: ["hähnchen", "ofen", "high-protein"]
 time: "40–50 Min"
 image: /recipes/images/haehnchenkeule-in-kraeutermarinade-mit-gnocchi-in-tomatensos-mur99i6j.jpg
 servings: 2

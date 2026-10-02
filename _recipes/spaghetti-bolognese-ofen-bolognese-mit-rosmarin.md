@@ -3,7 +3,7 @@ title: "Spaghetti al Pomodoro con Manzo"
 date: 2026-02-20
 category: "Pasta"
 categories: ["Italienisch", "Meal Prep"]
-tags: ["italienisch", "ragù", "rindfleisch", "ofen", "familienklassiker", "pasta", "Pasta"]
+tags: ["rind", "ofen", "familientauglich"]
 time: "ca. 1 Std 15 Min"
 image: /recipes/images/bolo2.jpg
 servings: 6

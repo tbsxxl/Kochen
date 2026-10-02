@@ -1,9 +1,10 @@
 ---
-title: "Currywurstsauce"
+title: "Currywurstsoße"
+subtitle: "mit Cola"
 date: 2026-02-20
 category: "Saucen & Basics"
 categories: ["Schnell"]
-tags: ["deutsch", "streetfood", "curry", "sauce", "cola", "schnell", "Sauce"]
+tags: ["deutsch", "streetfood"]
 time: "ca. 15–20 Min"
 image: /recipes/images/cwurst.jpg
 servings: 4

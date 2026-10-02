@@ -1,9 +1,10 @@
 ---
 title: "Naan"
+subtitle: "Indisches Fladenbrot aus der Pfanne"
 date: 2026-02-20
 category: "Pizza & Brot"
 categories: ["Indisch"]
-tags: ["indisch", "fladenbrot", "hefeteig", "pfanne", "vegetarisch", "Boulangerie"]
+tags: ["vegetarisch", "pfanne"]
 time: "ca. 1 Std 55 Min"
 image: /recipes/images/naan.jpg
 servings: 1
