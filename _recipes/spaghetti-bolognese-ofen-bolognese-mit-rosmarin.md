@@ -1,5 +1,6 @@
 ---
-title: "Spaghetti al Pomodoro con Manzo"
+title: "Spaghetti Bolognese"
+subtitle: "aus dem Ofen, mit Rotwein und Rosmarin"
 date: 2026-02-20
 category: "Pasta"
 categories: ["Italienisch", "Meal Prep"]

@@ -1,5 +1,6 @@
 ---
 title: "Chipotle-Hack-Bowl"
+subtitle: "Low-Carb-Bowl mit Hackfleisch"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"

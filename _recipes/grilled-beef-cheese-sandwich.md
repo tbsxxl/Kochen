@@ -1,5 +1,5 @@
 ---
-title: "Beef & Cheese Sandwich"
+title: "Grilled Beef & Cheese Sandwich"
 subtitle: "mit Burgersoße und Salat"
 source: "HelloFresh"
 date: 2026-10-02

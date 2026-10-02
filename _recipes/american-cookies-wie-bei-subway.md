@@ -1,6 +1,6 @@
 ---
 title: "Chocolate Chip Cookies"
-subtitle: "wie bei Subway"
+subtitle: "Schokoladenkekse wie bei Subway"
 date: 2026-02-20
 category: "Süßes & Backen"
 categories: ["Schnell"]

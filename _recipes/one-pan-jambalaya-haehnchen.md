@@ -1,5 +1,6 @@
 ---
-title: "Hähnchen-Jambalaya"
+title: "Jambalaya"
+subtitle: "mit Hähnchen"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Hähnchen"

@@ -1,5 +1,6 @@
 ---
-title: "Rindergulasch"
+title: "Gulasch"
+subtitle: "Rindergulasch, klassisch geschmort"
 date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
 categories: ["Meal Prep"]

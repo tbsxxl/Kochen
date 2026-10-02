@@ -1,6 +1,6 @@
 ---
 title: "Polpette alla Toscana"
-subtitle: "Hackbällchen aus dem Ofen"
+subtitle: "Hackbällchen in Tomatensoße aus dem Ofen"
 date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
 categories: ["Italienisch"]

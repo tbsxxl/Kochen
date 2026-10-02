@@ -1,5 +1,6 @@
 ---
-title: "Dal-Curry mit geröstetem Blumenkohl"
+title: "Dal-Curry"
+subtitle: "mit geröstetem Blumenkohl"
 source: "HelloFresh"
 date: 2026-09-04
 category: "Curry"

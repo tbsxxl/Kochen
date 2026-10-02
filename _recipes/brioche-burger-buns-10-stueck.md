@@ -1,6 +1,6 @@
 ---
 title: "Brioche Buns"
-subtitle: "für 10 Burger"
+subtitle: "Burgerbrötchen aus Hefeteig, für 10 Stück"
 date: 2026-02-20
 category: "Pizza & Brot"
 categories: ["Süßes & Backen"]

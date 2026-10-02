@@ -1,6 +1,6 @@
 ---
 title: "Fish & Chips"
-subtitle: "mit Tartarsoße"
+subtitle: "Fisch im Backteig mit Pommes und Tartarsoße"
 date: 2026-02-20
 category: "Knusprig & Frittiert"
 tags: ["fisch", "englisch", "streetfood", "klassiker"]

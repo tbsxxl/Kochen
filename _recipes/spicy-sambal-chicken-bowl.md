@@ -1,5 +1,6 @@
 ---
-title: "Scharfe Sambal-Hähnchen-Bowl"
+title: "Spicy Sambal Chicken Bowl"
+subtitle: "Scharfe Hähnchen-Bowl mit Sambal"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"

@@ -1,5 +1,6 @@
 ---
-title: "Kaiserschmarrn aus dem Ofen"
+title: "Kaiserschmarrn"
+subtitle: "aus dem Ofen"
 date: 2026-02-20
 category: "Süßes & Backen"
 tags: ["vegetarisch", "österreichisch", "ofen", "klassiker"]

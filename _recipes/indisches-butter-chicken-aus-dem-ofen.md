@@ -1,6 +1,6 @@
 ---
 title: "Butter Chicken"
-subtitle: "aus dem Ofen"
+subtitle: "Hähnchen in Tomaten-Butter-Soße aus dem Ofen"
 date: 2026-02-20
 category: "Curry"
 categories: ["Indisch", "Hähnchen", "Meal Prep"]

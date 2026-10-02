@@ -1,6 +1,6 @@
 ---
 title: "Chicken Wings"
-subtitle: "mit Cola-Butter-Glasur"
+subtitle: "Hähnchenflügel mit Cola-Butter-Glasur"
 date: 2026-02-20
 category: "Knusprig & Frittiert"
 categories: ["Hähnchen"]

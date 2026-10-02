@@ -1,5 +1,6 @@
 ---
 title: "Pesto alla Genovese"
+subtitle: "Basilikum-Pesto"
 date: 2026-02-20
 category: "Saucen & Basics"
 categories: ["Vegetarisch", "Italienisch", "Schnell"]
