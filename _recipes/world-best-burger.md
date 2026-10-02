@@ -1,5 +1,6 @@
 ---
-title: "Der beste Burger der Welt"
+title: "Bacon-Cheeseburger"
+subtitle: "mit Kartoffel-Buns, Champagner-Zwiebeln und Beef Salt"
 source: "Fallow"
 date: 2026-09-17
 category: "Burger & Sandwiches"
