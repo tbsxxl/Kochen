@@ -4,6 +4,7 @@ date: 2026-10-02
 category: "Hähnchen"
 tags: ["hähnchen", "high-protein", "französisch", "HelloFresh"]
 time: "25–35 Min"
+image: /recipes/images/franzoesische-haehnchenbrust-in-pfefferrahmsosse-mit-romanes-mur987wf.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchenbrustfilet" }
