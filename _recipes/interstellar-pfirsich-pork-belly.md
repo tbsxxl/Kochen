@@ -1,5 +1,5 @@
 ---
-title: "Pork Belly"
+title: "Glazed Pork Belly"
 subtitle: "Schweinebauch mit Pfirsich-Glasur"
 source: "Fallow"
 date: 2026-09-17

@@ -1,6 +1,6 @@
 ---
-title: "Paccheri in Pesto-Creme-Soße"
-subtitle: "mit Babyspinat und Karotte"
+title: "Paccheri al Pesto Rosso"
+subtitle: "in Tomatenpesto-Creme mit Babyspinat und Karotte"
 source: "HelloFresh"
 date: 2026-10-02
 category: "Pasta"

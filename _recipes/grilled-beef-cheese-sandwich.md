@@ -1,6 +1,6 @@
 ---
-title: "Grilled Beef & Cheese Sandwich"
-subtitle: "mit Burgersoße und Salat"
+title: "Patty Melt"
+subtitle: "Hack-Käse-Sandwich mit Burgersoße und Salat"
 source: "HelloFresh"
 date: 2026-10-02
 category: "Burger & Sandwiches"

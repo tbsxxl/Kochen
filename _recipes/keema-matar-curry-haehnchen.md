@@ -1,6 +1,6 @@
 ---
-title: "Keema Matar"
-subtitle: "Indisches Hähnchencurry"
+title: "Chicken Curry"
+subtitle: "mit grünen Bohnen, Joghurt und Naan"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"

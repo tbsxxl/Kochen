@@ -1,6 +1,6 @@
 ---
-title: "Pikanter Blumenkohl in Dalsoße"
-subtitle: "mit Kumin-Kartoffeln und Babyspinat"
+title: "Gobi Dal"
+subtitle: "Blumenkohl in Dalsoße mit Kumin-Kartoffeln und Babyspinat"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Curry"

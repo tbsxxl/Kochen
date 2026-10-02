@@ -1,6 +1,6 @@
 ---
-title: "Tandoori-Blumenkohl in Dalsoße"
-subtitle: "mit Basmatireis und Cashews"
+title: "Tandoori Gobi"
+subtitle: "Tandoori-Blumenkohl in Dalsoße mit Basmatireis"
 source: "HelloFresh"
 date: 2026-10-02
 category: "Curry"
