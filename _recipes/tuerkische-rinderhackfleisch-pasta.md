@@ -1,6 +1,6 @@
 ---
-title: "Türkische Hack-Pasta"
-subtitle: "in Mezze-Tomatensoße mit Minz-Joghurt"
+title: "Kıymalı Makarna"
+subtitle: "Türkische Hack-Pasta in Tomatensoße mit Minz-Joghurt"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Pasta"

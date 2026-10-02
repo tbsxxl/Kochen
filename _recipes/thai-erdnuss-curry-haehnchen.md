@@ -1,6 +1,6 @@
 ---
-title: "Thai-Erdnuss-Curry mit Hähnchen"
-subtitle: "mit Wokgemüse und Basmatireis"
+title: "Massaman Curry"
+subtitle: "Thai-Erdnuss-Curry mit Hähnchen, Wokgemüse und Reis"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"

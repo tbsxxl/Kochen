@@ -1,6 +1,6 @@
 ---
-title: "Korean Fried Chicken"
-subtitle: "mit Gochujang-Soja-Glasur"
+title: "Gochujang Chicken"
+subtitle: "Knuspriges Hähnchen mit Gochujang-Soja-Glasur"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Knusprig & Frittiert"

@@ -1,6 +1,6 @@
 ---
-title: "Hähnchen mit Prosciutto und Mozzarella"
-subtitle: "in Tomaten-Sahnesoße"
+title: "Pollo alla Sorrentina"
+subtitle: "Hähnchen mit Parmaschinken und Mozzarella in Tomaten-Sahnesoße"
 date: 2026-02-20
 category: "Hähnchen"
 categories: ["Italienisch"]
