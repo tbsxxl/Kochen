@@ -5,7 +5,7 @@ category: "Curry"
 categories: ["Indisch", "Hähnchen", "Schnell", "Meal Prep"]
 tags: ["hähnchen", "curry", "indisch", "schnell", "high-protein", "HelloFresh"]
 time: "15–25 Min"
-image: /recipes/images/keema-matar-curry-haehnchen.jpg
+image: /recipes/images/keema-matar-curry-mit-haehnchen-mur9b1gt.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchengeschnetzeltes, mariniert" }
