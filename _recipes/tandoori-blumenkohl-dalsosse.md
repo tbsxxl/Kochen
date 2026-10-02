@@ -5,6 +5,7 @@ category: "Curry"
 categories: ["Vegetarisch", "Indisch"]
 tags: ["vegetarisch", "indisch", "curry", "blumenkohl", "ofen", "HelloFresh"]
 time: "30–40 Min"
+image: /recipes/images/tandoori-blumenkohl-in-tomatiger-dalsosse-mit-basmatireis-un-mur9ajr9.jpg
 servings: 2
 ingredients:
   - { qty: 1, unit: "", item: "Blumenkohl" }
