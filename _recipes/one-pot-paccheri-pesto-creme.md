@@ -5,6 +5,7 @@ category: "Pasta"
 categories: ["Vegetarisch", "Schnell", "Italienisch"]
 tags: ["vegetarisch", "pasta", "one-pot", "schnell", "HelloFresh"]
 time: "15–25 Min"
+image: /recipes/images/one-pot-paccheri-in-pesto-creme-sosse-mit-babyspinat-und-kar-mur99zig.jpg
 servings: 2
 ingredients:
   - { qty: 375, unit: "g", item: "frische Paccheri" }
