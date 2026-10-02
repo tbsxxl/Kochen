@@ -1,5 +1,6 @@
 ---
 title: "Mezze-Hackpfanne"
+subtitle: "mit Reis, Gurken-Joghurt und Feta"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Fleisch & Schmorgerichte"

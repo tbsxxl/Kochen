@@ -1,5 +1,6 @@
 ---
 title: "Thai-Erdnuss-Curry mit Hähnchen"
+subtitle: "mit Wokgemüse und Basmatireis"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"
