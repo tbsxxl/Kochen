@@ -48,7 +48,7 @@
       "gelatine", "rosinen", "mandel", "nüsse", "nuss", "cashew", "walnuss", "pinienkerne", "marmelade", "streusel"],
     "Getränke": ["wein", "=bier", "bier ", "=cola", "wasser", "saft", "sprite", "espresso", "kaffee", "sekt", "=tee",
       "eistee", "bourbon", "champagner", "amaretto", "rum", "whisky"],
-    "Obst & Gemüse": ["zwiebel", "knoblauch", "karotte", "möhre", "sellerie", "paprika", "tomate", "kartoffel",
+    "Obst & Gemüse": ["zwiebel", "knoblauch", "romanesco", "karotte", "möhre", "sellerie", "paprika", "tomate", "kartoffel",
       "zucchini", "aubergine", "brokkoli", "blumenkohl", "spinat", "salat", "rucola", "gurke", "lauch", "porree",
       "pilz", "champignon", "ingwer", "chili", "jalapeño", "jalapeno", "limette", "zitrone", "orange", "apfel",
       "banane", "beere", "kiwi", "mango", "ananas", "pfirsich", "avocado", "schalotte", "koriander", "petersilie",
