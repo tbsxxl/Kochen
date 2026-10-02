@@ -1,9 +1,9 @@
 ---
-title: "Gulasch vom Rind"
+title: "Rindergulasch"
 date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
 categories: ["Meal Prep"]
-tags: ["ungarisch", "rindfleisch", "schmorgericht", "paprika", "Carne", "Beef"]
+tags: ["rind", "ungarisch", "klassiker"]
 time: "ca. 2 Std"
 image: /recipes/images/gulasch.jpg
 servings: 4

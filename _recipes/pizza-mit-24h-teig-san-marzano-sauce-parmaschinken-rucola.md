@@ -1,9 +1,10 @@
 ---
-title: "Pizza Napoletana mit Pomodoro San Marzano, Prosciutto di Parma & Rucola"
+title: "Pizza Napoletana"
+subtitle: "mit San-Marzano-Tomaten, Parmaschinken und Rucola"
 date: 2026-02-20
 category: "Pizza & Brot"
 categories: ["Italienisch"]
-tags: ["italienisch", "pizza", "napoletana", "prosciutto", "Pasta & Cucina Italiana", "Pizza"]
+tags: ["ofen", "klassiker", "am-vortag-starten"]
 time: "ca. 24 Std Reifezeit + Backzeit"
 image: /recipes/images/pizza.jpg
 servings: 6

@@ -1,9 +1,11 @@
 ---
-title: "Tandoori-Blumenkohl in tomatiger Dalsoße mit Basmatireis und Cashewkernen"
+title: "Tandoori-Blumenkohl in Dalsoße"
+subtitle: "mit Basmatireis und Cashews"
+source: "HelloFresh"
 date: 2026-10-02
 category: "Curry"
 categories: ["Vegetarisch", "Indisch"]
-tags: ["vegetarisch", "indisch", "curry", "blumenkohl", "ofen", "HelloFresh"]
+tags: ["ofen"]
 time: "30–40 Min"
 image: /recipes/images/tandoori-blumenkohl-in-tomatiger-dalsosse-mit-basmatireis-un-mur9ajr9.jpg
 servings: 2

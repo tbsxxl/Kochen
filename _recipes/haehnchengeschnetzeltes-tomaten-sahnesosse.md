@@ -1,8 +1,10 @@
 ---
-title: "Hähnchengeschnetzeltes in Tomaten-Sahnesoße auf Kräuterreis und Porree"
+title: "Hähnchengeschnetzeltes in Tomaten-Sahnesoße"
+subtitle: "mit Kräuterreis und Porree"
+source: "HelloFresh"
 date: 2026-09-17
 category: "Hähnchen"
-tags: ["deutsch", "klassiker", "familientauglich", "schnell", "HelloFresh"]
+tags: ["hähnchen", "deutsch", "klassiker", "familientauglich"]
 time: "25 - 35 Min"
 image: /recipes/images/haehnchengeschnetzeltes.jpg
 servings: 4

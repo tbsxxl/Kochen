@@ -157,7 +157,26 @@
   });
 
   // ---------- Entwurf ----------
-  const FIELDS = ["titleIn","catIn","timeIn","servIn","tagsIn","ingIn","stepsIn","notesIn"];
+  const FIELDS = ["titleIn","subtitleIn","sourceIn","catIn","timeIn","servIn","tagsIn","ingIn","stepsIn","notesIn"];
+
+  // ---------- Stichwörter zum Antippen (Liste aus _data/tags.yml) ----------
+  const tagList = ()=> $("#tagsIn").value.split(",").map(s=>s.trim()).filter(Boolean);
+  function syncTagChips(){
+    const cur = new Set(tagList().map(t=>t.toLowerCase()));
+    document.querySelectorAll("#tagPicker [data-tag]").forEach(b=>{
+      const on = cur.has(b.dataset.tag.toLowerCase());
+      b.setAttribute("aria-pressed", String(on)); b.classList.toggle("pillToggleActive", on);
+    });
+  }
+  $("#tagPicker")?.addEventListener("click", (e)=>{
+    const b = e.target.closest("[data-tag]"); if(!b) return;
+    const t = b.dataset.tag, cur = tagList();
+    const i = cur.findIndex(x=>x.toLowerCase() === t.toLowerCase());
+    if(i >= 0) cur.splice(i, 1); else cur.push(t);
+    $("#tagsIn").value = cur.join(", ");
+    syncTagChips(); saveDraft();
+  });
+  $("#tagsIn").addEventListener("input", syncTagChips);
   function saveDraft(){
     if(rowsMode) return;
     const d = { extra: [...extra] };
@@ -184,6 +203,8 @@
     $("#uploadErr").hidden = true;
     const payload = {
       title: $("#titleIn").value.trim(),
+      subtitle: $("#subtitleIn").value.trim(),
+      source: $("#sourceIn").value.trim(),
       category: $("#catIn").value,
       categories: [...extra],
       time: $("#timeIn").value.trim(),
@@ -282,6 +303,8 @@
     if(!m) throw new Error("Das Rezept hat ein unbekanntes Format.");
     const fm = window.jsyaml.load(m[1]) || {};
     $("#titleIn").value = fm.title || "";
+    $("#subtitleIn").value = fm.subtitle || "";
+    $("#sourceIn").value = fm.source || "";
     const cat = $("#catIn");
     if(fm.category && !Array.from(cat.options).some(o=>o.value === fm.category)) cat.add(new Option(fm.category, fm.category));
     cat.value = fm.category || "";
@@ -292,6 +315,7 @@
     $("#timeIn").value = fm.time || "";
     $("#servIn").value = fm.servings || "";
     $("#tagsIn").value = (fm.tags || []).join(", ");
+    syncTagChips();
     (fm.ingredients || []).forEach(i=> addRow(i));
     $("#stepsIn").value = m[2].trim();
     if(fm.image){
@@ -335,6 +359,7 @@
       if(r.ingredients && r.ingredients.length) $("#ingIn").value = r.ingredients.join("\n");
       if(r.steps && r.steps.length) $("#stepsIn").value = r.steps.join("\n");
       if(r.source && !$("#notesIn").value) $("#notesIn").value = `Quelle: ${r.source}`;
+      if(r.source && !$("#sourceIn").value){ try{ $("#sourceIn").value = new URL(r.source).hostname.replace(/^www\./, ""); }catch{} }
       if(r.image && r.image.data){
         const bin = atob(r.image.data);
         photoFile = new Blob([Uint8Array.from(bin, c=>c.charCodeAt(0))], { type: r.image.type });
@@ -375,6 +400,8 @@
     form.prepend(who);
     setupRowsUi();
     $("#titleIn").value = r.title || "";
+    $("#subtitleIn").value = r.subtitle || "";
+    $("#sourceIn").value = r.source || "";
     $("#catIn").value = r.category || "";
     (r.categories || []).forEach(c=>{
       const b = document.querySelector(`#extraCats [data-cat="${CSS.escape(c)}"]`);
@@ -383,6 +410,7 @@
     $("#timeIn").value = r.time || "";
     $("#servIn").value = r.servings || "";
     $("#tagsIn").value = (r.tags || []).join(", ");
+    syncTagChips();
     (r.ingredients || []).forEach(i=> addRow(i));
     $("#stepsIn").value = (r.steps || []).join("\n");
     $("#notesIn").value = r.notes || "";
@@ -423,7 +451,7 @@
       const me = await A.me();
       if(me.loggedIn && me.role !== "owner" && !rowsMode){
         setupSuggesting(me);
-        form.hidden = false; loadDraft(); renderIngPreview(); return;
+        form.hidden = false; loadDraft(); syncTagChips(); renderIngPreview(); return;
       }
       if(me.loggedIn && me.canUpload && reviewing){
         try{ await loadSuggestion(); form.hidden = false; }
@@ -436,7 +464,7 @@
           catch(err){ gate.hidden = false; gate.querySelector(".uEmptyTitle").textContent = "Rezept konnte nicht geladen werden"; gate.querySelector(".uEmptyText").textContent = err.message || String(err); gate.querySelector("a.btn")?.remove(); }
           return;
         }
-        form.hidden = false; loadDraft(); renderIngPreview(); return;
+        form.hidden = false; loadDraft(); syncTagChips(); renderIngPreview(); return;
       }
       gate.hidden = false;
       if(me.loggedIn && me.role !== "owner"){

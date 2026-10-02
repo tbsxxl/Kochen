@@ -1,8 +1,10 @@
 ---
-title: "Grilled Beef & Cheese Sandwich mit Burgersauce und buntem Salat"
+title: "Beef & Cheese Sandwich"
+subtitle: "mit Burgersoße und Salat"
+source: "HelloFresh"
 date: 2026-10-02
 category: "Burger & Sandwiches"
-tags: ["rind", "hackfleisch", "sandwich", "cheddar", "HelloFresh"]
+tags: ["rind", "hackfleisch", "amerikanisch", "pfanne"]
 time: "35–45 Min"
 image: /recipes/images/grilled-beef-cheese-sandwich-mit-burgersauce-und-buntem-sala-mur98w2r.jpg
 servings: 2

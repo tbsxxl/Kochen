@@ -1,9 +1,10 @@
 ---
 title: "Pasta al Forno"
+subtitle: "Nudelauflauf mit Tomaten und Mozzarella"
 date: 2026-02-20
 category: "Pasta"
 categories: ["Vegetarisch", "Italienisch", "Meal Prep"]
-tags: ["italienisch", "pasta", "ofen", "pomodoro", "vegetarisch", "Pasta & Cucina Italiana", "Pasta"]
+tags: ["ofen", "familientauglich"]
 time: "ca. 1 Std"
 image: /recipes/images/Nudelauflauf.jpg
 servings: 4

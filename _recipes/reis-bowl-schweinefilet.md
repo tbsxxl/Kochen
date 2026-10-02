@@ -1,9 +1,10 @@
 ---
-title: "Reis-Bowl mit marinierten Schweinefiletstreifen"
+title: "Reis-Bowl mit Schweinefilet"
+source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"
 categories: ["Asiatisch", "Meal Prep"]
-tags: ["schwein", "bowl", "high-protein", "kalorien-im-blick", "HelloFresh"]
+tags: ["schwein", "high-protein"]
 time: "30–40 Min"
 image: /recipes/images/reis-bowl-schweinefilet.jpg
 servings: 2

@@ -1,9 +1,11 @@
 ---
-title: "Kantonesisches Pork Belly (Siu Yuk)"
+title: "Siu Yuk"
+subtitle: "Kantonesischer Krustenschweinebauch"
+source: "Fallow"
 date: 2026-09-17
 category: "Asiatisch"
 categories: ["Fleisch & Schmorgerichte"]
-tags: ["chinesisch", "kantonesisch", "schwein", "knusprige-schwarte", "Fallow Chefs"]
+tags: ["schwein", "chinesisch", "aufwendig", "am-vortag-starten"]
 time: "ca. 1 Std. aktiv, plus mind. 12 Std. Ruhezeit im Kühlschrank"
 image: /recipes/images/siu-yuk-pork-belly.jpg
 servings: 4

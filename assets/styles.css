@@ -818,6 +818,9 @@ select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linea
 .uploadCard{display:flex;flex-direction:column;gap:12px}
 .uploadArea{min-height:140px;font-family:var(--fontUi);font-size:var(--fs16)}
 .uploadHint{margin:12px 4px 0;font-size:var(--fs14)}
+.fieldHint{margin:-4px 0 0;font-size:var(--fs12);color:var(--sub2)}
+.tagPicker{gap:6px}
+.tagPicker .pillToggle{min-height:32px;padding:0 12px;font-size:var(--fs12)}
 #extraCats{gap:8px}
 #extraCats .pillToggle[aria-pressed="true"],#randomFilters .pillToggle[data-filter]:not([data-filter="fav"])[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--onLeaf)}
 #extraCats .pillToggle{min-height:36px;padding:0 12px}
@@ -860,6 +863,9 @@ select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linea
 .notesHint{margin-top:8px;font-size:var(--fs12);color:var(--sub2)}
 .kvRating{background:var(--goldSoft);border-color:transparent;color:var(--text)}
 /* Autor */
+.recipeName{margin:0}
+.recipeSubtitle{margin:4px 0 16px;font-size:var(--fs18);font-weight:400;line-height:1.4;color:var(--sub2)}
+.recipeName:not(:has(+ .recipeSubtitle)){margin-bottom:12px}
 .recipeAuthor{display:inline-flex;align-items:center;gap:8px;margin:-4px 0 12px;color:var(--sub2);font-size:var(--fs14);text-decoration:none}
 .authorAvatar{display:inline-flex;align-items:center;justify-content:center;flex:0 0 24px;width:24px;height:24px;border-radius:var(--rPill);background:var(--leafSoft);color:var(--leaf);font-size:var(--fs12);font-weight:600}
 .personOptName{display:flex;align-items:center;gap:12px}

@@ -1,8 +1,9 @@
 ---
 title: "Der beste Burger der Welt"
+source: "Fallow"
 date: 2026-09-17
 category: "Burger & Sandwiches"
-tags: ["amerikanisch", "burger", "streetfood", "homemade-buns", "aufwendig", "Fallow Chefs"]
+tags: ["rind", "amerikanisch", "streetfood", "aufwendig", "am-vortag-starten"]
 time: "ca. 3-4 Std. aktive Zubereitung, plus Ruhezeiten (Teig, Gurken, Öl-Infusion: insgesamt ca. 1-2 Tage)"
 image: /recipes/images/world-best-burger.jpg
 servings: 4

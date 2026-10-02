@@ -1,9 +1,10 @@
 ---
-title: "Spicy Sambal Chicken Bowl"
+title: "Scharfe Sambal-Hähnchen-Bowl"
+source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"
 categories: ["Asiatisch", "Hähnchen", "Schnell", "Meal Prep"]
-tags: ["hähnchen", "bowl", "schnell", "high-protein", "HelloFresh"]
+tags: ["hähnchen", "scharf", "high-protein"]
 time: "15–25 Min"
 image: /recipes/images/spicy-sambal-chicken-bowl.jpg
 servings: 2

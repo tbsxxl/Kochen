@@ -1,9 +1,10 @@
 ---
-title: "Keema Matar Curry mit Hähnchen"
+title: "Keema Matar mit Hähnchen"
+source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"
 categories: ["Indisch", "Hähnchen", "Schnell", "Meal Prep"]
-tags: ["hähnchen", "curry", "indisch", "schnell", "high-protein", "HelloFresh"]
+tags: ["hähnchen", "high-protein"]
 time: "15–25 Min"
 image: /recipes/images/keema-matar-curry-mit-haehnchen-mur9b1gt.jpg
 servings: 2

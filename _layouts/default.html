@@ -6,7 +6,7 @@
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
 {%- capture meta_desc -%}
     {%- if page.layout == 'recipe' -%}
-      {{ page.category }}{% if page.time %} · {{ page.time }}{% endif %}{% if page.servings %} · {{ page.servings }} Portionen{% endif %}
+      {% if page.subtitle %}{{ page.title }} {{ page.subtitle }} · {% endif %}{{ page.category }}{% if page.time %} · {{ page.time }}{% endif %}{% if page.servings %} · {{ page.servings }} Portionen{% endif %}
     {%- else -%}{{ page.description | default: site.description }}{%- endif -%}
   {%- endcapture -%}
   {%- if page.image -%}{%- capture og_image -%}{{ page.image | absolute_url }}?v={{ site.image_version }}{%- endcapture -%}

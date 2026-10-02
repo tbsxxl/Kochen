@@ -1,8 +1,9 @@
 ---
-title: "Fish and Chips mit Tartarsauce"
+title: "Fish & Chips"
+subtitle: "mit Tartarsoße"
 date: 2026-02-20
 category: "Knusprig & Frittiert"
-tags: ["englisch","fisch","frittieren","streetfood","klassiker","kartoffeln","tartarsauce"]
+tags: ["fisch", "englisch", "streetfood", "klassiker"]
 time: "ca. 90 Min"
 image: /recipes/images/fish.jpg
 servings: 4

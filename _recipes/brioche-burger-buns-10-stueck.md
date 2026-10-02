@@ -1,9 +1,10 @@
 ---
 title: "Brioche Buns"
+subtitle: "für 10 Burger"
 date: 2026-02-20
 category: "Pizza & Brot"
 categories: ["Süßes & Backen"]
-tags: ["französisch", "hefeteig", "backen", "brioche", "vegetarisch", "Boulangerie"]
+tags: ["vegetarisch", "französisch", "ofen", "aufwendig"]
 time: "ca. 2 Std 50 Min"
 image: /recipes/images/Buns.jpg
 servings: 10

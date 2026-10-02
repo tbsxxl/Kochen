@@ -648,6 +648,8 @@ const q = (s) => JSON.stringify(s);
 function buildMarkdown(r, imagePath, date, author){
   const lines = ["---"];
   lines.push(`title: ${q(r.title)}`);
+  if(r.subtitle) lines.push(`subtitle: ${q(r.subtitle)}`);
+  if(r.source) lines.push(`source: ${q(r.source)}`);
   lines.push(`date: ${date || new Date().toISOString().slice(0, 10)}`);
   if(author) lines.push(`author: ${q(clean(author, 40))}`);
   lines.push(`category: ${q(r.category)}`);
@@ -690,6 +692,8 @@ function validateRecipe(b){
   const list = (a, n, max) => (Array.isArray(a) ? a : []).map(x => clean(x, max)).filter(Boolean).slice(0, n);
   return {
     title, category, servings, ingredients, steps, markdown,
+    subtitle: clean(b.subtitle, 120),
+    source: clean(b.source, 60),
     categories: list(b.categories, 10, 60).filter(c => c !== category),
     tags: list(b.tags, 20, 40),
     time: clean(b.time, 160),

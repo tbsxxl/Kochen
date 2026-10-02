@@ -1,9 +1,10 @@
 ---
-title: "Pollo al Basilico & Mozzarella"
+title: "Pollo al Basilico e Mozzarella"
+subtitle: "Hähnchen in Basilikum-Sahnesoße"
 date: 2026-02-20
 category: "Hähnchen"
 categories: ["Italienisch"]
-tags: ["italienisch", "hähnchen", "basilikum", "mozzarella", "Pollame & Geflügel", "Chicken"]
+tags: ["hähnchen"]
 time: "ca. 50 Min"
 image: /recipes/images/basilikum.jpg
 servings: 4

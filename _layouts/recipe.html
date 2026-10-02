@@ -8,6 +8,7 @@ layout: default
     path: {{ page.path | jsonify }},
     image: "{% if page.image %}{{ page.image | relative_url }}?v={{ site.image_version }}{% endif %}",
     title: {{ page.title | jsonify }},
+    subtitle: {{ page.subtitle | default: "" | jsonify }},
     baseServings: {{ page.servings | default: 1 | jsonify }},
     ingredients: {{ page.ingredients | jsonify }}
   };
@@ -34,9 +35,10 @@ layout: default
     {% endif %}
 
     <div class="recipePageBody">
-      <h1 class="h1" style="margin:0 0 12px 0">{{ page.title }}</h1>
+      <h1 class="h1 recipeName">{{ page.title }}</h1>
+      {%- if page.subtitle %}<p class="recipeSubtitle">{{ page.subtitle }}</p>{% endif %}
       {%- assign recipe_author = page.author | default: site.owner_name -%}
-      <a class="recipeAuthor" href="{{ '/rezeptindex/' | relative_url }}?person={{ recipe_author | url_encode }}"><span class="authorAvatar" aria-hidden="true">{{ recipe_author | slice: 0 | upcase }}</span><span>von {{ recipe_author }}</span></a>
+      <a class="recipeAuthor" href="{{ '/rezeptindex/' | relative_url }}?person={{ recipe_author | url_encode }}"><span class="authorAvatar" aria-hidden="true">{{ recipe_author | slice: 0 | upcase }}</span><span>von {{ recipe_author }}{% if page.source %} · nach {{ page.source }}{% endif %}</span></a>
 
       <div class="kvRow" style="margin-bottom:0">
         {% if page.time %}<span class="kv"><span class="kvIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span>{{ page.time }}</span></span>{% endif %}

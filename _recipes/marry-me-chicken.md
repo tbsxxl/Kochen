@@ -1,8 +1,9 @@
 ---
 title: "Marry-Me-Chicken"
+source: "HelloFresh"
 date: 2026-08-25
 category: "Hähnchen"
-tags: ["hähnchen", "usa", "high-protein", "kalorien-im-blick", "HelloFresh"]
+tags: ["hähnchen", "amerikanisch", "high-protein"]
 time: "30–40 Min"
 image: /recipes/images/marry-me-chicken.jpg
 servings: 2

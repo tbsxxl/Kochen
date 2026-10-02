@@ -1,9 +1,11 @@
 ---
-title: "Korean Fried Chicken mit Gochujiang-Soja-Glasur"
+title: "Korean Fried Chicken"
+subtitle: "mit Gochujang-Soja-Glasur"
+source: "HelloFresh"
 date: 2026-09-17
 category: "Knusprig & Frittiert"
 categories: ["Asiatisch", "Hähnchen"]
-tags: ["asiatisch", "koreanisch", "high-protein", "scharf", "HelloFresh"]
+tags: ["hähnchen", "koreanisch", "scharf", "high-protein"]
 time: "30 - 40 Min"
 image: /recipes/images/korean-fried-chicken.jpg
 servings: 4
