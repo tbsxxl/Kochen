@@ -9,25 +9,27 @@ time: "ca. 4,5–5 Stunden"
 image: /recipes/images/ribs.jpg
 servings: 4
 ingredients:
+  - { section: "Kartoffelpüree" }
   - { qty: 1, unit: "kg", item: "Maris-Piper-Kartoffeln" }
   - { qty: 200, unit: "ml", item: "Vollmilch" }
   - { qty: 200, unit: "ml", item: "Schlagsahne" }
-  - { qty: 4, unit: "Zehen", item: "Knoblauch, gehackt (Püree)" }
-  - { qty: "3", unit: "Zweige", item: "Thymian (Püree)" }
+  - { qty: 4, unit: "Zehen", item: "Knoblauch, gehackt" }
+  - { qty: "3", unit: "Zweige", item: "Thymian" }
   - { qty: 150, unit: "g", item: "Butter, geschmolzen" }
-  - { qty: "n. B.", unit: "", item: "Feines Salz (Püree)" }
-  - { qty: "n. B.", unit: "", item: "Weißer Pfeffer (Püree)" }
+  - { qty: "n. B.", unit: "", item: "Feines Salz" }
+  - { qty: "n. B.", unit: "", item: "Weißer Pfeffer" }
   - { qty: "n. B.", unit: "", item: "Muskatnuss, frisch gerieben" }
+  - { section: "Short Ribs" }
   - { qty: "4", unit: "Stk.", item: "Rinder-Short-Ribs" }
-  - { qty: "n. B.", unit: "", item: "Salz (Short Ribs)" }
-  - { qty: "n. B.", unit: "", item: "Pfeffer (Short Ribs)" }
+  - { qty: "n. B.", unit: "", item: "Salz" }
+  - { qty: "n. B.", unit: "", item: "Pfeffer" }
   - { qty: 1, unit: "EL", item: "Öl" }
   - { qty: 1, unit: "", item: "Zwiebel, gewürfelt" }
   - { qty: 2, unit: "Stangen", item: "Sellerie, gewürfelt" }
   - { qty: 2, unit: "", item: "Karotten, gewürfelt" }
   - { qty: 2, unit: "EL", item: "Tomatenmark" }
   - { qty: 3, unit: "Zehen", item: "Knoblauch, in Scheiben" }
-  - { qty: 3, unit: "Zweige", item: "Thymian (Short Ribs)" }
+  - { qty: 3, unit: "Zweige", item: "Thymian" }
   - { qty: 2, unit: "", item: "Lorbeerblätter" }
   - { qty: 500, unit: "ml", item: "Rotwein" }
   - { qty: "750", unit: "ml", item: "Rinderbrühe" }

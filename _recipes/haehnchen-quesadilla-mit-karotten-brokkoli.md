@@ -9,6 +9,7 @@ time: "ca. 25–35 Min"
 image: /recipes/images/ques.jpg
 servings: 3
 ingredients:
+  - { section: "Füllung" }
   - { qty: 2, unit: "", item: "Weizentortillas, groß" }
   - { qty: 300, unit: "g", item: "Hähnchenbrustfilet, in Streifen" }
   - { qty: 100, unit: "g", item: "Brokkoli, kleine Röschen (kurz blanchiert)" }
@@ -17,6 +18,7 @@ ingredients:
   - { qty: 0.5, unit: "", item: "Zwiebel, in Streifen" }
   - { qty: 150, unit: "g", item: "Käse (Cheddar/Gouda/Mix)" }
   - { qty: 1.5, unit: "EL", item: "Öl" }
+  - { section: "Gewürzmischung" }
   - { qty: 0.75, unit: "TL", item: "Paprikapulver, mild" }
   - { qty: 0.75, unit: "TL", item: "Kreuzkümmel" }
   - { qty: "0.75", unit: "TL", item: "Chilipulver" }
@@ -26,10 +28,11 @@ ingredients:
   - { qty: 0.25, unit: "TL", item: "Zucker (optional)" }
   - { qty: "n. B.", unit: "", item: "Salz" }
   - { qty: "n. B.", unit: "", item: "Pfeffer" }
-  - { qty: 4, unit: "EL", item: "Mayo oder Sour Cream (Dip, halbe Menge)" }
-  - { qty: 1, unit: "TL", item: "Chipotle-Sauce, mild (Dip)" }
-  - { qty: 1, unit: "TL", item: "Limettensaft (Dip)" }
-  - { qty: "n. B.", unit: "", item: "Salz (Dip)" }
+  - { section: "Dip" }
+  - { qty: 4, unit: "EL", item: "Mayo oder Sour Cream (halbe Menge)" }
+  - { qty: 1, unit: "TL", item: "Chipotle-Soße, mild" }
+  - { qty: 1, unit: "TL", item: "Limettensaft" }
+  - { qty: "n. B.", unit: "", item: "Salz" }
 ---
 
 ## Schritte

@@ -10,21 +10,25 @@ time: "20 - 30 Min"
 image: /recipes/images/tuerkische-hack-pasta.jpg
 servings: 4
 ingredients:
-  - { qty: 500, unit: "g", item: "Fusilli" }
-  - { qty: 800, unit: "g", item: "Kirschtomaten aus der Dose" }
-  - { qty: 12, unit: "g", item: "Gewürzmischung Mezze" }
-  - { qty: 10, unit: "g", item: "Minze/Petersilie" }
-  - { qty: 1, unit: "g", item: "Oregano, gerebelt" }
-  - { qty: 4, unit: "", item: "Knoblauchzehen" }
-  - { qty: 70, unit: "g", item: "Tomatenmark" }
-  - { qty: 200, unit: "g", item: "Sahnejoghurt, Bio" }
-  - { qty: 8, unit: "g", item: "Hühnerbrühpulver" }
+  - { section: "Hack-Tomatensoße" }
   - { qty: 400, unit: "g", item: "Hackfleischzubereitung vom Weiderind" }
   - { qty: 1, unit: "", item: "rote Zwiebel" }
+  - { qty: 4, unit: "", item: "Knoblauchzehen" }
+  - { qty: 70, unit: "g", item: "Tomatenmark" }
+  - { qty: 12, unit: "g", item: "Gewürzmischung Mezze" }
+  - { qty: 800, unit: "g", item: "Kirschtomaten aus der Dose" }
+  - { qty: 8, unit: "g", item: "Hühnerbrühpulver" }
   - { qty: 100, unit: "ml", item: "Wasser" }
+  - { qty: 1, unit: "g", item: "Oregano, gerebelt" }
+  - { qty: 1, unit: "Prise", item: "Zucker" }
+  - { section: "Minz-Joghurt" }
+  - { qty: 200, unit: "g", item: "Sahnejoghurt, Bio" }
+  - { qty: 10, unit: "g", item: "Minze/Petersilie" }
+  - { section: "Pasta" }
+  - { qty: 500, unit: "g", item: "Fusilli" }
+  - { section: "Zum Abschmecken" }
   - { qty: 1, unit: "Prise", item: "Salz" }
   - { qty: 1, unit: "Prise", item: "Pfeffer" }
-  - { qty: 1, unit: "Prise", item: "Zucker" }
 ---
 
 ## Schritte

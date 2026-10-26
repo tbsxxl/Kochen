@@ -10,23 +10,28 @@ time: "30 - 40 Min"
 image: /recipes/images/korean-fried-chicken.jpg
 servings: 4
 ingredients:
+  - { section: "Reis" }
+  - { qty: 300, unit: "g", item: "Jasminreis" }
+  - { qty: 600, unit: "ml", item: "Wasser" }
+  - { section: "Kohlrabi-Salat" }
+  - { qty: 2, unit: "", item: "Kohlrabi" }
+  - { qty: 2, unit: "", item: "Limetten" }
+  - { qty: 20, unit: "ml", item: "Sesamöl" }
+  - { section: "Soße" }
   - { qty: 50, unit: "g", item: "Gochujang" }
   - { qty: 40, unit: "ml", item: "Sojasoße" }
-  - { qty: 2, unit: "", item: "Knoblauchzehen" }
-  - { qty: 4, unit: "g", item: "milder Chili-Mix" }
-  - { qty: 20, unit: "ml", item: "Sesamöl" }
   - { qty: 20, unit: "g", item: "Sesamsamen" }
-  - { qty: 300, unit: "g", item: "Jasminreis" }
-  - { qty: 2, unit: "", item: "Limetten" }
-  - { qty: 16, unit: "g", item: "Maisstärke" }
-  - { qty: 6, unit: "", item: "Frühlingszwiebeln" }
-  - { qty: 500, unit: "g", item: "Hähnchenbrustfilet" }
-  - { qty: 2, unit: "", item: "Kohlrabi" }
+  - { qty: 100, unit: "ml", item: "Wasser" }
   - { qty: 2, unit: "TL", item: "Honig" }
   - { qty: 2, unit: "TL", item: "Balsamicoessig" }
-  - { qty: 600, unit: "ml", item: "Wasser, für den Reis" }
-  - { qty: 100, unit: "ml", item: "Wasser, für die Soße" }
+  - { section: "Hähnchen" }
+  - { qty: 500, unit: "g", item: "Hähnchenbrustfilet" }
+  - { qty: 16, unit: "g", item: "Maisstärke" }
+  - { qty: 2, unit: "", item: "Knoblauchzehen" }
+  - { qty: 4, unit: "g", item: "milder Chili-Mix" }
+  - { qty: 6, unit: "", item: "Frühlingszwiebeln" }
   - { qty: 4, unit: "EL", item: "Öl" }
+  - { section: "Zum Abschmecken" }
   - { qty: 1, unit: "Prise", item: "Salz" }
   - { qty: 1, unit: "Prise", item: "Pfeffer" }
 ---

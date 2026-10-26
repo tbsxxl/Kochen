@@ -10,16 +10,19 @@ time: "15–25 Min"
 image: /recipes/images/pasta-al-pomodoro-haehnchen.jpg
 servings: 2
 ingredients:
-  - { qty: 250, unit: "g", item: "Hähnchengeschnetzeltes" }
+  - { section: "Pasta" }
   - { qty: 250, unit: "g", item: "Penne" }
+  - { section: "Hähnchen-Tomatensoße" }
+  - { qty: 250, unit: "g", item: "Hähnchengeschnetzeltes" }
+  - { qty: 4, unit: "g", item: "Gewürzmischung Hello Paprika" }
+  - { qty: 1, unit: "", item: "Knoblauchzehe" }
+  - { qty: 390, unit: "g", item: "Hühnerbrühe" }
   - { qty: 250, unit: "g", item: "Kirschtomaten" }
   - { qty: 1, unit: "", item: "rote Paprika" }
+  - { section: "Knusper-Topping" }
   - { qty: 25, unit: "g", item: "Pankomehl" }
   - { qty: 40, unit: "g", item: "Hartkäse ital. Art, gerieben" }
   - { qty: 4, unit: "g", item: "Petersilie glatt/Basilikum" }
-  - { qty: 1, unit: "", item: "Knoblauchzehe" }
-  - { qty: 4, unit: "g", item: "Gewürzmischung Hello Paprika" }
-  - { qty: 390, unit: "g", item: "Hühnerbrühe" }
 ---
 
 ## Schritte

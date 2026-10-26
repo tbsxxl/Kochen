@@ -9,6 +9,7 @@ time: "ca. 50–60 Min"
 image: /recipes/images/parmahähnchen.jpg
 servings: 2
 ingredients:
+  - { section: "Hähnchen" }
   - { qty: 2, unit: "", item: "Hähnchenbrustfilets" }
   - { qty: 4, unit: "Scheiben", item: "Parmaschinken" }
   - { qty: 1, unit: "Kugel", item: "Mozzarella" }
@@ -16,18 +17,20 @@ ingredients:
   - { qty: "n. B.", unit: "", item: "Pfeffer" }
   - { qty: "n. B.", unit: "", item: "Paprikapulver" }
   - { qty: "n. B.", unit: "", item: "Öl zum Braten" }
+  - { section: "Tomaten-Sahnesoße" }
   - { qty: 200, unit: "ml", item: "Sahne" }
   - { qty: 200, unit: "ml", item: "Passierte Tomaten" }
   - { qty: 1, unit: "TL", item: "Tomatenmark" }
   - { qty: 1, unit: "", item: "Zwiebel, klein" }
   - { qty: 1, unit: "Zehe", item: "Knoblauch" }
   - { qty: 1, unit: "TL", item: "Zucker" }
-  - { qty: "0.5", unit: "TL", item: "Salz (Sauce)" }
-  - { qty: 0.5, unit: "TL", item: "Schwarzer Pfeffer (Sauce)" }
+  - { qty: "0.5", unit: "TL", item: "Salz" }
+  - { qty: 0.5, unit: "TL", item: "Schwarzer Pfeffer" }
   - { qty: 1, unit: "TL", item: "Italienische Kräuter (oder Oregano/Thymian/Basilikum)" }
-  - { qty: "2", unit: "TL", item: "Pesto (zum Servieren)" }
-  - { qty: "400", unit: "g", item: "Fries (TK oder Kartoffeln)" }
-  - { qty: "n. B.", unit: "", item: "Öl & Salz (Fries)" }
+  - { section: "Pesto-Pommes" }
+  - { qty: "400", unit: "g", item: "Pommes (TK oder frische Kartoffeln)" }
+  - { qty: "n. B.", unit: "", item: "Öl und Salz" }
+  - { qty: "2", unit: "TL", item: "Pesto" }
 ---
 
 ## Schritte

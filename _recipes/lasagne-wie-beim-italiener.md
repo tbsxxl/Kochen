@@ -9,6 +9,7 @@ time: "ca. 1 Std 40 Min"
 image: /recipes/images/lasagne-al-forno-mvpsln5s.jpg
 servings: 4
 ingredients:
+  - { section: "Ragù" }
   - { qty: "n. B.", unit: "", item: "Olivenöl" }
   - { qty: 500, unit: "g", item: "Hackfleisch, gemischt" }
   - { qty: 1, unit: "", item: "Zwiebel" }
@@ -17,13 +18,15 @@ ingredients:
   - { qty: 1, unit: "EL", item: "Tomatenmark" }
   - { qty: 800, unit: "g", item: "Tomaten, geschält (Dose)" }
   - { qty: "n. B.", unit: "", item: "Rotwein" }
+  - { qty: "n. B.", unit: "", item: "Salz" }
+  - { qty: "n. B.", unit: "", item: "Pfeffer" }
+  - { section: "Béchamel" }
   - { qty: 500, unit: "ml", item: "Milch" }
   - { qty: 30, unit: "g", item: "Butter" }
   - { qty: 40, unit: "g", item: "Mehl" }
-  - { qty: "n. B.", unit: "", item: "Salz" }
-  - { qty: "n. B.", unit: "", item: "Pfeffer" }
   - { qty: "n. B.", unit: "", item: "Zitronensaft" }
   - { qty: "n. B.", unit: "", item: "Muskat" }
+  - { section: "Zum Schichten" }
   - { qty: "n. B.", unit: "", item: "Fett für die Form" }
   - { qty: 300, unit: "g", item: "Lasagneplatten" }
   - { qty: "n. B.", unit: "", item: "Käse, gerieben" }
