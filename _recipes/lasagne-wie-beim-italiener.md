@@ -6,7 +6,7 @@ category: "Pasta"
 categories: ["Italienisch", "Meal Prep"]
 tags: ["hackfleisch", "ofen", "klassiker", "aufwendig"]
 time: "ca. 1 Std 40 Min"
-image: /recipes/images/lasagne.jpg
+image: /recipes/images/lasagne-al-forno-mvpsln5s.jpg
 servings: 4
 ingredients:
   - { section: "Ragù" }
