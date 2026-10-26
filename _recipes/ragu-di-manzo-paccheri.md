@@ -7,7 +7,7 @@ category: "Pasta"
 categories: ["Italienisch", "Fleisch & Schmorgerichte", "Meal Prep"]
 tags: ["rind", "high-protein", "aufwendig"]
 time: "110 - 120 Min"
-image: /recipes/images/ragu-di-manzo.jpg
+image: /recipes/images/ragu-di-manzo-mvpsa3c1.jpg
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Hüftsteak vom Weiderind" }
