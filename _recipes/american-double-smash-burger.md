@@ -9,21 +9,26 @@ time: "30 - 40 Min"
 image: /recipes/images/smash-burger.jpg
 servings: 4
 ingredients:
-  - { qty: 320, unit: "g", item: "vegane Brioche Burger Buns" }
-  - { qty: 2, unit: "", item: "kleine Salatgurken" }
-  - { qty: 4, unit: "", item: "Zwiebeln" }
+  - { section: "Wedges" }
   - { qty: 700, unit: "g", item: "Ofenkartoffeln" }
+  - { section: "Pickles" }
+  - { qty: 2, unit: "", item: "kleine Salatgurken" }
+  - { qty: 100, unit: "ml", item: "Wasser" }
+  - { qty: 100, unit: "ml", item: "Weißweinessig" }
+  - { qty: 1, unit: "TL", item: "Salz" }
+  - { qty: 6, unit: "EL", item: "Zucker" }
+  - { section: "Schmelzzwiebeln" }
+  - { qty: 4, unit: "", item: "Zwiebeln" }
+  - { qty: 2, unit: "EL", item: "Butter" }
+  - { section: "Burger" }
+  - { qty: 320, unit: "g", item: "vegane Brioche Burger Buns" }
+  - { qty: 500, unit: "g", item: "gemischte Hackfleischzubereitung" }
+  - { qty: 40, unit: "g", item: "geriebener Hartkäse italienischer Art" }
   - { qty: 100, unit: "g", item: "Ketchup" }
   - { qty: 20, unit: "g", item: "mittelscharfer Senf" }
-  - { qty: 40, unit: "g", item: "geriebener Hartkäse italienischer Art" }
   - { qty: 50, unit: "g", item: "Mayonnaise" }
-  - { qty: 500, unit: "g", item: "gemischte Hackfleischzubereitung" }
-  - { qty: 100, unit: "ml", item: "Wasser, für die Pickles" }
-  - { qty: 100, unit: "ml", item: "Weißweinessig, für die Pickles" }
-  - { qty: 1, unit: "TL", item: "Salz, für die Pickles" }
-  - { qty: 6, unit: "EL", item: "Zucker, für die Pickles" }
+  - { section: "Zum Braten und Würzen" }
   - { qty: 2, unit: "EL", item: "Öl" }
-  - { qty: 2, unit: "EL", item: "Butter" }
   - { qty: 1, unit: "Prise", item: "Salz" }
   - { qty: 1, unit: "Prise", item: "Pfeffer" }
 ---

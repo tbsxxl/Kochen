@@ -10,24 +10,26 @@ time: "110 - 120 Min"
 image: /recipes/images/ragu-di-manzo-mvpsa3c1.jpg
 servings: 4
 ingredients:
+  - { section: "Ragù" }
   - { qty: 500, unit: "g", item: "Hüftsteak vom Weiderind" }
   - { qty: 35, unit: "g", item: "Tomatenmark" }
   - { qty: 2, unit: "", item: "Karotten" }
   - { qty: 2, unit: "", item: "Zwiebeln" }
-  - { qty: 4, unit: "", item: "Stangen Stangensellerie" }
+  - { qty: 4, unit: "Stangen", item: "Stangensellerie" }
   - { qty: 4, unit: "", item: "Knoblauchzehen" }
   - { qty: 780, unit: "g", item: "stückige Tomaten" }
   - { qty: 8, unit: "g", item: "Rinderbrühpulver" }
   - { qty: 10, unit: "g", item: "Salbei/Thymian" }
   - { qty: 28, unit: "g", item: "kräftige Rotweinpaste" }
-  - { qty: 750, unit: "g", item: "frische Paccheri" }
-  - { qty: 40, unit: "g", item: "gehobelter Grana Padano" }
   - { qty: 400, unit: "ml", item: "Wasser" }
   - { qty: 2, unit: "EL", item: "Olivenöl" }
   - { qty: 1, unit: "TL", item: "Balsamicoessig" }
   - { qty: 1, unit: "Prise", item: "Salz" }
   - { qty: 1, unit: "Prise", item: "Pfeffer" }
   - { qty: 1, unit: "Prise", item: "Zucker" }
+  - { section: "Pasta und Servieren" }
+  - { qty: 750, unit: "g", item: "frische Paccheri" }
+  - { qty: 40, unit: "g", item: "gehobelter Grana Padano" }
 ---
 
 ## Schritte

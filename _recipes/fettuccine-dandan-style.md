@@ -10,19 +10,23 @@ time: "15 - 25 Min"
 image: /recipes/images/fettuccine-dandan.jpg
 servings: 4
 ingredients:
-  - { qty: 500, unit: "g", item: "gemischte Hackfleischzubereitung" }
+  - { section: "Nudeln" }
   - { qty: 500, unit: "g", item: "Fettuccine" }
-  - { qty: 800, unit: "g", item: "Pak Choi" }
-  - { qty: 4, unit: "", item: "Frühlingszwiebeln" }
-  - { qty: 120, unit: "g", item: "Hoisinsoße" }
-  - { qty: 40, unit: "ml", item: "Sojasoße" }
-  - { qty: 100, unit: "g", item: "Erdnussbutter" }
-  - { qty: 40, unit: "g", item: "geröstete, gesalzene Erdnüsse" }
+  - { section: "Chili-Öl" }
+  - { qty: 4, unit: "EL", item: "Öl" }
   - { qty: 4, unit: "g", item: "milder Chili-Mix" }
-  - { qty: 100, unit: "ml", item: "heißes Wasser" }
-  - { qty: 4, unit: "EL", item: "Öl, für das Chili-Öl" }
-  - { qty: 2, unit: "EL", item: "Öl, zum Anbraten" }
+  - { qty: 40, unit: "g", item: "geröstete, gesalzene Erdnüsse" }
   - { qty: 1, unit: "Prise", item: "Salz" }
+  - { section: "Dan-Dan-Fleisch" }
+  - { qty: 500, unit: "g", item: "gemischte Hackfleischzubereitung" }
+  - { qty: 4, unit: "", item: "Frühlingszwiebeln" }
+  - { qty: 800, unit: "g", item: "Pak Choi" }
+  - { qty: 120, unit: "g", item: "Hoisinsoße" }
+  - { qty: 2, unit: "EL", item: "Öl" }
+  - { section: "Erdnusssoße" }
+  - { qty: 100, unit: "g", item: "Erdnussbutter" }
+  - { qty: 40, unit: "ml", item: "Sojasoße" }
+  - { qty: 100, unit: "ml", item: "heißes Wasser" }
 ---
 
 ## Schritte

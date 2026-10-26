@@ -9,6 +9,7 @@ time: "ca. 5 Std"
 image: /recipes/images/ragu-alla-bolognese-mvpsbwj9.jpg
 servings: 6
 ingredients:
+  - { section: "Ragù" }
   - { qty: 1000, unit: "g", item: "Rinderhack (50% Beinscheibe, 50% Chuck)" }
   - { qty: 400, unit: "g", item: "Schweinebauch, gewürfelt" }
   - { qty: 100, unit: "g", item: "Pancetta, gewürfelt" }
@@ -27,10 +28,12 @@ ingredients:
   - { qty: 2, unit: "", item: "Lorbeerblätter" }
   - { qty: 1, unit: "Prise", item: "Muskatnuss" }
   - { qty: "n. B.", unit: "", item: "Salz" }
+  - { section: "Zum Fertigstellen" }
   - { qty: "zum Fertigstellen", unit: "", item: "Kalte Butter" }
   - { qty: "zum Fertigstellen", unit: "", item: "Zusätzlicher Schuss Milch" }
-  - { qty: 100, unit: "g", item: "Balsamicoessig (Gastrique)" }
-  - { qty: 50, unit: "g", item: "Zucker (Gastrique)" }
+  - { section: "Gastrique" }
+  - { qty: 100, unit: "g", item: "Balsamicoessig" }
+  - { qty: 50, unit: "g", item: "Zucker" }
 ---
 
 ## Schritte

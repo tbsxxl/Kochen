@@ -9,25 +9,28 @@ time: "ca. 2 Std"
 image: /recipes/images/butterchicken.jpg
 servings: 2
 ingredients:
+  - { section: "Marinade" }
   - { qty: 500, unit: "g", item: "Hähnchenbrust" }
   - { qty: 1, unit: "TL", item: "Paprikapulver" }
   - { qty: 1, unit: "EL", item: "Limetten- oder Zitronensaft" }
-  - { qty: 1, unit: "TL", item: "Salz (Marinade)" }
+  - { qty: 1, unit: "TL", item: "Salz" }
   - { qty: 150, unit: "g", item: "Joghurt" }
-  - { qty: 1, unit: "TL", item: "Cayennepfeffer (Marinade)" }
+  - { qty: 1, unit: "TL", item: "Cayennepfeffer" }
   - { qty: 1, unit: "EL", item: "Garam Masala" }
-  - { qty: 1, unit: "Zehe", item: "Knoblauch (Marinade)" }
-  - { qty: 1, unit: "Stück", item: "Ingwer, daumengroß (Marinade)" }
+  - { qty: 1, unit: "Zehe", item: "Knoblauch" }
+  - { qty: 1, unit: "Stück", item: "Ingwer, daumengroß" }
+  - { section: "Soße" }
   - { qty: 4, unit: "EL", item: "Butter" }
   - { qty: 1, unit: "", item: "Zwiebel" }
   - { qty: 500, unit: "g", item: "Tomaten, passierte" }
   - { qty: 1, unit: "TL", item: "Zimt" }
-  - { qty: 1, unit: "TL", item: "Salz (Sauce)" }
-  - { qty: 2, unit: "TL", item: "Cayennepfeffer (Sauce)" }
-  - { qty: 1, unit: "Stück", item: "Ingwer, daumengroß (Sauce)" }
-  - { qty: 1, unit: "Zehe", item: "Knoblauch (Sauce)" }
+  - { qty: 1, unit: "TL", item: "Salz" }
+  - { qty: 2, unit: "TL", item: "Cayennepfeffer" }
+  - { qty: 1, unit: "Stück", item: "Ingwer, daumengroß" }
+  - { qty: 1, unit: "Zehe", item: "Knoblauch" }
   - { qty: 1, unit: "EL", item: "Honig" }
   - { qty: 150, unit: "ml", item: "Sahne" }
+  - { section: "Zum Servieren" }
   - { qty: "optional", unit: "", item: "Korianderblätter" }
 ---
 

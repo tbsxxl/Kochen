@@ -8,6 +8,7 @@ time: "ca. 90 Min"
 image: /recipes/images/fish.jpg
 servings: 4
 ingredients:
+- { section: "Backteig und Fisch" }
 - { qty: 7, unit: "EL", item: "Weizenmehl, aufgeteilt" }
 - { qty: 7, unit: "EL", item: "Speisestärke" }
 - { qty: 1, unit: "TL", item: "Backpulver" }
@@ -16,8 +17,10 @@ ingredients:
 - { qty: 80, unit: "ml", item: "Dunkles Bier, kalt" }
 - { qty: 80, unit: "ml", item: "Mineralwasser mit Kohlensäure, kalt" }
 - { qty: 4, unit: "Stk.", item: "Weiße Fischfilets (je ca. 200 g)" }
+- { section: "Pommes" }
 - { qty: 900, unit: "g", item: "Kartoffeln, geschält" }
 - { qty: "n. B.", unit: "", item: "Pflanzenöl zum Frittieren" }
+- { section: "Tartarsoße" }
 - { qty: 120, unit: "ml", item: "Mayonnaise" }
 - { qty: 1.5, unit: "EL", item: "Dillgurken oder Cornichons, fein gehackt" }
 - { qty: 1, unit: "EL", item: "Frischer Dill (oder 1 TL getrocknet)" }
@@ -25,8 +28,8 @@ ingredients:
 - { qty: 2, unit: "TL", item: "Körniger Senf" }
 - { qty: 2, unit: "TL", item: "Zwiebel, fein gehackt (optional)" }
 - { qty: 1, unit: "TL", item: "Kapern, gehackt" }
-- { qty: "Prise", unit: "", item: "Salz (Sauce)" }
-- { qty: "Prise", unit: "", item: "Schwarzer Pfeffer (Sauce)" }
+- { qty: "Prise", unit: "", item: "Salz" }
+- { qty: "Prise", unit: "", item: "Schwarzer Pfeffer" }
 
 ---
 

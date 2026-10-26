@@ -9,6 +9,7 @@ time: "ca. 2 Std 50 Min"
 image: /recipes/images/Buns.jpg
 servings: 10
 ingredients:
+  - { section: "Teig" }
   - { qty: 200, unit: "ml", item: "Wasser, warm" }
   - { qty: 4, unit: "EL", item: "Milch" }
   - { qty: 1, unit: "Würfel", item: "Hefe, frisch" }
@@ -16,11 +17,12 @@ ingredients:
   - { qty: 8, unit: "g", item: "Salz" }
   - { qty: 80, unit: "g", item: "Butter, weich" }
   - { qty: 500, unit: "g", item: "Weizenmehl Type 550" }
-  - { qty: 1, unit: "", item: "Ei (für den Teig)" }
+  - { qty: 1, unit: "", item: "Ei" }
   - { qty: "n. B.", unit: "", item: "Mehl für Arbeitsfläche/Hände" }
-  - { qty: 1, unit: "", item: "Ei (zum Bestreichen)" }
-  - { qty: 2, unit: "EL", item: "Milch (zum Bestreichen)" }
-  - { qty: 2, unit: "EL", item: "Wasser (zum Bestreichen)" }
+  - { section: "Zum Bestreichen" }
+  - { qty: 1, unit: "", item: "Ei" }
+  - { qty: 2, unit: "EL", item: "Milch" }
+  - { qty: 2, unit: "EL", item: "Wasser" }
   - { qty: "n. B.", unit: "", item: "Sesam" }
 ---
 

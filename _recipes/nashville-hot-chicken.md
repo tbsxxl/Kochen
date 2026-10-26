@@ -10,25 +10,29 @@ time: "ca. 60 Min + marinieren"
 image: /recipes/images/nashville.jpg
 servings: 4
 ingredients:
+- { section: "Marinade" }
 - { qty: 8, unit: "Stk.", item: "Hähnchenschenkel (mit Haut und Knochen)" }
 - { qty: 500, unit: "ml", item: "Buttermilch" }
 - { qty: 2, unit: "EL", item: "Scharfe Soße (z.B. Frank's RedHot)" }
-- { qty: 1, unit: "EL", item: "Salz (Marinade)" }
+- { qty: 1, unit: "EL", item: "Salz" }
+- { section: "Panade" }
 - { qty: 400, unit: "g", item: "Weizenmehl" }
 - { qty: 60, unit: "g", item: "Speisestärke" }
-- { qty: 2, unit: "TL", item: "Paprikapulver (Panade)" }
-- { qty: 2, unit: "TL", item: "Knoblauchpulver (Panade)" }
+- { qty: 2, unit: "TL", item: "Paprikapulver" }
+- { qty: 2, unit: "TL", item: "Knoblauchpulver" }
 - { qty: 2, unit: "TL", item: "Zwiebelpulver" }
-- { qty: 1, unit: "TL", item: "Cayennepfeffer (Panade)" }
-- { qty: 2, unit: "TL", item: "Salz (Panade)" }
+- { qty: 1, unit: "TL", item: "Cayennepfeffer" }
+- { qty: 2, unit: "TL", item: "Salz" }
 - { qty: 1, unit: "TL", item: "Schwarzer Pfeffer, gemahlen" }
 - { qty: 1.5, unit: "l", item: "Pflanzenöl zum Frittieren" }
+- { section: "Scharfe Glasur" }
 - { qty: 120, unit: "ml", item: "Neutrales Öl (heiß, aus der Fritteuse)" }
-- { qty: 3, unit: "EL", item: "Cayennepfeffer (Glasur)" }
+- { qty: 3, unit: "EL", item: "Cayennepfeffer" }
 - { qty: 2, unit: "EL", item: "Brauner Zucker" }
-- { qty: 1, unit: "TL", item: "Paprikapulver (Glasur)" }
-- { qty: 1, unit: "TL", item: "Knoblauchpulver (Glasur)" }
-- { qty: 1, unit: "TL", item: "Salz (Glasur)" }
+- { qty: 1, unit: "TL", item: "Paprikapulver" }
+- { qty: 1, unit: "TL", item: "Knoblauchpulver" }
+- { qty: 1, unit: "TL", item: "Salz" }
+- { section: "Zum Servieren" }
 - { qty: 8, unit: "Stk.", item: "Toastbrot-Scheiben" }
 - { qty: 24, unit: "Stk.", item: "Essiggurken-Scheiben" }
 

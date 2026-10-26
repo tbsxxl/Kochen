@@ -9,21 +9,24 @@ time: "60 min"
 image: /recipes/images/yangnyeom.jpg
 servings: 4
 ingredients:
-  - { qty: 2, unit: "lb", item: "Chicken wings (Hähnchenflügel)" }
-  - { qty: 0.5, unit: "TL", item: "Kosher salt" }
-  - { qty: 0.5, unit: "TL", item: "Black pepper, gemahlen" }
-  - { qty: 0.5, unit: "cup", item: "Potato starch" }
-  - { qty: 0.25, unit: "cup", item: "Weizenmehl (all purpose)" }
-  - { qty: 0.5, unit: "TL", item: "Backnatron (baking soda)" }
+  - { section: "Hähnchen und Panade" }
+  - { qty: 2, unit: "lb", item: "Hähnchenflügel (Chicken Wings)" }
+  - { qty: 0.5, unit: "TL", item: "grobes Salz" }
+  - { qty: 0.5, unit: "TL", item: "schwarzer Pfeffer, gemahlen" }
+  - { qty: 0.5, unit: "cup", item: "Kartoffelstärke" }
+  - { qty: 0.25, unit: "cup", item: "Weizenmehl" }
+  - { qty: 0.5, unit: "TL", item: "Natron" }
   - { qty: 2, unit: "", item: "Eier, groß" }
-  - { qty: 1, unit: "EL", item: "Sesam, geröstet" }
-  - { qty: 2, unit: "TL", item: "Pflanzenöl (für Sauce)" }
-  - { qty: 3, unit: "Zehen", item: "Knoblauch, fein gehackt (für Sauce)" }
+  - { qty: "n. B.", unit: "", item: "Öl zum Frittieren (Mais- oder Pflanzenöl)" }
+  - { section: "Soße" }
+  - { qty: 2, unit: "TL", item: "Pflanzenöl" }
+  - { qty: 3, unit: "Zehen", item: "Knoblauch, fein gehackt" }
   - { qty: 0.3333333333333333, unit: "cup", item: "Ketchup" }
   - { qty: 0.3333333333333333, unit: "cup", item: "Reissirup" }
   - { qty: 0.25, unit: "cup", item: "Gochujang" }
   - { qty: 2, unit: "TL", item: "Weißweinessig" }
-  - { qty: "n. B.", unit: "", item: "Öl zum Frittieren (Mais- oder Pflanzenöl)" }
+  - { section: "Zum Servieren" }
+  - { qty: 1, unit: "EL", item: "Sesam, geröstet" }
   - { qty: "optional", unit: "", item: "Chicken-mu (eingelegter Rettich)" }
 ---
 

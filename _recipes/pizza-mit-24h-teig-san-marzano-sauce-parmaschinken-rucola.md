@@ -9,19 +9,22 @@ time: "ca. 24 Std Reifezeit + Backzeit"
 image: /recipes/images/pizza.jpg
 servings: 6
 ingredients:
+  - { section: "Teig" }
   - { qty: 1000, unit: "g", item: "Weizenmehl Typ 00 (11–15 % Eiweiß)" }
   - { qty: 630, unit: "g", item: "Kaltes Wasser" }
   - { qty: 30, unit: "g", item: "Feines Meersalz" }
   - { qty: 1, unit: "g", item: "Frische Hefe (oder 0,35 g Trockenhefe)" }
+  - { section: "Tomatensoße" }
   - { qty: 400, unit: "g", item: "San-Marzano-Tomaten (Dose)" }
-  - { qty: "1", unit: "TL", item: "Feines Salz (Sauce)" }
-  - { qty: "optional", unit: "", item: "4–6 Basilikumblätter" }
-  - { qty: "optional", unit: "", item: "1 TL Olivenöl (Sauce)" }
-  - { qty: "80–100", unit: "g", item: "Mozzarella (pro Pizza)" }
-  - { qty: "3", unit: "Scheiben", item: "Parmaschinken (pro Pizza)" }
-  - { qty: "1", unit: "Handvoll", item: "Rucola (pro Pizza)" }
+  - { qty: "1", unit: "TL", item: "Feines Salz" }
+  - { qty: "optional", unit: "", item: "Basilikumblätter (4–6 Stück)" }
+  - { qty: "optional", unit: "", item: "Olivenöl (1 TL)" }
+  - { section: "Belag (pro Pizza)" }
+  - { qty: "80–100", unit: "g", item: "Mozzarella" }
+  - { qty: "3", unit: "Scheiben", item: "Parmaschinken" }
+  - { qty: "1", unit: "Handvoll", item: "Rucola" }
   - { qty: "n. B.", unit: "", item: "Frisch geriebener Parmesan" }
-  - { qty: "1", unit: "EL", item: "Hochwertiges Olivenöl (pro Pizza)" }
+  - { qty: "1", unit: "EL", item: "Hochwertiges Olivenöl" }
 ---
 
 ## Schritte
