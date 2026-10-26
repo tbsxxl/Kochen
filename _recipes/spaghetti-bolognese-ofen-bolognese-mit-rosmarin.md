@@ -6,7 +6,7 @@ category: "Pasta"
 categories: ["Italienisch", "Meal Prep"]
 tags: ["rind", "ofen", "familientauglich"]
 time: "ca. 1 Std 15 Min"
-image: /recipes/images/bolo2.jpg
+image: /recipes/images/spaghetti-bolognese-mvpsb92p.jpg
 servings: 6
 ingredients:
   - { qty: 2, unit: "Zehen", item: "Knoblauch" }
