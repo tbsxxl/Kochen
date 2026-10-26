@@ -5,7 +5,7 @@ author: "Tobi"
 category: "Fleisch & Schmorgerichte"
 tags: ["Hauptspeise", "Braten", "griechisch"]
 time: "ca. 25 Min"
-image: /recipes/images/souvlaki-griechische-fleischspiesse.jpg
+image: /recipes/images/souvlaki-griechische-fleischspiesse-mvprezte.jpg
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Schweinelummer oder Schweinelachs (am Stück)" }
