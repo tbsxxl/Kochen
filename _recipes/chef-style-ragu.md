@@ -6,7 +6,7 @@ category: "Pasta"
 categories: ["Italienisch", "Fleisch & Schmorgerichte", "Meal Prep"]
 tags: ["rind", "klassiker", "aufwendig"]
 time: "ca. 5 Std"
-image: /recipes/images/Ragù.jpg
+image: /recipes/images/ragu-alla-bolognese-mvpsbwj9.jpg
 servings: 6
 ingredients:
   - { qty: 1000, unit: "g", item: "Rinderhack (50% Beinscheibe, 50% Chuck)" }
