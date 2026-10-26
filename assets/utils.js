@@ -461,6 +461,21 @@
     bindPressables
   };
 
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ()=>bindPressables(document));
-  else bindPressables(document);
+  // Großer Titel → kompakte Glas-Leiste oben, sobald er aus dem Bild gescrollt ist (wie in iOS)
+  function bindCompactTitle(){
+    const big = document.querySelector('.pageTitleBlock .h1, .recipeName, .homeGreetingTitle');
+    if(!big || !('IntersectionObserver' in window)) return;
+    const bar = document.createElement('div');
+    bar.className = 'navCompact';
+    bar.setAttribute('aria-hidden', 'true');
+    bar.textContent = big.classList.contains('homeGreetingTitle') ? (document.querySelector('.brandWordmark')?.textContent || '') : big.textContent.trim();
+    document.body.appendChild(bar);
+    new IntersectionObserver(([e])=>{
+      bar.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0);
+    }, { rootMargin: '-40px 0px 0px 0px' }).observe(big);
+  }
+
+  function init(){ bindPressables(document); bindCompactTitle(); }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();

@@ -28,9 +28,9 @@
 :root{
   color-scheme:light;
 
-  --bg:#FFF9F2;          /* Warm White */
-  --surface:#F7F0E6;     /* Cream: Cards, Sheets */
-  --surface2:#EFE6D8;    /* Flächen in Cards, Stepper, Chips */
+  --bg:#F7F1E8;          /* Hintergrund (wie iOS „grouped background“, warm) */
+  --surface:#FFFCF7;     /* Zellen, Karten, Sheets: heller als der Hintergrund */
+  --surface2:#EFE7DB;    /* Füllflächen: Stepper, Chips, Suchfeld */
   --line:#E5DED4;        /* Warm Gray */
   --lineStrong:#D3C9BB;
   --text:#252A27;        /* Charcoal */
@@ -53,21 +53,28 @@
   --danger:#A23327;
   --dangerSoft:#F8E3DF;
 
-  --glass:rgba(255,249,242,.84);
+  --glass:rgba(255,251,245,.64);          /* Liquid Glass: Leisten, Sheets, Menüs */
+  --glassEdge:rgba(255,255,255,.7);       /* heller Lichtrand oben */
+  --glassLine:rgba(120,100,80,.14);
+  --glassShadow:0 10px 30px rgba(60,45,30,.16), 0 1px 3px rgba(60,45,30,.08);
+  --glassBlur:saturate(180%) blur(22px);
+  --fill:rgba(130,105,80,.11);            /* iOS „tertiary fill“, warm */
   --scrim:rgba(37,42,39,.36);
   --onImage:#FFFFFF;
   --imageChip:rgba(37,42,39,.62);
 
-  --sh1:0 1px 2px rgba(37,42,39,.05);
-  --sh2:0 1px 2px rgba(37,42,39,.04), 0 8px 24px rgba(37,42,39,.07);
+  --sh1:0 1px 2px rgba(60,45,30,.04), 0 2px 10px rgba(60,45,30,.04);
+  --sh2:0 2px 6px rgba(60,45,30,.05), 0 12px 32px rgba(60,45,30,.09);
   --sh3:0 -12px 40px rgba(37,42,39,.14);
 
-  --rCard:16px;
-  --rInner:12px;
-  --rBtn:12px;
+  --rCard:22px;
+  --rInner:16px;
+  --rBtn:14px;
   --rPill:999px;
 
-  --fontUi:"Inter", -apple-system, "SF Pro Text", BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Apple-Geräte: SF (Systemschrift); sonst Inter als selbst gehosteter Ersatz */
+  --fontUi:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, sans-serif;
+  --fontLarge:-apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
   --fontDisplay:"Fraunces", Georgia, "Times New Roman", serif;
   --fontMono:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
@@ -76,8 +83,8 @@
   --fsBody:var(--fs16);
   --fsSecondary:var(--fs14);
 
-  --tabbarH:76px;
-  --recipeBarH:76px;
+  --tabbarH:92px;
+  --recipeBarH:92px;
   --imgRatio:4/3;
   --heroMaxH:320px;
 
@@ -89,9 +96,9 @@
 :root[data-theme="dark"]{
   /* Warmes „Espresso“-Dunkel statt Grüngrau: dieselbe Wärme wie Cream/Apricot, nur gedimmt */
   color-scheme:dark;
-  --bg:#17140F;
-  --surface:#221E18;
-  --surface2:#2C2720;
+  --bg:#0F0D0A;
+  --surface:#1D1A15;
+  --surface2:#2A251E;
   --line:#3A342B;
   --lineStrong:#4D463B;
   --text:#F2EBE0;
@@ -114,7 +121,11 @@
   --danger:#EF8A7D;
   --dangerSoft:#3B2320;
 
-  --glass:rgba(23,20,15,.86);
+  --glass:rgba(36,31,25,.62);
+  --glassEdge:rgba(255,255,255,.12);
+  --glassLine:rgba(255,240,220,.10);
+  --glassShadow:0 10px 30px rgba(0,0,0,.45), 0 1px 3px rgba(0,0,0,.3);
+  --fill:rgba(255,235,210,.10);
   --scrim:rgba(0,0,0,.6);
   --imageChip:rgba(0,0,0,.62);
 
@@ -1312,3 +1323,169 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 .timerAlertBtn{flex:1;min-height:56px;border:0;border-radius:16px;background:rgba(255,255,255,.1);color:#fff;font-size:var(--fs18);font-weight:600;cursor:pointer}
 .timerAlertBtn.primary{flex:1.6;background:#E8753D;color:#252A27}
 @media (prefers-reduced-motion: reduce){ .timerAlertIcon{animation:none} }
+
+/* ==========================================================================
+   10. Apple-Look (iOS, „Liquid Glass“)
+   Formen, Glas und Bewegung wie in iOS; Farben bleiben warm (Apricot/Kräutergrün).
+   Schrift: SF (Systemschrift) überall, Fraunces nur für Rezeptnamen. Große Titel
+   (34/700) schrumpfen beim Scrollen in eine schwebende Glas-Leiste (.navCompact, utils.js).
+   Glas (backdrop-filter) nur auf Leisten, Sheets, Menüs und Hinweisen – nie auf
+   wiederholten Elementen wie Karten.
+   ========================================================================== */
+body{font-feature-settings:normal;letter-spacing:-.003em}
+
+/* Glas-Baustein */
+.bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.timerPill,.navGlass{
+  background:var(--glass);
+  -webkit-backdrop-filter:var(--glassBlur);backdrop-filter:var(--glassBlur);
+  border:1px solid var(--glassLine);
+  box-shadow:var(--glassShadow), inset 0 1px 0 var(--glassEdge);
+}
+@media (prefers-reduced-transparency: reduce){
+  .bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.timerPill,.navGlass{
+    background:var(--surface);-webkit-backdrop-filter:none;backdrop-filter:none;
+  }
+}
+
+/* Große Titel wie in iOS */
+.h1,.homeGreetingTitle{
+  font-family:var(--fontLarge);font-size:2.125rem;font-weight:700;line-height:1.12;letter-spacing:-.022em;
+}
+.pageTitleBlock{padding:0 2px}
+.pageTitleBlock .h1{margin:4px 0 8px}
+.h2,.homeSectionTitle{font-family:var(--fontLarge);font-weight:700;letter-spacing:-.018em}
+.homeSectionTitle{font-size:var(--fs22)}
+/* Rezeptname bleibt Fraunces */
+.recipePageBody .h1.recipeName{font-family:var(--fontDisplay);font-weight:600;letter-spacing:-.02em}
+.homeFeaturedTitle{font-family:var(--fontDisplay)}
+.homeAllLink{color:var(--accent);font-weight:600}
+.homeAllLink:hover{text-decoration:none;opacity:.75}
+
+/* Kompakte Titelleiste beim Scrollen */
+.navCompact{
+  position:fixed;z-index:1250;top:calc(env(safe-area-inset-top) + 8px);left:50%;
+  max-width:min(70vw, 420px);padding:8px 18px;border-radius:var(--rPill);
+  font-size:var(--fs16);font-weight:600;letter-spacing:-.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  opacity:0;transform:translate3d(-50%,-12px,0) scale(.96);pointer-events:none;
+  transition:opacity .2s var(--easeIn), transform .26s var(--easeIn);
+}
+.navCompact.show{opacity:1;transform:translate3d(-50%,0,0);transition:opacity .28s var(--easeSheet), transform .45s var(--easeSheet)}
+
+/* Schwebende Tab-Leiste (Kapsel aus Glas) */
+.bottomRail{
+  left:max(12px, env(safe-area-inset-left));right:max(12px, env(safe-area-inset-right));
+  bottom:max(10px, calc(env(safe-area-inset-bottom) - 6px));
+  max-width:520px;margin:0 auto;padding:6px;
+  border-radius:var(--rPill);
+}
+.tabbarInner{gap:2px;padding:0;max-width:none}
+.tabItem{
+  position:relative;gap:2px;min-height:56px;padding:6px 2px;border-radius:var(--rPill);
+  color:var(--text);opacity:.72;
+  transition:background-color .3s var(--easeSheet), color .2s ease, opacity .2s ease, transform .32s var(--easeSheet);
+}
+.tabItem.active{opacity:1;color:var(--leaf);background:var(--fill)}
+.tabItem.active .tabIcon{width:auto;background:transparent}
+.tabLabel{font-size:11px;font-weight:600;letter-spacing:0}
+.tabIcon svg{width:24px;height:24px}
+.tabItem.active .tabIcon svg{stroke-width:2.1}
+.tabItem.isPressed{transform:scale(.92)}
+
+/* Karten: Flächen statt Rahmen, weiche Schatten, große Rundungen */
+.card{border-color:transparent;box-shadow:var(--sh1)}
+:root[data-theme="dark"] .card{box-shadow:none}
+.recipeCard .rcBody{padding:12px 16px 16px}
+.recipeTitle{font-size:var(--fs16);font-weight:600;letter-spacing:-.012em}
+.homeFeatured{box-shadow:var(--sh2)}
+.heroOverlayCat{font-weight:600}
+.freezerFlag{background:rgba(255,255,255,.88)}
+
+/* Gruppierte Listen (inset grouped) mit eingerückten Trennlinien */
+.listGroup{border:0;border-radius:var(--rInner);background:var(--surface);box-shadow:var(--sh1)}
+:root[data-theme="dark"] .listGroup{box-shadow:none}
+.listGroup .ingRow + .ingRow,.listGroup .uRow + .uRow{
+  border-top:0;
+  background-image:linear-gradient(var(--line),var(--line));
+  background-size:calc(100% - 52px) 1px;background-position:right top;background-repeat:no-repeat;
+}
+.ingRow{border-color:transparent}
+.uLead{border-radius:var(--rPill);border-width:1.6px}
+.uRow.checked .uLead{border-radius:var(--rPill)}
+
+/* Knöpfe: Kapseln */
+.btn{border-radius:var(--rPill);border-color:transparent;min-height:50px;padding:12px 20px;font-size:var(--fs16);box-shadow:none}
+.btn:not(.action):not(.brandBtn):not(.blue):not(.green):not(.red):not(.secondary):not(.btnDangerOutline){background:var(--fill)}
+.btn.btnGhost,.btn.ghost{background:var(--fill)}
+.smallBtn{border:0;border-radius:var(--rPill);background:var(--fill)}
+.navIconBtn{border:0;background:var(--fill);min-width:40px;min-height:40px;border-radius:var(--rPill)}
+.profileBadge{border:0;background:var(--fill)}
+.profileBadge.isIn{background:var(--leaf)}
+
+/* Suchfeld wie iOS: gefüllt, ohne Rahmen */
+.searchRow{border:0;box-shadow:none;background:var(--fill);border-radius:var(--rBtn);padding:2px}
+.searchRow:focus-within{box-shadow:none;background:var(--fill)}
+.searchRow input{height:42px}
+.searchRow .btn{min-height:42px;border-radius:12px}
+.searchRow .btn.btnGhost{background:transparent}
+#addShopBtn{border-radius:12px}
+
+/* Formularfelder */
+.fieldInput,.codeArea{border:0;background:var(--fill);border-radius:var(--rBtn)}
+.fieldInput:focus,.codeArea:focus{background:var(--fill);box-shadow:0 0 0 2px var(--accent)}
+.fieldLabel{color:var(--sub2);font-weight:600;text-transform:none}
+
+/* Chips, Filter, Badges: Kapseln mit Füllung */
+.chip{border:0;background:var(--fill);color:var(--text)}
+.chipLink{background:var(--leafSoft);color:var(--leaf)}
+.pillToggle,.filterChip,.sortChip,.catChip,.badge,.kv{border-color:transparent;background:var(--fill)}
+.pillToggle.pillToggleActive,.filterChip.active,.sortChip.active,.catChip.active{background:var(--leaf);color:var(--onLeaf)}
+.kvFav{background:var(--gold)}
+.kvFreezer{background:var(--iceSoft)}
+.homeQuickBtn{border:0;background:var(--surface);box-shadow:var(--sh1);border-radius:var(--rInner)}
+.homeEmpty{border:0;box-shadow:var(--sh1)}
+.notesCard{border:0;box-shadow:var(--sh1)}
+:root[data-theme="dark"] .homeQuickBtn,:root[data-theme="dark"] .homeEmpty,:root[data-theme="dark"] .notesCard{box-shadow:none}
+
+/* Segment-Umschalter */
+.segmented{background:var(--fill);border-radius:var(--rPill);padding:3px}
+.segBtn{border-radius:var(--rPill);min-height:36px}
+.segBtn.active{background:var(--surface);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+
+/* Menü (Sortieren) wie iOS-Kontextmenü */
+.sortMenu{border-radius:18px;padding:6px}
+.sortMenuItem{border-radius:10px;font-size:var(--fs16)}
+.sortMenuItem.active{background:transparent;color:var(--accent)}
+
+/* Sheets: Glas, große Rundung, kleiner Griff */
+.sheet{border-radius:32px 32px 0 0;border-bottom:0;max-width:680px}
+.sheetGrab{width:36px;height:5px;margin:8px auto 6px;background:var(--lineStrong);opacity:.9}
+.sheetHead{border-bottom:0;padding:4px 20px 8px}
+.sheetTitle{font-size:var(--fs18);font-weight:700}
+.sheetBody{padding:4px 12px calc(16px + env(safe-area-inset-bottom))}
+.sheetRow{border-radius:var(--rBtn);font-size:var(--fs16);min-height:48px}
+.sheetRow:hover{background:var(--fill)}
+.sheetOverlay{background:rgba(20,15,10,.24)}
+:root[data-theme="dark"] .sheetOverlay{background:rgba(0,0,0,.5)}
+.rowGlyph{border-radius:9px;width:32px;height:32px}
+
+/* Schalter wie iOS (51 × 31) */
+.sheetSwitch{width:51px;height:31px;background:var(--fill)}
+.sheetSwitch::after{top:2px;left:2px;width:27px;height:27px;box-shadow:0 3px 8px rgba(0,0,0,.15), 0 1px 1px rgba(0,0,0,.1);transition:transform .32s var(--easeSheet)}
+.sheetRow[aria-checked="true"] .sheetSwitch{background:#34C759}
+:root[data-theme="dark"] .sheetRow[aria-checked="true"] .sheetSwitch{background:#30D158}
+.sheetRow[aria-checked="true"] .sheetSwitch::after{transform:translateX(20px)}
+
+/* Hinweise / Timer-Kapsel */
+.uiToast{color:var(--text);bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 8px)}
+.timerPill{color:var(--text);bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 8px)}
+.timerPill.isDone{background:var(--accent);color:var(--onAccent)}
+
+/* Rezeptseite */
+.recipePageBody{border-radius:28px 28px 0 0;margin-top:-24px}
+.portionStepper{background:var(--fill)}
+.recipePortionStep{background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.recipeBody ol > li{border-bottom-color:var(--line)}
+.recipeTitle.homeFeaturedTitle{font-size:var(--fs28);font-weight:600;letter-spacing:-.02em}
+.btn{white-space:nowrap}
+#clearChecked,#clearAll{padding:12px 14px;font-size:var(--fs16)}

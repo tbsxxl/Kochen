@@ -71,11 +71,19 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 
 ## Design-System (in `assets/styles.css` als Tokens)
 
+- **Apple-Look (iOS „Liquid Glass“)**, Abschnitt 10 in `assets/styles.css`: schwebende Glas-Kapsel als Tab-Leiste,
+  große Titel (34/700), die beim Scrollen in eine kleine Glas-Leiste oben wandern (`.navCompact`, `bindCompactTitle()` in
+  `assets/utils.js`), gruppierte Listen mit eingerückten Trennlinien, Kapsel-Knöpfe, gefüllte Felder statt Rahmen
+  (`--fill`), Glas-Sheets mit großer Rundung, iOS-Schalter (Grün `#34C759`). Glas (`--glass`, `--glassBlur`) nur für
+  Leisten, Sheets, Menüs, Hinweise; bei „Transparenz reduzieren“ volle Fläche. Hintergrund `--bg` dunkler als Zellen
+  `--surface` (wie iOS). Radien: Karten 22, Listen 16, Felder 14.
 - Farben: Warm White `#FFF9F2`, Cream `#F7F0E6`, Warm Gray `#E5DED4`, Charcoal `#252A27`,
   Warm Apricot `#E8753D` (nur primäre Aktion, dunkler Text), Herb Green `#526B57` (aktiv, Tags),
   Olive Oil `#B8A35A` (Favoriten), Deep Petrol `#28565A` (Links). Metadaten `#716E67`.
-- Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz).
-- Schrift: Fraunces 400/600 nur für Rezeptnamen (36) und große Überschriften (28), sonst Inter.
+- Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz). Inter wird nicht mehr
+  vorgeladen (auf iPhone/iPad/Mac greift SF).
+- Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz); Fraunces 400/600
+  nur für Rezeptnamen (Rezeptseite, „Heute“-Karte) und den Schriftzug.
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
 - Standard-Theme hell; Dunkelmodus nur über den Schalter unter „Mehr“ (warme Espresso-Töne, kein Grüngrau).
 - Rezeptkarten gibt es genau zweimal: `_includes/recipe-card.html` (Liquid, Rezeptliste/Kategorien) und
