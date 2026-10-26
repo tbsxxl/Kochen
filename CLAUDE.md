@@ -11,6 +11,8 @@ https://kochbuch.tobis.workers.dev/ — Cloudflare baut jeden Push auf `main` au
   fehl; maßgeblich ist der Build nach dem Merge auf `main`. **Nach jedem Merge prüfen**, ob er grün ist:
   `curl -s https://api.github.com/repos/tbsxxl/Kochen/commits/<sha>/check-runs` (Eintrag „Workers Builds: kochbuch“;
   „build“/„deploy“ gehören zu GitHub Pages und sind egal). Rot = nichts geht live.
+  Gelegentlich scheitert ein Build auch bei harmlosen Commits (z. B. reine Rezeptänderung); dann behebt der nächste
+  Push auf `main` es meist. Lokal bauen + grüner GitHub-Check sprechen gegen einen echten Fehler.
 
 ## Bauen und prüfen
 
