@@ -54,7 +54,7 @@ permalink: /was-koche-ich/
     "categories": {{ r.categories | jsonify }},
     "time": {{ r.time | jsonify }},
     "servings": {{ r.servings | jsonify }},
-    "ings": {{ r.ingredients | map: "item" | jsonify }},
+    "ings": {{ r.ingredients | map: "item" | compact | jsonify }},
     "image": "{% if r.image %}{{ r.image | relative_url }}?v={{ site.image_version }}{% endif %}",
     "srcset": "{% if r.image %}{% include srcset.html src=r.image %}{% endif %}"
   }{% unless forloop.last %},{% endunless %}

@@ -9,12 +9,12 @@ time: "ca. 45 Minuten aktive Zubereitung + über Nacht marinieren"
 image: /recipes/images/crispy-chicken-tenders-mvppijlc.jpg
 servings: 2
 ingredients:
-  - { qty: "", unit: "", item: "*Hähnchen und Marinade*" }
+  - { section: "Hähnchen und Marinade" }
   - { qty: 6, unit: "", item: "Hähnchenoberkeulen ohne Knochen und Haut" }
   - { qty: 240, unit: "g", item: "Sriracha" }
   - { qty: 120, unit: "g", item: "Wasser" }
   - { qty: 14, unit: "g", item: "feines Salz" }
-  - { qty: "", unit: "", item: "*Knusperpanade*" }
+  - { section: "Knusperpanade" }
   - { qty: 400, unit: "g", item: "Weizenmehl (Type 405)" }
   - { qty: 200, unit: "g", item: "Kartoffelstärke" }
   - { qty: 17, unit: "g", item: "Backpulver" }
@@ -24,11 +24,11 @@ ingredients:
   - { qty: 5, unit: "g", item: "schwarzer Pfeffer" }
   - { qty: 5, unit: "g", item: "Knoblauchpulver" }
   - { qty: 5, unit: "g", item: "Cayennepfeffer" }
-  - { qty: "", unit: "", item: "*Flüssige Panade*" }
+  - { section: "Flüssige Panade" }
   - { qty: 200, unit: "g", item: "Buttermilch" }
   - { qty: 200, unit: "g", item: "Sprudelwasser" }
   - { qty: 50, unit: "g", item: "Maisstärke" }
-  - { qty: "", unit: "", item: "*Sriracha-Hot-Honey*" }
+  - { section: "Sriracha-Hot-Honey" }
   - { qty: 290, unit: "g", item: "Honig" }
   - { qty: 160, unit: "g", item: "Sriracha" }
   - { qty: 30, unit: "g", item: "Reisweinessig" }
@@ -38,7 +38,7 @@ ingredients:
   - { qty: 0.25, unit: "TL", item: "Fenchelsamen" }
   - { qty: 0.5, unit: "TL", item: "MSG (optional)" }
   - { qty: 0.75, unit: "TL", item: "Zitronensäure (optional)" }
-  - { qty: "", unit: "", item: "*Blue-Cheese-Ranch*" }
+  - { section: "Blue-Cheese-Ranch" }
   - { qty: 150, unit: "g", item: "Blauschimmelkäse" }
   - { qty: 120, unit: "g", item: "Buttermilch" }
   - { qty: 50, unit: "g", item: "japanische Mayonnaise" }

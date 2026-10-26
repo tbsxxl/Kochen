@@ -3,6 +3,7 @@
   const $ = (s)=>document.querySelector(s);
   const A = window.KOCHBUCH_ACCOUNT;
   const UI = window.KOCHBUCH_UI || {};
+  const U = window.KOCHBUCH_UTILS || { sectionOf: (i)=> (i && i.section) || "" };
   const DRAFT_KEY = "kochbuch.ui.uploadDraft";
   const form = $("#uploadForm"), gate = $("#uploadGate"), done = $("#uploadDone");
   const esc = (s)=>String(s??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -41,7 +42,15 @@
     if(["g","kg","mg","ml","l","cl","dl","cm"].includes(k)) return k;
     return u.charAt(0).toUpperCase() + u.slice(1);
   }
+  // „## Knusperpanade“, „*Knusperpanade*“ oder „Knusperpanade:“ = Zwischenüberschrift
+  function sectionLine(line){
+    const t = line.trim();
+    let m = t.match(/^#{1,3}\s+(.+)$/) || t.match(/^\*+([^*].*?)\*+:?$/) || t.match(/^([^\d:][^:]{0,40}):$/);
+    return m ? m[1].trim() : "";
+  }
   function parseIngredient(line){
+    const sec = sectionLine(line);
+    if(sec) return { section: sec };
     let s = line.replace(/^\s*[-•*–]\s*/, "").trim();
     if(!s) return null;
     let qty = "", unit = "";
@@ -56,12 +65,22 @@
     s = s.replace(/^(von|vom)\s+/i, "");
     return { qty, unit, item: s };
   }
-  const ingredients = ()=> rowsMode ? rowIngredients() : $("#ingIn").value.split(/\n+/).map(parseIngredient).filter(i=>i && i.item);
+  const ingredients = ()=> rowsMode ? rowIngredients() : $("#ingIn").value.split(/\n+/).map(parseIngredient).filter(i=>i && (i.item || i.section));
 
   // ---------- Zutaten als Zeilen (Bearbeiten) ----------
   const rowsEl = $("#ingRows");
   function fmtQty(q){ return typeof q === "number" ? String(Math.round(q*1000)/1000).replace(".", ",") : String(q ?? ""); }
   function addRow(i = { qty:"", unit:"", item:"" }){
+    const sec = U.sectionOf(i);
+    if(sec || i.isSection){
+      const row = document.createElement("div");
+      row.className = "ingRow ingRowSection";
+      row.innerHTML = `<input class="fieldInput ingItem" placeholder="Zwischenüberschrift, z. B. Knusperpanade" value="${esc(sec)}" aria-label="Zwischenüberschrift">
+        <button type="button" class="ingRowDel" aria-label="Überschrift entfernen">✕</button>`;
+      row.querySelector(".ingRowDel").addEventListener("click", ()=> row.remove());
+      rowsEl.appendChild(row);
+      return row;
+    }
     const row = document.createElement("div");
     row.className = "ingRow";
     row.innerHTML = `<input class="fieldInput ingQty" placeholder="Menge" value="${esc(fmtQty(i.qty))}" aria-label="Menge">
@@ -74,18 +93,21 @@
   }
   function rowIngredients(){
     return Array.from(rowsEl.querySelectorAll(".ingRow")).map(r=>{
+      if(r.classList.contains("ingRowSection")) return { section: r.querySelector(".ingItem").value.trim(), item: "" };
       const raw = r.querySelector(".ingQty").value.trim();
       const n = Number(raw.replace(",", "."));
       return { qty: raw !== "" && isFinite(n) ? n : raw, unit: r.querySelector(".ingUnit").value.trim(), item: r.querySelector(".ingItem").value.trim() };
-    }).filter(i=>i.item);
+    }).filter(i=>i.item || i.section).map(i=> i.section ? { section: i.section } : i);
   }
   $("#ingRowAdd").addEventListener("click", ()=> addRow().querySelector(".ingQty").focus());
+  $("#ingSecAdd")?.addEventListener("click", ()=> addRow({ isSection: true }).querySelector(".ingItem").focus());
   // Nummern/Aufzählungszeichen am Zeilenanfang entfernen (aber **fett** am Anfang behalten)
   const steps = ()=> $("#stepsIn").value.split(/\n+/).map(s=>s.replace(/^\s*(?:\d+[.)]\s+|[-•*]\s+)/, "").trim()).filter(Boolean);
 
   function renderIngPreview(){
     const list = ingredients();
     $("#ingPreview").innerHTML = list.length ? list.map(i=>{
+      if(i.section) return `<div class="ingPrevRow ingPrevSection">${esc(i.section)}</div>`;
       const q = typeof i.qty === "number" ? String(Math.round(i.qty*100)/100).replace(".", ",") : i.qty;
       return `<div class="ingPrevRow"><span class="ingPrevQty">${esc(`${q} ${i.unit}`.trim()) || "—"}</span><span>${esc(i.item)}</span></div>`;
     }).join("") : "";
@@ -286,7 +308,7 @@
     $("#uploadBtn").textContent = "Änderungen speichern";
     $("#uploadHint").textContent = "Die Änderung wird direkt übernommen und ist nach ca. 2 Minuten online.";
     $("#ingIn").hidden = true; $("#ingPreview").hidden = true;
-    rowsEl.hidden = false; $("#ingRowAdd").hidden = false;
+    rowsEl.hidden = false; $("#ingRowAdd").hidden = false; $("#ingSecAdd").hidden = false;
     document.querySelector('label[for="ingIn"]').textContent = "Zutaten";
     document.querySelector('label[for="stepsIn"]').textContent = "Zubereitung (so wie im Rezept: „## Schritte“, dann 1., 2., …)";
     $("#stepsIn").rows = 16;
@@ -385,7 +407,7 @@
   // ---------- Vorschlag prüfen (Besitzer) ----------
   function setupRowsUi(){
     $("#ingIn").hidden = true; $("#ingPreview").hidden = true;
-    rowsEl.hidden = false; $("#ingRowAdd").hidden = false;
+    rowsEl.hidden = false; $("#ingRowAdd").hidden = false; $("#ingSecAdd").hidden = false;
     document.querySelector('label[for="ingIn"]').textContent = "Zutaten";
   }
   async function loadSuggestion(){

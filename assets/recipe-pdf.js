@@ -65,10 +65,11 @@
     const cat = document.querySelector('.recipePageHero .heroOverlayCat')?.textContent;
     if(cat) meta.unshift(clean(cat));
 
-    const ingredients = Array.from(document.querySelectorAll('#ingredientsList .uRow')).map(row => ({
-      name: clean(row.querySelector('.uName')?.textContent),
-      qty: clean(row.querySelector('.uRight')?.textContent)
-    }));
+    const ingredients = Array.from(document.querySelectorAll('#ingredientsList .uRow, #ingredientsList .ingSection')).map(row =>
+      row.classList.contains('ingSection') ? { section: clean(row.textContent) } : {
+        name: clean(row.querySelector('.uName')?.textContent),
+        qty: clean(row.querySelector('.uRight')?.textContent)
+      });
 
     // Inhalt der Anleitung in Reihenfolge: Überschriften, nummerierte Schritte, Aufzählungen, Absätze
     const blocks = [];
@@ -132,6 +133,13 @@
       doc.setFontSize(10);
       const qtyW = 38;
       for(const ing of r.ingredients){
+        if(ing.section){
+          ensure(12); y += 3;
+          doc.setFont('helvetica','bold'); doc.setFontSize(10.5); doc.setTextColor(...SUB);
+          doc.text(ing.section, M, y + 3.6); y += 7;
+          doc.setFontSize(10);
+          continue;
+        }
         doc.setFont('helvetica','normal');
         const lines = doc.splitTextToSize(ing.name, CW - qtyW - 4);
         const h = lines.length * 4.6 + 2.4;

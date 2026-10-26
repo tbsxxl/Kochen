@@ -660,6 +660,7 @@ function buildMarkdown(r, imagePath, date, author){
   lines.push(`servings: ${r.servings}`);
   lines.push("ingredients:");
   for(const i of r.ingredients){
+    if(i.section){ lines.push(`  - { section: ${q(i.section)} }`); continue; }
     const qty = typeof i.qty === "number" ? String(i.qty) : q(i.qty);
     lines.push(`  - { qty: ${qty}, unit: ${q(i.unit)}, item: ${q(i.item)} }`);
   }
@@ -681,11 +682,12 @@ function validateRecipe(b){
   const servings = Math.round(Number(b.servings));
   if(!(servings >= 1 && servings <= 100)) fail("Portionen: bitte eine Zahl zwischen 1 und 100.");
   const ingredients = (Array.isArray(b.ingredients) ? b.ingredients : []).slice(0, 100).map(i => {
+    if(i && i.section) return { section: clean(i.section, 80) };
     const n = typeof i.qty === "number" ? i.qty : Number(String(i.qty ?? "").replace(",", "."));
     const qty = (String(i.qty ?? "").trim() !== "" && isFinite(n)) ? Math.round(n * 1000) / 1000 : clean(i.qty, 20);
     return { qty, unit: clean(i.unit, 20), item: clean(i.item, 120) };
-  }).filter(i => i.item);
-  if(!ingredients.length) fail("Bitte mindestens eine Zutat angeben.");
+  }).filter(i => i.item || i.section);
+  if(!ingredients.some(i => i.item)) fail("Bitte mindestens eine Zutat angeben.");
   const steps = (Array.isArray(b.steps) ? b.steps : []).map(s => clean(s, 1000).replace(/\s*\n\s*/g, " ")).filter(Boolean).slice(0, 60);
   const markdown = clean(String(b.markdown || "").replace(/\r\n?/g, "\n"), 30000);
   if(!steps.length && !markdown) fail("Bitte mindestens einen Schritt angeben.");

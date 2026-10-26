@@ -65,6 +65,8 @@
     if(!ings.length) ings = parseIngredientsFromBody();
 
     return ings.map((i,idx)=>{
+      const sec = U.sectionOf(i);
+      if(sec) return { idx, section: sec };
       const q = num(i.qty);
       return {
         idx,
@@ -82,10 +84,32 @@ function setIngChecks(v){ ls.set(ingCheckKey, v); }
 
 function renderIngredients(){
   if(!listEl) return;
-  const items = scaledIngredients();
+  const all = scaledIngredients();
   const checks = getIngChecks(); // { [idx]: true }
-
-  U.renderToggleList(listEl, items, {
+  // Zwischenüberschriften: je Abschnitt eine eigene Gruppe mit Überschrift
+  const groups = [];
+  for(const it of all){
+    if(it.section) groups.push({ title: it.section, items: [] });
+    else { if(!groups.length) groups.push({ title: "", items: [] }); groups[groups.length-1].items.push(it); }
+  }
+  const sectioned = groups.some(g=>g.title);
+  listEl.closest('#ingredientsGroup')?.classList.toggle('hasSections', sectioned);
+  if(!sectioned){ renderGroup(listEl, groups[0] ? groups[0].items : [], checks); return; }
+  listEl.innerHTML = "";
+  for(const g of groups){
+    if(g.title){
+      const h = document.createElement('div');
+      h.className = 'ingSection'; h.textContent = g.title;
+      listEl.appendChild(h);
+    }
+    const box = document.createElement('div');
+    box.className = 'listGroup ingSectionGroup';
+    listEl.appendChild(box);
+    renderGroup(box, g.items, checks);
+  }
+}
+function renderGroup(container, items, checks){
+  U.renderToggleList(container, items, {
     emptyText: "Keine Zutaten.",
     getId: (it)=>String(it.idx),
     getLabel: (it)=>it.item,
@@ -434,6 +458,7 @@ const cookOverlay = $("#cookOverlay");
     const lower = String(text||"").toLowerCase();
     const tokens = lower.split(/[^a-zäöüß]+/).filter(t=>t.length>=4 && !STOP.has(t));
     return scaledIngredients().filter(i=>{
+      if(i.section) return false;
       const keys = ingKeywords(i.item);
       return keys.some(k => lower.includes(k) || tokens.some(t => k.includes(t)));
     });
@@ -497,6 +522,12 @@ const cookOverlay = $("#cookOverlay");
     const ings = scaledIngredients();
     cookIngredients.innerHTML = '';
     for(const i of ings){
+      if(i.section){
+        const h = document.createElement('div');
+        h.className = 'cookIngSection'; h.textContent = i.section;
+        cookIngredients.appendChild(h);
+        continue;
+      }
       const qty = fmtQty(i);
       const row = document.createElement('label');
       row.className = 'cookIngRow';

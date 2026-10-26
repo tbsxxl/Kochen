@@ -142,6 +142,7 @@
   // Zutaten (bereits auf die Portionen umgerechnet) in die Einkaufsliste übernehmen.
   // Gleiche Zutat + Einheit wird zusammengezählt; „from“ sammelt die Rezeptnamen.
   function mergeIntoShopping(ings, from){
+    ings = (ings || []).filter(i=> !sectionOf(i));
     const key = "kochbuch.shopping";
     let list = [];
     try{ list = JSON.parse(localStorage.getItem(key) || "[]"); }catch{}
@@ -204,7 +205,16 @@
     }
   };
 
-  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum, renderToggleList, mergeIntoShopping, plan };
+  // Zwischenüberschrift in der Zutatenliste: { section: "Knusperpanade" }
+  // (ältere Einträge „*Knusperpanade*“ ohne Menge werden ebenfalls erkannt)
+  function sectionOf(i){
+    if(!i) return "";
+    if(i.section) return String(i.section).trim();
+    const t = String(i.item || "").trim();
+    if(!String(i.qty ?? "").trim() && !String(i.unit || "").trim() && /^\*+[^*].*\*+$/.test(t)) return t.replace(/^\*+|\*+$/g, "").trim();
+    return "";
+  }
+  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum, renderToggleList, mergeIntoShopping, plan, sectionOf };
 })();
 
 // Favorite badge indicator on list cards (uses kochbuch.stats)

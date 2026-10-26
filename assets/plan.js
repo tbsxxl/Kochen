@@ -28,7 +28,7 @@
 
   function scaled(r, servings){
     const factor = servings / (Number(r.servings) || 1);
-    return (r.ingredients || []).map(i=>{
+    return (r.ingredients || []).filter(i=> !U.sectionOf(i)).map(i=>{
       const q = U.tryNum(i.qty);
       return { ...i, qty: q === null ? i.qty : q * factor };
     });
