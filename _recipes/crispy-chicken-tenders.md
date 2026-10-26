@@ -6,6 +6,7 @@ author: "Tobi"
 category: "Knusprig & Frittiert"
 tags: ["hähnchen", "amerikanisch", "scharf", "streetfood", "aufwendig", "am-vortag-starten"]
 time: "ca. 45 Minuten aktive Zubereitung + über Nacht marinieren"
+image: /recipes/images/crispy-chicken-tenders-mvppijlc.jpg
 servings: 2
 ingredients:
   - { qty: "", unit: "", item: "*Hähnchen und Marinade**" }
@@ -48,7 +49,7 @@ ingredients:
   - { qty: 0.5, unit: "TL", item: "frisch gemahlener schwarzer Pfeffer" }
   - { qty: 1, unit: "Prise", item: "feines Meersalz" }
   - { qty: 5, unit: "g", item: "Schnittlauch, fein gehackt" }
-  - { qty: "", unit: "", item: "*Außerdem**" }
+  - { qty: "", unit: "", item: "Außerdem" }
   - { qty: "", unit: "", item: "Neutrales, hoch erhitzbares Pflanzenöl zum Frittieren" }
 ---
 
