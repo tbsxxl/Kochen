@@ -73,10 +73,12 @@ permalink: /neues-rezept/
 
   <div class="section card cardPad uploadCard">
     <label class="fieldLabel" for="ingIn">Zutaten – eine pro Zeile</label>
+    <p class="fieldHint">Zwischenüberschrift: Zeile mit „## “ beginnen, z. B. „## Knusperpanade“.</p>
     <textarea class="codeArea uploadArea" id="ingIn" rows="8" placeholder="400 g Gnocchi&#10;1 Dose stückige Tomaten&#10;2 Zehen Knoblauch&#10;1 Prise Salz&#10;Parmesan nach Bedarf"></textarea>
     <div class="ingPreview" id="ingPreview"></div>
     <div class="ingRows" id="ingRows" hidden></div>
     <button class="btn accountBtn" id="ingRowAdd" type="button" hidden>+ Zutat</button>
+    <button class="btn accountBtn" id="ingSecAdd" type="button" hidden>+ Zwischenüberschrift</button>
   </div>
 
   <div class="section card cardPad uploadCard">
