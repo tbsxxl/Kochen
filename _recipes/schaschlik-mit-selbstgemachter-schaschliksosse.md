@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
 tags: ["schwein", "deutsch", "klassiker"]
 time: "ca. 2 Std"
-image: /recipes/images/Schaschlik.jpg
+image: /recipes/images/schaschlik-mvprskni.jpg
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Schweinenacken" }
