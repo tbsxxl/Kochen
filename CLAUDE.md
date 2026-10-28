@@ -99,6 +99,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 
 ## Bedienhilfen (nur im Browser gespeichert, `kochbuch.ui.*`)
 
+- Haupt-Leiste unten (5 Tabs, `_layouts/default.html`): Start · Rezepte · Plan (Wochenplan) · Liste · Mehr.
 - Rezept-Leiste unten: Favorit · Planen · **Kochen** (Mitte, Kapsel wie aktiver Tab, Symbol Apricot) · Zur Liste · Mehr (Gekocht, Kühltruhe, PDF,
   Drucken, Bearbeiten, Navigation).
 - Rezeptseite: Schritte antippen = abhaken (`stepsDone`, 12 Std), Portionen pro Rezept (`servings`),
