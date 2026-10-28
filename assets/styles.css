@@ -1268,6 +1268,16 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 .shopItemLabel{font-size:var(--fs14);font-weight:600;color:var(--sub2);margin-top:4px}
 .shopItemQty{min-height:48px;padding:0 16px;border:1px solid var(--line);border-radius:var(--rBtn);background:var(--bg);color:var(--text);font:inherit;font-size:var(--fs16)}
 #shopItemDelete{margin-top:12px}
+.reweStartRow{margin-top:0}
+.reweStart{width:100%}
+.reweBody{display:flex;flex-direction:column;gap:12px;padding-bottom:24px}
+.reweProgress{font-size:var(--fs14);color:var(--sub2)}
+.reweItem{font-size:var(--fs22);font-weight:700;line-height:1.25}
+.reweQty{font-size:var(--fs16);color:var(--sub2);margin-top:-8px}
+.reweQty:empty{display:none}
+.reweNav{display:flex;gap:10px}
+.reweNav .btn{flex:1}
+.reweHint{margin:0;font-size:var(--fs12);color:var(--sub2)}
 #shopItemSections .filterChip{min-height:36px;padding:0 14px}
 /* Kochmodus: Zutaten des aktuellen Schritts */
 .cookIngRow{transition:background .2s ease}

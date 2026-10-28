@@ -91,6 +91,13 @@
     return classify(head) || classify(noNotes) || "Sonstiges";
   }
 
+  // ---------- REWE: Suche öffnen (keine offizielle Schnittstelle für den Warenkorb) ----------
+  const REWE_SEARCH = "https://www.rewe.de/shop/productList?search=";
+  function reweTerm(name){
+    return String(name || "").replace(/\(.*?\)/g, " ").replace(/[,;/]+/g, " ").replace(/\s+/g, " ").trim();
+  }
+  const reweUrl = (name)=> REWE_SEARCH + encodeURIComponent(reweTerm(name));
+
   function qtyText(it){
     const unit = U.normUnit(it.unit||"");
     if(typeof it.qty === "number" && isFinite(it.qty)){
@@ -206,6 +213,8 @@
     editing = it;
     document.querySelector("#shopItemTitle").textContent = it.item;
     qtyIn.value = qtyText(it);
+    const rl = document.querySelector("#shopItemRewe");
+    if(rl) rl.href = reweUrl(it.item);
     const cur = sectionOf(it.item);
     secBox.innerHTML = "";
     SECTIONS.forEach(sec=>{
@@ -256,9 +265,57 @@
     const it = editing; closeItemSheet(false); if(it) removeItem(it);
   });
 
+  // ---------- „Bei REWE bestellen“: offene Artikel nacheinander suchen und abhaken ----------
+  const rSheet = document.querySelector("#reweSheet");
+  const rOverlay = document.querySelector("#reweOverlay");
+  const rStartRow = document.querySelector("#reweStartRow");
+  let rQueue = [], rPos = 0;
+  function reweOpen(){
+    if(!rSheet) return;
+    // Reihenfolge wie in der Liste: nach Abteilung, darin alphabetisch
+    rQueue = getList().map((it, i)=>({ ...it, _i: i })).filter(it=>!it.checked)
+      .sort((a,b)=> SECTIONS.indexOf(sectionOf(a.item)) - SECTIONS.indexOf(sectionOf(b.item)) || String(a.item).localeCompare(String(b.item), "de"));
+    rPos = 0;
+    if(!rQueue.length) return;
+    reweShow();
+    rOverlay.classList.add("open"); rSheet.classList.add("open"); rSheet.setAttribute("aria-hidden", "false");
+    document.body.classList.add("noScroll");
+  }
+  function reweClose(){
+    if(!rSheet) return;
+    rOverlay.classList.remove("open"); rSheet.classList.remove("open"); rSheet.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("noScroll");
+    render();
+  }
+  function reweShow(){
+    const it = rQueue[rPos];
+    if(!it){ reweClose(); UI.toast?.("Alle Artikel durchgegangen"); return; }
+    document.querySelector("#reweProgress").textContent = `${rPos + 1} von ${rQueue.length}`;
+    document.querySelector("#reweItem").textContent = it.item;
+    document.querySelector("#reweQty").textContent = qtyText(it);
+    document.querySelector("#reweSearch").href = reweUrl(it.item);
+  }
+  function reweNext(markInCart){
+    const it = rQueue[rPos];
+    if(it && markInCart){
+      const l = getList();
+      const e = l[it._i];
+      if(e && e.item === it.item){ e.checked = true; setList(l); }
+      UI.haptic?.("light");
+    }
+    rPos++;
+    reweShow();
+  }
+  document.querySelector("#reweStart")?.addEventListener("click", reweOpen);
+  document.querySelector("#reweClose")?.addEventListener("click", reweClose);
+  rOverlay?.addEventListener("click", reweClose);
+  document.querySelector("#reweSkip")?.addEventListener("click", ()=> reweNext(false));
+  document.querySelector("#reweInCart")?.addEventListener("click", ()=> reweNext(true));
+
   function render(){
     const list = getList().map((it, i)=>({ ...it, _i: i }));
     listEl.innerHTML = "";
+    if(rStartRow) rStartRow.hidden = !list.some(it=>!it.checked);
     if(!list.length){
       listEl.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Die Liste ist leer</div><div class="uEmptyText">Füge oben etwas hinzu oder tippe auf einer Rezeptseite auf „Zur Liste“.</div></div>`;
       return;
@@ -346,7 +403,7 @@
   // Sync: neue Einträge vom anderen Gerät bzw. aus der gemeinsamen Liste ohne Neuladen anzeigen.
   // Bei einer gemeinsamen Liste regelmäßig nachsehen, solange die Seite offen ist.
   window.KOCHBUCH_LIVE_REFRESH = true;
-  window.addEventListener("kochbuch:synced", ()=>{ if(!editing) render(); });
+  window.addEventListener("kochbuch:synced", ()=>{ if(!editing && !rSheet?.classList.contains("open")) render(); });
   setInterval(()=>{
     const A = window.KOCHBUCH_ACCOUNT;
     const p = A && A.profile && A.profile();
