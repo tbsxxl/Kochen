@@ -8,13 +8,14 @@ permalink: /shopping/
   <p class="householdNote" data-household-note hidden></p>
   <div class="searchRow searchRowCompact">
     <input id="addShopItem" type="search" placeholder="Artikel hinzufügen …" autocomplete="off" />
-    <button class="btn brandBtn" id="addShopBtn" type="button" aria-label="Hinzufügen" style="min-height:48px;min-width:48px;padding:0 16px">+</button>
+    <button class="btn brandBtn shopAddBtn" id="addShopBtn" type="button" aria-label="Hinzufügen">+</button>
   </div>
   <div class="shopSuggest" id="shopSuggest" aria-label="Vorschläge" hidden></div>
 </div>
 
-<div class="section reweStartRow" id="reweStartRow" hidden>
-  <button class="btn btnGhost reweStart" id="reweStart" type="button">Bei REWE bestellen</button>
+<div class="shopToolbar" id="reweStartRow" hidden>
+  <div class="shopToolbarInfo"><span id="shopOpenCount"></span><span class="shopFor" id="shopFor"></span></div>
+  <button class="reweChip pressable" id="reweStart" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>Bei REWE bestellen</button>
 </div>
 
 <div class="section">
