@@ -77,6 +77,8 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 
 Skill `apple-design` (`.claude/skills/apple-design`, Apples Human Interface Guidelines; installiert mit
 `npx skills add dickwu/apple-design-skill --agent claude-code`, Stand in `skills-lock.json`) für Design-Reviews nutzen.
+Skill `swiftui-expert-skill` (`.claude/skills/swiftui-expert-skill`, aus avdlee/swiftui-agent-skill) nur für nativen
+SwiftUI-Code, nicht für diese Web-App.
 
 
 - **Apple-Look (iOS „Liquid Glass“)**, Abschnitt 10 in `assets/styles.css`: schwebende Glas-Kapsel als Tab-Leiste,
