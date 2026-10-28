@@ -95,7 +95,13 @@ SwiftUI-Code, nicht für diese Web-App.
 - Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz); Fraunces 400/600
   nur für Rezeptnamen (Rezeptseite, „Heute“-Karte) und den Schriftzug.
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
-- Standard-Theme hell; Dunkelmodus nur über den Schalter unter „Mehr“ (warme Espresso-Töne, kein Grüngrau).
+- Darstellung folgt dem iPhone (Hell/Dunkel, „auto“ = kein Eintrag in `kochbuch.ui.theme`); unter „Mehr“ Auswahl
+  Auto · Hell · Dunkel. Dunkel = warme Espresso-Töne, kein Grüngrau. „Kontrast erhöhen“ (iPhone) schaltet wie der
+  Schalter „Hoher Kontrast“ (`prefers-contrast: more`).
+- Apples Regeln (Abschnitt 11 in `assets/styles.css`, geprüft mit Skill `apple-design`): Tippflächen mindestens
+  44 × 44 pt (bei kleinen Chips per `::after`), Text mind. 4,5 : 1 (Apricot nie als Textfarbe auf Creme, Links Petrol),
+  Schrift wächst mit der iPhone-Textgröße (`font: -apple-system-body` auf `html`, alles in `rem`; bis 200 % ohne
+  seitliches Scrollen prüfen). Rezeptseite hat oben links eine Zurück-Taste (`#recipeBack`).
 - Rezeptkarten gibt es genau zweimal: `_includes/recipe-card.html` (Liquid, Rezeptliste/Kategorien) und
   `assets/cards.js` (`KOCHBUCH_CARDS.recipeCard`, Startseite). Beide mit Kühltruhen-Markierung „❄ n“, Bewertung ★ und
   Favoriten-Herz (befüllt von `updateFavBadges()` in `assets/utils.js`). Änderungen an Karten in beiden Dateien machen.
