@@ -75,6 +75,10 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 
 ## Design-System (in `assets/styles.css` als Tokens)
 
+Skill `apple-design` (`.claude/skills/apple-design`, Apples Human Interface Guidelines; installiert mit
+`npx skills add dickwu/apple-design-skill --agent claude-code`, Stand in `skills-lock.json`) für Design-Reviews nutzen.
+
+
 - **Apple-Look (iOS „Liquid Glass“)**, Abschnitt 10 in `assets/styles.css`: schwebende Glas-Kapsel als Tab-Leiste,
   große Titel (34/700), die beim Scrollen in eine kleine Glas-Leiste oben wandern (`.navCompact`, `bindCompactTitle()` in
   `assets/utils.js`), gruppierte Listen mit eingerückten Trennlinien, Kapsel-Knöpfe, gefüllte Felder statt Rahmen

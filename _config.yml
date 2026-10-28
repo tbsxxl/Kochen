@@ -42,6 +42,7 @@ exclude:
   - .wrangler
   - README.md
   - CLAUDE.md
+  - skills-lock.json
   - tools
   - MaybeRezepte
   - recipes/images/README.txt
