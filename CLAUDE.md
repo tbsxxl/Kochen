@@ -100,12 +100,15 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 ## Bedienhilfen (nur im Browser gespeichert, `kochbuch.ui.*`)
 
 - Haupt-Leiste unten (5 Tabs, `_layouts/default.html`): Start · Rezepte · Plan (Wochenplan) · Liste · Mehr.
+  Aktiver Tab: Kapsel, Grün, Symbol gefüllt (`fill-opacity`).
 - Rezept-Leiste unten: Favorit · Planen · **Kochen** (Mitte, Kapsel wie aktiver Tab, Symbol Apricot) · Zur Liste · Mehr (Gekocht, Kühltruhe, PDF,
   Drucken, Bearbeiten, Navigation).
 - Rezeptseite: Schritte antippen = abhaken (`stepsDone`, 12 Std), Portionen pro Rezept (`servings`),
   „Ähnliche Rezepte“ (gleiche Kategorie, Liquid `sample`, Karten mit `hcard=true`).
-- Kochmodus: Wischen links/rechts; Fortschritt in `cooking` → Startseite zeigt „Weiter kochen“ (12 Std),
-  Link `?kochen=1` öffnet den Kochmodus beim gespeicherten Schritt.
+- Kochmodus: Wischen links/rechts; Fortschritt in `cooking` (12 Std). „Kochen läuft“-Kapsel über der unteren Leiste
+  (`assets/now-cooking.js`, wie der Mini-Player in Apple Music) auf jeder Seite, solange Fortschritt oder Timer laufen:
+  Foto, Name, Timer-Restzeit, „Schritt n von m“; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt
+  `KOCHBUCH_OPENCOOK`). recipe.js meldet `kochbuch:cooking` / `kochbuch:cookmode`.
   Ab 768 px (iPad) kein Reiter: Schritt links (+ „Danach“-Vorschau), alle Zutaten rechts, die des aktuellen
   Schritts hervorgehoben (`.isStep`). Auf dem Handy bleibt es bei den Reitern „Schritte/Zutaten“.
 - Rezeptliste: Suche auch in Zutaten (mehrere Wörter = alle), Schnellfilter über `data-flags` der Karte

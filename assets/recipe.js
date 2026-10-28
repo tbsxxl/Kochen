@@ -562,6 +562,7 @@ const cookOverlay = $("#cookOverlay");
   const COOK_KEY = "kochbuch.ui.cooking";
   function saveCookProgress(){
     ls.set(COOK_KEY, { id: data.id, url: data.id, title: data.title, image: data.image || "", step: stepIdx, total: steps.length, t: Date.now() });
+    window.dispatchEvent(new Event("kochbuch:cooking"));
   }
   function savedCookStep(){
     const c = ls.get(COOK_KEY, null);
@@ -585,14 +586,15 @@ const cookOverlay = $("#cookOverlay");
     renderCookIngredients();
     renderCookStep();
     requestWakeLock();
-    if(timerPill) timerPill.hidden = true;
+    window.dispatchEvent(new CustomEvent("kochbuch:cookmode", { detail: { open: true } }));
   }
+  window.KOCHBUCH_OPENCOOK = openCook;
   function closeCook(){
     cookOverlay?.classList.remove('open');
     cookOverlay?.setAttribute('aria-hidden','true');
     document.body.classList.remove('noScroll');
     releaseWakeLock();
-    if(timerPill && T) timerPill.hidden = !T.list().length;
+    window.dispatchEvent(new CustomEvent("kochbuch:cookmode", { detail: { open: false } }));
   }
 
   function setTab(which){
@@ -610,7 +612,7 @@ const cookOverlay = $("#cookOverlay");
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
   cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); pulse(cookStepText); });
   cookNext?.addEventListener('click', ()=>{
-    if(cookNext.dataset.last){ closeCook(); try{ localStorage.removeItem(COOK_KEY); }catch{} markCooked(); successTap(); UI.toast?.('Als gekocht gespeichert'); return; }
+    if(cookNext.dataset.last){ try{ localStorage.removeItem(COOK_KEY); }catch{} closeCook(); markCooked(); successTap(); UI.toast?.('Als gekocht gespeichert'); return; }
     stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText);
   });
   cookStepText?.addEventListener('click', (e)=>{
@@ -642,22 +644,8 @@ const cookOverlay = $("#cookOverlay");
 
   // Timer: Leiste im Kochmodus + kleiner Hinweis auf der Rezeptseite, solange einer läuft
   const cookTimers = $("#cookTimers");
-  const timerPill = $("#timerPill");
   T?.bind(cookTimers);
-  T?.onChange((items)=>{
-    T.render(cookTimers);
-    if(timerPill){
-      const open = cookOverlay?.classList.contains('open');
-      timerPill.hidden = open || !items.length;
-      if(items.length){
-        const next = items.slice().sort((a,b)=>a.left-b.left)[0];
-        const done = items.some(t=>t.done);
-        timerPill.classList.toggle('isDone', done);
-        timerPill.innerHTML = `${T.CLOCK}<span>${done ? 'Timer fertig' : T.fmt(next.left)}${items.length>1 ? ` · ${items.length}` : ''}</span>`;
-      }
-    }
-  });
-  timerPill?.addEventListener('click', openCook);
+  T?.onChange(()=> T.render(cookTimers));
 
   // Eigene Notizen & Bewertung (kochbuch.notes, wird mit dem Profil synchronisiert)
   const NOTES_KEY = "kochbuch.notes";
