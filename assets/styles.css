@@ -1408,6 +1408,12 @@ body{font-feature-settings:normal;letter-spacing:-.003em}
 .tabIcon svg{width:24px;height:24px}
 .tabItem.active .tabIcon svg{stroke-width:2.1}
 .tabItem.isPressed{transform:scale(.92)}
+/* Rezept-Leiste: Kochen als Hauptaktion in der Mitte, Favorit gefüllt */
+.recipeTabbar .tabbarInner{grid-template-columns:repeat(5,minmax(0,1fr))}
+.recipeTabbar .tabItem.tabPrimary{opacity:1;background:var(--accent);color:var(--onAccent)}
+.recipeTabbar .tabItem.tabPrimary .tabIcon svg{width:22px;height:22px}
+.recipeTabbar #favQuick.isOn{opacity:1;color:var(--gold)}
+.recipeTabbar #favQuick.isOn svg{fill:currentColor}
 
 /* Karten: Flächen statt Rahmen, weiche Schatten, große Rundungen */
 .card{border-color:transparent;box-shadow:var(--sh1)}

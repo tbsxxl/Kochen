@@ -272,7 +272,7 @@ function renderGroup(container, items, checks){
   const statsKey = "kochbuch.stats";
   const cookedBtn = $("#sheetCookedBtn");
   const undoBtn = $("#undoCookedBtn");
-  const favBtn = $("#sheetFavoriteBtn");
+  const favBtn = $("#favQuick");
   const statsLine = $("#statsLine");
   const favPill = $("#favPill");
 
@@ -294,8 +294,8 @@ function renderGroup(container, items, checks){
   function renderStats(){
     const e=getEntry();
     if(favBtn){
-      favBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">${e.favorite ? '♥' : '♡'}</span><span>Favorit</span>`;
-      favBtn.classList.toggle("blue", !!e.favorite);
+      favBtn.classList.toggle("isOn", !!e.favorite);
+      favBtn.setAttribute("aria-pressed", String(!!e.favorite));
     }
     if(favPill){
       favPill.hidden = !e.favorite;
@@ -318,6 +318,7 @@ function renderGroup(container, items, checks){
     if(e.favorite) e.favoriteAt=new Date().toISOString();
     setEntry(e);
     renderStats(); successTap(); pop(favBtn); pop(favPill);
+    UI.toast?.(e.favorite ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt");
     if(typeof window.updateFavBadges === "function") window.updateFavBadges();
     window.dispatchEvent(new Event("kochbuch:stats"));
   });
@@ -403,7 +404,7 @@ function renderGroup(container, items, checks){
     planSheet?.classList.remove('open');
     planSheet?.setAttribute('aria-hidden','true');
   }
-  $("#sheetPlanBtn")?.addEventListener('click', openPlanSheet);
+  $("#planQuick")?.addEventListener('click', openPlanSheet);
   $("#planSheetClose")?.addEventListener('click', closePlanSheet);
   planOverlay?.addEventListener('click', closePlanSheet);
   planDays?.addEventListener('click', (e)=>{
@@ -421,14 +422,8 @@ function renderGroup(container, items, checks){
   });
 
   // Cooking mode
-  const cookingBtn = $("#cookingModeBtn");
   const cookingQuick = $("#cookingModeQuick");
 
-  // Kühltruhe quick action: opens freezer sheet
-  const freezerQuick = $("#freezerQuick");
-  freezerQuick?.addEventListener('click', ()=>{
-    openFreezerSheet();
-  });
 
 const cookOverlay = $("#cookOverlay");
   const cookClose = $("#cookClose");
@@ -610,7 +605,6 @@ const cookOverlay = $("#cookOverlay");
     if(cookPanelIngs) cookPanelIngs.hidden = stepsOn;
   }
 
-  cookingBtn?.addEventListener('click', openCook);
   cookingQuick?.addEventListener('click', openCook);
   cookClose?.addEventListener('click', closeCook);
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
