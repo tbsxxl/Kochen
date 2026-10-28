@@ -1133,16 +1133,6 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 .cookTimer.isDone .cookTimerLabel{color:rgba(37,42,39,.75)}
 .cookTimer.isDone .cookTimerBtn{background:rgba(37,42,39,.15);color:#252A27}
 @keyframes timerBlink{50%{opacity:.75}}
-.timerPill{
-  position:fixed;z-index:60;left:50%;transform:translateX(-50%);
-  bottom:calc(88px + env(safe-area-inset-bottom));
-  padding:10px 18px;border:0;border-radius:var(--rPill);
-  background:var(--text);color:var(--bg);font-weight:600;font-variant-numeric:tabular-nums;
-  box-shadow:0 8px 24px rgba(0,0,0,.18);
-}
-.timerPill{display:inline-flex;align-items:center;gap:6px}
-.timerPill .uiIcon{width:16px;height:16px}
-.timerPill[hidden]{display:none}
 .uiToast{
   position:fixed;z-index:6000;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));
   width:max-content;max-width:calc(100vw - 32px);padding:12px 20px;border-radius:var(--rPill);
@@ -1152,7 +1142,6 @@ body.layout-recipe .section:first-of-type{margin-top:0}
   transition:opacity .2s var(--easeIn), transform .2s var(--easeIn);
 }
 .uiToast.show{opacity:1;transform:translate3d(-50%,0,0);transition:opacity .28s var(--easeSheet), transform .42s var(--easeSheet)}
-.timerPill.isDone{background:var(--accent);color:var(--onAccent)}
 
 /* ---------- 8. Bewegung ----------
    Wenige, zweckgebundene Animationen: Seitenwechsel (View Transitions: ruhige Überblendung,
@@ -1233,15 +1222,6 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 }
 
 /* Weiter kochen (Startseite) */
-.resumeCook{display:flex;align-items:center;gap:12px;padding:12px;text-decoration:none;color:var(--text);position:relative;border:1px solid var(--line)}
-.resumeCookImg{width:64px;height:64px;border-radius:var(--rInner);object-fit:cover;flex-shrink:0}
-.resumeCookText{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1;padding-right:28px}
-.resumeCookKicker{font-size:var(--fs12);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--leaf)}
-.resumeCookTitle{font-weight:600;font-size:var(--fs16);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.resumeCookStep{font-size:var(--fs14);color:var(--sub)}
-.resumeCookBar{display:block;height:4px;border-radius:var(--rPill);background:var(--line);overflow:hidden;margin-top:4px}
-.resumeCookBar > span{display:block;height:100%;background:var(--leaf);border-radius:inherit}
-.resumeCookClose{position:absolute;top:8px;right:8px;width:32px;height:32px;border:0;background:none;color:var(--sub);font-size:16px;border-radius:var(--rPill);cursor:pointer}
 /* Ähnliche Rezepte (Rezeptseite) */
 .similarSection .homeSectionTitle{font-size:var(--fs22)}
 /* Schnellfilter (Rezeptliste) */
@@ -1352,14 +1332,14 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 body{font-feature-settings:normal;letter-spacing:-.003em}
 
 /* Glas-Baustein */
-.bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.timerPill,.navGlass{
+.bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.nowCooking,.navGlass{
   background:var(--glass);
   -webkit-backdrop-filter:var(--glassBlur);backdrop-filter:var(--glassBlur);
   border:1px solid var(--glassLine);
   box-shadow:var(--glassShadow), inset 0 1px 0 var(--glassEdge);
 }
 @media (prefers-reduced-transparency: reduce){
-  .bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.timerPill,.navGlass{
+  .bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.nowCooking,.navGlass{
     background:var(--surface);-webkit-backdrop-filter:none;backdrop-filter:none;
   }
 }
@@ -1399,14 +1379,16 @@ body{font-feature-settings:normal;letter-spacing:-.003em}
 .tabbarInner{gap:2px;padding:0;max-width:none}
 .tabItem{
   position:relative;gap:2px;min-height:56px;padding:6px 2px;border-radius:var(--rPill);
-  color:var(--text);opacity:.72;
+  color:var(--text);opacity:.9;
   transition:background-color .3s var(--easeSheet), color .2s ease, opacity .2s ease, transform .32s var(--easeSheet);
 }
 .tabItem.active{opacity:1;color:var(--leaf);background:var(--fill)}
 .tabItem.active .tabIcon{width:auto;background:transparent}
 .tabLabel{font-size:11px;font-weight:600;letter-spacing:0}
 .tabIcon svg{width:24px;height:24px}
-.tabItem.active .tabIcon svg{stroke-width:2.1}
+.tabItem.active .tabIcon svg{stroke-width:2}
+/* Aktiver Tab mit gefülltem Symbol (wie SF Symbols „.fill“) */
+.tabItem.active .tabIcon svg :is(path,rect,polygon){fill:currentColor;fill-opacity:.22}
 .tabItem.isPressed{transform:scale(.92)}
 /* Rezept-Leiste: Kochen als Hauptaktion in der Mitte, Favorit gefüllt */
 .recipeTabbar .tabItem.tabPrimary{opacity:1;background:var(--fill);color:var(--text)}
@@ -1500,8 +1482,34 @@ body{font-feature-settings:normal;letter-spacing:-.003em}
 
 /* Hinweise / Timer-Kapsel */
 .uiToast{color:var(--text);bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 8px)}
-.timerPill{color:var(--text);bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 8px)}
-.timerPill.isDone{background:var(--accent);color:var(--onAccent)}
+body.hasNowCooking .uiToast{bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 76px)}
+
+/* „Kochen läuft“-Kapsel über der unteren Leiste (assets/now-cooking.js), wie der Mini-Player in Apple Music */
+.nowCooking{
+  position:fixed;z-index:59;
+  left:max(12px, env(safe-area-inset-left));right:max(12px, env(safe-area-inset-right));
+  bottom:calc(max(10px, calc(env(safe-area-inset-bottom) - 6px)) + 76px);
+  max-width:520px;margin:0 auto;height:60px;padding:0 6px 0 8px;
+  display:flex;align-items:center;gap:4px;overflow:hidden;
+  border-radius:var(--rPill);color:var(--text);
+}
+.nowCooking[hidden]{display:none}
+.nowCookingMain{flex:1;min-width:0;display:flex;align-items:center;gap:10px;height:100%;color:inherit;text-decoration:none}
+.nowCookingImg{width:44px;height:44px;border-radius:12px;object-fit:cover;flex-shrink:0}
+.nowCookingText{display:flex;flex-direction:column;min-width:0;padding-left:4px}
+.nowCookingTitle,.nowCookingSub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nowCookingTitle{font-size:var(--fs16);font-weight:600;line-height:1.25}
+.nowCookingSub{font-size:var(--fs14);color:var(--sub2);font-variant-numeric:tabular-nums}
+.nowCookingPlay,.nowCookingClose{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--text)}
+.nowCookingPlay svg{width:26px;height:26px;color:var(--accent)}
+.nowCookingClose svg{width:16px;height:16px;opacity:.6}
+.nowCookingClose[hidden]{display:none}
+.nowCookingBar{position:absolute;left:22px;right:22px;bottom:0;height:2px;border-radius:2px;background:transparent}
+.nowCookingBar span{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);transition:width .3s var(--ease)}
+.nowCooking.isDone{background:var(--accent);color:var(--onAccent)}
+.nowCooking.isDone .nowCookingSub,.nowCooking.isDone .nowCookingPlay svg{color:var(--onAccent)}
+body.hasNowCooking .appMain{padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 92px)}
+body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) + env(safe-area-inset-bottom) + 92px)}
 
 /* Rezeptseite */
 .recipePageBody{border-radius:28px 28px 0 0;margin-top:-24px}
