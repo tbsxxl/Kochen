@@ -1332,14 +1332,14 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 body{font-feature-settings:normal;letter-spacing:-.003em}
 
 /* Glas-Baustein */
-.bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.nowCooking,.navGlass{
+.bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.nowCooking,.navGlass,.recipeBack{
   background:var(--glass);
   -webkit-backdrop-filter:var(--glassBlur);backdrop-filter:var(--glassBlur);
   border:1px solid var(--glassLine);
   box-shadow:var(--glassShadow), inset 0 1px 0 var(--glassEdge);
 }
 @media (prefers-reduced-transparency: reduce){
-  .bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.nowCooking,.navGlass{
+  .bottomRail,.navCompact,.sheet,.sortMenu,.uiToast,.nowCooking,.navGlass,.recipeBack{
     background:var(--surface);-webkit-backdrop-filter:none;backdrop-filter:none;
   }
 }
@@ -1355,7 +1355,7 @@ body{font-feature-settings:normal;letter-spacing:-.003em}
 /* Rezeptname bleibt Fraunces */
 .recipePageBody .h1.recipeName{font-family:var(--fontDisplay);font-weight:600;letter-spacing:-.02em}
 .homeFeaturedTitle{font-family:var(--fontDisplay)}
-.homeAllLink{color:var(--accent);font-weight:600}
+.homeAllLink{font-weight:600}
 .homeAllLink:hover{text-decoration:none;opacity:.75}
 
 /* Kompakte Titelleiste beim Scrollen */
@@ -1532,3 +1532,58 @@ body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) 
 .ingPrevSection{font-weight:600;padding-top:8px;color:var(--sub2)}
 .kv{white-space:normal;line-height:1.3;max-width:100%}
 .cookIngSection{margin-left:16px;margin-right:16px}
+
+/* ---------- 11. Apples Richtlinien (HIG-Prüfung Okt. 2026) ----------
+   Textgröße des iPhones übernehmen (Dynamic Type): -apple-system-body setzt die Grundgröße (17 pt, wächst mit
+   Einstellungen › Anzeige › Textgröße); alle Größen sind in rem und wachsen mit. Andere Browser bleiben bei 16 px. */
+@supports (font: -apple-system-body){
+  html{font:-apple-system-body}
+}
+/* „Kontrast erhöhen“ in den iPhone-Einstellungen = Schalter „Hoher Kontrast“ */
+@media (prefers-contrast: more){
+  body{--line:#BFB3A2;--lineStrong:#8F836F;--text:#111412;--sub:#34473A;--sub2:#45423C}
+  :root[data-theme="dark"] body{--line:#5A5146;--lineStrong:#7A7064;--text:#FFFFFF;--sub:#E3D9CB;--sub2:#D6CCBE}
+}
+/* Tippflächen mindestens 44 × 44 pt (Optik bleibt, wo möglich, gleich) */
+.homeAllLink{display:inline-flex;align-items:center;justify-content:flex-end;min-height:44px;min-width:44px;margin:-12px 0}
+.recipeAuthor{min-height:44px;margin:-14px 0 2px}
+.recipePortionStep{width:44px;height:44px;min-width:44px}
+.recipePortionInput{width:3ch;height:44px}
+.star{width:44px;height:44px}
+.filterChip,.pillToggle,.sortChip{min-height:44px}
+.planAdd{min-height:44px}
+.navIconBtn{min-width:44px;min-height:44px}
+.searchRow .btn.shopAddBtn{min-height:44px;min-width:44px;width:44px}
+.searchRow .btn{min-height:44px}
+.reweChip{min-height:44px}
+.segBtn{min-height:44px}
+#shopItemSections .filterChip{min-height:44px}
+/* Leere Sterne und Zurücksetzen-Symbol gut erkennbar (≥ 3 : 1) */
+.star{color:var(--muted)}
+.star.on{color:var(--gold)}
+#clearSearch{color:var(--sub2)}
+/* Darstellung (Auto/Hell/Dunkel) im Mehr-Menü */
+.themeRow{cursor:default}
+.themeRow .themeSeg{margin-left:auto;flex:0 0 auto}
+.themeSeg .segBtn{min-height:36px;padding:0 12px;flex:0 0 auto}
+.themeSeg .segBtn.active{background:var(--surface);color:var(--text)}
+/* Zurück-Taste auf der Rezeptseite (oben links über dem Foto, wie die Glas-Taste in iOS) */
+.recipeBack{
+  position:fixed;z-index:70;top:calc(env(safe-area-inset-top) + 10px);left:calc(env(safe-area-inset-left) + 12px);
+  display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;
+  color:var(--text);text-decoration:none;
+}
+.recipeBack svg{width:22px;height:22px}
+.cookOverlay.open ~ .recipeBack,body.noScroll .recipeBack{opacity:0;pointer-events:none}
+.profileBadge{min-width:44px;min-height:44px}
+.searchRow input{height:44px}
+/* Kategorie-Chips im Rezept: sichtbar klein, Tippfläche 44 pt hoch */
+.chipLink{position:relative}
+.chipLink::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+/* Große Textgrößen (bis 200 %): Zeilen umbrechen statt über den Rand zu laufen */
+.ingHead{flex-wrap:wrap;row-gap:8px}
+#clearChecked,#clearAll{white-space:normal;min-width:0}
+.pillToggle{max-width:100%;white-space:normal;text-align:left}
+.themeRow{flex-wrap:wrap;row-gap:8px}
+.reweNav{flex-wrap:wrap}
+.reweNav .btn{white-space:normal;min-width:0}

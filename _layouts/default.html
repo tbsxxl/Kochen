@@ -23,12 +23,21 @@
   <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
   <meta name="theme-color" content="#FFF9F2">
   <script>
-    // Theme vor dem ersten Rendern setzen (Standard: hell), damit nichts aufblitzt.
+    // Darstellung vor dem ersten Rendern setzen, damit nichts aufblitzt.
+    // Standard „auto“: folgt dem iPhone (Hell/Dunkel); „light“/„dark“ nur, wenn unter „Mehr“ fest gewählt.
     (function(){
-      var t = 'light';
-      try { t = JSON.parse(localStorage.getItem('kochbuch.ui.theme')) || 'light'; } catch(e){}
-      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'dark' ? '#1C1D1B' : '#FFF9F2');
+      var t = 'auto';
+      try {
+        // Früher war „hell“ der Standard und wurde beim Ausschalten des Schalters gespeichert → einmalig auf „auto“
+        if (!localStorage.getItem('kochbuch.ui.themeV2')) {
+          if (JSON.parse(localStorage.getItem('kochbuch.ui.theme')) === 'light') localStorage.removeItem('kochbuch.ui.theme');
+          localStorage.setItem('kochbuch.ui.themeV2', '1');
+        }
+        t = JSON.parse(localStorage.getItem('kochbuch.ui.theme')) || 'auto';
+      } catch(e){}
+      var dark = t === 'dark' || (t === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#1C1D1B' : '#FFF9F2');
     })();
     window.KOCHBUCH_RENAMED = {{ site.data.renamed | jsonify }};
 
@@ -140,7 +149,13 @@
       <a class="sheetRow" href="{{ '/konto/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg></span><span>Profil &amp; Sync</span></a>
       <a class="sheetRow" href="{{ '/backup/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/></svg></span><span>Backup / Import</span></a>
       <div class="sheetSep"></div>
-      <button class="sheetRow" id="toggleTheme" type="button" role="switch" aria-checked="false"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></span><span>Dunkler Modus</span><span class="sheetSwitch" aria-hidden="true"></span></button>
+      <div class="sheetRow themeRow"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></span><span>Darstellung</span>
+        <div class="segmented themeSeg" role="radiogroup" aria-label="Darstellung">
+          <button class="segBtn" type="button" role="radio" data-theme-opt="auto">Auto</button>
+          <button class="segBtn" type="button" role="radio" data-theme-opt="light">Hell</button>
+          <button class="segBtn" type="button" role="radio" data-theme-opt="dark">Dunkel</button>
+        </div>
+      </div>
       <button class="sheetRow" id="toggleCompact" type="button" role="switch" aria-checked="false"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg></span><span>Kompakte Ansicht</span><span class="sheetSwitch" aria-hidden="true"></span></button>
       <button class="sheetRow" id="toggleContrast" type="button" role="switch" aria-checked="false"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18" fill="currentColor" stroke="none" opacity=".3"/></svg></span><span>Hoher Kontrast</span><span class="sheetSwitch" aria-hidden="true"></span></button>
     </div>
@@ -213,7 +228,8 @@
     const compactKey="kochbuch.ui.compact";
     const contrastKey="kochbuch.ui.contrast";
     const themeKey="kochbuch.ui.theme";
-    const themeBtn=document.getElementById('toggleTheme');
+    const themeOpts=document.querySelectorAll('[data-theme-opt]');
+    const darkMq=window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
 
     function apply(){
       const compact = !!get(compactKey,false), contrast = !!get(contrastKey,false);
@@ -221,15 +237,20 @@
       document.body.classList.toggle('highContrast', contrast);
       document.getElementById('toggleCompact')?.setAttribute('aria-checked', compact ? 'true' : 'false');
       document.getElementById('toggleContrast')?.setAttribute('aria-checked', contrast ? 'true' : 'false');
-      const dark = get(themeKey,'light') === 'dark';
+      const mode = get(themeKey,'auto');
+      const dark = mode === 'dark' || (mode === 'auto' && !!darkMq?.matches);
       if (dark) document.documentElement.setAttribute('data-theme','dark');
       else document.documentElement.removeAttribute('data-theme');
       document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#1C1D1B' : '#FFF9F2');
-      themeBtn?.setAttribute('aria-checked', dark ? 'true' : 'false');
+      themeOpts.forEach(b=>{ const on = b.dataset.themeOpt === mode; b.classList.toggle('active', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
     }
     apply();
 
-    themeBtn?.addEventListener('click', ()=>{ set(themeKey, get(themeKey,'light') === 'dark' ? 'light' : 'dark'); apply(); });
+    themeOpts.forEach(b=> b.addEventListener('click', ()=>{
+      if (b.dataset.themeOpt === 'auto') { try{ localStorage.removeItem(themeKey); }catch{} } else set(themeKey, b.dataset.themeOpt);
+      apply();
+    }));
+    darkMq?.addEventListener?.('change', apply);
 
     document.getElementById('toggleCompact')?.addEventListener('click', ()=>{ set(compactKey,!get(compactKey,false)); apply(); });
     document.getElementById('toggleContrast')?.addEventListener('click', ()=>{ set(contrastKey,!get(contrastKey,false)); apply(); });
