@@ -106,6 +106,10 @@
         <span class="tabIcon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg></span><span class="tabLabel">Rezepte</span>
       </a>
 
+      <a class="tabItem" data-tab href="{{ '/wochenplan/' | relative_url }}">
+        <span class="tabIcon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span class="tabLabel">Plan</span>
+      </a>
+
       <a class="tabItem" data-tab href="{{ '/shopping/' | relative_url }}">
         <span class="tabIcon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span class="tabLabel">Liste</span>
       </a>
@@ -127,7 +131,6 @@
     </div>
 
     <div class="sheetBody">
-      <a class="sheetRow" href="{{ '/wochenplan/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span>Wochenplan</span></a>
       <a class="sheetRow" href="{{ '/was-koche-ich/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg class="uiIcon" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.3 21.7s9.9-3.5 12.7-6.4a4.5 4.5 0 00-6.4-6.3C5.8 11.8 2.3 21.7 2.3 21.7z"/><path d="M8.6 14l-2-2M15.3 15l-2.4-2.5"/><path d="M22 9s-1.3-2-3.5-2C16.9 7 15 9 15 9s1.3 2 3.5 2S22 9 22 9z"/><path d="M15 2s-2 1.3-2 3.5S15 9 15 9s2-1.8 2-3.5C17 3.3 15 2 15 2z"/></svg></span><span>Was koche ich?</span></a>
       <a class="sheetRow" href="{{ '/kuehltruhe/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px" aria-hidden="true"><path d="M12 2v20M3.3 7l17.4 10M20.7 7L3.3 17"/><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5M4 10.3l3.4.9-.9-3.4M20 13.7l-3.4-.9.9 3.4M17.5 7.8l-.9 3.4 3.4-.9M6.5 16.2l.9-3.4-3.4.9"/></svg></span><span>Kühltruhe</span></a>
       <a class="sheetRow" href="{{ '/kategorien/' | relative_url }}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span>Kategorien</span></a>
@@ -161,7 +164,6 @@
     const morePaths = [
       "{{ '/kuehltruhe/' | relative_url }}",
       "{{ '/was-koche-ich/' | relative_url }}",
-      "{{ '/wochenplan/' | relative_url }}",
       "{{ '/kategorien/' | relative_url }}",
       "{{ '/neues-rezept/' | relative_url }}",
       "{{ '/vorschlaege/' | relative_url }}",

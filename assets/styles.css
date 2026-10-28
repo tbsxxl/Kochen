@@ -275,7 +275,7 @@ body.layout-recipe .appMain{padding-top:0}
   -webkit-backdrop-filter:saturate(1.6) blur(18px);
 }
 .tabbar{z-index:1300}
-.tabbarInner{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:center;max-width:560px}
+.tabbarInner{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;align-items:center;max-width:560px}
 .tabItem{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
   min-height:56px;padding:8px 4px;
@@ -1409,7 +1409,6 @@ body{font-feature-settings:normal;letter-spacing:-.003em}
 .tabItem.active .tabIcon svg{stroke-width:2.1}
 .tabItem.isPressed{transform:scale(.92)}
 /* Rezept-Leiste: Kochen als Hauptaktion in der Mitte, Favorit gefüllt */
-.recipeTabbar .tabbarInner{grid-template-columns:repeat(5,minmax(0,1fr))}
 .recipeTabbar .tabItem.tabPrimary{opacity:1;background:var(--fill);color:var(--text)}
 .recipeTabbar .tabItem.tabPrimary .tabIcon{color:var(--accent)}
 .recipeTabbar #favQuick.isOn{opacity:1;color:var(--gold)}
