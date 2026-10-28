@@ -13,6 +13,10 @@ permalink: /shopping/
   <div class="shopSuggest" id="shopSuggest" aria-label="Vorschläge" hidden></div>
 </div>
 
+<div class="section reweStartRow" id="reweStartRow" hidden>
+  <button class="btn btnGhost reweStart" id="reweStart" type="button">Bei REWE bestellen</button>
+</div>
+
 <div class="section">
   <div id="shopList"></div>
 </div>
@@ -31,7 +35,28 @@ permalink: /shopping/
     <input class="shopItemQty" id="shopItemQty" type="text" inputmode="text" placeholder="z. B. 500 g" autocomplete="off">
     <div class="shopItemLabel">Abteilung</div>
     <div class="chips" id="shopItemSections"></div>
+    <a class="btn btnGhost" id="shopItemRewe" href="#" target="_blank" rel="noopener">Bei REWE suchen</a>
     <button class="btn btnDangerOutline" id="shopItemDelete" type="button">Löschen</button>
+  </div>
+</section>
+
+<div class="sheetOverlay" id="reweOverlay"></div>
+<section class="sheet" id="reweSheet" aria-labelledby="reweTitle" aria-hidden="true">
+  <div class="sheetGrab"></div>
+  <div class="sheetHead">
+    <div class="sheetTitle" id="reweTitle">Bei REWE bestellen</div>
+    <button class="navIconBtn pressable" id="reweClose" aria-label="Schließen" type="button">✕</button>
+  </div>
+  <div class="sheetBody reweBody">
+    <div class="reweProgress" id="reweProgress"></div>
+    <div class="reweItem" id="reweItem"></div>
+    <div class="reweQty" id="reweQty"></div>
+    <a class="btn brandBtn" id="reweSearch" href="#" target="_blank" rel="noopener">Bei REWE suchen</a>
+    <div class="reweNav">
+      <button class="btn btnGhost" id="reweSkip" type="button">Überspringen</button>
+      <button class="btn btnGhost" id="reweInCart" type="button">Im Warenkorb ✓</button>
+    </div>
+    <p class="reweHint">Öffnet die REWE-Suche (App oder Website). Produkt in den Warenkorb legen, zurückkommen und „Im Warenkorb“ tippen.</p>
   </div>
 </section>
 
