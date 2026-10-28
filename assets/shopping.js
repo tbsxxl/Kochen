@@ -107,6 +107,7 @@
     return `${it.qtyLabel || ""} ${unit}`.trim();
   }
 
+  let hideFrom = false;  // stammen alle offenen Artikel aus einem Rezept, steht es einmal oben statt in jeder Zeile
   function renderGroup(title, items, extraClass){
     const wrap = document.createElement("section");
     wrap.className = "shopSection" + (extraClass ? " " + extraClass : "");
@@ -124,7 +125,7 @@
     U.renderToggleList(group, items, {
       getId: (it)=>String(it._i),
       getLabel: (it)=>it.item,
-      getSub: (it)=>it.from || "",
+      getSub: (it)=> hideFrom ? "" : (it.from || ""),
       getRightText: qtyText,
       isChecked: (it)=>!!it.checked,
       onToggle: (it, _idx, now)=>{
@@ -315,7 +316,14 @@
   function render(){
     const list = getList().map((it, i)=>({ ...it, _i: i }));
     listEl.innerHTML = "";
-    if(rStartRow) rStartRow.hidden = !list.some(it=>!it.checked);
+    const openN = list.filter(it=>!it.checked).length;
+    const froms = new Set(list.map(it=>it.from || ""));
+    hideFrom = froms.size === 1 && !String([...froms][0]).includes(", ");
+    if(rStartRow){
+      rStartRow.hidden = !openN;
+      document.querySelector("#shopOpenCount").textContent = openN === 1 ? "1 Artikel offen" : `${openN} Artikel offen`;
+      document.querySelector("#shopFor").textContent = hideFrom && [...froms][0] ? `für ${[...froms][0]}` : "";
+    }
     if(!list.length){
       listEl.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Die Liste ist leer</div><div class="uEmptyText">Füge oben etwas hinzu oder tippe auf einer Rezeptseite auf „Zur Liste“.</div></div>`;
       return;

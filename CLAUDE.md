@@ -13,6 +13,8 @@ https://kochbuch.tobis.workers.dev/ — Cloudflare baut jeden Push auf `main` au
   „build“/„deploy“ gehören zu GitHub Pages und sind egal). Rot = nichts geht live.
   Gelegentlich scheitert ein Build auch bei harmlosen Commits (z. B. reine Rezeptänderung); dann behebt der nächste
   Push auf `main` es meist. Lokal bauen + grüner GitHub-Check sprechen gegen einen echten Fehler.
+  Ende Oktober 2026 meldete Cloudflare „failure“, obwohl die Änderungen live waren (Screenshot vom Besitzer) – bei Rot
+  also erst auf der Seite nachsehen (aus dem Container nicht erreichbar, ggf. den Besitzer fragen).
 
 ## Bauen und prüfen
 

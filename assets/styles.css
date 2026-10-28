@@ -1258,18 +1258,25 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 .uRow.swiping{z-index:1;transition:none}
 .uRow.swipeArmed{opacity:.85}
 .shopQtyBtn{min-height:32px;padding:0 8px;margin-right:-8px;border-radius:var(--rBtn);color:inherit}
-.shopQtyBtn:empty::before{content:"+ Menge";font-weight:400;font-size:var(--fs14);color:var(--sub2)}
+.shopQtyBtn:empty{min-width:32px;justify-content:center}
+.shopQtyBtn:empty::before{content:"+";font-weight:400;font-size:var(--fs18);color:var(--sub2);opacity:.6}
 .shopSuggest{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-top:12px;padding-bottom:2px}
 .shopSuggest::-webkit-scrollbar{display:none}
 .shopSuggest[hidden]{display:none}
 .shopSuggestChip{min-height:36px;padding:0 14px}
-.shopHint{margin:0 16px;font-size:var(--fs12);color:var(--sub2);text-align:center}
+.shopHint{margin:12px 16px 0;font-size:var(--fs12);color:var(--sub2);text-align:center}
 .shopItemBody{display:flex;flex-direction:column;gap:12px;padding-bottom:24px}
 .shopItemLabel{font-size:var(--fs14);font-weight:600;color:var(--sub2);margin-top:4px}
 .shopItemQty{min-height:48px;padding:0 16px;border:1px solid var(--line);border-radius:var(--rBtn);background:var(--bg);color:var(--text);font:inherit;font-size:var(--fs16)}
 #shopItemDelete{margin-top:12px}
-.reweStartRow{margin-top:0}
-.reweStart{width:100%}
+.searchRow .btn.shopAddBtn{min-height:40px;min-width:40px;width:40px;padding:0;margin:1px;border-radius:12px;font-size:var(--fs22);font-weight:500;line-height:1}
+.shopToolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 4px 16px}
+.shopToolbar[hidden]{display:none}
+.shopToolbarInfo{display:flex;flex-direction:column;min-width:0;font-size:var(--fs14);line-height:1.3;color:var(--sub2)}
+.shopToolbarInfo span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shopFor:empty{display:none}
+.reweChip{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;min-height:36px;padding:0 14px;border:0;border-radius:var(--rPill);background:var(--fill);color:var(--petrol);font:inherit;font-size:var(--fs14);font-weight:600;cursor:pointer}
+.reweChip svg{width:18px;height:18px}
 .reweBody{display:flex;flex-direction:column;gap:12px;padding-bottom:24px}
 .reweProgress{font-size:var(--fs14);color:var(--sub2)}
 .reweItem{font-size:var(--fs22);font-weight:700;line-height:1.25}
