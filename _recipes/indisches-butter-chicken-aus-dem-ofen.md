@@ -37,8 +37,8 @@ ingredients:
 ## Schritte
 1. Hähnchen in Stücke schneiden. Marinade aus Paprika, Saft, Salz, Joghurt, Cayenne, Garam Masala, Ingwer und Knoblauch herstellen und mit dem Fleisch mischen. Mind. 1 Std ziehen lassen (besser über Nacht).
 2. Ofen auf 200 °C Ober-/Unterhitze vorheizen. Fleisch in Auflaufform ca. 25 Min garen.
-3. Sauce: Zwiebel fein hacken und in 2 EL Butter glasig anschwitzen. Passierte Tomaten, Zimt, Salz, Cayenne, Ingwer und Knoblauch zugeben.
+3. Soße: Zwiebel fein hacken und in 2 EL Butter glasig anschwitzen. Passierte Tomaten, Zimt, Salz, Cayenne, Ingwer und Knoblauch zugeben.
 4. Mit Deckel bei niedriger Hitze ca. 20 Min köcheln (gelegentlich rühren).
 5. Restliche Butter, Honig und Sahne zugeben und weitere 3 Min köcheln.
-6. Fleisch aus der Marinade nehmen, in die Sauce geben, umrühren und ca. 2 Min mitköcheln.
+6. Fleisch aus der Marinade nehmen, in die Soße geben, umrühren und ca. 2 Min mitköcheln.
 7. Optional mit Koriander servieren; dazu Reis oder Naan.

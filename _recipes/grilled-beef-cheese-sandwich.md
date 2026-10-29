@@ -14,7 +14,7 @@ ingredients:
   - { qty: 50, unit: "g", item: "geriebener Cheddar" }
   - { qty: 2, unit: "", item: "Zwiebeln" }
   - { qty: 4, unit: "g", item: "Paprika-Gewürzmischung" }
-  - { qty: 45, unit: "g", item: "Burgersauce" }
+  - { qty: 45, unit: "g", item: "Burgersoße" }
   - { qty: 1, unit: "", item: "Karotte" }
   - { qty: 50, unit: "g", item: "Blattsalatmischung" }
   - { qty: 20, unit: "ml", item: "mittelscharfer Senf" }
@@ -31,4 +31,4 @@ ingredients:
 3. **Dressing**: In einer großen Schüssel Senf, Olivenöl, Essig, Honig, Salz und Pfeffer verrühren. Karotte nach Belieben schälen und grob in die Schüssel raspeln.
 4. **Belegen**: Hackfüllung auf die unteren Brothälften verteilen, mit Cheddar bestreuen und die oberen Hälften auflegen.
 5. **Grillen**: Die Sandwiches nacheinander im verbliebenen Fett der Pfanne bei mittlerer Hitze je Seite 2–3 Min. rösten, bis der Käse geschmolzen und das Brot goldbraun ist. Tipp: Mit einem Topf leicht beschweren, dann schmilzt der Käse besser und das Sandwich lässt sich leichter essen.
-6. **Anrichten**: Salat in die Schüssel mit dem Dressing geben und gut vermengen. Sandwiches halbieren und mit Salat und Burgersauce servieren.
+6. **Anrichten**: Salat in die Schüssel mit dem Dressing geben und gut vermengen. Sandwiches halbieren und mit Salat und Burgersoße servieren.

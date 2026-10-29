@@ -5,7 +5,7 @@ date: 2026-03-08
 category: "Süßes & Backen"
 categories: ["Italienisch"]
 tags: ["vegetarisch", "klassiker"]
-time: "ca. 30 Min + 2 Std Kühlzeit"
+time: "ca. 30 Min + 2 Std kühlen"
 image: /recipes/images/tiramisu.jpg
 servings: 6
 ingredients:

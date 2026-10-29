@@ -24,4 +24,4 @@ ingredients:
 2. Vanillezucker hinzufügen. Mehl und Backpulver dazugeben und gut verrühren.
 3. Milch nach und nach unterrühren, bis der Teig eine weiche, cremige Konsistenz hat.
 4. Waffeleisen auf Temperaturstufe 5 vorheizen (ca. 3,5 Minuten).
-5. Jeweils ca. 3 EL Teig auf die Backfläche geben und 1:50–2:20 Minuten backen.
+5. Jeweils ca. 3 EL Teig auf die Backfläche geben und ca. 2 Min. goldbraun backen.

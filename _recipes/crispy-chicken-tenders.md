@@ -4,8 +4,9 @@ subtitle: "mit Hot Honey und Blue-Cheese-Ranch"
 date: 2026-10-26
 author: "Tobi"
 category: "Knusprig & Frittiert"
+categories: ["Hähnchen"]
 tags: ["hähnchen", "amerikanisch", "scharf", "streetfood", "aufwendig", "am-vortag-starten"]
-time: "ca. 45 Minuten aktive Zubereitung + über Nacht marinieren"
+time: "ca. 45 Min + über Nacht marinieren"
 image: /recipes/images/crispy-chicken-tenders-mvppijlc.jpg
 servings: 2
 ingredients:
@@ -58,8 +59,8 @@ ingredients:
 2. Marinade anrühren: Sriracha, Wasser und Salz in einer Schüssel vermengen.
 3. Marinieren: Das Hähnchen vollständig in die Marinade legen, abdecken und über Nacht im Kühlschrank ziehen lassen.
 4. Hot Honey zubereiten: Honig in einem Topf bei mittlerer Hitze erwärmen. Reisweinessig, Sriracha, Chiliflocken, Szechuanpfeffer, Fenchelsamen und optional MSG sowie Zitronensäure einrühren.
-5. Sauce reduzieren: Die Mischung sanft köcheln lassen, bis sie leicht sirupartig wird. Knoblauch fein hineinreiben und weitere 3 Minuten köcheln lassen. Beiseitestellen.
-6. Blue-Cheese-Ranch zubereiten: Blauschimmelkäse, Buttermilch, japanische Mayonnaise, Weißweinessig, Zitronensaft, Honig, Zwiebelpulver, Pfeffer und Salz verrühren oder pürieren. Schnittlauch fein hacken, unterheben und die Sauce kalt stellen.
+5. Soße reduzieren: Die Mischung sanft köcheln lassen, bis sie leicht sirupartig wird. Knoblauch fein hineinreiben und weitere 3 Minuten köcheln lassen. Beiseitestellen.
+6. Blue-Cheese-Ranch zubereiten: Blauschimmelkäse, Buttermilch, japanische Mayonnaise, Weißweinessig, Zitronensaft, Honig, Zwiebelpulver, Pfeffer und Salz verrühren oder pürieren. Schnittlauch fein hacken, unterheben und die Soße kalt stellen.
 7. Trockene Panade mischen: Mehl, Kartoffelstärke, Backpulver, Salz, MSG, weißen und schwarzen Pfeffer, Knoblauchpulver und Cayennepfeffer gründlich vermengen.
 8. Hähnchen vorbereiten: Das Fleisch aus der Marinade nehmen und auf ein Blech legen. Etwas überschüssige Marinade darübergeben und alles vermengen.
 9. Erste Panadenschicht: Eine Handvoll der Mehlmischung über das Hähnchen geben und gut einarbeiten.
@@ -70,7 +71,7 @@ ingredients:
 14. Überschüssige Panade entfernen: Jedes Stück über der trockenen Panade leicht schütteln, damit lose Mehlreste abfallen.
 15. Frittieren: Die Hähnchenstücke vorsichtig portionsweise ins Öl geben und etwa 4–5 Minuten goldbraun frittieren. Die Kerntemperatur sollte mindestens 74 °C erreichen. Bei größeren Stücken kann die Garzeit länger sein.
 16. Abtropfen lassen: Das fertige Hähnchen auf einem Gitter über einem Blech kurz abtropfen lassen, damit die Kruste knusprig bleibt.
-17. Glasieren: Jedes Stück in die Sriracha-Honig-Sauce tauchen und überschüssige Sauce abtropfen lassen.
+17. Glasieren: Jedes Stück in die Sriracha-Honig-Soße tauchen und überschüssige Soße abtropfen lassen.
 18. Servieren: Die Chicken Tenders auf einer Platte anrichten und mit der Blue-Cheese-Ranch servieren.
 
 ## Tipps
@@ -78,6 +79,6 @@ ingredients:
 - **Extra knusprig:** Kartoffelstärke sorgt für Knusprigkeit, Backpulver für eine luftigere Kruste. Die unregelmäßigen Panadenstücke sind ausdrücklich erwünscht.
 - **Öltemperatur:** Während des Frittierens möglichst konstant bei etwa 185 °C halten. Nicht zu viele Stücke gleichzeitig frittieren.
 - **Kerntemperatur:** Für eine sichere Zubereitung von Geflügel mindestens 74 °C erreichen.
-- **Schärfe:** Für eine mildere Variante die Sriracha-Menge in der Hot-Honey-Sauce reduzieren.
-- **Vorbereitung:** Das Hähnchen am Vorabend marinieren und die Saucen vor dem Frittieren zubereiten. Erst kurz vor dem Frittieren panieren.
-- **Reste:** Die Saucen ergeben großzügige Mengen und können separat serviert werden.
+- **Schärfe:** Für eine mildere Variante die Sriracha-Menge in der Hot-Honey-Soße reduzieren.
+- **Vorbereitung:** Das Hähnchen am Vorabend marinieren und die Soßen vor dem Frittieren zubereiten. Erst kurz vor dem Frittieren panieren.
+- **Reste:** Die Soßen ergeben großzügige Mengen und können separat serviert werden.

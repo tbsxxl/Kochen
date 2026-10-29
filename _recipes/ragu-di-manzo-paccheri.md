@@ -6,7 +6,7 @@ date: 2026-09-17
 category: "Pasta"
 categories: ["Italienisch", "Fleisch & Schmorgerichte", "Meal Prep"]
 tags: ["rind", "high-protein", "aufwendig"]
-time: "110 - 120 Min"
+time: "ca. 2 Std"
 image: /recipes/images/ragu-di-manzo-mvpsa3c1.jpg
 servings: 4
 ingredients:

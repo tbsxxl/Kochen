@@ -6,7 +6,7 @@ date: 2026-09-17
 category: "Curry"
 categories: ["Vegetarisch", "Indisch", "Meal Prep"]
 tags: ["ofen"]
-time: "40 - 50 Min"
+time: "40–50 Min"
 image: /recipes/images/blumenkohl-dalsosse.jpg
 servings: 4
 ingredients:

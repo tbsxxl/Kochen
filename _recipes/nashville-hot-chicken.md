@@ -6,7 +6,7 @@ date: 2026-05-04
 category: "Knusprig & Frittiert"
 categories: ["Hähnchen"]
 tags: ["hähnchen", "amerikanisch", "scharf", "streetfood"]
-time: "ca. 60 Min + marinieren"
+time: "ca. 1 Std + 4 Std marinieren"
 image: /recipes/images/nashville.jpg
 servings: 4
 ingredients:
@@ -58,10 +58,7 @@ ingredients:
 
 9. **Anrichten und servieren:** Toastbrot auf einen Teller legen, mit Essiggurken-Scheiben belegen und das glasierte Hähnchen daraufsetzen. Sofort heiß servieren.
 
----
-
-## Hinweise
+## Tipps
 
 - **Schärfegrad steuern:** über die Cayenne-Menge in der Glasur — "Mild" ca. 1 EL, "Nashville Hot" 3 EL, "XXX Hot" bis zu 6 EL plus ein Spritzer zusätzliche scharfe Soße.
-- Fürs Grillen auf dem Balkon: Frittieren am besten in einem separaten Topf — der Grill eignet sich eher für den Nachgang mit Maiskolben oder als Beilagenstation.
 - Dazu passt klassisch Kartoffelsalat oder Coleslaw.

@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Hähnchen"
 categories: ["Italienisch"]
 tags: ["hähnchen", "ofen"]
-time: "ca. 50–60 Min"
+time: "50–60 Min"
 image: /recipes/images/parmahähnchen.jpg
 servings: 2
 ingredients:
@@ -35,9 +35,9 @@ ingredients:
 
 ## Schritte
 1. Ofen auf 180 °C Ober-/Unterhitze vorheizen. Zwiebel würfeln, Knoblauch hacken, Mozzarella in Scheiben schneiden.
-2. Sauce: Zwiebel/Knoblauch in Öl glasig anschwitzen. Tomatenmark 30 Sek mitrösten. Mit Sahne und passierten Tomaten ablöschen, Zucker/Salz/Pfeffer/Kräuter zugeben und 5–7 Min einköcheln.
+2. Soße: Zwiebel/Knoblauch in Öl glasig anschwitzen. Tomatenmark 30 Sek mitrösten. Mit Sahne und passierten Tomaten ablöschen, Zucker/Salz/Pfeffer/Kräuter zugeben und 5–7 Min einköcheln.
 3. Hähnchen trocken tupfen und mit Salz, Pfeffer und Paprika würzen. In Öl je Seite 2–3 Min scharf anbraten.
 4. Jede Brust mit 2 Scheiben Parmaschinken umwickeln, Mozzarella obenauf legen und in eine Auflaufform setzen.
-5. Sauce über das Fleisch geben und ca. 25 Min backen.
+5. Soße über das Fleisch geben und ca. 25 Min backen.
 6. Fries parallel zubereiten (nach Packung / im Ofen / Airfryer).
-7. Servieren: Hähnchen mit Sauce anrichten, Pesto darüber geben, mit Fries servieren.
+7. Servieren: Hähnchen mit Soße anrichten, Pesto darüber geben, mit Fries servieren.

@@ -1,6 +1,6 @@
 ---
-title: "Reis-Bowl mit Schweinefilet"
-subtitle: "mit Brokkoli, Gurke und Sweet-Chili-Soße"
+title: "Schweinefilet-Reis-Bowl"
+subtitle: "mit Brokkoli, Gurke und Sweet-Chili-Dressing"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"
@@ -22,9 +22,9 @@ ingredients:
 ---
 
 ## Schritte
-1. Wasser im Wasserkocher erhitzen. In einem kleinen Topf mit Deckel Wasser und Salz einrühren und aufkochen lassen. Reis zugeben und bei niedriger Hitze 10 Min. abgedeckt köcheln lassen.
-2. Limette vierteln. In einer großen Schüssel Sojasoße mit Zucker und Saft von Limettenspalten verrühren. Gurke in 4 Stücke teilen, dann in 1 cm dicke Stifte schneiden.
+1. Wasser im Wasserkocher erhitzen. Wasser mit etwas Salz in einem kleinen Topf mit Deckel aufkochen. Reis zugeben und bei niedriger Hitze 10 Min. abgedeckt köcheln lassen.
+2. Limette vierteln. In einer großen Schüssel Sojasoße, Sweet-Chili-Soße und den Saft von zwei Limettenspalten zu einem Dressing verrühren. Gurke in 4 Stücke teilen, dann in 1 cm dicke Stifte schneiden.
 3. Brokkoli in mundgerechte Röschen schneiden. Knoblauch abziehen. Chili längs halbieren, entkernen und in feine Streifen schneiden.
-4. Brokkoliröschen in den Topf mit kochendem Salzwasser geben und 2–3 Min. bissfest garen. Durch ein Sieb abgießen.
-5. Einen großen Topf mit heißem Wasser füllen, salzen und aufkochen lassen. In einer großen Pfanne Öl erhitzen. Schweinefiletstreifen darin 4–6 Min. rundherum anbraten. Knoblauch dazupressen, mit Chili und Sojasauce würzen.
+4. Brokkoli in kochendem Salzwasser 2–3 Min. bissfest garen und abgießen.
+5. In einer großen Pfanne Öl erhitzen. Schweinefiletstreifen darin 4–6 Min. rundherum anbraten. Knoblauch dazupressen, die Hälfte der Chili zugeben und 1 Min. mitbraten.
 6. Reis auf tiefe Teller verteilen. Brokkoli, Gurkensticks mit Dressing und Schweinefiletstreifen darauf anrichten und mit Chilistreifen und restlichen Limettenspalten toppen.

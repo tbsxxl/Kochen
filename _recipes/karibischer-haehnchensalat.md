@@ -6,7 +6,7 @@ date: 2026-09-17
 category: "Bowls & Salate"
 categories: ["Hähnchen", "Schnell"]
 tags: ["hähnchen", "karibisch", "high-protein"]
-time: "20 - 30 Min"
+time: "20–30 Min"
 image: /recipes/images/karibischer-haehnchensalat.jpg
 servings: 4
 ingredients:

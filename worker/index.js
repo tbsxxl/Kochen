@@ -464,6 +464,26 @@ function decodeEntities(s){
     .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
     .replace(/\s+/g, " ").trim();
 }
+// Importierte Schritte aufräumen: Mengen für andere Portionen („1 EL [1,5 EL | 2 EL]“), Sternchen für
+// Vorratszutaten („Öl*“), Grußformeln und Du-Anweisungen am Satzanfang („Erhitze …“, „Heize … vor“).
+function tidyStep(t){
+  return String(t || "")
+    .replace(/\s*\[[^\]]*\|[^\]]*\]/g, "")
+    .replace(/(\S)\*/g, "$1")
+    .replace(/\s*Guten Appetit!?/gi, "")
+    .replace(/(\d) – (\d)/g, "$1–$2")
+    .replace(/(^|\.\s+)Heize (den Backofen|den Ofen) auf ([^.]*?) vor\./g, (m, a, b, c) => `${a}Backofen auf ${c} vorheizen.`)
+    .replace(/(^|\.\s+)Erhitze ([^.]*?) im Wasserkocher\./g, (m, a, b) => `${a}${b.charAt(0).toUpperCase()}${b.slice(1)} im Wasserkocher erhitzen.`)
+    .trim();
+}
+// Quelle als Name statt Adresse („hellofresh.de“ → „HelloFresh“)
+function sourceName(host){
+  const h = String(host || "").toLowerCase().replace(/^www\./, "");
+  const known = { hellofresh: "HelloFresh", chefkoch: "Chefkoch", kitchenstories: "Kitchen Stories", lecker: "Lecker",
+    essen_und_trinken: "essen & trinken", "eat-club": "EAT CLUB", marleyspoon: "Marley Spoon", emmikochteinfach: "Emmi kocht einfach" };
+  const base = h.split(".").slice(-2, -1)[0] || h;
+  return known[base.replace(/-/g, "_")] || known[base] || h;
+}
 function instructionsOf(ins){
   const steps = [];
   const walk = (x, section)=>{
@@ -535,9 +555,10 @@ async function recipeImport(request, env){
     servings,
     time: fmtMinutes(min),
     ingredients: (Array.isArray(recipe.recipeIngredient) ? recipe.recipeIngredient : []).map(decodeEntities).filter(Boolean).slice(0, 100),
-    steps: instructionsOf(recipe.recipeInstructions),
+    steps: instructionsOf(recipe.recipeInstructions).map(tidyStep).filter(Boolean),
     tags: kw.map(decodeEntities).filter(Boolean).slice(0, 10),
-    source: u.toString()
+    source: u.toString(),
+    sourceName: sourceName(u.hostname)
   };
   // Foto gleich mitliefern (der Browser darf fremde Bilder wegen CORS nicht direkt verarbeiten)
   const imgUrl = imageUrlOf(recipe.image);

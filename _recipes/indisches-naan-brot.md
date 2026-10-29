@@ -29,4 +29,4 @@ ingredients:
 5. Teig kurz durchkneten, in 6 Kugeln teilen und abgedeckt ruhen lassen.
 6. Je Kugel dünn ausrollen (rund oder tropfenförmig).
 7. Sehr heiße (beschichtete) Pfanne ohne Fett verwenden. Fladen einlegen, erste Seite braten bis Blasen entstehen, kurz wenden und zweite Seite bräunen (Vorsicht: verbrennt schnell).
-8. Warm servieren; passt zu Currys und Saucengerichten.
+8. Warm servieren; passt zu Currys und Soßengerichten.

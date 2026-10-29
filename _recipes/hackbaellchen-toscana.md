@@ -25,7 +25,7 @@ ingredients:
 ## Schritte
 1. Hackfleisch mit Salz und Pfeffer würzen; optional Kräuter und Knoblauch zugeben.
 2. 12–15 kleine Bällchen formen und in eine Auflaufform legen.
-3. Sauce anrühren: stückige Tomaten, Sahne, Kräuter, Tomatenmark und Zucker verrühren; mit Salz und Pfeffer abschmecken.
-4. Sauce über die Hackbällchen gießen. Mozzarella in Scheiben schneiden und darauf verteilen.
+3. Soße anrühren: stückige Tomaten, Sahne, Kräuter, Tomatenmark und Zucker verrühren; mit Salz und Pfeffer abschmecken.
+4. Soße über die Hackbällchen gießen. Mozzarella in Scheiben schneiden und darauf verteilen.
 5. Bei 175 °C Umluft 30–40 Min backen (Käse nicht zu dunkel werden lassen).
 6. Dazu passt Reis.

@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Knusprig & Frittiert"
 categories: ["Asiatisch", "Hähnchen"]
 tags: ["hähnchen", "koreanisch", "scharf", "streetfood"]
-time: "60 min"
+time: "ca. 1 Std"
 image: /recipes/images/yangnyeom.jpg
 servings: 4
 ingredients:
@@ -34,8 +34,8 @@ ingredients:
 1. Öl (ca. 5 cm hoch) in einer schweren Pfanne/Topf auf ca. 165–175 °C erhitzen (330–350 °F).
 2. Währenddessen Wings mit Salz, Pfeffer, Kartoffelstärke, Mehl, Natron und Eiern in einer großen Schüssel gründlich vermengen.
 3. Erster Frittiergang: Wings portionsweise 12 Min frittieren, bis sie goldbraun sind. Auf einem Gitter/Abtropfsieb abtropfen lassen.
-4. Sauce: 2 TL Öl erhitzen, Knoblauch ca. 30 Sek anrösten. Ketchup, Reissirup, Gochujang und Essig zugeben, bei kleiner Hitze rühren bis es blubbert. Vom Herd nehmen.
+4. Soße: 2 TL Öl erhitzen, Knoblauch ca. 30 Sek anrösten. Ketchup, Reissirup, Gochujang und Essig zugeben, bei kleiner Hitze rühren bis es blubbert. Vom Herd nehmen.
 5. Öl erneut auf Temperatur bringen (kurz nachheizen).
 6. Zweiter Frittiergang: Wings nochmals ca. 12 Min frittieren, bis sehr knusprig.
-7. Sauce wieder erhitzen, Wings zugeben und gründlich wenden, bis alles überzogen ist.
+7. Soße wieder erhitzen, Wings zugeben und gründlich wenden, bis alles überzogen ist.
 8. Mit Sesam bestreuen und servieren (optional mit Chicken-mu).

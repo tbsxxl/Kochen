@@ -31,6 +31,6 @@ ingredients:
 3. Nudeln in Salzwasser nach Packungsangabe al dente garen.
 4. In einer großen Pfanne Olivenöl erhitzen, Zwiebel/Knoblauch/Chili anschwitzen.
 5. Passierte Tomaten zugeben und kurz köcheln. Sahne und Parmesan einrühren; mit Salz, Pfeffer und einer Prise Zucker abschmecken.
-6. Nudeln abgießen und zur Sauce geben. Von der Hitze nehmen, Tomaten und die Hälfte des Mozzarellas unterheben, Basilikum unterheben.
+6. Nudeln abgießen und zur Soße geben. Von der Hitze nehmen, Tomaten und die Hälfte des Mozzarellas unterheben, Basilikum unterheben.
 7. In Auflaufform füllen, restlichen Mozzarella darüber streuen.
 8. Bei 200 °C Ober-/Unterhitze bzw. 180 °C Umluft ca. 20 Min gratinieren.

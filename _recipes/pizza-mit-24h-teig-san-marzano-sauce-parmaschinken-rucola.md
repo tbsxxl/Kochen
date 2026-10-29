@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Pizza & Brot"
 categories: ["Italienisch"]
 tags: ["ofen", "klassiker", "am-vortag-starten"]
-time: "ca. 24 Std Reifezeit + Backzeit"
+time: "24 Std Teigreife + ca. 30 Min"
 image: /recipes/images/pizza.jpg
 servings: 6
 ingredients:
@@ -33,10 +33,12 @@ ingredients:
 3. Abgedeckt 24 Stunden im Kühlschrank reifen lassen.
 4. In 260–270 g Teiglinge portionieren und rund wirken.
 5. 2–3 Stunden vor dem Backen bei Raumtemperatur entspannen lassen.
-6. Sauce: Tomaten per Hand zerdrücken oder grob pürieren. Salz einrühren, optional Basilikum und Olivenöl zugeben. Nicht vorkochen.
-7. Pro Pizza 60–80 g Sauce dünn verstreichen.
-8. Teigling von innen nach außen drücken (Rand luftig lassen).
-9. Sauce dünn auftragen und Mozzarella verteilen.
-10. Backen: Haushaltsbackofen (250–300 °C, Stein/Stahl) 6–9 Min oder Pizzaofen (400–450 °C) 60–90 Sek.
-11. Nach dem Backen Parmaschinken auflegen, Rucola verteilen, Parmesan darüber reiben und mit Olivenöl beträufeln.
-12. Schinken und Rucola nicht mitbacken – sie trocknen aus bzw. werden bitter.
+6. Soße: Tomaten per Hand zerdrücken oder grob pürieren. Salz einrühren, optional Basilikum und Olivenöl zugeben. Nicht vorkochen.
+7. Teigling von innen nach außen drücken (Rand luftig lassen).
+8. 60–80 g Soße dünn auftragen und Mozzarella verteilen.
+9. Backen: Haushaltsbackofen (250–300 °C, Stein/Stahl) 6–9 Min oder Pizzaofen (400–450 °C) 60–90 Sek.
+10. Nach dem Backen Parmaschinken auflegen, Rucola verteilen, Parmesan darüber reiben und mit Olivenöl beträufeln.
+
+## Tipps
+
+- Schinken und Rucola nicht mitbacken – sie trocknen aus bzw. werden bitter.

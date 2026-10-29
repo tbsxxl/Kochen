@@ -4,7 +4,7 @@ subtitle: "Fisch im Backteig mit Pommes und Tartarsoße"
 date: 2026-02-20
 category: "Knusprig & Frittiert"
 tags: ["fisch", "englisch", "streetfood", "klassiker"]
-time: "ca. 90 Min"
+time: "ca. 1 Std 30 Min"
 image: /recipes/images/fish.jpg
 servings: 4
 ingredients:
@@ -36,24 +36,21 @@ ingredients:
 ## Schritte
 1. **Teig vorbereiten:** 2 EL Mehl beiseitestellen. Restliches Mehl mit Speisestärke und Backpulver in einer Schüssel mischen, mit Salz und Pfeffer würzen. Bier und Mineralwasser einrühren, bis ein glatter, dickflüssiger Teig entsteht. Abgedeckt 30–60 Minuten kalt stellen.
 2. **Kartoffeln vorbereiten:** In ca. 1 cm dicke Stifte schneiden, unter kaltem Wasser abspülen und 3–4 Minuten in Salzwasser vorkochen. Abgießen, auf Küchenpapier ausbreiten und vollständig trocken tupfen.
-3. **Tartar-Sauce:** Alle Zutaten in einer kleinen Schüssel gründlich verrühren, abschmecken und bis zum Servieren kalt stellen.
+3. **Tartarsoße:** Alle Zutaten in einer kleinen Schüssel gründlich verrühren, abschmecken und bis zum Servieren kalt stellen.
 4. **Fisch vorbereiten:** Filets trocken tupfen und leicht salzen.
 5. **Öl erhitzen:** Frittieröl (7–8 cm hoch) auf ca. 175 °C erhitzen.
 6. **Pommes vorfrittieren:** Kartoffeln portionsweise ca. 2 Minuten frittieren – noch nicht bräunen. Herausnehmen und auf Küchenpapier abtropfen lassen. Beiseitestellen.
 7. **Fisch panieren:** Fischfilets im beiseitegestellten Mehl wenden, überschüssiges Mehl abschütteln, dann vollständig durch den Teig ziehen.
 8. **Fisch frittieren:** Bei 175 °C portionsweise 6–8 Minuten goldbraun und knusprig ausbacken, gelegentlich wenden. Abtropfen lassen, leicht salzen und im Ofen bei ca. 95 °C warm halten.
 9. **Pommes fertigfrittieren:** Öl auf ca. 200 °C erhöhen und die Pommes portionsweise weitere 5 Minuten knusprig goldbraun frittieren. Herausnehmen, abtropfen lassen und salzen.
-10. **Servieren:** Fisch und Pommes sofort mit der Tartar-Sauce reichen.
+10. **Servieren:** Fisch und Pommes sofort mit der Tartarsoße reichen.
 
 
----
-
-
-## Hinweise
+## Tipps
 
 - Fisch und Kartoffeln vor dem Frittieren stets gut trocknen – das sorgt für bessere Knusprigkeit und verhindert Spritzer
 - Öltemperatur zwischen den Portionen konstant halten (Thermometer empfehlenswert)
 - Topf oder Fritteuse nicht überfüllen, sonst fällt die Temperatur zu stark ab
 - Dunkles Bier im Teig lässt sich durch helles Bier oder vollständig durch Mineralwasser ersetzen
-- Die Tartar-Sauce hält sich abgedeckt im Kühlschrank 2–3 Tage
+- Die Tartarsoße hält sich abgedeckt im Kühlschrank 2–3 Tage
 

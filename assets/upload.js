@@ -380,8 +380,7 @@
       if(r.tags && r.tags.length && !$("#tagsIn").value) $("#tagsIn").value = r.tags.join(", ");
       if(r.ingredients && r.ingredients.length) $("#ingIn").value = r.ingredients.join("\n");
       if(r.steps && r.steps.length) $("#stepsIn").value = r.steps.join("\n");
-      if(r.source && !$("#notesIn").value) $("#notesIn").value = `Quelle: ${r.source}`;
-      if(r.source && !$("#sourceIn").value){ try{ $("#sourceIn").value = new URL(r.source).hostname.replace(/^www\./, ""); }catch{} }
+      if(r.source && !$("#sourceIn").value) $("#sourceIn").value = r.sourceName || "";
       if(r.image && r.image.data){
         const bin = atob(r.image.data);
         photoFile = new Blob([Uint8Array.from(bin, c=>c.charCodeAt(0))], { type: r.image.type });
