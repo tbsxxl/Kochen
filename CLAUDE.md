@@ -64,9 +64,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   Timer im Kochmodus: `assets/cook-timer.js` (auf jeder Seite geladen) zeigt beim Ablauf einen Hinweis mit Ton
   (bis „OK“) und meldet Timer an `/api/timers` (nur mit Profil + Push-Abo). Durable Object `TimerAlarms`
   (Binding `TIMERS`, eins pro Profil) schickt 4 s nach Ablauf die Mitteilung, außer das Gerät hat den Ablauf bei
-  sichtbarer Seite schon selbst bemerkt (`/api/timers/cancel`). **Derzeit aus:** Mit Binding + Migration in
-  `wrangler.jsonc` schlug der Cloudflare-Build auf main fehl (Log nur im Dashboard). Ohne Binding antwortet
-  `/api/timers` mit `{ ok: false }`.
+  sichtbarer Seite schon selbst bemerkt (`/api/timers/cancel`). Die Klasse erbt von `DurableObject`
+  (`cloudflare:workers`, Pflicht für `new_sqlite_classes`); Node lädt den Worker nur mit
+  `node --import ./tools/cf-workers-stub.mjs` (so auch im GitHub-Check). Ohne Binding antwortet `/api/timers` mit `{ ok: false }`.
   iPhone: nur in der Homescreen-App. Lokal testen: Push-Mock mit `http_ece` entschlüsseln (`ALLOW_LOCAL_IMPORT` erlaubt
   http://127.0.0.1-Endpunkte); headless Chromium blockiert Mitteilungen immer.
 - Speicher: KV-Binding `KV` (ohne id, Wrangler legt es beim Deploy an).
