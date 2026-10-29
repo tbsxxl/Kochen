@@ -36,3 +36,4 @@ jobs:
           python3 -m http.server 8411 --directory _site >/dev/null 2>&1 &
           sleep 1
           node tools/smoke.js http://localhost:8411
+          node tools/flows.js http://localhost:8411

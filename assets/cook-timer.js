@@ -172,6 +172,19 @@
     timers.push(t);
     save(); ensureLoop(); emit();
     remoteSet(t);
+    pushHint();
+  }
+  // Ohne Mitteilungs-Abo meldet sich der Timer nur, solange die App offen ist → einmal pro Woche darauf hinweisen
+  const HINT_KEY = "kochbuch.ui.timerPushHint";
+  function pushHint(){
+    pushReady().then(ok=>{
+      if(ok || !("serviceWorker" in navigator) || !("PushManager" in window)) return;
+      let last = 0; try{ last = Number(localStorage.getItem(HINT_KEY)) || 0; }catch{}
+      if(Date.now() - last < 7 * 86400e3) return;
+      try{ localStorage.setItem(HINT_KEY, String(Date.now())); }catch{}
+      setTimeout(()=> window.KOCHBUCH_UI?.toast?.("Bei gesperrtem iPhone meldet sich der Timer nur mit Mitteilungen.",
+        { label: "Aktivieren", run: ()=>{ location.href = "/konto/#pushCard"; } }), 1200);
+    });
   }
   function remove(id){
     const had = timers.some(t=>t.id === id);

@@ -76,6 +76,7 @@
       .flatMap(d=>(plan[U.plan.key(d)] || []).filter(e=>byId.has(e.id)));
     const btn = $("#weekToShopping");
     btn.disabled = !upcoming.length;
+    btn.hidden = !upcoming.length;   // ohne geplante Gerichte kein halb durchsichtiger Knopf
     btn.textContent = upcoming.length
       ? `Zutaten für ${upcoming.length} Gericht${upcoming.length>1?"e":""} auf die Liste`
       : "Zutaten auf die Einkaufsliste";

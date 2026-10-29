@@ -177,7 +177,7 @@ permalink: /konto/
 
       <div class="card cardPad accountCard" id="pushCard">
         <h2 class="h2 accountTitle">Mitteilungen</h2>
-        <p class="sub">${owner ? 'Du bekommst eine Mitteilung bei neuen Rezeptvorschlägen' : 'Du bekommst eine Mitteilung, wenn dein Vorschlag angeschaut wurde'}${me.household ? ' und wenn jemand etwas auf die gemeinsame Einkaufsliste setzt' : ''}.</p>
+        <p class="sub">${owner ? 'Du bekommst eine Mitteilung bei neuen Rezeptvorschlägen' : 'Du bekommst eine Mitteilung, wenn dein Vorschlag angeschaut wurde'}${me.household ? ', wenn jemand etwas auf die gemeinsame Einkaufsliste setzt,' : ''} und wenn ein Timer im Kochmodus abläuft – auch bei gesperrtem iPhone.</p>
         <div id="pushState"></div>
       </div>
 
@@ -357,6 +357,7 @@ permalink: /konto/
         const p = A().profile();
         if(p && (p.role !== me.role || p.name !== me.name)) localStorage.setItem('kochbuch.profile', JSON.stringify({ ...p, name: me.name, uid: me.uid, role: me.role }));
         renderLoggedIn(me);
+        if(location.hash === '#pushCard') setTimeout(()=> document.getElementById('pushCard')?.scrollIntoView({ block: 'center' }), 100);
       }else{
         if(A().profile()) await A().logout(false);
         renderLoggedOut(me);

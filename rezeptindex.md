@@ -10,7 +10,7 @@ permalink: /rezeptindex/
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </span>
     <input id="searchInput" placeholder="Rezept oder Zutat, z. B. Pasta, Feta …" />
-    <button id="clearSearch" class="btn btnGhost" type="button" aria-label="Zurücksetzen">↺</button>
+    <button id="clearSearch" class="searchClear" type="button" aria-label="Suche löschen" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="var(--surface)" stroke-width="2" stroke-linecap="round"/></svg></button>
   </div>
 
   {%- assign cat_names = site.data.categories -%}
@@ -20,14 +20,9 @@ permalink: /rezeptindex/
   {%- assign authors = "" | split: "" -%}
   {%- for r in site.recipes -%}{%- assign a = r.author | default: site.owner_name -%}{%- unless authors contains a -%}{%- assign authors = authors | push: a -%}{%- endunless -%}{%- endfor -%}
 
-  <div class="quickFilters" role="group" aria-label="Schnellfilter">
-    <button class="filterChip" type="button" data-quick="schnell" aria-pressed="false">Schnell</button>
-    <button class="filterChip" type="button" data-quick="veg" aria-pressed="false">Vegetarisch</button>
-    <button class="filterChip" type="button" data-quick="never" aria-pressed="false">Nie gekocht</button>
-  </div>
 
   <div class="filterBar">
-    <div class="filterBarLeft">
+    <div class="filterBarLeft" role="group" aria-label="Filter">
       <button id="catBtn" class="pillToggle" type="button" aria-haspopup="dialog" aria-controls="catSheet">
         <span id="catBtnLabel">Kategorie</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
@@ -41,6 +36,9 @@ permalink: /rezeptindex/
       <button id="favToggle" class="pillToggle" type="button" aria-pressed="false" aria-label="Nur Favoriten anzeigen">
         <span aria-hidden="true">♡</span> <span class="favLabel">Favoriten</span>
       </button>
+      <button class="filterChip" type="button" data-quick="schnell" aria-pressed="false">Schnell</button>
+      <button class="filterChip" type="button" data-quick="veg" aria-pressed="false">Vegetarisch</button>
+      <button class="filterChip" type="button" data-quick="never" aria-pressed="false">Nie gekocht</button>
     </div>
     <div class="sortMenuWrap">
       <button id="sortBtn" class="pillToggle sortToggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Sortieren">
@@ -95,6 +93,7 @@ permalink: /rezeptindex/
 </section>
 
 <div class="section">
+  <p class="resultCount" id="resultCount" aria-live="polite"></p>
   <div id="emptyState" class="uEmpty" hidden>
     <div class="uEmptyTitle">Keine Rezepte gefunden</div>
     <div class="uEmptyText">Versuch einen anderen Suchbegriff oder setze die Filter zurück.</div>
@@ -169,6 +168,9 @@ permalink: /rezeptindex/
       if (visible) visibleCount++;
     });
     if (emptyState) emptyState.hidden = visibleCount > 0;
+    const rc = document.querySelector('#resultCount');
+    if (rc) rc.textContent = visibleCount === cards.length ? `${cards.length} Rezepte` : `${visibleCount} von ${cards.length} Rezepten`;
+    if (clearBtn) clearBtn.hidden = !(q && q.value);
     if (typeof window.updateFavBadges === "function") window.updateFavBadges();
   }
 
@@ -271,5 +273,6 @@ permalink: /rezeptindex/
     activePerson = ''; if(personOptions.length) setPerson('');
     setCat('');
   });
+  apply();
 })();
 </script>
