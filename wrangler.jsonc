@@ -16,8 +16,13 @@
   "kv_namespaces": [
     { "binding": "KV" }
   ],
-  // Timer-Mitteilungen (TimerAlarms in worker/index.js) vorerst aus: Mit dieser Durable-Object-Bindung schlug
-  // der Cloudflare-Build auf main fehl. Ohne Bindung antwortet /api/timers mit { ok: false }.
+  // Timer-Mitteilungen (worker/index.js, TimerAlarms extends DurableObject): ein Durable Object pro Profil mit Alarm.
+  "durable_objects": {
+    "bindings": [{ "name": "TIMERS", "class_name": "TimerAlarms" }]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["TimerAlarms"] }
+  ],
   "vars": {
     "GITHUB_REPO": "tbsxxl/Kochen",
     "GITHUB_BRANCH": "main"

@@ -10,6 +10,7 @@
 // Speicher: KV-Namespace mit Binding KV (wird beim Deploy automatisch angelegt).
 // Timer-Mitteilungen: Durable Object TimerAlarms (Binding TIMERS), eins pro Profil, weckt sich per Alarm.
 
+import { DurableObject } from "cloudflare:workers";
 import { b64url, randomBytes, verifyRegistration, verifyAuthentication } from "./webauthn.js";
 import { GitHub } from "./github.js";
 import { sendPush, vapidKeys } from "./push.js";
@@ -890,7 +891,7 @@ async function pushTest(request, env, url){
 // Das Gerät meldet gestartete Timer; bemerkt es den Ablauf selbst (Seite sichtbar), sagt es ab.
 // Sonst (Bildschirm gesperrt, App im Hintergrund) schickt das Durable Object kurz nach Ablauf eine Push-Mitteilung.
 const TIMER_GRACE = 4000;   // ms Vorsprung fürs Gerät, damit bei offener Seite keine doppelte Meldung kommt
-// Aufruf ans Durable Object über fetch (ohne „cloudflare:workers“-Import, damit Node den Worker laden kann)
+// Aufruf ans Durable Object über fetch
 function timerCall(env, uid, action, data){
   const stub = env.TIMERS.get(env.TIMERS.idFromName(uid));
   return stub.fetch("https://timers/" + action, { method: "POST", body: JSON.stringify(data) });
@@ -921,8 +922,8 @@ async function timerCancel(request, env){
   await timerCall(env, s.uid, "cancel", { id: String(b.id || "").slice(0, 24) });
   return json({ ok: true });
 }
-export class TimerAlarms {
-  constructor(ctx, env){ this.ctx = ctx; this.env = env; }
+// SQLite-Durable-Objects müssen von DurableObject erben (Node/GitHub-Check: Ersatz in tools/cf-workers-stub.mjs)
+export class TimerAlarms extends DurableObject {
   async fetch(request){
     const action = new URL(request.url).pathname.slice(1);
     const d = await request.json();
