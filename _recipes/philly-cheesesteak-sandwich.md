@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Burger & Sandwiches"
 categories: ["Schnell"]
 tags: ["rind", "amerikanisch", "streetfood", "pfanne"]
-time: "ca. 15–20 Min"
+time: "15–20 Min"
 image: /recipes/images/philly.jpg
 servings: 1
 ingredients:

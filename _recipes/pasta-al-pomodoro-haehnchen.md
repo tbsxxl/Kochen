@@ -14,7 +14,7 @@ ingredients:
   - { qty: 250, unit: "g", item: "Penne" }
   - { section: "Hähnchen-Tomatensoße" }
   - { qty: 250, unit: "g", item: "Hähnchengeschnetzeltes" }
-  - { qty: 4, unit: "g", item: "Gewürzmischung Hello Paprika" }
+  - { qty: 4, unit: "g", item: "Paprika-Gewürzmischung" }
   - { qty: 1, unit: "", item: "Knoblauchzehe" }
   - { qty: 390, unit: "g", item: "Hühnerbrühe" }
   - { qty: 250, unit: "g", item: "Kirschtomaten" }
@@ -26,9 +26,9 @@ ingredients:
 ---
 
 ## Schritte
-1. Reichlich Wasser im Wasserkocher erhitzen. In einem großen Topf reichlich heißes Wasser füllen, kräftig salzen und aufkochen. Pasta hinzugeben und 10–11 Min. bissfest garen.
+1. Reichlich Wasser in einem großen Topf aufkochen und kräftig salzen. Pasta hinzugeben und 10–11 Min. bissfest garen.
 2. Paprika halbieren, entkernen und in 1 cm Streifen schneiden. Basilikum- und Petersilienblätter fein hacken.
-3. In einer großen Pfanne mit Deckel Öl erhitzen. Hähnchengeschnetzeltes mit Gewürzmischung Hello Paprika anbraten. Knoblauch und Brühepulver kurz mitbraten, mit Wasser ablöschen. Mit gehackten Tomaten abgelöscht, mit Deckel köcheln lassen.
-4. In einer zweiten großen Pfanne 1 EL Öl bei mittlerer Temperatur erhitzen. Panko 2–3 Min. unter Rühren goldbraun rösten. Kurz abkühlen lassen und mit gehacktem Hartkäse und der Hälfte Basilikum mischen.
+3. In einer großen Pfanne mit Deckel Öl erhitzen. Hähnchengeschnetzeltes mit der Paprika-Gewürzmischung 3–4 Min. anbraten. Knoblauch und Brühepulver kurz mitbraten, mit Wasser und den Tomaten ablöschen und abgedeckt köcheln lassen.
+4. In einer zweiten großen Pfanne 1 EL Öl bei mittlerer Temperatur erhitzen. Panko 2–3 Min. unter Rühren goldbraun rösten. Kurz abkühlen lassen und mit etwas geriebenem Hartkäse und der Hälfte der Kräuter mischen.
 5. Pasta nach der Garzeit durch ein Sieb abgießen, in die Soße geben und verrühren. Restlichen Hartkäse darüber verteilen und 1–2 Min. abgedeckt köcheln lassen. Mit Salz und Pfeffer abschmecken.
 6. Käsige Pasta auf tiefe Teller verteilen, mit Panko-Bröseln und restlichen Kräutern toppen.

@@ -1,11 +1,12 @@
 ---
 title: "Souvlaki"
-subtitle: "Griechische Fleischspieße"
+subtitle: "Schweinespieße mit Zitronen-Oregano-Marinade"
+source: "Emmi kocht einfach"
 date: 2026-10-20
 author: "Tobi"
 category: "Fleisch & Schmorgerichte"
-tags: ["Hauptspeise", "Braten", "griechisch"]
-time: "ca. 25 Min"
+tags: ["schwein", "griechisch", "klassiker"]
+time: "ca. 25 Min + 2 Std marinieren"
 image: /recipes/images/souvlaki-griechische-fleischspiesse-mvprezte.jpg
 servings: 4
 ingredients:
@@ -19,13 +20,9 @@ ingredients:
 ---
 
 ## Schritte
-1. Das 500 g Schweinelummer-Stück tupfst du mit dem Küchentuch etwas ab und schneidest es in ca. 0,5 bis 1 cm dicke Scheiben. Je nach Größe drittelst oder halbierst du jede Scheibe mit der Fleischfaser.
-2. Für die Marinade schälst du 1 Knoblauchzehe, schneidest sie in feine Würfel und gibst sie in eine(n) Behälter / Schüssel. Dazu kommen 3 EL Olivenöl, 2 EL frisch gepresster Zitronensaft, 1 TL Oregano, ½ TL Salz und 1 Prise schwarzer Pfeffer aus der Mühle. Alles gut miteinander vermengen.
-3. Die Fleischstücke zur Marinade in Behälter / Schüssel geben und gut unterheben. Gut abdecken, idealerweise mit einem Deckel, alternativ mit Frischhaltefolie. 2 Stunden im Kühlschrank marinieren.
-4. Für die Souvlaki die Holzspieße ca. 10 Minuten in einem Gefäß mit Wasser wässern. Im Anschluss 3-4 Stück der marinierten Fleischstücke dicht nebeneinander stecken.
-5. In einer Grillpfanne, einem Kontaktgrill, Gas- oder Kohlegrill insgesamt ca. 8-10 Minuten grillen.
-6. Serviere die Souvlaki am besten mit meinem Tsatsiki und meinem griechischem Krautsalat. Ich wünsche dir einen guten Appetit!
-
-## Tipps
-
-https://emmikochteinfach.de/souvlaki-rezept/
+1. Fleisch trocken tupfen und in 0,5–1 cm dicke Scheiben schneiden. Je nach Größe jede Scheibe entlang der Faser halbieren oder dritteln.
+2. **Marinade**: Knoblauch fein würfeln und mit Olivenöl, Zitronensaft, Oregano, Salz und Pfeffer in einer Schüssel verrühren.
+3. Fleisch in der Marinade wenden, abdecken und 2 Std. im Kühlschrank marinieren.
+4. Holzspieße 10 Min. in Wasser einweichen. Je 3–4 Fleischstücke dicht nebeneinander aufstecken.
+5. In der Grillpfanne oder auf dem Grill rundum insgesamt 8–10 Min. grillen.
+6. Mit Tzatziki und griechischem Krautsalat servieren.

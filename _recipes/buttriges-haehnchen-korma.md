@@ -22,5 +22,5 @@ ingredients:
 
 ## Schritte
 1. Reichlich Wasser im Wasserkocher erhitzen. In einen kleinen Topf mit Deckel Wasser und Salz dazugeben und aufkochen lassen. Reis zugeben und bei niedriger Hitze 12 Min. abgedeckt köcheln lassen, bis das Wasser aufgesaugt ist.
-2. In einer großen Pfanne Öl erhitzen. Hähnchengeschnetzeltes darin 2–3 Min. anbraten. Ingwerpaste und Kormapaste hinzugeben und 1 Min. anbraten. Pfanneninhalt mit Wasser und Sahne ablöschen, Tomatenmark und Kormapaste einrühren und mit Salz, Pfeffer und einer Prise Zucker abschmecken.
-3. Spinat grob hacken und nach der Garzeit in den Topf mit dem Reis geben. Reis auf tiefe Teller verteilen und Butter Chicken daneben anrichten.
+2. In einer großen Pfanne Öl erhitzen. Hähnchengeschnetzeltes darin 2–3 Min. anbraten. Ingwerpaste und Kormapaste hinzugeben und 1 Min. anbraten. Pfanneninhalt mit Wasser und Sahne ablöschen, Tomatenmark einrühren und 3–4 Min. köcheln lassen. Butter einrühren und mit Salz, Pfeffer und einer Prise Zucker abschmecken.
+3. Spinat grob hacken und nach der Garzeit in den Topf mit dem Reis geben. Reis auf tiefe Teller verteilen und Chicken Korma daneben anrichten.

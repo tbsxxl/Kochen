@@ -5,7 +5,7 @@ source: "HelloFresh"
 date: 2026-09-17
 category: "Hähnchen"
 tags: ["hähnchen", "deutsch", "klassiker", "familientauglich"]
-time: "25 - 35 Min"
+time: "25–35 Min"
 image: /recipes/images/haehnchengeschnetzeltes.jpg
 servings: 4
 ingredients:
@@ -29,6 +29,6 @@ ingredients:
 1. **Reis kochen**: Wasser aufkochen, salzen. Reis zugeben und bei niedriger Hitze 10 Min. abgedeckt köcheln lassen, dann vom Herd nehmen und weitere 10 Min. abgedeckt ziehen lassen.
 2. **Kleine Vorbereitung**: Karotten schälen, längs halbieren und in 0,5 cm Halbmonde schneiden. Porree längs halbieren, waschen und ebenso in Halbmonde schneiden. Hähnchenbrust in 2 cm Stücke schneiden. Petersilie hacken.
 3. **Hähnchen anbraten**: Butter in einer Pfanne erhitzen. Hähnchen, Karotten und Porree darin 5-6 Min. braten, bis alles etwas Farbe bekommt. Mit Salz und Pfeffer würzen.
-4. **Frikassee vollenden**: Tomatenmark, Brühepulver und die Gewürzmischung zugeben und 1 Min. mitbraten. Hitze reduzieren, Wasser und Kochsahne zugeben und abgedeckt 6-8 Min. köcheln lassen, dabei gelegentlich umrühren. Mit Salz und Pfeffer abschmecken.
+4. **Soße vollenden**: Tomatenmark, Brühepulver und die Gewürzmischung zugeben und 1 Min. mitbraten. Hitze reduzieren, Wasser und Kochsahne zugeben und abgedeckt 6-8 Min. köcheln lassen, dabei gelegentlich umrühren. Mit Salz und Pfeffer abschmecken.
 5. **Reis vollenden**: Kurz vor dem Servieren die Petersilie unter den Reis heben.
-6. **Anrichten**: Kräuterreis auf Tellern verteilen und das Hähnchen-Tomaten-Frikassee daneben anrichten.
+6. **Anrichten**: Kräuterreis auf Tellern verteilen und das Geschnetzelte daneben anrichten.

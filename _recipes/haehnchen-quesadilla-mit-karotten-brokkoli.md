@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Mexikanisch"
 categories: ["Hähnchen"]
 tags: ["hähnchen", "pfanne"]
-time: "ca. 25–35 Min"
+time: "25–35 Min"
 image: /recipes/images/ques.jpg
 servings: 3
 ingredients:

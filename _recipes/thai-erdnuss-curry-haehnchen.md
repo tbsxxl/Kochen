@@ -26,6 +26,6 @@ ingredients:
 ## Schritte
 1. Wasser im Wasserkocher erhitzen. In einen großen Topf mit Deckel Wasser füllen, leicht salzen. Reis zugeben und abgedeckt köcheln, bis der Reis gar ist. Durch ein Sieb abgießen.
 2. Koriander grob hacken. Chilischote entkernen und in feine Streifen schneiden (Achtung: scharf). Limette in Spalten schneiden.
-3. Maisstärke mit Saft von Limettenspalten, Salz und Pfeffer verrühren.
-4. In einem hohen Rührgefäß Erdnussbutter, Sojasoße, Maisstärke, Agavendicksaft und Wasser verrühren. In einer großen Pfanne Currypaste, Salz und Pfeffer erhitzen. Stir Fry Mix zugeben und 2–3 Min. braten.
-5. Pfanne mit der Soße ablöschen und 1–2 Min. köcheln lassen, bis die Soße etwas eindickt und das Fleisch innen nicht mehr rosa ist. Reis auf tiefe Teller verteilen. Erdnuss-Curry darüber anrichten und mit restlichem Koriander, Chilischote und Zucker abschmecken.
+3. Hähnchen mit der Hälfte der Maisstärke, dem Saft von zwei Limettenspalten, Salz und Pfeffer vermengen.
+4. In einem hohen Rührgefäß Erdnussbutter, Sojasoße, restliche Maisstärke, Agavendicksaft und 100 ml Wasser verrühren. In einer großen Pfanne Öl erhitzen und das Hähnchen 3–4 Min. anbraten. Currypaste und Stir Fry Mix zugeben und 2–3 Min. mitbraten.
+5. Pfanne mit der Soße ablöschen und 1–2 Min. köcheln lassen, bis die Soße etwas eindickt und das Fleisch innen nicht mehr rosa ist. Reis auf tiefe Teller verteilen. Curry daneben anrichten und mit Koriander, Chili und den restlichen Limettenspalten servieren.

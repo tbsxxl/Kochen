@@ -21,4 +21,7 @@ ingredients:
 1. Basilikum, Pinienkerne, Knoblauch, Salz und Olivenöl nach und nach mit dem Pürierstab fein mixen (Parmesan noch nicht zugeben).
 2. Parmesan unterrühren (nicht mehr stark mixen).
 3. In ein sauberes Glas füllen und gut verschließen (ergibt ca. 300 ml). Kühl lagern; ein Teil kann eingefroren werden.
-4. Tipp: Vor dem Vermischen mit Pasta Pesto kurz erwärmen und optional einen Schuss Sahne zugeben.
+
+## Tipps
+
+- Vor dem Vermischen mit Pasta kurz erwärmen und nach Belieben einen Schuss Sahne zugeben.

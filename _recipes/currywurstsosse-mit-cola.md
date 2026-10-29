@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Saucen & Basics"
 categories: ["Schnell"]
 tags: ["deutsch", "streetfood"]
-time: "ca. 15–20 Min"
+time: "15–20 Min"
 image: /recipes/images/cwurst.jpg
 servings: 4
 ingredients:

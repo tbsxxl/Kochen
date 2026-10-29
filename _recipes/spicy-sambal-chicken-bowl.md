@@ -1,6 +1,6 @@
 ---
-title: "Spicy Sambal Chicken Bowl"
-subtitle: "Scharfe Hähnchen-Bowl mit Sambal"
+title: "Sambal Chicken Bowl"
+subtitle: "mit Mais-Reis, Salat und Limetten-Joghurt"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"
@@ -21,6 +21,6 @@ ingredients:
 ---
 
 ## Schritte
-1. In einen großen Topf mit Deckel Wasser füllen, salzen und aufkochen lassen. Reis hinzugeben und 10 Min. bei niedriger Hitze mit der Garzeit im Topf ziehen lassen. Mais und Hälfte der Frühlingszwiebel in den letzten 4 Min. der Garzeit zugeben.
-2. Zwiebel halbieren und in Streifen schneiden. In einer großen Schüssel ein Drittel Sambal Badjak, Zwiebel, Salz und Pfeffer vermengen. Mariniertes Hähnchenfilet 4–5 Min. in einer großen Pfanne mit Öl braten, bis es innen nicht mehr glasig ist.
-3. Limette heiß waschen und in Spalten vierteln. In einer kleinen Schüssel Joghurt, Limettenabrieb, Saft von Limettenvierteln, Salz und Pfeffer vermengen. In einer großen Schüssel Salat mit Dip vermengen. Reis, Hähnchen und Salat auf tiefen Tellern anrichten und mit Dip und restlichen Limettenspalten genießen.
+1. In einen großen Topf mit Deckel Wasser füllen, salzen und aufkochen lassen. Reis zugeben und bei niedriger Hitze 10 Min. abgedeckt köcheln lassen. Frühlingszwiebel in Ringe schneiden; Mais und die Hälfte der Ringe in den letzten 4 Min. zum Reis geben.
+2. Hähnchen in Streifen schneiden und in einer Schüssel mit einem Drittel Sambal Badjak, Salz und Pfeffer vermengen. In einer großen Pfanne Öl erhitzen und das Hähnchen 4–5 Min. braten, bis es innen nicht mehr glasig ist. Restliches Sambal unterrühren.
+3. Limette heiß waschen und in Spalten vierteln. In einer kleinen Schüssel Joghurt, Limettenabrieb, Saft von Limettenvierteln, Salz und Pfeffer vermengen. Salatherz in Streifen schneiden und mit etwas Dip vermengen. Reis, Hähnchen und Salat auf tiefen Tellern anrichten, mit restlicher Frühlingszwiebel bestreuen und mit Dip und Limettenspalten servieren.

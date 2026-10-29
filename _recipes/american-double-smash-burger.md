@@ -5,7 +5,7 @@ source: "HelloFresh"
 date: 2026-09-17
 category: "Burger & Sandwiches"
 tags: ["rind", "hackfleisch", "amerikanisch", "streetfood"]
-time: "30 - 40 Min"
+time: "30–40 Min"
 image: /recipes/images/smash-burger.jpg
 servings: 4
 ingredients:

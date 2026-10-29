@@ -6,7 +6,7 @@ date: 2026-09-17
 category: "Asiatisch"
 categories: ["Fleisch & Schmorgerichte"]
 tags: ["schwein", "amerikanisch", "aufwendig", "am-vortag-starten"]
-time: "ca. 20 Min aktiv, plus 6-12 Std. Trockenpökeln und 6-8 Std. Garzeit"
+time: "ca. 20 Min aktiv + 1–2 Tage Vorlauf"
 image: /recipes/images/interstellar-pork-belly.jpg
 servings: 6
 ingredients:

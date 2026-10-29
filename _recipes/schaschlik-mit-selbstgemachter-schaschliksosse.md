@@ -30,5 +30,5 @@ ingredients:
 3. Restliche Zwiebeln/Speck/Paprika kleiner würfeln, in derselben Pfanne anbraten und ca. 10 Min dünsten.
 4. Mit Fleischbrühe ablöschen und in einen größeren Topf umfüllen. Passierte Tomaten zugeben.
 5. Kräftig mit Currypulver würzen und mit Honig sowie restlichen Gewürzen abschmecken.
-6. Sauce ca. 10 Min reduzieren, dann die Spieße zugeben.
+6. Soße ca. 10 Min reduzieren, dann die Spieße zugeben.
 7. Auf kleinster Stufe ca. 90 Min köcheln lassen. Dazu Pommes oder Reis.

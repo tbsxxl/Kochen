@@ -6,7 +6,7 @@ date: 2026-09-17
 category: "Hähnchen"
 categories: ["Meal Prep"]
 tags: ["hähnchen", "amerikanisch", "one-pot", "high-protein"]
-time: "35 - 45 Min"
+time: "35–45 Min"
 image: /recipes/images/jambalaya-haehnchen.jpg
 servings: 4
 ingredients:

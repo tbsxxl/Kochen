@@ -4,9 +4,9 @@ subtitle: "Kantonesischer Krustenschweinebauch"
 source: "Fallow"
 date: 2026-09-17
 category: "Asiatisch"
-categories: ["Fleisch & Schmorgerichte"]
+categories: ["Fleisch & Schmorgerichte", "Knusprig & Frittiert"]
 tags: ["schwein", "chinesisch", "aufwendig", "am-vortag-starten"]
-time: "ca. 1 Std. aktiv, plus mind. 12 Std. Ruhezeit im Kühlschrank"
+time: "ca. 1 Std + 12 Std ruhen"
 image: /recipes/images/siu-yuk-pork-belly.jpg
 servings: 4
 ingredients:

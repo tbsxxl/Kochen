@@ -4,6 +4,7 @@ subtitle: "mit Brokkoli"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Vegetarisch"
+categories: ["Italienisch"]
 tags: ["pfanne", "familientauglich"]
 time: "25–35 Min"
 image: /recipes/images/cremige-gnocchi-pfanne-brokkoli.jpg

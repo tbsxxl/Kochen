@@ -6,7 +6,7 @@ date: 2026-09-17
 category: "Pasta"
 categories: ["Asiatisch", "Schnell"]
 tags: ["hackfleisch", "chinesisch", "scharf"]
-time: "15 - 25 Min"
+time: "15–25 Min"
 image: /recipes/images/fettuccine-dandan.jpg
 servings: 4
 ingredients:

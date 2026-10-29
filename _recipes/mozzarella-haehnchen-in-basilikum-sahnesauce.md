@@ -27,7 +27,7 @@ ingredients:
 1. Filets waschen, trocken tupfen und mit Salz/Pfeffer würzen. Öl erhitzen und Filets rundherum ca. 5 Min kräftig anbraten.
 2. Tomaten waschen und halbieren. Basilikumblätter abzupfen und fein hacken.
 3. Sahne aufkochen, Schmelzkäse einrühren und schmelzen lassen. Mit Salz/Pfeffer würzen und ca. 2/3 des Basilikums unterrühren.
-4. Fleisch und Tomaten in eine gefettete Auflaufform geben, Sauce darüber gießen.
+4. Fleisch und Tomaten in eine gefettete Auflaufform geben, Soße darüber gießen.
 5. Mozzarella zerkleinern und auf dem Fleisch verteilen. Optional Parmesan und Kräuterbutterflöckchen ergänzen.
 6. Bei 200 °C Ober-/Unterhitze bzw. 175 °C Umluft ca. 30 Min backen.
 7. Mit restlichem Basilikum bestreuen und servieren (z. B. mit Kroketten oder Reis).

@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Fleisch & Schmorgerichte"
 categories: ["Meal Prep"]
 tags: ["rind", "ofen", "aufwendig"]
-time: "ca. 4,5–5 Stunden"
+time: "ca. 5 Std"
 image: /recipes/images/ribs.jpg
 servings: 4
 ingredients:
@@ -46,5 +46,5 @@ ingredients:
 6. Zwiebel, Sellerie und Karotten im selben Topf anschwitzen. Tomatenmark, Knoblauch, Thymian und Lorbeer zugeben.
 7. Mit Rotwein ablöschen und leicht reduzieren. Brühe zugeben, bis die Ribs vollständig bedeckt sind.
 8. Ribs zurücklegen, abdecken und bei 130 °C im Ofen ca. 4 Stunden schmoren, bis sie sehr zart sind.
-9. Ribs herausnehmen. Sauce abseihen, entfetten und einkochen, bis sie glänzend und leicht dicklich ist.
-10. Ribs zurück in die Sauce legen und glasieren. Mit dem Püree servieren.
+9. Ribs herausnehmen. Soße abseihen, entfetten und einkochen, bis sie glänzend und leicht dicklich ist.
+10. Ribs zurück in die Soße legen und glasieren. Mit dem Püree servieren.

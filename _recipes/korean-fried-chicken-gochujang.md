@@ -1,12 +1,12 @@
 ---
 title: "Gochujang Chicken"
-subtitle: "Knuspriges Hähnchen mit Gochujang-Soja-Glasur"
+subtitle: "Hähnchen in Gochujang-Glasur mit Reis und Kohlrabi-Salat"
 source: "HelloFresh"
 date: 2026-09-17
-category: "Knusprig & Frittiert"
-categories: ["Asiatisch", "Hähnchen"]
+category: "Asiatisch"
+categories: ["Hähnchen"]
 tags: ["hähnchen", "koreanisch", "scharf", "high-protein"]
-time: "30 - 40 Min"
+time: "30–40 Min"
 image: /recipes/images/korean-fried-chicken.jpg
 servings: 4
 ingredients:

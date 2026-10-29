@@ -5,7 +5,7 @@ source: "HelloFresh"
 date: 2026-09-17
 category: "Asiatisch"
 tags: ["ente", "thailändisch", "high-protein"]
-time: "25 - 35 Min"
+time: "25–35 Min"
 image: /recipes/images/pad-kra-pao-ente.jpg
 servings: 4
 ingredients:
