@@ -141,12 +141,33 @@
 
   // Zutaten (bereits auf die Portionen umgerechnet) in die Einkaufsliste übernehmen.
   // Gleiche Zutat + Einheit wird zusammengezählt; „from“ sammelt die Rezeptnamen.
+  // Zutaten, die nur einen Verwendungszweck nennen („Mehl für die Arbeitsfläche“, „Öl zum Braten“):
+  // Grundzutat ohne den Zusatz, oder "" wenn sie gar nicht auf die Liste gehört (Fett für die Form).
+  const USE_RE = /\s*(?:\(|,)?\s*(?:für\s+(?:die\s+|den\s+)?(?:arbeitsfläche|form|hände|backblech|blech)\b[^)]*|zum\s+(?:braten|frittieren|ausbacken|bestäuben|bestreuen|einfetten|ausrollen|anbraten)\b[^)]*)\)?.*$/i;
+  function usageBase(item){
+    const t = String(item || "").trim();
+    if(!USE_RE.test(t)) return null;
+    const base = t.replace(USE_RE, "").trim();
+    if(!base || /^(fett|butter oder fett)$/i.test(base)) return "";
+    return base;
+  }
+  const mainWord = (s)=> String(s || "").toLowerCase().replace(/\(.*?\)/g, " ").split(/[^a-zäöüß]+/).filter(w=>w.length >= 2).pop() || "";
+
   function mergeIntoShopping(ings, from){
     ings = (ings || []).filter(i=> !sectionOf(i));
     const key = "kochbuch.shopping";
     let list = [];
     try{ list = JSON.parse(localStorage.getItem(key) || "[]"); }catch{}
     const nk = (s)=>String(s||"").trim().toLowerCase();
+    // „Mehl für die Arbeitsfläche“ weglassen, wenn schon Mehl gekauft wird (im Rezept oder auf der Liste)
+    const others = [...ings.filter(i=> usageBase(i.item) === null).map(i=>i.item), ...list.filter(e=>!e.checked).map(e=>e.item)].map(nk);
+    ings = ings.filter(i=>{
+      const base = usageBase(i.item);
+      if(base === null) return true;
+      if(base === "") return false;
+      const w = mainWord(base);
+      return !(w && others.some(o=> o.includes(w)));
+    });
     const map = new Map();
     for(const e of list) map.set(`${nk(e.item)}|${nk(e.unit)}`, e);
     for(const i of ings || []){

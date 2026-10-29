@@ -18,8 +18,8 @@ ingredients:
   - { qty: 4, unit: "g", item: "Gemüsebrühpulver" }
   - { qty: 400, unit: "g", item: "Stir Fry Mix" }
   - { qty: 450, unit: "ml", item: "Wasser" }
-  - { qty: "", unit: "", item: "nach Geschmack Salz" }
-  - { qty: "", unit: "", item: "nach Geschmack Pfeffer" }
+  - { qty: "n. B.", unit: "", item: "Salz" }
+  - { qty: "n. B.", unit: "", item: "Pfeffer" }
   - { qty: 3, unit: "", item: "Esslöffel Öl" }
   - { qty: 2, unit: "", item: "Esslöffel Butter" }
   - { qty: 1, unit: "", item: "Esslöffel Mehl" }

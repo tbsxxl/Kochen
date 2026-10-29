@@ -19,8 +19,8 @@ ingredients:
   - { qty: 2, unit: "Stück", item: "Entenbrust" }
   - { qty: 3, unit: "", item: "Esslöffel Olivenöl" }
   - { qty: 1, unit: "", item: "Teelöffel Honig" }
-  - { qty: "", unit: "", item: "nach Geschmack Salz" }
-  - { qty: "", unit: "", item: "nach Geschmack Pfeffer" }
+  - { qty: "n. B.", unit: "", item: "Salz" }
+  - { qty: "n. B.", unit: "", item: "Pfeffer" }
 ---
 
 ## Schritte
