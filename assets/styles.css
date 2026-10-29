@@ -1592,16 +1592,17 @@ body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) 
 .recipePageHero .recipeHeroImg{height:clamp(300px, 86vw, 540px)}
 
 /* ---------- 12. Stöbern (UX-Prüfung Okt. 2026) ----------
-   Rezeptliste auf dem Handy als Raster mit 2 Spalten (wie Alben in Apple Music) statt bildschirmbreiter Karten. */
+   Rezeptliste auf dem Handy als Raster mit 2 Spalten (wie Alben in Apple Music) statt bildschirmbreiter Karten.
+   Unter „Mehr“ → „Rezeptliste“ auf „Karten“ umschaltbar (kochbuch.ui.listView = "cards" → Klasse listCards auf <html>). */
 @media (max-width:640px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
-  .grid .rcImg{aspect-ratio:1/1}
-  .grid .rcBody{padding:10px 12px 12px;gap:4px}
-  .grid .recipeTitle{font-size:var(--fs16);line-height:1.25;min-height:2.5em}
-  .grid .recipeMeta{gap:6px;font-size:var(--fs12)}
-  .grid .metaItem + .metaItem{display:none}          /* Portionen weglassen, die Zeit zählt beim Stöbern */
-  .grid .heroOverlayCat{left:8px;bottom:8px;padding:2px 8px;font-size:11px}
-  body.compact .grid .rcImg{aspect-ratio:4/3}
+  html:not(.listCards) .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
+  html:not(.listCards) .grid .rcImg{aspect-ratio:1/1}
+  html:not(.listCards) .grid .rcBody{padding:10px 12px 12px;gap:4px}
+  html:not(.listCards) .grid .recipeTitle{font-size:var(--fs16);line-height:1.25;min-height:2.5em}
+  html:not(.listCards) .grid .recipeMeta{gap:6px;font-size:var(--fs12)}
+  html:not(.listCards) .grid .metaItem + .metaItem{display:none}          /* Portionen weglassen, die Zeit zählt beim Stöbern */
+  html:not(.listCards) .grid .heroOverlayCat{left:8px;bottom:8px;padding:2px 8px;font-size:11px}
+  html:not(.listCards) body.compact .grid .rcImg{aspect-ratio:4/3}
 }
 /* Kategorien als Kacheln */
 .catTiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -1616,3 +1617,4 @@ body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) 
 /* Menüzeilen, die eine Seite öffnen, zeigen rechts „›“ (wie in den iPhone-Einstellungen); Schalter nicht */
 .sheet a.sheetRow::after{content:"›";margin-left:auto;padding-left:8px;font-size:22px;line-height:1;color:var(--muted)}
 .sheet a.sheetRow:has(.countBadge)::after{margin-left:8px}
+.themeRow + .themeRow{margin-top:0}
