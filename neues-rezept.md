@@ -64,7 +64,7 @@ permalink: /neues-rezept/
     <label class="fieldLabel" for="tagsIn">Stichwörter (antippen oder mit Komma getrennt eintragen)</label>
     <input class="fieldInput" id="tagsIn" placeholder="z. B. hähnchen, ofen">
     <div class="chips tagPicker" id="tagPicker">
-      {%- for grp in site.data.tags %}{% for t in grp[1] %}<button type="button" class="pillToggle" data-tag="{{ t | escape }}" aria-pressed="false">{{ t }}</button>{% endfor %}{% endfor %}
+      {%- for grp in site.data.tags %}{% for t in grp[1] %}<button type="button" class="pillToggle" data-tag="{{ t | escape }}" aria-pressed="false">{{ site.data.tag_labels[t] | default: t }}</button>{% endfor %}{% endfor %}
     </div>
 
     <label class="fieldLabel" for="sourceIn">Quelle (optional)</label>

@@ -1,0 +1,3 @@
+# Anzeige-Namen für Tags aus _data/tags.yml, wo der gespeicherte Tag (klein, mit Bindestrich) unschön aussähe.
+# Gespeichert wird weiterhin der Tag selbst (links), angezeigt der Text rechts.
+am-vortag-starten: "am Vortag starten"

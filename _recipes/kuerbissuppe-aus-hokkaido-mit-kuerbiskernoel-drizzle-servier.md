@@ -21,8 +21,8 @@ ingredients:
   - { qty: 1, unit: "Stück", item: "Karotte" }
   - { qty: 100, unit: "g", item: "saure Sahne, Bio" }
   - { qty: 10, unit: "g", item: "Kürbiskerne, geröstet" }
-  - { qty: "", unit: "", item: "nach Geschmack Pfeffer" }
-  - { qty: "", unit: "", item: "nach Geschmack Salz" }
+  - { qty: "n. B.", unit: "", item: "Pfeffer" }
+  - { qty: "n. B.", unit: "", item: "Salz" }
   - { qty: 350, unit: "ml", item: "Wasser" }
   - { qty: 1, unit: "", item: "Esslöffel Butter" }
 ---

@@ -49,7 +49,7 @@ ingredients:
   - { qty: 0.5, unit: "TL", item: "frisch gemahlener schwarzer Pfeffer" }
   - { qty: 1, unit: "Prise", item: "feines Meersalz" }
   - { qty: 5, unit: "g", item: "Schnittlauch, fein gehackt" }
-  - { qty: "", unit: "", item: "Außerdem" }
+  - { section: "Außerdem" }
   - { qty: "", unit: "", item: "Neutrales, hoch erhitzbares Pflanzenöl zum Frittieren" }
 ---
 

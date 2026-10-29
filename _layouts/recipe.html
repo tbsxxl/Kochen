@@ -62,7 +62,7 @@ layout: default
           {%- assign t_lc = t | downcase -%}
           {%- assign key = "|" | append: t_lc | append: "|" -%}
           {%- unless t_lc == cat_lc or shown contains key -%}
-          <span class="chip">{{ t }}</span>
+          <span class="chip">{{ site.data.tag_labels[t] | default: t }}</span>
           {%- assign shown = shown | append: key -%}
           {%- endunless -%}
         {% endfor %}

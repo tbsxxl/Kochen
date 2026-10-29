@@ -1587,3 +1587,6 @@ body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) 
 .themeRow{flex-wrap:wrap;row-gap:8px}
 .reweNav{flex-wrap:wrap}
 .reweNav .btn{white-space:normal;min-width:0}
+/* Food-Fotos als Markenzeichen: „Heute für dich“ fast quadratisch, Rezeptfoto höher (Kompakt-Ansicht bleibt kleiner) */
+.homeFeatured .rcImg{height:clamp(280px, 92vw, 480px)}
+.recipePageHero .recipeHeroImg{height:clamp(300px, 86vw, 540px)}
