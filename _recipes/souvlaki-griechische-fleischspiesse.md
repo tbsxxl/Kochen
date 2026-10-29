@@ -1,5 +1,6 @@
 ---
-title: "Souvlaki – griechische Fleischspieße"
+title: "Souvlaki"
+subtitle: "Griechische Fleischspieße"
 date: 2026-10-20
 author: "Tobi"
 category: "Fleisch & Schmorgerichte"
