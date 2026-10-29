@@ -6,7 +6,7 @@ author: "Tobi"
 category: "Schnell"
 tags: ["suppe"]
 time: "ca. 25 Min"
-image: /recipes/images/kuerbissuppe-aus-hokkaido-mit-kuerbiskernoel-drizzle-servier.jpg
+image: /recipes/images/kuerbissuppe-aus-hokkaido-mit-kuerbiskernoel-drizzle-servier-mvtphevk.jpg
 servings: 2
 ingredients:
   - { qty: 280, unit: "g", item: "Frischer Butter-Blätterteig" }
