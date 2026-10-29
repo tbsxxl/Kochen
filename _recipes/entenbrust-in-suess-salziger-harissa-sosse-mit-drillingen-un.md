@@ -6,7 +6,7 @@ author: "Tobi"
 category: "Asiatisch"
 tags: ["ente"]
 time: "ca. 35 Min"
-image: /recipes/images/entenbrust-in-suess-salziger-harissa-sosse-mit-drillingen-un.jpg
+image: /recipes/images/entenbrust-in-suess-salziger-harissa-sosse-mit-drillingen-un-mvtpjztj.jpg
 servings: 2
 ingredients:
   - { qty: 1, unit: "Stück", item: "rote Zwiebel" }
