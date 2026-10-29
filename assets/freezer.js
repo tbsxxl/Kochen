@@ -69,7 +69,7 @@
     const f = getFreezer();
     const ids = Object.keys(f);
     if(!ids.length){
-      host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Noch nichts eingefroren</div><div class="uEmptyText">Öffne ein Rezept und tippe unten auf „Kühltruhe“.</div></div>`;
+      host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Noch nichts eingefroren</div><div class="uEmptyText">Öffne ein Rezept und tippe unten auf „Mehr“ → „Kühltruhe“.</div></div>`;
       return;
     }
     // Älteste zuerst: was am längsten drin ist, sollte zuerst gegessen werden

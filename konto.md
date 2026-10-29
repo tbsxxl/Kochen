@@ -362,7 +362,13 @@ permalink: /konto/
         renderLoggedOut(me);
       }
     }catch(err){
-      host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Keine Verbindung</div><div class="uEmptyText">${esc(err.message || err)}</div></div>`;
+      // Technische Fehler (z. B. „Fehler 404“) nicht anzeigen, sondern sagen, was los ist und was hilft
+      const offline = navigator.onLine === false;
+      const msg = offline ? 'Du bist gerade offline. Deine Rezepte, Listen und Pläne funktionieren trotzdem; synchronisiert wird, sobald du wieder online bist.'
+        : (err && err.status && err.status < 500 && err.message && !/^Fehler \d+$/.test(err.message)) ? err.message
+        : 'Das Profil ist gerade nicht erreichbar. Deine Daten auf diesem Gerät bleiben erhalten.';
+      host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">${offline ? 'Offline' : 'Gerade keine Verbindung'}</div><div class="uEmptyText">${esc(msg)}</div><button class="btn accountBtn" id="retryBtn" type="button" style="margin-top:16px">Erneut versuchen</button></div>`;
+      host.querySelector('#retryBtn').addEventListener('click', load);
     }
   }
 

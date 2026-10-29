@@ -18,7 +18,7 @@
   <div class="card recipeCard cardHover">
     {%- if r.image %}
     <div class="rcImg">
-      <img src="{{ r.image | relative_url }}?v={{ site.image_version }}" srcset="{% include srcset.html src=r.image %}" sizes="(min-width:900px) 300px, (min-width:641px) 45vw, 92vw" alt="{{ r.title | escape }}"{% if include.eager %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
+      <img src="{{ r.image | relative_url }}?v={{ site.image_version }}" srcset="{% include srcset.html src=r.image %}" sizes="(min-width:900px) 300px, 46vw" alt="{{ r.title | escape }}"{% if include.eager %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
       {%- if include.index and r.category %}<div class="heroOverlayCat">{{ r.category }}</div>{% endif %}
       {% include freezer-flag.html id=r.url %}
     </div>
