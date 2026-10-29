@@ -81,7 +81,7 @@
       : "Zutaten auf die Einkaufsliste";
     $("#weekHint").textContent = upcoming.length
       ? "Gleiche Zutaten werden zusammengezählt. Vergangene Tage zählen nicht mit."
-      : "Plane Gerichte über „+ Gericht“ oder auf einer Rezeptseite unter „Mehr → Zum Wochenplan“.";
+      : "Plane Gerichte über „+ Gericht“ oder auf einer Rezeptseite unter „Planen“ (unten in der Leiste).";
   }
 
   function kw(d){
