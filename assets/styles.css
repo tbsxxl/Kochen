@@ -1618,3 +1618,24 @@ body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) 
 .sheet a.sheetRow::after{content:"›";margin-left:auto;padding-left:8px;font-size:22px;line-height:1;color:var(--muted)}
 .sheet a.sheetRow:has(.countBadge)::after{margin-left:8px}
 .themeRow + .themeRow{margin-top:0}
+/* Rezeptliste: eine wischbare Filterreihe, Sortieren als Symbol rechts, Trefferzahl, ✕ im Suchfeld */
+.filterBar{margin-top:12px}
+.filterBarLeft{flex:1;padding:2px 0}
+.filterBarLeft > *{flex-shrink:0}
+.sortToggle .sortLabel{display:none}
+.sortToggle{width:44px;padding:0;justify-content:center}
+.resultCount{margin:0 4px 10px;font-size:var(--fs14);color:var(--sub2)}
+.searchClear{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.searchClear svg{width:18px;height:18px}
+.searchClear[hidden]{display:none}
+/* Wochenplan: die Woche als eine gruppierte Liste (wie iOS) statt sieben großer Karten */
+#weekDays{gap:0;background:var(--surface);border-radius:var(--rList, 16px);overflow:hidden;box-shadow:var(--sh1)}
+#weekDays .planDayCard{border:0;border-radius:0;box-shadow:none;background:transparent;padding:2px 8px 2px 16px}
+#weekDays .planDayCard + .planDayCard{border-top:1px solid var(--line)}
+#weekDays .planDayCard.isToday{box-shadow:inset 4px 0 0 var(--leaf);border-color:var(--line)}
+#weekDays .planDayCard.isToday .planDayWd{color:var(--leaf)}
+#weekDays .planDayHead{min-height:48px}
+#weekDays .planServBtn{width:44px;height:44px}
+#weekDays .planRemove{min-width:44px;min-height:44px}
+#weekToShopping[hidden]{display:none}
+.uiToastBtn{color:var(--petrol)}
