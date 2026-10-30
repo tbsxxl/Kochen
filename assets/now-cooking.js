@@ -6,6 +6,7 @@
   const T = window.KOCHBUCH_TIMER;
   const esc = (x)=>String(x ?? "").replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
   let cookOpen = false;
+  const CLOCK = '<svg class="ico nowCookingClock" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 9v4l2.5 2M10 2h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 
   function cooking(){
     try{
@@ -41,11 +42,11 @@
     const title = c ? c.title : (next.title || next.label);
     target = c ? c.id + "?kochen=1" : (next.url || "");
     const parts = [];
-    if(next) parts.push(done ? "Timer fertig" : `⏱ ${T.fmt(next.left)}${timers.length > 1 ? ` (+${timers.length - 1})` : ""}`);
+    if(next) parts.push(done ? "Timer fertig" : `${CLOCK}${esc(T.fmt(next.left))}${timers.length > 1 ? ` (+${timers.length - 1})` : ""}`);
     if(c) parts.push(`Schritt ${c.step + 1} von ${c.total}`);
 
     $(".nowCookingTitle").textContent = title || "Kochen";
-    $(".nowCookingSub").textContent = parts.join(" · ");
+    $(".nowCookingSub").innerHTML = parts.join(" · ");
     bar.classList.toggle("isDone", done);
     const img = $(".nowCookingImg");
     if(c && c.image){ if(img.getAttribute("src") !== c.image) img.src = c.image; img.hidden = false; }

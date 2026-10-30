@@ -131,7 +131,7 @@ SwiftUI-Code, nicht für diese Web-App.
   „Ähnliche Rezepte“ (gleiche Kategorie, Liquid `sample`, Karten mit `hcard=true`).
 - Kochmodus: Wischen links/rechts; Fortschritt in `cooking` (12 Std). „Kochen läuft“-Kapsel über der unteren Leiste
   (`assets/now-cooking.js`, wie der Mini-Player in Apple Music) auf jeder Seite, solange Fortschritt oder Timer laufen:
-  Foto, Name, Timer-Restzeit, „Schritt n von m“; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt
+  Foto, Name, Timer-Restzeit (Uhr-SVG), „Schritt n von m“, Fortschritt grün; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt
   `KOCHBUCH_OPENCOOK`). recipe.js meldet `kochbuch:cooking` / `kochbuch:cookmode`.
   Farben wie die App im Dunkelmodus (Abschnitt 14 in `assets/styles.css`): warme Espresso-Töne, Fortschritt und Haken
   Kräutergrün, Segment-Umschalter und Zurück als Kapseln, nur „Weiter“ Apricot.

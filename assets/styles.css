@@ -1014,14 +1014,14 @@ body.layout-recipe .section:first-of-type{margin-top:0}
   position:absolute;left:0;top:16px;
   display:flex;align-items:center;justify-content:center;
   width:28px;height:28px;border-radius:var(--rPill);
-  background:var(--accentSoft);color:var(--text);
+  background:var(--fill);color:var(--text);
   font-size:var(--fs14);font-weight:600;font-variant-numeric:tabular-nums;
 }
 .recipeBody ol > li > p{margin:0}
 /* Schritte abhaken */
 .recipeBody ol > li{cursor:pointer;transition:opacity .2s ease;-webkit-tap-highlight-color:transparent}
 .recipeBody ol > li.stepDone{opacity:.45}
-.recipeBody ol > li.stepDone::before{content:"✓";background:var(--leaf);color:var(--onLeaf)}
+.recipeBody ol > li.stepDone::before{content:"";background:var(--leaf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
 .recipeBody a{color:var(--petrol)}
 .recipeBody blockquote{margin:16px 0;padding:12px 16px;border-left:3px solid var(--leaf);border-radius:0 var(--rBtn) var(--rBtn) 0;background:var(--surface2);color:var(--sub)}
 
@@ -1505,7 +1505,7 @@ body.hasNowCooking .uiToast{bottom:calc(var(--tabbarH) + env(safe-area-inset-bot
 .nowCookingClose svg{width:16px;height:16px;opacity:.6}
 .nowCookingClose[hidden]{display:none}
 .nowCookingBar{position:absolute;left:22px;right:22px;bottom:0;height:2px;border-radius:2px;background:transparent}
-.nowCookingBar span{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);transition:width .3s var(--ease)}
+.nowCookingBar span{display:block;height:100%;width:0;border-radius:2px;background:var(--leaf);transition:width .3s var(--ease)}
 .nowCooking.isDone{background:var(--accent);color:var(--onAccent)}
 .nowCooking.isDone .nowCookingSub,.nowCooking.isDone .nowCookingPlay svg{color:var(--onAccent)}
 body.hasNowCooking .appMain{padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 92px)}
@@ -1785,3 +1785,5 @@ html.tabbarMin .nowCooking{transform:translate3d(0,18px,0)}
 .cookIngRow.isStep{background:rgba(157,187,163,.14)}
 .cookIngRow.isStep .cookIngQty{color:var(--cLeaf)}
 @media (min-width:768px){ .cookIngsHead{background:var(--cBg)} }
+.nowCookingClock{width:15px;height:15px;vertical-align:-2px;margin-right:4px}
+:root[data-theme="dark"] .recipeBody ol > li.stepDone::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%2317140F' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
