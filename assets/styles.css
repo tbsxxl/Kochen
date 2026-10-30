@@ -1804,3 +1804,167 @@ input{text-overflow:ellipsis}
 .homeEmptyIcon .ico{width:22px;height:22px}
 .planAdd{white-space:nowrap}
 .shopToolbar{flex-wrap:wrap}
+
+/* ==========================================================================
+   16. Neuanfang (Okt. 2026): Fotos sind die Farbe, die Oberfläche bleibt ruhig
+   - Flächen in Apples neutralen Grautönen (hell/dunkel), eine einzige Akzentfarbe:
+     Kräutergrün für alles Antippbare und die Hauptaktion. Apricot nur noch im Logo.
+   - Raster ohne Karten: Foto mit Rundung, Name und Zeit direkt auf dem Hintergrund.
+   - Systemschrift überall; Fraunces nur für den Rezeptnamen auf dem Foto (und im Logo-Schriftzug).
+   - Rezeptseite: Titel auf dem Foto, Umschalter „Zutaten | Zubereitung“ bleibt oben.
+   - Weniger Verpackung: leere Zustände ohne Rahmen, keine Gesten-Erklärtexte.
+   ========================================================================== */
+:root{
+  --bg:#F2F2F7;
+  --surface:#FFFFFF;
+  --surface2:#E9E9EE;
+  --line:#E3E3E8;
+  --lineStrong:#C7C7CC;
+  --text:#1C1C1E;
+  --sub:#545458;
+  --sub2:#6C6C70;
+  --muted:#8E8E93;
+
+  --leaf:#526B57;
+  --leafSoft:#E2EAE3;
+  --onLeaf:#FFFFFF;
+  --accent:var(--leaf);
+  --accentSoft:var(--leafSoft);
+  --onAccent:#FFFFFF;
+  --gold:var(--leaf);
+  --goldSoft:var(--leafSoft);
+  --onGold:#FFFFFF;
+  --petrol:var(--leaf);
+  --ice:var(--leaf);
+  --iceSoft:var(--leafSoft);
+
+  --glass:rgba(249,249,251,.74);
+  --glassEdge:rgba(255,255,255,.75);
+  --glassLine:rgba(0,0,0,.07);
+  --glassShadow:0 10px 30px rgba(0,0,0,.12), 0 1px 3px rgba(0,0,0,.06);
+  --fill:rgba(118,118,128,.12);
+  --scrim:rgba(0,0,0,.32);
+  --imageChip:rgba(0,0,0,.5);
+  --sh1:0 1px 2px rgba(0,0,0,.04);
+  --sh2:0 2px 6px rgba(0,0,0,.05), 0 12px 32px rgba(0,0,0,.08);
+  --sh3:0 -12px 40px rgba(0,0,0,.12);
+}
+:root[data-theme="dark"]{
+  --bg:#000000;
+  --surface:#1C1C1E;
+  --surface2:#2C2C2E;
+  --line:#38383A;
+  --lineStrong:#48484A;
+  --text:#F5F5F7;
+  --sub:#C7C7CC;
+  --sub2:#AEAEB2;
+  --muted:#8E8E93;
+
+  --leaf:#9DBBA3;
+  --leafSoft:#22302A;
+  --onLeaf:#0B0D0B;
+  --accent:var(--leaf);
+  --accentSoft:var(--leafSoft);
+  --onAccent:#0B0D0B;
+  --gold:var(--leaf);
+  --goldSoft:var(--leafSoft);
+  --onGold:#0B0D0B;
+  --petrol:var(--leaf);
+  --ice:var(--leaf);
+  --iceSoft:var(--leafSoft);
+
+  --glass:rgba(30,30,32,.68);
+  --glassEdge:rgba(255,255,255,.10);
+  --glassLine:rgba(255,255,255,.08);
+  --glassShadow:0 10px 30px rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.3);
+  --fill:rgba(118,118,128,.24);
+  --scrim:rgba(0,0,0,.6);
+  --imageChip:rgba(0,0,0,.55);
+}
+body.highContrast{--line:#C7C7CC;--lineStrong:#8E8E93;--text:#000000;--sub:#3A3A3C;--sub2:#48484A}
+:root[data-theme="dark"] body.highContrast{--line:#545458;--lineStrong:#8E8E93;--text:#FFFFFF;--sub:#E5E5EA;--sub2:#D1D1D6}
+
+/* Raster und Leisten ohne Karten (wie Alben in Apple Music) */
+.recipeCard:not(.homeFeatured){background:transparent !important;border:0 !important;box-shadow:none !important;border-radius:0;overflow:visible}
+.recipeCard:not(.homeFeatured) .rcImg{border-radius:var(--rInner);overflow:hidden;background:var(--surface2)}
+.recipeCard:not(.homeFeatured) .rcBody,
+html:not(.listCards) .grid .recipeCard .rcBody{padding:8px 2px 0;gap:2px;background:transparent}
+.recipeCard:not(.homeFeatured) .recipeTitle{font-weight:600}
+.cardHover:hover{transform:none}
+
+/* Schrift: Systemschrift, auch für die „Heute“-Karte */
+.homeFeaturedTitle,.recipeTitle.homeFeaturedTitle{font-family:var(--fontLarge);font-weight:700;letter-spacing:-.02em}
+.homeFeatured .heroOverlayCat{background:rgba(0,0,0,.45)}
+
+/* Rezeptseite: Titel auf dem Foto */
+.recipePageHero .recipeHeroImg{height:clamp(380px, 118vw, 600px)}
+.recipePageHero::after{background:linear-gradient(180deg, rgba(0,0,0,.32) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 42%, rgba(0,0,0,.72) 100%)}
+.recipeHeroText{position:absolute;z-index:1;left:calc(20px + env(safe-area-inset-left));right:calc(20px + env(safe-area-inset-right));bottom:44px;color:#fff}
+.recipeHeroText .recipeName{margin:0;color:#fff;font-family:var(--fontDisplay);font-weight:600;font-size:var(--fs36);line-height:1.08;letter-spacing:-.02em;text-shadow:0 1px 14px rgba(0,0,0,.3)}
+.recipeHeroText .recipeSubtitle{margin:6px 0 0;color:rgba(255,255,255,.9);font-size:var(--fs18);line-height:1.35;text-shadow:0 1px 10px rgba(0,0,0,.3)}
+.recipePageBody{padding-top:20px}
+body.compact .recipePageHero .recipeHeroImg{height:clamp(300px, 90vw, 440px)}
+@media (min-width:900px){ .recipeHeroText{bottom:24px;left:24px;right:24px} .recipeHeroText .recipeName{font-size:2.75rem} }
+
+/* Umschalter Zutaten | Zubereitung: bleibt unter Zurück-Taste und Titelleiste stehen */
+.recipeSegWrap{position:sticky;z-index:30;top:calc(env(safe-area-inset-top) + 62px);margin:8px calc(16px + env(safe-area-inset-right)) 0 calc(16px + env(safe-area-inset-left))}
+.recipeSeg{background:var(--glass);-webkit-backdrop-filter:var(--glassBlur);backdrop-filter:var(--glassBlur);border:1px solid var(--glassLine);box-shadow:var(--sh1)}
+.recipeSeg .segBtn{min-height:40px;font-size:var(--fs16)}
+.recipeSeg .segBtn.active{color:var(--text)}
+@media (max-width:899px){
+  .recipePageCard[data-pane="ing"] #stepsPane,
+  .recipePageCard[data-pane="steps"] #ingPane{display:none}
+  .recipePageCard[data-pane="steps"] #stepsPane > :first-child{margin-top:16px}
+}
+@media (min-width:900px){ .recipeSegWrap{display:none} }
+@media (prefers-reduced-transparency: reduce){ .recipeSeg{background:var(--surface);-webkit-backdrop-filter:none;backdrop-filter:none} }
+
+/* Startseite: „Weiterkochen“ ganz oben */
+.homeContinue[hidden]{display:none}
+.continueCard{display:flex;align-items:center;gap:12px;padding:10px 10px 10px 10px;border-radius:var(--rCard);background:var(--surface);color:var(--text);text-decoration:none}
+.continueImg{width:64px;height:64px;border-radius:14px;object-fit:cover;flex-shrink:0}
+.continueText{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.continueEyebrow{font-size:var(--fs12);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--leaf)}
+.continueTitle{font-size:var(--fs18);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.continueSub{font-size:var(--fs14);color:var(--sub2)}
+.continuePlay{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:var(--rPill);background:var(--accent);color:var(--onAccent)}
+.continuePlay svg{width:22px;height:22px;margin-left:2px}
+
+/* Weniger Verpackung */
+.uEmpty{border:0;background:transparent;padding:40px 16px}
+.uEmpty::before{background:var(--muted);border-radius:0;width:44px;height:44px;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3C/svg%3E") center/contain no-repeat}
+.shopHint{display:none}
+
+/* Kochmodus: neutrales Dunkel statt Espresso, Hauptknopf Grün */
+.cookOverlay{--cBg:#000000;--cCard:#1C1C1E;--cFill:rgba(118,118,128,.24);--cLine:rgba(255,255,255,.08);--cText:#F5F5F7;--cSub:#AEAEB2;--cLeaf:#9DBBA3}
+.cookTab.active{background:#3A3A3C}
+.cookNavBtn.primary{background:var(--cLeaf);color:#0B0D0B}
+.cookTimerBar,.cookProgressBar{background:var(--cLeaf)}
+.cookTimer.isDone{background:var(--cLeaf);color:#0B0D0B}
+.timerAlertBtn.primary{background:var(--accent);color:var(--onAccent)}
+.nowCooking.isDone{background:var(--accent);color:var(--onAccent)}
+/* overflow:hidden würde das Anheften (sticky) verhindern; clip schneidet genauso ab */
+.recipePageCard{overflow:clip}
+@media (max-width:899px){
+  /* Der Umschalter nennt den Teil schon */
+  #ingPane .ingHead .h2,
+  #stepsPane > h2:first-child{display:none}
+  #stepsPane > h2:first-child + *{margin-top:8px}
+}
+/* „Weiterkochen“ sichtbar → keine doppelte „Kochen läuft“-Kapsel */
+body.continueVisible .nowCooking{display:none}
+.recipeSegWrap::before{content:"";position:absolute;z-index:-1;pointer-events:none;
+  left:calc(-16px - env(safe-area-inset-left));right:calc(-16px - env(safe-area-inset-right));
+  top:calc(-62px - env(safe-area-inset-top));bottom:-14px;
+  background:linear-gradient(to bottom, var(--bg) 0, var(--bg) calc(100% - 14px), transparent);
+  opacity:0;transition:opacity .2s var(--ease)}
+.recipeSegWrap.isStuck::before{opacity:1}
+/* Große Schrift: Titel auf dem Foto und Umschalter wachsen mit, aber begrenzt (wie Großtitel in iOS) */
+.recipeHeroText .recipeName{font-size:min(var(--fs36), 50px);-webkit-hyphens:auto;hyphens:auto}
+.recipeHeroText .recipeSubtitle{font-size:min(var(--fs18), 26px)}
+.recipeSeg .segBtn{font-size:min(var(--fs16), 22px);padding:0 8px}
+.recipeSeg .segBtn{min-height:44px}
+.segBtn{color:var(--sub)}
+.homeFeatured .heroOverlayCat{background:rgba(0,0,0,.55)}

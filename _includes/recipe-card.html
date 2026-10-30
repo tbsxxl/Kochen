@@ -1,7 +1,7 @@
 {%- comment -%}
   Rezeptkarte für Listen (Liquid). Gleiches Markup wie assets/cards.js (Karten, die per JS entstehen).
   Aufruf: {% include recipe-card.html r=r index=true %}
-  index=true: Filterdaten für die Rezeptliste, Kategorie auf dem Foto.
+  index=true: Filterdaten für die Rezeptliste.
   Bildübergang zur Rezeptseite: Name vergibt das Skript im Kopf von _layouts/default.html beim Antippen.
   hcard=true: Karte in waagerechter Leiste (z. B. „Ähnliche Rezepte“).
 {%- endcomment -%}
@@ -19,7 +19,6 @@
     {%- if r.image %}
     <div class="rcImg">
       <img src="{{ r.image | relative_url }}?v={{ site.image_version }}" srcset="{% include srcset.html src=r.image %}" sizes="(min-width:900px) 300px, 46vw" alt="{{ r.title | escape }}"{% if include.eager %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
-      {%- if include.index and r.category %}<div class="heroOverlayCat">{{ r.category }}</div>{% endif %}
       {% include freezer-flag.html id=r.url %}
     </div>
     {%- endif %}

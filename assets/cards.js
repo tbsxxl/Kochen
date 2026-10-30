@@ -17,7 +17,6 @@
     const img = r.image ? `
       <div class="rcImg">
         <img src="${esc(r.image)}" srcset="${esc(r.srcset||"")}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="${esc(r.title)}" loading="lazy" decoding="async">
-        ${r.category ? `<div class="heroOverlayCat">${esc(r.category)}</div>` : ""}
         <span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(id)}" hidden title="In der Kühltruhe">${SVG_ICE}<span data-count></span></span>
       </div>` : "";
     return `

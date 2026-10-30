@@ -11,6 +11,7 @@ layout: default
     subtitle: {{ page.subtitle | default: "" | jsonify }},
     baseServings: {{ page.servings | default: 1 | jsonify }},
     ingredients: {{ page.ingredients | jsonify }},
+    category: {{ page.category | default: "" | jsonify }},
     mealPrep: {% if page.category == "Meal Prep" or page.categories contains "Meal Prep" %}true{% else %}false{% endif %}
   };
 </script>
@@ -31,13 +32,18 @@ layout: default
           fetchpriority="high"
           decoding="async"
         >
-        {% if page.category %}<div class="heroOverlayCat">{{ page.category }}</div>{% endif %}
+        <div class="recipeHeroText">
+          <h1 class="h1 recipeName">{{ page.title }}</h1>
+          {%- if page.subtitle %}<p class="recipeSubtitle">{{ page.subtitle }}</p>{% endif %}
+        </div>
       </div>
     {% endif %}
 
     <div class="recipePageBody">
+      {%- unless page.image %}
       <h1 class="h1 recipeName">{{ page.title }}</h1>
       {%- if page.subtitle %}<p class="recipeSubtitle">{{ page.subtitle }}</p>{% endif %}
+      {%- endunless %}
       {%- assign recipe_author = page.author | default: site.owner_name -%}
       <a class="recipeAuthor" href="{{ '/rezeptindex/' | relative_url }}?person={{ recipe_author | url_encode }}"><span class="authorAvatar" aria-hidden="true">{{ recipe_author | slice: 0 | upcase }}</span><span>von {{ recipe_author }}{% if page.source %} · nach {{ page.source }}{% endif %}</span></a>
 
@@ -74,7 +80,15 @@ layout: default
 
     <div class="dim" id="statsLine"></div>
 
-    <div class="card cardPad recipeInnerCard">
+    <!-- Zwei klare Teile: Zutaten | Zubereitung (bleibt beim Scrollen oben; ab 900 px nebeneinander) -->
+    <div class="recipeSegWrap" id="recipeSegWrap">
+      <div class="segmented recipeSeg" role="tablist" aria-label="Rezeptteil">
+        <button class="segBtn active" type="button" role="tab" aria-selected="true" aria-controls="ingPane" data-pane="ing">Zutaten</button>
+        <button class="segBtn" type="button" role="tab" aria-selected="false" aria-controls="stepsPane" data-pane="steps">Zubereitung</button>
+      </div>
+    </div>
+
+    <div class="card cardPad recipeInnerCard" id="ingPane" role="tabpanel">
       <div class="ingHead">
         <h2 class="h2">Zutaten</h2>
         <div class="portionStepper recipePortionControls" role="group" aria-label="Portionen ändern">
@@ -92,7 +106,7 @@ layout: default
       </div>
     </div>
 
-    <div class="recipeBody" style="padding:0 16px 16px 16px">
+    <div class="recipeBody" id="stepsPane" role="tabpanel" style="padding:0 16px 16px 16px">
       {{ content }}
       <section class="notesCard" id="notesCard" aria-labelledby="notesTitle">
         <div class="notesHead">
@@ -117,6 +131,30 @@ layout: default
   </div>
 </div>
 {%- endif %}
+
+<script>
+  // Umschalter Zutaten | Zubereitung (nur Handy; ab 900 px stehen beide nebeneinander)
+  (function(){
+    const card = document.querySelector('.recipePageCard');
+    const wrap = document.getElementById('recipeSegWrap');
+    if (!card || !wrap) return;
+    const btns = wrap.querySelectorAll('[data-pane]');
+    function show(pane, scroll){
+      card.dataset.pane = pane;
+      btns.forEach(b => { const on = b.dataset.pane === pane; b.classList.toggle('active', on); b.setAttribute('aria-selected', on); });
+      // War der Umschalter schon oben angeheftet, an den Anfang des Teils springen
+      const stuck = wrap.getBoundingClientRect().top <= parseFloat(getComputedStyle(wrap).top) + 1;
+      if (scroll && stuck) window.scrollTo({ top: wrap.offsetTop - parseFloat(getComputedStyle(wrap).top) + 1, behavior: 'instant' });
+    }
+    btns.forEach(b => b.addEventListener('click', () => show(b.dataset.pane, true)));
+    // Angeheftet: ruhige Fläche hinter Titelleiste und Umschalter (statt durchscheinendem Text)
+    let tick = false;
+    function stick(){ tick = false; wrap.classList.toggle('isStuck', wrap.getBoundingClientRect().top <= parseFloat(getComputedStyle(wrap).top) + 1); }
+    addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(stick); } }, { passive: true });
+    window.KOCHBUCH_SHOWPANE = (pane) => show(pane, false);
+    show('ing', false);
+  })();
+</script>
 
 <!-- Zurück (oben links, wie in iOS): zur vorherigen Seite der App, sonst zur Rezeptliste -->
 <a class="recipeBack pressable" id="recipeBack" href="{{ '/rezeptindex/' | relative_url }}" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>

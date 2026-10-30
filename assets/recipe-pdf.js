@@ -62,7 +62,7 @@
     if(time) meta.push(clean(time));
     const servings = currentKey();
     if(servings) meta.push(`${servings} ${servings === "1" ? "Portion" : "Portionen"}`);
-    const cat = document.querySelector('.recipePageHero .heroOverlayCat')?.textContent;
+    const cat = window.RECIPE_DATA?.category;
     if(cat) meta.unshift(clean(cat));
 
     const ingredients = Array.from(document.querySelectorAll('#ingredientsList .uRow, #ingredientsList .ingSection')).map(row =>
