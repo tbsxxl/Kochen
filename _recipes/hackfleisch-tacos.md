@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Mexikanisch"
 tags: ["rind", "hackfleisch", "streetfood"]
 time: "ca. 50 Min"
-image: /recipes/images/tacos.jpg
+image: /recipes/images/tacos-mvuzwahp.jpg
 servings: 4
 ingredients:
   - { qty: 1, unit: "EL", item: "Öl" }
