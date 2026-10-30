@@ -1598,7 +1598,7 @@ body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) 
   html:not(.listCards) .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
   html:not(.listCards) .grid .rcImg{aspect-ratio:1/1}
   html:not(.listCards) .grid .rcBody{padding:10px 12px 12px;gap:4px}
-  html:not(.listCards) .grid .recipeTitle{font-size:var(--fs16);line-height:1.25;min-height:2.5em}
+  html:not(.listCards) .grid .recipeTitle{font-size:var(--fs16);line-height:1.25}
   html:not(.listCards) .grid .recipeMeta{gap:6px;font-size:var(--fs12)}
   html:not(.listCards) .grid .metaItem + .metaItem{display:none}          /* Portionen weglassen, die Zeit zählt beim Stöbern */
   html:not(.listCards) .grid .heroOverlayCat{left:8px;bottom:8px;padding:2px 8px;font-size:11px}
@@ -1787,3 +1787,6 @@ html.tabbarMin .nowCooking{transform:translate3d(0,18px,0)}
 @media (min-width:768px){ .cookIngsHead{background:var(--cBg)} }
 .nowCookingClock{width:15px;height:15px;vertical-align:-2px;margin-right:4px}
 :root[data-theme="dark"] .recipeBody ol > li.stepDone::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%2317140F' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.filterBarLeft{--fl:0px;--fr:0px;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%)}
+.filterBarLeft.fadeL{--fl:28px} .filterBarLeft.fadeR{--fr:28px}
+#searchInput{text-overflow:ellipsis}
