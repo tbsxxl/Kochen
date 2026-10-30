@@ -6,7 +6,7 @@ category: "Pizza & Brot"
 categories: ["Indisch"]
 tags: ["vegetarisch", "pfanne"]
 time: "ca. 1 Std 55 Min"
-image: /recipes/images/naan.jpg
+image: /recipes/images/naan-mvv02yy9.jpg
 servings: 1
 ingredients:
   - { qty: 500, unit: "g", item: "Mehl" }
