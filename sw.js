@@ -1,7 +1,7 @@
 /* Tobis Kochbuch — Service Worker
    Offline: Seiten „netzwerk-zuerst“, aber nach 3 s Warten (schlechter Empfang im Supermarkt) aus dem Cache.
    CSS/JS/Bilder „Cache zuerst“, im Hintergrund aktualisieren. /api/ nie cachen. */
-const VERSION = 'kochbuch-v36';
+const VERSION = 'kochbuch-v37';
 const ASSET_CACHE = `${VERSION}-assets`;
 const IMAGE_CACHE = `${VERSION}-images`;
 const PAGE_CACHE = `${VERSION}-pages`;
@@ -13,7 +13,7 @@ const PRECACHE_PAGES = ['/', '/rezeptindex/', '/shopping/', '/wochenplan/', '/wa
 const PRECACHE_ASSETS = [
   '/assets/styles.css', '/assets/utils.js', '/assets/account.js', '/assets/shopping.js', '/assets/plan.js',
   '/assets/recipe.js', '/assets/cook-timer.js', '/assets/now-cooking.js', '/assets/home-reco.js', '/assets/cards.js', '/assets/what-to-cook.js', '/assets/freezer.js',
-  '/assets/logo.svg?v=7', '/assets/logo-dark.svg?v=8', '/assets/fonts/inter.woff2', '/assets/fonts/fraunces.woff2'
+  '/assets/logo.svg?v=7', '/assets/logo-dark.svg?v=9', '/assets/fonts/inter.woff2', '/assets/fonts/fraunces.woff2'
 ];
 
 self.addEventListener('install', (e) => {

@@ -92,8 +92,8 @@ SwiftUI-Code, nicht für diese Web-App.
   Füllung `#EDE7DD`, Linien `#E6E0D6`, Text `#1F1D1A`, Sekundärtext `#57534C`, Metadaten `#68645C`;
   dunkel Apples neutrales `#000`/`#1C1C1E`/`#F5F5F7`. `theme-color`/Manifest hell `#F6F1E9`.
   **Markenfarbe Kräutergrün (Abschnitt 17 = Rollen, Abschnitt 18 = Farben):** das Grün aus dem Logo, eine einzige Farbe.
-  `--brand`/`--leaf` hell `#526B57` (weißer Inhalt 5,8 : 1, als Text 5,2 : 1), dunkel `#9DBBA3` mit dunklem Inhalt,
-  blasse Fläche `--brandSoft` `#E2EAE3`/`#22302A`. Für Hauptaktion und Fortschritt (Kochen, Play, Weiter, Haken, Balken,
+  `--brand`/`--leaf` hell `#526B57` (weißer Inhalt 5,8 : 1, als Text 5,2 : 1), dunkel `#7EC48A` (kräftiger, 10 : 1 auf Schwarz) mit dunklem Inhalt,
+  blasse Fläche `--brandSoft` `#E2EAE3`/`#1D3524`. Für Hauptaktion und Fortschritt (Kochen, Play, Weiter, Haken, Balken,
   aktiver Tab als blasse Kapsel) und als Tönung für Text und Symbole (Links, „Alle ›“, Sterne, Herz). Auswahl (aktive
   Filter-Kapseln) grün gefüllt (`--sel` = `--brand`, Abschnitt 22). Safran, Basilikum-Palette (`#287A36` …) und Spiegelei-/Blatt-Logo hat der Besitzer
   verworfen. Text sonst nie grün.
@@ -123,7 +123,7 @@ SwiftUI-Code, nicht für diese Web-App.
 - Logo „Zwei Seiten“ (offenes Buch als Schale; Spiegelei und Basilikumblatt hat der Besitzer verworfen; keine Kochmütze,
   kein Besteck). Hell (`assets/logo.svg`, „mit Tiefe“): Terrakotta-Verlauf `#DB875F`→`#C46A42` links, Kräutergrün-Verlauf
   `#5E7863`→`#465C4B` rechts, feine helle Oberkante. Dunkel (`assets/logo-dark.svg`): Terrakotta `#E0906A`→`#C97350`,
-  rechte Seite helles Kräutergrün `#A8C5AD`→`#8FAE95` (wie das Grün der App im Dunkelmodus; Creme war zu weit weg). Startseite zeigt je nach App-Darstellung `.logoLight`/`.logoDark`;
+  rechte Seite kräftiges Kräutergrün `#92D09D`→`#6FB57C` (wie das Grün der App im Dunkelmodus; Creme war zu weit weg). Startseite zeigt je nach App-Darstellung `.logoLight`/`.logoDark`;
   `assets/favicon.svg` = Kachel, folgt dem System (hell Weiß, dunkel `#2E3B31`).
   Homescreen-/Android-Icons (`apple-touch-icon-v8.png`, `icon-512-v8.png`, `icon-maskable-512-v8.png`, `favicon.ico`)
   auf Weiß mit leichtem Verlauf nach `#EEEEF0` (wie Apples Health-Icon), nur hell (Web-Apps können kein dunkles Icon festlegen), gerendert per Playwright, ico mit ImageMagick `convert`.
