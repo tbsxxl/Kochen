@@ -6,7 +6,7 @@ category: "Pasta"
 categories: ["Italienisch", "Fleisch & Schmorgerichte", "Meal Prep"]
 tags: ["rind", "klassiker", "aufwendig"]
 time: "ca. 5 Std"
-image: /recipes/images/ragu-alla-bolognese-mvpsbwj9.jpg
+image: /recipes/images/ragu-alla-bolognese-mvv058x4.jpg
 servings: 6
 ingredients:
   - { section: "Ragù" }
