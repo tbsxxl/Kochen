@@ -6,7 +6,7 @@ category: "Pizza & Brot"
 categories: ["Süßes & Backen"]
 tags: ["vegetarisch", "französisch", "ofen", "aufwendig"]
 time: "ca. 2 Std 50 Min"
-image: /recipes/images/Buns.jpg
+image: /recipes/images/brioche-buns-mvuzhpyz.jpg
 servings: 10
 ingredients:
   - { section: "Teig" }
