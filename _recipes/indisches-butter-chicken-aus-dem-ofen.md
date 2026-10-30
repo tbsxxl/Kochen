@@ -6,7 +6,7 @@ category: "Curry"
 categories: ["Indisch", "Hähnchen", "Meal Prep"]
 tags: ["hähnchen", "ofen"]
 time: "ca. 2 Std"
-image: /recipes/images/butterchicken.jpg
+image: /recipes/images/butter-chicken-mvuzj9cu.jpg
 servings: 2
 ingredients:
   - { section: "Marinade" }
