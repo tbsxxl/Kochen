@@ -5,11 +5,11 @@ date: 2026-02-20
 category: "Hähnchen"
 tags: ["hähnchen", "amerikanisch", "ofen", "streetfood"]
 time: "ca. 45 Min"
-image: /recipes/images/wings.jpg
+image: /recipes/images/chicken-wings-mvuzk5d9.jpg
 servings: 3
 ingredients:
   - { qty: 1, unit: "kg", item: "Chicken Wings" }
-  - { qty: "2", unit: "EL", item: "Geräuchertes Paprikapulver" }
+  - { qty: 2, unit: "EL", item: "Geräuchertes Paprikapulver" }
   - { qty: 2, unit: "EL", item: "Würzmix" }
   - { qty: "Prise", unit: "", item: "Pfeffermix" }
   - { qty: "Schuss", unit: "", item: "Sojasoße" }
@@ -18,7 +18,7 @@ ingredients:
   - { qty: 4, unit: "EL", item: "Butter" }
   - { qty: 200, unit: "ml", item: "Cola" }
   - { qty: 1, unit: "EL", item: "Würzkraft" }
-  - { qty: "3", unit: "EL", item: "Bratöl" }
+  - { qty: 3, unit: "EL", item: "Bratöl" }
 ---
 
 ## Schritte
