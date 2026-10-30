@@ -324,6 +324,10 @@
       document.querySelector("#shopOpenCount").textContent = openN === 1 ? "1 Artikel offen" : `${openN} Artikel offen`;
       document.querySelector("#shopFor").textContent = hideFrom && [...froms][0] ? `für ${[...froms][0]}` : "";
     }
+    // Löschen-Knöpfe nur, wenn sie etwas tun
+    const actions = document.querySelector("#shopActions");
+    if(actions) actions.hidden = !list.length;
+    if(clearCheckedBtn) clearCheckedBtn.hidden = list.length === openN;
     if(!list.length){
       listEl.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Die Liste ist leer</div><div class="uEmptyText">Füge oben etwas hinzu oder tippe auf einer Rezeptseite auf „Zur Liste“.</div></div>`;
       return;
@@ -390,15 +394,17 @@
     addInput.focus();
   }
 
-  clearCheckedBtn?.addEventListener("click", ()=>{ setList(getList().filter(x=>!x.checked)); render(); });
-  clearAllBtn?.addEventListener("click", ()=>{
-    const cur = getList();
-    if(!cur.length) return;
-    const ok = window.confirm("Wirklich alles aus der Einkaufsliste löschen?");
-    if(!ok) return;
-    setList([]);
-    render();
-  });
+  // Löschen ohne Rückfrage, dafür mit „Rückgängig“ (wie in iOS: Rückgängig statt Bestätigungsdialog)
+  function clearWithUndo(keep, text){
+    const before = getList();
+    const after = before.filter(keep);
+    const n = before.length - after.length;
+    if(!n) return;
+    setList(after); render();
+    UI.toast?.(text(n), { label: "Rückgängig", run: ()=>{ setList(before); render(); } });
+  }
+  clearCheckedBtn?.addEventListener("click", ()=> clearWithUndo(x=>!x.checked, n=> n === 1 ? "1 erledigter Artikel gelöscht" : `${n} erledigte Artikel gelöscht`));
+  clearAllBtn?.addEventListener("click", ()=> clearWithUndo(()=>false, n=> n === 1 ? "1 Artikel gelöscht" : `Alle ${n} Artikel gelöscht`));
 
   addBtn?.addEventListener("click", ()=> addItem());
   addInput?.addEventListener("input", renderSuggest);

@@ -61,7 +61,7 @@ permalink: /shopping/
   </div>
 </section>
 
-<div class="section">
+<div class="section" id="shopActions">
   <div style="display:flex;gap:10px">
     <button class="btn btnGhost" id="clearChecked" style="flex:1" type="button">Erledigte löschen</button>
     <button class="btn btnDangerOutline" id="clearAll" style="flex:1" type="button">Alles löschen</button>
