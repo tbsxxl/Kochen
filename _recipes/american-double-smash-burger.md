@@ -6,7 +6,7 @@ date: 2026-09-17
 category: "Burger & Sandwiches"
 tags: ["rind", "hackfleisch", "amerikanisch", "streetfood"]
 time: "30–40 Min"
-image: /recipes/images/smash-burger.jpg
+image: /recipes/images/double-smash-burger-mvuzq1k9.jpg
 servings: 4
 ingredients:
   - { section: "Wedges" }
