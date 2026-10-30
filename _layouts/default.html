@@ -229,6 +229,21 @@
     overlay?.addEventListener('click', closeSheet);
     closeBtn?.addEventListener('click', closeSheet);
 
+    // Tab-Leiste wie in iOS 26: beim Runterscrollen kleiner, beim Hochscrollen (oder ganz oben/unten) wieder groß
+    (function(){
+      let lastY = window.scrollY, ticking = false;
+      const root = document.documentElement;
+      function update(){
+        ticking = false;
+        const y = window.scrollY, dy = y - lastY;
+        const atEnd = window.innerHeight + y >= document.documentElement.scrollHeight - 40;
+        if (y < 80 || atEnd || dy < -6) root.classList.remove('tabbarMin');
+        else if (dy > 6 && !document.body.classList.contains('noScroll')) root.classList.add('tabbarMin');
+        if (Math.abs(dy) > 6 || y < 80) lastY = y;
+      }
+      window.addEventListener('scroll', ()=>{ if(!ticking){ ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    })();
+
     // Persisted toggles
     const get = (k,fb)=>{ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):fb; }catch{return fb;} };
     const set = (k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch{} };

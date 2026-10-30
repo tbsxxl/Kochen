@@ -87,9 +87,10 @@ SwiftUI-Code, nicht für diese Web-App.
   (`--fill`), Glas-Sheets mit großer Rundung, iOS-Schalter (Grün `#34C759`). Glas (`--glass`, `--glassBlur`) nur für
   Leisten, Sheets, Menüs, Hinweise; bei „Transparenz reduzieren“ volle Fläche. Hintergrund `--bg` dunkler als Zellen
   `--surface` (wie iOS). Radien: Karten 22, Listen 16, Felder 14.
-- Farben: Warm White `#FFF9F2`, Cream `#F7F0E6`, Warm Gray `#E5DED4`, Charcoal `#252A27`,
-  Warm Apricot `#E8753D` (nur primäre Aktion, dunkler Text), Herb Green `#526B57` (aktiv, Tags),
-  Olive Oil `#B8A35A` (Favoriten), Deep Petrol `#28565A` (Links). Metadaten `#716E67`.
+- Farben (Rollen, Abschnitt 13 in `assets/styles.css`): **Kräutergrün `#526B57` = Bedienfarbe** (aktiv, Links, Auswahl,
+  Tags; `--petrol` zeigt darauf), **Apricot `#E8753D` = nur Hauptaktion** (gefüllte Knöpfe, dunkler Text),
+  **Gold `#B8A35A` = nur Favoriten/Sterne**, Petrol nur Kühltruhe (`--ice`). Flächen: Hintergrund `#F5F2ED`,
+  Zellen `#FFFEFB`, Füllung `#ECE7E0`, Linien `#E2DCD3`, Text Charcoal `#252A27`, Metadaten `#68655E`.
 - Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz). Inter wird nicht mehr
   vorgeladen (auf iPhone/iPad/Mac greift SF).
 - Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz); Fraunces 400/600
@@ -115,6 +116,9 @@ SwiftUI-Code, nicht für diese Web-App.
 ## Bedienhilfen (nur im Browser gespeichert, `kochbuch.ui.*`)
 
 - Haupt-Leiste unten (5 Tabs, `_layouts/default.html`): Start · Rezepte · Plan (Wochenplan) · Liste · Mehr.
+  Wie iOS 26: beim Runterscrollen kleiner ohne Beschriftung (`html.tabbarMin`), beim Hochscrollen/oben/unten wieder groß.
+- Startseite wie der „Heute“-Tab im App Store: Datum über der Begrüßung, „Heute für dich“ als Bildkarte mit Titel auf dem
+  Foto. Rezeptfoto mit Parallaxe/Dehnen beim Scrollen (Skript in `_layouts/recipe.html`, aus bei „Bewegung reduzieren“).
   Aktiver Tab: Kapsel, Grün, Symbol gefüllt (`fill-opacity`).
 - Rezept-Leiste unten: Favorit · Planen · **Kochen** (Mitte, Kapsel wie aktiver Tab, Symbol Apricot) · Zur Liste · Mehr (Gekocht, Kühltruhe, PDF,
   Drucken, Bearbeiten).
