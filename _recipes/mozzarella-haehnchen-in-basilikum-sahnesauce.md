@@ -6,7 +6,7 @@ category: "Hähnchen"
 categories: ["Italienisch"]
 tags: ["hähnchen"]
 time: "ca. 50 Min"
-image: /recipes/images/basilikum.jpg
+image: /recipes/images/mozzarella-haehnchen-mvvbpcmy.jpg
 servings: 4
 ingredients:
   - { qty: 4, unit: "", item: "Hühnerbrustfilets" }
