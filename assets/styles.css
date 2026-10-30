@@ -2064,3 +2064,8 @@ body.highContrast{--leaf:#3B4F40}
   --sh2:0 2px 6px rgba(60,45,30,.05), 0 12px 32px rgba(60,45,30,.08);
 }
 body.highContrast{--line:#CFC7BA;--lineStrong:#8C877E;--text:#000000;--sub:#3A3732;--sub2:#45423C}
+/* Bewertungssterne als Symbol (statt Schriftzeichen „★“) */
+.star{display:inline-flex;align-items:center;justify-content:center}
+.star .ico{width:26px;height:26px}
+.star .ico path{fill:none}
+.star.on .ico path{fill:currentColor}
