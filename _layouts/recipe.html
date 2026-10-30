@@ -55,10 +55,14 @@ layout: default
         <span class="kv kvFreezer" data-freezer-badge data-freezer-format="long" data-recipe-id="{{ page.url | relative_url }}" hidden><span class="kvIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="8 4 12 7 16 4"/><polyline points="8 20 12 17 16 20"/><polyline points="4 8 7 12 4 16"/><polyline points="20 8 17 12 20 16"/></svg></span><span data-count></span></span>
       </div>
 
-      {% if page.tags or page.categories %}
+      {% if page.category or page.tags or page.categories %}
       {%- assign cat_lc = page.category | downcase -%}
       <div class="chips recipeTags">
         {%- assign shown = "" -%}
+        {%- if page.category %}
+          {%- comment -%} Hauptkategorie zuerst (stand früher auf dem Foto) {%- endcomment -%}
+          <a class="chip chipLink chipMainCat" href="{{ '/rezeptindex/' | relative_url }}?kategorie={{ page.category | url_encode }}">{{ page.category }}</a>
+        {%- endif -%}
         {%- for c in page.categories -%}
           {%- if c == page.category -%}{%- continue -%}{%- endif -%}
           {%- assign c_lc = c | downcase -%}
