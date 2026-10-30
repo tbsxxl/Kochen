@@ -6,7 +6,7 @@ category: "Pasta"
 categories: ["Vegetarisch", "Italienisch", "Meal Prep"]
 tags: ["ofen", "familientauglich"]
 time: "ca. 1 Std"
-image: /recipes/images/Nudelauflauf.jpg
+image: /recipes/images/pasta-al-forno-mvuzrbnr.jpg
 servings: 4
 ingredients:
   - { qty: 1, unit: "", item: "Zwiebel" }
