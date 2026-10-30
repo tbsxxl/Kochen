@@ -8,7 +8,7 @@ category: "Vegetarisch"
 categories: ["Schnell"]
 tags: ["ofen", "familientauglich"]
 time: "ca. 30 Min"
-image: /recipes/images/kuerbissuppe-aus-hokkaido-mit-kuerbiskernoel-drizzle-servier-mvtphevk.jpg
+image: /recipes/images/kuerbissuppe-mvuzxh96.jpg
 servings: 2
 ingredients:
   - { qty: 280, unit: "g", item: "Butter-Blätterteig (Kühlregal)" }
