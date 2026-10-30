@@ -2037,3 +2037,4 @@ body.highContrast{--leaf:#3B4F40}
 .cookOverlay{--cLeaf:#9DBBA3}
 .cookNavBtn.primary,.cookTimer.isDone{color:#0B0D0B}
 .cookIngRow.isStep{background:rgba(157,187,163,.14)}
+.recipeTags .chipMainCat{font-weight:600}
