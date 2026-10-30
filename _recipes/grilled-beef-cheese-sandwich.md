@@ -6,7 +6,7 @@ date: 2026-10-02
 category: "Burger & Sandwiches"
 tags: ["rind", "hackfleisch", "amerikanisch", "pfanne"]
 time: "35–45 Min"
-image: /recipes/images/grilled-beef-cheese-sandwich-mit-burgersauce-und-buntem-sala-mur98w2r.jpg
+image: /recipes/images/patty-melt-mvv00on3.jpg
 servings: 2
 ingredients:
   - { qty: 200, unit: "g", item: "Rinderhackfleisch" }
