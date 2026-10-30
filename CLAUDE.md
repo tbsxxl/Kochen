@@ -120,7 +120,7 @@ SwiftUI-Code, nicht für diese Web-App.
 - Logo „Zwei Seiten“ (offenes Buch als Schale; Spiegelei und Basilikumblatt hat der Besitzer verworfen; keine Kochmütze,
   kein Besteck). Hell (`assets/logo.svg`, „mit Tiefe“): Terrakotta-Verlauf `#DB875F`→`#C46A42` links, Kräutergrün-Verlauf
   `#5E7863`→`#465C4B` rechts, feine helle Oberkante. Dunkel (`assets/logo-dark.svg`): Terrakotta `#E0906A`→`#C97350`,
-  rechte Seite Creme `#E9E2D3`→`#D6CDBA`. Startseite zeigt je nach App-Darstellung `.logoLight`/`.logoDark`;
+  rechte Seite helles Kräutergrün `#A8C5AD`→`#8FAE95` (wie das Grün der App im Dunkelmodus; Creme war zu weit weg). Startseite zeigt je nach App-Darstellung `.logoLight`/`.logoDark`;
   `assets/favicon.svg` = Kachel, folgt dem System (hell Papierweiß `#F6F1E9`, dunkel `#2E3B31`).
   Homescreen-/Android-Icons (`apple-touch-icon-v7.png`, `icon-512-v7.png`, `icon-maskable-512-v7.png`, `favicon.ico`)
   nur hell (Web-Apps können kein dunkles Icon festlegen), gerendert per Playwright, ico mit ImageMagick `convert`.
