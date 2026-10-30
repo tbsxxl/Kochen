@@ -7,7 +7,7 @@ author: "Tobi"
 category: "Fleisch & Schmorgerichte"
 tags: ["ente", "ofen"]
 time: "ca. 35 Min"
-image: /recipes/images/entenbrust-in-suess-salziger-harissa-sosse-mit-drillingen-un-mvtpjztj.jpg
+image: /recipes/images/harissa-entenbrust-mvuzueyx.jpg
 servings: 2
 ingredients:
   - { qty: 1, unit: "", item: "rote Zwiebel" }
