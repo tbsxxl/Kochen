@@ -106,6 +106,7 @@ SwiftUI-Code, nicht für diese Web-App.
 - Rezeptkarten gibt es genau zweimal: `_includes/recipe-card.html` (Liquid, Rezeptliste/Kategorien) und
   `assets/cards.js` (`KOCHBUCH_CARDS.recipeCard`, Startseite). Beide mit Kühltruhen-Markierung „❄ n“, Bewertung ★ und
   Favoriten-Herz (befüllt von `updateFavBadges()` in `assets/utils.js`). Änderungen an Karten in beiden Dateien machen.
+  Kartentitel mit Silbentrennung (`hyphens:auto`), Zeitangabe einzeilig mit „…“.
 - Symbole: nur Linien-SVGs (Klasse `.ico`, Strichstärke ~2, `currentColor`) wie in der Tab-Leiste – keine Schriftzeichen
   wie ✕ ‹ › ✓ ♡ als Knopf-Symbol. „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
   iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol).
@@ -132,6 +133,8 @@ SwiftUI-Code, nicht für diese Web-App.
   (`assets/now-cooking.js`, wie der Mini-Player in Apple Music) auf jeder Seite, solange Fortschritt oder Timer laufen:
   Foto, Name, Timer-Restzeit, „Schritt n von m“; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt
   `KOCHBUCH_OPENCOOK`). recipe.js meldet `kochbuch:cooking` / `kochbuch:cookmode`.
+  Farben wie die App im Dunkelmodus (Abschnitt 14 in `assets/styles.css`): warme Espresso-Töne, Fortschritt und Haken
+  Kräutergrün, Segment-Umschalter und Zurück als Kapseln, nur „Weiter“ Apricot.
   Ab 768 px (iPad) kein Reiter: Schritt links (+ „Danach“-Vorschau), alle Zutaten rechts, die des aktuellen
   Schritts hervorgehoben (`.isStep`). Auf dem Handy bleibt es bei den Reitern „Schritte/Zutaten“.
 - Rezeptliste auf dem Handy als Raster mit 2 Spalten (Abschnitt 12 in `assets/styles.css`, quadratische Fotos, nur

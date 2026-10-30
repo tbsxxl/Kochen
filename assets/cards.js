@@ -26,7 +26,7 @@
           ${img}
           <div class="rcBody">
             <h2 class="recipeTitle">${esc(r.title)}</h2>
-            <div class="recipeMeta">${opts.meta != null ? opts.meta : metaLine(r)}<span class="metaRating" data-rating-badge data-recipe-id="${esc(id)}" hidden></span><span class="favBadge rcFavBadge metaFav${opts.fav ? " isFav" : ""}" data-fav-badge data-recipe-id="${esc(id)}" aria-label="Favorit">♥</span></div>
+            <div class="recipeMeta">${opts.meta != null ? opts.meta : metaLine(r)}<span class="metaRating" data-rating-badge data-recipe-id="${esc(id)}" hidden></span><span class="favBadge rcFavBadge metaFav${opts.fav ? " isFav" : ""}" data-fav-badge data-recipe-id="${esc(id)}" aria-label="Favorit"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z" fill="currentColor"/></svg></span></div>
           </div>
         </div>
       </a>`;
