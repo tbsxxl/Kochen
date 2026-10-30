@@ -7,7 +7,7 @@ category: "Pasta"
 categories: ["Italienisch", "Hähnchen", "Schnell"]
 tags: ["hähnchen", "high-protein"]
 time: "15–25 Min"
-image: /recipes/images/pasta-al-pomodoro-haehnchen.jpg
+image: /recipes/images/pasta-al-pomodoro-mvvbytty.jpg
 servings: 2
 ingredients:
   - { section: "Pasta" }
