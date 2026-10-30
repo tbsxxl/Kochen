@@ -2042,3 +2042,25 @@ body.highContrast{--leaf:#3B4F40}
 .homeBrand .logoDark{display:none}
 :root[data-theme="dark"] .homeBrand .logoLight{display:none}
 :root[data-theme="dark"] .homeBrand .logoDark{display:block}
+
+/* ---------- 19. Hellmodus wieder warm (Wunsch des Besitzers, Okt. 2026) ----------
+   Hintergrund Papierweiß statt Apples kühlem Grau; Zellen, Linien, Füllflächen und Glas leicht gewärmt.
+   Kontraste auf #F6F1E9: Text 15 : 1, Sekundär 6,8 : 1, Metadaten 5,2 : 1, Kräutergrün 5,2 : 1. Dunkelmodus unverändert. */
+:root{
+  --bg:#F6F1E9;
+  --surface:#FFFDF9;
+  --surface2:#EDE7DD;
+  --line:#E6E0D6;
+  --lineStrong:#CFC7BA;
+  --text:#1F1D1A;
+  --sub:#57534C;
+  --sub2:#68645C;
+  --muted:#8C877E;
+  --fill:rgba(120,100,75,.10);
+  --glass:rgba(252,249,244,.74);
+  --glassLine:rgba(90,70,40,.08);
+  --glassShadow:0 10px 30px rgba(60,45,30,.12), 0 1px 3px rgba(60,45,30,.06);
+  --sh1:0 1px 2px rgba(60,45,30,.04);
+  --sh2:0 2px 6px rgba(60,45,30,.05), 0 12px 32px rgba(60,45,30,.08);
+}
+body.highContrast{--line:#CFC7BA;--lineStrong:#8C877E;--text:#000000;--sub:#3A3732;--sub2:#45423C}
