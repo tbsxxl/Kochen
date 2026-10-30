@@ -7,7 +7,7 @@ category: "Bowls & Salate"
 categories: ["Asiatisch", "Meal Prep"]
 tags: ["schwein", "high-protein"]
 time: "30–40 Min"
-image: /recipes/images/reis-bowl-schweinefilet.jpg
+image: /recipes/images/schweinefilet-reis-bowl-mvvbwxsc.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Schweinefilet" }
