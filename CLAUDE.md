@@ -120,6 +120,7 @@ SwiftUI-Code, nicht für diese Web-App.
   iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol), Kacheln nur aus der Logo-Palette (Kräutergrün `#526B57`,
   Dunkelgrün `#3E5244`, Terrakotta `#C46A42`, warmes Grau `#7A746B`; Abschnitt 20). Schalter in Kräutergrün statt
   Apples Systemgrün; Kühltruhen-Markierung auf Fotos Kräutergrün. Rot nur für Löschen/Warnungen.
+  Plus/Minus überall als gefüllte runde Knöpfe (`.stepBtn` wie `.recipePortionStep`, Abschnitt 21).
 - Logo „Zwei Seiten“ (offenes Buch als Schale; Spiegelei und Basilikumblatt hat der Besitzer verworfen; keine Kochmütze,
   kein Besteck). Hell (`assets/logo.svg`, „mit Tiefe“): Terrakotta-Verlauf `#DB875F`→`#C46A42` links, Kräutergrün-Verlauf
   `#5E7863`→`#465C4B` rechts, feine helle Oberkante. Dunkel (`assets/logo-dark.svg`): Terrakotta `#E0906A`→`#C97350`,
@@ -146,7 +147,7 @@ SwiftUI-Code, nicht für diese Web-App.
   „Meal Prep“ (`RECIPE_DATA.mealPrep`). Tags auf der Rezeptseite = antippbare Kapseln (`/rezeptindex/?q=<tag>`), Infos
   (Zeit, Portionen, Favorit, Bewertung, Kühltruhe) als ruhige Zeile mit Symbolen.
 - Rezeptseite: großes Foto mit Rezeptname (Fraunces, weiß) und Untertitel darauf (`.recipeHeroText`). Darunter Autor,
-  Infos, Kapseln (Hauptkategorie zuerst, `.chipMainCat`, dann weitere Kategorien und Tags), dann der Umschalter „Zutaten | Zubereitung“ (`#recipeSegWrap`, `data-pane` auf `.recipePageCard`), der
+  Infos, Kapseln (alle neutral `--fill`, Hauptkategorie zuerst und fett, `.chipMainCat`, dann weitere Kategorien und Tags), dann der Umschalter „Zutaten | Zubereitung“ (`#recipeSegWrap`, `data-pane` auf `.recipePageCard`), der
   beim Scrollen unter Zurück-Taste und Titelleiste kleben bleibt (`.isStuck` legt eine ruhige Fläche dahinter;
   `.recipePageCard` braucht `overflow:clip`, nicht `hidden`). Ab 900 px kein Umschalter, beide Teile nebeneinander.
   Kategorie für das PDF steht in `RECIPE_DATA.category`.
