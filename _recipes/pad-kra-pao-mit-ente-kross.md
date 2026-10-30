@@ -6,7 +6,7 @@ date: 2026-09-17
 category: "Asiatisch"
 tags: ["ente", "thailändisch", "high-protein"]
 time: "25–35 Min"
-image: /recipes/images/pad-kra-pao-ente.jpg
+image: /recipes/images/pad-kra-pao-mvvbtcbr.jpg
 servings: 4
 ingredients:
   - { qty: 300, unit: "g", item: "Jasminreis" }
