@@ -117,11 +117,10 @@ SwiftUI-Code, nicht für diese Web-App.
 - Symbole: nur Linien-SVGs (Klasse `.ico`, Strichstärke ~2, `currentColor`) wie in der Tab-Leiste – keine Schriftzeichen
   wie ✕ ‹ › ✓ ♡ + − als Knopf-Symbol (Plus/Minus: `.icoPM`). „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
   iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol).
-- Logo: `assets/logo.svg` Basilikumblatt in Soft Sage White `#EAF1E4` mit Adern in Sage Green `#82AD80` auf Botanical Green `#287A36`.
-  Keine Kochmütze, kein Besteck, kein Spiegelei (vom Besitzer abgelehnt). Icons (`apple-touch-icon-v5.png`,
-  `icon-512-v5.png`, maskable mit kleinerem Blatt, `favicon.ico` 16/32/48) aus dem SVG per Playwright gerendert,
-  ico mit ImageMagick `convert`.
-  Bei Logo-Änderungen die Icon-Dateinamen (`-v5` → `-v6`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
+- Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot `#E8753D`, rechte Kräutergrün `#526B57`
+  (das ursprüngliche Logo; Spiegelei und Basilikumblatt hat der Besitzer verworfen). Keine Kochmütze, kein Besteck.
+  Icons `apple-touch-icon-v6.png`, `icon-512-v6.png`, `icon-maskable-512-v6.png`, `favicon.ico`.
+  Bei Logo-Änderungen die Icon-Dateinamen (`-v6` → `-v7`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.
 
 ## Bedienhilfen (nur im Browser gespeichert, `kochbuch.ui.*`)
