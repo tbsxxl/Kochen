@@ -6,7 +6,7 @@ category: "Fleisch & Schmorgerichte"
 categories: ["Italienisch"]
 tags: ["hackfleisch", "ofen"]
 time: "ca. 55 Min"
-image: /recipes/images/Toscana.jpg
+image: /recipes/images/polpette-alla-toscana-mvuzyyj5.jpg
 servings: 3
 ingredients:
   - { qty: 500, unit: "g", item: "Hackfleisch, gemischt" }
