@@ -6,7 +6,7 @@ date: 2026-08-25
 category: "Hähnchen"
 tags: ["hähnchen", "amerikanisch", "high-protein"]
 time: "30–40 Min"
-image: /recipes/images/marry-me-chicken.jpg
+image: /recipes/images/marry-me-chicken-mvvblq6o.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchenbrustfilet in Lake" }
