@@ -6,7 +6,7 @@ category: "Süßes & Backen"
 categories: ["Schnell"]
 tags: ["vegetarisch", "amerikanisch", "ofen"]
 time: "ca. 29 Min"
-image: /recipes/images/Cookies.jpg
+image: /recipes/images/chocolate-chip-cookies-mvuzn2mu.jpg
 servings: 20
 ingredients:
   - { qty: 280, unit: "g", item: "Mehl" }
