@@ -95,7 +95,7 @@ SwiftUI-Code, nicht für diese Web-App.
   `--brand`/`--leaf` hell `#526B57` (weißer Inhalt 5,8 : 1, als Text 5,2 : 1), dunkel `#9DBBA3` mit dunklem Inhalt,
   blasse Fläche `--brandSoft` `#E2EAE3`/`#22302A`. Für Hauptaktion und Fortschritt (Kochen, Play, Weiter, Haken, Balken,
   aktiver Tab als blasse Kapsel) und als Tönung für Text und Symbole (Links, „Alle ›“, Sterne, Herz). Auswahl (aktive
-  Filter-Kapseln) in Tinte `--sel`. Safran, Basilikum-Palette (`#287A36` …) und Spiegelei-/Blatt-Logo hat der Besitzer
+  Filter-Kapseln) grün gefüllt (`--sel` = `--brand`, Abschnitt 22). Safran, Basilikum-Palette (`#287A36` …) und Spiegelei-/Blatt-Logo hat der Besitzer
   verworfen. Text sonst nie grün.
 - Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz). Inter wird nicht mehr
   vorgeladen (auf iPhone/iPad/Mac greift SF).
@@ -116,9 +116,8 @@ SwiftUI-Code, nicht für diese Web-App.
   (wie Alben in Apple Music): Foto mit Rundung, Name und Zeit direkt auf dem Hintergrund, keine Kategorie-Kapsel
   (nur die „Heute“-Karte behält sie).
 - Symbole: nur Linien-SVGs (Klasse `.ico`, Strichstärke ~2, `currentColor`) wie in der Tab-Leiste – keine Schriftzeichen
-  wie ✕ ‹ › ✓ ♡ ★ + − als Knopf-Symbol (Plus/Minus: `.icoPM`, Bewertungssterne als SVG mit Füllung bei `.on`). „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
-  iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol), Kacheln nur aus der Logo-Palette (Kräutergrün `#526B57`,
-  Dunkelgrün `#3E5244`, Terrakotta `#C46A42`, warmes Grau `#7A746B`; Abschnitt 20). Schalter in Kräutergrün statt
+  wie ✕ ‹ › ✓ ♡ ★ + − als Knopf-Symbol (Plus/Minus: `.icoPM`, Bewertungssterne als SVG mit Füllung bei `.on`). „Alle ›“ mit CSS-Chevron. Listen-Symbole („Mehr“-Menü, Rezept-Menü, Konto) ohne Kacheln, in Kräutergrün
+  (`.rowGlyph`, wie die Mediathek in Apple Music; Abschnitt 22). Schalter in Kräutergrün statt
   Apples Systemgrün; Kühltruhen-Markierung auf Fotos Kräutergrün. Rot nur für Löschen/Warnungen.
   Plus/Minus überall als gefüllte runde Knöpfe (`.stepBtn` wie `.recipePortionStep`, Abschnitt 21).
 - Logo „Zwei Seiten“ (offenes Buch als Schale; Spiegelei und Basilikumblatt hat der Besitzer verworfen; keine Kochmütze,
