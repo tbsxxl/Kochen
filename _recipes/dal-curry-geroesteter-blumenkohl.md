@@ -7,7 +7,7 @@ category: "Curry"
 categories: ["Vegetarisch", "Indisch", "Meal Prep"]
 tags: ["ofen"]
 time: "35–45 Min"
-image: /recipes/images/dal-curry-geroesteter-blumenkohl.jpg
+image: /recipes/images/dal-mvuzsmpw.jpg
 servings: 2
 ingredients:
   - { qty: 1, unit: "", item: "Blumenkohl" }
