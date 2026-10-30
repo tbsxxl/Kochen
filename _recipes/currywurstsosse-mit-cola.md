@@ -6,15 +6,15 @@ category: "Saucen & Basics"
 categories: ["Schnell"]
 tags: ["deutsch", "streetfood"]
 time: "15–20 Min"
-image: /recipes/images/cwurst.jpg
+image: /recipes/images/currywurstsosse-mvuznqmd.jpg
 servings: 4
 ingredients:
   - { qty: 250, unit: "ml", item: "Cola" }
   - { qty: 3, unit: "EL", item: "Apfelmus" }
   - { qty: 250, unit: "ml", item: "Ketchup" }
-  - { qty: "2", unit: "TL", item: "Currypulver" }
-  - { qty: "1", unit: "TL", item: "Chilipulver" }
-  - { qty: "1", unit: "TL", item: "Worcestershiresauce" }
+  - { qty: 2, unit: "TL", item: "Currypulver" }
+  - { qty: 1, unit: "TL", item: "Chilipulver" }
+  - { qty: 1, unit: "TL", item: "Worcestershiresauce" }
   - { qty: "Prise", unit: "", item: "Salz (optional)" }
 ---
 
