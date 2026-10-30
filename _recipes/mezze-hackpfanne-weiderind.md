@@ -6,7 +6,7 @@ date: 2026-08-25
 category: "Fleisch & Schmorgerichte"
 tags: ["rind", "hackfleisch", "türkisch", "high-protein", "pfanne"]
 time: "25–35 Min"
-image: /recipes/images/mezze-hackpfanne-weiderind.jpg
+image: /recipes/images/k-ymal-pilav-mvvboo2u.jpg
 servings: 2
 ingredients:
   - { qty: 200, unit: "g", item: "Hackfleischzubereitung vom Weiderind" }
