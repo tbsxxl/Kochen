@@ -7,7 +7,7 @@ category: "Pasta"
 categories: ["Vegetarisch", "Schnell", "Italienisch"]
 tags: ["one-pot"]
 time: "15–25 Min"
-image: /recipes/images/one-pot-paccheri-in-pesto-creme-sosse-mit-babyspinat-und-kar-mur99zig.jpg
+image: /recipes/images/paccheri-al-pesto-rosso-mvvbuqgb.jpg
 servings: 2
 ingredients:
   - { qty: 375, unit: "g", item: "frische Paccheri" }
