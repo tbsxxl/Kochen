@@ -1715,3 +1715,37 @@ html.tabbarMin .nowCooking{transform:translate3d(0,18px,0)}
 /* Rezeptfoto mit Tiefe: bewegt sich beim Scrollen langsamer (Skript in _layouts/recipe.html) */
 .recipePageHero{overflow:hidden}
 .recipePageHero .recipeHeroImg{will-change:transform;transform-origin:50% 100%}
+/* Planen über mehrere Tage (Blatt auf der Rezeptseite) */
+.planSheetHint{margin:0 4px 8px;font-size:var(--fs14);color:var(--sub2)}
+.planDayCheck{flex:0 0 22px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--muted)}
+.planDay.isPlanned .planDayCheck{border-color:var(--leaf);background:var(--leaf) center/14px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.planLeftoverRow{margin:0 0 8px;background:var(--fill)}
+.planLeftoverRow[hidden]{display:none}
+.planLeftoverText{display:flex;flex-direction:column;gap:2px;text-align:left;flex:1}
+.planLeftoverSub{font-size:var(--fs12);color:var(--sub2);font-weight:400}
+.planDone{width:100%;margin-top:12px}
+.planLeftoverTag{flex:0 0 auto;padding:4px 10px;border-radius:var(--rPill);background:var(--fill);color:var(--sub2);font-size:var(--fs14);font-weight:600}
+/* Rezeptseite: Infos als ruhige Zeile mit Symbolen (wie im App Store), Tags als kleine antippbare Kapseln */
+.recipeFacts{gap:6px 18px;margin-top:4px}
+.recipeFacts .kv{min-height:0;padding:0;border:0;background:none;color:var(--sub2);font-size:var(--fs16);font-weight:500;gap:6px;max-width:100%}
+.recipeFacts .kvIcon{color:var(--leaf)}
+.recipeFacts .kvIcon svg{width:18px;height:18px}
+.recipeFacts .kvFav{color:var(--gold);background:none}
+.recipeFacts .kvRating{color:var(--text);background:none}
+.recipeFacts .kvRating .ico{color:var(--gold)}
+.recipeFacts .kvFreezer{color:var(--ice);background:none}
+.recipeFacts .ico{width:18px;height:18px}
+.recipeTags{margin-top:14px;gap:6px}
+.recipeTags .chip{min-height:30px;padding:0 12px;font-size:var(--fs14);font-weight:500;border-radius:var(--rPill);text-decoration:none}
+.recipeTags .chipTag{background:var(--fill);color:var(--text)}
+.recipeTags .chipLink:not(.chipTag){background:var(--leafSoft);color:var(--leaf)}
+/* Kochmodus nach Apples Richtlinien: 44-pt-Tippflächen, runde Häkchen wie in den Listen, Symbole statt Zeichen */
+.cookTab{min-height:44px}
+.cookTime{min-height:44px;padding:4px 12px;vertical-align:middle}
+.cookNavBtn{display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.cookNavBtn .ico{width:20px;height:20px}
+.cookChk{border-radius:50%}
+.cookChk::after{content:"";width:14px;height:14px;background:#1C1D1B;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.planLeftoverRow:disabled{opacity:.5}

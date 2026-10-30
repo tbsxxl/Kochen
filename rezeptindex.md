@@ -248,6 +248,10 @@ permalink: /rezeptindex/
   const urlPerson = new URLSearchParams(location.search).get('person');
   if(urlPerson && personOptions.some(x=>x.getAttribute('data-person') === urlPerson)) setPerson(urlPerson);
 
+  // Direktlink auf eine Suche (Tags auf der Rezeptseite): /rezeptindex/?q=scharf
+  const urlQ = new URLSearchParams(location.search).get('q');
+  if(urlQ && q){ q.value = urlQ; apply(); }
+
   // Direktlink auf eine Kategorie: /rezeptindex/?kategorie=Pasta
   const urlCat = new URLSearchParams(location.search).get('kategorie');
   if(urlCat && catOptions.some(x=>x.getAttribute('data-cat') === urlCat)) setCat(urlCat);

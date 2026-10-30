@@ -375,26 +375,51 @@ function renderGroup(container, items, checks){
     if(i === 1) return "Morgen";
     return ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"][d.getDay()];
   }
-  function openPlanSheet(){
-    document.getElementById('recipeSheetOverlay')?.classList.remove('open');
-    const rs = document.getElementById('recipeSheet');
-    rs?.classList.remove('open'); rs?.setAttribute('aria-hidden','true');
+  // Planen über mehrere Tage: Tage antippen schaltet sie an/aus (Blatt bleibt offen).
+  // „Einmal kochen, Reste essen“: der früheste geplante Tag wird gekocht (und eingekauft), die übrigen sind Reste.
+  const planLeftover = $("#planLeftover");
+  function myDays(plan){
+    const todayKey = U.plan.key(new Date());
+    return Object.keys(plan).filter(k=> k >= todayKey && (plan[k] || []).some(e=>e.id === data.id)).sort();
+  }
+  function applyLeftovers(on){
+    const plan = U.plan.get();
+    const days = myDays(plan);
+    days.forEach((k, i)=> (plan[k] || []).forEach(e=>{ if(e.id === data.id){ if(on && i > 0) e.leftover = true; else delete e.leftover; } }));
+    U.plan.set(plan);
+  }
+  function leftoverOn(){ return planLeftover?.getAttribute('aria-checked') === 'true'; }
+  function renderPlanDays(){
     const plan = U.plan.get();
     const today = new Date(); today.setHours(12,0,0,0);
+    const mine = myDays(plan);
     let html = "";
     for(let i=0;i<10;i++){
       const d = new Date(today.getTime() + i*86400000);
       const k = U.plan.key(d);
       const entries = plan[k] || [];
-      const already = entries.some(e=>e.id === data.id);
-      const others = entries.length - (already ? 1 : 0);
-      html += `<button class="sheetRow planDay${already ? " isPlanned" : ""}" type="button" data-day="${k}">
+      const own = entries.find(e=>e.id === data.id);
+      const others = entries.length - (own ? 1 : 0);
+      const info = own ? (own.leftover ? "Reste" : (mine.length > 1 && leftoverOn() ? "kochen" : "geplant")) : others ? `${others} Gericht${others>1?"e":""}` : "";
+      html += `<button class="sheetRow planDay${own ? " isPlanned" : ""}" type="button" data-day="${k}" aria-pressed="${own ? "true" : "false"}">
         <span class="planDayDate"><b>${WD[d.getDay()]}</b>${d.getDate()}.${d.getMonth()+1}.</span>
         <span class="planDayName">${dayLabel(d, i)}</span>
-        <span class="planDayInfo">${already ? "✓ geplant" : others ? `${others} Gericht${others>1?"e":""}` : ""}</span>
+        <span class="planDayInfo">${info}</span>
+        <span class="planDayCheck" aria-hidden="true"></span>
       </button>`;
     }
     if(planDays) planDays.innerHTML = html;
+    // Schalter immer sichtbar (kein Springen der Liste beim Antippen), erst ab zwei Tagen bedienbar
+    if(planLeftover) planLeftover.disabled = mine.length < 2;
+  }
+  function openPlanSheet(){
+    document.getElementById('recipeSheetOverlay')?.classList.remove('open');
+    const rs = document.getElementById('recipeSheet');
+    rs?.classList.remove('open'); rs?.setAttribute('aria-hidden','true');
+    const plan = U.plan.get();
+    const hasLeftover = myDays(plan).some(k=> (plan[k] || []).some(e=>e.id === data.id && e.leftover));
+    planLeftover?.setAttribute('aria-checked', String(hasLeftover || (!myDays(plan).length && !!data.mealPrep)));
+    renderPlanDays();
     planOverlay?.classList.add('open');
     planSheet?.classList.add('open');
     planSheet?.setAttribute('aria-hidden','false');
@@ -407,18 +432,23 @@ function renderGroup(container, items, checks){
   $("#planQuick")?.addEventListener('click', openPlanSheet);
   $("#planSheetClose")?.addEventListener('click', closePlanSheet);
   planOverlay?.addEventListener('click', closePlanSheet);
+  $("#planDone")?.addEventListener('click', ()=>{
+    const n = myDays(U.plan.get()).length;
+    closePlanSheet();
+    if(n) UI.toast?.(n === 1 ? "Eingeplant" : `An ${n} Tagen eingeplant${leftoverOn() ? " – einmal kochen" : ""}`);
+  });
+  planLeftover?.addEventListener('click', ()=>{
+    planLeftover.setAttribute('aria-checked', String(!leftoverOn()));
+    applyLeftovers(leftoverOn()); renderPlanDays(); lightTap();
+  });
   planDays?.addEventListener('click', (e)=>{
     const b = e.target.closest('[data-day]'); if(!b) return;
     const k = b.dataset.day;
-    if(b.classList.contains('isPlanned')){
-      U.plan.remove(k, data.id);
-      UI.toast?.("Aus dem Wochenplan entfernt");
-    }else{
-      U.plan.add(k, data.id, currentServings());
-      UI.toast?.(`Eingeplant: ${b.querySelector('.planDayName')?.textContent || ""}`);
-    }
+    if(b.classList.contains('isPlanned')) U.plan.remove(k, data.id);
+    else U.plan.add(k, data.id, currentServings());
+    applyLeftovers(leftoverOn());
+    renderPlanDays();
     successTap();
-    closePlanSheet();
   });
 
   // Cooking mode
@@ -490,6 +520,7 @@ const cookOverlay = $("#cookOverlay");
     if(T) cookStepText.innerHTML = T.linkify(steps[stepIdx] || '—');
     else cookStepText.textContent = steps[stepIdx] || '—';
     cookStepPill.textContent = `${stepIdx+1}/${total}`;
+    cookStepPill.setAttribute('aria-label', `Schritt ${stepIdx+1} von ${total}`);
     if(cookOverlay?.classList.contains('open')) saveCookProgress();
     if(cookProgressBar) cookProgressBar.style.width = `${((stepIdx+1)/total)*100}%`;
     if(cookStepIngs && cookStepIngsList){
@@ -507,7 +538,7 @@ const cookOverlay = $("#cookOverlay");
     if(cookPrev) cookPrev.disabled = stepIdx===0;
     if(cookNext){
       const last = stepIdx>=total-1;
-      cookNext.textContent = last ? 'Fertig ✓' : 'Weiter ›';
+      cookNext.innerHTML = last ? 'Fertig<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' : 'Weiter<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       cookNext.dataset.last = last ? '1' : '';
     }
   }
@@ -671,7 +702,7 @@ const cookOverlay = $("#cookOverlay");
     });
     if(ratingPill){
       ratingPill.hidden = !e.rating;
-      ratingPill.textContent = e.rating ? `★ ${e.rating}` : "";
+      ratingPill.innerHTML = e.rating ? `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="currentColor"/></svg>${e.rating} von 5` : "";
       ratingPill.setAttribute("aria-label", e.rating ? `Deine Bewertung: ${e.rating} von 5` : "");
     }
   }

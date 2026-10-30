@@ -64,14 +64,20 @@ const RECIPES = fs.readdirSync(path.join(__dirname, '..', '_recipes')).filter(f 
 
   await page.tap('#planQuick'); await page.waitForTimeout(300);
   await page.tap('#planDays [data-day] >> nth=0'); await page.waitForTimeout(150);
+  await page.tap('#planDays [data-day] >> nth=1'); await page.waitForTimeout(150);
+  if (await page.getAttribute('#planLeftover', 'aria-checked') !== 'true') { await page.tap('#planLeftover'); await page.waitForTimeout(150); }
   const plan = await page.evaluate(() => JSON.parse(localStorage.getItem('kochbuch.plan') || '{}'));
-  check(Object.values(plan).some(l => l.length), '„Planen“ trägt nichts in den Wochenplan ein');
+  const planned = Object.keys(plan).sort().map(k => plan[k]).flat();
+  check(planned.length === 2, `„Planen“ über zwei Tage: ${planned.length} Einträge statt 2`);
+  check(planned.length === 2 && !planned[0].leftover && planned[1].leftover, '„Einmal kochen, Reste essen“ markiert den zweiten Tag nicht als Reste');
+  await page.tap('#planDone'); await page.waitForTimeout(300);
 
   await page.tap('#favQuick'); await page.waitForTimeout(150);
   check(await page.evaluate(() => Object.values(JSON.parse(localStorage.getItem('kochbuch.stats') || '{}')).some(e => e.favorite)), 'Favorit wird nicht gespeichert');
 
   await go('/wochenplan/');
   check(await page.evaluate(() => !document.querySelector('#weekToShopping').hidden), 'Wochenplan: Einkaufs-Knopf fehlt trotz geplantem Gericht');
+  check(/für 1 Gericht/.test(await page.textContent('#weekToShopping')) || !(await page.$('.planLeftoverTag')), 'Wochenplan: Reste-Tag wird beim Einkaufen mitgezählt');
   await go('/shopping/');
   check(await page.evaluate(() => document.querySelectorAll('#shopList .uRow').length > 0), 'Einkaufsliste zeigt nichts an');
 

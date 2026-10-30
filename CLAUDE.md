@@ -122,6 +122,10 @@ SwiftUI-Code, nicht für diese Web-App.
   Aktiver Tab: Kapsel, Grün, Symbol gefüllt (`fill-opacity`).
 - Rezept-Leiste unten: Favorit · Planen · **Kochen** (Mitte, Kapsel wie aktiver Tab, Symbol Apricot) · Zur Liste · Mehr (Gekocht, Kühltruhe, PDF,
   Drucken, Bearbeiten).
+- Planen (Rezept-Leiste): Blatt mit 10 Tagen, mehrere antippbar; Schalter „Einmal kochen, Reste essen“ markiert alle
+  außer dem frühesten Tag mit `leftover: true` (Wochenplan zeigt „Reste“, Einkaufen zählt sie nicht). Standard an bei
+  „Meal Prep“ (`RECIPE_DATA.mealPrep`). Tags auf der Rezeptseite = antippbare Kapseln (`/rezeptindex/?q=<tag>`), Infos
+  (Zeit, Portionen, Favorit, Bewertung, Kühltruhe) als ruhige Zeile mit Symbolen.
 - Rezeptseite: Schritte antippen = abhaken (`stepsDone`, 12 Std), Portionen pro Rezept (`servings`),
   „Ähnliche Rezepte“ (gleiche Kategorie, Liquid `sample`, Karten mit `hcard=true`).
 - Kochmodus: Wischen links/rechts; Fortschritt in `cooking` (12 Std). „Kochen läuft“-Kapsel über der unteren Leiste
