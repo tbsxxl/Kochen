@@ -8,7 +8,7 @@ category: "Asiatisch"
 categories: ["Schnell"]
 tags: ["fisch", "pfanne"]
 time: "ca. 25 Min"
-image: /recipes/images/fischfilet-mit-curry-chili-butter-auf-reis-dazu-stir-fry-gem-mvtpi3o5.jpg
+image: /recipes/images/fischfilet-mit-curry-chili-butter-mvuztt35.jpg
 servings: 2
 ingredients:
   - { qty: 240, unit: "g", item: "Pangasius" }
