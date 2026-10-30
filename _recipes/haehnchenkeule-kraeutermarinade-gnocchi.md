@@ -7,7 +7,7 @@ category: "Hähnchen"
 categories: ["Italienisch"]
 tags: ["hähnchen", "ofen", "high-protein"]
 time: "40–50 Min"
-image: /recipes/images/haehnchenkeule-in-kraeutermarinade-mit-gnocchi-in-tomatensos-mur99i6j.jpg
+image: /recipes/images/kraeuter-haehnchenkeulen-mvv02gy2.jpg
 servings: 2
 ingredients:
   - { qty: 500, unit: "g", item: "Hähnchenkeulen in Kräutermarinade" }
