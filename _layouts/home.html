@@ -8,6 +8,7 @@ layout: default
 <!-- Begrüßung -->
 <div class="section homeGreeting">
   <div class="homeBrand"><img src="{{ '/assets/logo.svg' | relative_url }}?v=2" alt="" width="28" height="28"><span class="brandWordmark">{{ site.title }}</span><a class="profileBadge pressable" data-profile-badge href="{{ '/konto/' | relative_url }}" aria-label="Anmelden"></a></div>
+  <div class="homeDate" id="homeDate"></div>
   <div class="homeGreetingTitle" id="homeGreeting">Hallo</div>
   <div class="homeGreetingSub">Was kochst du heute?</div>
 </div>
@@ -16,6 +17,8 @@ layout: default
   var h = new Date().getHours();
   var t = h < 5 ? 'Gute Nacht' : h < 11 ? 'Guten Morgen' : h < 17 ? 'Guten Tag' : 'Guten Abend';
   document.getElementById('homeGreeting').textContent = t;
+  // Datum klein über der Begrüßung (wie der „Heute“-Tab im App Store)
+  document.getElementById('homeDate').textContent = new Date().toLocaleDateString('de-DE', { weekday:'long', day:'numeric', month:'long' });
 })();
 </script>
 

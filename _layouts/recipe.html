@@ -125,6 +125,22 @@ layout: default
   });
 </script>
 
+<script>
+  // Rezeptfoto mit Tiefe: läuft beim Scrollen langsamer mit und dehnt sich beim Zug nach unten (Überscrollen)
+  (function(){
+    const img = document.querySelector('.recipePageHero .recipeHeroImg');
+    if (!img || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let ticking = false;
+    function update(){
+      ticking = false;
+      const y = window.scrollY, h = img.offsetHeight || 1;
+      if (y < 0) img.style.transform = `scale(${1 + Math.min(-y / h, .25)})`;
+      else if (y < h) img.style.transform = `translate3d(0, ${y * 0.35}px, 0)`;
+    }
+    window.addEventListener('scroll', ()=>{ if(!ticking){ ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  })();
+</script>
+
 <!-- Sticky Bottom Action Bar -->
 <nav class="tabbar bottomRail recipeTabbar" aria-label="Rezept Aktionen">
   <div class="tabbarInner container">

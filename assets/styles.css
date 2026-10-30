@@ -1668,3 +1668,50 @@ body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) 
 #sheet .themeRow + .themeRow{--tile:#526B57}
 #sheet #toggleCompact,#sheet #toggleContrast{--tile:#7A746B}
 :root[data-theme="dark"] #sheet .themeRow:first-of-type{--tile:#5A5D5B}
+
+/* ---------- 13. Feinschliff nach Apples Richtlinien (Okt. 2026) ----------
+   Farbrollen: Kräutergrün = Bedienfarbe (aktiv, Links, Auswahl), Apricot = nur Hauptaktion, Gold = nur Favoriten/Sterne.
+   Petrol nur noch für die Kühltruhe. Flächen etwas ruhiger (weniger gelb), Zellen fast weiß. */
+:root{
+  --bg:#F5F2ED;
+  --surface:#FFFEFB;
+  --surface2:#ECE7E0;
+  --line:#E2DCD3;
+  --petrol:var(--leaf);
+}
+:root[data-theme="dark"]{ --petrol:var(--leaf); }
+
+/* Startseite: Datum über der Begrüßung (wie der „Heute“-Tab im App Store) */
+.homeDate{font-size:var(--fs12);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sub2);margin-bottom:2px}
+
+/* „Heute für dich“ als Bildkarte: Titel und Infos auf dem Foto */
+.homeFeatured{position:relative;overflow:hidden}
+.homeFeatured .rcImg{height:clamp(340px, 108vw, 520px)}
+.homeFeatured .rcImg::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top, rgba(18,14,10,.78) 0%, rgba(18,14,10,.38) 32%, rgba(18,14,10,0) 58%)}
+.homeFeatured .rcBody{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px 20px 22px;background:none;gap:6px}
+.homeFeatured .homeFeaturedTitle{color:#fff;font-size:var(--fs36);line-height:1.08;text-shadow:0 1px 12px rgba(0,0,0,.25)}
+.homeFeatured .recipeMeta{color:rgba(255,255,255,.88)}
+.homeFeatured .metaFav{color:#F2DE93}
+.homeFeatured .heroOverlayCat{top:16px;bottom:auto;left:16px;background:rgba(20,16,12,.55);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#fff;font-weight:600;letter-spacing:.03em}
+body.compact .homeFeatured .rcImg{height:clamp(220px, 60vw, 320px)}
+body.compact .homeFeatured .homeFeaturedTitle{font-size:var(--fs28)}
+
+/* Tab-Leiste wie in iOS 26: beim Runterscrollen kleiner (Beschriftungen ausgeblendet), beim Hochscrollen wieder groß */
+.bottomRail{transition:transform .45s var(--easeSheet)}
+.bottomRail .tabLabel{transition:opacity .25s ease}
+.nowCooking{transition:transform .45s var(--easeSheet)}
+html.tabbarMin .bottomRail{transform:translate3d(0,10px,0) scale(.88)}
+html.tabbarMin .bottomRail .tabLabel{opacity:0}
+html.tabbarMin .nowCooking{transform:translate3d(0,18px,0)}
+@media (prefers-reduced-motion: reduce){
+  .bottomRail,.nowCooking{transition:none}
+  html.tabbarMin .bottomRail{transform:none}
+  html.tabbarMin .bottomRail .tabLabel{opacity:1}
+  html.tabbarMin .nowCooking{transform:none}
+}
+
+/* Rezeptfoto mit Tiefe: bewegt sich beim Scrollen langsamer (Skript in _layouts/recipe.html) */
+.recipePageHero{overflow:hidden}
+.recipePageHero .recipeHeroImg{will-change:transform;transform-origin:50% 100%}
