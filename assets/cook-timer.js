@@ -212,7 +212,7 @@
           <span class="cookTimerLabel">${esc(t.label)}</span>
         </div>
         ${t.done ? "" : `<button type="button" class="cookTimerBtn" data-act="plus" aria-label="Eine Minute mehr">+1</button>`}
-        <button type="button" class="cookTimerBtn" data-act="stop" aria-label="Timer beenden">✕</button>
+        <button type="button" class="cookTimerBtn" data-act="stop" aria-label="Timer beenden"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
         <span class="cookTimerBar" style="width:${t.done ? 100 : Math.min(100, 100 - (t.left / t.total) * 100)}%"></span>
       </div>`).join("");
   }

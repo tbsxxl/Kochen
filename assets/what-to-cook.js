@@ -81,7 +81,7 @@
   const resultsEl = $("#pantryResults");
 
   function renderChips(){
-    chipsEl.innerHTML = pantry.map((p, i)=>`<button type="button" class="chip pantryChip" data-i="${i}" aria-label="${esc(p)} entfernen">${esc(p)} <span aria-hidden="true">✕</span></button>`).join("")
+    chipsEl.innerHTML = pantry.map((p, i)=>`<button type="button" class="chip pantryChip" data-i="${i}" aria-label="${esc(p)} entfernen">${esc(p)} <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>`).join("")
       + (pantry.length > 1 ? `<button type="button" class="chip pantryClear" id="pantryClear">Alle löschen</button>` : "");
   }
 

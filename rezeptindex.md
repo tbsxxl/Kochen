@@ -34,7 +34,7 @@ permalink: /rezeptindex/
       </button>
       {%- endif %}
       <button id="favToggle" class="pillToggle" type="button" aria-pressed="false" aria-label="Nur Favoriten anzeigen">
-        <span aria-hidden="true">♡</span> <span class="favLabel">Favoriten</span>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> <span class="favLabel">Favoriten</span>
       </button>
       <button class="filterChip" type="button" data-quick="schnell" aria-pressed="false">Schnell</button>
       <button class="filterChip" type="button" data-quick="veg" aria-pressed="false">Vegetarisch</button>
@@ -62,7 +62,7 @@ permalink: /rezeptindex/
   <div class="sheetGrab"></div>
   <div class="sheetHead">
     <div class="sheetTitle">Kategorie</div>
-    <button class="navIconBtn pressable" id="catSheetClose" aria-label="Schließen" type="button">✕</button>
+    <button class="navIconBtn pressable" id="catSheetClose" aria-label="Schließen" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="sheetBody">
     <button class="sheetRow catOption active" data-cat="" type="button" aria-pressed="true"><span>Alle Rezepte</span><span class="catOptCount">{{ site.recipes | size }}</span></button>
@@ -81,7 +81,7 @@ permalink: /rezeptindex/
   <div class="sheetGrab"></div>
   <div class="sheetHead">
     <div class="sheetTitle">Rezepte von …</div>
-    <button class="navIconBtn pressable" id="personSheetClose" aria-label="Schließen" type="button">✕</button>
+    <button class="navIconBtn pressable" id="personSheetClose" aria-label="Schließen" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="sheetBody">
     <button class="sheetRow catOption personOption active" data-person="" type="button" aria-pressed="true"><span>Alle</span><span class="catOptCount">{{ site.recipes | size }}</span></button>
@@ -256,7 +256,7 @@ permalink: /rezeptindex/
     favOnly = !favOnly;
     favToggle.setAttribute('aria-pressed', String(favOnly));
     favToggle.classList.toggle('pillToggleActive', favOnly);
-    favToggle.innerHTML = favOnly ? '<span aria-hidden="true">♥</span> <span class="favLabel">Favoriten</span>' : '<span aria-hidden="true">♡</span> <span class="favLabel">Favoriten</span>';
+    favToggle.innerHTML = (favOnly ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>' : '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>') + ' <span class="favLabel">Favoriten</span>';
     apply();
   });
 
@@ -268,7 +268,7 @@ permalink: /rezeptindex/
     favOnly = false;
     favToggle.setAttribute('aria-pressed','false');
     favToggle.classList.remove('pillToggleActive');
-    favToggle.innerHTML = '<span aria-hidden="true">♡</span> <span class="favLabel">Favoriten</span>';
+    favToggle.innerHTML = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> <span class="favLabel">Favoriten</span>';
     quick.clear(); quickBtns.forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
     activePerson = ''; if(personOptions.length) setPerson('');
     setCat('');

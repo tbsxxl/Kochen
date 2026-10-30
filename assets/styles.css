@@ -1615,8 +1615,8 @@ body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) 
 .catTileName{font-size:var(--fs16);font-weight:700;line-height:1.2;letter-spacing:-.01em}
 .catTileCount{font-size:var(--fs12);font-weight:500;opacity:.9}
 /* Menüzeilen, die eine Seite öffnen, zeigen rechts „›“ (wie in den iPhone-Einstellungen); Schalter nicht */
-.sheet a.sheetRow::after{content:"›";margin-left:auto;padding-left:8px;font-size:22px;line-height:1;color:var(--muted)}
-.sheet a.sheetRow:has(.countBadge)::after{margin-left:8px}
+.sheet a.sheetRow::after{content:"";flex:0 0 7px;width:7px;height:12px;margin-left:auto;background:var(--muted);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 12'%3E%3Cpath d='M1 1l5 5-5 5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 12'%3E%3Cpath d='M1 1l5 5-5 5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.sheet a.sheetRow:has(.countBadge)::after{margin-left:10px}
 .themeRow + .themeRow{margin-top:0}
 /* Rezeptliste: eine wischbare Filterreihe, Sortieren als Symbol rechts, Trefferzahl, ✕ im Suchfeld */
 .filterBar{margin-top:12px}
@@ -1639,3 +1639,32 @@ body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) 
 #weekDays .planRemove{min-width:44px;min-height:44px}
 #weekToShopping[hidden]{display:none}
 .uiToastBtn{color:var(--petrol)}
+/* Einheitliche Linien-Symbole statt Schriftzeichen (✕ ‹ › ✓ ♡), Stil wie die Tab-Leiste */
+.ico{width:20px;height:20px;flex-shrink:0;display:block}
+.navIconBtn .ico{width:18px;height:18px}
+.weekNav .navIconBtn .ico{width:22px;height:22px}
+.uLead .ico{width:16px;height:16px}
+.rowGlyph .ico{width:18px;height:18px}
+.cookTimerBtn .ico,.planRemove .ico,.ingRowDel .ico{width:16px;height:16px;margin:auto}
+.pantryChip .ico{width:12px;height:12px;display:inline-block;vertical-align:-1px;margin-left:4px}
+#favToggle .ico{width:16px;height:16px;display:inline-block;vertical-align:-3px}
+#favToggle.pillToggleActive .ico{color:var(--gold)}
+/* „Alle ›“ wie in iOS: Text mit kleinem Chevron statt Pfeil */
+.homeAllLink::after{content:"";width:7px;height:12px;margin-left:5px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 12'%3E%3Cpath d='M1 1l5 5-5 5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 12'%3E%3Cpath d='M1 1l5 5-5 5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+#favToggle.pillToggleActive{border-color:transparent}
+/* „Mehr“-Menü wie die iPhone-Einstellungen: farbige Symbol-Kacheln mit weißem Symbol (Farben aus der Palette) */
+#sheet .rowGlyph{color:#fff;background:var(--tile, #8A8780);width:30px;height:30px;border-radius:8px}
+#sheet .rowGlyph svg{width:18px !important;height:18px !important}
+#sheet a[href$="/was-koche-ich/"]{--tile:#E8753D}
+#sheet a[href$="/kuehltruhe/"]{--tile:#28565A}
+#sheet a[href$="/kategorien/"]{--tile:#526B57}
+#sheet a[href$="/vorschlaege/"]{--tile:#B8A35A}
+#sheet a[href$="/neues-rezept/"]{--tile:#C9622F}
+#sheet a[href$="/konto/"]{--tile:#7A746B}
+#sheet a[href$="/backup/"]{--tile:#4A6E78}
+#sheet .themeRow:first-of-type{--tile:#3A3D3B}
+#sheet .themeRow + .themeRow{--tile:#526B57}
+#sheet #toggleCompact,#sheet #toggleContrast{--tile:#7A746B}
+:root[data-theme="dark"] #sheet .themeRow:first-of-type{--tile:#5A5D5B}

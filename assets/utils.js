@@ -94,7 +94,7 @@
       if(showStatus){
         const dot = document.createElement("span");
         dot.className = "";
-        dot.textContent = checked ? "✓" : "○";
+        dot.innerHTML = checked ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' : "";
         left.appendChild(dot);
       }
 

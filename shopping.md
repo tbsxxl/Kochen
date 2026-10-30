@@ -29,7 +29,7 @@ permalink: /shopping/
   <div class="sheetGrab"></div>
   <div class="sheetHead">
     <div class="sheetTitle" id="shopItemTitle">Artikel</div>
-    <button class="navIconBtn pressable" id="shopItemDone" aria-label="Fertig" type="button">✓</button>
+    <button class="navIconBtn pressable" id="shopItemDone" aria-label="Fertig" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
   <div class="sheetBody shopItemBody">
     <label class="shopItemLabel" for="shopItemQty">Menge</label>
@@ -46,7 +46,7 @@ permalink: /shopping/
   <div class="sheetGrab"></div>
   <div class="sheetHead">
     <div class="sheetTitle" id="reweTitle">Bei REWE bestellen</div>
-    <button class="navIconBtn pressable" id="reweClose" aria-label="Schließen" type="button">✕</button>
+    <button class="navIconBtn pressable" id="reweClose" aria-label="Schließen" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="sheetBody reweBody">
     <div class="reweProgress" id="reweProgress"></div>

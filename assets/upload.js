@@ -76,7 +76,7 @@
       const row = document.createElement("div");
       row.className = "ingRow ingRowSection";
       row.innerHTML = `<input class="fieldInput ingItem" placeholder="Zwischenüberschrift, z. B. Knusperpanade" value="${esc(sec)}" aria-label="Zwischenüberschrift">
-        <button type="button" class="ingRowDel" aria-label="Überschrift entfernen">✕</button>`;
+        <button type="button" class="ingRowDel" aria-label="Überschrift entfernen"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>`;
       row.querySelector(".ingRowDel").addEventListener("click", ()=> row.remove());
       rowsEl.appendChild(row);
       return row;
@@ -86,7 +86,7 @@
     row.innerHTML = `<input class="fieldInput ingQty" placeholder="Menge" value="${esc(fmtQty(i.qty))}" aria-label="Menge">
       <input class="fieldInput ingUnit" placeholder="Einheit" value="${esc(i.unit || "")}" aria-label="Einheit">
       <input class="fieldInput ingItem" placeholder="Zutat" value="${esc(i.item || "")}" aria-label="Zutat">
-      <button type="button" class="ingRowDel" aria-label="Zutat entfernen">✕</button>`;
+      <button type="button" class="ingRowDel" aria-label="Zutat entfernen"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>`;
     row.querySelector(".ingRowDel").addEventListener("click", ()=> row.remove());
     rowsEl.appendChild(row);
     return row;

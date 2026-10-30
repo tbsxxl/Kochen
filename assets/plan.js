@@ -60,7 +60,7 @@
             <span class="planServVal">${s}</span>
             <button type="button" class="planServBtn" data-act="plus" aria-label="Mehr Portionen">+</button>
           </div>
-          <button type="button" class="planRemove" data-act="remove" aria-label="${esc(r.title)} entfernen">✕</button>
+          <button type="button" class="planRemove" data-act="remove" aria-label="${esc(r.title)} entfernen"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
         </div>`;
       }).join("");
       return `<section class="card planDayCard${k === todayKey ? " isToday" : ""}${past ? " isPast" : ""}">

@@ -6,9 +6,9 @@ permalink: /wochenplan/
 
 <div class="section" style="margin-top:6px">
   <div class="weekNav">
-    <button class="navIconBtn pressable" id="weekPrev" type="button" aria-label="Vorherige Woche">‹</button>
+    <button class="navIconBtn pressable" id="weekPrev" type="button" aria-label="Vorherige Woche"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <div class="weekNavLabel"><div id="weekTitle">Diese Woche</div><div class="weekNavRange" id="weekRange"></div></div>
-    <button class="navIconBtn pressable" id="weekNext" type="button" aria-label="Nächste Woche">›</button>
+    <button class="navIconBtn pressable" id="weekNext" type="button" aria-label="Nächste Woche"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
 </div>
 
@@ -27,7 +27,7 @@ permalink: /wochenplan/
   <div class="sheetGrab"></div>
   <div class="sheetHead">
     <div class="sheetTitle" id="pickTitle">Rezept auswählen</div>
-    <button class="navIconBtn pressable" id="pickClose" aria-label="Schließen" type="button">✕</button>
+    <button class="navIconBtn pressable" id="pickClose" aria-label="Schließen" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="sheetBody">
     <div class="searchRow searchRowCompact" style="margin-bottom:8px">
