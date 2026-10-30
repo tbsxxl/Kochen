@@ -7,7 +7,7 @@ category: "Hähnchen"
 categories: ["Mexikanisch"]
 tags: ["hähnchen", "high-protein", "pfanne"]
 time: "30–40 Min"
-image: /recipes/images/chipotle-honig-haehnchen.jpg
+image: /recipes/images/chipotle-honig-haehnchen-mvuzm431.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchenbrustfilet in Lake" }
