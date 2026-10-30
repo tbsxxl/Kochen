@@ -90,12 +90,12 @@ SwiftUI-Code, nicht für diese Web-App.
 - **Neuanfang Okt. 2026 (Abschnitt 16 in `assets/styles.css`, gilt vor allen älteren Abschnitten):** Die Fotos sind die
   Farbe, die Oberfläche bleibt ruhig. Flächen in Apples neutralen Grautönen: hell Hintergrund `#F2F2F7`, Zellen `#FFFFFF`,
   Linien `#E3E3E8`, Text `#1C1C1E`, Sekundärtext `#545458`, Metadaten `#6C6C70`; dunkel `#000`/`#1C1C1E`/`#F5F5F7`.
-  **Marke „Basilikum“ (Abschnitt 17 = Rollen, Abschnitt 18 = Farben):** Palette nur vier Grüntöne: Botanical Green `#287A36`,
-  Soft Sage White `#EAF1E4`, Sage Green `#82AD80`, Deep Green `#1E642D`. `--brand` (hell `#287A36` mit weißem Inhalt,
-  dunkel `#82AD80` mit dunklem Inhalt) für Hauptaktion und Fortschritt: gefüllte Knöpfe, „Kochen“ in der
-  Rezept-Leiste, Play, „Weiter“, Haken, Balken, aktiver Tab als blasse Kapsel (`--brandSoft`). `--leaf` (hell `#1E642D`,
-  dunkel `#82AD80`) = Tönung für Text und Symbole (Links, „Alle ›“, aktiver Tab, Sterne, Herz). Auswahl (aktive
-  Filter-Kapseln) in Tinte `--sel` (hell dunkel, dunkel hell). Text sonst nie grün.
+  **Markenfarbe Kräutergrün (Abschnitt 17 = Rollen, Abschnitt 18 = Farben):** das Grün aus dem Logo, eine einzige Farbe.
+  `--brand`/`--leaf` hell `#526B57` (weißer Inhalt 5,8 : 1, als Text 5,2 : 1), dunkel `#9DBBA3` mit dunklem Inhalt,
+  blasse Fläche `--brandSoft` `#E2EAE3`/`#22302A`. Für Hauptaktion und Fortschritt (Kochen, Play, Weiter, Haken, Balken,
+  aktiver Tab als blasse Kapsel) und als Tönung für Text und Symbole (Links, „Alle ›“, Sterne, Herz). Auswahl (aktive
+  Filter-Kapseln) in Tinte `--sel`. Safran, Basilikum-Palette (`#287A36` …) und Spiegelei-/Blatt-Logo hat der Besitzer
+  verworfen. Text sonst nie grün.
 - Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz). Inter wird nicht mehr
   vorgeladen (auf iPhone/iPad/Mac greift SF).
 - Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz) überall; Fraunces 600
