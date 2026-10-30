@@ -675,7 +675,7 @@ body.compact{--ingRowH:49px}
 }
 .uEmpty::before{
   content:"";width:48px;height:48px;border-radius:var(--rPill);
-  background:var(--bg) url('logo.svg?v=6') center/32px 32px no-repeat;
+  background:var(--bg) url('logo.svg?v=7') center/32px 32px no-repeat;
 }
 .uEmptyTitle{font-weight:600;font-size:var(--fs18);color:var(--text)}
 .uEmptyText{max-width:300px;font-size:var(--fs14);color:var(--sub2)}
@@ -2038,3 +2038,7 @@ body.highContrast{--leaf:#3B4F40}
 .cookNavBtn.primary,.cookTimer.isDone{color:#0B0D0B}
 .cookIngRow.isStep{background:rgba(157,187,163,.14)}
 .recipeTags .chipMainCat{font-weight:600}
+/* Logo: Variante „mit Tiefe“ hell, dunkle Variante im Dunkelmodus (folgt der App-Einstellung) */
+.homeBrand .logoDark{display:none}
+:root[data-theme="dark"] .homeBrand .logoLight{display:none}
+:root[data-theme="dark"] .homeBrand .logoDark{display:block}

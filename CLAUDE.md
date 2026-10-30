@@ -117,10 +117,14 @@ SwiftUI-Code, nicht für diese Web-App.
 - Symbole: nur Linien-SVGs (Klasse `.ico`, Strichstärke ~2, `currentColor`) wie in der Tab-Leiste – keine Schriftzeichen
   wie ✕ ‹ › ✓ ♡ + − als Knopf-Symbol (Plus/Minus: `.icoPM`). „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
   iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol).
-- Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot `#E8753D`, rechte Kräutergrün `#526B57`
-  (das ursprüngliche Logo; Spiegelei und Basilikumblatt hat der Besitzer verworfen). Keine Kochmütze, kein Besteck.
-  Icons `apple-touch-icon-v6.png`, `icon-512-v6.png`, `icon-maskable-512-v6.png`, `favicon.ico`.
-  Bei Logo-Änderungen die Icon-Dateinamen (`-v6` → `-v7`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
+- Logo „Zwei Seiten“ (offenes Buch als Schale; Spiegelei und Basilikumblatt hat der Besitzer verworfen; keine Kochmütze,
+  kein Besteck). Hell (`assets/logo.svg`, „mit Tiefe“): Terrakotta-Verlauf `#DB875F`→`#C46A42` links, Kräutergrün-Verlauf
+  `#5E7863`→`#465C4B` rechts, feine helle Oberkante. Dunkel (`assets/logo-dark.svg`): Terrakotta `#E0906A`→`#C97350`,
+  rechte Seite Creme `#E9E2D3`→`#D6CDBA`. Startseite zeigt je nach App-Darstellung `.logoLight`/`.logoDark`;
+  `assets/favicon.svg` = Kachel, folgt dem System (hell Papierweiß `#F6F1E9`, dunkel `#2E3B31`).
+  Homescreen-/Android-Icons (`apple-touch-icon-v7.png`, `icon-512-v7.png`, `icon-maskable-512-v7.png`, `favicon.ico`)
+  nur hell (Web-Apps können kein dunkles Icon festlegen), gerendert per Playwright, ico mit ImageMagick `convert`.
+  Bei Logo-Änderungen die Icon-Dateinamen (`-v7` → `-v8`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.
 
 ## Bedienhilfen (nur im Browser gespeichert, `kochbuch.ui.*`)

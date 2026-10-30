@@ -12,13 +12,13 @@
   "theme_color": "#F2F2F7",
   "icons": [
     {
-      "src": "/assets/icon-512-v6.png",
+      "src": "/assets/icon-512-v7.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/icon-maskable-512-v6.png",
+      "src": "/assets/icon-maskable-512-v7.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

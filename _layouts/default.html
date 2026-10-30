@@ -10,7 +10,7 @@
     {%- else -%}{{ page.description | default: site.description }}{%- endif -%}
   {%- endcapture -%}
   {%- if page.image -%}{%- capture og_image -%}{{ page.image | absolute_url }}?v={{ site.image_version }}{%- endcapture -%}
-  {%- else -%}{%- capture og_image -%}{{ '/assets/icon-512-v6.png' | absolute_url }}{%- endcapture -%}{%- endif -%}
+  {%- else -%}{%- capture og_image -%}{{ '/assets/icon-512-v7.png' | absolute_url }}{%- endcapture -%}{%- endif -%}
   <meta name="description" content="{{ meta_desc | strip | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:site_name" content="{{ site.title }}">
@@ -77,9 +77,9 @@
       });
     })();
   </script>
-  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=6" sizes="any">
-  <link rel="icon" type="image/svg+xml" href="{{ '/assets/logo.svg' | relative_url }}?v=6">
-  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon-v6.png' | relative_url }}">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=7" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}?v=7">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon-v7.png' | relative_url }}">
   <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
