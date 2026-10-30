@@ -675,7 +675,7 @@ body.compact{--ingRowH:49px}
 }
 .uEmpty::before{
   content:"";width:48px;height:48px;border-radius:var(--rPill);
-  background:var(--bg) url('logo.svg?v=2') center/32px 32px no-repeat;
+  background:var(--bg) url('logo.svg?v=3') center/32px 32px no-repeat;
 }
 .uEmptyTitle{font-weight:600;font-size:var(--fs18);color:var(--text)}
 .uEmptyText{max-width:300px;font-size:var(--fs14);color:var(--sub2)}
@@ -1973,3 +1973,46 @@ body.continueVisible .nowCooking{display:none}
 .catTiles .catGroupTitle{grid-column:1 / -1;padding:12px 2px 0}
 .catTiles .catGroupTitle:first-child{padding-top:0}
 .sheetBody .catGroupTitle{padding:18px 16px 6px}
+
+/* ==========================================================================
+   17. Marke „Safran“ (Okt. 2026): Logo Spiegelei auf Safran-Gelb (assets/logo.svg)
+   - Safran (--brand) = Hauptaktion und Fortschritt: gefüllte Knöpfe, „Kochen“, Haken, Balken; immer mit dunklem Text.
+   - Bernstein (--leaf) = Tönung für Text und Symbole (Links, aktiver Tab, Sterne, Herz); im Dunkelmodus Safran.
+   - Auswahl (Filter-Kapseln) = Tinte (--sel): dunkel im Hellmodus, hell im Dunkelmodus.
+   - Flächen bleiben neutral (Abschnitt 16), die Fotos liefern die übrigen Farben.
+   ========================================================================== */
+:root{
+  --brand:#F5B700; --onBrand:#1C1C1E; --brandSoft:#FFF1C7;
+  --leaf:#8A5A00; --leafSoft:#FFF1C7; --onLeaf:#1C1C1E;
+  --accent:var(--brand); --accentSoft:var(--brandSoft); --onAccent:var(--onBrand);
+  --sel:#1C1C1E; --onSel:#FFFFFF;
+}
+:root[data-theme="dark"]{
+  --brand:#FFC21A; --onBrand:#1C1C1E; --brandSoft:#3A2E0A;
+  --leaf:#FFC21A; --leafSoft:#3A2E0A; --onLeaf:#1C1C1E;
+  --sel:#F5F5F7; --onSel:#1C1C1E;
+}
+body.highContrast{--leaf:#6B4500}
+/* Füllflächen in Safran mit dunklem Inhalt */
+.btn.secondary{background:var(--sel);border-color:var(--sel);color:var(--onSel)}
+.uRow.checked .uLead,.profileBadge.isIn{background:var(--brand);border-color:var(--brand);color:var(--onBrand)}
+.pantryBar span,.householdNote::before,.pushDot,.nowCookingBar span{background:var(--brand)}
+.planDay.isPlanned .planDayDate{background:var(--brand);color:var(--onBrand)}
+.planDay.isPlanned .planDayCheck{border-color:var(--brand);background-color:var(--brand);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7' fill='none' stroke='%231C1C1E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.recipeBody ol > li.stepDone::before,
+:root[data-theme="dark"] .recipeBody ol > li.stepDone::before{background-color:var(--brand);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%231C1C1E' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+/* Auswahl: Tinte statt Farbe */
+.pillToggle.pillToggleActive,.filterChip.active,.sortChip.active,.catChip.active,
+#extraCats .pillToggle[aria-pressed="true"],#randomFilters .pillToggle[data-filter]:not([data-filter="fav"])[aria-pressed="true"]{background:var(--sel);border-color:var(--sel);color:var(--onSel)}
+#favToggle.pillToggleActive .ico{color:var(--brand)}
+/* Tab-Leiste: aktiver Tab als Safran-Kapsel, „Kochen“ in der Rezept-Leiste gefüllt */
+.tabItem.active{background:var(--brandSoft);color:var(--leaf)}
+.recipeTabbar .tabItem.tabPrimary{background:var(--brand);color:var(--onBrand)}
+.recipeTabbar .tabItem.tabPrimary .tabIcon{color:var(--onBrand)}
+.nowCookingPlay svg{color:var(--leaf)}
+/* Kochmodus */
+.cookOverlay{--cLeaf:#FFC21A}
+.cookNavBtn.primary,.cookTimer.isDone{background:var(--cLeaf);color:#1C1C1E}
+.cookChk:checked{background:var(--cLeaf);border-color:var(--cLeaf)}
+.cookChk::after{background:#1C1C1E}
+.cookIngRow.isStep{background:rgba(255,194,26,.12)}
