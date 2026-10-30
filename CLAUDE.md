@@ -122,10 +122,10 @@ SwiftUI-Code, nicht für diese Web-App.
   kein Besteck). Hell (`assets/logo.svg`, „mit Tiefe“): Terrakotta-Verlauf `#DB875F`→`#C46A42` links, Kräutergrün-Verlauf
   `#5E7863`→`#465C4B` rechts, feine helle Oberkante. Dunkel (`assets/logo-dark.svg`): Terrakotta `#E0906A`→`#C97350`,
   rechte Seite helles Kräutergrün `#A8C5AD`→`#8FAE95` (wie das Grün der App im Dunkelmodus; Creme war zu weit weg). Startseite zeigt je nach App-Darstellung `.logoLight`/`.logoDark`;
-  `assets/favicon.svg` = Kachel, folgt dem System (hell Papierweiß `#F6F1E9`, dunkel `#2E3B31`).
-  Homescreen-/Android-Icons (`apple-touch-icon-v7.png`, `icon-512-v7.png`, `icon-maskable-512-v7.png`, `favicon.ico`)
-  nur hell (Web-Apps können kein dunkles Icon festlegen), gerendert per Playwright, ico mit ImageMagick `convert`.
-  Bei Logo-Änderungen die Icon-Dateinamen (`-v7` → `-v8`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
+  `assets/favicon.svg` = Kachel, folgt dem System (hell Weiß, dunkel `#2E3B31`).
+  Homescreen-/Android-Icons (`apple-touch-icon-v8.png`, `icon-512-v8.png`, `icon-maskable-512-v8.png`, `favicon.ico`)
+  auf Weiß mit leichtem Verlauf nach `#EEEEF0` (wie Apples Health-Icon), nur hell (Web-Apps können kein dunkles Icon festlegen), gerendert per Playwright, ico mit ImageMagick `convert`.
+  Bei Logo-Änderungen die Icon-Dateinamen (`-v8` → `-v9`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.
 
 ## Bedienhilfen (nur im Browser gespeichert, `kochbuch.ui.*`)
