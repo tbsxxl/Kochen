@@ -117,7 +117,9 @@ SwiftUI-Code, nicht für diese Web-App.
   (nur die „Heute“-Karte behält sie).
 - Symbole: nur Linien-SVGs (Klasse `.ico`, Strichstärke ~2, `currentColor`) wie in der Tab-Leiste – keine Schriftzeichen
   wie ✕ ‹ › ✓ ♡ ★ + − als Knopf-Symbol (Plus/Minus: `.icoPM`, Bewertungssterne als SVG mit Füllung bei `.on`). „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
-  iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol).
+  iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol), Kacheln nur aus der Logo-Palette (Kräutergrün `#526B57`,
+  Dunkelgrün `#3E5244`, Terrakotta `#C46A42`, warmes Grau `#7A746B`; Abschnitt 20). Schalter in Kräutergrün statt
+  Apples Systemgrün; Kühltruhen-Markierung auf Fotos Kräutergrün. Rot nur für Löschen/Warnungen.
 - Logo „Zwei Seiten“ (offenes Buch als Schale; Spiegelei und Basilikumblatt hat der Besitzer verworfen; keine Kochmütze,
   kein Besteck). Hell (`assets/logo.svg`, „mit Tiefe“): Terrakotta-Verlauf `#DB875F`→`#C46A42` links, Kräutergrün-Verlauf
   `#5E7863`→`#465C4B` rechts, feine helle Oberkante. Dunkel (`assets/logo-dark.svg`): Terrakotta `#E0906A`→`#C97350`,

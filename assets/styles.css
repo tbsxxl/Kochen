@@ -2069,3 +2069,15 @@ body.highContrast{--line:#CFC7BA;--lineStrong:#8C877E;--text:#000000;--sub:#3A37
 .star .ico{width:26px;height:26px}
 .star .ico path{fill:none}
 .star.on .ico path{fill:currentColor}
+
+/* ---------- 20. Alle Farben aus der Logo-Palette (Okt. 2026) ----------
+   „Mehr“-Kacheln nur Kräutergrün, Dunkelgrün, Terrakotta (Logo) und warmes Grau; Schalter in Kräutergrün statt
+   Apples Systemgrün (iOS erlaubt eine eigene Tönung, zwei Grüntöne nebeneinander wirkten fremd);
+   Kühltruhen-Markierung auf Fotos Kräutergrün statt Petrol. */
+#sheet a[href$="/was-koche-ich/"],#sheet a[href$="/vorschlaege/"]{--tile:#C46A42}
+#sheet a[href$="/kuehltruhe/"]{--tile:#3E5244}
+#sheet a[href$="/kategorien/"],#sheet a[href$="/neues-rezept/"]{--tile:#526B57}
+#sheet a[href$="/konto/"],#sheet a[href$="/backup/"]{--tile:#7A746B}
+.sheetRow[aria-checked="true"] .sheetSwitch,
+:root[data-theme="dark"] .sheetRow[aria-checked="true"] .sheetSwitch{background:var(--brand)}
+.freezerFlag{color:#526B57}
