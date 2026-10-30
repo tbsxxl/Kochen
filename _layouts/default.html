@@ -21,7 +21,7 @@
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:image" content="{{ og_image }}">
   <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
-  <meta name="theme-color" content="#F2F2F7">
+  <meta name="theme-color" content="#F6F1E9">
   <script>
     // Darstellung vor dem ersten Rendern setzen, damit nichts aufblitzt.
     // Standard „auto“: folgt dem iPhone (Hell/Dunkel); „light“/„dark“ nur, wenn unter „Mehr“ fest gewählt.
@@ -37,7 +37,7 @@
       } catch(e){}
       var dark = t === 'dark' || (t === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
       if (dark) document.documentElement.setAttribute('data-theme', 'dark');
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#000000' : '#F2F2F7');
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#000000' : '#F6F1E9');
     })();
     // Rezeptliste: Raster (Standard) oder große Karten (Einstellung unter „Mehr“)
     try { if (JSON.parse(localStorage.getItem('kochbuch.ui.listView')) === 'cards') document.documentElement.classList.add('listCards'); } catch(e){}
@@ -266,7 +266,7 @@
       const dark = mode === 'dark' || (mode === 'auto' && !!darkMq?.matches);
       if (dark) document.documentElement.setAttribute('data-theme','dark');
       else document.documentElement.removeAttribute('data-theme');
-      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#000000' : '#F2F2F7');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#000000' : '#F6F1E9');
       themeOpts.forEach(b=>{ const on = b.dataset.themeOpt === mode; b.classList.toggle('active', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
       const list = get(listKey,'grid') === 'cards' ? 'cards' : 'grid';
       document.documentElement.classList.toggle('listCards', list === 'cards');

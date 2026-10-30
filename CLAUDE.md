@@ -88,8 +88,9 @@ SwiftUI-Code, nicht für diese Web-App.
   Leisten, Sheets, Menüs, Hinweise; bei „Transparenz reduzieren“ volle Fläche. Hintergrund `--bg` dunkler als Zellen
   `--surface` (wie iOS). Radien: Karten 22, Listen 16, Felder 14.
 - **Neuanfang Okt. 2026 (Abschnitt 16 in `assets/styles.css`, gilt vor allen älteren Abschnitten):** Die Fotos sind die
-  Farbe, die Oberfläche bleibt ruhig. Flächen in Apples neutralen Grautönen: hell Hintergrund `#F2F2F7`, Zellen `#FFFFFF`,
-  Linien `#E3E3E8`, Text `#1C1C1E`, Sekundärtext `#545458`, Metadaten `#6C6C70`; dunkel `#000`/`#1C1C1E`/`#F5F5F7`.
+  Farbe, die Oberfläche bleibt ruhig. Hellmodus warm (Abschnitt 19): Hintergrund Papierweiß `#F6F1E9`, Zellen `#FFFDF9`,
+  Füllung `#EDE7DD`, Linien `#E6E0D6`, Text `#1F1D1A`, Sekundärtext `#57534C`, Metadaten `#68645C`;
+  dunkel Apples neutrales `#000`/`#1C1C1E`/`#F5F5F7`. `theme-color`/Manifest hell `#F6F1E9`.
   **Markenfarbe Kräutergrün (Abschnitt 17 = Rollen, Abschnitt 18 = Farben):** das Grün aus dem Logo, eine einzige Farbe.
   `--brand`/`--leaf` hell `#526B57` (weißer Inhalt 5,8 : 1, als Text 5,2 : 1), dunkel `#9DBBA3` mit dunklem Inhalt,
   blasse Fläche `--brandSoft` `#E2EAE3`/`#22302A`. Für Hauptaktion und Fortschritt (Kochen, Play, Weiter, Haken, Balken,
