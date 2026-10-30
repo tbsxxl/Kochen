@@ -105,6 +105,9 @@ SwiftUI-Code, nicht für diese Web-App.
 - Rezeptkarten gibt es genau zweimal: `_includes/recipe-card.html` (Liquid, Rezeptliste/Kategorien) und
   `assets/cards.js` (`KOCHBUCH_CARDS.recipeCard`, Startseite). Beide mit Kühltruhen-Markierung „❄ n“, Bewertung ★ und
   Favoriten-Herz (befüllt von `updateFavBadges()` in `assets/utils.js`). Änderungen an Karten in beiden Dateien machen.
+- Symbole: nur Linien-SVGs (Klasse `.ico`, Strichstärke ~2, `currentColor`) wie in der Tab-Leiste – keine Schriftzeichen
+  wie ✕ ‹ › ✓ ♡ als Knopf-Symbol. „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
+  iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol).
 - Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot, rechte Kräutergrün. Keine Kochmütze, kein Besteck.
   Bei Logo-Änderungen die Icon-Dateinamen (`-v2` → `-v3`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.

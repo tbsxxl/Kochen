@@ -67,7 +67,7 @@ layout: default
 <div class="section" id="favoritesSection">
   <div class="homeSectionHead">
     <div class="homeSectionTitle">Favoriten</div>
-    <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle →</a>
+    <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle</a>
   </div>
   <div class="hScroll" id="favoritesRow"></div>
 </div>
@@ -76,7 +76,7 @@ layout: default
 <div class="section">
   <div class="homeSectionHead">
     <div class="homeSectionTitle">Noch mehr Ideen</div>
-    <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle →</a>
+    <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle</a>
   </div>
   <div class="hScroll" id="forYouRow"></div>
 </div>
@@ -161,7 +161,7 @@ layout: default
     if(hd && !hd.querySelector('.homeAllLink')){
       const a = document.createElement('a');
       a.className = 'homeAllLink'; a.href = "{{ '/wochenplan/' | relative_url }}";
-      a.textContent = planned.length > 1 ? `+${planned.length-1} weitere →` : 'Wochenplan →';
+      a.textContent = planned.length > 1 ? `+${planned.length-1} weitere` : 'Wochenplan';
       hd.appendChild(a);
     }
   }
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     if(!favEntries.length){
-      host.innerHTML = `<div class="homeEmpty"><span class="homeEmptyIcon" aria-hidden="true">♥</span><div><div class="homeEmptyTitle">Noch keine Favoriten</div><div class="homeEmptyText">Öffne ein Rezept und merke es dir über „Mehr → Favorit“.</div></div></div>`;
+      host.innerHTML = `<div class="homeEmpty"><span class="homeEmptyIcon" aria-hidden="true">♥</span><div><div class="homeEmptyTitle">Noch keine Favoriten</div><div class="homeEmptyText">Öffne ein Rezept und tippe unten auf das Herz.</div></div></div>`;
       return;
     }
 

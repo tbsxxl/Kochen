@@ -307,7 +307,7 @@ function renderGroup(container, items, checks){
         : '';
     }
     if(cookedBtn){
-      cookedBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true">✓</span><span>Gekocht${(e.cookedCount||0)>0 ? ` · ${e.cookedCount||0}×` : ''}</span>`;
+      cookedBtn.innerHTML = `<span class="rowGlyph" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Gekocht${(e.cookedCount||0)>0 ? ` · ${e.cookedCount||0}×` : ''}</span>`;
       cookedBtn.classList.toggle('green', (e.cookedCount||0)>0);
     }
     if(undoBtn) undoBtn.style.opacity = (e.cookedCount||0)>0 ? "1" : ".55";
