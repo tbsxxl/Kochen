@@ -7,7 +7,7 @@ category: "Bowls & Salate"
 categories: ["Mexikanisch", "Schnell", "Meal Prep"]
 tags: ["hackfleisch", "low-carb", "high-protein"]
 time: "20–30 Min"
-image: /recipes/images/keto-bowl-chipotle-hackfleisch.jpg
+image: /recipes/images/chipotle-hack-bowl-mvv05o68.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "gemischte Hackfleischzubereitung" }
