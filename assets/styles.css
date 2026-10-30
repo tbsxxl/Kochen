@@ -2017,24 +2017,23 @@ body.highContrast{--leaf:#6B4500}
 .cookChk::after{background:#1C1C1E}
 .cookIngRow.isStep{background:rgba(255,194,26,.12)}
 
-/* ---------- 18. Marke „Basilikum“ (Okt. 2026, ersetzt Safran aus Abschnitt 17) ----------
-   Palette (vom Besitzer): Botanical Green #287A36 · Soft Sage White #EAF1E4 · Sage Green #82AD80 · Deep Green #1E642D.
-   Logo: Basilikumblatt in Soft Sage White mit Adern in Sage Green auf Botanical Green.
-   Hell: Botanical Green = Hauptaktion/Fortschritt (weißer Inhalt, 5,4 : 1), Soft Sage White = blasse Flächen,
-   Deep Green = Text und Symbole (6,5 : 1). Dunkel: Sage Green für beides (dunkler Inhalt). Rollen wie in Abschnitt 17. */
+/* ---------- 18. Markenfarbe Kräutergrün (Okt. 2026, ersetzt Safran aus Abschnitt 17) ----------
+   Das Grün aus dem Logo „Zwei Seiten“: Kräutergrün #526B57 (hell; weißer Inhalt 5,8 : 1, als Text 5,2 : 1),
+   im Dunkelmodus #9DBBA3 mit dunklem Inhalt. Eine Farbe für Hauptaktion, Fortschritt und Tönung.
+   Rollen wie in Abschnitt 17. */
 :root{
-  --brand:#287A36; --onBrand:#FFFFFF; --brandSoft:#EAF1E4;
-  --leaf:#1E642D; --leafSoft:#EAF1E4; --onLeaf:#FFFFFF;
+  --brand:#526B57; --onBrand:#FFFFFF; --brandSoft:#E2EAE3;
+  --leaf:#526B57; --leafSoft:#E2EAE3; --onLeaf:#FFFFFF;
 }
 :root[data-theme="dark"]{
-  --brand:#82AD80; --onBrand:#0B0D0B; --brandSoft:#1E2A1D;
-  --leaf:#82AD80; --leafSoft:#1E2A1D; --onLeaf:#0B0D0B;
+  --brand:#9DBBA3; --onBrand:#0B0D0B; --brandSoft:#22302A;
+  --leaf:#9DBBA3; --leafSoft:#22302A; --onLeaf:#0B0D0B;
 }
-body.highContrast{--leaf:#164D22}
+body.highContrast{--leaf:#3B4F40}
 .planDay.isPlanned .planDayCheck{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
 .recipeBody ol > li.stepDone::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
 :root[data-theme="dark"] .planDay.isPlanned .planDayCheck{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7' fill='none' stroke='%230B0D0B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
 :root[data-theme="dark"] .recipeBody ol > li.stepDone::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%230B0D0B' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
-.cookOverlay{--cLeaf:#82AD80}
+.cookOverlay{--cLeaf:#9DBBA3}
 .cookNavBtn.primary,.cookTimer.isDone{color:#0B0D0B}
-.cookIngRow.isStep{background:rgba(130,173,128,.16)}
+.cookIngRow.isStep{background:rgba(157,187,163,.14)}
