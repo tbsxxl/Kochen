@@ -7,7 +7,7 @@ category: "Pasta"
 categories: ["Asiatisch", "Schnell"]
 tags: ["hackfleisch", "chinesisch", "scharf"]
 time: "15–25 Min"
-image: /recipes/images/fettuccine-dandan.jpg
+image: /recipes/images/dan-dan-noodles-mvuzt4a3.jpg
 servings: 4
 ingredients:
   - { section: "Nudeln" }
