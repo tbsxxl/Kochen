@@ -2089,3 +2089,8 @@ body.highContrast{--line:#CFC7BA;--lineStrong:#8C877E;--text:#000000;--sub:#3A37
 .sheet a.sheetRow:has(.countBadge[hidden])::after{margin-left:auto}
 /* Kapseln auf der Rezeptseite einheitlich neutral (alle antippbar), Hauptkategorie fett */
 .recipeTags .chip,.recipeTags .chipLink:not(.chipTag){background:var(--fill);color:var(--text)}
+/* „Kochen“ in der Rezept-Leiste wie der aktive Tab der Hauptleiste: blasse grüne Kapsel, grünes Symbol und Wort
+   (statt grüner Vollfläche aus dem Safran-Rebranding, die in der Glasleiste zu schwer wirkte) */
+.recipeTabbar .tabItem.tabPrimary{background:var(--brandSoft);color:var(--leaf)}
+.recipeTabbar .tabItem.tabPrimary .tabIcon{color:var(--leaf)}
+.recipeTabbar .tabItem.tabPrimary .tabLabel{font-weight:600}
