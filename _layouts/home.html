@@ -22,6 +22,36 @@ layout: default
 })();
 </script>
 
+<!-- Weiterkochen: läuft gerade ein Kochmodus, steht er ganz oben -->
+<div class="section homeContinue" id="homeContinue" hidden>
+  <a class="continueCard pressable" id="continueLink" href="#">
+    <img class="continueImg" id="continueImg" alt="" hidden>
+    <span class="continueText">
+      <span class="continueEyebrow">Weiterkochen</span>
+      <span class="continueTitle" id="continueTitle"></span>
+      <span class="continueSub" id="continueSub"></span>
+    </span>
+    <span class="continuePlay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 001.5.9l10-6.5a1 1 0 000-1.7l-10-6.5A1 1 0 008 5.5z" fill="currentColor"/></svg></span>
+  </a>
+</div>
+<script>
+(function(){
+  try{
+    var c = JSON.parse(localStorage.getItem('kochbuch.ui.cooking') || 'null');
+    if(!c || !c.id || !c.total || Date.now() - c.t > 12 * 3600e3) return;
+    document.getElementById('continueLink').href = c.id + '?kochen=1';
+    document.getElementById('continueTitle').textContent = c.title || 'Rezept';
+    document.getElementById('continueSub').textContent = 'Schritt ' + (c.step + 1) + ' von ' + c.total;
+    if(c.image){ var i = document.getElementById('continueImg'); i.src = c.image; i.hidden = false; }
+    var box = document.getElementById('homeContinue');
+    box.hidden = false;
+    if('IntersectionObserver' in window) new IntersectionObserver(function(e){
+      document.body.classList.toggle('continueVisible', e[0].isIntersecting);
+    }).observe(box);
+  }catch(e){}
+})();
+</script>
+
 <!-- Heute -->
 <div class="section homeToday">
   <div class="homeSectionHead"><div class="homeSectionTitle">Heute für dich</div></div>

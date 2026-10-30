@@ -87,26 +87,30 @@ SwiftUI-Code, nicht für diese Web-App.
   (`--fill`), Glas-Sheets mit großer Rundung, iOS-Schalter (Grün `#34C759`). Glas (`--glass`, `--glassBlur`) nur für
   Leisten, Sheets, Menüs, Hinweise; bei „Transparenz reduzieren“ volle Fläche. Hintergrund `--bg` dunkler als Zellen
   `--surface` (wie iOS). Radien: Karten 22, Listen 16, Felder 14.
-- Farben (Rollen, Abschnitt 13 in `assets/styles.css`): **Kräutergrün `#526B57` = Bedienfarbe** (aktiv, Links, Auswahl,
-  Tags; `--petrol` zeigt darauf), **Apricot `#E8753D` = nur Hauptaktion** (gefüllte Knöpfe, dunkler Text),
-  **Gold `#B8A35A` = nur Favoriten/Sterne**, Petrol nur Kühltruhe (`--ice`). Flächen: Hintergrund `#F5F2ED`,
-  Zellen `#FFFEFB`, Füllung `#ECE7E0`, Linien `#E2DCD3`, Text Charcoal `#252A27`, Sekundärtext `#57534C`, Metadaten `#68655E` (Text nie Grün, Grün heißt „antippbar“).
+- **Neuanfang Okt. 2026 (Abschnitt 16 in `assets/styles.css`, gilt vor allen älteren Abschnitten):** Die Fotos sind die
+  Farbe, die Oberfläche bleibt ruhig. Flächen in Apples neutralen Grautönen: hell Hintergrund `#F2F2F7`, Zellen `#FFFFFF`,
+  Linien `#E3E3E8`, Text `#1C1C1E`, Sekundärtext `#545458`, Metadaten `#6C6C70`; dunkel `#000`/`#1C1C1E`/`#F5F5F7`.
+  **Eine einzige Akzentfarbe: Kräutergrün** (`--leaf` hell `#526B57` mit weißem Text, dunkel `#9DBBA3` mit dunklem Text)
+  für alles Antippbare und die Hauptaktion; `--accent`, `--gold`, `--ice`, `--petrol` zeigen alle darauf.
+  Apricot nur noch im Logo. Text nie Grün (Grün heißt „antippbar“).
 - Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz). Inter wird nicht mehr
   vorgeladen (auf iPhone/iPad/Mac greift SF).
-- Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz); Fraunces 400/600
-  nur für Rezeptnamen (Rezeptseite, „Heute“-Karte) und den Schriftzug.
+- Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz) überall; Fraunces 600
+  nur für den Rezeptnamen auf dem Foto der Rezeptseite und den Logo-Schriftzug.
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
 - Darstellung folgt dem iPhone (Hell/Dunkel, „auto“ = kein Eintrag in `kochbuch.ui.theme`); unter „Mehr“ Auswahl
-  Auto · Hell · Dunkel. Dunkel = warme Espresso-Töne, kein Grüngrau. „Kontrast erhöhen“ (iPhone) schaltet wie der
+  Auto · Hell · Dunkel. Dunkel = Apples neutrales Schwarz/Grau. „Kontrast erhöhen“ (iPhone) schaltet wie der
   Schalter „Hoher Kontrast“ (`prefers-contrast: more`).
 - Apples Regeln (Abschnitt 11 in `assets/styles.css`, geprüft mit Skill `apple-design`): Tippflächen mindestens
-  44 × 44 pt (bei kleinen Chips per `::after`), Text mind. 4,5 : 1 (Apricot nie als Textfarbe auf Creme, Links Petrol),
+  44 × 44 pt (bei kleinen Chips per `::after`), Text mind. 4,5 : 1,
   Schrift wächst mit der iPhone-Textgröße (`font: -apple-system-body` auf `html`, alles in `rem`; bis 200 % ohne
   seitliches Scrollen prüfen; Großtitel trennen, Symbole neben Text in `em`, Abschnitt 15). Rezeptseite hat oben links eine Zurück-Taste (`#recipeBack`).
 - Rezeptkarten gibt es genau zweimal: `_includes/recipe-card.html` (Liquid, Rezeptliste/Kategorien) und
   `assets/cards.js` (`KOCHBUCH_CARDS.recipeCard`, Startseite). Beide mit Kühltruhen-Markierung „❄ n“, Bewertung ★ und
   Favoriten-Herz (befüllt von `updateFavBadges()` in `assets/utils.js`). Änderungen an Karten in beiden Dateien machen.
-  Kartentitel mit Silbentrennung (`hyphens:auto`), Zeitangabe einzeilig mit „…“.
+  Kartentitel mit Silbentrennung (`hyphens:auto`), Zeitangabe einzeilig mit „…“. Karten haben **keine** Kartenfläche
+  (wie Alben in Apple Music): Foto mit Rundung, Name und Zeit direkt auf dem Hintergrund, keine Kategorie-Kapsel
+  (nur die „Heute“-Karte behält sie).
 - Symbole: nur Linien-SVGs (Klasse `.ico`, Strichstärke ~2, `currentColor`) wie in der Tab-Leiste – keine Schriftzeichen
   wie ✕ ‹ › ✓ ♡ + − als Knopf-Symbol (Plus/Minus: `.icoPM`). „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
   iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol).
@@ -118,23 +122,30 @@ SwiftUI-Code, nicht für diese Web-App.
 
 - Haupt-Leiste unten (5 Tabs, `_layouts/default.html`): Start · Rezepte · Plan (Wochenplan) · Liste · Mehr.
   Wie iOS 26: beim Runterscrollen kleiner ohne Beschriftung (`html.tabbarMin`), beim Hochscrollen/oben/unten wieder groß.
+- Startseite: läuft ein Kochmodus, steht „Weiterkochen“ ganz oben (`#homeContinue`, solange sichtbar keine
+  „Kochen läuft“-Kapsel, `body.continueVisible`). Leere Zustände ohne Rahmen und ohne Logo, keine Gesten-Erklärtexte.
 - Startseite wie der „Heute“-Tab im App Store: Datum über der Begrüßung, „Heute für dich“ als Bildkarte mit Titel auf dem
   Foto. Rezeptfoto mit Parallaxe/Dehnen beim Scrollen (Skript in `_layouts/recipe.html`, aus bei „Bewegung reduzieren“).
   Aktiver Tab: Kapsel, Grün, Symbol gefüllt (`fill-opacity`).
-- Rezept-Leiste unten: Favorit · Planen · **Kochen** (Mitte, Kapsel wie aktiver Tab, Symbol Apricot) · Zur Liste · Mehr (Gekocht, Kühltruhe, PDF,
+- Rezept-Leiste unten: Favorit · Planen · **Kochen** (Mitte, Kapsel wie aktiver Tab, Symbol Grün) · Zur Liste · Mehr (Gekocht, Kühltruhe, PDF,
   Drucken, Bearbeiten).
 - Planen (Rezept-Leiste): Blatt mit 10 Tagen, mehrere antippbar; Schalter „Einmal kochen, Reste essen“ markiert alle
   außer dem frühesten Tag mit `leftover: true` (Wochenplan zeigt „Reste“, Einkaufen zählt sie nicht). Standard an bei
   „Meal Prep“ (`RECIPE_DATA.mealPrep`). Tags auf der Rezeptseite = antippbare Kapseln (`/rezeptindex/?q=<tag>`), Infos
   (Zeit, Portionen, Favorit, Bewertung, Kühltruhe) als ruhige Zeile mit Symbolen.
+- Rezeptseite: großes Foto mit Rezeptname (Fraunces, weiß) und Untertitel darauf (`.recipeHeroText`). Darunter Autor,
+  Infos, Tags, dann der Umschalter „Zutaten | Zubereitung“ (`#recipeSegWrap`, `data-pane` auf `.recipePageCard`), der
+  beim Scrollen unter Zurück-Taste und Titelleiste kleben bleibt (`.isStuck` legt eine ruhige Fläche dahinter;
+  `.recipePageCard` braucht `overflow:clip`, nicht `hidden`). Ab 900 px kein Umschalter, beide Teile nebeneinander.
+  Kategorie für das PDF steht in `RECIPE_DATA.category`.
 - Rezeptseite: Schritte antippen = abhaken (`stepsDone`, 12 Std), Portionen pro Rezept (`servings`),
   „Ähnliche Rezepte“ (gleiche Kategorie, Liquid `sample`, Karten mit `hcard=true`).
 - Kochmodus: Wischen links/rechts; Fortschritt in `cooking` (12 Std). „Kochen läuft“-Kapsel über der unteren Leiste
   (`assets/now-cooking.js`, wie der Mini-Player in Apple Music) auf jeder Seite, solange Fortschritt oder Timer laufen:
   Foto, Name, Timer-Restzeit (Uhr-SVG), „Schritt n von m“, Fortschritt grün; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt
   `KOCHBUCH_OPENCOOK`). recipe.js meldet `kochbuch:cooking` / `kochbuch:cookmode`.
-  Farben wie die App im Dunkelmodus (Abschnitt 14 in `assets/styles.css`): warme Espresso-Töne, Fortschritt und Haken
-  Kräutergrün, Segment-Umschalter und Zurück als Kapseln, nur „Weiter“ Apricot.
+  Farben (Abschnitt 14/16 in `assets/styles.css`): neutrales Dunkel, Fortschritt, Haken und „Weiter“ Kräutergrün,
+  Segment-Umschalter und Zurück als Kapseln.
   Ab 768 px (iPad) kein Reiter: Schritt links (+ „Danach“-Vorschau), alle Zutaten rechts, die des aktuellen
   Schritts hervorgehoben (`.isStep`). Auf dem Handy bleibt es bei den Reitern „Schritte/Zutaten“.
 - Rezeptliste auf dem Handy als Raster mit 2 Spalten (Abschnitt 12 in `assets/styles.css`, quadratische Fotos, nur
