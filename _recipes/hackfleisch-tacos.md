@@ -3,7 +3,8 @@ title: "Tacos"
 subtitle: "mit Rinderhack"
 date: 2026-02-20
 category: "Mexikanisch"
-tags: ["rind", "hackfleisch", "streetfood"]
+categories: ["Hackfleisch"]
+tags: ["streetfood"]
 time: "ca. 50 Min"
 image: /recipes/images/tacos-mvuzwahp.jpg
 servings: 4

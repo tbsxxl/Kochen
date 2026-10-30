@@ -4,8 +4,8 @@ subtitle: "mit Brokkoli, Gurke und Sweet-Chili-Dressing"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"
-categories: ["Asiatisch", "Meal Prep"]
-tags: ["schwein", "high-protein"]
+categories: ["Schwein", "Asiatisch", "Meal Prep"]
+tags: ["high-protein"]
 time: "30–40 Min"
 image: /recipes/images/schweinefilet-reis-bowl-mvvbwxsc.jpg
 servings: 2

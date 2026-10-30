@@ -2,8 +2,9 @@
 title: "Schaschlik"
 subtitle: "Schweinespieße mit Schaschliksoße"
 date: 2026-02-20
-category: "Fleisch & Schmorgerichte"
-tags: ["schwein", "deutsch", "klassiker"]
+category: "Schwein"
+categories: ["Schmorgerichte"]
+tags: ["deutsch", "klassiker"]
 time: "ca. 2 Std"
 image: /recipes/images/schaschlik-mvprskni.jpg
 servings: 4

@@ -4,8 +4,8 @@ subtitle: "Thai-Erdnuss-Curry mit Hähnchen, Wokgemüse und Reis"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"
-categories: ["Asiatisch", "Hähnchen", "Schnell", "Meal Prep"]
-tags: ["hähnchen", "thailändisch", "scharf"]
+categories: ["Hähnchen", "Asiatisch", "Schnell", "Meal Prep"]
+tags: ["thailändisch", "scharf"]
 time: "15–25 Min"
 image: /recipes/images/thai-erdnuss-curry-haehnchen.jpg
 servings: 2

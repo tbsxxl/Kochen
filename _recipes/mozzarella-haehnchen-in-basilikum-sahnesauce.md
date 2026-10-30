@@ -4,7 +4,6 @@ subtitle: "in Basilikum-Sahnesoße"
 date: 2026-02-20
 category: "Hähnchen"
 categories: ["Italienisch"]
-tags: ["hähnchen"]
 time: "ca. 50 Min"
 image: /recipes/images/mozzarella-haehnchen-mvvbpcmy.jpg
 servings: 4

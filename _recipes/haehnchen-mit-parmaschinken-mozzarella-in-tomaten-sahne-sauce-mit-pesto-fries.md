@@ -4,7 +4,7 @@ subtitle: "Hähnchen mit Parmaschinken und Mozzarella in Tomaten-Sahnesoße"
 date: 2026-02-20
 category: "Hähnchen"
 categories: ["Italienisch"]
-tags: ["hähnchen", "ofen"]
+tags: ["ofen"]
 time: "50–60 Min"
 image: /recipes/images/pollo-alla-sorrentina-mvuzzqog.jpg
 servings: 2

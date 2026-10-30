@@ -4,8 +4,8 @@ subtitle: "mit Bouillonkartoffeln und Bohnen-Spinat-Gemüse"
 source: "HelloFresh"
 date: 2026-10-30
 author: "Tobi"
-category: "Fleisch & Schmorgerichte"
-tags: ["rind", "ofen"]
+category: "Rind"
+tags: ["ofen"]
 time: "ca. 45 Min"
 image: /recipes/images/rinderhueftsteak-mit-bouillonkartoffeln-und-kraeuterbutter-d.jpg
 servings: 2

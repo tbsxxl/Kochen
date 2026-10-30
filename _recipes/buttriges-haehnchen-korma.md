@@ -4,8 +4,8 @@ subtitle: "Hähnchen in buttriger Kormasoße"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"
-categories: ["Indisch", "Hähnchen", "Schnell", "Meal Prep"]
-tags: ["hähnchen", "high-protein"]
+categories: ["Hähnchen", "Indisch", "Schnell", "Meal Prep"]
+tags: ["high-protein"]
 time: "15–25 Min"
 image: /recipes/images/chicken-korma-mvuzqmo6.jpg
 servings: 2

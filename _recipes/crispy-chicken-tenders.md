@@ -4,8 +4,8 @@ subtitle: "mit Hot Honey und Blue-Cheese-Ranch"
 date: 2026-10-26
 author: "Tobi"
 category: "Knusprig & Frittiert"
-categories: ["Hähnchen"]
-tags: ["hähnchen", "amerikanisch", "scharf", "streetfood", "aufwendig", "am-vortag-starten"]
+categories: ["Hähnchen", "Amerikanisch", "Wochenendprojekt"]
+tags: ["scharf", "streetfood", "am-vortag-starten"]
 time: "ca. 45 Min + über Nacht marinieren"
 image: /recipes/images/crispy-chicken-tenders-mvuzrvxi.jpg
 servings: 2

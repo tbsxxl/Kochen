@@ -2,9 +2,9 @@
 title: "Gulasch"
 subtitle: "Rindergulasch, klassisch geschmort"
 date: 2026-02-20
-category: "Fleisch & Schmorgerichte"
-categories: ["Meal Prep"]
-tags: ["rind", "ungarisch", "klassiker"]
+category: "Schmorgerichte"
+categories: ["Rind", "Suppen & Eintöpfe", "Meal Prep"]
+tags: ["ungarisch", "klassiker"]
 time: "ca. 2 Std"
 image: /recipes/images/gulasch-mvuzyhd5.jpg
 servings: 4

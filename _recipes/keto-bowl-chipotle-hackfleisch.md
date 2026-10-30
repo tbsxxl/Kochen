@@ -4,8 +4,8 @@ subtitle: "Low-Carb-Bowl mit Hackfleisch"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"
-categories: ["Mexikanisch", "Schnell", "Meal Prep"]
-tags: ["hackfleisch", "low-carb", "high-protein"]
+categories: ["Hackfleisch", "Mexikanisch", "Schnell", "Meal Prep"]
+tags: ["low-carb", "high-protein"]
 time: "20–30 Min"
 image: /recipes/images/chipotle-hack-bowl-mvv05o68.jpg
 servings: 2

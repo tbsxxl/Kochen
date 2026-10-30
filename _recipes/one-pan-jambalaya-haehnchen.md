@@ -4,8 +4,8 @@ subtitle: "mit Hähnchen"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Hähnchen"
-categories: ["Meal Prep"]
-tags: ["hähnchen", "amerikanisch", "one-pot", "high-protein"]
+categories: ["Amerikanisch", "Meal Prep"]
+tags: ["one-pot", "high-protein"]
 time: "35–45 Min"
 image: /recipes/images/jambalaya-mvvbvhdd.jpg
 servings: 4

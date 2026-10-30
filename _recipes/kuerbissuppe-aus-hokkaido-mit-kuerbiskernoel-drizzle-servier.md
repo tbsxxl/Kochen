@@ -4,8 +4,8 @@ subtitle: "aus Hokkaido mit Tomatenpesto-Schnecken"
 source: "HelloFresh"
 date: 2026-10-29
 author: "Tobi"
-category: "Vegetarisch"
-categories: ["Schnell"]
+category: "Suppen & Eintöpfe"
+categories: ["Vegetarisch", "Schnell"]
 tags: ["ofen", "familientauglich"]
 time: "ca. 30 Min"
 image: /recipes/images/kuerbissuppe-mvuzxh96.jpg

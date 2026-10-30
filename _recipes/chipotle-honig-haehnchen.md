@@ -5,7 +5,7 @@ source: "HelloFresh"
 date: 2026-08-25
 category: "Hähnchen"
 categories: ["Mexikanisch"]
-tags: ["hähnchen", "high-protein", "pfanne"]
+tags: ["high-protein", "pfanne"]
 time: "30–40 Min"
 image: /recipes/images/chipotle-honig-haehnchen-mvuzm431.jpg
 servings: 2

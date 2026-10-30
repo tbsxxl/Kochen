@@ -4,8 +4,8 @@ subtitle: "mit Fettuccine, Hackfleisch und Pak Choi"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Pasta"
-categories: ["Asiatisch", "Schnell"]
-tags: ["hackfleisch", "chinesisch", "scharf"]
+categories: ["Hackfleisch", "Asiatisch", "Schnell"]
+tags: ["chinesisch", "scharf"]
 time: "15–25 Min"
 image: /recipes/images/dan-dan-noodles-mvuzt4a3.jpg
 servings: 4

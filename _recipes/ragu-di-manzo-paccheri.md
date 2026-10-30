@@ -4,8 +4,8 @@ subtitle: "Schmorfleisch vom Rind auf Paccheri"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Pasta"
-categories: ["Italienisch", "Fleisch & Schmorgerichte", "Meal Prep"]
-tags: ["rind", "high-protein", "aufwendig"]
+categories: ["Rind", "Schmorgerichte", "Italienisch", "Meal Prep", "Wochenendprojekt"]
+tags: ["high-protein"]
 time: "ca. 2 Std"
 image: /recipes/images/ragu-di-manzo-mvvbw2mo.jpg
 servings: 4

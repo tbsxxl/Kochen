@@ -5,7 +5,7 @@ source: "HelloFresh"
 date: 2026-09-17
 category: "Asiatisch"
 categories: ["Hähnchen"]
-tags: ["hähnchen", "koreanisch", "scharf", "high-protein"]
+tags: ["koreanisch", "scharf", "high-protein"]
 time: "30–40 Min"
 image: /recipes/images/gochujang-chicken-mvv03kef.jpg
 servings: 4

@@ -5,7 +5,7 @@ source: "HelloFresh"
 date: 2026-10-02
 category: "Hähnchen"
 categories: ["Italienisch"]
-tags: ["hähnchen", "ofen", "high-protein"]
+tags: ["ofen", "high-protein"]
 time: "40–50 Min"
 image: /recipes/images/kraeuter-haehnchenkeulen-mvv02gy2.jpg
 servings: 2

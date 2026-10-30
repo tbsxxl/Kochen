@@ -1,0 +1,7 @@
+# Zwischenüberschriften für Kategorien-Seite und Kategorie-Auswahl: erste Kategorie der Gruppe → Titel.
+# Reihenfolge der Kategorien steht in _data/categories.yml.
+"Schnell": "Anlass"
+"Pasta": "Gericht"
+"Hähnchen": "Hauptzutat"
+"Amerikanisch": "Küche"
+"Süßes & Backen": "Süßes & Basics"

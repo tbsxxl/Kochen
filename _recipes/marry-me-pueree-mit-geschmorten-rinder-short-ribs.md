@@ -2,9 +2,9 @@
 title: "Short Ribs"
 subtitle: "Geschmorte Rinderrippe mit Kartoffelpüree"
 date: 2026-02-20
-category: "Fleisch & Schmorgerichte"
-categories: ["Meal Prep"]
-tags: ["rind", "ofen", "aufwendig"]
+category: "Schmorgerichte"
+categories: ["Rind", "Meal Prep", "Wochenendprojekt"]
+tags: ["ofen"]
 time: "ca. 5 Std"
 image: /recipes/images/short-ribs-mvvbn4oq.jpg
 servings: 4

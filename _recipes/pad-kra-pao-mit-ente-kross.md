@@ -4,7 +4,8 @@ subtitle: "Thai-Basilikum-Pfanne mit knuspriger Ente"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Asiatisch"
-tags: ["ente", "thailändisch", "high-protein"]
+categories: ["Ente"]
+tags: ["thailändisch", "high-protein"]
 time: "25–35 Min"
 image: /recipes/images/pad-kra-pao-mvvbtcbr.jpg
 servings: 4

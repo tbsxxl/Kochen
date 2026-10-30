@@ -4,8 +4,8 @@ subtitle: "in süß-salziger Soße mit Drillingen und Zucchini"
 source: "HelloFresh"
 date: 2026-10-29
 author: "Tobi"
-category: "Fleisch & Schmorgerichte"
-tags: ["ente", "ofen"]
+category: "Ente"
+tags: ["ofen"]
 time: "ca. 35 Min"
 image: /recipes/images/harissa-entenbrust-mvuzueyx.jpg
 servings: 2

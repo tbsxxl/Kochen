@@ -4,8 +4,8 @@ subtitle: "Schweinespieße mit Zitronen-Oregano-Marinade"
 source: "Emmi kocht einfach"
 date: 2026-10-20
 author: "Tobi"
-category: "Fleisch & Schmorgerichte"
-tags: ["schwein", "griechisch", "klassiker"]
+category: "Schwein"
+tags: ["griechisch", "klassiker"]
 time: "ca. 25 Min + 2 Std marinieren"
 image: /recipes/images/souvlaki-griechische-fleischspiesse-mvprezte.jpg
 servings: 4

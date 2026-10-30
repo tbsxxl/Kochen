@@ -69,6 +69,8 @@ permalink: /rezeptindex/
     {%- for c in cat_names %}
     {%- assign hits = site.recipes | where_exp: "r", "r.category == c or r.categories contains c" -%}
     {%- if hits.size > 0 %}
+    {%- assign grp = site.data.category_groups[c] -%}{%- if grp %}
+    <div class="catGroupTitle">{{ grp }}</div>{% endif -%}
     <button class="sheetRow catOption" data-cat="{{ c | escape }}" type="button" aria-pressed="false"><span>{{ c }}</span><span class="catOptCount">{{ hits.size }}</span></button>
     {%- endif -%}
     {%- endfor %}

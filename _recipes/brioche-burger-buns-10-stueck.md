@@ -3,8 +3,8 @@ title: "Brioche Buns"
 subtitle: "Burgerbrötchen aus Hefeteig, für 10 Stück"
 date: 2026-02-20
 category: "Pizza & Brot"
-categories: ["Süßes & Backen"]
-tags: ["vegetarisch", "französisch", "ofen", "aufwendig"]
+categories: ["Wochenendprojekt"]
+tags: ["vegetarisch", "französisch", "ofen"]
 time: "ca. 2 Std 50 Min"
 image: /recipes/images/brioche-buns-mvuzhpyz.jpg
 servings: 10

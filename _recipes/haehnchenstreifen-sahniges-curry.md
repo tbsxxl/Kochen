@@ -5,7 +5,7 @@ source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"
 categories: ["Hähnchen", "Schnell", "Meal Prep"]
-tags: ["hähnchen", "high-protein"]
+tags: ["high-protein"]
 time: "15–25 Min"
 image: /recipes/images/haehnchenstreifen-in-sahnigem-curry-mvv0fc3y.jpg
 servings: 2

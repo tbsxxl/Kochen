@@ -4,9 +4,9 @@ subtitle: "mit Butterreis und Blumenkohl"
 source: "HelloFresh"
 date: 2026-10-30
 author: "Tobi"
-category: "Curry"
-categories: ["Schnell"]
-tags: ["fisch", "pfanne"]
+category: "Fisch"
+categories: ["Curry", "Schnell"]
+tags: ["pfanne"]
 time: "ca. 25 Min"
 image: /recipes/images/doppelt-fischfilet-in-mango-sahne-sosse-mit-butter-reis-und.jpg
 servings: 2

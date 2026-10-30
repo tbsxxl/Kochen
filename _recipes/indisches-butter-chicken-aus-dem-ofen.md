@@ -3,8 +3,8 @@ title: "Butter Chicken"
 subtitle: "Hähnchen in Tomaten-Butter-Soße aus dem Ofen"
 date: 2026-02-20
 category: "Curry"
-categories: ["Indisch", "Hähnchen", "Meal Prep"]
-tags: ["hähnchen", "ofen"]
+categories: ["Hähnchen", "Indisch", "Meal Prep"]
+tags: ["ofen"]
 time: "ca. 2 Std"
 image: /recipes/images/butter-chicken-mvuzj9cu.jpg
 servings: 2

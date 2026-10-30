@@ -4,8 +4,8 @@ subtitle: "mit grünen Bohnen, Joghurt und Naan"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Curry"
-categories: ["Indisch", "Hähnchen", "Schnell", "Meal Prep"]
-tags: ["hähnchen", "high-protein"]
+categories: ["Hähnchen", "Indisch", "Schnell", "Meal Prep"]
+tags: ["high-protein"]
 time: "15–25 Min"
 image: /recipes/images/chicken-curry-mvv0a7yl.jpg
 servings: 2
