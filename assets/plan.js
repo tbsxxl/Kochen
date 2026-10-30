@@ -55,11 +55,11 @@
             ${r.image ? `<img class="planThumb" src="${esc(r.image)}" srcset="${esc(r.srcset||"")}" sizes="56px" alt="" loading="lazy">` : `<span class="planThumb"></span>`}
             <span class="planEntryTitle">${esc(r.title)}</span>
           </a>
-          <div class="planServ" aria-label="Portionen">
+          ${e.leftover ? `<span class="planLeftoverTag" title="Wird an einem früheren Tag gekocht">Reste</span>` : `<div class="planServ" aria-label="Portionen">
             <button type="button" class="planServBtn" data-act="minus" aria-label="Weniger Portionen">−</button>
             <span class="planServVal">${s}</span>
             <button type="button" class="planServBtn" data-act="plus" aria-label="Mehr Portionen">+</button>
-          </div>
+          </div>`}
           <button type="button" class="planRemove" data-act="remove" aria-label="${esc(r.title)} entfernen"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
         </div>`;
       }).join("");
@@ -73,7 +73,7 @@
     }).join("");
 
     const upcoming = dates.filter(d=>U.plan.key(d) >= todayKey)
-      .flatMap(d=>(plan[U.plan.key(d)] || []).filter(e=>byId.has(e.id)));
+      .flatMap(d=>(plan[U.plan.key(d)] || []).filter(e=>byId.has(e.id) && !e.leftover));   // Reste-Tage nicht einkaufen
     const btn = $("#weekToShopping");
     btn.disabled = !upcoming.length;
     btn.hidden = !upcoming.length;   // ohne geplante Gerichte kein halb durchsichtiger Knopf
@@ -122,7 +122,7 @@
       const k = U.plan.key(d);
       if(k < todayKey) return;
       (plan[k] || []).forEach(e=>{
-        const r = byId.get(e.id); if(!r) return;
+        const r = byId.get(e.id); if(!r || e.leftover) return;
         U.mergeIntoShopping(scaled(r, servingsOf(e, r)), r.title);
         n++;
       });
