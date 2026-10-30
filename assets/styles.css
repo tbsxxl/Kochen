@@ -2081,3 +2081,11 @@ body.highContrast{--line:#CFC7BA;--lineStrong:#8C877E;--text:#000000;--sub:#3A37
 .sheetRow[aria-checked="true"] .sheetSwitch,
 :root[data-theme="dark"] .sheetRow[aria-checked="true"] .sheetSwitch{background:var(--brand)}
 .freezerFlag{color:#526B57}
+
+/* ---------- 21. Einheitlichkeit (Okt. 2026) ---------- */
+/* Plus/Minus überall als gefüllte runde Knöpfe (wie der Portionen-Stepper im Rezept) */
+.stepBtn,.counterBtn{border:0;border-radius:var(--rPill);background:var(--fill)}
+/* „Mehr“: Pfeil rechtsbündig, auch wenn der Zähler (z. B. bei Vorschlägen) ausgeblendet ist */
+.sheet a.sheetRow:has(.countBadge[hidden])::after{margin-left:auto}
+/* Kapseln auf der Rezeptseite einheitlich neutral (alle antippbar), Hauptkategorie fett */
+.recipeTags .chip,.recipeTags .chipLink:not(.chipTag){background:var(--fill);color:var(--text)}
