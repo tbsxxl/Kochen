@@ -6,7 +6,7 @@ date: 2026-09-17
 category: "Hähnchen"
 tags: ["hähnchen", "deutsch", "klassiker", "familientauglich"]
 time: "25–35 Min"
-image: /recipes/images/haehnchengeschnetzeltes.jpg
+image: /recipes/images/haehnchengeschnetzeltes-in-tomaten-sahnesosse-mvv0e700.jpg
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Hähnchenbrustfilet" }
