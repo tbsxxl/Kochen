@@ -7,7 +7,7 @@ category: "Curry"
 categories: ["Indisch", "Hähnchen", "Schnell", "Meal Prep"]
 tags: ["hähnchen", "high-protein"]
 time: "15–25 Min"
-image: /recipes/images/buttriges-haehnchen-korma.jpg
+image: /recipes/images/chicken-korma-mvuzqmo6.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchengeschnetzeltes" }
