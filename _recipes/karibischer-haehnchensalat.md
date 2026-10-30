@@ -7,7 +7,7 @@ category: "Bowls & Salate"
 categories: ["Hähnchen", "Schnell"]
 tags: ["hähnchen", "karibisch", "high-protein"]
 time: "20–30 Min"
-image: /recipes/images/karibischer-haehnchensalat.jpg
+image: /recipes/images/karibischer-haehnchensalat-mvv04l3x.jpg
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Hähnchenbrustfilet" }
