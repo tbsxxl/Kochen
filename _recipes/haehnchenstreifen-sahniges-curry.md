@@ -7,7 +7,7 @@ category: "Curry"
 categories: ["Hähnchen", "Schnell", "Meal Prep"]
 tags: ["hähnchen", "high-protein"]
 time: "15–25 Min"
-image: /recipes/images/haehnchenstreifen-sahniges-curry.jpg
+image: /recipes/images/haehnchenstreifen-in-sahnigem-curry-mvv0fc3y.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchengeschnetzeltes" }
