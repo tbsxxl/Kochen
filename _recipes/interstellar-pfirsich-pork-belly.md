@@ -7,7 +7,7 @@ category: "Asiatisch"
 categories: ["Fleisch & Schmorgerichte"]
 tags: ["schwein", "amerikanisch", "aufwendig", "am-vortag-starten"]
 time: "ca. 20 Min aktiv + 1–2 Tage Vorlauf"
-image: /recipes/images/interstellar-pork-belly.jpg
+image: /recipes/images/glazed-pork-belly-mvv0axpd.jpg
 servings: 6
 ingredients:
   - { qty: 2, unit: "kg", item: "Schweinebauch, ohne Haut und Knochen" }
