@@ -7,7 +7,7 @@ category: "Asiatisch"
 categories: ["Fleisch & Schmorgerichte", "Knusprig & Frittiert"]
 tags: ["schwein", "chinesisch", "aufwendig", "am-vortag-starten"]
 time: "ca. 1 Std + 12 Std ruhen"
-image: /recipes/images/siu-yuk-pork-belly.jpg
+image: /recipes/images/siu-yuk-mvv0c0tg.jpg
 servings: 4
 ingredients:
   - { qty: 725, unit: "g", item: "Schweinebauch, mit Schwarte" }
