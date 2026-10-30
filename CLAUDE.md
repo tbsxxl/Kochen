@@ -90,10 +90,11 @@ SwiftUI-Code, nicht für diese Web-App.
 - **Neuanfang Okt. 2026 (Abschnitt 16 in `assets/styles.css`, gilt vor allen älteren Abschnitten):** Die Fotos sind die
   Farbe, die Oberfläche bleibt ruhig. Flächen in Apples neutralen Grautönen: hell Hintergrund `#F2F2F7`, Zellen `#FFFFFF`,
   Linien `#E3E3E8`, Text `#1C1C1E`, Sekundärtext `#545458`, Metadaten `#6C6C70`; dunkel `#000`/`#1C1C1E`/`#F5F5F7`.
-  **Marke „Basilikum“ (Abschnitt 17 = Rollen, Abschnitt 18 = Farben):** Basilikumgrün `--brand` (hell `#2E7D32` mit weißem
-  Inhalt, dunkel `#6CC070` mit dunklem Inhalt) für Hauptaktion und Fortschritt: gefüllte Knöpfe, „Kochen“ in der
-  Rezept-Leiste, Play, „Weiter“, Haken, Balken, aktiver Tab als blasse Kapsel (`--brandSoft`). `--leaf` (hell `#2A7230`,
-  dunkel `#7ACB7E`) = Tönung für Text und Symbole (Links, „Alle ›“, aktiver Tab, Sterne, Herz). Auswahl (aktive
+  **Marke „Basilikum“ (Abschnitt 17 = Rollen, Abschnitt 18 = Farben):** Palette nur vier Grüntöne: Botanical Green `#287A36`,
+  Soft Sage White `#EAF1E4`, Sage Green `#82AD80`, Deep Green `#1E642D`. `--brand` (hell `#287A36` mit weißem Inhalt,
+  dunkel `#82AD80` mit dunklem Inhalt) für Hauptaktion und Fortschritt: gefüllte Knöpfe, „Kochen“ in der
+  Rezept-Leiste, Play, „Weiter“, Haken, Balken, aktiver Tab als blasse Kapsel (`--brandSoft`). `--leaf` (hell `#1E642D`,
+  dunkel `#82AD80`) = Tönung für Text und Symbole (Links, „Alle ›“, aktiver Tab, Sterne, Herz). Auswahl (aktive
   Filter-Kapseln) in Tinte `--sel` (hell dunkel, dunkel hell). Text sonst nie grün.
 - Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz). Inter wird nicht mehr
   vorgeladen (auf iPhone/iPad/Mac greift SF).
@@ -116,11 +117,10 @@ SwiftUI-Code, nicht für diese Web-App.
 - Symbole: nur Linien-SVGs (Klasse `.ico`, Strichstärke ~2, `currentColor`) wie in der Tab-Leiste – keine Schriftzeichen
   wie ✕ ‹ › ✓ ♡ + − als Knopf-Symbol (Plus/Minus: `.icoPM`). „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
   iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol).
-- Logo: `assets/logo.svg` weißes Basilikumblatt (rechte Hälfte weiß, linke `#E8F3E4`, Adern grün) auf Basilikumgrün `#2E7D32`.
-  Keine Kochmütze, kein Besteck, kein Spiegelei (vom Besitzer abgelehnt). Icons (`apple-touch-icon-v4.png`,
-  `icon-512-v4.png`, maskable mit kleinerem Blatt, `favicon.ico` 16/32/48) aus dem SVG per Playwright gerendert,
-  ico mit ImageMagick `convert`.
-  Bei Logo-Änderungen die Icon-Dateinamen (`-v4` → `-v5`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
+- Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot `#E8753D`, rechte Kräutergrün `#526B57`
+  (das ursprüngliche Logo; Spiegelei und Basilikumblatt hat der Besitzer verworfen). Keine Kochmütze, kein Besteck.
+  Icons `apple-touch-icon-v6.png`, `icon-512-v6.png`, `icon-maskable-512-v6.png`, `favicon.ico`.
+  Bei Logo-Änderungen die Icon-Dateinamen (`-v6` → `-v7`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.
 
 ## Bedienhilfen (nur im Browser gespeichert, `kochbuch.ui.*`)
