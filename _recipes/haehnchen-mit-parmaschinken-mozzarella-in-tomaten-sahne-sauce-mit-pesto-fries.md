@@ -6,7 +6,7 @@ category: "Hähnchen"
 categories: ["Italienisch"]
 tags: ["hähnchen", "ofen"]
 time: "50–60 Min"
-image: /recipes/images/parmahähnchen.jpg
+image: /recipes/images/pollo-alla-sorrentina-mvuzzqog.jpg
 servings: 2
 ingredients:
   - { section: "Hähnchen" }
@@ -24,13 +24,13 @@ ingredients:
   - { qty: 1, unit: "", item: "Zwiebel, klein" }
   - { qty: 1, unit: "Zehe", item: "Knoblauch" }
   - { qty: 1, unit: "TL", item: "Zucker" }
-  - { qty: "0.5", unit: "TL", item: "Salz" }
+  - { qty: 0.5, unit: "TL", item: "Salz" }
   - { qty: 0.5, unit: "TL", item: "Schwarzer Pfeffer" }
   - { qty: 1, unit: "TL", item: "Italienische Kräuter (oder Oregano/Thymian/Basilikum)" }
   - { section: "Pesto-Pommes" }
-  - { qty: "400", unit: "g", item: "Pommes (TK oder frische Kartoffeln)" }
+  - { qty: 400, unit: "g", item: "Pommes (TK oder frische Kartoffeln)" }
   - { qty: "n. B.", unit: "", item: "Öl und Salz" }
-  - { qty: "2", unit: "TL", item: "Pesto" }
+  - { qty: 2, unit: "TL", item: "Pesto" }
 ---
 
 ## Schritte
