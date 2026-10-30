@@ -116,6 +116,16 @@ permalink: /rezeptindex/
   const catOptions = Array.from(document.querySelectorAll('#catSheet .catOption'));
   const catBtn = document.querySelector('#catBtn');
   const catBtnLabel = document.querySelector('#catBtnLabel');
+  // Filterreihe: an angeschnittenen Rändern weich ausblenden statt hart abschneiden
+  const fbar = document.querySelector('.filterBarLeft');
+  const fadeEdges = ()=>{
+    if(!fbar) return;
+    fbar.classList.toggle('fadeL', fbar.scrollLeft > 2);
+    fbar.classList.toggle('fadeR', fbar.scrollLeft + fbar.clientWidth < fbar.scrollWidth - 2);
+  };
+  fbar?.addEventListener('scroll', fadeEdges, { passive:true });
+  window.addEventListener('resize', fadeEdges);
+  fadeEdges();
   const catSheet = document.querySelector('#catSheet');
   const catOverlay = document.querySelector('#catSheetOverlay');
   function openCatSheet(){ catOverlay.classList.add('open'); catSheet.classList.add('open','half'); catSheet.setAttribute('aria-hidden','false'); document.body.classList.add('noScroll'); }
