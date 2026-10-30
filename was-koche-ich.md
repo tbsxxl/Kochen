@@ -17,7 +17,7 @@ permalink: /was-koche-ich/
     <p class="sub" style="margin:0 0 12px">Gib ein, was im Kühlschrank ist. Salz, Pfeffer, Öl und Wasser setze ich als vorhanden voraus.</p>
     <div class="searchRow searchRowCompact">
       <input id="pantryInput" type="text" placeholder="z. B. Hähnchen, Paprika, Reis" autocomplete="off" enterkeyhint="done" list="pantrySuggest" />
-      <button id="pantryAdd" class="btn action" type="button" aria-label="Zutat hinzufügen">+</button>
+      <button id="pantryAdd" class="btn action" type="button" aria-label="Zutat hinzufügen"><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     </div>
     <datalist id="pantrySuggest"></datalist>
     <div class="chips pantryChips" id="pantryChips"></div>

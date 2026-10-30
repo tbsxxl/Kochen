@@ -8,7 +8,7 @@ permalink: /shopping/
   <p class="householdNote" data-household-note hidden></p>
   <div class="searchRow searchRowCompact">
     <input id="addShopItem" type="search" placeholder="Artikel hinzufügen …" autocomplete="off" />
-    <button class="btn brandBtn shopAddBtn" id="addShopBtn" type="button" aria-label="Hinzufügen">+</button>
+    <button class="btn brandBtn shopAddBtn" id="addShopBtn" type="button" aria-label="Hinzufügen"><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="shopSuggest" id="shopSuggest" aria-label="Vorschläge" hidden></div>
 </div>

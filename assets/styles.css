@@ -34,7 +34,7 @@
   --line:#E5DED4;        /* Warm Gray */
   --lineStrong:#D3C9BB;
   --text:#252A27;        /* Charcoal */
-  --sub:#526B57;         /* Sekundärer Text */
+  --sub:#57534C;         /* Sekundärer Text (warmes Grau, nicht Grün: Grün heißt „antippbar“) */
   --sub2:#68655E;        /* Metadaten (Mid Gray #716E67, für kleinen Text auf Cream abgedunkelt: Kontrast ≥ 4,5) */
   --muted:#8A8780;       /* Mid Gray: Platzhalter, Icons */
 
@@ -166,7 +166,7 @@ body.highContrast{
   --line:#BFB3A2;
   --lineStrong:#8F836F;
   --text:#111412;
-  --sub:#34473A;
+  --sub:#3A3732;
   --sub2:#45423C;
 }
 :root[data-theme="dark"] body.highContrast{
@@ -1790,3 +1790,17 @@ html.tabbarMin .nowCooking{transform:translate3d(0,18px,0)}
 .filterBarLeft{--fl:0px;--fr:0px;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%)}
 .filterBarLeft.fadeL{--fl:28px} .filterBarLeft.fadeR{--fr:28px}
 #searchInput{text-overflow:ellipsis}
+/* ---------- 15. Große Schrift (bis 200 %) und Symbole statt Schriftzeichen ---------- */
+.h1{-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+input{text-overflow:ellipsis}
+/* Symbole neben Text wachsen mit der Textgröße (bei 100 % unverändert) */
+.kvIcon,.kvIcon svg{width:1em;height:1em}
+.metaIcon,.metaIcon svg{width:1.15em;height:1.15em}
+.recipeFacts .kvIcon svg,.recipeFacts .ico{width:1.1em;height:1.1em}
+.searchRowIcon .searchIcon{width:1.2em;height:1.2em}
+#favToggle .ico{width:1em;height:1em}
+.icoPM{width:18px;height:18px;margin:auto}
+.shopAddBtn .icoPM,#pantryAdd .icoPM{width:20px;height:20px}
+.homeEmptyIcon .ico{width:22px;height:22px}
+.planAdd{white-space:nowrap}
+.shopToolbar{flex-wrap:wrap}
