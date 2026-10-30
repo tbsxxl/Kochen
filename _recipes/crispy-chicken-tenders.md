@@ -7,7 +7,7 @@ category: "Knusprig & Frittiert"
 categories: ["Hähnchen"]
 tags: ["hähnchen", "amerikanisch", "scharf", "streetfood", "aufwendig", "am-vortag-starten"]
 time: "ca. 45 Min + über Nacht marinieren"
-image: /recipes/images/crispy-chicken-tenders-mvppijlc.jpg
+image: /recipes/images/crispy-chicken-tenders-mvuzrvxi.jpg
 servings: 2
 ingredients:
   - { section: "Hähnchen und Marinade" }
