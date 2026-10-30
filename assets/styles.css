@@ -2102,3 +2102,9 @@ body.highContrast{--line:#CFC7BA;--lineStrong:#8C877E;--text:#000000;--sub:#3A37
 .rowGlyph svg,.rowGlyph .ico,#sheet .rowGlyph svg{width:24px !important;height:24px !important}
 :root{--sel:var(--brand);--onSel:var(--onBrand)}
 :root[data-theme="dark"]{--sel:var(--brand);--onSel:var(--onBrand)}
+/* Dunkelmodus: Kräutergrün kräftiger (Sättigung verdoppelt, gleiche Helligkeit, 10 : 1 auf Schwarz) */
+:root[data-theme="dark"]{
+  --brand:#7EC48A; --leaf:#7EC48A; --brandSoft:#1D3524; --leafSoft:#1D3524;
+}
+.cookOverlay{--cLeaf:#7EC48A}
+.cookIngRow.isStep{background:rgba(126,196,138,.16)}
