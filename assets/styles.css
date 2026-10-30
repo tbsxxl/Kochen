@@ -1968,3 +1968,8 @@ body.continueVisible .nowCooking{display:none}
 .recipeSeg .segBtn{min-height:44px}
 .segBtn{color:var(--sub)}
 .homeFeatured .heroOverlayCat{background:rgba(0,0,0,.55)}
+/* Kategorien in Gruppen (Anlass · Gericht · Hauptzutat · Küche · Süßes & Basics, _data/category_groups.yml) */
+.catGroupTitle{font-size:var(--fs12);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sub2);padding:16px 4px 6px}
+.catTiles .catGroupTitle{grid-column:1 / -1;padding:12px 2px 0}
+.catTiles .catGroupTitle:first-child{padding-top:0}
+.sheetBody .catGroupTitle{padding:18px 16px 6px}

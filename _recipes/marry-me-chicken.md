@@ -4,7 +4,8 @@ subtitle: "Hähnchen in Parmesan-Tomaten-Sahnesoße"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Hähnchen"
-tags: ["hähnchen", "amerikanisch", "high-protein"]
+categories: ["Amerikanisch"]
+tags: ["high-protein"]
 time: "30–40 Min"
 image: /recipes/images/marry-me-chicken-mvvblq6o.jpg
 servings: 2

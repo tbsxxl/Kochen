@@ -4,8 +4,8 @@ subtitle: "Scharfes frittiertes Hähnchen"
 source: "Babish"
 date: 2026-05-04
 category: "Knusprig & Frittiert"
-categories: ["Hähnchen"]
-tags: ["hähnchen", "amerikanisch", "scharf", "streetfood"]
+categories: ["Hähnchen", "Amerikanisch"]
+tags: ["scharf", "streetfood"]
 time: "ca. 1 Std + 4 Std marinieren"
 image: /recipes/images/nashville-hot-chicken-mvvbq0nu.jpg
 servings: 4

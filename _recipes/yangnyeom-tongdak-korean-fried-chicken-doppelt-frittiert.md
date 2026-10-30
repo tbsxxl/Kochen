@@ -3,8 +3,8 @@ title: "Yangnyeom Tongdak"
 subtitle: "Koreanisches Fried Chicken mit süß-scharfer Glasur"
 date: 2026-02-20
 category: "Knusprig & Frittiert"
-categories: ["Asiatisch", "Hähnchen"]
-tags: ["hähnchen", "koreanisch", "scharf", "streetfood"]
+categories: ["Hähnchen", "Asiatisch"]
+tags: ["koreanisch", "scharf", "streetfood"]
 time: "ca. 1 Std"
 image: /recipes/images/yangnyeom.jpg
 servings: 4

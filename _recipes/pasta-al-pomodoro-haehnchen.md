@@ -4,8 +4,8 @@ subtitle: "mit Hähnchen"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Pasta"
-categories: ["Italienisch", "Hähnchen", "Schnell"]
-tags: ["hähnchen", "high-protein"]
+categories: ["Hähnchen", "Italienisch", "Schnell"]
+tags: ["high-protein"]
 time: "15–25 Min"
 image: /recipes/images/pasta-al-pomodoro-mvvbytty.jpg
 servings: 2

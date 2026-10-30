@@ -3,8 +3,8 @@ title: "Spaghetti Bolognese"
 subtitle: "aus dem Ofen, mit Rotwein und Rosmarin"
 date: 2026-02-20
 category: "Pasta"
-categories: ["Italienisch", "Meal Prep"]
-tags: ["rind", "ofen", "familientauglich"]
+categories: ["Hackfleisch", "Italienisch", "Meal Prep"]
+tags: ["ofen", "familientauglich"]
 time: "ca. 1 Std 15 Min"
 image: /recipes/images/spaghetti-bolognese-mvpsb92p.jpg
 servings: 6

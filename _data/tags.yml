@@ -1,6 +1,7 @@
 # Erlaubte Stichwörter (Tags) für Rezepte, klein geschrieben. Nur, was die Kategorie nicht schon sagt:
-# „Vegetarisch“, „Schnell“, „Italienisch“ usw. stehen in `category`/`categories` (_data/categories.yml).
+# Hauptzutaten (Hähnchen, Rind, Hackfleisch, Schwein, Ente, Fisch), „Amerikanisch“, „Wochenendprojekt“ usw. sind Kategorien
+# (_data/categories.yml). „vegetarisch“ nur, wenn die Kategorie „Vegetarisch“ nicht passt (Süßes, Brot).
 # Das Formular unter /neues-rezept/ bietet diese Liste zum Antippen an.
-hauptzutat: ["hähnchen", "rind", "hackfleisch", "schwein", "ente", "fisch", "vegetarisch", "vegan"]
-kueche: ["amerikanisch", "französisch", "deutsch", "österreichisch", "englisch", "ungarisch", "griechisch", "türkisch", "koreanisch", "thailändisch", "chinesisch", "karibisch"]
-eigenschaft: ["scharf", "high-protein", "low-carb", "ofen", "one-pot", "pfanne", "streetfood", "klassiker", "familientauglich", "aufwendig", "am-vortag-starten"]
+hauptzutat: ["vegetarisch", "vegan"]
+kueche: ["französisch", "deutsch", "österreichisch", "englisch", "ungarisch", "griechisch", "türkisch", "koreanisch", "thailändisch", "chinesisch", "karibisch"]
+eigenschaft: ["scharf", "high-protein", "low-carb", "ofen", "one-pot", "pfanne", "streetfood", "klassiker", "familientauglich", "am-vortag-starten"]

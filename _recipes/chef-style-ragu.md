@@ -3,8 +3,8 @@ title: "Ragù alla Bolognese"
 subtitle: "Fleischsoße, mehrere Stunden geschmort"
 date: 2026-02-20
 category: "Pasta"
-categories: ["Italienisch", "Fleisch & Schmorgerichte", "Meal Prep"]
-tags: ["rind", "klassiker", "aufwendig"]
+categories: ["Hackfleisch", "Schmorgerichte", "Italienisch", "Meal Prep", "Wochenendprojekt"]
+tags: ["klassiker"]
 time: "ca. 5 Std"
 image: /recipes/images/ragu-alla-bolognese-mvv058x4.jpg
 servings: 6

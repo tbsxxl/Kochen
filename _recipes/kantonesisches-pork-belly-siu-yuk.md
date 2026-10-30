@@ -3,9 +3,9 @@ title: "Siu Yuk"
 subtitle: "Kantonesischer Krustenschweinebauch"
 source: "Fallow"
 date: 2026-09-17
-category: "Asiatisch"
-categories: ["Fleisch & Schmorgerichte", "Knusprig & Frittiert"]
-tags: ["schwein", "chinesisch", "aufwendig", "am-vortag-starten"]
+category: "Schwein"
+categories: ["Asiatisch", "Knusprig & Frittiert", "Wochenendprojekt"]
+tags: ["chinesisch", "am-vortag-starten"]
 time: "ca. 1 Std + 12 Std ruhen"
 image: /recipes/images/siu-yuk-mvv0c0tg.jpg
 servings: 4

@@ -230,8 +230,14 @@ schon so auf (`tidyStep()`, `sourceName()` in `worker/index.js`).
 was schon `category`/`categories` sagt, keine Gerichtsnamen. „vegetarisch“ als Tag nur, wenn die Kategorie
 „Vegetarisch“ nicht passt (z. B. Süßes, Brot); der Schnellfilter „Vegetarisch“ wertet beides aus.
 Titel ändern ändert die Adresse nicht (kommt aus dem Dateinamen); danach PDFs neu erzeugen.
-Hauptkategorie (`category:`, steht auf dem Foto) und optionale weitere (`categories: ["Italienisch", …]`) immer aus
-`_data/categories.yml` wählen; die Datei bestimmt auch die Reihenfolge in der Kategorie-Auswahl (Bottom-Sheet).
+Hauptkategorie (`category:`) und optionale weitere (`categories: ["Italienisch", …]`) immer aus
+`_data/categories.yml` wählen (25 Kategorien in fünf Gruppen, Zwischenüberschriften aus `_data/category_groups.yml`):
+**Anlass** Schnell · Meal Prep · Wochenendprojekt (lange/aufwendig, Vorlauf) — **Gericht** Pasta · Curry · Bowls & Salate ·
+Burger & Sandwiches · Pizza & Brot · Knusprig & Frittiert · Suppen & Eintöpfe · Schmorgerichte — **Hauptzutat** Hähnchen ·
+Rind (Stücke/Steak) · Hackfleisch · Schwein · Ente · Fisch · Vegetarisch — **Küche** Amerikanisch · Italienisch · Indisch ·
+Asiatisch · Mexikanisch — **Süßes & Basics** Süßes & Backen · Saucen & Basics.
+Hauptkategorie = Art des Gerichts, sonst die Hauptzutat; Hauptzutat und Küche zusätzlich unter `categories`.
+Hauptzutaten, „Amerikanisch“ und „aufwendig“ sind keine Tags mehr (stehen in den Kategorien).
 „Schnell“ = Zeitangabe höchstens 30 Min ohne Wartezeiten; „Meal Prep“ = lässt sich gut vorkochen und aufwärmen. Einkaufsliste sortiert Zutaten per Stichwort nach Supermarkt-Abteilung (`assets/shopping.js`,
 `KEYWORDS`); neue Zutaten, die unter „Sonstiges“ landen, dort ergänzen.
 Neue Bilder mit `python3 tools/optimize-images.py recipes/images/<bild>.jpg` vorbereiten: schneidet links

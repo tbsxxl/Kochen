@@ -3,7 +3,7 @@ title: "Pizza Napoletana"
 subtitle: "mit San-Marzano-Tomaten, Parmaschinken und Rucola"
 date: 2026-02-20
 category: "Pizza & Brot"
-categories: ["Italienisch"]
+categories: ["Vegetarisch", "Italienisch", "Wochenendprojekt"]
 tags: ["ofen", "klassiker", "am-vortag-starten"]
 time: "24 Std Teigreife + ca. 30 Min"
 image: /recipes/images/pizza-napoletana-mvvbxc0u.jpg

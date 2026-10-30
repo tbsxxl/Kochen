@@ -3,8 +3,8 @@ title: "Lasagne al Forno"
 subtitle: "mit Ragù und Béchamel"
 date: 2026-02-20
 category: "Pasta"
-categories: ["Italienisch", "Meal Prep"]
-tags: ["hackfleisch", "ofen", "klassiker", "aufwendig"]
+categories: ["Hackfleisch", "Italienisch", "Meal Prep", "Wochenendprojekt"]
+tags: ["ofen", "klassiker"]
 time: "ca. 1 Std 40 Min"
 image: /recipes/images/lasagne-al-forno-mvuzx05o.jpg
 servings: 4

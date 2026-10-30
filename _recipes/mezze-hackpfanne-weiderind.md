@@ -3,8 +3,8 @@ title: "Kıymalı Pilav"
 subtitle: "Türkische Hackpfanne mit Reis, Gurken-Joghurt und Feta"
 source: "HelloFresh"
 date: 2026-08-25
-category: "Fleisch & Schmorgerichte"
-tags: ["rind", "hackfleisch", "türkisch", "high-protein", "pfanne"]
+category: "Hackfleisch"
+tags: ["türkisch", "high-protein", "pfanne"]
 time: "25–35 Min"
 image: /recipes/images/k-ymal-pilav-mvvboo2u.jpg
 servings: 2

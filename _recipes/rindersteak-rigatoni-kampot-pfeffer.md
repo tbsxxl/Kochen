@@ -4,7 +4,7 @@ subtitle: "mit Rosenkohl in Kampot-Pfefferrahm"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Pasta"
-tags: ["rind"]
+categories: ["Rind"]
 time: "25–35 Min"
 image: /recipes/images/rindersteak-rigatoni-kampot-pfeffer.jpg
 servings: 2

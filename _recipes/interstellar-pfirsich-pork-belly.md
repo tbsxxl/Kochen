@@ -3,9 +3,9 @@ title: "Glazed Pork Belly"
 subtitle: "Schweinebauch mit Pfirsich-Glasur"
 source: "Fallow"
 date: 2026-09-17
-category: "Asiatisch"
-categories: ["Fleisch & Schmorgerichte"]
-tags: ["schwein", "amerikanisch", "aufwendig", "am-vortag-starten"]
+category: "Schwein"
+categories: ["Asiatisch", "Amerikanisch", "Wochenendprojekt"]
+tags: ["am-vortag-starten"]
 time: "ca. 20 Min aktiv + 1–2 Tage Vorlauf"
 image: /recipes/images/glazed-pork-belly-mvv0axpd.jpg
 servings: 6

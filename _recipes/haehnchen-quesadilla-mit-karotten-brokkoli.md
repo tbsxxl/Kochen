@@ -4,7 +4,7 @@ subtitle: "mit Brokkoli und Karotte"
 date: 2026-02-20
 category: "Mexikanisch"
 categories: ["Hähnchen"]
-tags: ["hähnchen", "pfanne"]
+tags: ["pfanne"]
 time: "25–35 Min"
 image: /recipes/images/haehnchen-quesadillas-mvv01ld7.jpg
 servings: 3

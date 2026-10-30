@@ -4,7 +4,8 @@ subtitle: "Hack-Käse-Sandwich mit Burgersoße und Salat"
 source: "HelloFresh"
 date: 2026-10-02
 category: "Burger & Sandwiches"
-tags: ["rind", "hackfleisch", "amerikanisch", "pfanne"]
+categories: ["Hackfleisch", "Amerikanisch"]
+tags: ["pfanne"]
 time: "35–45 Min"
 image: /recipes/images/patty-melt-mvv00on3.jpg
 servings: 2

@@ -3,7 +3,8 @@ title: "Fish & Chips"
 subtitle: "Fisch im Backteig mit Pommes und Tartarsoße"
 date: 2026-02-20
 category: "Knusprig & Frittiert"
-tags: ["fisch", "englisch", "streetfood", "klassiker"]
+categories: ["Fisch"]
+tags: ["englisch", "streetfood", "klassiker"]
 time: "ca. 1 Std 30 Min"
 image: /recipes/images/fish-chips-mvuzuylf.jpg
 servings: 4

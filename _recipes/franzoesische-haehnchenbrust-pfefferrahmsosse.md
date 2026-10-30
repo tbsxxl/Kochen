@@ -4,7 +4,7 @@ subtitle: "mit Romanesco und Kartoffelpüree"
 source: "HelloFresh"
 date: 2026-10-02
 category: "Hähnchen"
-tags: ["hähnchen", "französisch", "high-protein"]
+tags: ["französisch", "high-protein"]
 time: "25–35 Min"
 image: /recipes/images/haehnchenbrust-in-pfefferrahmsosse-mvuzvlxo.jpg
 servings: 2

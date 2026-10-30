@@ -4,7 +4,7 @@ subtitle: "Linsencurry mit geröstetem Blumenkohl"
 source: "HelloFresh"
 date: 2026-09-04
 category: "Curry"
-categories: ["Vegetarisch", "Indisch", "Meal Prep"]
+categories: ["Vegetarisch", "Indisch", "Suppen & Eintöpfe", "Meal Prep"]
 tags: ["ofen"]
 time: "35–45 Min"
 image: /recipes/images/dal-mvuzsmpw.jpg

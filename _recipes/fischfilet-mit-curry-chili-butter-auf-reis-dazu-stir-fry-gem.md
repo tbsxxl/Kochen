@@ -4,9 +4,9 @@ subtitle: "auf Reis mit Stir-Fry-Gemüse"
 source: "HelloFresh"
 date: 2026-10-29
 author: "Tobi"
-category: "Asiatisch"
-categories: ["Schnell"]
-tags: ["fisch", "pfanne"]
+category: "Fisch"
+categories: ["Asiatisch", "Schnell"]
+tags: ["pfanne"]
 time: "ca. 25 Min"
 image: /recipes/images/fischfilet-mit-curry-chili-butter-mvuztt35.jpg
 servings: 2

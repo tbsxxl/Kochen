@@ -4,8 +4,8 @@ subtitle: "mit Mais-Reis, Salat und Limetten-Joghurt"
 source: "HelloFresh"
 date: 2026-08-25
 category: "Bowls & Salate"
-categories: ["Asiatisch", "Hähnchen", "Schnell", "Meal Prep"]
-tags: ["hähnchen", "scharf", "high-protein"]
+categories: ["Hähnchen", "Asiatisch", "Schnell", "Meal Prep"]
+tags: ["scharf", "high-protein"]
 time: "15–25 Min"
 image: /recipes/images/spicy-sambal-chicken-bowl.jpg
 servings: 2

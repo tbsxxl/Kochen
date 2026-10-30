@@ -4,7 +4,8 @@ subtitle: "mit Schmelzzwiebeln und Wedges"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Burger & Sandwiches"
-tags: ["rind", "hackfleisch", "amerikanisch", "streetfood"]
+categories: ["Hackfleisch", "Amerikanisch"]
+tags: ["streetfood"]
 time: "30–40 Min"
 image: /recipes/images/double-smash-burger-mvuzq1k9.jpg
 servings: 4

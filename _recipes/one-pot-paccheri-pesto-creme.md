@@ -4,7 +4,7 @@ subtitle: "in Tomatenpesto-Creme mit Babyspinat und Karotte"
 source: "HelloFresh"
 date: 2026-10-02
 category: "Pasta"
-categories: ["Vegetarisch", "Schnell", "Italienisch"]
+categories: ["Vegetarisch", "Italienisch", "Schnell"]
 tags: ["one-pot"]
 time: "15–25 Min"
 image: /recipes/images/paccheri-al-pesto-rosso-mvvbuqgb.jpg

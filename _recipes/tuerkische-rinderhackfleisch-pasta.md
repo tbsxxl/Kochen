@@ -4,8 +4,8 @@ subtitle: "Türkische Hack-Pasta in Tomatensoße mit Minz-Joghurt"
 source: "HelloFresh"
 date: 2026-09-17
 category: "Pasta"
-categories: ["Schnell"]
-tags: ["rind", "hackfleisch", "türkisch", "high-protein"]
+categories: ["Hackfleisch", "Schnell"]
+tags: ["türkisch", "high-protein"]
 time: "20–30 Min"
 image: /recipes/images/tuerkische-hack-pasta.jpg
 servings: 4
