@@ -7,7 +7,7 @@ category: "Curry"
 categories: ["Vegetarisch", "Indisch", "Meal Prep"]
 tags: ["ofen"]
 time: "40–50 Min"
-image: /recipes/images/blumenkohl-dalsosse.jpg
+image: /recipes/images/gobi-dal-mvvby372.jpg
 servings: 4
 ingredients:
   - { qty: 2, unit: "", item: "Blumenkohlköpfe" }
