@@ -1,7 +1,7 @@
 /* Tobis Kochbuch — Service Worker
    Offline: Seiten „netzwerk-zuerst“, aber nach 3 s Warten (schlechter Empfang im Supermarkt) aus dem Cache.
    CSS/JS/Bilder „Cache zuerst“, im Hintergrund aktualisieren. /api/ nie cachen. */
-const VERSION = 'kochbuch-v22';
+const VERSION = 'kochbuch-v23';
 const ASSET_CACHE = `${VERSION}-assets`;
 const IMAGE_CACHE = `${VERSION}-images`;
 const PAGE_CACHE = `${VERSION}-pages`;
@@ -13,7 +13,7 @@ const PRECACHE_PAGES = ['/', '/rezeptindex/', '/shopping/', '/wochenplan/', '/wa
 const PRECACHE_ASSETS = [
   '/assets/styles.css', '/assets/utils.js', '/assets/account.js', '/assets/shopping.js', '/assets/plan.js',
   '/assets/recipe.js', '/assets/cook-timer.js', '/assets/now-cooking.js', '/assets/home-reco.js', '/assets/cards.js', '/assets/what-to-cook.js', '/assets/freezer.js',
-  '/assets/logo.svg?v=3', '/assets/fonts/inter.woff2', '/assets/fonts/fraunces.woff2'
+  '/assets/logo.svg?v=4', '/assets/fonts/inter.woff2', '/assets/fonts/fraunces.woff2'
 ];
 
 self.addEventListener('install', (e) => {
@@ -108,8 +108,8 @@ self.addEventListener('push', (e) => {
   try { m = e.data ? e.data.json() : {}; } catch { m = { body: e.data && e.data.text() }; }
   e.waitUntil(self.registration.showNotification(m.title || 'Tobis Kochbuch', {
     body: m.body || '',
-    icon: '/assets/icon-512-v3.png',
-    badge: '/assets/icon-512-v3.png',
+    icon: '/assets/icon-512-v4.png',
+    badge: '/assets/icon-512-v4.png',
     tag: m.tag || undefined,
     // Timer: bleibt stehen, bis man sie wegtippt, und meldet sich auch bei gleichem Tag erneut
     requireInteraction: !!m.timer,
