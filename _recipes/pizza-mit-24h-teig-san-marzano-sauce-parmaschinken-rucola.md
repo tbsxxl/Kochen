@@ -6,7 +6,7 @@ category: "Pizza & Brot"
 categories: ["Italienisch"]
 tags: ["ofen", "klassiker", "am-vortag-starten"]
 time: "24 Std Teigreife + ca. 30 Min"
-image: /recipes/images/pizza.jpg
+image: /recipes/images/pizza-napoletana-mvvbxc0u.jpg
 servings: 6
 ingredients:
   - { section: "Teig" }
@@ -16,15 +16,15 @@ ingredients:
   - { qty: 1, unit: "g", item: "Frische Hefe (oder 0,35 g Trockenhefe)" }
   - { section: "Tomatensoße" }
   - { qty: 400, unit: "g", item: "San-Marzano-Tomaten (Dose)" }
-  - { qty: "1", unit: "TL", item: "Feines Salz" }
+  - { qty: 1, unit: "TL", item: "Feines Salz" }
   - { qty: "optional", unit: "", item: "Basilikumblätter (4–6 Stück)" }
   - { qty: "optional", unit: "", item: "Olivenöl (1 TL)" }
   - { section: "Belag (pro Pizza)" }
   - { qty: "80–100", unit: "g", item: "Mozzarella" }
-  - { qty: "3", unit: "Scheiben", item: "Parmaschinken" }
-  - { qty: "1", unit: "Handvoll", item: "Rucola" }
+  - { qty: 3, unit: "Scheiben", item: "Parmaschinken" }
+  - { qty: 1, unit: "Handvoll", item: "Rucola" }
   - { qty: "n. B.", unit: "", item: "Frisch geriebener Parmesan" }
-  - { qty: "1", unit: "EL", item: "Hochwertiges Olivenöl" }
+  - { qty: 1, unit: "EL", item: "Hochwertiges Olivenöl" }
 ---
 
 ## Schritte
