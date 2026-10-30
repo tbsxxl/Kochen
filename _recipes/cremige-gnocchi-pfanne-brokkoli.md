@@ -7,7 +7,7 @@ category: "Vegetarisch"
 categories: ["Italienisch"]
 tags: ["pfanne", "familientauglich"]
 time: "25–35 Min"
-image: /recipes/images/cremige-gnocchi-pfanne-brokkoli.jpg
+image: /recipes/images/cremige-gnocchi-pfanne-mvuzo9eg.jpg
 servings: 2
 ingredients:
   - { qty: 400, unit: "g", item: "frische Gnocchi, vorgekocht" }
