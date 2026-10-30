@@ -1,7 +1,7 @@
 /* Tobis Kochbuch — Service Worker
    Offline: Seiten „netzwerk-zuerst“, aber nach 3 s Warten (schlechter Empfang im Supermarkt) aus dem Cache.
    CSS/JS/Bilder „Cache zuerst“, im Hintergrund aktualisieren. /api/ nie cachen. */
-const VERSION = 'kochbuch-v16';
+const VERSION = 'kochbuch-v17';
 const ASSET_CACHE = `${VERSION}-assets`;
 const IMAGE_CACHE = `${VERSION}-images`;
 const PAGE_CACHE = `${VERSION}-pages`;

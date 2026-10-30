@@ -1749,3 +1749,39 @@ html.tabbarMin .nowCooking{transform:translate3d(0,18px,0)}
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
 .planLeftoverRow:disabled{opacity:.5}
+/* Rezeptkarten: deutsche Silbentrennung statt abgeschnittener Wörter, Infozeile immer einzeilig */
+.recipeTitle{-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+.recipeMeta{flex-wrap:nowrap;min-width:0}
+.recipeMeta .metaItem{min-width:0;flex-shrink:1}
+.recipeMeta .metaItem:first-child{flex:0 1 auto}
+.recipeMeta .metaItem > span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.recipeMeta .metaIcon,.recipeMeta .metaRating,.recipeMeta .metaFav{flex-shrink:0}
+.favBadge .ico{width:16px;height:16px;display:block}
+
+/* ---------- 14. Kochmodus im Design der App ----------
+   Immer dunkel (Küche: wenig Blendung), aber mit den warmen Espresso-Tönen des Dunkelmodus statt kühlem Grau.
+   Farbrollen wie überall: Kräutergrün = Fortschritt/Auswahl, Apricot = nur „Weiter“ (und Timer), Kapsel-Knöpfe. */
+.cookOverlay{
+  --cBg:#12100C; --cCard:#1F1B16; --cFill:rgba(255,235,210,.10); --cLine:rgba(255,235,210,.09);
+  --cText:#F2EBE0; --cSub:#B5AB9C; --cLeaf:#9DBBA3;
+  background:var(--cBg);color:var(--cText);
+}
+.cookOverlay .navIconBtn,.cookPill{background:var(--cFill);border-color:transparent;color:var(--cText)}
+.cookTabs{border-radius:var(--rPill);background:var(--cFill);padding:3px}
+.cookTab{border-radius:var(--rPill);color:var(--cSub)}
+.cookTab.active{background:#3D352C;color:var(--cText);box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.cookProgress{background:var(--cFill)}
+.cookProgressBar{background:var(--cLeaf)}
+.cookStep,.cookStepIngsList,.cookIngs{background:var(--cCard)}
+.cookStepIng + .cookStepIng,.cookIngRow + .cookIngRow{border-top-color:var(--cLine)}
+.cookStepIngsLabel,.cookIngSection,.cookTimerLabel{color:var(--cSub)}
+.cookNavBtn{border-radius:var(--rPill);background:var(--cFill);color:var(--cText)}
+.cookNavBtn.primary{background:var(--accent);color:var(--onAccent)}
+.cookTimerBtn{background:var(--cFill);color:var(--cText)}
+.cookTimer{background:var(--cCard)}
+.cookChk{border-color:rgba(255,235,210,.35)}
+.cookChk:checked{background:var(--cLeaf);border-color:var(--cLeaf)}
+.cookChk::after{background:var(--cBg)}
+.cookIngRow.isStep{background:rgba(157,187,163,.14)}
+.cookIngRow.isStep .cookIngQty{color:var(--cLeaf)}
+@media (min-width:768px){ .cookIngsHead{background:var(--cBg)} }
