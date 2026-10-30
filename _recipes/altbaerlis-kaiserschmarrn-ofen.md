@@ -5,7 +5,7 @@ date: 2026-02-20
 category: "Süßes & Backen"
 tags: ["vegetarisch", "österreichisch", "ofen", "klassiker"]
 time: "ca. 55 Min"
-image: /recipes/images/Kaiserschmarrn.jpg
+image: /recipes/images/kaiserschmarrn-mvuzpb5w.jpg
 servings: 4
 ingredients:
   - { qty: 130, unit: "g", item: "Mehl" }
