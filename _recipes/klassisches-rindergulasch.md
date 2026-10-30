@@ -6,7 +6,7 @@ category: "Fleisch & Schmorgerichte"
 categories: ["Meal Prep"]
 tags: ["rind", "ungarisch", "klassiker"]
 time: "ca. 2 Std"
-image: /recipes/images/gulasch.jpg
+image: /recipes/images/gulasch-mvuzyhd5.jpg
 servings: 4
 ingredients:
   - { qty: 600, unit: "g", item: "Rindergulasch (ca. 3×3 cm Stücke)" }
@@ -19,7 +19,7 @@ ingredients:
   - { qty: "1–2", unit: "TL", item: "Zitronenabrieb (optional)" }
   - { qty: 2, unit: "TL", item: "Paprikapulver, edelsüß" }
   - { qty: 0.5, unit: "TL", item: "Majoran, getrocknet" }
-  - { qty: "1", unit: "Msp.", item: "Cayennepfeffer" }
+  - { qty: 1, unit: "Msp.", item: "Cayennepfeffer" }
   - { qty: 1, unit: "Prise", item: "Salz" }
 ---
 
