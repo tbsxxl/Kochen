@@ -53,9 +53,9 @@
         </div>
         <div class="freezerControls">
           <div class="qtyStepper" aria-label="Portionen ändern">
-            <button class="stepBtn" data-act="minus" type="button" aria-label="Eine Portion weniger">−</button>
+            <button class="stepBtn" data-act="minus" type="button" aria-label="Eine Portion weniger"><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
             <div class="stepVal" aria-label="Portionen">${portions}</div>
-            <button class="stepBtn" data-act="plus" type="button" aria-label="Eine Portion mehr">+</button>
+            <button class="stepBtn" data-act="plus" type="button" aria-label="Eine Portion mehr"><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
             <span class="freezerUnit">${portions === 1 ? 'Portion' : 'Portionen'}</span>
           </div>
           <button class="btn btnDangerOutline freezerRemoveBtn" data-act="remove" type="button" aria-label="Aus Kühltruhe entfernen">

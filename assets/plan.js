@@ -56,9 +56,9 @@
             <span class="planEntryTitle">${esc(r.title)}</span>
           </a>
           ${e.leftover ? `<span class="planLeftoverTag" title="Wird an einem früheren Tag gekocht">Reste</span>` : `<div class="planServ" aria-label="Portionen">
-            <button type="button" class="planServBtn" data-act="minus" aria-label="Weniger Portionen">−</button>
+            <button type="button" class="planServBtn" data-act="minus" aria-label="Weniger Portionen"><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
             <span class="planServVal">${s}</span>
-            <button type="button" class="planServBtn" data-act="plus" aria-label="Mehr Portionen">+</button>
+            <button type="button" class="planServBtn" data-act="plus" aria-label="Mehr Portionen"><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
           </div>`}
           <button type="button" class="planRemove" data-act="remove" aria-label="${esc(r.title)} entfernen"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
         </div>`;

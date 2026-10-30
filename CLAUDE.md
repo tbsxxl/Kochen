@@ -90,7 +90,7 @@ SwiftUI-Code, nicht für diese Web-App.
 - Farben (Rollen, Abschnitt 13 in `assets/styles.css`): **Kräutergrün `#526B57` = Bedienfarbe** (aktiv, Links, Auswahl,
   Tags; `--petrol` zeigt darauf), **Apricot `#E8753D` = nur Hauptaktion** (gefüllte Knöpfe, dunkler Text),
   **Gold `#B8A35A` = nur Favoriten/Sterne**, Petrol nur Kühltruhe (`--ice`). Flächen: Hintergrund `#F5F2ED`,
-  Zellen `#FFFEFB`, Füllung `#ECE7E0`, Linien `#E2DCD3`, Text Charcoal `#252A27`, Metadaten `#68655E`.
+  Zellen `#FFFEFB`, Füllung `#ECE7E0`, Linien `#E2DCD3`, Text Charcoal `#252A27`, Sekundärtext `#57534C`, Metadaten `#68655E` (Text nie Grün, Grün heißt „antippbar“).
 - Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz). Inter wird nicht mehr
   vorgeladen (auf iPhone/iPad/Mac greift SF).
 - Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz); Fraunces 400/600
@@ -102,13 +102,13 @@ SwiftUI-Code, nicht für diese Web-App.
 - Apples Regeln (Abschnitt 11 in `assets/styles.css`, geprüft mit Skill `apple-design`): Tippflächen mindestens
   44 × 44 pt (bei kleinen Chips per `::after`), Text mind. 4,5 : 1 (Apricot nie als Textfarbe auf Creme, Links Petrol),
   Schrift wächst mit der iPhone-Textgröße (`font: -apple-system-body` auf `html`, alles in `rem`; bis 200 % ohne
-  seitliches Scrollen prüfen). Rezeptseite hat oben links eine Zurück-Taste (`#recipeBack`).
+  seitliches Scrollen prüfen; Großtitel trennen, Symbole neben Text in `em`, Abschnitt 15). Rezeptseite hat oben links eine Zurück-Taste (`#recipeBack`).
 - Rezeptkarten gibt es genau zweimal: `_includes/recipe-card.html` (Liquid, Rezeptliste/Kategorien) und
   `assets/cards.js` (`KOCHBUCH_CARDS.recipeCard`, Startseite). Beide mit Kühltruhen-Markierung „❄ n“, Bewertung ★ und
   Favoriten-Herz (befüllt von `updateFavBadges()` in `assets/utils.js`). Änderungen an Karten in beiden Dateien machen.
   Kartentitel mit Silbentrennung (`hyphens:auto`), Zeitangabe einzeilig mit „…“.
 - Symbole: nur Linien-SVGs (Klasse `.ico`, Strichstärke ~2, `currentColor`) wie in der Tab-Leiste – keine Schriftzeichen
-  wie ✕ ‹ › ✓ ♡ als Knopf-Symbol. „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
+  wie ✕ ‹ › ✓ ♡ + − als Knopf-Symbol (Plus/Minus: `.icoPM`). „Alle ›“ mit CSS-Chevron. „Mehr“-Menü mit farbigen Symbol-Kacheln wie die
   iPhone-Einstellungen (`--tile` je Zeile, weißes Symbol).
 - Logo: `assets/logo.svg` „Zwei Seiten“: offenes Buch als Schale, linke Seite Apricot, rechte Kräutergrün. Keine Kochmütze, kein Besteck.
   Bei Logo-Änderungen die Icon-Dateinamen (`-v2` → `-v3`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
