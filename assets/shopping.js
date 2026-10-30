@@ -26,7 +26,7 @@
       "sojasauce", "sojasoße", "fischsauce", "austernsauce", "worcester", "ketchup", "mayonnaise", "=mayo", "senf",
       "honig", "erdnussbutter", "sambal", "sriracha", "gochujang", "hoisin", "tahini", "pesto", "=oliven", "kapern",
       "kichererbsen", "kidney", "schwarze bohnen", "weiße bohnen", "linsen", "=mais", "paste", "apfelmus", "konfitüre",
-      "salsa", "miso", "ketjap", "sauce", "soße", "dose"],
+      "salsa", "miso", "ketjap", "sauce", "soße", "dose", "chutney", "butterbohnen"],
     "Gewürze & Öle": ["pulver", "granulat", "chiliflocken", "garam masala", "kreuzkümmel", "kumin", "cumin", "kurkuma",
       "zimt", "muskat", "pfeffer", "pepper", "~salz", "=salt", "oregano", "majoran", "lorbeer", "gewürz", "würz",
       "essig", "~öl", "=öl", "gochugaru", "vanilleextrakt", "sesam", "samen", "körner", "nelke", "sternanis",
