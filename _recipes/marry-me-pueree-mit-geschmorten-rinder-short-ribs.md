@@ -6,7 +6,7 @@ category: "Fleisch & Schmorgerichte"
 categories: ["Meal Prep"]
 tags: ["rind", "ofen", "aufwendig"]
 time: "ca. 5 Std"
-image: /recipes/images/ribs.jpg
+image: /recipes/images/short-ribs-mvvbn4oq.jpg
 servings: 4
 ingredients:
   - { section: "Kartoffelpüree" }
@@ -14,13 +14,13 @@ ingredients:
   - { qty: 200, unit: "ml", item: "Vollmilch" }
   - { qty: 200, unit: "ml", item: "Schlagsahne" }
   - { qty: 4, unit: "Zehen", item: "Knoblauch, gehackt" }
-  - { qty: "3", unit: "Zweige", item: "Thymian" }
+  - { qty: 3, unit: "Zweige", item: "Thymian" }
   - { qty: 150, unit: "g", item: "Butter, geschmolzen" }
   - { qty: "n. B.", unit: "", item: "Feines Salz" }
   - { qty: "n. B.", unit: "", item: "Weißer Pfeffer" }
   - { qty: "n. B.", unit: "", item: "Muskatnuss, frisch gerieben" }
   - { section: "Short Ribs" }
-  - { qty: "4", unit: "Stk.", item: "Rinder-Short-Ribs" }
+  - { qty: 4, unit: "Stk.", item: "Rinder-Short-Ribs" }
   - { qty: "n. B.", unit: "", item: "Salz" }
   - { qty: "n. B.", unit: "", item: "Pfeffer" }
   - { qty: 1, unit: "EL", item: "Öl" }
@@ -32,7 +32,7 @@ ingredients:
   - { qty: 3, unit: "Zweige", item: "Thymian" }
   - { qty: 2, unit: "", item: "Lorbeerblätter" }
   - { qty: 500, unit: "ml", item: "Rotwein" }
-  - { qty: "750", unit: "ml", item: "Rinderbrühe" }
+  - { qty: 750, unit: "ml", item: "Rinderbrühe" }
 ---
 
 ### Püree
