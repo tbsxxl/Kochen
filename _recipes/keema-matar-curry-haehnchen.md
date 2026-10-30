@@ -7,7 +7,7 @@ category: "Curry"
 categories: ["Indisch", "Hähnchen", "Schnell", "Meal Prep"]
 tags: ["hähnchen", "high-protein"]
 time: "15–25 Min"
-image: /recipes/images/keema-matar-curry-mit-haehnchen-mur9b1gt.jpg
+image: /recipes/images/chicken-curry-mvv0a7yl.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchengeschnetzeltes, mariniert" }
