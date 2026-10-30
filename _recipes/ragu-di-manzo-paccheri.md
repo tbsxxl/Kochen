@@ -7,7 +7,7 @@ category: "Pasta"
 categories: ["Italienisch", "Fleisch & Schmorgerichte", "Meal Prep"]
 tags: ["rind", "high-protein", "aufwendig"]
 time: "ca. 2 Std"
-image: /recipes/images/ragu-di-manzo-mvpsa3c1.jpg
+image: /recipes/images/ragu-di-manzo-mvvbw2mo.jpg
 servings: 4
 ingredients:
   - { section: "Ragù" }
