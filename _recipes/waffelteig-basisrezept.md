@@ -6,7 +6,7 @@ category: "Süßes & Backen"
 categories: ["Schnell"]
 tags: ["vegetarisch", "familientauglich"]
 time: "ca. 20 Min"
-image: /recipes/images/waffel.jpg
+image: /recipes/images/waffeln-mvwcyzel.jpg
 servings: 10
 ingredients:
   - { qty: 250, unit: "g", item: "Mehl" }
