@@ -256,7 +256,7 @@ Hauptzutaten, „Amerikanisch“ und „aufwendig“ sind keine Tags mehr (stehe
 **KI-Fotos (Okt. 2026, Stil vom Besitzer):** Prompt je Rezept in `tools/image-prompts.json` (Gericht + gemeinsamer Stil:
 heller greige Steintisch, weiches Seitenlicht, warmweißes Keramikgeschirr, skandinavisch-minimalistisch, 16 : 9), erzeugt mit
 Canva `generate-image` (`LANDSCAPE_16_9`); `canva_media_id` = schon erzeugt. Canva-Kontingent ist begrenzt (Okt. 2026 nach
-10 Bildern erschöpft); Herunterladen braucht `media.canva.com` in den Netzwerk-Freigaben der Umgebung.
+9 Bildern erschöpft); Herunterladen braucht `media.canva.com` in den Netzwerk-Freigaben der Umgebung.
 Neue Bilder mit `python3 tools/optimize-images.py recipes/images/<bild>.jpg` vorbereiten: schneidet links
 und rechts je 7 % ab (KI-Wasserzeichen, Motiv bleibt mittig) und erzeugt `-480.webp`/`-960.webp`. Ohne WebP fällt die Seite aufs JPG zurück.
 Wenn bestehende Bilder geändert werden: `image_version` in `_config.yml` hochzählen (Cache-Busting).
