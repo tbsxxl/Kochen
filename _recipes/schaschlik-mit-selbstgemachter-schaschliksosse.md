@@ -6,7 +6,7 @@ category: "Schwein"
 categories: ["Schmorgerichte"]
 tags: ["deutsch", "klassiker"]
 time: "ca. 2 Std"
-image: /recipes/images/schaschlik-mvprskni.jpg
+image: /recipes/images/schaschlik-mvwdo1xy.jpg
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Schweinenacken" }
