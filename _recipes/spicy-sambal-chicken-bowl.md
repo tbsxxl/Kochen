@@ -7,7 +7,7 @@ category: "Bowls & Salate"
 categories: ["Hähnchen", "Asiatisch", "Schnell", "Meal Prep"]
 tags: ["scharf", "high-protein"]
 time: "15–25 Min"
-image: /recipes/images/spicy-sambal-chicken-bowl.jpg
+image: /recipes/images/sambal-chicken-bowl-mvwds4ym.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchenbrustfilet" }
