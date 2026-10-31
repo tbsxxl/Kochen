@@ -7,7 +7,7 @@ category: "Pasta"
 categories: ["Hackfleisch", "Schnell"]
 tags: ["türkisch", "high-protein"]
 time: "20–30 Min"
-image: /recipes/images/tuerkische-hack-pasta.jpg
+image: /recipes/images/k-ymal-makarna-mvwdl9hq.jpg
 servings: 4
 ingredients:
   - { section: "Hack-Tomatensoße" }
