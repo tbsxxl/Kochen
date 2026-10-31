@@ -7,7 +7,7 @@ author: "Tobi"
 category: "Schwein"
 tags: ["griechisch", "klassiker"]
 time: "ca. 25 Min + 2 Std marinieren"
-image: /recipes/images/souvlaki-griechische-fleischspiesse-mvprezte.jpg
+image: /recipes/images/souvlaki-mvwdnouz.jpg
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Schweinelummer oder Schweinelachs (am Stück)" }
