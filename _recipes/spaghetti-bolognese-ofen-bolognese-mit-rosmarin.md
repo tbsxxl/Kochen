@@ -6,7 +6,7 @@ category: "Pasta"
 categories: ["Hackfleisch", "Italienisch", "Meal Prep"]
 tags: ["ofen", "familientauglich"]
 time: "ca. 1 Std 15 Min"
-image: /recipes/images/spaghetti-bolognese-mvpsb92p.jpg
+image: /recipes/images/spaghetti-bolognese-mvwdn598.jpg
 servings: 6
 ingredients:
   - { qty: 2, unit: "Zehen", item: "Knoblauch" }
