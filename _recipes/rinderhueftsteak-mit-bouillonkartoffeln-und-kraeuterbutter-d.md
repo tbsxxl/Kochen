@@ -7,7 +7,7 @@ author: "Tobi"
 category: "Rind"
 tags: ["ofen"]
 time: "ca. 45 Min"
-image: /recipes/images/rinderhueftsteak-mit-bouillonkartoffeln-und-kraeuterbutter-d.jpg
+image: /recipes/images/rinderhueftsteak-mit-kraeuterbutter-mvwdq735.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hüftsteak vom Weiderind" }
