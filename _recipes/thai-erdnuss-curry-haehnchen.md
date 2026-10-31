@@ -7,7 +7,7 @@ category: "Curry"
 categories: ["Hähnchen", "Asiatisch", "Schnell", "Meal Prep"]
 tags: ["thailändisch", "scharf"]
 time: "15–25 Min"
-image: /recipes/images/thai-erdnuss-curry-haehnchen.jpg
+image: /recipes/images/massaman-curry-mvwdt5of.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Bio-Hähnchenbruststreifen" }
