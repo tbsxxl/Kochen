@@ -7,7 +7,7 @@ category: "Hähnchen"
 categories: ["Amerikanisch", "Meal Prep"]
 tags: ["one-pot", "high-protein"]
 time: "35–45 Min"
-image: /recipes/images/jambalaya-mvwctfg6.jpg
+image: /recipes/images/jambalaya-mvvbvhdd.jpg
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Hähnchenbrustfilet" }
