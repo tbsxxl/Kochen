@@ -6,7 +6,7 @@ category: "Süßes & Backen"
 categories: ["Italienisch"]
 tags: ["vegetarisch", "klassiker"]
 time: "ca. 30 Min + 2 Std kühlen"
-image: /recipes/images/tiramisu.jpg
+image: /recipes/images/tiramisu-mvwdmlfr.jpg
 servings: 6
 ingredients:
   - { qty: 4, unit: "", item: "Eier (Größe L), sehr frisch" }
