@@ -6,7 +6,7 @@ date: 2026-08-25
 category: "Pasta"
 categories: ["Rind"]
 time: "25–35 Min"
-image: /recipes/images/rindersteak-rigatoni-kampot-pfeffer.jpg
+image: /recipes/images/rindersteak-auf-rigatoni-mvwdql7z.jpg
 servings: 2
 ingredients:
   - { qty: 300, unit: "g", item: "Hüftsteak vom Weiderind" }
