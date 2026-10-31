@@ -6,7 +6,7 @@ category: "Knusprig & Frittiert"
 categories: ["Hähnchen", "Asiatisch"]
 tags: ["koreanisch", "scharf", "streetfood"]
 time: "ca. 1 Std"
-image: /recipes/images/yangnyeom.jpg
+image: /recipes/images/yangnyeom-tongdak-mvwcw54z.jpg
 servings: 4
 ingredients:
   - { section: "Hähnchen und Panade" }
@@ -21,8 +21,8 @@ ingredients:
   - { section: "Soße" }
   - { qty: 2, unit: "TL", item: "Pflanzenöl" }
   - { qty: 3, unit: "Zehen", item: "Knoblauch, fein gehackt" }
-  - { qty: 0.3333333333333333, unit: "cup", item: "Ketchup" }
-  - { qty: 0.3333333333333333, unit: "cup", item: "Reissirup" }
+  - { qty: 0.333, unit: "cup", item: "Ketchup" }
+  - { qty: 0.333, unit: "cup", item: "Reissirup" }
   - { qty: 0.25, unit: "cup", item: "Gochujang" }
   - { qty: 2, unit: "TL", item: "Weißweinessig" }
   - { section: "Zum Servieren" }
