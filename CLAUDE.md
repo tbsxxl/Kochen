@@ -124,7 +124,8 @@ SwiftUI-Code, nicht für diese Web-App.
   kein Besteck). Hell (`assets/logo.svg`, „mit Tiefe“): Terrakotta-Verlauf `#DB875F`→`#C46A42` links, Kräutergrün-Verlauf
   `#5E7863`→`#465C4B` rechts, feine helle Oberkante. Dunkel (`assets/logo-dark.svg`): Terrakotta `#E0906A`→`#C97350`,
   rechte Seite kräftiges Kräutergrün `#92D09D`→`#6FB57C` (wie das Grün der App im Dunkelmodus; Creme war zu weit weg). Startseite zeigt je nach App-Darstellung `.logoLight`/`.logoDark`;
-  `assets/favicon.svg` = Kachel, folgt dem System (hell Weiß, dunkel `#2E3B31`).
+  `assets/favicon.svg` und `favicon.ico` = nur das Zeichen auf transparentem Grund, **ohne Kachel** (eine helle
+  Kachel wirkte in dunklen Browser-Tab-Leisten wie ein weißer Kasten); Grün etwas heller (`#6E8C74`), dunkel wie `logo-dark.svg`.
   Homescreen-/Android-Icons (`apple-touch-icon-v8.png`, `icon-512-v8.png`, `icon-maskable-512-v8.png`, `favicon.ico`)
   auf Weiß mit leichtem Verlauf nach `#EEEEF0` (wie Apples Health-Icon), nur hell (Web-Apps können kein dunkles Icon festlegen), gerendert per Playwright, ico mit ImageMagick `convert`.
   Bei Logo-Änderungen die Icon-Dateinamen (`-v8` → `-v9`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
