@@ -8,7 +8,7 @@ category: "Fisch"
 categories: ["Curry", "Schnell"]
 tags: ["pfanne"]
 time: "ca. 25 Min"
-image: /recipes/images/fischfilet-in-mango-curry-sosse-mvwdkfwz.jpg
+image: /recipes/images/fischfilet-in-mango-curry-sosse-mvwdr0uv.jpg
 servings: 2
 ingredients:
   - { qty: 480, unit: "g", item: "Pangasiusfilet" }
