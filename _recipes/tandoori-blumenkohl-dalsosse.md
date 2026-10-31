@@ -7,7 +7,7 @@ category: "Curry"
 categories: ["Vegetarisch", "Indisch"]
 tags: ["ofen"]
 time: "30–40 Min"
-image: /recipes/images/tandoori-blumenkohl-in-tomatiger-dalsosse-mit-basmatireis-un-mur9ajr9.jpg
+image: /recipes/images/tandoori-gobi-mvwdvamt.jpg
 servings: 2
 ingredients:
   - { qty: 1, unit: "", item: "Blumenkohl" }
