@@ -89,7 +89,7 @@ SwiftUI-Code, nicht für diese Web-App.
   `--surface` (wie iOS). Radien: Karten 22, Listen 16, Felder 14.
 - **Neuanfang Okt. 2026 (Abschnitt 16 in `assets/styles.css`, gilt vor allen älteren Abschnitten):** Die Fotos sind die
   Farbe, die Oberfläche bleibt ruhig. Hellmodus warm (Abschnitt 19): Hintergrund Papierweiß `#F6F1E9`, Zellen `#FFFDF9`,
-  Füllung `#EDE7DD`, Linien `#E6E0D6`, Text `#1F1D1A`, Sekundärtext `#57534C`, Metadaten `#68645C`;
+  Füllung `#EDE7DD`, Linien `#E6E0D6`, Text `#1F1D1A`, Sekundärtext und Metadaten `#57534C` (6,8 : 1, Apple empfiehlt für kleine Schrift ~7 : 1);
   dunkel Apples neutrales `#000`/`#1C1C1E`/`#F5F5F7`. `theme-color`/Manifest hell `#F6F1E9`.
   **Markenfarbe Kräutergrün (Abschnitt 17 = Rollen, Abschnitt 18 = Farben):** das Grün aus dem Logo, eine einzige Farbe.
   `--brand`/`--leaf` hell `#526B57` (weißer Inhalt 5,8 : 1, als Text 5,2 : 1), dunkel `#7EC48A` (kräftiger, 10 : 1 auf Schwarz) mit dunklem Inhalt,
@@ -102,8 +102,8 @@ SwiftUI-Code, nicht für diese Web-App.
 - Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz) überall; Fraunces 600
   nur für den Rezeptnamen auf dem Foto der Rezeptseite und den Logo-Schriftzug.
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
-- Darstellung folgt dem iPhone (Hell/Dunkel, „auto“ = kein Eintrag in `kochbuch.ui.theme`); unter „Mehr“ Auswahl
-  Auto · Hell · Dunkel. Dunkel = Apples neutrales Schwarz/Grau. „Kontrast erhöhen“ (iPhone) schaltet wie der
+- Darstellung folgt dem iPhone (Hell/Dunkel, „auto“ = kein Eintrag in `kochbuch.ui.theme`); ganz unten unter „Mehr“ Auswahl
+  Auto · Hell · Dunkel (Apple rät von eigener Darstellungs-Wahl ab, daher nur als Ausnahme, Standard Auto). Dunkel = Apples neutrales Schwarz/Grau. „Kontrast erhöhen“ (iPhone) schaltet wie der
   Schalter „Hoher Kontrast“ (`prefers-contrast: more`).
 - Apples Regeln (Abschnitt 11 in `assets/styles.css`, geprüft mit Skill `apple-design`): Tippflächen mindestens
   44 × 44 pt (bei kleinen Chips per `::after`), Text mind. 4,5 : 1,
@@ -140,9 +140,11 @@ SwiftUI-Code, nicht für diese Web-App.
 - Startseite wie der „Heute“-Tab im App Store: Datum über der Begrüßung, „Heute für dich“ als Bildkarte mit Titel auf dem
   Foto. Rezeptfoto mit Parallaxe/Dehnen beim Scrollen (Skript in `_layouts/recipe.html`, aus bei „Bewegung reduzieren“).
   Aktiver Tab: Kapsel, Grün, Symbol gefüllt (`fill-opacity`).
-- Rezept-Leiste unten: Favorit · Planen · **Kochen** (Mitte, Kapsel wie aktiver Tab, Symbol Grün) · Zur Liste · Mehr (Gekocht, Kühltruhe, PDF,
-  Drucken, Bearbeiten).
-- Planen (Rezept-Leiste): Blatt mit 10 Tagen, mehrere antippbar; Schalter „Einmal kochen, Reste essen“ markiert alle
+- Rezeptseite: die Tab-Leiste bleibt stehen (Apple: Tab-Leiste = Navigation, keine Aktionen). Aktionen direkt unter dem
+  Foto (`.recipeActions`, Abschnitt 23 in `assets/styles.css`, wie „Wiedergabe“ unter einem Album in Apple Music):
+  **Kochen** als grüne Kapsel, daneben runde Knöpfe Favorit · Planen · Zur Liste · Mehr (Gekocht, Kühltruhe, PDF,
+  Drucken, Bearbeiten). Die IDs (`#cookingModeQuick`, `#favQuick`, …) nutzen recipe.js und die Tests.
+- Planen (Kalender-Knopf unter dem Foto): Blatt mit 10 Tagen, mehrere antippbar; Schalter „Einmal kochen, Reste essen“ markiert alle
   außer dem frühesten Tag mit `leftover: true` (Wochenplan zeigt „Reste“, Einkaufen zählt sie nicht). Standard an bei
   „Meal Prep“ (`RECIPE_DATA.mealPrep`). Tags auf der Rezeptseite = antippbare Kapseln (`/rezeptindex/?q=<tag>`), Infos
   (Zeit, Portionen, Favorit, Bewertung, Kühltruhe) als ruhige Zeile mit Symbolen.
@@ -172,6 +174,7 @@ SwiftUI-Code, nicht für diese Web-App.
   (`schnell`, `veg` aus Kategorien/Tags) und „Nie gekocht“ (aus `kochbuch.stats`).
 - Einkaufsliste: nach links wischen = löschen (Rückgängig über `KOCHBUCH_UI.toast(text, {label, run})`);
   „Erledigte löschen“/„Alles löschen“ ohne Rückfrage, mit „Rückgängig“ (`clearWithUndo`), nur sichtbar, wenn sie etwas tun;
+  Kühltruhe genauso: Entfernen (auch per Minus auf 0) ohne Rückfrage, mit „Rückgängig“ (`assets/freezer.js`).
   lange drücken/Menge antippen = Blatt für Menge, Abteilung, Löschen. Korrigierte Abteilungen in
   `kochbuch.shopsections` (synchronisiert), Vorschläge beim Tippen aus `kochbuch.ui.shopfreq`.
   „Zur Liste“ lässt reine Verwendungszeilen weg (`usageBase()` in `assets/utils.js`: „Fett für die Form“ immer,

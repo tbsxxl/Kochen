@@ -69,7 +69,7 @@
     const f = getFreezer();
     const ids = Object.keys(f);
     if(!ids.length){
-      host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Noch nichts eingefroren</div><div class="uEmptyText">Öffne ein Rezept und tippe unten auf „Mehr“ → „Kühltruhe“.</div></div>`;
+      host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Noch nichts eingefroren</div><div class="uEmptyText">Öffne ein Rezept und tippe unter dem Foto auf „Mehr“ → „Kühltruhe“.</div></div>`;
       return;
     }
     // Älteste zuerst: was am längsten drin ist, sollte zuerst gegessen werden
@@ -90,9 +90,17 @@
 
     if(act === 'plus'){ entry.portions = Math.min(999, Number(entry.portions||0)+1); f[id]=entry; }
     if(act === 'minus'){ entry.portions = Math.max(0, Number(entry.portions||0)-1); if(entry.portions<=0) delete f[id]; else f[id]=entry; }
-    if(act === 'remove'){ if(!window.confirm('Aus der Kühltruhe entfernen?')) return; delete f[id]; }
+    // Entfernen ohne Rückfrage, dafür mit „Rückgängig“ (wie in der Einkaufsliste)
+    if(act === 'remove') delete f[id];
+    const removed = !f[id] && (act === 'remove' || act === 'minus');
     setFreezer(f);
     render();
+    if(removed && window.KOCHBUCH_UI?.toast){
+      const saved = { ...entry, portions: act === 'minus' ? 1 : entry.portions };
+      window.KOCHBUCH_UI.toast('Aus der Kühltruhe entfernt', { label: 'Rückgängig', run: ()=>{
+        const g = getFreezer(); g[id] = saved; setFreezer(g); render();
+      }});
+    }
   });
 
   render();
