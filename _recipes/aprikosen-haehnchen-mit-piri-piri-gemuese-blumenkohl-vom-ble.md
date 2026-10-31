@@ -8,7 +8,7 @@ category: "Hähnchen"
 categories: ["Schnell"]
 tags: ["ofen"]
 time: "ca. 30 Min"
-image: /recipes/images/aprikosen-haehnchen-mit-piri-piri-gemuese-blumenkohl-vom-ble.jpg
+image: /recipes/images/aprikosen-haehnchen-vom-blech-mvwdjfmw.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchenbrustfilet" }
