@@ -6,7 +6,7 @@ category: "Knusprig & Frittiert"
 categories: ["Hähnchen", "Asiatisch"]
 tags: ["koreanisch", "scharf", "streetfood"]
 time: "ca. 1 Std"
-image: /recipes/images/yangnyeom-tongdak-mvwcw54z.jpg
+image: /recipes/images/yangnyeom.jpg
 servings: 4
 ingredients:
   - { section: "Hähnchen und Panade" }
