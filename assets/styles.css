@@ -240,7 +240,6 @@ code{font-family:var(--fontMono)}
   padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 24px);
 }
 body.layout-recipe .appMain{padding-top:0}
-.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) + env(safe-area-inset-bottom) + 24px)}
 
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px}
 @media (max-width:640px){ .grid{grid-template-columns:minmax(0,1fr)} }
@@ -1509,7 +1508,6 @@ body.hasNowCooking .uiToast{bottom:calc(var(--tabbarH) + env(safe-area-inset-bot
 .nowCooking.isDone{background:var(--accent);color:var(--onAccent)}
 .nowCooking.isDone .nowCookingSub,.nowCooking.isDone .nowCookingPlay svg{color:var(--onAccent)}
 body.hasNowCooking .appMain{padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 92px)}
-body.hasNowCooking.layout-recipe .appMain{padding-bottom:calc(var(--recipeBarH) + env(safe-area-inset-bottom) + 92px)}
 
 /* Rezeptseite */
 .recipePageBody{border-radius:28px 28px 0 0;margin-top:-24px}
@@ -2054,7 +2052,7 @@ body.highContrast{--leaf:#3B4F40}
   --lineStrong:#CFC7BA;
   --text:#1F1D1A;
   --sub:#57534C;
-  --sub2:#68645C;
+  --sub2:#57534C;
   --muted:#8C877E;
   --fill:rgba(120,100,75,.10);
   --glass:rgba(252,249,244,.74);
@@ -2089,11 +2087,6 @@ body.highContrast{--line:#CFC7BA;--lineStrong:#8C877E;--text:#000000;--sub:#3A37
 .sheet a.sheetRow:has(.countBadge[hidden])::after{margin-left:auto}
 /* Kapseln auf der Rezeptseite einheitlich neutral (alle antippbar), Hauptkategorie fett */
 .recipeTags .chip,.recipeTags .chipLink:not(.chipTag){background:var(--fill);color:var(--text)}
-/* „Kochen“ in der Rezept-Leiste wie der aktive Tab der Hauptleiste: blasse grüne Kapsel, grünes Symbol und Wort
-   (statt grüner Vollfläche aus dem Safran-Rebranding, die in der Glasleiste zu schwer wirkte) */
-.recipeTabbar .tabItem.tabPrimary{background:var(--brandSoft);color:var(--leaf)}
-.recipeTabbar .tabItem.tabPrimary .tabIcon{color:var(--leaf)}
-.recipeTabbar .tabItem.tabPrimary .tabLabel{font-weight:600}
 
 /* ---------- 22. Akzentfarbe öfter (wie Apple Music, Okt. 2026) ----------
    Listen-Symbole ohne bunte Kacheln, dafür in Kräutergrün (wie die Mediathek-Liste in Apple Music);
@@ -2108,3 +2101,17 @@ body.highContrast{--line:#CFC7BA;--lineStrong:#8C877E;--text:#000000;--sub:#3A37
 }
 .cookOverlay{--cLeaf:#7EC48A}
 .cookIngRow.isStep{background:rgba(126,196,138,.16)}
+
+/* ---------- 23. Rezeptseite nach Apples Regeln (Design-Prüfung Okt. 2026) ----------
+   Die Tab-Leiste bleibt auch auf der Rezeptseite stehen (Navigation, keine Aktionen). Die Aktionen stehen wie
+   „Wiedergabe“ unter einem Album in Apple Music direkt unter dem Foto: „Kochen“ als große grüne Kapsel,
+   daneben runde Knöpfe für Favorit, Planen, Zur Liste und Mehr. */
+.recipeActions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px}
+.recipeCookBtn{flex:1 1 6.5rem;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:0;border-radius:var(--rPill);background:var(--brand);color:var(--onBrand);font:inherit;font-size:var(--fs16);font-weight:600;padding:0 20px;cursor:pointer}
+.recipeCookBtn .ico{width:1.1em;height:1.1em}
+.recipeActBtn{flex:0 0 auto;width:44px;height:44px;display:inline-grid;place-items:center;border:0;border-radius:50%;
+  background:var(--fill);color:var(--leaf);cursor:pointer;padding:0}
+.recipeActBtn .ico{width:21px;height:21px}
+#favQuick.isOn svg path{fill:currentColor}
+.recipeActions + .recipeAuthor{margin-top:0}

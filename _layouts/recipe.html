@@ -44,6 +44,13 @@ layout: default
       <h1 class="h1 recipeName">{{ page.title }}</h1>
       {%- if page.subtitle %}<p class="recipeSubtitle">{{ page.subtitle }}</p>{% endif %}
       {%- endunless %}
+      <div class="recipeActions" role="group" aria-label="Rezept Aktionen">
+        <button class="recipeCookBtn pressable" id="cookingModeQuick" type="button"><svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.9l10-6.5a1 1 0 000-1.7l-10-6.5A1 1 0 008 5.5z"/></svg><span>Kochen</span></button>
+        <button class="recipeActBtn pressable" id="favQuick" type="button" aria-pressed="false" aria-label="Favorit"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></svg></button>
+        <button class="recipeActBtn pressable" id="planQuick" type="button" aria-label="Planen"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></button>
+        <button class="recipeActBtn pressable" id="addToShopping" type="button" aria-label="Zur Einkaufsliste"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></button>
+        <button class="recipeActBtn pressable" id="recipeMoreBtn" type="button" aria-label="Weitere Aktionen"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="19" cy="12" r="1.2" fill="currentColor"/></svg></button>
+      </div>
       {%- assign recipe_author = page.author | default: site.owner_name -%}
       <a class="recipeAuthor" href="{{ '/rezeptindex/' | relative_url }}?person={{ recipe_author | url_encode }}"><span class="authorAvatar" aria-hidden="true">{{ recipe_author | slice: 0 | upcase }}</span><span>von {{ recipe_author }}{% if page.source %} · nach {{ page.source }}{% endif %}</span></a>
 
@@ -185,30 +192,7 @@ layout: default
   })();
 </script>
 
-<!-- Sticky Bottom Action Bar -->
-<nav class="tabbar bottomRail recipeTabbar" aria-label="Rezept Aktionen">
-  <div class="tabbarInner container">
-    <button class="tabItem pressable" id="favQuick" type="button" aria-pressed="false">
-      <span class="tabIcon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></svg></span><span class="tabLabel">Favorit</span>
-    </button>
 
-    <button class="tabItem pressable" id="planQuick" type="button">
-      <span class="tabIcon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span class="tabLabel">Planen</span>
-    </button>
-
-    <button class="tabItem tabPrimary pressable" id="cookingModeQuick" type="button">
-      <span class="tabIcon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.9l10-6.5a1 1 0 000-1.7l-10-6.5A1 1 0 008 5.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></span><span class="tabLabel">Kochen</span>
-    </button>
-
-    <button class="tabItem pressable" id="addToShopping" type="button">
-      <span class="tabIcon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span class="tabLabel">Zur Liste</span>
-    </button>
-
-    <button class="tabItem pressable" id="recipeMoreBtn" type="button">
-      <span class="tabIcon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="5" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="19" cy="12" r="1.4" fill="currentColor"/></svg></span><span class="tabLabel">Mehr</span>
-    </button>
-  </div>
-</nav>
 
 <!-- Recipe More Sheet -->
 <div class="sheetOverlay" id="recipeSheetOverlay"></div>
