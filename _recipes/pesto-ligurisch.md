@@ -6,7 +6,7 @@ category: "Saucen & Basics"
 categories: ["Vegetarisch", "Italienisch", "Schnell"]
 tags: ["klassiker"]
 time: "ca. 20 Min"
-image: /recipes/images/pesto.jpg
+image: /recipes/images/pesto-alla-genovese-mvwdouq6.jpg
 servings: 4
 ingredients:
   - { qty: 75, unit: "g", item: "Basilikum, frisch" }
