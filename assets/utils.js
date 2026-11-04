@@ -151,17 +151,35 @@
     if(!base || /^(fett|butter oder fett)$/i.test(base)) return "";
     return base;
   }
+  // Name für die Einkaufsliste: Zubereitung und Hinweise weglassen, damit gleiche Zutaten zusammenkommen
+  // („Knoblauch, fein gehackt“ + „Knoblauch, in Scheiben“ → „Knoblauch“; „Fond (ca.)“ → „Fond“).
+  // Was beim Einkaufen zählt (gemahlen, getrocknet, frisch, festkochend, Bio …), bleibt stehen.
+  const PREP = "(?:sehr |grob |fein |frisch |leicht |kurz |klein |dünn |sehr dünn |in feine |in feinen |und |oder |gut )*(?:gewürfelt|gerieben|gehackt|gestreift|geschnitten|zerkleinert|geschmolzen|geschält|halbiert|geviertelt|geschlagen|blanchiert|zerdrückt|gepresst|zerlassen|weich|kalt|warm|lauwarm|zimmerwarm|in (?:streifen|scheiben|ringen|würfeln|stiften|stücken|röschen|zwei zugaben)|in [a-zäöüß/]+|kleine röschen|für (?:die|den|das) [a-zäöüß-]+|halbe menge|ca\\.?)";
+  const PREP_TAIL = new RegExp(`\\s*,\\s*${PREP}(?:\\s*(?:,|und|oder)\\s*${PREP})*\\s*(\\([^)]*\\))?\\s*$`, "i");
+  const PREP_PAREN = new RegExp(`\\s*\\(\\s*${PREP}(?:\\s*[,;]?\\s*(?:${PREP}|je nach form))*\\s*\\)`, "gi");
+  function shopName(item){
+    let t = String(item || "").trim();
+    t = t.replace(PREP_PAREN, "").replace(PREP_TAIL, (_, p)=> p ? ` ${p}` : "").replace(/\s{2,}/g, " ").trim();
+    return t || String(item || "").trim();
+  }
   const mainWord = (s)=> String(s || "").toLowerCase().replace(/\(.*?\)/g, " ").split(/[^a-zäöüß]+/).filter(w=>w.length >= 2).pop() || "";
 
   function mergeIntoShopping(ings, from){
-    ings = (ings || []).filter(i=> !sectionOf(i));
+    // „Zusätzlicher Schuss Milch – zum Fertigstellen“: Menge ist nur ein Verwendungszweck → wie „Öl zum Braten“
+    ings = (ings || []).filter(i=> !sectionOf(i)).map(i=>{
+      const q = String(i.qty ?? "").trim();
+      const item = shopName(i.item);
+      if(/^(zum|für)\s/i.test(q)) return { ...i, qty:"", usage:true, item: item.replace(/^(?:zusätzliche[rsn]?|etwas|ein|eine|einen)\s+(?:(?:schuss|prise|spritzer|handvoll)\s+)?/i, "") };
+      return { ...i, item };
+    });
     const key = "kochbuch.shopping";
     let list = [];
     try{ list = JSON.parse(localStorage.getItem(key) || "[]"); }catch{}
     const nk = (s)=>String(s||"").trim().toLowerCase();
     // „Mehl für die Arbeitsfläche“ weglassen, wenn schon Mehl gekauft wird (im Rezept oder auf der Liste)
-    const others = [...ings.filter(i=> usageBase(i.item) === null).map(i=>i.item), ...list.filter(e=>!e.checked).map(e=>e.item)].map(nk);
+    const others = [...ings.filter(i=> !i.usage && usageBase(i.item) === null).map(i=>i.item), ...list.filter(e=>!e.checked).map(e=>e.item)].map(nk);
     ings = ings.filter(i=>{
+      if(i.usage){ const w = mainWord(i.item); return !(w && others.some(o=> o.includes(w))); }
       const base = usageBase(i.item);
       if(base === null) return true;
       if(base === "") return false;
@@ -169,17 +187,24 @@
       return !(w && others.some(o=> o.includes(w)));
     });
     const map = new Map();
-    for(const e of list) map.set(`${nk(e.item)}|${nk(e.unit)}`, e);
+    for(const e of compactShopping(list)) map.set(`${nk(e.item)}|${unitKey(e.unit)}`, e);
     for(const i of ings || []){
       const item = String(i.item||"").trim(); if(!item) continue;
       const unit = normUnit(i.unit||"");
-      const q0 = tryNum(i.qty);
+      const q0 = shopNum(i.qty);
       const conv = (q0!==null) ? autoConvert(q0, unit) : { qty:null, unit };
-      const k = `${nk(item)}|${nk(conv.unit)}`;
-      const ex = map.get(k);
+      const k = `${nk(item)}|${unitKey(conv.unit)}`;
+      // ohne Menge („n. B.“): zu einem vorhandenen Eintrag derselben Zutat legen, egal welche Einheit
+      let ex = map.get(k) || (conv.qty === null && !String(i.qty ?? "").trim().match(/\d/) ? [...map.values()].find(e=> nk(e.item) === nk(item)) : undefined);
+      // umgekehrt: Eintrag ohne Menge und Einheit bekommt jetzt eine Menge
+      if(!ex && conv.qty !== null){
+        const bare = [...map.entries()].find(([, e])=> nk(e.item) === nk(item) && e.qty == null && !e.unit);
+        if(bare){ map.delete(bare[0]); ex = bare[1]; ex.unit = conv.unit; ex.qtyLabel = ""; map.set(k, ex); }
+      }
       if(ex){
+        if(map.get(k) === ex) ex.unit = longerUnit(ex.unit, conv.unit);
         if(typeof ex.qty==="number" && typeof conv.qty==="number"){
-          const c2 = autoConvert(ex.qty + conv.qty, conv.unit);
+          const c2 = autoConvert(ex.qty + conv.qty, ex.unit);
           ex.qty = c2.qty; ex.unit = c2.unit;
         }else if(ex.qty==null && typeof conv.qty==="number"){
           ex.qty = conv.qty; ex.unit = conv.unit;
@@ -194,6 +219,33 @@
     }
     const out = Array.from(map.values()).sort((a,b)=>String(a.item).localeCompare(String(b.item),"de"));
     try{ localStorage.setItem(key, JSON.stringify(out)); }catch{}
+  }
+
+  // Einheit für den Vergleich: Einzahl/Mehrzahl gleich behandeln (Zehe/Zehen, Dose/Dosen, Packung/Packungen)
+  const unitKey = (u)=> String(u||"").trim().toLowerCase().replace(/^(.*ung)en$/, "$1").replace(/^(.*e)n$/, "$1");
+  const longerUnit = (a, b)=> String(b||"").length > String(a||"").length ? b : a;
+  // „1–2“ zählt beim Einkaufen als 2
+  const shopNum = (q)=>{ if(q == null || String(q).trim() === "") return null; const n = tryNum(q); if(n !== null) return n; const m = String(q ?? "").trim().match(/^\d+(?:[.,]\d+)?\s*[–-]\s*(\d+(?:[.,]\d+)?)$/); return m ? tryNum(m[1]) : null; };
+
+  // Vorhandene Liste aufräumen: Namen kürzen und gleiche Zutat + Einheit zusammenzählen.
+  function compactShopping(list){
+    const nk = (s)=>String(s||"").trim().toLowerCase();
+    const map = new Map();
+    for(const e0 of (list || [])){
+      if(!e0 || !e0.item) continue;
+      const e = { ...e0, item: shopName(e0.item) };
+      if(typeof e.qty !== "number" && shopNum(e.qtyLabel) !== null){ e.qty = shopNum(e.qtyLabel); e.qtyLabel = ""; }
+      const k = `${nk(e.item)}|${unitKey(e.unit)}`;
+      const ex = map.get(k);
+      if(!ex){ map.set(k, e); continue; }
+      ex.unit = longerUnit(ex.unit, e.unit);
+      ex.checked = !!(ex.checked && e.checked);   // noch etwas offen → Eintrag bleibt offen
+      if(typeof ex.qty === "number" && typeof e.qty === "number"){ const c = autoConvert(ex.qty + e.qty, ex.unit); ex.qty = c.qty; ex.unit = c.unit; }
+      else if(ex.qty == null && typeof e.qty === "number"){ ex.qty = e.qty; ex.qtyLabel = ""; }
+      if(e.qtyLabel && ex.qtyLabel && ex.qtyLabel !== e.qtyLabel && !ex.qtyLabel.includes(e.qtyLabel)) ex.qtyLabel = `${ex.qtyLabel} + ${e.qtyLabel}`;
+      for(const f of String(e.from || "").split(", ").filter(Boolean)) if(!String(ex.from || "").split(", ").includes(f)) ex.from = ex.from ? `${ex.from}, ${f}` : f;
+    }
+    return Array.from(map.values());
   }
 
   // Wochenplan: { "YYYY-MM-DD": [{ id, servings }] }
@@ -235,7 +287,7 @@
     if(!String(i.qty ?? "").trim() && !String(i.unit || "").trim() && /^\*+[^*].*\*+$/.test(t)) return t.replace(/^\*+|\*+$/g, "").trim();
     return "";
   }
-  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum, renderToggleList, mergeIntoShopping, plan, sectionOf };
+  window.KOCHBUCH_UTILS = { normUnit, autoConvert, roundSmart, tryNum, renderToggleList, mergeIntoShopping, compactShopping, shopName, plan, sectionOf };
 })();
 
 // Favorite badge indicator on list cards (uses kochbuch.stats)
@@ -500,9 +552,16 @@
     bar.className = 'navCompact';
     bar.setAttribute('aria-hidden', 'true');
     bar.textContent = big.classList.contains('homeGreetingTitle') ? (document.querySelector('.brandWordmark')?.textContent || '') : big.textContent.trim();
-    document.body.appendChild(bar);
+    // Weicher Rand oben (wie der „Scroll Edge“ in iOS 26): Inhalt verschwindet unter der Titelkapsel,
+    // statt dass Text durch die Kapsel hindurch zu lesen ist.
+    const edge = document.createElement('div');
+    edge.className = 'navEdge';
+    edge.setAttribute('aria-hidden', 'true');
+    document.body.append(edge, bar);
     new IntersectionObserver(([e])=>{
-      bar.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0);
+      const show = !e.isIntersecting && e.boundingClientRect.top < 0;
+      bar.classList.toggle('show', show);
+      edge.classList.toggle('show', show);
     }, { rootMargin: '-40px 0px 0px 0px' }).observe(big);
   }
 
