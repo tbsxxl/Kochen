@@ -1367,8 +1367,8 @@ body{font-feature-settings:normal;letter-spacing:-.003em}
   transition:opacity .2s var(--easeIn), transform .26s var(--easeIn);
 }
 .navCompact.show{opacity:1;transform:translate3d(-50%,0,0);transition:opacity .28s var(--easeSheet), transform .45s var(--easeSheet)}
-.navEdge{position:fixed;z-index:1249;top:0;left:0;right:0;height:calc(env(safe-area-inset-top) + 64px);pointer-events:none;
-  background:linear-gradient(to bottom, var(--bg) 0, var(--bg) calc(env(safe-area-inset-top) + 30px), transparent 100%);
+.navEdge{position:fixed;z-index:1249;top:0;left:0;right:0;height:calc(env(safe-area-inset-top) + 78px);pointer-events:none;
+  background:linear-gradient(to bottom, var(--bg) 0, var(--bg) calc(env(safe-area-inset-top) + 50px), transparent 100%);
   opacity:0;transition:opacity .2s var(--easeIn)}
 .navEdge.show{opacity:1;transition:opacity .28s var(--easeSheet)}
 body.layout-recipe .navEdge{display:none}

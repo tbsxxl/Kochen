@@ -180,7 +180,8 @@ SwiftUI-Code, nicht für diese Web-App.
   Gleiche Zutaten kommen zusammen: `shopName()` in `assets/utils.js` lässt Zubereitung weg („Knoblauch, fein gehackt“,
   „…, in Scheiben“ → „Knoblauch“; „(ca.)“, „für die Soße“), behält aber, was beim Kaufen zählt (gemahlen, frisch, Dose,
   optional). Zehe/Zehen usw. gelten als gleiche Einheit, „1–2“ zählt als 2, Zutaten ohne Menge legen sich zu einer
-  vorhandenen. Ältere Listen räumt `compactShopping()` beim Öffnen der Liste auf.
+  vorhandenen, „(alternativ …)“ und „trocken“ fallen weg, „Kalte Butter – zum Fertigstellen“ verschwindet, wenn Butter schon
+  draufsteht. Ältere Listen räumt `compactShopping()` beim Öffnen der Liste genauso auf.
   „Zur Liste“ lässt reine Verwendungszeilen weg (`usageBase()` in `assets/utils.js`: „Fett für die Form“ immer,
   „Mehl für die Arbeitsfläche“/„Öl zum Braten“ nur, wenn die Grundzutat schon im Rezept oder auf der Liste steht).
   REWE: keine Warenkorb-Schnittstelle, nur Suche (`REWE_SEARCH` in `assets/shopping.js`). „Bei REWE bestellen“ geht die
