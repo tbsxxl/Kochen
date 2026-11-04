@@ -154,12 +154,12 @@
   // Name für die Einkaufsliste: Zubereitung und Hinweise weglassen, damit gleiche Zutaten zusammenkommen
   // („Knoblauch, fein gehackt“ + „Knoblauch, in Scheiben“ → „Knoblauch“; „Fond (ca.)“ → „Fond“).
   // Was beim Einkaufen zählt (gemahlen, getrocknet, frisch, festkochend, Bio …), bleibt stehen.
-  const PREP = "(?:sehr |grob |fein |frisch |leicht |kurz |klein |dünn |sehr dünn |in feine |in feinen |und |oder |gut )*(?:gewürfelt|gerieben|gehackt|gestreift|geschnitten|zerkleinert|geschmolzen|geschält|halbiert|geviertelt|geschlagen|blanchiert|zerdrückt|gepresst|zerlassen|weich|kalt|warm|lauwarm|zimmerwarm|in (?:streifen|scheiben|ringen|würfeln|stiften|stücken|röschen|zwei zugaben)|in [a-zäöüß/]+|kleine röschen|für (?:die|den|das) [a-zäöüß-]+|halbe menge|ca\\.?)";
+  const PREP = "(?:sehr |grob |fein |frisch |leicht |kurz |klein |dünn |sehr dünn |in feine |in feinen |und |oder |gut )*(?:gewürfelt|gerieben|gehackt|gestreift|geschnitten|zerkleinert|geschmolzen|geschält|halbiert|geviertelt|geschlagen|blanchiert|zerdrückt|gepresst|zerlassen|weich|kalt|warm|lauwarm|zimmerwarm|in (?:streifen|scheiben|ringen|würfeln|stiften|stücken|röschen|zwei zugaben)|in [a-zäöüß/]+|kleine röschen|für (?:die|den|das) [a-zäöüß-]+|halbe menge|trocken|ca\\.?)";
   const PREP_TAIL = new RegExp(`\\s*,\\s*${PREP}(?:\\s*(?:,|und|oder)\\s*${PREP})*\\s*(\\([^)]*\\))?\\s*$`, "i");
   const PREP_PAREN = new RegExp(`\\s*\\(\\s*${PREP}(?:\\s*[,;]?\\s*(?:${PREP}|je nach form))*\\s*\\)`, "gi");
   function shopName(item){
     let t = String(item || "").trim();
-    t = t.replace(PREP_PAREN, "").replace(PREP_TAIL, (_, p)=> p ? ` ${p}` : "").replace(/\s{2,}/g, " ").trim();
+    t = t.replace(/\s*\(\s*alternativ[^)]*\)/gi, "").replace(PREP_PAREN, "").replace(PREP_TAIL, (_, p)=> p ? ` ${p}` : "").replace(/\s{2,}/g, " ").trim();
     return t || String(item || "").trim();
   }
   const mainWord = (s)=> String(s || "").toLowerCase().replace(/\(.*?\)/g, " ").split(/[^a-zäöüß]+/).filter(w=>w.length >= 2).pop() || "";
@@ -169,7 +169,7 @@
     ings = (ings || []).filter(i=> !sectionOf(i)).map(i=>{
       const q = String(i.qty ?? "").trim();
       const item = shopName(i.item);
-      if(/^(zum|für)\s/i.test(q)) return { ...i, qty:"", usage:true, item: item.replace(/^(?:zusätzliche[rsn]?|etwas|ein|eine|einen)\s+(?:(?:schuss|prise|spritzer|handvoll)\s+)?/i, "") };
+      if(/^(zum|für)\s/i.test(q)) return { ...i, qty:"", usage:true, item: item.replace(/^(?:zusätzliche[rsn]?|etwas|ein|eine|einen|kalte[rsn]?)\s+(?:(?:schuss|prise|spritzer|handvoll)\s+)?/i, "") };
       return { ...i, item };
     });
     const key = "kochbuch.shopping";
@@ -245,7 +245,25 @@
       if(e.qtyLabel && ex.qtyLabel && ex.qtyLabel !== e.qtyLabel && !ex.qtyLabel.includes(e.qtyLabel)) ex.qtyLabel = `${ex.qtyLabel} + ${e.qtyLabel}`;
       for(const f of String(e.from || "").split(", ").filter(Boolean)) if(!String(ex.from || "").split(", ").includes(f)) ex.from = ex.from ? `${ex.from}, ${f}` : f;
     }
-    return Array.from(map.values());
+    // Einträge ohne Menge („Muskatnuss +“) zu derselben Zutat mit Menge legen
+    const all = Array.from(map.values());
+    const out = all.filter(e=>{
+      if(e.qty != null || e.unit || e.qtyLabel) return true;
+      const host = all.find(o=> o !== e && nk(o.item) === nk(e.item) && (o.qty != null || o.qtyLabel));
+      if(!host) return true;
+      for(const f of String(e.from || "").split(", ").filter(Boolean)) if(!String(host.from || "").split(", ").includes(f)) host.from = host.from ? `${host.from}, ${f}` : f;
+      host.checked = !!(host.checked && e.checked);
+      return false;
+    });
+    // „Kalte Butter – zum Fertigstellen“: weg, wenn die Zutat ohnehin auf der Liste steht, sonst ohne den Zusatz
+    return out.filter(e=>{
+      if(!/^(zum|für)\s/i.test(String(e.qtyLabel || "").trim())) return true;
+      const name = e.item.replace(/^(?:zusätzliche[rsn]?|etwas|ein|eine|einen|kalte[rsn]?)\s+(?:(?:schuss|prise|spritzer|handvoll)\s+)?/i, "");
+      const w = mainWord(name);
+      if(w && out.some(o=> o !== e && !/^(zum|für)\s/i.test(String(o.qtyLabel || "")) && nk(o.item).includes(w))) return false;
+      e.item = name; e.qtyLabel = "";
+      return true;
+    });
   }
 
   // Wochenplan: { "YYYY-MM-DD": [{ id, servings }] }
