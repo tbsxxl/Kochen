@@ -411,6 +411,11 @@
   addInput?.addEventListener("keydown", (ev)=>{ if(ev.key==="Enter") addItem(); });
 
   window.KOCHBUCH_SHOP = { sectionOf };
+  // Ältere Einträge („Knoblauch, gehackt“ neben „Knoblauch, in Scheiben“) einmal zusammenführen
+  if(U?.compactShopping){
+    const before = getList(), after = U.compactShopping(before);
+    if(JSON.stringify(before) !== JSON.stringify(after)) setList(after.sort((a,b)=>String(a.item).localeCompare(String(b.item),"de")));
+  }
   render();
   renderSuggest();
 

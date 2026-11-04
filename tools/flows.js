@@ -75,6 +75,14 @@ const RECIPES = fs.readdirSync(path.join(__dirname, '..', '_recipes')).filter(f 
   await page.tap('#favQuick'); await page.waitForTimeout(150);
   check(await page.evaluate(() => Object.values(JSON.parse(localStorage.getItem('kochbuch.stats') || '{}')).some(e => e.favorite)), 'Favorit wird nicht gespeichert');
 
+  // Einkaufsliste: gleiche Zutat mit anderer Zubereitung kommt zusammen
+  const merged = await page.evaluate(() => {
+    localStorage.setItem('kochbuch.shopping', '[]');
+    KOCHBUCH_UTILS.mergeIntoShopping([{ qty: 4, unit: 'Zehen', item: 'Knoblauch, fein gehackt' }, { qty: '1–2', unit: 'Zehe', item: 'Knoblauch, in Scheiben' }, { qty: 1, unit: 'Dose', item: 'Tomaten, geschält (Dose)' }], 'Test');
+    return JSON.parse(localStorage.getItem('kochbuch.shopping'));
+  });
+  check(merged.length === 2 && merged.some(e => e.item === 'Knoblauch' && e.qty === 6) && merged.some(e => e.item === 'Tomaten (Dose)'), `Einkaufsliste führt gleiche Zutaten nicht zusammen: ${JSON.stringify(merged)}`);
+
   await go('/wochenplan/');
   check(await page.evaluate(() => !document.querySelector('#weekToShopping').hidden), 'Wochenplan: Einkaufs-Knopf fehlt trotz geplantem Gericht');
   check(/für 1 Gericht/.test(await page.textContent('#weekToShopping')) || !(await page.$('.planLeftoverTag')), 'Wochenplan: Reste-Tag wird beim Einkaufen mitgezählt');
