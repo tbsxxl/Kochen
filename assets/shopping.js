@@ -133,7 +133,15 @@
         if(!l[it._i]) return;
         l[it._i].checked = now;
         setList(l);
-        render();
+        // Haken erst kurz an Ort und Stelle zeigen, dann rutscht der Eintrag nach „Im Wagen“ (sonst springt er ohne Rückmeldung weg)
+        const row = group.querySelector(`.uRow[data-id="${it._i}"]`);
+        if(row && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+          row.classList.toggle("checked", now);
+          row.setAttribute("aria-checked", now ? "true" : "false");
+          const lead = row.querySelector(".uLead > span");
+          if(lead) lead.innerHTML = now ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' : "";
+          setTimeout(render, 220);
+        } else render();
       },
     });
     group.querySelectorAll(".uRow").forEach((row, idx)=> enhanceRow(row, items[idx]));
@@ -156,12 +164,12 @@
   }
   function enhanceRow(row, it){
     if(!it) return;
-    let x0 = null, y0 = null, dx = 0, horizontal = false, suppress = false, pressTimer = null;
+    let x0 = null, y0 = null, dx = 0, horizontal = false, suppress = false, pressTimer = null, t0 = 0;
     const right = row.querySelector(".uRight");
     if(right){ right.classList.add("shopQtyBtn"); right.setAttribute("aria-label", "Menge ändern"); }
     const cancelPress = ()=>{ clearTimeout(pressTimer); pressTimer = null; };
     row.addEventListener("touchstart", (e)=>{
-      const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; dx = 0; horizontal = false;
+      const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; dx = 0; horizontal = false; t0 = performance.now();
       cancelPress();
       pressTimer = setTimeout(()=>{ pressTimer = null; suppress = true; UI.haptic?.("medium"); openItemSheet(it); }, 550);
     }, { passive: true });
@@ -184,8 +192,10 @@
       x0 = null;
       if(!horizontal) return;
       suppress = true;
-      const armed = dx < -row.offsetWidth * 0.35;
-      row.style.transition = "transform .2s ease";
+      // Schnelles Wischen reicht auch ohne 35 % Weg (Tempo > 0,11 px/ms, wie Sonner/Vaul)
+      const speed = Math.abs(dx) / Math.max(1, performance.now() - t0);
+      const armed = dx < -row.offsetWidth * 0.35 || (dx < -24 && speed > 0.11);
+      row.style.transition = "transform .2s var(--easeSheet)";
       row.style.transform = armed ? "translateX(-100%)" : "";
       setTimeout(()=>{
         row.classList.remove("swiping", "swipeArmed");

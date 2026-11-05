@@ -18,7 +18,8 @@
       <div class="rcImg">
         <img src="${esc(r.image)}" srcset="${esc(r.srcset||"")}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="${esc(r.title)}" loading="lazy" decoding="async">
         <span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(id)}" hidden title="In der Kühltruhe">${SVG_ICE}<span data-count></span></span>
-      </div>` : "";
+      </div>` : `
+      <div class="rcImg rcImgEmpty" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16v3a6 6 0 01-6 6h-4a6 6 0 01-6-6z"/><path d="M2 11h2M20 11h2M9 7c0-1 1-1 1-2M14 7c0-1 1-1 1-2"/></svg><span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(id)}" hidden title="In der Kühltruhe">${SVG_ICE}<span data-count></span></span></div>`;
     return `
       <a class="linkCard${opts.hCard ? " hCard homeFavCard" : ""}" href="${esc(r.url || id)}">
         <div class="card recipeCard cardHover">

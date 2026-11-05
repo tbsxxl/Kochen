@@ -89,6 +89,14 @@ Umgesetzt (Abschnitt 24/25 in `assets/styles.css`): Hover nur mit `(hover:hover)
 ohne Textauswahl und Kontextmenü beim langen Drücken, Textfelder ≥ 16 px (sonst zoomt iOS), `interactive-widget=resizes-content`;
 Fortschrittsbalken (Kochmodus, Timer, „Kochen läuft“) per `transform: scaleX()` statt `width`, `--easeIn` ist ein kräftiges
 Ease-out (nie ease-in), Tab-Druck `scale(.95)`.
+Weitere Skill-Runden (Nov. 2026): `break-ui` (Abschnitt 26; extreme Testdaten in `tools/worstcase/`: Rezept mit
+120-Zeichen-Titel, Rezept ohne Foto, Kommentar im Kopf von `worst.js` zeigt den Ablauf; Karten ohne Foto zeigen ein Topf-Symbol,
+Titel > 44 Zeichen auf dem Foto kleiner), `remove-animations` (kein Wackeln bei Schritt/Reiter/Portionen, Seitenwechsel nur
+Überblenden), `find-animation-opportunities` (Einkaufsliste: Haken erst an Ort und Stelle, Wischen löscht auch bei schnellem
+Wischen), `apple-design-web` (alle Blätter lassen sich nach unten wegziehen: `bindSheetDrag()` in `assets/utils.js`,
+1:1, Gummiband nach oben, schließt über einen Klick aufs vorangehende `.sheetOverlay`; jedes Blatt braucht diese Reihenfolge),
+`impeccable` (Abschnitt 27: Cursor, Unterstriche, Scrollbalken, `text-wrap`). Funde des `impeccable detect`, die bewusst
+bleiben: weißer Text auf Fotos (Detektor sieht das Bild nicht), versteckte `#continueImg` ohne src, Fotos randlos.
 
 
 - **Apple-Look (iOS „Liquid Glass“)**, Abschnitt 10 in `assets/styles.css`: schwebende Glas-Kapsel als Tab-Leiste,

@@ -33,7 +33,7 @@ layout: default
           decoding="async"
         >
         <div class="recipeHeroText">
-          <h1 class="h1 recipeName">{{ page.title }}</h1>
+          <h1 class="h1 recipeName{% if page.title.size > 44 %} recipeNameLong{% endif %}">{{ page.title }}</h1>
           {%- if page.subtitle %}<p class="recipeSubtitle">{{ page.subtitle }}</p>{% endif %}
         </div>
       </div>
