@@ -522,7 +522,7 @@ const cookOverlay = $("#cookOverlay");
     cookStepPill.textContent = `${stepIdx+1}/${total}`;
     cookStepPill.setAttribute('aria-label', `Schritt ${stepIdx+1} von ${total}`);
     if(cookOverlay?.classList.contains('open')) saveCookProgress();
-    if(cookProgressBar) cookProgressBar.style.width = `${((stepIdx+1)/total)*100}%`;
+    if(cookProgressBar) cookProgressBar.style.transform = `scaleX(${(stepIdx+1)/total})`;
     if(cookStepIngs && cookStepIngsList){
       const hits = ingredientsForStep(steps[stepIdx]);
       cookStepIngs.hidden = !hits.length;

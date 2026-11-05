@@ -90,7 +90,7 @@
 
   --ease:cubic-bezier(.2,.8,.2,1);       /* kleine Rückmeldungen */
   --easeSheet:cubic-bezier(.32,.72,0,1); /* Sheets/Überlagerungen: wie iOS, schnell los, weich aus */
-  --easeIn:cubic-bezier(.4,0,1,1);       /* Schließen */
+  --easeIn:cubic-bezier(.23,1,.32,1);    /* Schließen: kräftiges Ease-out, kürzer als das Öffnen (nie ease-in, wirkt träge) */
 }
 
 :root[data-theme="dark"]{
@@ -334,7 +334,7 @@ body.layout-recipe .appMain{padding-top:0}
   background:transparent;
   color:var(--text);font-weight:500;text-align:left;text-decoration:none;
 }
-.sheetRow:hover{background:var(--surface2)}
+@media (hover:hover) and (pointer:fine){.sheetRow:hover{background:var(--surface2)}}
 .rowGlyph{
   display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
   width:36px;height:36px;border-radius:8px;
@@ -528,7 +528,7 @@ body.layout-recipe .appMain{padding-top:0}
   background:transparent;color:var(--text);
   font-size:var(--fs14);font-weight:400;text-align:left;
 }
-.sortMenuItem:hover{background:var(--surface2)}
+@media (hover:hover) and (pointer:fine){.sortMenuItem:hover{background:var(--surface2)}}
 .sortMenuItem.active{font-weight:600;color:var(--leaf);background:var(--leafSoft)}
 .filterRow,.sortRow{display:flex;gap:8px;margin-top:10px;padding-bottom:4px;overflow-x:auto;scrollbar-width:none}
 .filterRow::-webkit-scrollbar,.sortRow::-webkit-scrollbar{display:none}
@@ -540,7 +540,7 @@ body.layout-recipe .appMain{padding-top:0}
   height:100%;
 }
 .rcImg{position:relative;overflow:hidden;flex-shrink:0;aspect-ratio:var(--imgRatio);background:var(--surface2)}
-.rcImg img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;transition:transform .5s var(--ease)}
+.rcImg img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;transition:transform .3s var(--ease)}
 @media (hover:hover){
   .cardHover:hover .rcImg img{transform:scale(1.03)}
 }
@@ -688,7 +688,7 @@ body.compact{--ingRowH:49px}
 }
 .homeSectionHead .homeSectionTitle{margin:0}
 .homeAllLink{color:var(--petrol);font-size:var(--fs14);font-weight:500;text-decoration:none}
-.homeAllLink:hover{text-decoration:underline}
+@media (hover:hover) and (pointer:fine){.homeAllLink:hover{text-decoration:underline}}
 
 /* „Heute für dich“: große Karte im Seitenraster */
 .homeFeatured{box-shadow:var(--sh2)}
@@ -914,7 +914,7 @@ select.fieldInput{appearance:none;-webkit-appearance:none;background-image:linea
 .ingRow .ingItem{flex:1;min-width:0}
 .ingRowDel{flex:0 0 36px;height:36px;border:0;border-radius:var(--rPill);background:transparent;color:var(--muted)}
 .editSwitch{margin:0;padding:12px 0;align-items:flex-start}
-.editSwitch:hover{background:transparent}
+@media (hover:hover) and (pointer:fine){.editSwitch:hover{background:transparent}}
 .editSwitchText{flex:1;display:flex;flex-direction:column;gap:4px}
 .editSwitchText .sub{font-size:var(--fs14);font-weight:400}
 .editSwitch .sheetSwitch{margin-top:2px}
@@ -1355,7 +1355,7 @@ body{font-feature-settings:normal;letter-spacing:-.003em}
 .recipePageBody .h1.recipeName{font-family:var(--fontDisplay);font-weight:600;letter-spacing:-.02em}
 .homeFeaturedTitle{font-family:var(--fontDisplay)}
 .homeAllLink{font-weight:600}
-.homeAllLink:hover{text-decoration:none;opacity:.75}
+@media (hover:hover) and (pointer:fine){.homeAllLink:hover{text-decoration:none;opacity:.75}}
 
 /* Kompakte Titelleiste beim Scrollen */
 .navCompact{
@@ -1393,7 +1393,7 @@ body.layout-recipe .navEdge{display:none}
 .tabItem.active .tabIcon svg{stroke-width:2}
 /* Aktiver Tab mit gefülltem Symbol (wie SF Symbols „.fill“) */
 .tabItem.active .tabIcon svg :is(path,rect,polygon){fill:currentColor;fill-opacity:.22}
-.tabItem.isPressed{transform:scale(.92)}
+.tabItem.isPressed{transform:scale(.95)}
 /* Rezept-Leiste: Kochen als Hauptaktion in der Mitte, Favorit gefüllt */
 .recipeTabbar .tabItem.tabPrimary{opacity:1;background:var(--fill);color:var(--text)}
 .recipeTabbar .tabItem.tabPrimary .tabIcon{color:var(--accent)}
@@ -1472,7 +1472,7 @@ body.layout-recipe .navEdge{display:none}
 .sheetTitle{font-size:var(--fs18);font-weight:700}
 .sheetBody{padding:4px 12px calc(16px + env(safe-area-inset-bottom))}
 .sheetRow{border-radius:var(--rBtn);font-size:var(--fs16);min-height:48px}
-.sheetRow:hover{background:var(--fill)}
+@media (hover:hover) and (pointer:fine){.sheetRow:hover{background:var(--fill)}}
 .sheetOverlay{background:rgba(20,15,10,.24)}
 :root[data-theme="dark"] .sheetOverlay{background:rgba(0,0,0,.5)}
 .rowGlyph{border-radius:9px;width:32px;height:32px}
@@ -2120,3 +2120,17 @@ body.highContrast{--line:#CFC7BA;--lineStrong:#8C877E;--text:#000000;--sub:#3A37
 .recipeActBtn .ico{width:21px;height:21px}
 #favQuick.isOn svg path{fill:currentColor}
 .recipeActions + .recipeAuthor{margin-top:0}
+
+/* ---------- 24. Wie eine installierte App (Skill mobile-native, Nov. 2026) ----------
+   Langes Drücken auf Knöpfe, Tabs und Kapseln markiert keinen Text und öffnet kein Kontextmenü (Inhalt bleibt markierbar).
+   Textfelder mindestens 16 px, sonst zoomt iOS beim Antippen hinein. */
+button,[role="button"],[role="switch"],[role="tab"],[role="radio"],.tabItem,.chip,.segBtn,.sheetRow,.recipeActBtn,.recipeCookBtn,.stepBtn,.navIconBtn,.recipeBack{
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.codeArea,input,textarea,select{font-size:max(1rem,16px)}
+
+/* ---------- 25. Bewegung nach Emil Kowalski (Skill emil-design-eng, Nov. 2026) ----------
+   Fortschrittsbalken über transform statt width (kein Layout pro Bild), wächst von links. */
+.cookProgressBar,.cookTimerBar,.nowCookingBar span{width:100% !important;transform-origin:left center;transform:scaleX(0);will-change:transform}
+.cookProgressBar,.nowCookingBar span{transition:transform .3s var(--ease)}
+.cookTimerBar{right:0;transition:transform .5s linear}
+@media (prefers-reduced-motion: reduce){.cookProgressBar,.cookTimerBar,.nowCookingBar span{transition:none}}

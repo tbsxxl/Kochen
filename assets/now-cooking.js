@@ -51,7 +51,7 @@
     const img = $(".nowCookingImg");
     if(c && c.image){ if(img.getAttribute("src") !== c.image) img.src = c.image; img.hidden = false; }
     else img.hidden = true;
-    $(".nowCookingBar span").style.width = c ? Math.round((c.step + 1) / c.total * 100) + "%" : "0%";
+    $(".nowCookingBar span").style.transform = `scaleX(${c ? (c.step + 1) / c.total : 0})`;
     $(".nowCookingClose").hidden = !c;
     bar.querySelectorAll("a").forEach(a=> a.href = target || "#");
   }
