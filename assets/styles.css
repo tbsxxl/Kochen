@@ -2146,3 +2146,12 @@ button,[role="button"],[role="switch"],[role="tab"],[role="radio"],.tabItem,.chi
 .shopQtyBtn{white-space:normal;text-align:right;overflow-wrap:anywhere}
 /* Kühltruhe: Knöpfe brechen bei großer Schrift um statt über den Rand zu laufen */
 .freezerControls{flex-wrap:wrap}
+
+/* ---------- 27. Feinschliff (Skill impeccable, Nov. 2026) ----------
+   Auch die Teile, die der Browser zeichnet, tragen die App-Farben. */
+input,textarea{caret-color:var(--brand)}
+a{text-underline-offset:.18em;text-decoration-thickness:.08em}
+html{scrollbar-color:var(--lineStrong) transparent}
+/* Überschriften ausgewogen umbrechen, Fließtext ohne einzelne Wörter in der letzten Zeile */
+h1,h2,h3,.recipeTitle,.homeFeaturedTitle{text-wrap:balance}
+p,.recipeBody li,.cookStepText,.uEmptyText,.fieldHint{text-wrap:pretty}
