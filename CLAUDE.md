@@ -85,6 +85,10 @@ in `.claude/skills/` nur Verweise): `impeccable` (pbakaus/impeccable: Kritik, Au
 `apple-design` heißt hier **`apple-design-web`**, damit es den HIG-Skill `apple-design` nicht überschreibt; nach einem
 `skills update` prüfen) und `shadcn` (shadcn/ui; nur relevant für React-Projekte, diese Seite nutzt kein shadcn).
 Bewegung: `review-animations`/`remove-animations`; Mobil-Feinheiten: `mobile-native`.
+Umgesetzt (Abschnitt 24/25 in `assets/styles.css`): Hover nur mit `(hover:hover) and (pointer:fine)`, Knöpfe/Tabs/Kapseln
+ohne Textauswahl und Kontextmenü beim langen Drücken, Textfelder ≥ 16 px (sonst zoomt iOS), `interactive-widget=resizes-content`;
+Fortschrittsbalken (Kochmodus, Timer, „Kochen läuft“) per `transform: scaleX()` statt `width`, `--easeIn` ist ein kräftiges
+Ease-out (nie ease-in), Tab-Druck `scale(.95)`.
 
 
 - **Apple-Look (iOS „Liquid Glass“)**, Abschnitt 10 in `assets/styles.css`: schwebende Glas-Kapsel als Tab-Leiste,
