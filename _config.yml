@@ -43,6 +43,7 @@ exclude:
   - README.md
   - CLAUDE.md
   - skills-lock.json
+  - agent
   - tools
   - MaybeRezepte
   - recipes/images/README.txt

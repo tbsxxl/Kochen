@@ -79,6 +79,12 @@ Skill `apple-design` (`.claude/skills/apple-design`, Apples Human Interface Guid
 `npx skills add dickwu/apple-design-skill --agent claude-code`, Stand in `skills-lock.json`) für Design-Reviews nutzen.
 Skill `swiftui-expert-skill` (`.claude/skills/swiftui-expert-skill`, aus avdlee/swiftui-agent-skill) nur für nativen
 SwiftUI-Code, nicht für diese Web-App.
+Weitere Design-Skills (Nov. 2026, `npx skills add <quelle> --agent claude-code --all -y`; Dateien in `.agents/skills/` (einen dabei angelegten Ordner `agent/` für andere Agenten löschen, Jekyll bricht sonst an Liquid in den Skill-Texten ab),
+in `.claude/skills/` nur Verweise): `impeccable` (pbakaus/impeccable: Kritik, Audit, Feinschliff), Emil Kowalskis Paket
+(emilkowalski/skill: `emil-design-eng`, `animate`, `review-animations`, `mobile-native`, `break-ui` u. a.; sein
+`apple-design` heißt hier **`apple-design-web`**, damit es den HIG-Skill `apple-design` nicht überschreibt; nach einem
+`skills update` prüfen) und `shadcn` (shadcn/ui; nur relevant für React-Projekte, diese Seite nutzt kein shadcn).
+Bewegung: `review-animations`/`remove-animations`; Mobil-Feinheiten: `mobile-native`.
 
 
 - **Apple-Look (iOS „Liquid Glass“)**, Abschnitt 10 in `assets/styles.css`: schwebende Glas-Kapsel als Tab-Leiste,
