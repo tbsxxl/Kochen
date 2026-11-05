@@ -146,12 +146,11 @@ function renderGroup(container, items, checks){
     showBase();
     if(n !== prev){
       lightTap();
-      pulse(servingsInput);
     }
   }
 
   servingsInput?.addEventListener("input", ()=>{ renderIngredients(); showBase(); });
-  servingsInput?.addEventListener("blur", ()=>{ setServings(currentServings()); pulse(servingsInput); });
+  servingsInput?.addEventListener("blur", ()=>{ setServings(currentServings()); });
   servingsPlus?.addEventListener("click", ()=> setServings(currentServings() + 1));
   servingsMinus?.addEventListener("click", ()=> setServings(currentServings() - 1));
   showBase();
@@ -303,7 +302,7 @@ function renderGroup(container, items, checks){
     if(statsLine){
       const n = Number(e.cookedCount||0);
       statsLine.textContent = n > 0
-        ? `${n}× gekocht${e.lastCooked ? ` · zuletzt am ${fmt(e.lastCooked)}` : ''}`
+        ? `${Number(n).toLocaleString("de-DE")}× gekocht${e.lastCooked ? ` · zuletzt am ${fmt(e.lastCooked)}` : ''}`
         : '';
     }
     if(cookedBtn){
@@ -336,7 +335,6 @@ function renderGroup(container, items, checks){
   }
   cookedBtn?.addEventListener("click", ()=>{
     markCooked();
-    cookedBtn.classList.add("saved"); setTimeout(()=>cookedBtn.classList.remove("saved"),600);
     successTap();
     pop(cookedBtn);
   });
@@ -348,7 +346,6 @@ function renderGroup(container, items, checks){
     e.cookedCount=Math.max(0,(e.cookedCount||0)-1);
     e.lastCooked=e.history.length?e.history[0]:null;
     setEntry(e);
-    undoBtn.classList.add("saved"); setTimeout(()=>undoBtn.classList.remove("saved"),600);
     renderStats();
     lightTap();
     pop(undoBtn);
@@ -360,7 +357,6 @@ function renderGroup(container, items, checks){
   addBtn?.addEventListener("click", ()=>{
     U.mergeIntoShopping(scaledIngredients(), data.title || "");
     UI.toast?.("Zutaten auf der Einkaufsliste");
-    addBtn.classList.add("saved"); setTimeout(()=>addBtn.classList.remove("saved"),600);
     successTap();
     pop(addBtn);
   });
@@ -641,10 +637,10 @@ const cookOverlay = $("#cookOverlay");
   cookingQuick?.addEventListener('click', openCook);
   cookClose?.addEventListener('click', closeCook);
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
-  cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); pulse(cookStepText); });
+  cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); });
   cookNext?.addEventListener('click', ()=>{
     if(cookNext.dataset.last){ try{ localStorage.removeItem(COOK_KEY); }catch{} closeCook(); markCooked(); successTap(); UI.toast?.('Als gekocht gespeichert'); return; }
-    stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText);
+    stepIdx++; renderCookStep(); lightTap();
   });
   cookStepText?.addEventListener('click', (e)=>{
     const tb = e.target.closest('.cookTime');
@@ -659,12 +655,12 @@ const cookOverlay = $("#cookOverlay");
     const dx = t.clientX - swipeX, dy = t.clientY - swipeY;
     swipeX = null;
     if(Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    if(dx < 0 && stepIdx < steps.length - 1){ stepIdx++; renderCookStep(); lightTap(); pulse(cookStepText); }
-    else if(dx > 0 && stepIdx > 0){ stepIdx--; renderCookStep(); lightTap(); pulse(cookStepText); }
+    if(dx < 0 && stepIdx < steps.length - 1){ stepIdx++; renderCookStep(); lightTap(); }
+    else if(dx > 0 && stepIdx > 0){ stepIdx--; renderCookStep(); lightTap(); }
   }, { passive: true });
 
-  cookTabSteps?.addEventListener('click', ()=>{ setTab('steps'); lightTap(); pulse(cookTabSteps); });
-  cookTabIngs?.addEventListener('click', ()=>{ setTab('ings'); lightTap(); pulse(cookTabIngs); });
+  cookTabSteps?.addEventListener('click', ()=>{ setTab('steps'); lightTap(); });
+  cookTabIngs?.addEventListener('click', ()=>{ setTab('ings'); lightTap(); });
 
   document.addEventListener('keydown', (e)=>{
     if(!cookOverlay?.classList.contains('open')) return;
