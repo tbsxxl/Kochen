@@ -583,7 +583,55 @@
     }, { rootMargin: '-40px 0px 0px 0px' }).observe(big);
   }
 
-  function init(){ bindPressables(document); bindCompactTitle(); }
+  // Blätter wie in iOS mit dem Finger nach unten wegziehen (Skill apple-design-web):
+  // folgt 1:1, nach oben mit Gummiband-Widerstand; schließt bei > 30 % Weg oder schnellem Wischen (> 0,5 px/ms),
+  // sonst federt es zurück. Die CSS-Übergänge laufen dabei vom aktuellen Stand aus weiter (unterbrechbar).
+  function bindSheetDrag(){
+    const rubber = (d, dim)=> (d * dim * 0.55) / (dim + 0.55 * Math.abs(d));
+    document.querySelectorAll('.sheet').forEach(sheet=>{
+      const overlay = sheet.previousElementSibling?.classList.contains('sheetOverlay') ? sheet.previousElementSibling : null;
+      if(!overlay) return;
+      let y0 = null, x0 = 0, dy = 0, dragging = false, hist = [];
+      const reset = ()=>{ sheet.style.transition = ''; sheet.style.transform = ''; overlay.style.transition = ''; overlay.style.opacity = ''; };
+      sheet.addEventListener('touchstart', (e)=>{
+        y0 = null;
+        if(!sheet.classList.contains('open') || e.touches.length > 1) return;
+        if(e.target.closest('input,textarea,select,[contenteditable],.hScroll')) return;
+        const body = e.target.closest('.sheetBody');
+        if(body && body.scrollTop > 0) return;
+        const t = e.touches[0]; y0 = t.clientY; x0 = t.clientX; dy = 0; dragging = false; hist = [{ y: y0, t: performance.now() }];
+      }, { passive: true });
+      sheet.addEventListener('touchmove', (e)=>{
+        if(y0 === null) return;
+        const t = e.touches[0], d = t.clientY - y0;
+        if(!dragging){
+          if(Math.abs(t.clientX - x0) > Math.abs(d) || d < -4){ y0 = null; return; }
+          if(d < 10) return;
+          dragging = true; y0 += 10;               // ab hier 1:1, ohne Sprung um die Schwelle
+          sheet.style.transition = 'none'; overlay.style.transition = 'none';
+        }
+        const raw = t.clientY - y0, h = sheet.offsetHeight || 1;
+        dy = raw >= 0 ? raw : rubber(raw, h);
+        sheet.style.transform = `translate3d(0,${dy}px,0)`;
+        overlay.style.opacity = String(Math.max(0, 1 - Math.max(0, dy) / h));
+        const now = performance.now(); hist.push({ y: t.clientY, t: now }); while(hist.length > 2 && now - hist[0].t > 100) hist.shift();
+        e.preventDefault();
+      }, { passive: false });
+      const end = ()=>{
+        if(y0 === null) return; y0 = null;
+        if(!dragging) return; dragging = false;
+        const a = hist[0], b = hist[hist.length - 1];
+        const v = b && a && b.t > a.t ? (b.y - a.y) / (b.t - a.t) : 0;
+        const close = dy > sheet.offsetHeight * 0.3 || (v > 0.5 && dy > 0);
+        reset();
+        if(close){ overlay.click(); haptic('light'); }
+      };
+      sheet.addEventListener('touchend', end);
+      sheet.addEventListener('touchcancel', end);
+    });
+  }
+
+  function init(){ bindPressables(document); bindCompactTitle(); bindSheetDrag(); }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
