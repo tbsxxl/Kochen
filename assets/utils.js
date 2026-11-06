@@ -570,16 +570,10 @@
     bar.className = 'navCompact';
     bar.setAttribute('aria-hidden', 'true');
     bar.textContent = big.classList.contains('homeGreetingTitle') ? (document.querySelector('.brandWordmark')?.textContent || '') : big.textContent.trim();
-    // Weicher Rand oben (wie der „Scroll Edge“ in iOS 26): Inhalt verschwindet unter der Titelkapsel,
-    // statt dass Text durch die Kapsel hindurch zu lesen ist.
-    const edge = document.createElement('div');
-    edge.className = 'navEdge';
-    edge.setAttribute('aria-hidden', 'true');
-    document.body.append(edge, bar);
+    document.body.appendChild(bar);
     new IntersectionObserver(([e])=>{
       const show = !e.isIntersecting && e.boundingClientRect.top < 0;
       bar.classList.toggle('show', show);
-      edge.classList.toggle('show', show);
     }, { rootMargin: '-40px 0px 0px 0px' }).observe(big);
   }
 
