@@ -106,7 +106,7 @@ getrennt (Wunsch des Besitzers).
 
 - **Apple-Look (iOS „Liquid Glass“)**, Abschnitt 10 in `assets/styles.css`: schwebende Glas-Kapsel als Tab-Leiste,
   große Titel (34/700), die beim Scrollen in eine kleine Glas-Leiste oben wandern (`.navCompact`, `bindCompactTitle()` in
-  `assets/utils.js`; darunter ein weicher Rand `.navEdge` in `--bg`, damit kein Text durch die Kapsel scheint), gruppierte Listen mit eingerückten Trennlinien, Kapsel-Knöpfe, gefüllte Felder statt Rahmen
+  `assets/utils.js`; darunter ein weicher Rand `.navEdge` wie der Scroll Edge in iOS 26: Unschärfe + Hintergrundfarbe, nach unten ausgeblendet, Abschnitt 29; geht nahtlos in die Unschärfe über, die iOS selbst unter der Statusleiste zeichnet), gruppierte Listen mit eingerückten Trennlinien, Kapsel-Knöpfe, gefüllte Felder statt Rahmen
   (`--fill`), Glas-Sheets mit großer Rundung, iOS-Schalter (Grün `#34C759`). Glas (`--glass`, `--glassBlur`) nur für
   Leisten, Sheets, Menüs, Hinweise; bei „Transparenz reduzieren“ volle Fläche. Hintergrund `--bg` dunkler als Zellen
   `--surface` (wie iOS). Radien: Karten 22, Listen 16, Felder 14.
