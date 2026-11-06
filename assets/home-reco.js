@@ -62,7 +62,7 @@
     const meta = (opts && opts.ago && r.daysSince !== null)
       ? `<span class="metaItem">${r.daysSince >= 60 ? `vor ${Math.round(r.daysSince/30)} Monaten` : `vor ${r.daysSince} Tagen`}</span>`
       : null;
-    return C.recipeCard(r, { hCard: true, fav: !!(opts && opts.favState && r.favorite), meta });
+    return C.recipeCard(r, { hCard: true, hLevel: 'h3', fav: !!(opts && opts.favState && r.favorite), meta });
   }
 
   function freezerRow(r){

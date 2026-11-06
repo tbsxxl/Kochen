@@ -37,7 +37,12 @@ export default {
       await migrate(env);
       return await route(request, env, url);
     }catch(err){
-      return json({ error: String(err && err.message || err) }, err && err.status || 500);
+      const status = err && err.status || 500;
+      const raw = String(err && err.message || err);
+      // GitHub-Zugang kaputt: verständlich sagen, was zu tun ist (nur der Besitzer lädt hoch)
+      if(/^GitHub (401|403)\b/.test(raw)) return json({ error: "Der Zugang zu GitHub ist abgelaufen oder fehlt (GITHUB_TOKEN in Cloudflare erneuern)." }, 424);
+      if(status >= 500){ console.error(raw); return json({ error: "Speichern hat nicht geklappt. Bitte später noch einmal versuchen." }, status); }
+      return json({ error: raw }, status);
     }
   }
 };
@@ -194,7 +199,7 @@ function safeEqual(a, b){
 
 async function readJson(request, limit = 1_000_000){
   const text = await request.text();
-  if(text.length > limit) fail("Anfrage zu groß", 413);
+  if(text.length > limit) fail("Das ist zu viel auf einmal. Nimm ein kleineres Foto oder kürze den Text.", 413);
   try{ return JSON.parse(text || "{}"); }catch{ fail("Ungültiges JSON"); }
 }
 
@@ -510,7 +515,7 @@ function imageUrlOf(img){
 }
 async function fetchLimited(target, limit, accept){
   const res = await fetch(target, { headers: { "User-Agent": "Mozilla/5.0 (Kochbuch-Import)", "Accept": accept }, redirect: "follow", cf: { cacheTtl: 0 } });
-  if(!res.ok) fail(`Die Seite antwortet mit Fehler ${res.status}.`);
+  if(!res.ok) fail("Diese Seite lässt sich gerade nicht abrufen. Versuch es später oder trag das Rezept selbst ein.");
   const len = Number(res.headers.get("Content-Length") || 0);
   if(len > limit) fail("Die Seite ist zu groß.");
   const buf = new Uint8Array(await res.arrayBuffer());
@@ -535,7 +540,7 @@ async function recipeImport(request, env){
   const { url: target } = await readJson(request);
   let u;
   try{ u = new URL(String(target || "").trim()); }catch{ fail("Bitte einen gültigen Link einfügen."); }
-  if(!/^https?:$/.test(u.protocol)) fail("Nur http- und https-Links.");
+  if(!/^https?:$/.test(u.protocol)) fail("Bitte einen Link einfügen, der mit https:// beginnt.");
   if(!env.ALLOW_LOCAL_IMPORT && isPrivateHost(u)) fail("Diese Adresse ist nicht erlaubt.");
   const { buf } = await fetchLimited(u.toString(), 4_000_000, "text/html");
   const html = new TextDecoder().decode(buf);
@@ -730,7 +735,7 @@ function b64Size(s){ return Math.floor(String(s || "").length * 3 / 4); }
 function imageFiles(img, stem){
   const files = [];
   if(!img || !img.jpg) return { files, imagePath: "" };
-  if(b64Size(img.jpg) > 8_000_000) fail("Das Foto ist zu groß.");
+  if(b64Size(img.jpg) > 8_000_000) fail("Das Foto ist zu groß (höchstens etwa 8 MB).");
   files.push({ path: `recipes/images/${stem}.jpg`, content: img.jpg });
   if(img.webp480 && img.webp960 && b64Size(img.webp480) < 2_000_000 && b64Size(img.webp960) < 4_000_000){
     files.push({ path: `recipes/images/${stem}-480.webp`, content: img.webp480 });
@@ -776,7 +781,7 @@ async function recipeUpdate(request, env){
   const gh = github(env);
   const current = await gh.read(path);
   if(!current) fail("Rezept nicht gefunden.", 404);
-  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen geändert. Bitte die Seite neu laden.", 409);
+  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen woanders geändert. Deine Änderungen bleiben hier stehen – kopiere sie, lade die Seite neu und füge sie wieder ein.", 409);
   const r = validateRecipe(body);
 
   const files = [];
@@ -809,7 +814,7 @@ async function recipeDelete(request, env){
   const gh = github(env);
   const current = await gh.read(path);
   if(!current) fail("Rezept nicht gefunden.", 404);
-  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen geändert. Bitte die Seite neu laden.", 409);
+  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen woanders geändert. Deine Änderungen bleiben hier stehen – kopiere sie, lade die Seite neu und füge sie wieder ein.", 409);
   const files = [{ path, delete: true }];
   for(const p of imagePathsOf(current.text)) if(await gh.exists(p)) files.push({ path: p, delete: true });
   const pdf = checkPdfPath(body.pdf);
@@ -864,7 +869,7 @@ async function pushSubscribe(request, env){
   const s = await requireSession(request, env);
   const { subscription } = await readJson(request);
   const ep = String(subscription && subscription.endpoint || "");
-  if(!(/^https:\/\//.test(ep) || (env.ALLOW_LOCAL_IMPORT && /^http:\/\/127\.0\.0\.1:/.test(ep))) || !subscription.keys || !subscription.keys.p256dh || !subscription.keys.auth) fail("Ungültiges Abo.");
+  if(!(/^https:\/\//.test(ep) || (env.ALLOW_LOCAL_IMPORT && /^http:\/\/127\.0\.0\.1:/.test(ep))) || !subscription.keys || !subscription.keys.p256dh || !subscription.keys.auth) fail("Mitteilungen ließen sich nicht einrichten. Schalte sie aus und wieder ein.");
   const list = ((await env.KV.get(`push:${s.uid}`, "json")) || []).filter(x => x.endpoint !== ep);
   list.push({ endpoint: ep, keys: { p256dh: String(subscription.keys.p256dh), auth: String(subscription.keys.auth) }, created: Date.now() });
   await env.KV.put(`push:${s.uid}`, JSON.stringify(list.slice(-10)));
@@ -1043,7 +1048,7 @@ async function suggestionCreate(request, env){
   const body = await readJson(request, 15_000_000);
   const recipe = validateRecipe(body);
   const img = body.image && body.image.jpg ? body.image : null;
-  if(img && b64Size(img.jpg) > 8_000_000) fail("Das Foto ist zu groß.");
+  if(img && b64Size(img.jpg) > 8_000_000) fail("Das Foto ist zu groß (höchstens etwa 8 MB).");
   const mine = (await listSuggestions(env)).filter(x => x.uid === s.uid && x.status === "pending");
   if(mine.length >= 20) fail("Du hast schon 20 offene Vorschläge. Warte, bis sie angeschaut wurden.");
   const id = b64url.encode(randomBytes(12));

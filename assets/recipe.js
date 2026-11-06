@@ -230,7 +230,7 @@ function renderGroup(container, items, checks){
     const e = freezerEntry();
     const p = e?.portions ? Number(e.portions) : 0;
     if(freezerCount) freezerCount.textContent = String(p);
-    if(freezerHint) freezerHint.textContent = e ? 'In Kühltruhe gespeichert' : 'Nicht in Kühltruhe';
+    if(freezerHint) freezerHint.textContent = e ? 'In der Kühltruhe' : 'Nicht in der Kühltruhe';
     freezerMinus && (freezerMinus.disabled = p<=0);
     freezerRemove && (freezerRemove.disabled = !e);
   }
@@ -489,7 +489,7 @@ const cookOverlay = $("#cookOverlay");
     const unit = U.normUnit(i.unit||"");
     const qn = num(i.qty);
     if(qn !== null){ const conv = U.autoConvert(qn, unit); return `${U.roundSmart(conv.qty, conv.unit)} ${conv.unit}`.trim(); }
-    return `${String(i.qty||"").trim()} ${unit}`.trim();
+    return `${String(i.qty||"").trim().replace(/^n\.?\s*b\.?$/i, "nach Bedarf")} ${unit}`.trim();
   }
   const escHtml = (x)=>String(x??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
@@ -644,6 +644,8 @@ const cookOverlay = $("#cookOverlay");
   cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); });
   cookNext?.addEventListener('click', ()=>{
     if(cookNext.dataset.last){ try{ localStorage.removeItem(COOK_KEY); }catch{} closeCook(); markCooked(); successTap(); window.dispatchEvent(new Event("kochbuch:cooking"));
+      // kleiner Abschluss: der „Kochen“-Knopf poppt kurz auf, die Gekocht-Zeile blinkt einmal
+      setTimeout(()=>{ pop(cookingQuick); flash(statsLine); }, 280);
       UI.toast?.('Als gekocht gespeichert', { label: 'Bewerten', run: ()=> document.getElementById('notesCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' }) }); return; }
     stepIdx++; renderCookStep(); lightTap();
   });

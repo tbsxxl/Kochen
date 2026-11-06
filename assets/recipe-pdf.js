@@ -242,7 +242,7 @@
     try{ const p = await prepare(); await deliver(p.file); }
     catch(err){
       console.error('PDF:', err);
-      alert('Das PDF konnte nicht erstellt werden.\n\nFehler: ' + String(err && (err.message || err)).slice(0, 160));
+      console.warn('PDF', err); alert('Das PDF konnte nicht erstellt werden. Prüf die Verbindung und versuch es noch einmal.');
     }
     finally{ setBusy(false); }
   });

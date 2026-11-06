@@ -1,7 +1,7 @@
 /* Tobis Kochbuch — Service Worker
    Offline: Seiten „netzwerk-zuerst“, aber nach 3 s Warten (schlechter Empfang im Supermarkt) aus dem Cache.
    CSS/JS/Bilder „Cache zuerst“, im Hintergrund aktualisieren. /api/ nie cachen. */
-const VERSION = 'kochbuch-v51';
+const VERSION = 'kochbuch-v55';
 const ASSET_CACHE = `${VERSION}-assets`;
 const IMAGE_CACHE = `${VERSION}-images`;
 const PAGE_CACHE = `${VERSION}-pages`;
@@ -9,7 +9,7 @@ const MAX_IMAGES = 150;
 const PAGE_TIMEOUT = 3000;
 
 // Grundausstattung für unterwegs: wichtigste Seiten und Skripte
-const PRECACHE_PAGES = ['/', '/rezeptindex/', '/shopping/', '/wochenplan/', '/was-koche-ich/', '/kuehltruhe/', '/kategorien/'];
+const PRECACHE_PAGES = ['/', '/rezeptindex/', '/shopping/', '/wochenplan/', '/was-koche-ich/', '/kuehltruhe/', '/kategorien/', '/backup/', '/konto/', '/offline/'];
 const PRECACHE_ASSETS = [
   '/assets/styles.css', '/assets/utils.js', '/assets/account.js', '/assets/shopping.js', '/assets/plan.js',
   '/assets/recipe.js', '/assets/cook-timer.js', '/assets/now-cooking.js', '/assets/home-reco.js', '/assets/cards.js', '/assets/what-to-cook.js', '/assets/freezer.js',
@@ -98,7 +98,8 @@ self.addEventListener('fetch', (e) => {
     if (fast) return fast;
     const hit = await cached(req);
     if (hit) { e.waitUntil(net); return hit; }
-    return (await net) || (await caches.match('/')) || Response.error();
+    // nicht gespeicherte Seite offline: eigene Hinweisseite statt der Startseite unter falscher Adresse
+    return (await net) || (await caches.match('/offline/')) || (await caches.match('/')) || Response.error();
   })());
 });
 

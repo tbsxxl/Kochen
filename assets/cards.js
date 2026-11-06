@@ -8,7 +8,7 @@
 
   function metaLine(r){
     return (r.time ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_CLOCK}</span><span>${esc(r.time)}</span></span>` : "")
-      + (r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_PEOPLE}</span><span>${esc(r.servings)}</span></span>` : "");
+      + (r.servings ? `<span class="metaItem"><span class="metaIcon" aria-hidden="true">${SVG_PEOPLE}</span><span>${esc(r.servings)}<span class="srOnly"> Portionen</span></span></span>` : "");
   }
 
   // opts: { hCard: Karte in waagerechter Leiste, fav: Herz gleich gefüllt zeigen, meta: eigener Metatext (HTML) }
@@ -16,7 +16,7 @@
     const id = r.id || r.url || "";
     const img = r.image ? `
       <div class="rcImg">
-        <img src="${esc(r.image)}" srcset="${esc(r.srcset||"")}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="${esc(r.title)}" loading="lazy" decoding="async">
+        <img src="${esc(r.image)}" srcset="${esc(r.srcset||"")}" sizes="(min-width:900px) 300px, (min-width:640px) 44vw, 78vw" alt="" loading="lazy" decoding="async">
         <span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(id)}" hidden title="In der Kühltruhe">${SVG_ICE}<span data-count></span></span>
       </div>` : `
       <div class="rcImg rcImgEmpty" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16v3a6 6 0 01-6 6h-4a6 6 0 01-6-6z"/><path d="M2 11h2M20 11h2M9 7c0-1 1-1 1-2M14 7c0-1 1-1 1-2"/></svg><span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(id)}" hidden title="In der Kühltruhe">${SVG_ICE}<span data-count></span></span></div>`;
@@ -25,7 +25,7 @@
         <div class="card recipeCard cardHover">
           ${img}
           <div class="rcBody">
-            <h2 class="recipeTitle">${esc(r.title)}</h2>
+            <${opts.hLevel || "h2"} class="recipeTitle">${esc(r.title)}</${opts.hLevel || "h2"}>
             <div class="recipeMeta">${opts.meta != null ? opts.meta : metaLine(r)}<span class="metaRating" data-rating-badge data-recipe-id="${esc(id)}" hidden></span><span class="favBadge rcFavBadge metaFav${opts.fav ? " isFav" : ""}" data-fav-badge data-recipe-id="${esc(id)}" aria-label="Favorit"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z" fill="currentColor"/></svg></span></div>
           </div>
         </div>

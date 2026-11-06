@@ -5,7 +5,7 @@ permalink: /konto/
 ---
 
 <div class="section" style="margin-top:6px" id="accountHost">
-  <div class="card cardPad sub">Lade …</div>
+  <div class="card cardPad sub">Wird geladen …</div>
 </div>
 
 <script>
@@ -46,7 +46,7 @@ permalink: /konto/
   // ---------- Nicht angemeldet ----------
   function renderLoggedOut(me){
     const unsupported = !A().passkeySupported();
-    const noPasskey = unsupported ? '<p class="sub">Dieser Browser unterstützt keine Passkeys. Auf dem iPhone bitte Safari oder die Homescreen-App nutzen.</p>' : '';
+    const noPasskey = unsupported ? '<p class="sub">Dieser Browser unterstützt keine Passkeys. Auf dem iPhone bitte Safari oder die Home-Bildschirm-App nutzen.</p>' : '';
     let html;
     if(invite && me.inviteValid){
       html = `
@@ -87,7 +87,7 @@ permalink: /konto/
     host.innerHTML = html;
 
     document.getElementById('loginBtn')?.addEventListener('click', async (e)=>{
-      const btn = e.currentTarget; busy(btn, true, 'Warte auf Face ID …');
+      const btn = e.currentTarget; busy(btn, true, 'Anmeldung wird bestätigt …');
       try{ await A().login(); load(); }catch(err){ busy(btn, false); showError(err); }
     });
     document.getElementById('setupBtn')?.addEventListener('click', async (e)=>{
@@ -95,14 +95,14 @@ permalink: /konto/
       const name = document.getElementById('nameIn').value.trim();
       const setupCode = document.getElementById('codeIn').value.trim();
       if(!name || !setupCode){ showError('Bitte Name und Einrichtungscode eingeben.'); return; }
-      busy(btn, true, 'Warte auf Face ID …');
+      busy(btn, true, 'Anmeldung wird bestätigt …');
       try{ await A().register({ name, setupCode }); load(); }catch(err){ busy(btn, false); showError(err); }
     });
     document.getElementById('inviteBtn')?.addEventListener('click', async (e)=>{
       const btn = e.currentTarget;
       const name = document.getElementById('nameIn').value.trim();
       if(!name){ showError('Bitte gib deinen Namen ein.'); return; }
-      busy(btn, true, 'Warte auf Face ID …');
+      busy(btn, true, 'Anmeldung wird bestätigt …');
       try{
         await A().register({ name, invite });
         history.replaceState(null, '', location.pathname);
@@ -127,7 +127,7 @@ permalink: /konto/
         ${invite ? '<p class="sub">Du bist schon angemeldet. Den Einladungslink kann jemand anderes auf seinem Gerät öffnen.</p>' : ''}
         <button class="btn accountBtn" id="syncBtn" type="button">Jetzt synchronisieren</button>
         ${owner ? (me.canUpload ? `<a class="btn action accountBtn" href="{{ '/neues-rezept/' | relative_url }}">Rezept hochladen</a>` : `<p class="sub">Zum Hochladen fehlt in Cloudflare noch das GITHUB_TOKEN.</p>`) : ''}
-        ${owner ? `<button class="sheetRow editSwitch" id="editModeBtn" type="button" role="switch" aria-checked="${editOn() ? 'true' : 'false'}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg></span><span class="editSwitchText"><span>Bearbeiten-Modus</span><span class="sub">Zeigt auf Rezeptseiten unter „Mehr“ „Rezept bearbeiten“. Nur auf diesem Gerät und nur für dich.</span></span><span class="sheetSwitch" aria-hidden="true"></span></button>` : ''}
+        ${owner ? `<button class="sheetRow editSwitch" id="editModeBtn" type="button" role="switch" aria-checked="${editOn() ? 'true' : 'false'}"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg></span><span class="editSwitchText"><span>Bearbeiten-Modus</span><span class="sub">Zeigt auf Rezeptseiten im Menü „Mehr“ den Punkt „Rezept bearbeiten“. Nur auf diesem Gerät und nur für dich.</span></span><span class="sheetSwitch" aria-hidden="true"></span></button>` : ''}
         <p class="accountError" id="err" hidden></p>
       </div>
 
@@ -207,14 +207,14 @@ permalink: /konto/
       busy(btn, false);
     });
     document.getElementById('addDeviceBtn').addEventListener('click', async (e)=>{
-      const btn = e.currentTarget; busy(btn, true, 'Warte auf Face ID …');
+      const btn = e.currentTarget; busy(btn, true, 'Anmeldung wird bestätigt …');
       try{ await A().register({}); toast('Passkey hinzugefügt'); load(); }
       catch(ex){ busy(btn, false); showError(ex); }
     });
     document.getElementById('logoutBtn').addEventListener('click', async ()=>{ await A().logout(false); load(); });
     document.getElementById('logoutAllBtn').addEventListener('click', async ()=>{
       if(!confirm('Auf allen Geräten abmelden?')) return;
-      await A().logout(true); load();
+      try{ await A().logout(true); load(); }catch(ex){ showError(ex); }
     });
 
     // Einladungen & Mitglieder (nur Besitzer)
@@ -258,7 +258,7 @@ permalink: /konto/
     document.getElementById('hhCreateBtn')?.addEventListener('click', ()=> hhCall('/api/household/create', {}, ()=>{ toast('Einkaufsliste wird jetzt geteilt'); load(); }));
     document.getElementById('hhLeaveBtn')?.addEventListener('click', ()=>{
       if(!confirm('Gemeinsame Einkaufsliste verlassen? Du behältst eine Kopie der Liste.')) return;
-      hhCall('/api/household/leave', {}, ()=>{ toast('Gemeinsame Liste verlassen'); load(); });
+      hhCall('/api/household/leave', {}, ()=>{ toast('Du hast die gemeinsame Liste verlassen'); load(); });
     });
     document.getElementById('hhJoinBtn')?.addEventListener('click', ()=> hhCall('/api/household/join', { token: hhToken }, ()=>{
       history.replaceState(null, '', location.pathname); hhToken = ''; toast('Ihr teilt jetzt eine Einkaufsliste'); load();
@@ -305,7 +305,7 @@ permalink: /konto/
     if(!host) return;
     if(!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)){
       host.innerHTML = isIOS && !standalone
-        ? '<p class="sub">Auf dem iPhone gehen Mitteilungen nur in der App vom Home-Bildschirm: In Safari „Teilen → Zum Home-Bildschirm“, dann dort öffnen.</p>'
+        ? '<p class="sub">Auf dem iPhone gehen Mitteilungen nur in der Home-Bildschirm-App: In Safari „Teilen → Zum Home-Bildschirm“, dann dort öffnen.</p>'
         : '<p class="sub">Dieser Browser unterstützt keine Mitteilungen.</p>';
       return;
     }
@@ -333,7 +333,7 @@ permalink: /konto/
     });
     document.getElementById('pushTestBtn')?.addEventListener('click', async (e)=>{
       const btn = e.currentTarget; busy(btn, true, 'Wird gesendet …');
-      try{ await A().api('/api/push/test', { method: 'POST', body: {} }); toast('Test gesendet'); }
+      try{ await A().api('/api/push/test', { method: 'POST', body: {} }); toast('Test-Mitteilung gesendet'); }
       catch(ex){ showError(ex); }
       busy(btn, false);
     });
@@ -355,7 +355,9 @@ permalink: /konto/
       const me = await A().me(q.toString() ? `?${q}` : '');
       if(me.loggedIn){
         const p = A().profile();
-        if(p && (p.role !== me.role || p.name !== me.name)) localStorage.setItem('kochbuch.profile', JSON.stringify({ ...p, name: me.name, uid: me.uid, role: me.role }));
+        // Profil fehlt lokal (z. B. Abmelden ohne Netz), Server-Sitzung gilt aber noch: wieder eintragen, sonst ruht der Sync
+        if(!p) localStorage.setItem('kochbuch.profile', JSON.stringify({ name: me.name, uid: me.uid, role: me.role, lastSync: null }));
+        else if(p.role !== me.role || p.name !== me.name) localStorage.setItem('kochbuch.profile', JSON.stringify({ ...p, name: me.name, uid: me.uid, role: me.role }));
         renderLoggedIn(me);
         if(location.hash === '#pushCard') setTimeout(()=> document.getElementById('pushCard')?.scrollIntoView({ block: 'center' }), 100);
       }else{

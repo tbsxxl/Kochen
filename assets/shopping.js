@@ -133,7 +133,7 @@
         if(!l[it._i]) return;
         l[it._i].checked = now;
         setList(l);
-        // Haken erst kurz an Ort und Stelle zeigen, dann rutscht der Eintrag nach „Im Wagen“ (sonst springt er ohne Rückmeldung weg)
+        // Haken erst kurz an Ort und Stelle zeigen, dann rutscht der Eintrag nach „Erledigt“ (sonst springt er ohne Rückmeldung weg)
         const row = group.querySelector(`.uRow[data-id="${it._i}"]`);
         if(row && !matchMedia('(prefers-reduced-motion: reduce)').matches){
           row.classList.toggle("checked", now);
@@ -340,7 +340,7 @@
     if(actions) actions.hidden = !list.length;
     if(clearCheckedBtn) clearCheckedBtn.hidden = list.length === openN;
     if(!list.length){
-      listEl.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Die Liste ist leer</div><div class="uEmptyText">Füge oben etwas hinzu oder tippe auf einer Rezeptseite auf „Zur Liste“.</div></div>`;
+      listEl.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Die Liste ist leer</div><div class="uEmptyText">Füge oben etwas hinzu oder nimm die Zutaten eines Rezepts über das Listen-Symbol unter dem Foto mit.</div></div>`;
       return;
     }
     const open = list.filter(it=>!it.checked);
@@ -352,7 +352,7 @@
       items.sort((a,b)=>String(a.item).localeCompare(String(b.item), "de"));
       renderGroup(sec, items);
     });
-    if(done.length) renderGroup("Im Wagen", done, "shopSectionDone");
+    if(done.length) renderGroup("Erledigt", done, "shopSectionDone");
   }
 
   // ---------- Vorschläge beim Tippen: häufig gekaufte Artikel (nur auf diesem Gerät) ----------
@@ -434,9 +434,19 @@
   // Bei einer gemeinsamen Liste regelmäßig nachsehen, solange die Seite offen ist.
   window.KOCHBUCH_LIVE_REFRESH = true;
   window.addEventListener("kochbuch:synced", ()=>{ if(!editing && !rSheet?.classList.contains("open")) render(); });
+  let lastOk = Date.now();
+  function syncWarn(on){
+    let el = document.getElementById("shopSyncWarn");
+    if(!on){ lastOk = Date.now(); if(el) el.hidden = true; return; }
+    if(!el){ el = document.createElement("p"); el.id = "shopSyncWarn"; el.className = "householdNote"; document.querySelector("[data-household-note]")?.after(el); }
+    const t = new Date(lastOk).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+    el.textContent = `Nicht synchronisiert · zuletzt ${t}`; el.hidden = false;
+  }
   setInterval(()=>{
     const A = window.KOCHBUCH_ACCOUNT;
     const p = A && A.profile && A.profile();
-    if(p && p.household && document.visibilityState === "visible") A.syncNow().catch(()=>{});
+    if(!(p && p.household && document.visibilityState === "visible")) return;
+    // Klappt der Abgleich nicht, still „Nicht synchronisiert · zuletzt hh:mm“ unter die Überschrift schreiben
+    A.syncNow().then(()=>{ syncWarn(false); }).catch(()=>{ syncWarn(true); });
   }, 15000);
 })();

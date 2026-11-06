@@ -9,7 +9,7 @@ layout: default
 <div class="section homeGreeting">
   <div class="homeBrand"><img class="logoLight" src="{{ '/assets/logo.svg' | relative_url }}?v=7" alt="" width="28" height="28"><img class="logoDark" src="{{ '/assets/logo-dark.svg' | relative_url }}?v=9" alt="" width="28" height="28"><span class="brandWordmark">{{ site.title }}</span><a class="profileBadge pressable" data-profile-badge href="{{ '/konto/' | relative_url }}" aria-label="Anmelden"></a></div>
   <div class="homeDate" id="homeDate"></div>
-  <div class="homeGreetingTitle" id="homeGreeting">Hallo</div>
+  <h1 class="homeGreetingTitle" id="homeGreeting">Hallo</h1>
   <div class="homeGreetingSub">Was kochst du heute?</div>
 </div>
 <script>
@@ -66,7 +66,7 @@ layout: default
 
 <!-- Heute -->
 <div class="section homeToday">
-  <div class="homeSectionHead"><div class="homeSectionTitle">Heute für dich</div></div>
+  <div class="homeSectionHead"><h2 class="homeSectionTitle">Heute für dich</h2></div>
 
   <a class="linkCard" id="todayLink" href="{{ featured.url | relative_url }}">
     <div class="card recipeCard cardHover homeFeatured">
@@ -85,7 +85,7 @@ layout: default
         <div class="heroOverlayCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</div>
       </div>
       <div class="rcBody">
-        <h2 class="recipeTitle homeFeaturedTitle" id="todayTitle">{{ featured.title }}</h2>
+        <h3 class="recipeTitle homeFeaturedTitle" id="todayTitle">{{ featured.title }}</h3>
         <div class="recipeMeta">
           <span class="metaItem" id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span id="todayTimeText">{{ featured.time }}</span></span>
           <span class="metaItem" id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span id="todayServingsText">{{ featured.servings }} {% if featured.servings == 1 %}Portion{% else %}Portionen{% endif %}</span></span>
@@ -99,7 +99,7 @@ layout: default
 <!-- Favoriten -->
 <div class="section" id="favoritesSection">
   <div class="homeSectionHead">
-    <div class="homeSectionTitle">Favoriten</div>
+    <h2 class="homeSectionTitle">Favoriten</h2>
     <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle</a>
   </div>
   <div class="hScroll" id="favoritesRow"></div>
@@ -108,7 +108,7 @@ layout: default
 <!-- Noch mehr Ideen -->
 <div class="section">
   <div class="homeSectionHead">
-    <div class="homeSectionTitle">Noch mehr Ideen</div>
+    <h2 class="homeSectionTitle">Noch mehr Ideen</h2>
     <a class="homeAllLink" href="{{ '/rezeptindex/' | relative_url }}">Alle</a>
   </div>
   <div class="hScroll" id="forYouRow"></div>
@@ -117,7 +117,7 @@ layout: default
 <!-- Zuletzt gekocht -->
 <div class="section" id="recentSection" hidden>
   <div class="homeSectionHead">
-    <div class="homeSectionTitle">Zuletzt gekocht</div>
+    <h2 class="homeSectionTitle">Zuletzt gekocht</h2>
   </div>
   <div class="hScroll" id="recentRow"></div>
 </div>
@@ -125,14 +125,14 @@ layout: default
 <!-- Lange nicht gekocht -->
 <div class="section" id="longAgoSection" hidden>
   <div class="homeSectionHead">
-    <div class="homeSectionTitle">Lange nicht gekocht</div>
+    <h2 class="homeSectionTitle">Lange nicht gekocht</h2>
   </div>
   <div class="hScroll" id="longAgoRow"></div>
 </div>
 
 <!-- Kühltruhe -->
 <div class="section" id="freezerSection" hidden>
-  <div class="homeSectionTitle">Aus der Kühltruhe</div>
+  <h2 class="homeSectionTitle">Aus der Kühltruhe</h2>
   <div class="stack" id="freezerList"></div>
 </div>
 
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function(){
   recipes.forEach(r=>{ const k=r.id||r.url||''; byId.set(withSlash(k),r); byId.set(normPath(k),r); });
 
   const C = window.KOCHBUCH_CARDS;
-  const favCard = (r)=> C.recipeCard(r, { hCard: true, fav: true });
+  const favCard = (r)=> C.recipeCard(r, { hCard: true, hLevel: 'h3', fav: true });
 
   function render(){
     const stats = getStats();

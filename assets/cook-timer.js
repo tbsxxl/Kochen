@@ -83,7 +83,17 @@
   }
   function remote(path, body){
     pushReady().then(ok=>{
-      if(ok) fetch(path, { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).catch(()=>{});
+      if(!ok) return;
+      const send = ()=> fetch(path, { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+        .then(r=> r.ok ? r.json().catch(()=>({})) : { ok: false }).catch(()=> ({ ok: false }));
+      send().then(res=>{
+        if(res && res.ok !== false) return;
+        // Timer läuft trotzdem auf dem Gerät – nur die Mitteilung bei gesperrtem iPhone klappt gerade nicht
+        if(path === "/api/timers"){
+          try{ window.KOCHBUCH_UI?.toast?.("Timer läuft – Mitteilung bei gesperrtem iPhone gerade nicht möglich (keine Verbindung)."); }catch{}
+          window.addEventListener("online", ()=> send(), { once: true });
+        }
+      });
     });
   }
   const remoteSet = (t)=> remote("/api/timers", { id: t.id, end: t.end, label: t.label, title: t.title || "", url: t.url || "" });
@@ -106,7 +116,7 @@
         <div class="timerAlertSub"></div>
         <div class="timerAlertBtns">
           <button type="button" class="timerAlertBtn" data-act="plus">+1 Min</button>
-          <button type="button" class="timerAlertBtn primary" data-act="ok">OK</button>
+          <button type="button" class="timerAlertBtn primary" data-act="ok">Ton aus</button>
         </div>
       </div>`;
     alertEl.addEventListener("click", (e)=>{

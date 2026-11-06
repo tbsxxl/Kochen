@@ -437,8 +437,9 @@
     Object.keys(notes).forEach(k=>{ const r = Number(notes[k] && notes[k].rating || 0); if(r > 0) ratingById[trimPath(k)] = r; });
     document.querySelectorAll('[data-rating-badge][data-recipe-id]').forEach(el=>{
       const r = ratingById[trimPath(el.getAttribute('data-recipe-id'))] || 0;
-      el.hidden = !r;
-      el.textContent = r ? `★ ${r}` : "";
+      // Auf Karten nur gute Bewertungen (ab 4 Sternen) – sonst steht überall eine Zahl und das Raster wird unruhig
+      el.hidden = r < 4;
+      el.textContent = r >= 4 ? `★ ${r}` : "";
       el.setAttribute('aria-label', r ? `Deine Bewertung: ${r} von 5` : '');
     });
   };
@@ -625,7 +626,42 @@
     });
   }
 
-  function init(){ bindPressables(document); bindCompactTitle(); bindSheetDrag(); }
+  // Blätter und Kochmodus als echte Dialoge (VoiceOver/Tastatur): Fokus hinein, Hintergrund gesperrt,
+  // Escape schließt, danach Fokus zurück auf den Knopf, der geöffnet hat. Beobachtet nur die Klasse „open“.
+  function bindDialogs(){
+    const dialogs = [...document.querySelectorAll('.sheet, #cookOverlay')];
+    dialogs.forEach((dlg, i)=>{
+      dlg.setAttribute('role', 'dialog'); dlg.setAttribute('aria-modal', 'true');
+      const title = dlg.querySelector('.sheetTitle, #cookTitle');
+      if(title){ if(!title.id) title.id = `dlgTitle${i}`; dlg.setAttribute('aria-labelledby', title.id); }
+      let opener = null, locked = [];
+      const close = ()=>{
+        const btn = dlg.id === 'cookOverlay' ? document.getElementById('cookClose') : null;
+        if(btn) btn.click(); else dlg.previousElementSibling?.classList.contains('sheetOverlay') && dlg.previousElementSibling.click();
+      };
+      new MutationObserver(()=>{
+        const open = dlg.classList.contains('open');
+        if(open && !locked.length){
+          opener = document.activeElement;
+          for(let el = dlg; el && el !== document.body; el = el.parentElement){
+            [...(el.parentElement?.children || [])].forEach(sib=>{
+              if(sib !== el && !sib.inert && !sib.classList.contains('sheetOverlay') && !/^(SCRIPT|STYLE)$/.test(sib.tagName) && !sib.classList.contains('uiToast') && !sib.classList.contains('timerAlert')){ sib.inert = true; locked.push(sib); }
+            });
+          }
+          const f = dlg.querySelector('.sheetHead button, #cookClose, button, [href], input');
+          setTimeout(()=>{ try{ f?.focus({ preventScroll: true }); }catch{} }, 50);
+        }else if(!open && locked.length){
+          locked.forEach(el=> el.inert = false); locked = [];
+          try{ if(opener && document.contains(opener)) opener.focus({ preventScroll: true }); }catch{}
+          opener = null;
+        }
+      }).observe(dlg, { attributes: true, attributeFilter: ['class'] });
+      dlg.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && dlg.classList.contains('open')){ e.preventDefault(); close(); } });
+    });
+    document.getElementById('moreBtn')?.setAttribute('aria-haspopup', 'dialog');
+  }
+
+  function init(){ bindPressables(document); bindCompactTitle(); bindSheetDrag(); bindDialogs(); }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();

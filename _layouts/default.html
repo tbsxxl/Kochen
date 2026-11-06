@@ -86,7 +86,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Kochbuch">
   {% if page.image %}<link rel="preload" as="image" href="{{ page.image | relative_url }}?v={{ site.image_version }}" imagesrcset="{% include srcset.html src=page.image %}" imagesizes="(min-width:960px) 928px, 100vw" fetchpriority="high">{% endif %}
+  {%- if page.layout == 'recipe' or page.layout == 'home' %}
   <link rel="preload" href="{{ '/assets/fonts/fraunces.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  {%- endif %}
   <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <script defer src="{{ '/assets/utils.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   <script defer src="{{ '/assets/account.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
@@ -177,8 +179,8 @@
 
     document.querySelectorAll('[data-tab]').forEach(a=>{
       const href = new URL(a.getAttribute('href'), location.origin).pathname.replace(/\/+$/,'') || "/";
-      if (href === path) a.classList.add('active');
-      if (recipeBase && path.startsWith(recipeBase) && href === recipeIndex) a.classList.add('active');
+      if (href === path){ a.classList.add('active'); a.setAttribute('aria-current','page'); }
+      if (recipeBase && path.startsWith(recipeBase) && href === recipeIndex){ a.classList.add('active'); a.setAttribute('aria-current','page'); }
     });
 
     // Mark "Mehr" as active for secondary pages
