@@ -2181,3 +2181,17 @@ p,.recipeBody li,.cookStepText,.uEmptyText,.fieldHint{text-wrap:pretty}
 /* Breite Bildschirme: „Kochen“ nicht über die ganze Zeile ziehen */
 .recipeCookBtn{max-width:18rem}
 @media (min-width:900px){ .homeFeatured .rcImg{height:min(380px, 50vh)} }
+
+/* ---------- 29. Oberer Rand wie der „Scroll Edge“ in iOS 26 (Nov. 2026) ----------
+   Statt eines harten Streifens in Hintergrundfarbe: weiche Unschärfe, die nach unten ausläuft. Geht so nahtlos in die
+   Unschärfe über, die das iPhone selbst unter der Statusleiste zeichnet (vorher: verschwommene Fotos + schwarzer Balken). */
+.navEdge{
+  height:calc(env(safe-area-inset-top) + 72px);
+  background:linear-gradient(to bottom, color-mix(in srgb, var(--bg) 82%, transparent) 0%, color-mix(in srgb, var(--bg) 55%, transparent) 60%, transparent 100%);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+  mask-image:linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+}
+@media (prefers-reduced-transparency: reduce){
+  .navEdge{-webkit-backdrop-filter:none;backdrop-filter:none;background:linear-gradient(to bottom, var(--bg) 0%, var(--bg) 60%, transparent 100%)}
+}
