@@ -121,7 +121,8 @@ function renderGroup(container, items, checks){
         const conv = U.autoConvert(qn, unit);
         return `${U.roundSmart(conv.qty, conv.unit)} ${conv.unit}`.trim();
       }
-      return `${String(it.qty||"").trim()} ${unit}`.trim();
+      // „n. B.“ ausgeschrieben (wurde in der Kritik als unverständliche Abkürzung genannt)
+      return `${String(it.qty||"").trim().replace(/^n\.?\s*b\.?$/i, "nach Bedarf")} ${unit}`.trim();
     },
     isChecked: (it)=>!!checks[it.idx],
     onToggle: (it, _idx, now)=>{
@@ -588,6 +589,9 @@ const cookOverlay = $("#cookOverlay");
   // 3) Fortschritt im Kochmodus merken → Startseite zeigt „Weiter kochen“
   const COOK_KEY = "kochbuch.ui.cooking";
   function saveCookProgress(){
+    // Nur Reinschauen (Schritt 1, noch nichts gemerkt) startet keine „Kochen läuft“-Kapsel
+    const cur = ls.get(COOK_KEY, null);
+    if(stepIdx === 0 && !(cur && cur.id === data.id)) return;
     ls.set(COOK_KEY, { id: data.id, url: data.id, title: data.title, image: data.image || "", step: stepIdx, total: steps.length, t: Date.now() });
     window.dispatchEvent(new Event("kochbuch:cooking"));
   }
@@ -639,7 +643,8 @@ const cookOverlay = $("#cookOverlay");
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
   cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); });
   cookNext?.addEventListener('click', ()=>{
-    if(cookNext.dataset.last){ try{ localStorage.removeItem(COOK_KEY); }catch{} closeCook(); markCooked(); successTap(); UI.toast?.('Als gekocht gespeichert'); return; }
+    if(cookNext.dataset.last){ try{ localStorage.removeItem(COOK_KEY); }catch{} closeCook(); markCooked(); successTap(); window.dispatchEvent(new Event("kochbuch:cooking"));
+      UI.toast?.('Als gekocht gespeichert', { label: 'Bewerten', run: ()=> document.getElementById('notesCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' }) }); return; }
     stepIdx++; renderCookStep(); lightTap();
   });
   cookStepText?.addEventListener('click', (e)=>{

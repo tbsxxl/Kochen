@@ -52,6 +52,18 @@ layout: default
 })();
 </script>
 
+<!-- Schnellsuche -->
+<div class="section">
+  <div class="searchRow searchRowCompact">
+    <input id="homeSearch" type="search" placeholder="Rezept suchen …" autocomplete="off" />
+  </div>
+  <div class="stack" id="homeSearchResults" hidden style="margin-top:10px"></div>
+  <div class="homeQuick">
+    <a class="homeQuickBtn pressable" href="{{ '/was-koche-ich/' | relative_url }}"><svg class="uiIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.3 21.7s9.9-3.5 12.7-6.4a4.5 4.5 0 00-6.4-6.3C5.8 11.8 2.3 21.7 2.3 21.7z"/><path d="M8.6 14l-2-2M15.3 15l-2.4-2.5"/><path d="M22 9s-1.3-2-3.5-2C16.9 7 15 9 15 9s1.3 2 3.5 2S22 9 22 9z"/><path d="M15 2s-2 1.3-2 3.5S15 9 15 9s2-1.8 2-3.5C17 3.3 15 2 15 2z"/></svg>Zutaten suchen</a>
+    <a class="homeQuickBtn pressable" href="{{ '/was-koche-ich/?zufall=1' | relative_url }}"><svg class="uiIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01" stroke-width="2.6"/></svg>Überrasch mich</a>
+  </div>
+</div>
+
 <!-- Heute -->
 <div class="section homeToday">
   <div class="homeSectionHead"><div class="homeSectionTitle">Heute für dich</div></div>
@@ -76,24 +88,12 @@ layout: default
         <h2 class="recipeTitle homeFeaturedTitle" id="todayTitle">{{ featured.title }}</h2>
         <div class="recipeMeta">
           <span class="metaItem" id="todayTime" {% unless featured.time %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span><span id="todayTimeText">{{ featured.time }}</span></span>
-          <span class="metaItem" id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span id="todayServingsText">{{ featured.servings }}</span></span>
+          <span class="metaItem" id="todayServings" {% unless featured.servings %}style="display:none"{% endunless %}><span class="metaIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span id="todayServingsText">{{ featured.servings }} {% if featured.servings == 1 %}Portion{% else %}Portionen{% endif %}</span></span>
           <span class="metaRating" id="todayRating" data-rating-badge data-recipe-id="{{ featured.url | relative_url }}" hidden></span><span class="favBadge rcFavBadge metaFav" id="todayFav" data-fav-badge data-recipe-id="{{ featured.url | relative_url }}" aria-label="Favorit"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z" fill="currentColor"/></svg></span>
         </div>
       </div>
     </div>
   </a>
-</div>
-
-<!-- Schnellsuche -->
-<div class="section">
-  <div class="searchRow searchRowCompact">
-    <input id="homeSearch" type="search" placeholder="Rezept suchen …" autocomplete="off" />
-  </div>
-  <div class="stack" id="homeSearchResults" hidden style="margin-top:10px"></div>
-  <div class="homeQuick">
-    <a class="homeQuickBtn pressable" href="{{ '/was-koche-ich/' | relative_url }}"><svg class="uiIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.3 21.7s9.9-3.5 12.7-6.4a4.5 4.5 0 00-6.4-6.3C5.8 11.8 2.3 21.7 2.3 21.7z"/><path d="M8.6 14l-2-2M15.3 15l-2.4-2.5"/><path d="M22 9s-1.3-2-3.5-2C16.9 7 15 9 15 9s1.3 2 3.5 2S22 9 22 9z"/><path d="M15 2s-2 1.3-2 3.5S15 9 15 9s2-1.8 2-3.5C17 3.3 15 2 15 2z"/></svg>Zutaten suchen</a>
-    <a class="homeQuickBtn pressable" href="{{ '/was-koche-ich/?zufall=1' | relative_url }}"><svg class="uiIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01" stroke-width="2.6"/></svg>Überrasch mich</a>
-  </div>
 </div>
 
 <!-- Favoriten -->
@@ -179,17 +179,31 @@ layout: default
   }
   // Steht für heute etwas im Wochenplan, wird das gezeigt, sonst ein Tagesvorschlag
   // (utils.js ist hier noch nicht geladen, daher direkt aus dem Speicher lesen)
-  let planned = [];
+  let planned = [], nextLabel = '';
   try{
     const n = new Date();
     const k = `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;
     const plan = JSON.parse(localStorage.getItem('kochbuch.plan') || '{}');
     planned = (plan[k] || []).map(e=>recipes.find(x=>x.id===e.id)).filter(Boolean);
+    // Heute nichts geplant: das nächste geplante Gericht der kommenden 6 Tage (Woche vor Zufall)
+    if(!planned.length){
+      const WD = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+      for(let d = 1; d <= 6 && !planned.length; d++){
+        const x = new Date(n.getFullYear(), n.getMonth(), n.getDate() + d);
+        const kk = `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`;
+        planned = (plan[kk] || []).filter(e=>!e.leftover).map(e=>recipes.find(y=>y.id===e.id)).filter(Boolean);
+        if(planned.length) nextLabel = d === 1 ? 'Morgen geplant' : `${WD[x.getDay()]} geplant`;
+      }
+    }
   }catch(e){}
-  const r = planned[0] || recipes[hashStr(dayKey) % recipes.length];
+  // Tagesvorschlag passend zur Tageszeit: abends nichts Süßes und keine Grundrezepte
+  const hour = new Date().getHours();
+  const pool = recipes.filter(x=> hour < 11 || !/^(Süßes & Backen|Saucen & Basics)$/.test(x.category || ''));
+  const list = pool.length ? pool : recipes;
+  const r = planned[0] || list[hashStr(dayKey) % list.length];
   if(planned.length){
     const head = document.querySelector('.homeToday .homeSectionTitle');
-    if(head) head.textContent = 'Heute geplant';
+    if(head) head.textContent = nextLabel || 'Heute geplant';
     const hd = document.querySelector('.homeToday .homeSectionHead');
     if(hd && !hd.querySelector('.homeAllLink')){
       const a = document.createElement('a');
@@ -212,7 +226,7 @@ layout: default
   if(ttl) ttl.textContent = r.title || '—';
   if(cat){ r.category ? (cat.textContent = r.category, cat.style.removeProperty('display')) : (cat.style.display='none'); }
   if(t && tTxt){ r.time ? (tTxt.textContent = r.time, t.style.removeProperty('display')) : (t.style.display='none'); }
-  if(s && sTxt){ r.servings ? (sTxt.textContent = r.servings, s.style.removeProperty('display')) : (s.style.display='none'); }
+  if(s && sTxt){ r.servings ? (sTxt.textContent = r.servings + (Number(r.servings) === 1 ? ' Portion' : ' Portionen'), s.style.removeProperty('display')) : (s.style.display='none'); }
   if(imgW && img){
     r.image ? (img.srcset = r.srcset || '', img.src = r.image, img.alt = r.title||'', imgW.style.removeProperty('display')) : (imgW.style.display='none');
   }

@@ -66,7 +66,7 @@
       return `<section class="card planDayCard${k === todayKey ? " isToday" : ""}${past ? " isPast" : ""}">
         <div class="planDayHead">
           <div><span class="planDayWd">${k === todayKey ? "Heute" : WD[d.getDay()]}</span> <span class="planDayNum">${d.getDate()}. ${MON[d.getMonth()]}</span></div>
-          <button type="button" class="planAdd pressable" data-add="${k}" aria-label="Gericht für ${WD[d.getDay()]} hinzufügen">+ Gericht</button>
+          <button type="button" class="planAdd pressable" data-add="${k}" aria-label="Gericht für ${WD[d.getDay()]} hinzufügen"><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Gericht</button>
         </div>
         ${rows}
       </section>`;
@@ -82,7 +82,7 @@
       : "Zutaten auf die Einkaufsliste";
     $("#weekHint").textContent = upcoming.length
       ? "Gleiche Zutaten werden zusammengezählt. Vergangene Tage zählen nicht mit."
-      : "Plane Gerichte über „+ Gericht“ oder auf einer Rezeptseite unter „Planen“ (unten in der Leiste).";
+      : "Plane Gerichte über „Gericht“ bei einem Tag oder auf einer Rezeptseite über das Kalender-Symbol unter dem Foto.";
   }
 
   function kw(d){

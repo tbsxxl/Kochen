@@ -86,6 +86,20 @@ layout: default
           {%- endunless -%}
         {% endfor %}
       </div>
+      <script>
+      // Nur Hauptkategorie + zwei weitere zeigen, der Rest hinter „+n“ (sonst schieben 7 Kapseln die Zutaten aus dem Bild)
+      (function(){
+        var box = document.currentScript.previousElementSibling, chips = box.querySelectorAll('.chip');
+        if (chips.length <= 4) return;
+        box.classList.add('isCollapsed');
+        var more = document.createElement('button');
+        more.type = 'button'; more.className = 'chip chipMore';
+        more.textContent = '+' + (chips.length - 3);
+        more.setAttribute('aria-label', (chips.length - 3) + ' weitere Kategorien und Stichwörter zeigen');
+        more.addEventListener('click', function(){ box.classList.remove('isCollapsed'); more.remove(); });
+        box.appendChild(more);
+      })();
+      </script>
       {% endif %}
     </div>
 

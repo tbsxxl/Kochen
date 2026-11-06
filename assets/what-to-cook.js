@@ -87,7 +87,7 @@
 
   function renderResults(){
     if(!pantry.length){
-      resultsEl.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Was ist da?</div><div class="uEmptyText">Füge ein paar Zutaten hinzu, dann zeige ich passende Rezepte – die mit den wenigsten fehlenden Zutaten zuerst.</div></div>`;
+      resultsEl.innerHTML = `<div class="uEmpty"><div class="uEmptyText">Hier erscheinen passende Rezepte – die mit den wenigsten fehlenden Zutaten zuerst.</div></div>`;
       return;
     }
     const scored = prepared.map(r=>{

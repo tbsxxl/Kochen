@@ -50,6 +50,10 @@ const RECIPES = fs.readdirSync(path.join(__dirname, '..', '_recipes')).filter(f 
   await go(`/rezepte/${demo}/`);
   await page.evaluate(() => localStorage.clear());
   await go(`/rezepte/${demo}/`);
+  // Nur reinschauen (öffnen, schließen) startet keine „Kochen läuft“-Kapsel
+  await page.tap('#cookingModeQuick'); await page.waitForTimeout(300);
+  await page.tap('#cookClose'); await page.waitForTimeout(300);
+  check(await page.evaluate(() => !localStorage.getItem('kochbuch.ui.cooking')), 'Kochmodus: bloßes Öffnen merkt sich schon Fortschritt');
   await page.tap('#cookingModeQuick'); await page.waitForTimeout(300);
   check(await page.evaluate(() => document.querySelector('#cookOverlay')?.classList.contains('open')), 'Kochmodus öffnet nicht');
   await page.tap('#cookNext'); await page.waitForTimeout(150);
