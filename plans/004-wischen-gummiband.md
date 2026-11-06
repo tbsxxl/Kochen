@@ -1,6 +1,6 @@
 # 004 — Einkaufsliste: Gummiband statt harter Kante beim Wischen nach rechts
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 1671559
 - **Severity**: LOW
 - **Category**: Interruptibility

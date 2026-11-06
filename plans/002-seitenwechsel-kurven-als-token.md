@@ -1,6 +1,6 @@
 # 002 — Seitenwechsel: kein ease-in, Kurven aus den Tokens
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 1671559
 - **Severity**: MEDIUM
 - **Category**: Easing & duration / Cohesion & tokens

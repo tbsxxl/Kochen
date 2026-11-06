@@ -1,6 +1,6 @@
 # 003 — Tab-Leiste beim Scrollen schneller verkleinern
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 1671559
 - **Severity**: LOW
 - **Category**: Easing & duration
