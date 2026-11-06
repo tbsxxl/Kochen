@@ -52,7 +52,7 @@ Favoriten, Einkaufsliste, Kühltruhe und Wochenplan, können aber keine Rezepte 
 
 Browserdaten hängen an der Adresse und ziehen nicht automatisch mit um.
 
-1. Auf der alten Seite: **Mehr → Backup / Import → Backup erzeugen** und den Text kopieren.
-2. Auf der neuen Seite: **Mehr → Backup / Import**, Text einfügen, **Mergen**.
+1. Auf der alten Seite: **Mehr → Datensicherung → Backup erzeugen** und den Text kopieren.
+2. Auf der neuen Seite: **Mehr → Datensicherung**, Text einfügen, **Mergen**.
 
 Alte Pfade (`/Kochen/…`) werden beim Import automatisch angepasst.

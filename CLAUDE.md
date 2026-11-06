@@ -97,6 +97,11 @@ Wischen), `apple-design-web` (alle Blätter lassen sich nach unten wegziehen: `b
 1:1, Gummiband nach oben, schließt über einen Klick aufs vorangehende `.sheetOverlay`; jedes Blatt braucht diese Reihenfolge),
 `impeccable` (Abschnitt 27: Cursor, Unterstriche, Scrollbalken, `text-wrap`). Funde des `impeccable detect`, die bewusst
 bleiben: weißer Text auf Fotos (Detektor sieht das Bild nicht), versteckte `#continueImg` ohne src, Fotos randlos.
+Nach der `impeccable`-Kritik (Abschnitt 28): „Kochen läuft“ erst ab Schritt 2/Timer (bloßes Öffnen merkt nichts),
+„Fertig“ bietet „Bewerten“ an; Rezeptseite zeigt 3 Kapseln + „+n“; Startseite: Suche oben, „Heute für dich“ flacher (≤ 60 vh),
+heute nichts geplant → nächstes geplantes Gericht der Woche („Morgen geplant“), Zufall abends ohne Süßes/Grundrezepte;
+„n. B.“ als „nach Bedarf“; Menüpunkt „Datensicherung“; „Was koche ich?“/„Überrasch mich“/„Zutaten suchen“ bleiben
+getrennt (Wunsch des Besitzers).
 
 
 - **Apple-Look (iOS „Liquid Glass“)**, Abschnitt 10 in `assets/styles.css`: schwebende Glas-Kapsel als Tab-Leiste,

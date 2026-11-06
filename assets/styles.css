@@ -2155,3 +2155,19 @@ html{scrollbar-color:var(--lineStrong) transparent}
 /* Überschriften ausgewogen umbrechen, Fließtext ohne einzelne Wörter in der letzten Zeile */
 h1,h2,h3,.recipeTitle,.homeFeaturedTitle{text-wrap:balance}
 p,.recipeBody li,.cookStepText,.uEmptyText,.fieldHint{text-wrap:pretty}
+
+/* ---------- 28. Nach der impeccable-Kritik (Nov. 2026) ---------- */
+/* Wochenplan: vergangene Tage nicht mehr insgesamt blass (Knopf fiel auf 2,5 : 1), nur der Tagesname leiser */
+.planDayCard.isPast{opacity:1}
+.planDayCard.isPast .planDayHead > div{color:var(--sub)}
+.planAdd{display:inline-flex;align-items:center;gap:4px}
+.planAdd .ico{width:1em;height:1em}
+/* Rezeptseite: Kapseln eingeklappt (Skript in _layouts/recipe.html) */
+.recipeTags.isCollapsed .chip:nth-child(n+4):not(.chipMore){display:none}
+.recipeTags .chipMore{border:0;background:var(--fill);color:var(--sub);font:inherit;font-weight:600;cursor:pointer}
+@media print{.recipeTags.isCollapsed .chip{display:inline-flex !important}.chipMore{display:none !important}}
+/* Startseite: „Heute für dich“ flacher (etwa 4 : 3, höchstens 60 % der Bildschirmhöhe), Suche steht darüber */
+.homeFeatured .rcImg{height:min(clamp(260px, 76vw, 440px), 60vh)}
+/* Breite Bildschirme: „Kochen“ nicht über die ganze Zeile ziehen */
+.recipeCookBtn{max-width:18rem}
+@media (min-width:900px){ .homeFeatured .rcImg{height:min(380px, 50vh)} }
