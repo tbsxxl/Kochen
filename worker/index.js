@@ -37,7 +37,12 @@ export default {
       await migrate(env);
       return await route(request, env, url);
     }catch(err){
-      return json({ error: String(err && err.message || err) }, err && err.status || 500);
+      const status = err && err.status || 500;
+      const raw = String(err && err.message || err);
+      // GitHub-Zugang kaputt: verständlich sagen, was zu tun ist (nur der Besitzer lädt hoch)
+      if(/^GitHub (401|403)\b/.test(raw)) return json({ error: "Der Zugang zu GitHub ist abgelaufen oder fehlt (GITHUB_TOKEN in Cloudflare erneuern)." }, 424);
+      if(status >= 500){ console.error(raw); return json({ error: "Speichern hat nicht geklappt. Bitte später noch einmal versuchen." }, status); }
+      return json({ error: raw }, status);
     }
   }
 };
@@ -776,7 +781,7 @@ async function recipeUpdate(request, env){
   const gh = github(env);
   const current = await gh.read(path);
   if(!current) fail("Rezept nicht gefunden.", 404);
-  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen geändert. Bitte die Seite neu laden.", 409);
+  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen woanders geändert. Deine Änderungen bleiben hier stehen – kopiere sie, lade die Seite neu und füge sie wieder ein.", 409);
   const r = validateRecipe(body);
 
   const files = [];
@@ -809,7 +814,7 @@ async function recipeDelete(request, env){
   const gh = github(env);
   const current = await gh.read(path);
   if(!current) fail("Rezept nicht gefunden.", 404);
-  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen geändert. Bitte die Seite neu laden.", 409);
+  if(body.sha && body.sha !== current.sha) fail("Das Rezept wurde inzwischen woanders geändert. Deine Änderungen bleiben hier stehen – kopiere sie, lade die Seite neu und füge sie wieder ein.", 409);
   const files = [{ path, delete: true }];
   for(const p of imagePathsOf(current.text)) if(await gh.exists(p)) files.push({ path: p, delete: true });
   const pdf = checkPdfPath(body.pdf);

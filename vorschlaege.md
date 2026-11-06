@@ -33,7 +33,13 @@ permalink: /vorschlaege/
       return;
     }
     const owner = me.role === 'owner';
-    const { suggestions } = await A().api('/api/suggestions');
+    let suggestions;
+    try{ ({ suggestions } = await A().api('/api/suggestions')); }
+    catch(err){
+      host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Gerade keine Verbindung</div><div class="uEmptyText">Die Vorschläge sind gerade nicht erreichbar.</div><button class="btn accountBtn" id="retryBtn" type="button" style="margin-top:16px">Erneut versuchen</button></div>`;
+      host.querySelector('#retryBtn').addEventListener('click', ()=>{ host.innerHTML = '<div class="card cardPad sub">Wird geladen …</div>'; load(); });
+      return;
+    }
     if(owner){
       host.innerHTML = suggestions.length ? `
         <p class="sub" style="margin:0 0 12px">${suggestions.length === 1 ? 'Ein Vorschlag wartet' : `${suggestions.length} Vorschläge warten`} auf deine Freigabe.</p>
@@ -67,8 +73,8 @@ permalink: /vorschlaege/
       : `<div class="uEmpty"><div class="uEmptyTitle">Noch keine Vorschläge</div><div class="uEmptyText">Du kennst ein gutes Rezept? Schlag es vor – auch per Link von einer Rezeptseite.</div></div>`}`;
     host.querySelectorAll('.sugWithdraw').forEach(b=> b.addEventListener('click', async ()=>{
       if(!confirm('Vorschlag zurückziehen?')) return;
-      await A().api(`/api/suggestions/${encodeURIComponent(b.dataset.id)}/withdraw`, { method: 'POST', body: {} });
-      load();
+      try{ await A().api(`/api/suggestions/${encodeURIComponent(b.dataset.id)}/withdraw`, { method: 'POST', body: {} }); load(); }
+      catch(err){ window.KOCHBUCH_UI?.toast?.(err.message || 'Zurückziehen hat nicht geklappt. Bitte noch einmal versuchen.'); }
     }));
   }
   if(window.KOCHBUCH_ACCOUNT) load(); else document.addEventListener('DOMContentLoaded', load);

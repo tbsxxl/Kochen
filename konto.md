@@ -214,7 +214,7 @@ permalink: /konto/
     document.getElementById('logoutBtn').addEventListener('click', async ()=>{ await A().logout(false); load(); });
     document.getElementById('logoutAllBtn').addEventListener('click', async ()=>{
       if(!confirm('Auf allen Geräten abmelden?')) return;
-      await A().logout(true); load();
+      try{ await A().logout(true); load(); }catch(ex){ showError(ex); }
     });
 
     // Einladungen & Mitglieder (nur Besitzer)
@@ -355,7 +355,9 @@ permalink: /konto/
       const me = await A().me(q.toString() ? `?${q}` : '');
       if(me.loggedIn){
         const p = A().profile();
-        if(p && (p.role !== me.role || p.name !== me.name)) localStorage.setItem('kochbuch.profile', JSON.stringify({ ...p, name: me.name, uid: me.uid, role: me.role }));
+        // Profil fehlt lokal (z. B. Abmelden ohne Netz), Server-Sitzung gilt aber noch: wieder eintragen, sonst ruht der Sync
+        if(!p) localStorage.setItem('kochbuch.profile', JSON.stringify({ name: me.name, uid: me.uid, role: me.role, lastSync: null }));
+        else if(p.role !== me.role || p.name !== me.name) localStorage.setItem('kochbuch.profile', JSON.stringify({ ...p, name: me.name, uid: me.uid, role: me.role }));
         renderLoggedIn(me);
         if(location.hash === '#pushCard') setTimeout(()=> document.getElementById('pushCard')?.scrollIntoView({ block: 'center' }), 100);
       }else{

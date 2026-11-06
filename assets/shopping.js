@@ -434,9 +434,19 @@
   // Bei einer gemeinsamen Liste regelmäßig nachsehen, solange die Seite offen ist.
   window.KOCHBUCH_LIVE_REFRESH = true;
   window.addEventListener("kochbuch:synced", ()=>{ if(!editing && !rSheet?.classList.contains("open")) render(); });
+  let lastOk = Date.now();
+  function syncWarn(on){
+    let el = document.getElementById("shopSyncWarn");
+    if(!on){ lastOk = Date.now(); if(el) el.hidden = true; return; }
+    if(!el){ el = document.createElement("p"); el.id = "shopSyncWarn"; el.className = "householdNote"; document.querySelector("[data-household-note]")?.after(el); }
+    const t = new Date(lastOk).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+    el.textContent = `Nicht synchronisiert · zuletzt ${t}`; el.hidden = false;
+  }
   setInterval(()=>{
     const A = window.KOCHBUCH_ACCOUNT;
     const p = A && A.profile && A.profile();
-    if(p && p.household && document.visibilityState === "visible") A.syncNow().catch(()=>{});
+    if(!(p && p.household && document.visibilityState === "visible")) return;
+    // Klappt der Abgleich nicht, still „Nicht synchronisiert · zuletzt hh:mm“ unter die Überschrift schreiben
+    A.syncNow().then(()=>{ syncWarn(false); }).catch(()=>{ syncWarn(true); });
   }, 15000);
 })();

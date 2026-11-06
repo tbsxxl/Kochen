@@ -395,7 +395,7 @@
       hint.textContent = (err && err.message) || String(err);
       hint.classList.add("isError");
     }finally{
-      btn.disabled = false; btn.textContent = "Laden";
+      btn.disabled = false; btn.textContent = "Übernehmen";
     }
   }
   $("#importBtn").addEventListener("click", importFromUrl);
@@ -494,11 +494,14 @@
         gate.querySelector("a.btn")?.remove();
       }else if(me.loggedIn && !me.canUpload){
         gate.querySelector(".uEmptyTitle").textContent = "Hochladen noch nicht eingerichtet";
-        gate.querySelector(".uEmptyText").textContent = "In Cloudflare fehlt noch das GITHUB_TOKEN (siehe Anleitung).";
+        gate.querySelector(".uEmptyText").textContent = "In Cloudflare fehlt noch das Secret GITHUB_TOKEN.";
       }
     }catch(err){
       gate.hidden = false;
-      gate.querySelector(".uEmptyText").textContent = (err && err.message) || "Keine Verbindung.";
+      gate.querySelector(".uEmptyTitle").textContent = "Gerade keine Verbindung";
+      gate.querySelector(".uEmptyText").textContent = "Hochladen und Vorschlagen braucht Internet. Dein Entwurf bleibt auf diesem Gerät gespeichert.";
+      const a = gate.querySelector("a.btn");
+      if(a){ a.textContent = "Erneut versuchen"; a.setAttribute("href", location.href); }
     }
   })();
 })();

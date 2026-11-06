@@ -70,17 +70,28 @@
 
   // ---------- Server ----------
   async function api(path, opts = {}){
-    const res = await fetch(path, {
+    let res;
+    try{ res = await fetch(path, {
       method: opts.method || "GET",
       credentials: "same-origin",
       headers: opts.body !== undefined ? { "Content-Type": "application/json" } : {},
       body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
       keepalive: !!opts.keepalive
-    });
+    }); }catch(netErr){
+      // „Failed to fetch“/„Load failed“ nie anzeigen
+      const e = new Error(navigator.onLine === false ? "Du bist offline. Deine Daten bleiben auf diesem Gerät und werden später synchronisiert." : "Keine Verbindung zum Kochbuch. Bitte gleich noch einmal versuchen.");
+      e.status = 0; e.network = true; throw e;
+    }
     let data = {};
     try{ data = await res.json(); }catch{}
-    if(res.status === 401 && loggedIn()){ rawRemove.call(store, PROFILE_KEY); renderBadges(); }
-    if(!res.ok){ const e = new Error(data.error || "Das Kochbuch ist gerade nicht erreichbar. Versuch es gleich noch einmal."); e.status = res.status; throw e; }
+    if(res.status === 401 && loggedIn()){
+      rawRemove.call(store, PROFILE_KEY); renderBadges();
+      try{ window.KOCHBUCH_UI?.toast?.("Du wurdest abgemeldet. Melde dich wieder an, damit deine Änderungen synchronisiert werden.", { label: "Anmelden", run: ()=>{ location.href = "/konto/"; } }); }catch{}
+    }
+    if(!res.ok){
+      const msg = res.status >= 500 || !data.error ? "Der Kochbuch-Server hat gerade ein Problem. Bitte später noch einmal versuchen." : data.error;
+      const e = new Error(msg); e.status = res.status; throw e;
+    }
     return data;
   }
 
@@ -310,7 +321,12 @@
   }
 
   async function logout(everywhere){
-    try{ await api("/api/auth/logout", { method: "POST", body: { everywhere: !!everywhere } }); }catch{}
+    try{ await api("/api/auth/logout", { method: "POST", body: { everywhere: !!everywhere } }); }
+    catch(err){
+      // „Überall abmelden“ muss beim Server ankommen – sonst bleiben die anderen Geräte angemeldet
+      if(everywhere) throw new Error("Abmelden auf allen Geräten hat nicht geklappt – keine Verbindung. Bitte noch einmal versuchen.");
+      try{ window.KOCHBUCH_UI?.toast?.("Auf diesem Gerät abgemeldet."); }catch{}
+    }
     rawRemove.call(store, PROFILE_KEY);
     renderBadges();
   }
