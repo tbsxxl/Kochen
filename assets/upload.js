@@ -370,7 +370,7 @@
     const hint = $("#importHint");
     if(!url){ $("#importUrl").focus(); return; }
     const btn = $("#importBtn");
-    btn.disabled = true; btn.textContent = "Lädt …";
+    btn.disabled = true; btn.textContent = "Wird geladen …";
     hint.classList.remove("isError");
     try{
       const r = await A.api("/api/import", { method: "POST", body: { url } });

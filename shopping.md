@@ -22,7 +22,6 @@ permalink: /shopping/
   <div id="shopList"></div>
 </div>
 
-<p class="shopHint">Antippen = abhaken · nach links wischen = löschen · lange drücken oder Menge antippen = bearbeiten</p>
 
 <div class="sheetOverlay" id="shopItemOverlay"></div>
 <section class="sheet" id="shopItemSheet" aria-labelledby="shopItemTitle" aria-hidden="true">
@@ -55,7 +54,7 @@ permalink: /shopping/
     <a class="btn brandBtn" id="reweSearch" href="#" target="_blank" rel="noopener">Bei REWE suchen</a>
     <div class="reweNav">
       <button class="btn btnGhost" id="reweSkip" type="button">Überspringen</button>
-      <button class="btn btnGhost" id="reweInCart" type="button">Im Warenkorb ✓</button>
+      <button class="btn btnGhost" id="reweInCart" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Im Warenkorb</button>
     </div>
     <p class="reweHint">Öffnet die REWE-Suche (App oder Website). Produkt in den Warenkorb legen, zurückkommen und „Im Warenkorb“ tippen.</p>
   </div>

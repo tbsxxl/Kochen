@@ -230,7 +230,7 @@ function renderGroup(container, items, checks){
     const e = freezerEntry();
     const p = e?.portions ? Number(e.portions) : 0;
     if(freezerCount) freezerCount.textContent = String(p);
-    if(freezerHint) freezerHint.textContent = e ? 'In Kühltruhe gespeichert' : 'Nicht in Kühltruhe';
+    if(freezerHint) freezerHint.textContent = e ? 'In der Kühltruhe' : 'Nicht in der Kühltruhe';
     freezerMinus && (freezerMinus.disabled = p<=0);
     freezerRemove && (freezerRemove.disabled = !e);
   }

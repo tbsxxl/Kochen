@@ -194,7 +194,7 @@
       const on = filters.has(f);
       b.setAttribute("aria-pressed", String(on));
       b.classList.toggle("pillToggleActive", on && f !== "fav");
-      if(f === "fav") b.textContent = on ? "♥ Nur Favoriten" : "♡ Nur Favoriten";
+      if(f === "fav") b.innerHTML = (on ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z" fill="currentColor" stroke="currentColor" stroke-width="2"/></svg>' : '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z" fill="none" stroke="currentColor" stroke-width="2"/></svg>') + "Nur Favoriten";
       renderRandom();
     });
   });

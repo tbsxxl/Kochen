@@ -133,7 +133,7 @@
         if(!l[it._i]) return;
         l[it._i].checked = now;
         setList(l);
-        // Haken erst kurz an Ort und Stelle zeigen, dann rutscht der Eintrag nach „Im Wagen“ (sonst springt er ohne Rückmeldung weg)
+        // Haken erst kurz an Ort und Stelle zeigen, dann rutscht der Eintrag nach „Erledigt“ (sonst springt er ohne Rückmeldung weg)
         const row = group.querySelector(`.uRow[data-id="${it._i}"]`);
         if(row && !matchMedia('(prefers-reduced-motion: reduce)').matches){
           row.classList.toggle("checked", now);
@@ -340,7 +340,7 @@
     if(actions) actions.hidden = !list.length;
     if(clearCheckedBtn) clearCheckedBtn.hidden = list.length === openN;
     if(!list.length){
-      listEl.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Die Liste ist leer</div><div class="uEmptyText">Füge oben etwas hinzu oder tippe auf einer Rezeptseite auf „Zur Liste“.</div></div>`;
+      listEl.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Die Liste ist leer</div><div class="uEmptyText">Füge oben etwas hinzu oder nimm die Zutaten eines Rezepts über das Listen-Symbol unter dem Foto mit.</div></div>`;
       return;
     }
     const open = list.filter(it=>!it.checked);
@@ -352,7 +352,7 @@
       items.sort((a,b)=>String(a.item).localeCompare(String(b.item), "de"));
       renderGroup(sec, items);
     });
-    if(done.length) renderGroup("Im Wagen", done, "shopSectionDone");
+    if(done.length) renderGroup("Erledigt", done, "shopSectionDone");
   }
 
   // ---------- Vorschläge beim Tippen: häufig gekaufte Artikel (nur auf diesem Gerät) ----------

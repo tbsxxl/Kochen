@@ -5,7 +5,7 @@ permalink: /vorschlaege/
 ---
 
 <div class="section" style="margin-top:6px" id="sugHost">
-  <div class="card cardPad sub">Lade …</div>
+  <div class="card cardPad sub">Wird geladen …</div>
 </div>
 
 <script>
@@ -24,7 +24,10 @@ permalink: /vorschlaege/
 
   async function load(){
     let me;
-    try{ me = await A().me(); }catch(err){ host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Keine Verbindung</div><div class="uEmptyText">${esc(err.message)}</div></div>`; return; }
+    try{ me = await A().me(); }catch(err){
+      host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">${navigator.onLine === false ? 'Offline' : 'Gerade keine Verbindung'}</div><div class="uEmptyText">${esc(err.message || 'Das Kochbuch ist gerade nicht erreichbar.')}</div><button class="btn accountBtn" id="retryBtn" type="button" style="margin-top:16px">Erneut versuchen</button></div>`;
+      host.querySelector('#retryBtn')?.addEventListener('click', ()=>{ host.innerHTML = '<div class="card cardPad sub">Wird geladen …</div>'; load(); });
+      return; }
     if(!me.loggedIn){
       host.innerHTML = `<div class="uEmpty"><div class="uEmptyTitle">Bitte anmelden</div><div class="uEmptyText">Rezepte vorschlagen können alle mit Profil.</div><a class="btn action" href="{{ '/konto/' | relative_url }}" style="margin-top:12px">Zum Profil</a></div>`;
       return;
@@ -56,7 +59,7 @@ permalink: /vorschlaege/
             <div class="sugTitle">${esc(x.title)}</div>
             <div class="sugMeta">${day(x.created)}</div>
             <span class="sugStatus ${cls}">${label}</span>
-            ${x.status === 'approved' && x.url ? `<a class="homeAllLink" href="${esc(x.url)}">Zum Rezept →</a>` : ''}
+            ${x.status === 'approved' && x.url ? `<a class="homeAllLink" href="${esc(x.url)}">Zum Rezept</a>` : ''}
             ${x.status === 'rejected' && x.reason ? `<div class="sub">„${esc(x.reason)}“</div>` : ''}
             ${x.status === 'pending' ? `<button class="sugWithdraw" data-id="${esc(x.id)}" type="button">Zurückziehen</button>` : ''}
           </div>

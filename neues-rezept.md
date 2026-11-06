@@ -17,7 +17,7 @@ permalink: /neues-rezept/
     <label class="fieldLabel" for="importUrl">Von einer Webseite übernehmen (optional)</label>
     <div class="searchRow searchRowCompact">
       <input id="importUrl" type="url" inputmode="url" placeholder="Link zum Rezept einfügen" autocomplete="off">
-      <button class="btn secondary" id="importBtn" type="button">Laden</button>
+      <button class="btn secondary" id="importBtn" type="button">Übernehmen</button>
     </div>
     <p class="sub importHint" id="importHint">Klappt bei den meisten großen Rezeptseiten. Danach alles prüfen und bei Bedarf anpassen.</p>
   </div>
@@ -39,7 +39,7 @@ permalink: /neues-rezept/
     <label class="fieldLabel" for="subtitleIn">Unterzeile (optional)</label>
     <input class="fieldInput" id="subtitleIn" maxlength="120" placeholder="z. B. mit Romanesco und Kartoffelpüree">
 
-    <label class="fieldLabel" for="catIn">Kategorie (steht auf dem Foto)</label>
+    <label class="fieldLabel" for="catIn">Kategorie</label>
     <select class="fieldInput" id="catIn" required>
       <option value="">Bitte wählen …</option>
       {% for c in site.data.categories %}<option>{{ c }}</option>{% endfor %}
@@ -77,8 +77,8 @@ permalink: /neues-rezept/
     <textarea class="codeArea uploadArea" id="ingIn" rows="8" placeholder="400 g Gnocchi&#10;1 Dose stückige Tomaten&#10;2 Zehen Knoblauch&#10;1 Prise Salz&#10;Parmesan nach Bedarf"></textarea>
     <div class="ingPreview" id="ingPreview"></div>
     <div class="ingRows" id="ingRows" hidden></div>
-    <button class="btn accountBtn" id="ingRowAdd" type="button" hidden>+ Zutat</button>
-    <button class="btn accountBtn" id="ingSecAdd" type="button" hidden>+ Zwischenüberschrift</button>
+    <button class="btn accountBtn" id="ingRowAdd" type="button" hidden><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Zutat</button>
+    <button class="btn accountBtn" id="ingSecAdd" type="button" hidden><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Zwischenüberschrift</button>
   </div>
 
   <div class="section card cardPad uploadCard">

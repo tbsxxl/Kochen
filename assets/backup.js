@@ -45,9 +45,9 @@
 
   function parseImport(){
     const txt = String(inp.value || "").trim();
-    if(!txt) throw new Error("Import ist leer.");
+    if(!txt) throw new Error("Wähle zuerst eine Sicherungsdatei oder füge den Text einer Sicherung ein.");
     const obj = JSON.parse(txt);
-    if(!obj || typeof obj !== "object" || !obj.data) throw new Error("Ungültiges Format.");
+    if(!obj || typeof obj !== "object" || !obj.data) throw new Error("Das ist keine Sicherung aus dem Kochbuch. Wähle eine Datei, die du unter „Datensicherung“ gesichert hast.");
     return obj;
   }
 
@@ -101,11 +101,11 @@
 
   $("#copyExport")?.addEventListener("click", async ()=>{
     try{ await navigator.clipboard.writeText(out.value || ""); toast("Kopiert"); }
-    catch{ alert("Clipboard nicht verfügbar. Manuell kopieren."); }
+    catch{ alert("Kopieren hat nicht geklappt. Markiere den Text und kopiere ihn selbst."); }
   });
 
   $("#doImport")?.addEventListener("click", ()=>{
-    if(!confirm("Import anwenden und vorhandene Daten überschreiben?")) return;
+    if(!confirm("Deine jetzigen Daten auf diesem Gerät durch die Sicherung ersetzen?")) return;
     try{ applyImport("overwrite"); toast("Daten ersetzt"); }catch(e){ alert(e.message || "Fehler."); }
   });
 

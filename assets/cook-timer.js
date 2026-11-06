@@ -106,7 +106,7 @@
         <div class="timerAlertSub"></div>
         <div class="timerAlertBtns">
           <button type="button" class="timerAlertBtn" data-act="plus">+1 Min</button>
-          <button type="button" class="timerAlertBtn primary" data-act="ok">OK</button>
+          <button type="button" class="timerAlertBtn primary" data-act="ok">Ton aus</button>
         </div>
       </div>`;
     alertEl.addEventListener("click", (e)=>{

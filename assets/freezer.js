@@ -58,7 +58,7 @@
             <button class="stepBtn" data-act="plus" type="button" aria-label="Eine Portion mehr"><svg class="ico icoPM" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
             <span class="freezerUnit">${portions === 1 ? 'Portion' : 'Portionen'}</span>
           </div>
-          <button class="btn btnDangerOutline freezerRemoveBtn" data-act="remove" type="button" aria-label="Aus Kühltruhe entfernen">
+          <button class="btn btnDangerOutline freezerRemoveBtn" data-act="remove" type="button" aria-label="Aus der Kühltruhe entfernen">
             <span class="metaIcon" style="width:16px;height:16px" aria-hidden="true">${SVG_TRASH}</span>
           </button>
         </div>

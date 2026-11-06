@@ -80,7 +80,7 @@
     let data = {};
     try{ data = await res.json(); }catch{}
     if(res.status === 401 && loggedIn()){ rawRemove.call(store, PROFILE_KEY); renderBadges(); }
-    if(!res.ok){ const e = new Error(data.error || `Fehler ${res.status}`); e.status = res.status; throw e; }
+    if(!res.ok){ const e = new Error(data.error || "Das Kochbuch ist gerade nicht erreichbar. Versuch es gleich noch einmal."); e.status = res.status; throw e; }
     return data;
   }
 
@@ -246,7 +246,7 @@
   }
   function passkeySupported(){ return !!(window.PublicKeyCredential && navigator.credentials); }
   function friendly(err){
-    if(err && err.name === "NotAllowedError") return "Abgebrochen oder nicht erlaubt.";
+    if(err && err.name === "NotAllowedError") return "Anmeldung abgebrochen. Tippe einfach noch einmal auf den Knopf.";
     if(err && err.name === "InvalidStateError") return "Auf diesem Gerät gibt es schon einen Passkey für das Kochbuch.";
     return (err && err.message) || String(err);
   }
@@ -365,7 +365,7 @@
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 
   // Offline: Änderungen bleiben auf dem Gerät und werden abgeglichen, sobald wieder Netz da ist
-  window.addEventListener("offline", ()=>{ try{ window.KOCHBUCH_UI?.toast?.("Offline – Änderungen werden später abgeglichen"); }catch{} });
+  window.addEventListener("offline", ()=>{ try{ window.KOCHBUCH_UI?.toast?.("Offline – Änderungen werden synchronisiert, sobald du wieder online bist"); }catch{} });
   window.addEventListener("online", ()=>{ if(loggedIn()) syncNow().catch(()=>{}); });
 
   // App wieder im Vordergrund → neuen Stand holen; beim Verlassen noch schnell senden

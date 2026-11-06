@@ -42,7 +42,7 @@
     const title = c ? c.title : (next.title || next.label);
     target = c ? c.id + "?kochen=1" : (next.url || "");
     const parts = [];
-    if(next) parts.push(done ? "Timer fertig" : `${CLOCK}${esc(T.fmt(next.left))}${timers.length > 1 ? ` (+${timers.length - 1})` : ""}`);
+    if(next) parts.push(done ? "Timer abgelaufen" : `${CLOCK}${esc(T.fmt(next.left))}${timers.length > 1 ? ` (+${timers.length - 1})` : ""}`);
     if(c) parts.push(`Schritt ${c.step + 1} von ${c.total}`);
 
     $(".nowCookingTitle").textContent = title || "Kochen";
