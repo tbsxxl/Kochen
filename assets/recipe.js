@@ -489,7 +489,7 @@ const cookOverlay = $("#cookOverlay");
     const unit = U.normUnit(i.unit||"");
     const qn = num(i.qty);
     if(qn !== null){ const conv = U.autoConvert(qn, unit); return `${U.roundSmart(conv.qty, conv.unit)} ${conv.unit}`.trim(); }
-    return `${String(i.qty||"").trim()} ${unit}`.trim();
+    return `${String(i.qty||"").trim().replace(/^n\.?\s*b\.?$/i, "nach Bedarf")} ${unit}`.trim();
   }
   const escHtml = (x)=>String(x??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 

@@ -97,6 +97,7 @@ Wischen), `apple-design-web` (alle Blätter lassen sich nach unten wegziehen: `b
 1:1, Gummiband nach oben, schließt über einen Klick aufs vorangehende `.sheetOverlay`; jedes Blatt braucht diese Reihenfolge),
 `impeccable` (Abschnitt 27: Cursor, Unterstriche, Scrollbalken, `text-wrap`). Funde des `impeccable detect`, die bewusst
 bleiben: weißer Text auf Fotos (Detektor sieht das Bild nicht), versteckte `#continueImg` ohne src, Fotos randlos.
+`impeccable audit` (Abschnitt 30): Blätter und Kochmodus sind echte Dialoge (`bindDialogs()` in `assets/utils.js`: role=dialog, Hintergrund `inert`, Escape, Fokus zurück); Startseite h1/h2, Karten-Bilder `alt=""` (Name steht im Titel), aktiver Tab `aria-current`, Fraunces nur auf Rezept- und Startseite vorgeladen.
 `impeccable harden` (Nov. 2026): Fehler laufen über `api()` in `assets/account.js` (Netzfehler/5xx → deutscher Text, nie „Failed to fetch“/„Fehler 404“), offline nicht gespeicherte Seiten → `/offline/` (`offline-seite.md`), „Überall abmelden“ ohne Netz meldet Fehler, gemeinsame Liste zeigt „Nicht synchronisiert · zuletzt …“, Datensicherung „Ersetzen“ mit Rückgängig.
 Nach der `impeccable`-Kritik (Abschnitt 28): „Kochen läuft“ erst ab Schritt 2/Timer (bloßes Öffnen merkt nichts),
 „Fertig“ bietet „Bewerten“ an; Rezeptseite zeigt 3 Kapseln + „+n“; Startseite: Suche oben, „Heute für dich“ flacher (≤ 60 vh),
