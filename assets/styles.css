@@ -2176,3 +2176,11 @@ p,.recipeBody li,.cookStepText,.uEmptyText,.fieldHint{text-wrap:pretty}
 /* Breite Bildschirme: „Kochen“ nicht über die ganze Zeile ziehen */
 .recipeCookBtn{max-width:18rem}
 @media (min-width:900px){ .homeFeatured .rcImg{height:min(380px, 50vh)} }
+
+/* ---------- 29. Tab-Leiste im Dunkelmodus neutral (Nov. 2026) ----------
+   Über Fotos nahm das Glas durch die starke Sättigung deren Farben an und wirkte bräunlich-trüb.
+   Dunkler und kaum gesättigt wie Apples graues Glas. */
+:root[data-theme="dark"] .bottomRail,:root[data-theme="dark"] .nowCooking{
+  background:rgba(24,24,26,.78);
+  -webkit-backdrop-filter:saturate(110%) blur(24px);backdrop-filter:saturate(110%) blur(24px);
+}

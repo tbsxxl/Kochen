@@ -437,8 +437,9 @@
     Object.keys(notes).forEach(k=>{ const r = Number(notes[k] && notes[k].rating || 0); if(r > 0) ratingById[trimPath(k)] = r; });
     document.querySelectorAll('[data-rating-badge][data-recipe-id]').forEach(el=>{
       const r = ratingById[trimPath(el.getAttribute('data-recipe-id'))] || 0;
-      el.hidden = !r;
-      el.textContent = r ? `★ ${r}` : "";
+      // Auf Karten nur gute Bewertungen (ab 4 Sternen) – sonst steht überall eine Zahl und das Raster wird unruhig
+      el.hidden = r < 4;
+      el.textContent = r >= 4 ? `★ ${r}` : "";
       el.setAttribute('aria-label', r ? `Deine Bewertung: ${r} von 5` : '');
     });
   };

@@ -644,6 +644,8 @@ const cookOverlay = $("#cookOverlay");
   cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); });
   cookNext?.addEventListener('click', ()=>{
     if(cookNext.dataset.last){ try{ localStorage.removeItem(COOK_KEY); }catch{} closeCook(); markCooked(); successTap(); window.dispatchEvent(new Event("kochbuch:cooking"));
+      // kleiner Abschluss: der „Kochen“-Knopf poppt kurz auf, die Gekocht-Zeile blinkt einmal
+      setTimeout(()=>{ pop(cookingQuick); flash(statsLine); }, 280);
       UI.toast?.('Als gekocht gespeichert', { label: 'Bewerten', run: ()=> document.getElementById('notesCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' }) }); return; }
     stepIdx++; renderCookStep(); lightTap();
   });
