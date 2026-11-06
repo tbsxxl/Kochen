@@ -1,6 +1,6 @@
 # 001 — Reduzierte Bewegung: Bewegung weglassen, Überblenden behalten
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 1671559
 - **Severity**: MEDIUM
 - **Category**: Accessibility

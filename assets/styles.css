@@ -1146,12 +1146,12 @@ body.layout-recipe .section:first-of-type{margin-top:0}
    (Druckeffekt). Alles aus bei „Bewegung reduzieren“. */
 @view-transition{navigation:auto}
 /* Alte Seite blendet schnell aus, neue kommt kurz danach mit einem Hauch Bewegung – nie beide halb sichtbar */
-::view-transition-old(root){animation:vtOut .12s cubic-bezier(.4,0,1,1) both}
-::view-transition-new(root){animation:vtIn .18s cubic-bezier(0,0,.2,1) .06s both}
+::view-transition-old(root){animation:vtOut .1s var(--ease) both}
+::view-transition-new(root){animation:vtIn .18s var(--ease) .04s both}
 @keyframes vtOut{to{opacity:0}}
 @keyframes vtIn{from{opacity:0}}
 /* Rezeptfoto: weicher Flug */
-::view-transition-group(*){animation-duration:.34s;animation-timing-function:cubic-bezier(.2,0,0,1)}
+::view-transition-group(*){animation-duration:.34s;animation-timing-function:var(--easeSheet)}
 /* Untere Leiste steht still, nur der aktive Reiter wechselt */
 .tabbar:not(.recipeTabbar){view-transition-name:tabbar}
 ::view-transition-group(tabbar){animation:none}
@@ -1185,7 +1185,17 @@ body.layout-recipe .section:first-of-type{margin-top:0}
 @keyframes menuIn{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}
 
 @media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+  /* Bewegung weglassen, kurzes Überblenden und Farbwechsel behalten (reduziert heißt sanfter, nicht gar nichts) */
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-property:opacity,background-color,border-color,color !important;
+    transition-duration:.15s !important;transition-timing-function:ease !important;
+    scroll-behavior:auto !important;
+  }
+  /* Blätter und Hinweise erscheinen per Überblenden statt Hereinschieben */
+  .sheet{transform:none !important;opacity:0}
+  .sheet.open{opacity:1}
+  .uiToast{transform:translate3d(-50%,0,0) !important}
 }
 
 /* ---------- 9. Druck ---------- */
@@ -1699,9 +1709,9 @@ body.compact .homeFeatured .rcImg{height:clamp(220px, 60vw, 320px)}
 body.compact .homeFeatured .homeFeaturedTitle{font-size:var(--fs28)}
 
 /* Tab-Leiste wie in iOS 26: beim Runterscrollen kleiner (Beschriftungen ausgeblendet), beim Hochscrollen wieder groß */
-.bottomRail{transition:transform .45s var(--easeSheet)}
+.bottomRail{transition:transform .3s var(--easeSheet)}
 .bottomRail .tabLabel{transition:opacity .25s ease}
-.nowCooking{transition:transform .45s var(--easeSheet)}
+.nowCooking{transition:transform .3s var(--easeSheet)}
 html.tabbarMin .bottomRail{transform:translate3d(0,10px,0) scale(.88)}
 html.tabbarMin .bottomRail .tabLabel{opacity:0}
 html.tabbarMin .nowCooking{transform:translate3d(0,18px,0)}

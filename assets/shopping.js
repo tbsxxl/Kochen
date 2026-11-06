@@ -180,7 +180,8 @@
       if(Math.abs(mx) > 8 || Math.abs(my) > 8) cancelPress();
       if(!horizontal && Math.abs(mx) > 12 && Math.abs(mx) > Math.abs(my) * 1.3) horizontal = true;
       if(!horizontal) return;
-      dx = Math.min(0, mx);
+      // nach rechts mit Gummiband (je weiter, desto weniger folgt der Eintrag), nach links 1:1
+      dx = mx < 0 ? mx : (mx * row.offsetWidth * 0.55) / (row.offsetWidth + 0.55 * mx) * 0.25;
       row.classList.add("swiping");
       row.style.transform = `translateX(${dx}px)`;
       row.parentElement?.classList.add("swipeHost");

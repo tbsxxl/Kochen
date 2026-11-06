@@ -87,7 +87,7 @@ in `.claude/skills/` nur Verweise): `impeccable` (pbakaus/impeccable: Kritik, Au
 Bewegung: `review-animations`/`remove-animations`; Mobil-Feinheiten: `mobile-native`.
 Umgesetzt (Abschnitt 24/25 in `assets/styles.css`): Hover nur mit `(hover:hover) and (pointer:fine)`, Knöpfe/Tabs/Kapseln
 ohne Textauswahl und Kontextmenü beim langen Drücken, Textfelder ≥ 16 px (sonst zoomt iOS), `interactive-widget=resizes-content`;
-Fortschrittsbalken (Kochmodus, Timer, „Kochen läuft“) per `transform: scaleX()` statt `width`, `--easeIn` ist ein kräftiges
+Fortschrittsbalken (Kochmodus, Timer, „Kochen läuft“) per `transform: scaleX()` statt `width`; „Bewegung reduzieren“ lässt nur Bewegung weg, Überblenden (0,15 s) bleibt; Seitenwechsel und Tab-Leiste (0,3 s) nur mit Kurven-Tokens; Pläne aus `improve-animations` in `plans/` (von Jekyll ausgeschlossen); `--easeIn` ist ein kräftiges
 Ease-out (nie ease-in), Tab-Druck `scale(.95)`.
 Weitere Skill-Runden (Nov. 2026): `break-ui` (Abschnitt 26; extreme Testdaten in `tools/worstcase/`: Rezept mit
 120-Zeichen-Titel, Rezept ohne Foto, Kommentar im Kopf von `worst.js` zeigt den Ablauf; Karten ohne Foto zeigen ein Topf-Symbol,
