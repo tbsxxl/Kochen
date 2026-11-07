@@ -2,16 +2,11 @@
 layout: page
 title: Alle Rezepte
 permalink: /rezeptindex/
+field_include: recipe-search.html
 ---
 
 <div class="section" style="margin-top:6px">
-  <div class="searchRow searchRowCompact searchRowIcon">
-    <span class="searchIcon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </span>
-    <input id="searchInput" placeholder="Rezept oder Zutat, z. B. Pasta, Feta …" />
-    <button id="clearSearch" class="searchClear" type="button" aria-label="Suche löschen" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="var(--surface)" stroke-width="2" stroke-linecap="round"/></svg></button>
-  </div>
+
 
   {%- assign cat_names = site.data.categories -%}
   {%- assign primaries = site.recipes | map: "category" | uniq -%}
