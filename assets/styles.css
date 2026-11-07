@@ -2244,3 +2244,8 @@ body.highContrast:not([data-theme="dark"] *){--text:#000;--sub:#2C352F;--sub2:#2
 .ingSection{font-family:var(--fontDisplay);font-size:var(--fs18);font-weight:600;color:var(--text)}
 .catGroupTitle{font-family:var(--fontDisplay);font-size:var(--fs18);color:var(--text);padding:20px 4px 8px}
 .homeFeatured .homeFeaturedTitle,.continueTitle{font-family:var(--fontDisplay);font-weight:600;letter-spacing:-.02em}
+/* Heute-Karte: Bewertung auf dem Foto hell wie die übrige Zeile (Grün war auf dem Foto kaum zu sehen) */
+.homeFeatured .metaRating{color:rgba(255,255,255,.92)}
+/* Großer Titel auf dem Foto: lieber am vorhandenen Bindestrich umbrechen („Aprikosen-“ / „Hähnchen vom Blech“)
+   statt mitten im nächsten Wort; lange Wörter ohne Bindestrich trennt der Browser weiter selbst */
+.homeFeatured .homeFeaturedTitle,.recipeHeroText .recipeName{-webkit-hyphenate-limit-before:4;-webkit-hyphenate-limit-after:5;hyphenate-limit-chars:12 5 5}
