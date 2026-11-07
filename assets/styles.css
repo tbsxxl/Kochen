@@ -2661,3 +2661,16 @@ html.retro body::before{background:#000080}
 .metaRating{display:inline-flex;align-items:center;gap:3px;font-variant-numeric:tabular-nums}
 .metaRating .rateStar{width:.95em;height:.95em;flex:none}
 .cookIngsHead{text-transform:none;letter-spacing:0;font-size:var(--fs14);font-weight:600}
+
+/* ==========================================================================
+   43. unslop, zweiter Schritt (Nov. 2026): Titel nicht mehr extra fett – Rangfolge über Größe, nicht über Gewicht
+   (große Titel 600 statt 800, Abschnitte/Karten 600 bzw. 500). Startseite: Datum als Überschrift statt Begrüßung.
+   Rezeptfoto ohne Parallax/Dehnen (Skript in _layouts/recipe.html entfernt).
+   ========================================================================== */
+:root:not(.retro) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle){font-weight:600;letter-spacing:-.02em}
+:root:not(.retro) :is(.homeSectionTitle,.h2,.sheetTitle,.accountTitle,.catGroupTitle,.ingSection,.navCompact){font-weight:600}
+:root:not(.retro) :is(.recipeTitle,.catTileName){font-weight:600}
+:root:not(.retro).listCards .grid .recipeTitle{font-weight:600}
+:root:not(.retro) .brandWordmark{font-weight:600}
+:root:not(.retro) .homeGreetingTitle{font-size:clamp(1.9rem, 8.5vw, 2.4rem)}
+:root:not(.retro) .homeGreetingTitle{white-space:pre-line;line-height:1.08}
