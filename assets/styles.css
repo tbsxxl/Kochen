@@ -16,6 +16,13 @@
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 @font-face{
+  font-family:"Retro Display";font-style:normal;font-weight:300 800;font-display:swap;
+  src:url("fonts/host-grotesk.woff2") format("woff2");
+}
+@font-face{font-family:"Retro Interface";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/plex-sans-400.woff2") format("woff2")}
+@font-face{font-family:"Retro Interface";font-style:normal;font-weight:600 700;font-display:swap;src:url("fonts/plex-sans-600.woff2") format("woff2")}
+@font-face{font-family:"Retro Mono";font-style:normal;font-weight:400 600;font-display:swap;src:url("fonts/plex-mono-500.woff2") format("woff2")}
+@font-face{
   font-family:"Fraunces";font-style:normal;font-weight:400 600;font-display:swap;
   src:url("fonts/fraunces.woff2") format("woff2");
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
@@ -2379,3 +2386,108 @@ body.layout-recipe .recipePageBody,:root[data-theme="dark"] body.layout-recipe .
 .catTile::after{background:linear-gradient(to top, var(--coffee) 0%, rgba(30,59,42,.7) 30%, transparent 62%)}
 .recipeTags .chipMainCat,.recipeTags .chipLink.chipMainCat,.homeFeatured .heroOverlayCat,.heroOverlayCat{color:#FFFFFF}
 .recipePageHero::after,.homeFeatured .rcImg::after{background:linear-gradient(to top, rgba(10,14,11,.8) 0%, rgba(10,14,11,.32) 40%, rgba(10,14,11,0) 70%) !important}
+
+/* ==========================================================================
+   36. Versteckter Retro-Modus (Nov. 2026, Wunsch des Besitzers): html.retro
+   Freischalten: auf der Startseite 5× schnell auf „Tobis Kochbuch“ (Logo/Schriftzug) tippen; danach steht
+   „Retro-Modus“ als Schalter unter „Mehr“. Gilt hell und dunkel gleich (eigene Farben).
+   Graue Fenster mit harten Kanten (weiß oben links, grau unten rechts), schwarzer Versatz, weiße Lesefelder,
+   Navy-Titelleisten, Gelb für die Hauptaktion, Lila für gedrückte Auswahl, Petrol für Auswahlflächen.
+   Schriften: Host Grotesk (Titel), IBM Plex Sans (Text), IBM Plex Mono (Metadaten), selbst gehostet, OFL.
+   ========================================================================== */
+:root.retro,:root.retro[data-theme="dark"]{
+  --dp-color-window:#d4d4d4; --dp-color-ink:#000; --dp-color-bevel-dark:#808080; --dp-color-bevel-light:#fff;
+  --dp-color-accent:#6600ff; --dp-color-highlight:#ffff00; --dp-color-link-hover:#0000ff; --dp-color-desktop:#008080;
+  --dp-color-emphasis:#ff00b8; --dp-color-titlebar:#000080;
+  --rRaise:inset -2px -2px 0 #808080, inset 2px 2px 0 #fff;
+  --rSink:inset 2px 2px 0 #808080, inset -2px -2px 0 #fff;
+  --rWin:inset -2px -2px 0 #808080, inset 2px 2px 0 #fff, 4px 4px 0 #000;
+  --bg:#c3c3c3; --surface:#d4d4d4; --surface2:#ffffff; --fill:#ffffff;
+  --line:#808080; --lineStrong:#000;
+  --text:#000; --sub:#1f1f1f; --sub2:#1f1f1f; --muted:#3a3a3a;
+  --brand:#ffff00; --onBrand:#000; --leaf:#000080; --onLeaf:#fff; --brandSoft:#ffff00; --leafSoft:#ffff00;
+  --sel:#6600ff; --onSel:#fff; --accent:#000080; --accentSoft:#ffff00; --onAccent:#fff;
+  --glass:#d4d4d4; --glassLine:#000; --glassShadow:none; --glassBlur:none;
+  --coffee:#000080;
+  --fontUi:"Retro Interface", -apple-system, sans-serif;
+  --fontLarge:"Retro Interface", -apple-system, sans-serif;
+  --fontDisplay:"Retro Display", "Helvetica Neue", Arial, sans-serif;
+  --fontMono:"Retro Mono", ui-monospace, monospace;
+  color-scheme:light;
+}
+html.retro *,html.retro *::before,html.retro *::after{border-radius:0 !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.retro body{font-family:var(--fontUi);color:#000;background-color:#c3c3c3;
+  background-image:linear-gradient(45deg, rgba(0,0,0,.05) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.05) 75%),
+    linear-gradient(45deg, rgba(0,0,0,.05) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.05) 75%);
+  background-size:4px 4px;background-position:0 0, 2px 2px}
+html.retro body.layout-recipe{background-color:#c3c3c3}
+html.retro a:not([class]){color:#000080;text-decoration:underline}
+@media (hover:hover) and (pointer:fine){ html.retro a:not([class]):hover{color:#0000ff} }
+html.retro :focus-visible{outline:2px dotted #000 !important;outline-offset:2px}
+
+/* Titel: Host Grotesk, schwer, eng, Großbuchstaben */
+html.retro .pageTitleBlock .h1,html.retro .homeGreetingTitle,html.retro .recipeHeroText .recipeName,html.retro .homeFeatured .homeFeaturedTitle,
+html.retro.listCards .grid .recipeTitle{font-family:var(--fontDisplay);font-weight:800;font-stretch:100%;text-transform:uppercase;letter-spacing:-.03em;line-height:.95}
+html.retro .homeSectionTitle,html.retro .h2,html.retro .sheetTitle,html.retro .accountTitle,html.retro .catGroupTitle,html.retro .ingSection,
+html.retro .recipeTitle,html.retro .catTileName,html.retro .brandWordmark,html.retro .navCompact{font-family:var(--fontDisplay);font-stretch:100%}
+html.retro .homeDate,html.retro .recipeMeta,html.retro .continueEyebrow,html.retro .metaItem,html.retro .countBadge,html.retro .resultCount{font-family:var(--fontMono)}
+
+/* Startseite: Begrüßung als breites gelbes Startfenster */
+html.retro .homeGreeting{background:#ffff00;box-shadow:var(--rWin);padding:14px 14px 16px;margin:8px 16px 16px}
+html.retro .homeBrand{background:#000080;color:#fff;margin:8px 16px 0;padding:4px 6px;box-shadow:4px 4px 0 #000}
+html.retro .homeBrand .brandWordmark{color:#fff}
+/* Abschnitte: Navy-Titelleiste */
+html.retro .homeSectionHead{background:#000080;color:#fff;padding:4px 8px;box-shadow:4px 4px 0 #000;margin-bottom:12px}
+html.retro .homeSectionHead .homeSectionTitle,html.retro .homeSectionHead a{color:#fff}
+
+/* Fenster: Karten, Listen, Blätter */
+html.retro .recipeCard,html.retro .card,html.retro .catTile,html.retro .list,html.retro .group,html.retro .continueCard{background:#d4d4d4;box-shadow:var(--rWin);border:0}
+html.retro .recipeCard{padding:5px}
+html.retro .recipeCard .rcImg{box-shadow:var(--rSink);padding:2px;background:#fff}
+html.retro .recipeCard .rcBody{padding:8px 6px 6px}
+html.retro .recipeCard .recipeTitle{color:#000}
+html.retro.listCards .grid .recipeCard{margin:0 16px}
+html.retro.listCards .grid .recipeCard .rcImg{margin:0}
+html.retro .catTile{padding:5px}
+html.retro .catTile::after{background:linear-gradient(to top, rgba(0,0,128,.9) 0%, rgba(0,0,128,.55) 30%, transparent 62%)}
+html.retro .homeFeatured .rcImg::after,html.retro .recipePageHero::after{background:linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.3) 40%, transparent 70%) !important}
+html.retro .recipePageBody{background:#d4d4d4;box-shadow:inset 2px 2px 0 #fff}
+html.retro .sheet,html.retro .toast,html.retro .menuPopover{background:#d4d4d4 !important;box-shadow:var(--rWin) !important;border:0 !important;color:#000}
+html.retro .sheetHead{background:#000080;color:#fff;padding:6px 8px;margin:6px 6px 8px}
+html.retro .sheetHead .sheetTitle{color:#fff}
+html.retro .sheetHead .navIconBtn{width:32px;height:28px;min-height:28px}
+html.retro .sheetRow{color:#000}
+html.retro .sheetGrab{background:#808080}
+
+/* Eingaben: weiße, versenkte Lesefelder */
+html.retro input:not([type=checkbox]):not([type=radio]),html.retro textarea,html.retro select,html.retro .searchRow{background:#fff !important;box-shadow:var(--rSink) !important;border:1px solid #000 !important;color:#000}
+html.retro .searchRow input{border:0 !important;box-shadow:none !important}
+
+/* Knöpfe: erhabene Tasten; Drücken versenkt sie und schiebt 1 px */
+html.retro .btn,html.retro .segBtn,html.retro .pillToggle,html.retro .filterChip,html.retro .chip,html.retro .homeQuickBtn,
+html.retro .recipeActBtn,html.retro .recipeCookBtn,html.retro .navIconBtn,html.retro .stepBtn,html.retro .cookNavBtn,html.retro .profileBadge,
+html.retro .timerAlertBtn,html.retro .planServBtn,html.retro .cookTimerBtn,html.retro #recipeBack{
+  background:#d4d4d4 !important;color:#000 !important;box-shadow:var(--rRaise) !important;border:1px solid #000 !important;
+  font-family:var(--fontUi);transition:none}
+html.retro .recipeCookBtn,html.retro .btn.action,html.retro .btn.brandBtn,html.retro .cookNavBtn.primary,html.retro .timerAlertBtn.primary,html.retro .continuePlay{background:#ffff00 !important;color:#000 !important}
+html.retro .chipMainCat,html.retro .heroOverlayCat{background:#ff00b8 !important;color:#000 !important;box-shadow:var(--rRaise) !important}
+html.retro .segBtn.active,html.retro .pillToggle[aria-pressed="true"],html.retro .pillToggle.pillToggleActive,html.retro .filterChip.active{
+  background:#6600ff !important;color:#fff !important;box-shadow:var(--rSink) !important;transform:translate(1px,1px)}
+html.retro .isPressed,html.retro .btn:active,html.retro .segBtn:active,html.retro .pillToggle:active,html.retro .chip:active{box-shadow:var(--rSink) !important;transform:translate(1px,1px) !important}
+html.retro .segmented{background:#d4d4d4;box-shadow:var(--rSink);padding:2px;gap:2px}
+
+/* Untere Leiste: graue Taskleiste, aktiver Tab als gedrückte Taste */
+html.retro .tabbar,html.retro .tabbarInner,html.retro .bottomRail{background:#d4d4d4 !important;box-shadow:inset 0 2px 0 #fff, 0 -1px 0 #000 !important;border:0 !important}
+html.retro .tabItem{color:#000 !important;background:transparent !important}
+html.retro .tabItem.active{background:#008080 !important;color:#fff !important;box-shadow:var(--rSink) !important}
+html.retro .nowCooking{background:#d4d4d4 !important;box-shadow:var(--rWin) !important;color:#000}
+html.retro .sheetSwitch{background:#fff;box-shadow:var(--rSink)}
+html.retro [aria-checked="true"] > .sheetSwitch{background:#008080}
+html.retro .sheetSwitch::after{background:#d4d4d4;box-shadow:var(--rRaise)}
+html.retro .countBadge{background:#ff00b8;color:#000}
+html.retro .metaRating{color:#000080}
+html.retro .rowGlyph{color:#000080}
+html.retro .rcImgEmpty{background:#008080;color:#fff}
+html.retro .cookOverlay{--cLeaf:#ffff00}
+html.retro .homeGreeting .homeBrand{margin:-14px -14px 12px;box-shadow:none}
+html.retro .homeFeatured .homeFeaturedTitle,html.retro .homeFeatured .recipeMeta{color:#fff}
