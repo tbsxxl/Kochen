@@ -120,6 +120,9 @@ getrennt (Wunsch des Besitzers).
   Seitentitel, Abschnitte, Kartentitel, Blatt-Titel, Kategorien; Fließtext und Bedienung SF. Keine Etiketten in
   GROSSBUCHSTABEN mehr (Datum, Abteilungen, Kategorie-Gruppen in normaler Schreibung). Dunkelmodus unverändert.
   Die Farbangaben unten (Papierweiß usw.) gelten nur noch, wo Abschnitt 31 nichts sagt.
+- **Kochbuch zum Blättern (Nov. 2026, Abschnitt 33):** Rezeptliste standardmäßig untereinander (`listCards`): Foto randlos
+  über die ganze Breite (4 : 3), Name groß in Fraunces darunter; Raster weiter unter „Mehr“ → „Rezeptliste“. Einmalige
+  Umstellung über `kochbuch.ui.listViewV2` (alte Einstellung wird zurückgesetzt). Heute-Karte auf der Startseite randlos.
 - **Farbe je Kategorie (Nov. 2026, Abschnitt 32, Wunsch des Besitzers „mehr Farbe“):** jede der 25 Kategorien hat einen
   Farbton aus der Küche in `_data/category_colors.yml` (Tomate, Kurkuma, Basilikum, Aubergine …; alle mit Weiß ≥ 5,6 : 1;
   neue Kategorie → dort Farbe ergänzen und Kontrast prüfen). Über `--cat` im Markup: Kategorie-Kacheln laufen unten in den
@@ -201,8 +204,8 @@ getrennt (Wunsch des Besitzers).
   Segment-Umschalter und Zurück als Kapseln.
   Ab 768 px (iPad) kein Reiter: Schritt links (+ „Danach“-Vorschau), alle Zutaten rechts, die des aktuellen
   Schritts hervorgehoben (`.isStep`). Auf dem Handy bleibt es bei den Reitern „Schritte/Zutaten“.
-- Rezeptliste auf dem Handy als Raster mit 2 Spalten (Abschnitt 12 in `assets/styles.css`, quadratische Fotos, nur
-  Zeit statt Zeit + Portionen); unter „Mehr“ → „Rezeptliste“ auf „Karten“ umschaltbar (`kochbuch.ui.listView`,
+- Rezeptliste (Standard seit Nov. 2026: untereinander, Abschnitt 33); als Raster mit 2 Spalten (Abschnitt 12, quadratische Fotos, nur
+  Zeit statt Zeit + Portionen) unter „Mehr“ → „Rezeptliste“ umschaltbar (`kochbuch.ui.listView`,
   Klasse `listCards` auf `<html>`, schon im Kopf gesetzt). Kategorien-Seite = Kacheln (Foto, Name, Anzahl; jedes Foto nur einmal), Antippen →
   `/rezeptindex/?kategorie=…`. Menüzeilen, die eine Seite öffnen, zeigen „›“.
 - Rezeptliste: eine wischbare Filterreihe (Kategorie, Favoriten, Schnell, Vegetarisch, Nie gekocht), Sortieren als
