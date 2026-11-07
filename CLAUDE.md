@@ -118,6 +118,17 @@ getrennt (Wunsch des Besitzers).
   `#0C1410`/`#16211B`, Text `#F2F6F3`. Knöpfe/Aktives kräftiges Kräutergrün `#34B864` (dunkel `#5CD685`) mit Tinte-Schrift
   `#0E1A12` (7 : 1); Grün als Text hell `#187A41`. Kategorie-Kacheln/-Kapseln Waldgrün `#1E3B2A` (Variable `--coffee`).
   `theme-color` hell `#FFFFFF`, dunkel `#0C1410`. Archivo-Titel und Layout aus Abschnitt 34 bleiben.
+- **Nach dem `apple-design`-Audit (Abschnitt 37, gilt vor 35):** ein Grün für alle gefüllten Knöpfe/Auswahlen: hell `#1F8247`
+  mit Weiß (4,8 : 1), dunkel `#7EC48A` mit Tinte `#0E1A12` (8,6 : 1); Grün als Text hell `#187A41`. Dunkel wieder Apples
+  neutrales `#000`/`#1C1C1E`/`#F5F5F7`, Sekundär `#AEAEB2` (kein Grünschwarz + Neon-Grün, das ist ein Vorlagen-Look).
+  Grün nur für Antippbares, Hauptaktion, aktiven Zustand – Infozeilen-Symbole, Stern und Autor-Avatar neutral (`--sub`/`--fill`).
+  Kategorie-Kacheln mit schwarzem Verlauf (kein Farbschleier über Essen). Kartentitel in der Blätter-Liste normal
+  geschrieben (Versalien nur Seitentitel, Begrüßung, Rezeptname auf dem Foto, Heute-Karte). Seiten mit gruppierten
+  Listen tragen `grouped: true` im Front Matter (→ `body.grouped`: grauer Grund `#F2F4F2`, weiße Zellen wie iOS).
+  Aktionsreihe: „Kochen“ rutscht bei großer Schrift allein in die erste Zeile, die vier runden Knöpfe bleiben zusammen.
+  Logo: links Tinte (`#3D4840`→`#141B16`, dunkel `#EEF2EF`→`#C9D1CB`), rechts Kräutergrün (`#2FA35A`→`#1F8247`,
+  dunkel `#92D09D`→`#6FB57C`); kein Terrakotta mehr. Icons `-v9`, `logo.svg?v=8`, `logo-dark.svg?v=10`,
+  `favicon.svg?v=12`, `favicon.ico?v=10`.
 - **Versteckter Retro-Modus (Abschnitt 36, `html.retro`, `kochbuch.ui.retro`):** Startseite 5× schnell auf Logo/„Tobis Kochbuch“
   tippen (Hinweis mit Rückgängig); danach steht „Retro-Modus“ als Schalter unter „Mehr“ (`kochbuch.ui.retroFound`).
   Graue Fenster mit harten Kanten und schwarzem Versatz, weiße Lesefelder, Navy-Titelleisten, Gelb = Hauptaktion,
@@ -190,9 +201,9 @@ getrennt (Wunsch des Besitzers).
   rechte Seite kräftiges Kräutergrün `#92D09D`→`#6FB57C` (wie das Grün der App im Dunkelmodus; Creme war zu weit weg). Startseite zeigt je nach App-Darstellung `.logoLight`/`.logoDark`;
   `assets/favicon.svg` und `favicon.ico` = nur das Zeichen auf transparentem Grund, **ohne Kachel** (eine helle
   Kachel wirkte in dunklen Browser-Tab-Leisten wie ein weißer Kasten); Grün etwas heller (`#6E8C74`), dunkel wie `logo-dark.svg`.
-  Homescreen-/Android-Icons (`apple-touch-icon-v8.png`, `icon-512-v8.png`, `icon-maskable-512-v8.png`, `favicon.ico`)
+  Homescreen-/Android-Icons (`apple-touch-icon-v9.png`, `icon-512-v9.png`, `icon-maskable-512-v9.png`, `favicon.ico`)
   auf Weiß mit leichtem Verlauf nach `#EEEEF0` (wie Apples Health-Icon), nur hell (Web-Apps können kein dunkles Icon festlegen), gerendert per Playwright, ico mit ImageMagick `convert`.
-  Bei Logo-Änderungen die Icon-Dateinamen (`-v8` → `-v9`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
+  Bei Logo-Änderungen die Icon-Dateinamen (`-v9` → `-v10`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.
 
 ## Bedienhilfen (nur im Browser gespeichert, `kochbuch.ui.*`)
