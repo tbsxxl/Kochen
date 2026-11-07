@@ -127,7 +127,10 @@ getrennt (Wunsch des Besitzers).
   Der Inhalt liegt auf einem Blatt (`--bg`, runde Ecken 28 oben), das sich über das Feld schiebt. Rezeptseite bleibt
   Foto oben. Gefüllte Knöpfe hell im Feld-Grün (`--brand` = `#1D4A33`), dunkel `#7EC48A`. `theme-color` auf Feld-Seiten
   = Feld-Grün (`window.KOCHBUCH_FIELD`, Startwert schon per Liquid im `<meta>`), sonst Weiß/Schwarz; Manifest `theme_color`
-  ebenfalls `#1D4A33` (sonst legte iOS in der Homescreen-App einen weißen Schleier unter die Statusleiste). `html` malt unten die Blatt-Farbe (kein Grün unter kurzen Seiten).
+  ebenfalls `#1D4A33`. Statusleiste: `apple-mobile-web-app-status-bar-style` = `black-translucent` (mit `default` malt iOS
+  in der Homescreen-App selbst einen weißen/schwarzen Streifen über das Feld); die Seite reicht unter die Uhr, `body::before`
+  (fest, Höhe `safe-area-inset-top`) färbt den Streifen: Feld-Seiten Feld-Grün, sonst dunkler Verlauf (weiße Uhr lesbar), Retro Navy.
+  Wird `status-bar-style` geändert, die App vom Homescreen löschen und neu hinzufügen. `html` malt unten die Blatt-Farbe (kein Grün unter kurzen Seiten).
 - **Schrift (Abschnitt 38, gilt vor 34/37, Wahl des Besitzers):** Titel in der Apple-Systemschrift (SF Pro Display, sonst Inter),
   fett (Seitentitel/Begrüßung/Rezeptname 800, Abschnitte/Karten 700), **normal geschrieben, keine Versalien, nicht schmal**.
   Archivo (schmal, versal) hat der Besitzer verworfen („passt nicht“); Bricolage Grotesque und Young Serif waren die anderen
