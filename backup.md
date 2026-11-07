@@ -1,5 +1,6 @@
 ---
 layout: page
+grouped: true
 title: Datensicherung
 permalink: /backup/
 ---

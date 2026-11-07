@@ -2395,7 +2395,7 @@ body.layout-recipe .recipePageBody,:root[data-theme="dark"] body.layout-recipe .
    Navy-Titelleisten, Gelb für die Hauptaktion, Lila für gedrückte Auswahl, Petrol für Auswahlflächen.
    Schriften: Host Grotesk (Titel), IBM Plex Sans (Text), IBM Plex Mono (Metadaten), selbst gehostet, OFL.
    ========================================================================== */
-:root.retro,:root.retro[data-theme="dark"]{
+:root.retro:not(.x),:root.retro[data-theme="dark"]{
   --dp-color-window:#d4d4d4; --dp-color-ink:#000; --dp-color-bevel-dark:#808080; --dp-color-bevel-light:#fff;
   --dp-color-accent:#6600ff; --dp-color-highlight:#ffff00; --dp-color-link-hover:#0000ff; --dp-color-desktop:#008080;
   --dp-color-emphasis:#ff00b8; --dp-color-titlebar:#000080;
@@ -2491,3 +2491,38 @@ html.retro .rcImgEmpty{background:#008080;color:#fff}
 html.retro .cookOverlay{--cLeaf:#ffff00}
 html.retro .homeGreeting .homeBrand{margin:-14px -14px 12px;box-shadow:none}
 html.retro .homeFeatured .homeFeaturedTitle,html.retro .homeFeatured .recipeMeta{color:#fff}
+
+/* ==========================================================================
+   37. Nach dem apple-design-Audit (Nov. 2026)
+   - Ein Grün für alle gefüllten Knöpfe: hell #1F8247 mit Weiß (4,8 : 1), dunkel #7EC48A mit Tinte (8,6 : 1).
+   - Dunkel wieder Apples neutrales Schwarz/Grau statt Grünschwarz (kein „Schwarz + Neon-Grün“-Vorlagen-Look).
+   - Grün nur für Antippbares, Hauptaktion und aktiven Zustand: Infozeilen-Symbole und Autor-Avatar neutral.
+   - Kategorie-Kacheln mit neutralem Verlauf; Kartentitel normal geschrieben (Versalien nur Seitentitel/Foto-Titel).
+   - Seiten mit gruppierten Listen (body.grouped): grauer Grund, weiße Zellen wie iOS.
+   - 200 % Text: Kochen über die ganze Breite, vier runde Knöpfe darunter in einer Reihe; Schriftzug bricht nicht um.
+   ========================================================================== */
+:root:not([data-theme="dark"]){
+  --brand:#1F8247; --onBrand:#FFFFFF; --sel:#1F8247; --onSel:#FFFFFF; --accent:#1F8247; --onAccent:#FFFFFF; --herb:#1F8247;
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --surface:#1C1C1E; --surface2:#2C2C2E; --fill:rgba(118,118,128,.24);
+  --line:#38383A; --lineStrong:#48484A;
+  --text:#F5F5F7; --sub:#AEAEB2; --sub2:#AEAEB2; --muted:#8E8E93;
+  --brand:#7EC48A; --onBrand:#0E1A12; --leaf:#7EC48A; --onLeaf:#0E1A12; --brandSoft:#1D3524; --leafSoft:#1D3524;
+  --sel:#7EC48A; --onSel:#0E1A12; --accent:#7EC48A; --accentSoft:#1D3524; --onAccent:#0E1A12;
+  --glass:rgba(28,28,30,.78); --glassLine:rgba(255,255,255,.08);
+}
+:root[data-theme="dark"] .bottomRail,:root[data-theme="dark"] .nowCooking{background:rgba(22,22,24,.84)}
+.cookOverlay{--cLeaf:#7EC48A}
+.cookIngRow.isStep{background:rgba(126,196,138,.16)}
+.recipeFacts .kvIcon,.recipeMeta .metaIcon{color:var(--sub)}
+.recipeFacts .kvRating .ico{color:var(--sub)}
+.authorAvatar{background:var(--fill);color:var(--text)}
+.catTile::after{background:linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.4) 30%, transparent 62%)}
+html.listCards .grid .recipeTitle{text-transform:none;font-weight:800;font-stretch:82%;line-height:1.05;letter-spacing:-.01em;font-size:clamp(1.5rem, 7vw, 1.85rem)}
+:root:not([data-theme="dark"]):not(.retro) body.grouped{--bg:#F2F4F2;--surface:#FFFFFF;background:#F2F4F2}
+:root:not([data-theme="dark"]):not(.retro) body.grouped .searchRow{background:#FFFFFF}
+/* Kochen nimmt den Platz neben den vier runden Knöpfen (4 × 44 + 4 × 8 = 208 px); wird die Schrift groß, rutscht es in
+   eine eigene Zeile über die ganze Breite und die vier Knöpfe bleiben zusammen darunter */
+.recipeActions .recipeCookBtn{flex:1 1 max(calc(100% - 208px), min(100%, calc((6.5rem - (100% - 208px)) * 999)));white-space:nowrap}
+@media (max-width:899px){ .recipeActions .recipeCookBtn{max-width:none} }

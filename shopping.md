@@ -1,5 +1,6 @@
 ---
 layout: page
+grouped: true
 title: Einkaufsliste
 permalink: /shopping/
 ---

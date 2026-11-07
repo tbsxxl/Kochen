@@ -1,5 +1,6 @@
 ---
 layout: page
+grouped: true
 title: Profil & Sync
 permalink: /konto/
 ---

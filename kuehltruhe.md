@@ -1,5 +1,6 @@
 ---
 layout: page
+grouped: true
 title: Kühltruhe
 permalink: /kuehltruhe/
 ---
