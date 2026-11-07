@@ -97,7 +97,7 @@ Wischen), `apple-design-web` (alle Blätter lassen sich nach unten wegziehen: `b
 1:1, Gummiband nach oben, schließt über einen Klick aufs vorangehende `.sheetOverlay`; jedes Blatt braucht diese Reihenfolge),
 `impeccable` (Abschnitt 27: Cursor, Unterstriche, Scrollbalken, `text-wrap`). Funde des `impeccable detect`, die bewusst
 bleiben: weißer Text auf Fotos (Detektor sieht das Bild nicht), versteckte `#continueImg` ohne src, Fotos randlos.
-`impeccable audit` (Abschnitt 30): Blätter und Kochmodus sind echte Dialoge (`bindDialogs()` in `assets/utils.js`: role=dialog, Hintergrund `inert`, Escape, Fokus zurück); Startseite h1/h2, Karten-Bilder `alt=""` (Name steht im Titel), aktiver Tab `aria-current`, Fraunces nur auf Rezept- und Startseite vorgeladen.
+`impeccable audit` (Abschnitt 30): Blätter und Kochmodus sind echte Dialoge (`bindDialogs()` in `assets/utils.js`: role=dialog, Hintergrund `inert`, Escape, Fokus zurück); Startseite h1/h2, Karten-Bilder `alt=""` (Name steht im Titel), aktiver Tab `aria-current`, Fraunces wird (seit Abschnitt 31) überall vorgeladen.
 `impeccable harden` (Nov. 2026): Fehler laufen über `api()` in `assets/account.js` (Netzfehler/5xx → deutscher Text, nie „Failed to fetch“/„Fehler 404“), offline nicht gespeicherte Seiten → `/offline/` (`offline-seite.md`), „Überall abmelden“ ohne Netz meldet Fehler, gemeinsame Liste zeigt „Nicht synchronisiert · zuletzt …“, Datensicherung „Ersetzen“ mit Rückgängig.
 Nach der `impeccable`-Kritik (Abschnitt 28): „Kochen läuft“ erst ab Schritt 2/Timer (bloßes Öffnen merkt nichts),
 „Fertig“ bietet „Bewerten“ an; Rezeptseite zeigt 3 Kapseln + „+n“; Startseite: Suche oben, „Heute für dich“ flacher (≤ 60 vh),
@@ -112,6 +112,14 @@ getrennt (Wunsch des Besitzers).
   (`--fill`), Glas-Sheets mit großer Rundung, iOS-Schalter (Grün `#34C759`). Glas (`--glass`, `--glassBlur`) nur für
   Leisten, Sheets, Menüs, Hinweise; bei „Transparenz reduzieren“ volle Fläche. Hintergrund `--bg` dunkler als Zellen
   `--surface` (wie iOS). Radien: Karten 22, Listen 16, Felder 14.
+- **Neuer Look „Porzellan & Kräuter“ (Nov. 2026, Abschnitt 31 in `assets/styles.css`, gilt vor allem anderen):**
+  Neuentwurf auf Wunsch des Besitzers (Superpowers-Brainstorming + Skill `frontend-design`, Leitfaden „Prompting for frontend
+  aesthetics“). Weg vom Creme-Serifen-Terrakotta-Einheitslook: Hintergrund kühles Porzellanweiß `#F1F4F0` (auch
+  `theme-color`/Manifest), Zellen `#FFFFFF`, Linien `#DCE3DB`, Text Waldtinte `#17201A`, Sekundärtext `#47524A`
+  (7,6 : 1). Kräutergrün bleibt die eine Farbe. **Fraunces (Logo-Schrift) ist die Stimme für alle Überschriften**:
+  Seitentitel, Abschnitte, Kartentitel, Blatt-Titel, Kategorien; Fließtext und Bedienung SF. Keine Etiketten in
+  GROSSBUCHSTABEN mehr (Datum, Abteilungen, Kategorie-Gruppen in normaler Schreibung). Dunkelmodus unverändert.
+  Die Farbangaben unten (Papierweiß usw.) gelten nur noch, wo Abschnitt 31 nichts sagt.
 - **Neuanfang Okt. 2026 (Abschnitt 16 in `assets/styles.css`, gilt vor allen älteren Abschnitten):** Die Fotos sind die
   Farbe, die Oberfläche bleibt ruhig. Hellmodus warm (Abschnitt 19): Hintergrund Papierweiß `#F6F1E9`, Zellen `#FFFDF9`,
   Füllung `#EDE7DD`, Linien `#E6E0D6`, Text `#1F1D1A`, Sekundärtext und Metadaten `#57534C` (6,8 : 1, Apple empfiehlt für kleine Schrift ~7 : 1);
@@ -124,8 +132,8 @@ getrennt (Wunsch des Besitzers).
   verworfen. Text sonst nie grün.
 - Schriften liegen selbst gehostet in `assets/fonts/` (kein Google Fonts, Datenschutz). Inter wird nicht mehr
   vorgeladen (auf iPhone/iPad/Mac greift SF).
-- Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz) überall; Fraunces 600
-  nur für den Rezeptnamen auf dem Foto der Rezeptseite und den Logo-Schriftzug.
+- Schrift: Systemschrift (SF auf Apple-Geräten, sonst das selbst gehostete Inter als Ersatz) für Text und Bedienung; Fraunces 600
+  für Überschriften (seit Abschnitt 31), wird auf jeder Seite vorgeladen.
   Größen 12/14/16/18/22/28/36, Abstände 4/8/12/16/24/32/48.
 - Darstellung folgt dem iPhone (Hell/Dunkel, „auto“ = kein Eintrag in `kochbuch.ui.theme`); ganz unten unter „Mehr“ Auswahl
   Auto · Hell · Dunkel (Apple rät von eigener Darstellungs-Wahl ab, daher nur als Ausnahme, Standard Auto). Dunkel = Apples neutrales Schwarz/Grau. „Kontrast erhöhen“ (iPhone) schaltet wie der
