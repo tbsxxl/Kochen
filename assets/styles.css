@@ -2674,3 +2674,14 @@ html.retro body::before{background:#000080}
 :root:not(.retro) .brandWordmark{font-weight:600}
 :root:not(.retro) .homeGreetingTitle{font-size:clamp(1.9rem, 8.5vw, 2.4rem)}
 :root:not(.retro) .homeGreetingTitle{white-space:pre-line;line-height:1.08}
+
+/* ==========================================================================
+   44. unslop, dritter Schritt (Nov. 2026): eine Linienstärke (2) für alle Symbole, zwei Größen je Rolle
+   (Knöpfe 20 px, neben Text 1em, Tab-Leiste/Listen 24 px), kurze Platzhalter, Erkennungsdetail Eieruhr:
+   Kochzeiten überall mit eiförmigem Küchenwecker statt allgemeiner Uhr (Karten, Rezeptseite, Kochmodus, „Kochen läuft“).
+   ========================================================================== */
+:root:not(.retro) svg,:root:not(.retro) svg *{stroke-width:2}
+:root:not(.retro) :is(.navIconBtn,.recipeBack,#recipeBack,.recipeActBtn,.recipeCookBtn,.cookNavBtn,.stepBtn,.recipePortionStep,.homeQuickBtn,.profileBadge,.btn) > svg,
+:root:not(.retro) :is(.navIconBtn,.recipeBack,#recipeBack,.recipeActBtn,.recipeCookBtn,.cookNavBtn,.stepBtn,.recipePortionStep,.homeQuickBtn,.profileBadge,.btn) > .ico{width:20px;height:20px}
+:root:not(.retro) :is(.pillToggle,.planAdd,.searchIcon) svg{width:1em;height:1em}
+:root:not(.retro) .homeEmptyIcon svg{width:24px;height:24px}
