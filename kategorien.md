@@ -26,7 +26,7 @@ permalink: /kategorien/
       {%- assign used = used | append: "|" | append: main.image %}
     {%- assign grp = site.data.category_groups[c] -%}{%- if grp %}
     <div class="catGroupTitle">{{ grp }}</div>{% endif -%}
-    <a class="catTile pressable" href="{{ '/rezeptindex/' | relative_url }}?kategorie={{ c | url_encode }}">
+    <a class="catTile pressable" style="--cat:{{ site.data.category_colors[c] | default: '#526B57' }}" href="{{ '/rezeptindex/' | relative_url }}?kategorie={{ c | url_encode }}">
       {%- if main %}<img src="{{ main.image | relative_url }}?v={{ site.image_version }}" srcset="{% include srcset.html src=main.image %}" sizes="(min-width:900px) 300px, 46vw" alt="" loading="lazy" decoding="async">{% endif %}
       <span class="catTileText"><span class="catTileName">{{ c }}</span><span class="catTileCount">{{ hits.size }} {% if hits.size == 1 %}Rezept{% else %}Rezepte{% endif %}</span></span>
     </a>
