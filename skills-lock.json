@@ -193,6 +193,12 @@
       "skillPath": "skills/test-driven-development/SKILL.md",
       "computedHash": "3cfe4ebb6fa7288f668d87880d279c8e48f7a92b63415e296857060f5ce22e05"
     },
+    "unslop": {
+      "source": "heydamir/unslop",
+      "sourceType": "github",
+      "skillPath": "skills/unslop/SKILL.md",
+      "computedHash": "5e0f71983a01d96213b4b9cc8a5ea81ed902fd99e6be8bbf35bc60dde8161a9a"
+    },
     "using-git-worktrees": {
       "source": "obra/superpowers",
       "sourceType": "github",
