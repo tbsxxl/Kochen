@@ -89,8 +89,9 @@ Bewegung: `review-animations`/`remove-animations`; Mobil-Feinheiten: `mobile-nat
 `unslop` (heydamir/unslop, CC BY 4.0, Nov. 2026 von Hand übernommen: Ordner `skills/unslop` nach `.agents/skills/unslop`, Verweis in
 `.claude/skills/`, Eintrag in `skills-lock.json`): räumt KI-typische Merkmale auf (Abstände, Farben, Symbole, Texte, Bewegung).
 Erster Lauf (Abschnitt 42): nur leichter Feinschliff nötig – Bewertung auf Karten mit SVG-Stern (`.rateStar`) statt „★“,
-Häkchen als SVG statt „✓“, keine Ausrufezeichen in UI-Texten, keine Versal-Etiketten. Bewusst geblieben (Wünsche des Besitzers):
-fette Titel (800), Begrüßung „Guten Abend“, Dehnen des Rezeptfotos beim Scrollen.
+Häkchen als SVG statt „✓“, keine Ausrufezeichen in UI-Texten, keine Versal-Etiketten. Zweiter Schritt (Abschnitt 43, der Besitzer
+hatte das nicht gewählt): Titel 600 statt 800 (Rangfolge über Größe), Startseite zeigt das Datum als Überschrift
+(Wochentag / „7. November“, zwei Zeilen) statt „Guten Abend“, Rezeptfoto ohne Parallax/Dehnen.
 Umgesetzt (Abschnitt 24/25 in `assets/styles.css`): Hover nur mit `(hover:hover) and (pointer:fine)`, Knöpfe/Tabs/Kapseln
 ohne Textauswahl und Kontextmenü beim langen Drücken, Textfelder ≥ 16 px (sonst zoomt iOS), `interactive-widget=resizes-content`;
 Fortschrittsbalken (Kochmodus, Timer, „Kochen läuft“) per `transform: scaleX()` statt `width`; „Bewegung reduzieren“ lässt nur Bewegung weg, Überblenden (0,15 s) bleibt; Seitenwechsel und Tab-Leiste (0,3 s) nur mit Kurven-Tokens; Pläne aus `improve-animations` in `plans/` (von Jekyll ausgeschlossen); `--easeIn` ist ein kräftiges
@@ -143,7 +144,7 @@ getrennt (Wunsch des Besitzers).
   Feld-Füllung 20 %, Schriftzug höchstens 30 px, dunkel Blatt `#0B0B0C` mit feiner Oberkante.
   Logo auf dem Feld immer in der Variante `logo-dark.svg` (gleiche Farben, helleres Kräutergrün; das dunkle Grün ging unter).
 - **Schrift (Abschnitt 38, gilt vor 34/37, Wahl des Besitzers):** Titel in der Apple-Systemschrift (SF Pro Display, sonst Inter),
-  fett (Seitentitel/Begrüßung/Rezeptname 800, Abschnitte/Karten 700), **normal geschrieben, keine Versalien, nicht schmal**.
+  fett (Seitentitel/Datum/Rezeptname seit Abschnitt 43: 600), **normal geschrieben, keine Versalien, nicht schmal**.
   Archivo (schmal, versal) hat der Besitzer verworfen („passt nicht“); Bricolage Grotesque und Young Serif waren die anderen
   Vorschläge. Archivo wird nicht mehr vorgeladen. Retro-Modus behält seine Schriften (Regeln mit `:root:not(.retro)`).
 - **Nach dem `apple-design`-Audit (Abschnitt 37, gilt vor 35):** ein Grün für alle gefüllten Knöpfe/Auswahlen: hell `#1F8247`
