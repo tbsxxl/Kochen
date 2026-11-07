@@ -2588,7 +2588,6 @@ html.listCards .grid .recipeTitle{text-transform:none;font-weight:800;font-stret
   box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
 :root:not(.retro) body.layout-home .appMain::after{content:"";display:block;height:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 32px);
   background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
-:root:not(.retro) body.layout-home .homeToday .homeFeatured{margin-inline:calc(-16px - env(safe-area-inset-left))}
 @media (min-width:993px){
   :root:not(.retro) body.fieldPage .pageContent,:root:not(.retro) body.layout-home .homeToday{box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax -100vmax);border-radius:0}
 }
@@ -2598,3 +2597,9 @@ html.listCards .grid .recipeTitle{text-transform:none;font-weight:800;font-stret
 /* Unter kurzen Seiten bleibt unten Blatt-Farbe statt Grün (oben überdeckt das Feld die obere Hälfte) */
 :root:not(.retro):has(body.fieldPage){background:linear-gradient(to bottom, var(--field) 0 50%, var(--bg) 50%)}
 :root:not(.retro):not([data-theme="dark"]):has(body.grouped.fieldPage){background:linear-gradient(to bottom, var(--field) 0 50%, #F2F4F2 50%)}
+/* Statusleiste (Homescreen-App, black-translucent): die Seite reicht unter die Uhr, ein fester Streifen gibt ihr die Farbe.
+   Feld-Seiten: Feld-Grün; Rezeptseite und sonstige: dunkler Verlauf, damit die weiße Uhr über Fotos und Text lesbar bleibt. */
+body::before{content:"";position:fixed;z-index:1400;left:0;right:0;top:0;height:env(safe-area-inset-top);pointer-events:none;
+  background:linear-gradient(rgba(0,0,0,.42), rgba(0,0,0,.18))}
+:root:not(.retro) body.fieldPage::before{background:var(--field)}
+html.retro body::before{background:#000080}
