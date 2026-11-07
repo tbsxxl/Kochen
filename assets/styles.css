@@ -2604,3 +2604,6 @@ body::before{content:"";position:fixed;z-index:1400;left:0;right:0;top:0;height:
 :root:not(.retro) body.fieldPage::before{background:var(--field)}
 html.retro body::before{background:#000080}
 /* Safari (iOS 26) färbt den Bereich unter der Uhr nach der Hintergrundfarbe von html, nicht nach dem Verlauf: daher die Farbe dazu */
+/* Auf dem Feld-Grün das Logo in der hellen Variante (logo-dark.svg: gleiche Farben, Kräutergrün heller), sonst verschwindet die grüne Hälfte */
+:root:not(.retro) body.fieldPage .homeBrand .logoLight{display:none}
+:root:not(.retro) body.fieldPage .homeBrand .logoDark{display:block}
