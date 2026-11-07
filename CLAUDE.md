@@ -15,6 +15,7 @@ https://kochbuch.tobis.workers.dev/ — Cloudflare baut jeden Push auf `main` au
   Push auf `main` es meist. Lokal bauen + grüner GitHub-Check sprechen gegen einen echten Fehler.
   Ende Oktober 2026 meldete Cloudflare „failure“, obwohl die Änderungen live waren (Screenshot vom Besitzer) – bei Rot
   also erst auf der Seite nachsehen (aus dem Container nicht erreichbar, ggf. den Besitzer fragen).
+  Im November 2026 meldete Cloudflare viermal hintereinander „failure“ (PR #105–#108), alles war trotzdem live.
 
 ## Bauen und prüfen
 
@@ -118,6 +119,14 @@ getrennt (Wunsch des Besitzers).
   `#0C1410`/`#16211B`, Text `#F2F6F3`. Knöpfe/Aktives kräftiges Kräutergrün `#34B864` (dunkel `#5CD685`) mit Tinte-Schrift
   `#0E1A12` (7 : 1); Grün als Text hell `#187A41`. Kategorie-Kacheln/-Kapseln Waldgrün `#1E3B2A` (Variable `--coffee`).
   `theme-color` hell `#FFFFFF`, dunkel `#0C1410`. Archivo-Titel und Layout aus Abschnitt 34 bleiben.
+- **Look „Markthalle“ (Abschnitt 39, gilt vor allem anderen, Wahl des Besitzers aus drei `impeccable`-Entwürfen;
+  die anderen: „Bildband“ = Foto-Pinnwand, „Mediathek“ = iOS-Listen mit kleinen Fotos):** Start- und Listenseiten
+  (`body.fieldPage`, gesetzt in `_layouts/default.html` für `layout: home` und `layout: page` mit Titel) haben oben ein
+  tiefes Basilikum-Farbfeld `--field` (hell `#1D4A33`, dunkel `#123120`) mit weißem Titel; auf der Startseite liegen
+  Begrüßung, Suche und Schnellknöpfe im Feld (Füllung `rgba(255,255,255,.14)`), ab „Heute für dich“ beginnt das Blatt.
+  Der Inhalt liegt auf einem Blatt (`--bg`, runde Ecken 28 oben), das sich über das Feld schiebt. Rezeptseite bleibt
+  Foto oben. Gefüllte Knöpfe hell im Feld-Grün (`--brand` = `#1D4A33`), dunkel `#7EC48A`. `theme-color` auf Feld-Seiten
+  = Feld-Grün (`window.KOCHBUCH_FIELD`), sonst Weiß/Schwarz. `html` malt unten die Blatt-Farbe (kein Grün unter kurzen Seiten).
 - **Schrift (Abschnitt 38, gilt vor 34/37, Wahl des Besitzers):** Titel in der Apple-Systemschrift (SF Pro Display, sonst Inter),
   fett (Seitentitel/Begrüßung/Rezeptname 800, Abschnitte/Karten 700), **normal geschrieben, keine Versalien, nicht schmal**.
   Archivo (schmal, versal) hat der Besitzer verworfen („passt nicht“); Bricolage Grotesque und Young Serif waren die anderen

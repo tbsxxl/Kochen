@@ -2544,3 +2544,57 @@ html.listCards .grid .recipeTitle{text-transform:none;font-weight:800;font-stret
 :root:not(.retro) :is(.recipeTitle,.catTileName){font-weight:700;letter-spacing:-.015em}
 :root:not(.retro).listCards .grid .recipeTitle{font-weight:800;letter-spacing:-.02em;line-height:1.1;font-size:clamp(1.4rem, 6.5vw, 1.7rem)}
 :root:not(.retro) .brandWordmark{font-weight:700;letter-spacing:-.01em}
+
+/* ==========================================================================
+   39. „Markthalle“ (Nov. 2026, Wahl des Besitzers aus drei Entwürfen)
+   Oben auf Start- und Listenseiten (body.fieldPage) ein tiefes Basilikum-Farbfeld mit weißem Titel; der Inhalt liegt
+   auf einem Blatt (--bg) mit runden Ecken, das sich darüberschiebt. Rezeptseite bleibt Foto oben.
+   Hauptaktionen (Kochen usw.) im Feld-Grün. Retro-Modus unberührt.
+   ========================================================================== */
+:root:not(.retro){--field:#1D4A33;--onField:#FFFFFF;--onField2:rgba(255,255,255,.80);--fieldFill:rgba(255,255,255,.14);
+  --brand:#1D4A33;--sel:#1D4A33;--accent:#1D4A33;--herb:#1D4A33}
+:root:not(.retro)[data-theme="dark"]{--field:#123120;--brand:#7EC48A;--sel:#7EC48A;--accent:#7EC48A}
+:root:not(.retro):has(body.fieldPage){background:var(--field)}
+:root:not(.retro) body.fieldPage{background:transparent}
+:root:not(.retro) body.fieldPage .appMain{padding-bottom:0}
+
+/* Listenseiten: Titel im Feld, Inhalt auf dem Blatt */
+:root:not(.retro) body.fieldPage .pageTitleBlock{position:relative;padding:8px 2px 40px;
+  box-shadow:0 0 0 100vmax var(--field);clip-path:inset(-100vmax -100vmax 0 -100vmax)}
+:root:not(.retro) body.fieldPage .pageTitleBlock .h1{color:var(--onField)}
+:root:not(.retro) body.fieldPage .subtleRule{display:none}
+:root:not(.retro) body.fieldPage .pageContent{position:relative;z-index:1;background:var(--bg);border-radius:28px 28px 0 0;
+  margin:-24px calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
+  padding:20px calc(16px + env(safe-area-inset-right)) calc(var(--tabbarH) + env(safe-area-inset-bottom) + 32px) calc(16px + env(safe-area-inset-left));
+  min-height:calc(100vh - 120px)}
+
+/* Startseite: Begrüßung, Suche und Schnellknöpfe im Feld, ab „Heute für dich“ das Blatt */
+:root:not(.retro) body.layout-home .homeGreeting{margin-top:0}
+:root:not(.retro) body.layout-home .appMain > .section:not(.homeToday):not(.homeToday ~ *),
+:root:not(.retro) body.layout-home .homeQuick{color:var(--onField)}
+:root:not(.retro) body.layout-home .homeBrand .brandWordmark,:root:not(.retro) body.layout-home .homeGreetingTitle{color:var(--onField)}
+:root:not(.retro) body.layout-home .homeDate,:root:not(.retro) body.layout-home .homeGreetingSub{color:var(--onField2)}
+:root:not(.retro) body.layout-home .homeBrand .profileBadge{background:var(--fieldFill);color:var(--onField)}
+:root:not(.retro) body.layout-home .searchRowCompact{background:var(--fieldFill);color:var(--onField);box-shadow:none}
+:root:not(.retro) body.layout-home .searchRowCompact input{color:var(--onField)}
+:root:not(.retro) body.layout-home .searchRowCompact input::placeholder{color:var(--onField2)}
+:root:not(.retro) body.layout-home .homeQuickBtn{background:var(--fieldFill);color:var(--onField);box-shadow:none}
+:root:not(.retro) body.layout-home .homeQuickBtn svg{color:#BFE8CB}
+:root:not(.retro) body.layout-home #homeSearchResults{background:var(--bg);border-radius:16px;padding:8px}
+:root:not(.retro) body.layout-home .homeToday{position:relative;background:var(--bg);border-radius:28px 28px 0 0;
+  margin:28px calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
+  padding:22px calc(16px + env(safe-area-inset-right)) 0 calc(16px + env(safe-area-inset-left))}
+:root:not(.retro) body.layout-home .homeToday ~ .section{margin-top:0;padding-top:24px;background:var(--bg);
+  box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
+:root:not(.retro) body.layout-home .appMain::after{content:"";display:block;height:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 32px);
+  background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
+:root:not(.retro) body.layout-home .homeToday .homeFeatured{margin-inline:calc(-16px - env(safe-area-inset-left))}
+@media (min-width:993px){
+  :root:not(.retro) body.fieldPage .pageContent,:root:not(.retro) body.layout-home .homeToday{box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax -100vmax);border-radius:0}
+}
+/* Aktiver Tab und Kochen-Knopf im Feld-Grün */
+:root:not(.retro):not([data-theme="dark"]) .tabItem.active{color:var(--field)}
+:root:not(.retro) body.grouped.fieldPage,:root:not([data-theme="dark"]):not(.retro) body.grouped.fieldPage{background:transparent}
+/* Unter kurzen Seiten bleibt unten Blatt-Farbe statt Grün (oben überdeckt das Feld die obere Hälfte) */
+:root:not(.retro):has(body.fieldPage){background:linear-gradient(to bottom, var(--field) 0 50%, var(--bg) 50%)}
+:root:not(.retro):not([data-theme="dark"]):has(body.grouped.fieldPage){background:linear-gradient(to bottom, var(--field) 0 50%, #F2F4F2 50%)}

@@ -1,3 +1,4 @@
+{%- assign field_page = false -%}{%- if page.layout == 'home' -%}{%- assign field_page = true -%}{%- elsif page.layout == 'page' and page.title -%}{%- assign field_page = true -%}{%- endif -%}
 <!doctype html>
 <html lang="de">
 <head>
@@ -37,7 +38,9 @@
       } catch(e){}
       var dark = t === 'dark' || (t === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
       if (dark) document.documentElement.setAttribute('data-theme', 'dark');
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#0C1410' : '#FFFFFF');
+      // Seiten mit grünem Farbfeld oben (Abschnitt 39): Statusleiste im Feld-Grün
+      window.KOCHBUCH_FIELD = {{ field_page }};
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', window.KOCHBUCH_FIELD ? (dark ? '#123120' : '#1D4A33') : (dark ? '#000000' : '#FFFFFF'));
     })();
     // Rezeptliste: Raster (Standard) oder große Karten (Einstellung unter „Mehr“)
     try {
@@ -105,7 +108,7 @@
     }
   </script>
 </head>
-<body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}{% if page.grouped %} grouped{% endif %}">
+<body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}{% if page.grouped %} grouped{% endif %}{% if field_page %} fieldPage{% endif %}">
 
   <main class="container appMain" role="main">
     {{ content }}
@@ -275,7 +278,7 @@
       document.documentElement.classList.toggle('retro', retro);
       const retroRow = document.getElementById('toggleRetro');
       if (retroRow){ retroRow.hidden = !retro && !get(retroFoundKey,false); retroRow.setAttribute('aria-checked', retro ? 'true' : 'false'); }
-      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', retro ? '#000080' : dark ? '#0C1410' : '#FFFFFF');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', retro ? '#000080' : window.KOCHBUCH_FIELD ? (dark ? '#123120' : '#1D4A33') : dark ? '#000000' : '#FFFFFF');
       themeOpts.forEach(b=>{ const on = b.dataset.themeOpt === mode; b.classList.toggle('active', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
       const list = get(listKey,'cards') === 'grid' ? 'grid' : 'cards';
       document.documentElement.classList.toggle('listCards', list === 'cards');
