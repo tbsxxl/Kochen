@@ -118,6 +118,10 @@ getrennt (Wunsch des Besitzers).
   `#0C1410`/`#16211B`, Text `#F2F6F3`. Knöpfe/Aktives kräftiges Kräutergrün `#34B864` (dunkel `#5CD685`) mit Tinte-Schrift
   `#0E1A12` (7 : 1); Grün als Text hell `#187A41`. Kategorie-Kacheln/-Kapseln Waldgrün `#1E3B2A` (Variable `--coffee`).
   `theme-color` hell `#FFFFFF`, dunkel `#0C1410`. Archivo-Titel und Layout aus Abschnitt 34 bleiben.
+- **Schrift (Abschnitt 38, gilt vor 34/37, Wahl des Besitzers):** Titel in der Apple-Systemschrift (SF Pro Display, sonst Inter),
+  fett (Seitentitel/Begrüßung/Rezeptname 800, Abschnitte/Karten 700), **normal geschrieben, keine Versalien, nicht schmal**.
+  Archivo (schmal, versal) hat der Besitzer verworfen („passt nicht“); Bricolage Grotesque und Young Serif waren die anderen
+  Vorschläge. Archivo wird nicht mehr vorgeladen. Retro-Modus behält seine Schriften (Regeln mit `:root:not(.retro)`).
 - **Nach dem `apple-design`-Audit (Abschnitt 37, gilt vor 35):** ein Grün für alle gefüllten Knöpfe/Auswahlen: hell `#1F8247`
   mit Weiß (4,8 : 1), dunkel `#7EC48A` mit Tinte `#0E1A12` (8,6 : 1); Grün als Text hell `#187A41`. Dunkel wieder Apples
   neutrales `#000`/`#1C1C1E`/`#F5F5F7`, Sekundär `#AEAEB2` (kein Grünschwarz + Neon-Grün, das ist ein Vorlagen-Look).

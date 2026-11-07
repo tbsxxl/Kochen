@@ -2526,3 +2526,21 @@ html.listCards .grid .recipeTitle{text-transform:none;font-weight:800;font-stret
    eine eigene Zeile über die ganze Breite und die vier Knöpfe bleiben zusammen darunter */
 .recipeActions .recipeCookBtn{flex:1 1 max(calc(100% - 208px), min(100%, calc((6.5rem - (100% - 208px)) * 999)));white-space:nowrap}
 @media (max-width:899px){ .recipeActions .recipeCookBtn{max-width:none} }
+
+/* ==========================================================================
+   38. Schrift: Apple-Systemschrift für alle Titel (Nov. 2026, Wahl des Besitzers „A“)
+   Archivo (schmal, versal) ist raus. Titel in SF Pro Display (sonst Inter), fett, normal geschrieben – wie App Store/Musik.
+   Der Retro-Modus behält seine eigenen Schriften.
+   ========================================================================== */
+:root:not(.retro){--fontDisplay:-apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif}
+:root:not(.retro) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,
+  .homeSectionTitle,.h2,.sheetTitle,.accountTitle,.catGroupTitle,.ingSection,.navCompact,.recipeTitle,.catTileName,.brandWordmark){
+  font-family:var(--fontDisplay);font-stretch:100%;text-transform:none}
+:root:not(.retro) :is(.pageTitleBlock .h1,.homeGreetingTitle){font-weight:800;letter-spacing:-.025em;line-height:1.05;font-size:clamp(2.1rem, 9.5vw, 2.6rem)}
+:root:not(.retro) .recipeHeroText .recipeName{font-weight:800;letter-spacing:-.025em;line-height:1.05;font-size:min(clamp(2.1rem, 9.5vw, 2.6rem), 48px)}
+:root:not(.retro) .recipeHeroText .recipeName.recipeNameLong{font-size:min(clamp(1.6rem, 7vw, 2rem), 36px)}
+:root:not(.retro) .homeFeatured .homeFeaturedTitle{font-weight:800;letter-spacing:-.02em;line-height:1.05;font-size:clamp(1.9rem, 8.5vw, 2.4rem)}
+:root:not(.retro) :is(.homeSectionTitle,.h2,.sheetTitle,.accountTitle,.catGroupTitle,.ingSection,.navCompact){font-weight:700;letter-spacing:-.015em}
+:root:not(.retro) :is(.recipeTitle,.catTileName){font-weight:700;letter-spacing:-.015em}
+:root:not(.retro).listCards .grid .recipeTitle{font-weight:800;letter-spacing:-.02em;line-height:1.1;font-size:clamp(1.4rem, 6.5vw, 1.7rem)}
+:root:not(.retro) .brandWordmark{font-weight:700;letter-spacing:-.01em}
