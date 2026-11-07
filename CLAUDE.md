@@ -96,6 +96,9 @@ Dritter Schritt (Abschnitt 44): alle Symbole Linienstärke 2 (per CSS, auch wenn
 Symbole neben Text 1em, Tab-Leiste/Listen 24 px; kurze Platzhalter ohne „…“. **Erkennungsdetail Eieruhr:** Kochzeiten überall
 mit eiförmigem Küchenwecker (`M5.5 15.5a6.5 6.5 0 0 0 13 0c0-4.5-3-9-6.5-9s-6.5 4.5-6.5 9z` + Knopf + Zeiger) statt Uhr –
 Karten (beide Dateien!), Rezeptseite, Kochmodus-Zeiten (`cook-timer.js`), „Kochen läuft“ (`now-cooking.js`), Kühltruhe, Was koche ich?.
+**Geschirrtuch-Streifen** (Abschnitt 45, Wahl des Besitzers): zwei feine weiße Linien (4 + 2 px, 55 %) quer über den unteren
+Rand des grünen Felds, 14 px über der Blattkante (`.pageTitleBlock::after`, Startseite `.homeQuick::after`), nicht im Retro-Modus.
+Datum auf der Startseite höchstens `10.5vw` groß (passt auch bei 200 % Schrift in eine Zeile).
 Umgesetzt (Abschnitt 24/25 in `assets/styles.css`): Hover nur mit `(hover:hover) and (pointer:fine)`, Knöpfe/Tabs/Kapseln
 ohne Textauswahl und Kontextmenü beim langen Drücken, Textfelder ≥ 16 px (sonst zoomt iOS), `interactive-widget=resizes-content`;
 Fortschrittsbalken (Kochmodus, Timer, „Kochen läuft“) per `transform: scaleX()` statt `width`; „Bewegung reduzieren“ lässt nur Bewegung weg, Überblenden (0,15 s) bleibt; Seitenwechsel und Tab-Leiste (0,3 s) nur mit Kurven-Tokens; Pläne aus `improve-animations` in `plans/` (von Jekyll ausgeschlossen); `--easeIn` ist ein kräftiges
