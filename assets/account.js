@@ -347,7 +347,7 @@
       el.classList.toggle("hasPending", !!pending);
       el.setAttribute("aria-label", p ? `Profil: ${p.name || "angemeldet"}` : "Anmelden");
       el.innerHTML = p
-        ? `<span class="profileInitial">${initial || "✓"}</span>`
+        ? (initial ? `<span class="profileInitial">${initial}</span>` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>`)
         : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>`;
     });
     document.querySelectorAll("[data-household-note]").forEach(el=>{

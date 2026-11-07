@@ -2652,3 +2652,12 @@ html.retro body::before{background:#000080}
 :root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTimer.isDone .cookTimerBtn{background:rgba(255,255,255,.2);color:#FFFFFF}
 @media (min-width:768px){ :root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookIngsHead{background:var(--cBg);color:var(--cSub)} }
 :root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTime{background:rgba(29,74,51,.10);color:var(--cLeaf);border-color:transparent}
+
+/* ==========================================================================
+   42. unslop-Feinschliff (Nov. 2026, Skill unslop von Damir Sokolovsky, CC BY 4.0):
+   Bewertung auf Karten mit SVG-Stern statt Schriftzeichen, Häkchen als SVG, keine Ausrufezeichen in Texten,
+   Etikett über den Zutaten im Kochmodus (iPad) normal geschrieben.
+   ========================================================================== */
+.metaRating{display:inline-flex;align-items:center;gap:3px;font-variant-numeric:tabular-nums}
+.metaRating .rateStar{width:.95em;height:.95em;flex:none}
+.cookIngsHead{text-transform:none;letter-spacing:0;font-size:var(--fs14);font-weight:600}

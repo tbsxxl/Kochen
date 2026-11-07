@@ -218,7 +218,7 @@
     host.innerHTML = items.map(t=>`
       <div class="cookTimer${t.done ? " isDone" : ""}" data-id="${esc(t.id)}">
         <div class="cookTimerMain">
-          <span class="cookTimerTime">${t.done ? "Fertig!" : fmt(t.left)}</span>
+          <span class="cookTimerTime">${t.done ? "Fertig" : fmt(t.left)}</span>
           <span class="cookTimerLabel">${esc(t.label)}</span>
         </div>
         ${t.done ? "" : `<button type="button" class="cookTimerBtn" data-act="plus" aria-label="Eine Minute mehr">+1</button>`}
