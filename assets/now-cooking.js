@@ -6,7 +6,7 @@
   const T = window.KOCHBUCH_TIMER;
   const esc = (x)=>String(x ?? "").replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
   let cookOpen = false;
-  const CLOCK = '<svg class="ico nowCookingClock" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 9v4l2.5 2M10 2h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const CLOCK = '<svg class="ico nowCookingClock" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 15.5a6.5 6.5 0 0 0 13 0c0-4.5-3-9-6.5-9s-6.5 4.5-6.5 9z"/><path d="M12 6.5V4M10.5 4h3"/><path d="M12 15l2.5-2"/></g></svg>';
 
   function cooking(){
     try{

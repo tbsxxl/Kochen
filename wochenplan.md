@@ -32,7 +32,7 @@ permalink: /wochenplan/
   </div>
   <div class="sheetBody">
     <div class="searchRow searchRowCompact" style="margin-bottom:8px">
-      <input id="pickSearch" type="search" placeholder="Rezept suchen …" autocomplete="off" />
+      <input id="pickSearch" type="search" placeholder="Rezept suchen" autocomplete="off" />
     </div>
     <div id="pickList"></div>
   </div>

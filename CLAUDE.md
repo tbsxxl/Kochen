@@ -92,6 +92,10 @@ Erster Lauf (Abschnitt 42): nur leichter Feinschliff nötig – Bewertung auf Ka
 Häkchen als SVG statt „✓“, keine Ausrufezeichen in UI-Texten, keine Versal-Etiketten. Zweiter Schritt (Abschnitt 43, der Besitzer
 hatte das nicht gewählt): Titel 600 statt 800 (Rangfolge über Größe), Startseite zeigt das Datum als Überschrift
 (Wochentag / „7. November“, zwei Zeilen) statt „Guten Abend“, Rezeptfoto ohne Parallax/Dehnen.
+Dritter Schritt (Abschnitt 44): alle Symbole Linienstärke 2 (per CSS, auch wenn im SVG anderes steht), Knopf-Symbole 20 px,
+Symbole neben Text 1em, Tab-Leiste/Listen 24 px; kurze Platzhalter ohne „…“. **Erkennungsdetail Eieruhr:** Kochzeiten überall
+mit eiförmigem Küchenwecker (`M5.5 15.5a6.5 6.5 0 0 0 13 0c0-4.5-3-9-6.5-9s-6.5 4.5-6.5 9z` + Knopf + Zeiger) statt Uhr –
+Karten (beide Dateien!), Rezeptseite, Kochmodus-Zeiten (`cook-timer.js`), „Kochen läuft“ (`now-cooking.js`), Kühltruhe, Was koche ich?.
 Umgesetzt (Abschnitt 24/25 in `assets/styles.css`): Hover nur mit `(hover:hover) and (pointer:fine)`, Knöpfe/Tabs/Kapseln
 ohne Textauswahl und Kontextmenü beim langen Drücken, Textfelder ≥ 16 px (sonst zoomt iOS), `interactive-widget=resizes-content`;
 Fortschrittsbalken (Kochmodus, Timer, „Kochen läuft“) per `transform: scaleX()` statt `width`; „Bewegung reduzieren“ lässt nur Bewegung weg, Überblenden (0,15 s) bleibt; Seitenwechsel und Tab-Leiste (0,3 s) nur mit Kurven-Tokens; Pläne aus `improve-animations` in `plans/` (von Jekyll ausgeschlossen); `--easeIn` ist ein kräftiges
@@ -261,7 +265,7 @@ getrennt (Wunsch des Besitzers).
   „Ähnliche Rezepte“ (gleiche Kategorie, Liquid `sample`, Karten mit `hcard=true`).
 - Kochmodus: Wischen links/rechts; Fortschritt in `cooking` (12 Std). „Kochen läuft“-Kapsel über der unteren Leiste
   (`assets/now-cooking.js`, wie der Mini-Player in Apple Music) auf jeder Seite, solange Fortschritt oder Timer laufen:
-  Foto, Name, Timer-Restzeit (Uhr-SVG), „Schritt n von m“, Fortschritt grün; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt
+  Foto, Name, Timer-Restzeit (Eieruhr-SVG), „Schritt n von m“, Fortschritt grün; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt
   `KOCHBUCH_OPENCOOK`). recipe.js meldet `kochbuch:cooking` / `kochbuch:cookmode`.
   **Farben seit Abschnitt 41 (Wunsch des Besitzers):** im Dunkelmodus wie bisher neutrales Schwarz mit hellgrünem „Weiter“;
   im hellen Modus hell mit grünem Kopf (Kopfzeile Feld-Grün, Grund `#F2F4F2`, weiße Karten, „Weiter“/Haken/Timer-Feld
