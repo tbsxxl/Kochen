@@ -2346,3 +2346,36 @@ body.layout-recipe,:root[data-theme="dark"] body.layout-recipe{background:var(--
 body.layout-recipe .recipePageBody,:root[data-theme="dark"] body.layout-recipe .recipePageBody{background:var(--surface)}
 /* Fotos mit warmem Kaffee-Verlauf wie das Plakat */
 .recipePageHero::after,.homeFeatured .rcImg::after{background:linear-gradient(to top, rgba(42,22,13,.82) 0%, rgba(42,22,13,.35) 40%, rgba(42,22,13,0) 70%) !important}
+
+/* ==========================================================================
+   35. „Weiß, Tinte & Kräutergrün“ (Nov. 2026, gilt vor Abschnitt 34)
+   Der Besitzer fand Sand + Kaffee + Tangerine zu nah an Claudes eigenen Farben. Drei Farben bleiben, aber:
+   reines Weiß, fast schwarze Tinte und ein kräftiges Kräutergrün (das Grün aus dem Logo, lauter).
+   Knöpfe Grün #34B864 mit Tinte-Schrift (7,0 : 1), Grün als Text hell #187A41 (5,4 : 1), dunkel #5CD685 (10 : 1).
+   Kategorie-Kacheln/-Kapseln in tiefem Waldgrün #1E3B2A (Weiß 12 : 1). Archivo-Titel aus Abschnitt 34 bleiben.
+   ========================================================================== */
+:root{--coffee:#1E3B2A;--herb:#34B864}
+:root:not([data-theme="dark"]){
+  --bg:#FFFFFF; --surface:#F4F6F4; --surface2:#E8EDE9; --fill:rgba(16,21,17,.06);
+  --line:#E2E7E3; --lineStrong:#C9D1CB;
+  --text:#101511; --sub:#4A534D; --sub2:#4A534D; --muted:#7A847D;
+  --brand:#34B864; --onBrand:#0E1A12; --leaf:#187A41; --onLeaf:#FFFFFF; --brandSoft:#DDF3E4; --leafSoft:#DDF3E4;
+  --sel:#34B864; --onSel:#0E1A12; --accent:#187A41; --accentSoft:#DDF3E4; --onAccent:#FFFFFF;
+  --glass:rgba(255,255,255,.78); --glassLine:rgba(16,21,17,.08);
+  --glassShadow:0 10px 30px rgba(16,21,17,.12), 0 1px 3px rgba(16,21,17,.08);
+}
+:root[data-theme="dark"]{
+  --bg:#0C1410; --surface:#16211B; --surface2:#1F2C24; --fill:rgba(185,199,190,.14);
+  --line:#223029; --lineStrong:#33463B;
+  --text:#F2F6F3; --sub:#B9C7BE; --sub2:#B9C7BE; --muted:#8C9A91;
+  --brand:#5CD685; --onBrand:#0E1A12; --leaf:#5CD685; --onLeaf:#0E1A12; --brandSoft:#173826; --leafSoft:#173826;
+  --sel:#5CD685; --onSel:#0E1A12; --accent:#5CD685; --accentSoft:#173826; --onAccent:#0E1A12;
+  --glass:rgba(22,33,27,.78); --glassLine:rgba(242,246,243,.08);
+}
+:root[data-theme="dark"] .bottomRail,:root[data-theme="dark"] .nowCooking{background:rgba(12,20,16,.82)}
+.cookOverlay{--cLeaf:#34B864}
+.cookIngRow.isStep{background:rgba(52,184,100,.16)}
+.cookNavBtn.primary,.cookTimer.isDone{color:#0E1A12}
+.catTile::after{background:linear-gradient(to top, var(--coffee) 0%, rgba(30,59,42,.7) 30%, transparent 62%)}
+.recipeTags .chipMainCat,.recipeTags .chipLink.chipMainCat,.homeFeatured .heroOverlayCat,.heroOverlayCat{color:#FFFFFF}
+.recipePageHero::after,.homeFeatured .rcImg::after{background:linear-gradient(to top, rgba(10,14,11,.8) 0%, rgba(10,14,11,.32) 40%, rgba(10,14,11,0) 70%) !important}

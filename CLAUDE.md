@@ -112,7 +112,13 @@ getrennt (Wunsch des Besitzers).
   (`--fill`), Glas-Sheets mit großer Rundung, iOS-Schalter (Grün `#34C759`). Glas (`--glass`, `--glassBlur`) nur für
   Leisten, Sheets, Menüs, Hinweise; bei „Transparenz reduzieren“ volle Fläche. Hintergrund `--bg` dunkler als Zellen
   `--surface` (wie iOS). Radien: Karten 22, Listen 16, Felder 14.
-- **Aktueller Look „Kaffee & Tangerine“ (Nov. 2026, Abschnitt 34, gilt vor allem anderen):** nach einer Vorlage des Besitzers
+- **Aktueller Look „Weiß, Tinte & Kräutergrün“ (Nov. 2026, Abschnitt 35, gilt vor allem anderen):** Sand/Kaffee/Tangerine
+  (Abschnitt 34) fand der Besitzer zu nah an Claudes eigenen Farben – **kein Creme/Sand, kein Terrakotta/Orange als Akzent**.
+  Drei Farben: hell reines Weiß `#FFFFFF` (Zellen `#F4F6F4`), Tinte `#101511`, Sekundär `#4A534D`; dunkel Grünschwarz
+  `#0C1410`/`#16211B`, Text `#F2F6F3`. Knöpfe/Aktives kräftiges Kräutergrün `#34B864` (dunkel `#5CD685`) mit Tinte-Schrift
+  `#0E1A12` (7 : 1); Grün als Text hell `#187A41`. Kategorie-Kacheln/-Kapseln Waldgrün `#1E3B2A` (Variable `--coffee`).
+  `theme-color` hell `#FFFFFF`, dunkel `#0C1410`. Archivo-Titel und Layout aus Abschnitt 34 bleiben.
+- **Vorstufe „Kaffee & Tangerine“ (Abschnitt 34, Farben durch 35 ersetzt):** nach einer Vorlage des Besitzers
   (Plakat „DARK“, Prinzip „nicht mehr Farben, sondern drei“). Hell: Sand `#F3E6DA` (Hintergrund), `#FBF4EE` (Zellen),
   Text Kaffee `#2A160D`, Sekundär `#5E3E2E` (7,8 : 1); dunkel: Kaffeebraun `#2A160D`/`#3A1E12`, Text `#FBF1E8`.
   **Tangerine `#FE4D03` nur für Knöpfe/Aktives, mit dunkler Schrift `#2A140A`** (5,2 : 1; Weiß nur 3,4 : 1);
