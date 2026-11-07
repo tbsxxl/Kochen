@@ -22,7 +22,7 @@
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:image" content="{{ og_image }}">
   <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
-  <meta name="theme-color" content="#FFFFFF">
+  <meta name="theme-color" content="{% if field_page %}#1D4A33{% else %}#FFFFFF{% endif %}">
   <script>
     // Darstellung vor dem ersten Rendern setzen, damit nichts aufblitzt.
     // Standard „auto“: folgt dem iPhone (Hell/Dunkel); „light“/„dark“ nur, wenn unter „Mehr“ fest gewählt.

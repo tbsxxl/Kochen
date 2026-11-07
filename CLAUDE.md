@@ -126,7 +126,8 @@ getrennt (Wunsch des Besitzers).
   Begrüßung, Suche und Schnellknöpfe im Feld (Füllung `rgba(255,255,255,.14)`), ab „Heute für dich“ beginnt das Blatt.
   Der Inhalt liegt auf einem Blatt (`--bg`, runde Ecken 28 oben), das sich über das Feld schiebt. Rezeptseite bleibt
   Foto oben. Gefüllte Knöpfe hell im Feld-Grün (`--brand` = `#1D4A33`), dunkel `#7EC48A`. `theme-color` auf Feld-Seiten
-  = Feld-Grün (`window.KOCHBUCH_FIELD`), sonst Weiß/Schwarz. `html` malt unten die Blatt-Farbe (kein Grün unter kurzen Seiten).
+  = Feld-Grün (`window.KOCHBUCH_FIELD`, Startwert schon per Liquid im `<meta>`), sonst Weiß/Schwarz; Manifest `theme_color`
+  ebenfalls `#1D4A33` (sonst legte iOS in der Homescreen-App einen weißen Schleier unter die Statusleiste). `html` malt unten die Blatt-Farbe (kein Grün unter kurzen Seiten).
 - **Schrift (Abschnitt 38, gilt vor 34/37, Wahl des Besitzers):** Titel in der Apple-Systemschrift (SF Pro Display, sonst Inter),
   fett (Seitentitel/Begrüßung/Rezeptname 800, Abschnitte/Karten 700), **normal geschrieben, keine Versalien, nicht schmal**.
   Archivo (schmal, versal) hat der Besitzer verworfen („passt nicht“); Bricolage Grotesque und Young Serif waren die anderen
