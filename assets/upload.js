@@ -251,7 +251,7 @@
       if(suggesting){
         await A.api("/api/suggestions", { method: "POST", body: payload });
         try{ localStorage.removeItem(DRAFT_KEY); }catch{}
-        showDone("Danke für deinen Vorschlag!", "Er wird angeschaut und dann freigegeben. Den Stand siehst du unter „Vorschläge“.", "/vorschlaege/", "Meine Vorschläge");
+        showDone("Danke für deinen Vorschlag", "Er wird angeschaut und dann freigegeben. Den Stand siehst du unter „Vorschläge“.", "/vorschlaege/", "Meine Vorschläge");
         return;
       }
       if(reviewing) payload.suggestion = SUG_ID;
@@ -265,7 +265,7 @@
       form.hidden = true;
       done.hidden = false;
       done.innerHTML = `<div class="card cardPad accountCard uploadSuccess">
-        <div class="accountIcon" aria-hidden="true">✓</div>
+        <div class="accountIcon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
         <h2 class="h2 accountTitle">„${esc(payload.title)}“ ist hochgeladen</h2>
         <p class="sub">Cloudflare baut die Seite jetzt neu. In etwa 2 Minuten ist das Rezept online.</p>
         <a class="btn action accountBtn" href="${esc(res.url)}">Zum Rezept</a>
@@ -284,7 +284,7 @@
     $("#deleteSection").hidden = true;
     done.hidden = false;
     done.innerHTML = `<div class="card cardPad accountCard uploadSuccess">
-      <div class="accountIcon" aria-hidden="true">✓</div>
+      <div class="accountIcon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
       <h2 class="h2 accountTitle">${esc(title)}</h2>
       <p class="sub">${esc(text)}</p>
       <a class="btn action accountBtn" href="${esc(href)}">${esc(label)}</a>

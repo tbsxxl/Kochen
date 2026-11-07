@@ -88,6 +88,9 @@ in `.claude/skills/` nur Verweise): `impeccable` (pbakaus/impeccable: Kritik, Au
 Bewegung: `review-animations`/`remove-animations`; Mobil-Feinheiten: `mobile-native`.
 `unslop` (heydamir/unslop, CC BY 4.0, Nov. 2026 von Hand übernommen: Ordner `skills/unslop` nach `.agents/skills/unslop`, Verweis in
 `.claude/skills/`, Eintrag in `skills-lock.json`): räumt KI-typische Merkmale auf (Abstände, Farben, Symbole, Texte, Bewegung).
+Erster Lauf (Abschnitt 42): nur leichter Feinschliff nötig – Bewertung auf Karten mit SVG-Stern (`.rateStar`) statt „★“,
+Häkchen als SVG statt „✓“, keine Ausrufezeichen in UI-Texten, keine Versal-Etiketten. Bewusst geblieben (Wünsche des Besitzers):
+fette Titel (800), Begrüßung „Guten Abend“, Dehnen des Rezeptfotos beim Scrollen.
 Umgesetzt (Abschnitt 24/25 in `assets/styles.css`): Hover nur mit `(hover:hover) and (pointer:fine)`, Knöpfe/Tabs/Kapseln
 ohne Textauswahl und Kontextmenü beim langen Drücken, Textfelder ≥ 16 px (sonst zoomt iOS), `interactive-widget=resizes-content`;
 Fortschrittsbalken (Kochmodus, Timer, „Kochen läuft“) per `transform: scaleX()` statt `width`; „Bewegung reduzieren“ lässt nur Bewegung weg, Überblenden (0,15 s) bleibt; Seitenwechsel und Tab-Leiste (0,3 s) nur mit Kurven-Tokens; Pläne aus `improve-animations` in `plans/` (von Jekyll ausgeschlossen); `--easeIn` ist ein kräftiges

@@ -106,7 +106,7 @@
       const pct = Math.round(have.length / total * 100);
       const miss = missing.length
         ? `Es fehlt: ${esc(missing.slice(0, 4).map(m=>m.label).join(", "))}${missing.length > 4 ? ` +${missing.length-4}` : ""}`
-        : "Du hast alles da!";
+        : "Du hast alles da";
       return rowCard(r, `
         <div class="pantryScore"><span class="pantryBar"><span style="width:${pct}%"></span></span><span>${have.length} von ${total}</span></div>
         <div class="pantryMissing${missing.length ? "" : " isComplete"}">${miss}</div>`);

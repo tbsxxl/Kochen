@@ -439,7 +439,7 @@
       const r = ratingById[trimPath(el.getAttribute('data-recipe-id'))] || 0;
       // Alle eigenen Bewertungen zeigen (1–5), damit „nicht bewertet“ und „schlecht bewertet“ unterscheidbar sind
       el.hidden = !r;
-      el.textContent = r ? `★ ${r}` : "";
+      el.innerHTML = r ? `<svg class="ico rateStar" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" fill="currentColor"/></svg><span>${r}</span>` : "";
       el.setAttribute('aria-label', r ? `Deine Bewertung: ${r} von 5` : '');
     });
   };
