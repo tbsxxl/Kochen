@@ -40,7 +40,11 @@
       document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#000000' : '#F1F4F0');
     })();
     // Rezeptliste: Raster (Standard) oder große Karten (Einstellung unter „Mehr“)
-    try { if (JSON.parse(localStorage.getItem('kochbuch.ui.listView')) === 'cards') document.documentElement.classList.add('listCards'); } catch(e){}
+    try {
+      // Seit Nov. 2026 ist „Kochbuch zum Blättern“ (Karten untereinander) Standard; alte Einstellung einmalig zurücksetzen
+      if (!localStorage.getItem('kochbuch.ui.listViewV2')) { localStorage.removeItem('kochbuch.ui.listView'); localStorage.setItem('kochbuch.ui.listViewV2', '1'); }
+      if (JSON.parse(localStorage.getItem('kochbuch.ui.listView')) !== 'grid') document.documentElement.classList.add('listCards');
+    } catch(e){ document.documentElement.classList.add('listCards'); }
     window.KOCHBUCH_RENAMED = {{ site.data.renamed | jsonify }};
 
     // Seitenwechsel: Das Rezeptfoto „fliegt“ nur zwischen einer Karte und ihrer Rezeptseite (hin und zurück).
@@ -266,7 +270,7 @@
       else document.documentElement.removeAttribute('data-theme');
       document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#000000' : '#F1F4F0');
       themeOpts.forEach(b=>{ const on = b.dataset.themeOpt === mode; b.classList.toggle('active', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
-      const list = get(listKey,'grid') === 'cards' ? 'cards' : 'grid';
+      const list = get(listKey,'cards') === 'grid' ? 'grid' : 'cards';
       document.documentElement.classList.toggle('listCards', list === 'cards');
       listOpts.forEach(b=>{ const on = b.dataset.listOpt === list; b.classList.toggle('active', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
     }

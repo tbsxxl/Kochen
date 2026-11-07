@@ -2263,3 +2263,28 @@ body.layout-recipe{background:color-mix(in srgb, var(--cat, #526B57) 9%, var(--b
 body.layout-recipe .recipePageBody{background:color-mix(in srgb, var(--cat, #526B57) 6%, var(--surface))}
 :root[data-theme="dark"] body.layout-recipe .recipePageBody{background:color-mix(in srgb, var(--cat, #526B57) 12%, #1C1C1E)}
 @media (prefers-contrast: more){ body.layout-recipe{background:var(--bg)} }
+
+/* ---------- 33. Kochbuch zum Blättern (Nov. 2026, Wunsch des Besitzers „beides“: Farbe + Blättern) ----------
+   Standard der Rezeptliste: Rezepte untereinander wie Seiten eines Kochbuchs – großes Foto über die ganze Breite,
+   Name groß in Fraunces darunter. Raster bleibt unter „Mehr“ → „Rezeptliste“ wählbar.
+   Startseite: Heute-Karte von Rand zu Rand. */
+@media (max-width:640px){
+  html.listCards .grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  html.listCards .grid .linkCard{margin:0 -16px}
+  html.listCards .grid .recipeCard .rcImg{aspect-ratio:4/3;border-radius:0}
+  html.listCards .grid .recipeCard .rcBody{padding:12px 16px 0;gap:6px}
+  html.listCards .grid .recipeTitle{font-size:var(--fs28);line-height:1.08;letter-spacing:-.02em;-webkit-line-clamp:3}
+  html.listCards .grid .recipeMeta{font-size:var(--fs14)}
+}
+@media (min-width:641px){
+  html.listCards .grid .recipeTitle{font-size:var(--fs22);line-height:1.12}
+}
+/* Heute-Karte randlos */
+@media (max-width:640px){
+  .homeToday .linkCard{display:block;margin:0 -16px}
+  .homeToday .homeFeatured{border-radius:0;box-shadow:none;border:0}
+  .homeToday .homeFeatured .rcImg{height:min(clamp(320px, 100vw, 480px), 66vh);border-radius:0}
+  .homeToday .homeFeatured .homeFeaturedTitle{font-size:var(--fs36)}
+}
+/* In der Blätter-Ansicht ist Platz: „2 Portionen“ statt nur „2“ */
+@media (max-width:640px){ html.listCards .grid .metaItem .srOnly{position:static !important;width:auto;height:auto;margin:0;clip:auto;overflow:visible;white-space:normal} }
