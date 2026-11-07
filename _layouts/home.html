@@ -82,7 +82,7 @@ layout: default
           decoding="async"
         >
         <span class="freezerFlag" id="todayFreezer" data-freezer-badge data-recipe-id="{{ featured.url | relative_url }}" hidden title="In der Kühltruhe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><polyline points="8 4 12 7 16 4"/><polyline points="8 20 12 17 16 20"/><polyline points="4 8 7 12 4 16"/><polyline points="20 8 17 12 20 16"/></svg><span data-count></span></span>
-        <div class="heroOverlayCat" id="todayCat" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</div>
+        <div class="heroOverlayCat" id="todayCat" style="--cat:{{ site.data.category_colors[featured.category] | default: '#526B57' }}" {% unless featured.category %}style="display:none"{% endunless %}>{{ featured.category }}</div>
       </div>
       <div class="rcBody">
         <h3 class="recipeTitle homeFeaturedTitle" id="todayTitle">{{ featured.title }}</h3>
@@ -180,6 +180,7 @@ layout: default
   // Steht für heute etwas im Wochenplan, wird das gezeigt, sonst ein Tagesvorschlag
   // (utils.js ist hier noch nicht geladen, daher direkt aus dem Speicher lesen)
   let planned = [], nextLabel = '';
+  const CAT_COLORS = {{ site.data.category_colors | jsonify }};
   try{
     const n = new Date();
     const k = `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;
@@ -224,7 +225,7 @@ layout: default
   const tr = el('todayRating'); if(tr) tr.setAttribute('data-recipe-id', r.id || r.url || '');
   const fz = el('todayFreezer'); if(fz) fz.setAttribute('data-recipe-id', r.id || r.url || '');
   if(ttl) ttl.textContent = r.title || '—';
-  if(cat){ r.category ? (cat.textContent = r.category, cat.style.removeProperty('display')) : (cat.style.display='none'); }
+  if(cat){ r.category ? (cat.textContent = r.category, cat.style.removeProperty('display'), cat.style.setProperty('--cat', CAT_COLORS[r.category] || '#526B57')) : (cat.style.display='none'); }
   if(t && tTxt){ r.time ? (tTxt.textContent = r.time, t.style.removeProperty('display')) : (t.style.display='none'); }
   if(s && sTxt){ r.servings ? (sTxt.textContent = r.servings + (Number(r.servings) === 1 ? ' Portion' : ' Portionen'), s.style.removeProperty('display')) : (s.style.display='none'); }
   if(imgW && img){

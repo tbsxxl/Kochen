@@ -120,6 +120,11 @@ getrennt (Wunsch des Besitzers).
   Seitentitel, Abschnitte, Kartentitel, Blatt-Titel, Kategorien; Fließtext und Bedienung SF. Keine Etiketten in
   GROSSBUCHSTABEN mehr (Datum, Abteilungen, Kategorie-Gruppen in normaler Schreibung). Dunkelmodus unverändert.
   Die Farbangaben unten (Papierweiß usw.) gelten nur noch, wo Abschnitt 31 nichts sagt.
+- **Farbe je Kategorie (Nov. 2026, Abschnitt 32, Wunsch des Besitzers „mehr Farbe“):** jede der 25 Kategorien hat einen
+  Farbton aus der Küche in `_data/category_colors.yml` (Tomate, Kurkuma, Basilikum, Aubergine …; alle mit Weiß ≥ 5,6 : 1;
+  neue Kategorie → dort Farbe ergänzen und Kontrast prüfen). Über `--cat` im Markup: Kategorie-Kacheln laufen unten in den
+  Farbton aus, Hauptkategorie-Kapsel und Heute-Karte-Kapsel gefüllt, Rezeptseite leicht im Farbton der Hauptkategorie getönt
+  (Hintergrund 9 %, Inhaltsfläche 6 %; dunkel 16/12 %). Kräutergrün bleibt für Bedienung (Kochen, Tabs, Haken).
 - **Neuanfang Okt. 2026 (Abschnitt 16 in `assets/styles.css`, gilt vor allen älteren Abschnitten):** Die Fotos sind die
   Farbe, die Oberfläche bleibt ruhig. Hellmodus warm (Abschnitt 19): Hintergrund Papierweiß `#F6F1E9`, Zellen `#FFFDF9`,
   Füllung `#EDE7DD`, Linien `#E6E0D6`, Text `#1F1D1A`, Sekundärtext und Metadaten `#57534C` (6,8 : 1, Apple empfiehlt für kleine Schrift ~7 : 1);

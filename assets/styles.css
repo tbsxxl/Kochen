@@ -2249,3 +2249,17 @@ body.highContrast:not([data-theme="dark"] *){--text:#000;--sub:#2C352F;--sub2:#2
 /* Großer Titel auf dem Foto: lieber am vorhandenen Bindestrich umbrechen („Aprikosen-“ / „Hähnchen vom Blech“)
    statt mitten im nächsten Wort; lange Wörter ohne Bindestrich trennt der Browser weiter selbst */
 .homeFeatured .homeFeaturedTitle,.recipeHeroText .recipeName{-webkit-hyphenate-limit-before:4;-webkit-hyphenate-limit-after:5;hyphenate-limit-chars:12 5 5}
+
+/* ---------- 32. Mehr Farbe: ein Farbton je Kategorie (Nov. 2026, Wunsch des Besitzers) ----------
+   Farben in _data/category_colors.yml (alle ≥ 5,6 : 1 mit Weiß), per --cat ins Markup gesetzt.
+   Kategorie-Kacheln: Foto läuft unten in den Farbton aus. Hauptkategorie-Kapsel und Heute-Karte: gefüllt.
+   Rezeptseite: Hintergrund leicht im Farbton des Gerichts. */
+.catTile::after{background:linear-gradient(to top, var(--cat, #526B57) 0%, color-mix(in srgb, var(--cat, #526B57) 70%, transparent) 30%, transparent 62%)}
+.catTile{background:var(--cat, var(--surface2))}
+.recipeTags .chipMainCat,.recipeTags .chipLink.chipMainCat{background:var(--cat, var(--brand));color:#fff}
+.homeFeatured .heroOverlayCat,.heroOverlayCat{background:var(--cat, rgba(20,16,12,.55));color:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}
+body.layout-recipe{background:color-mix(in srgb, var(--cat, #526B57) 9%, var(--bg))}
+:root[data-theme="dark"] body.layout-recipe{background:color-mix(in srgb, var(--cat, #526B57) 16%, #000)}
+body.layout-recipe .recipePageBody{background:color-mix(in srgb, var(--cat, #526B57) 6%, var(--surface))}
+:root[data-theme="dark"] body.layout-recipe .recipePageBody{background:color-mix(in srgb, var(--cat, #526B57) 12%, #1C1C1E)}
+@media (prefers-contrast: more){ body.layout-recipe{background:var(--bg)} }
