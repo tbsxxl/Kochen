@@ -2625,3 +2625,30 @@ html.retro body::before{background:#000080}
 :root:not(.retro) .brandWordmark{font-size:min(1.25rem, 30px)}
 :root:not(.retro)[data-theme="dark"]{--bg:#0B0B0C}
 :root:not(.retro)[data-theme="dark"] body.fieldPage .pageContent,:root:not(.retro)[data-theme="dark"] body.layout-home .homeToday{box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+
+/* ==========================================================================
+   41. Kochmodus (Nov. 2026, Wunsch des Besitzers): Dunkelmodus bleibt wie bisher (neutrales Schwarz, „Weiter“ hellgrün);
+   im hellen Modus hell mit grünem Kopf: Kopfzeile im Feld-Grün, darunter hellgrauer Grund, weiße Karten, Tinte-Text,
+   „Weiter“ und Haken im Feld-Grün mit Weiß. Retro-Modus unberührt.
+   ========================================================================== */
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay{
+  --cBg:#F2F4F2;--cCard:#FFFFFF;--cFill:rgba(16,21,17,.06);--cLine:#E2E7E3;--cText:#101511;--cSub:#4A534D;--cLeaf:#1D4A33;
+  background:var(--cBg);color:var(--cText)}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTop{background:var(--field);color:#fff;margin-bottom:12px}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTop .cookTitle{color:#fff}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTop .navIconBtn,
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTop .cookPill{background:rgba(255,255,255,.18);color:#fff}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTabs{background:rgba(16,21,17,.07)}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTab{color:var(--cSub)}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTab.active{background:#FFFFFF;color:var(--cText);box-shadow:0 1px 3px rgba(16,21,17,.12)}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookProgress{background:rgba(16,21,17,.08)}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookNav{background:linear-gradient(180deg, rgba(242,244,242,0) 0%, var(--cBg) 30%)}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookNavBtn.primary{background:var(--cLeaf);color:#FFFFFF}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookChk{border-color:rgba(16,21,17,.30)}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookChk::after{background:#FFFFFF}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookIngRow.isStep{background:rgba(29,74,51,.08)}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTimer.isDone{background:var(--cLeaf);color:#FFFFFF}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTimer.isDone .cookTimerLabel{color:rgba(255,255,255,.82)}
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTimer.isDone .cookTimerBtn{background:rgba(255,255,255,.2);color:#FFFFFF}
+@media (min-width:768px){ :root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookIngsHead{background:var(--cBg);color:var(--cSub)} }
+:root:not([data-theme="dark"]):not(.retro) .cookOverlay .cookTime{background:rgba(29,74,51,.10);color:var(--cLeaf);border-color:transparent}
