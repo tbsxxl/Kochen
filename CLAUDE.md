@@ -132,6 +132,7 @@ getrennt (Wunsch des Besitzers).
   (fest, Höhe `safe-area-inset-top`) färbt den Streifen: Feld-Seiten Feld-Grün, sonst dunkler Verlauf (weiße Uhr lesbar), Retro Navy.
   Wird `status-bar-style` geändert, die App vom Homescreen löschen und neu hinzufügen. `html` malt unten die Blatt-Farbe (kein Grün unter kurzen Seiten),
   hat aber als `background-color` das Feld-Grün: Safari (iOS 26) färbt den Bereich unter der Uhr danach, nicht nach `theme-color`.
+  Logo auf dem Feld immer in der Variante `logo-dark.svg` (gleiche Farben, helleres Kräutergrün; das dunkle Grün ging unter).
 - **Schrift (Abschnitt 38, gilt vor 34/37, Wahl des Besitzers):** Titel in der Apple-Systemschrift (SF Pro Display, sonst Inter),
   fett (Seitentitel/Begrüßung/Rezeptname 800, Abschnitte/Karten 700), **normal geschrieben, keine Versalien, nicht schmal**.
   Archivo (schmal, versal) hat der Besitzer verworfen („passt nicht“); Bricolage Grotesque und Young Serif waren die anderen
