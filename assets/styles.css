@@ -2607,3 +2607,21 @@ html.retro body::before{background:#000080}
 /* Auf dem Feld-Grün das Logo in der hellen Variante (logo-dark.svg: gleiche Farben, Kräutergrün heller), sonst verschwindet die grüne Hälfte */
 :root:not(.retro) body.fieldPage .homeBrand .logoLight{display:none}
 :root:not(.retro) body.fieldPage .homeBrand .logoDark{display:block}
+
+/* ==========================================================================
+   40. Zweites apple-design-Audit (Nov. 2026)
+   1) Ein Grün: hell Links, Listen-Symbole, aktiver Tab = Feld-Grün #1D4A33 (10,1 : 1 auf Weiß), Tönung #DCE8E0.
+   2) Rezeptliste: Suche im Feld wie auf der Startseite (_includes/recipe-search.html via field_include).
+   3) Suchfelder im Feld etwas deutlicher (Füllung 20 %).
+   4) Schriftzug bei großer Schrift begrenzt.  5) Dunkel: Blatt minimal heller mit feiner Oberkante.
+   ========================================================================== */
+:root:not(.retro):not([data-theme="dark"]){--leaf:#1D4A33;--accent:#1D4A33;--brandSoft:#DCE8E0;--leafSoft:#DCE8E0;--accentSoft:#DCE8E0}
+:root:not(.retro){--fieldFill:rgba(255,255,255,.20)}
+:root:not(.retro) body.fieldPage .fieldExtra{margin-top:16px}
+:root:not(.retro) body.fieldPage .fieldExtra .searchRow{background:var(--fieldFill);color:var(--onField);box-shadow:none;border:0}
+:root:not(.retro) body.fieldPage .fieldExtra .searchRow input{color:var(--onField);background:transparent}
+:root:not(.retro) body.fieldPage .fieldExtra .searchRow input::placeholder{color:var(--onField2)}
+:root:not(.retro) body.fieldPage .fieldExtra .searchIcon,:root:not(.retro) body.fieldPage .fieldExtra .searchClear{color:var(--onField2)}
+:root:not(.retro) .brandWordmark{font-size:min(1.25rem, 30px)}
+:root:not(.retro)[data-theme="dark"]{--bg:#0B0B0C}
+:root:not(.retro)[data-theme="dark"] body.fieldPage .pageContent,:root:not(.retro)[data-theme="dark"] body.layout-home .homeToday{box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}

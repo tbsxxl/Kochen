@@ -132,6 +132,10 @@ getrennt (Wunsch des Besitzers).
   (fest, Höhe `safe-area-inset-top`) färbt den Streifen: Feld-Seiten Feld-Grün, sonst dunkler Verlauf (weiße Uhr lesbar), Retro Navy.
   Wird `status-bar-style` geändert, die App vom Homescreen löschen und neu hinzufügen. `html` malt unten die Blatt-Farbe (kein Grün unter kurzen Seiten),
   hat aber als `background-color` das Feld-Grün: Safari (iOS 26) färbt den Bereich unter der Uhr danach, nicht nach `theme-color`.
+  Nach dem 2. `apple-design`-Audit (Abschnitt 40): hell nur noch ein Grün – Links, Listen-Symbole, aktiver Tab = Feld-Grün
+  `#1D4A33`, Tönung `#DCE8E0` (dunkel bleibt `#7EC48A` als helle Stufe). Rezeptliste: Suchfeld im Feld unter dem Titel
+  (`_includes/recipe-search.html`, eingebunden über Front Matter `field_include:` in `_layouts/page.html`, `.fieldExtra`).
+  Feld-Füllung 20 %, Schriftzug höchstens 30 px, dunkel Blatt `#0B0B0C` mit feiner Oberkante.
   Logo auf dem Feld immer in der Variante `logo-dark.svg` (gleiche Farben, helleres Kräutergrün; das dunkle Grün ging unter).
 - **Schrift (Abschnitt 38, gilt vor 34/37, Wahl des Besitzers):** Titel in der Apple-Systemschrift (SF Pro Display, sonst Inter),
   fett (Seitentitel/Begrüßung/Rezeptname 800, Abschnitte/Karten 700), **normal geschrieben, keine Versalien, nicht schmal**.

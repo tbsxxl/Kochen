@@ -7,6 +7,7 @@ layout: default
     <div class="pageTitleBlock">
       <h1 class="h1">{{ page.title }}</h1>
       <div class="subtleRule"></div>
+      {% if page.field_include %}<div class="fieldExtra">{% include {{ page.field_include }} %}</div>{% endif %}
     </div>
   {% endif %}
 
