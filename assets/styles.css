@@ -11,6 +11,11 @@
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 @font-face{
+  font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;
+  src:url("fonts/archivo.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
   font-family:"Fraunces";font-style:normal;font-weight:400 600;font-display:swap;
   src:url("fonts/fraunces.woff2") format("woff2");
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
@@ -2288,3 +2293,56 @@ body.layout-recipe .recipePageBody{background:color-mix(in srgb, var(--cat, #526
 }
 /* In der Blätter-Ansicht ist Platz: „2 Portionen“ statt nur „2“ */
 @media (max-width:640px){ html.listCards .grid .metaItem .srOnly{position:static !important;width:auto;height:auto;margin:0;clip:auto;overflow:visible;white-space:normal} }
+
+/* ==========================================================================
+   34. „Kaffee & Tangerine“ (Nov. 2026, nach Vorlage des Besitzers „DARK“-Plakat)
+   Drei Farben statt vieler: Sand (hell), Kaffeebraun (dunkel), Tangerine nur für Knöpfe und Aktives.
+   Schrift: Archivo (selbst gehostet, variabel) fett und schmal für große Titel in GROSSBUCHSTABEN wie auf dem Plakat;
+   Fließtext und Bedienung SF. Die Kategorie-Farben (Abschnitt 32) sind damit wieder aus: alles in Kaffeebraun.
+   Knöpfe: Tangerine #FE4D03 mit dunkler Kaffee-Schrift (5,2 : 1; Weiß wäre nur 3,4 : 1).
+   ========================================================================== */
+:root{--fontDisplay:"Archivo", "Helvetica Neue", Arial, sans-serif;--coffee:#693822;--sand:#C48B67;--tangerine:#FE4D03}
+:root:not([data-theme="dark"]){
+  --bg:#F3E6DA; --surface:#FBF4EE; --surface2:#EAD8C9; --fill:rgba(105,56,34,.09);
+  --line:#E3CFBF; --lineStrong:#CDB19C;
+  --text:#2A160D; --sub:#5E3E2E; --sub2:#5E3E2E; --muted:#8A6A58;
+  --brand:#FE4D03; --onBrand:#2A140A; --leaf:#A83300; --onLeaf:#FFFFFF; --brandSoft:#FBDCCB; --leafSoft:#FBDCCB;
+  --sel:#FE4D03; --onSel:#2A140A; --accent:#A83300; --accentSoft:#FBDCCB; --onAccent:#FFFFFF;
+  --glass:rgba(251,244,238,.76); --glassLine:rgba(105,56,34,.10);
+  --glassShadow:0 10px 30px rgba(60,28,14,.14), 0 1px 3px rgba(60,28,14,.08);
+}
+:root[data-theme="dark"]{
+  --bg:#2A160D; --surface:#3A1E12; --surface2:#4A2817; --fill:rgba(196,139,103,.18);
+  --line:#4F2C1B; --lineStrong:#6B3E27;
+  --text:#FBF1E8; --sub:#E5C9B5; --sub2:#E5C9B5; --muted:#C2A08A;
+  --brand:#FE4D03; --onBrand:#2A140A; --leaf:#FE6A2A; --onLeaf:#2A140A; --brandSoft:#4E2412; --leafSoft:#4E2412;
+  --sel:#FE4D03; --onSel:#2A140A; --accent:#FE6A2A; --accentSoft:#4E2412; --onAccent:#2A140A;
+  --glass:rgba(58,30,18,.78); --glassLine:rgba(251,241,232,.08);
+}
+:root[data-theme="dark"] .bottomRail,:root[data-theme="dark"] .nowCooking{background:rgba(42,22,13,.82)}
+.cookOverlay{--cLeaf:#FE4D03}
+.cookIngRow.isStep{background:rgba(254,77,3,.16)}
+.cookNavBtn.primary,.cookTimer.isDone{color:#2A140A}
+
+/* Große Titel: Archivo schwarz, schmal, Großbuchstaben – das eine laute Element */
+.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle{
+  font-family:var(--fontDisplay);font-weight:900;font-stretch:75%;text-transform:uppercase;letter-spacing:-.01em;line-height:.92}
+.pageTitleBlock .h1,.homeGreetingTitle{font-size:clamp(2.6rem, 13vw, 3.6rem)}
+.recipeHeroText .recipeName{font-size:min(clamp(2.4rem, 12vw, 3.4rem), 64px)}
+.recipeHeroText .recipeName.recipeNameLong{font-size:min(clamp(1.9rem, 9vw, 2.6rem), 48px)}
+.homeFeatured .homeFeaturedTitle{font-size:clamp(2.4rem, 12vw, 3.2rem)}
+/* Abschnitte und Karten: Archivo kräftig, normale Schreibung */
+.homeSectionTitle,.h2,.sheetTitle,.accountTitle,.catGroupTitle,.ingSection,.navCompact{font-family:var(--fontDisplay);font-weight:800;font-stretch:85%;letter-spacing:-.005em}
+.recipeTitle,.catTileName{font-family:var(--fontDisplay);font-weight:750;font-stretch:88%;letter-spacing:-.005em}
+html.listCards .grid .recipeTitle{font-weight:850;font-stretch:80%;text-transform:uppercase;line-height:.98;font-size:clamp(1.7rem, 8vw, 2.1rem)}
+.brandWordmark{font-family:var(--fontDisplay);font-weight:850;font-stretch:80%;text-transform:uppercase;letter-spacing:.01em}
+
+/* Kategorie-Farben aus: alles in Kaffeebraun */
+.catTile{background:var(--coffee)}
+.catTile::after{background:linear-gradient(to top, var(--coffee) 0%, rgba(105,56,34,.7) 30%, transparent 62%)}
+.recipeTags .chipMainCat,.recipeTags .chipLink.chipMainCat{background:var(--coffee);color:#FBF1E8}
+.homeFeatured .heroOverlayCat,.heroOverlayCat{background:var(--coffee);color:#FBF1E8}
+body.layout-recipe,:root[data-theme="dark"] body.layout-recipe{background:var(--bg)}
+body.layout-recipe .recipePageBody,:root[data-theme="dark"] body.layout-recipe .recipePageBody{background:var(--surface)}
+/* Fotos mit warmem Kaffee-Verlauf wie das Plakat */
+.recipePageHero::after,.homeFeatured .rcImg::after{background:linear-gradient(to top, rgba(42,22,13,.82) 0%, rgba(42,22,13,.35) 40%, rgba(42,22,13,0) 70%) !important}

@@ -112,6 +112,16 @@ getrennt (Wunsch des Besitzers).
   (`--fill`), Glas-Sheets mit großer Rundung, iOS-Schalter (Grün `#34C759`). Glas (`--glass`, `--glassBlur`) nur für
   Leisten, Sheets, Menüs, Hinweise; bei „Transparenz reduzieren“ volle Fläche. Hintergrund `--bg` dunkler als Zellen
   `--surface` (wie iOS). Radien: Karten 22, Listen 16, Felder 14.
+- **Aktueller Look „Kaffee & Tangerine“ (Nov. 2026, Abschnitt 34, gilt vor allem anderen):** nach einer Vorlage des Besitzers
+  (Plakat „DARK“, Prinzip „nicht mehr Farben, sondern drei“). Hell: Sand `#F3E6DA` (Hintergrund), `#FBF4EE` (Zellen),
+  Text Kaffee `#2A160D`, Sekundär `#5E3E2E` (7,8 : 1); dunkel: Kaffeebraun `#2A160D`/`#3A1E12`, Text `#FBF1E8`.
+  **Tangerine `#FE4D03` nur für Knöpfe/Aktives, mit dunkler Schrift `#2A140A`** (5,2 : 1; Weiß nur 3,4 : 1);
+  Tangerine als Textfarbe hell `#A83300` (5,5 : 1), dunkel `#FE6A2A`. Kaffeebraun `#693822` für Kategorie-Kacheln/-Kapseln
+  (die Farben aus `_data/category_colors.yml`, Abschnitt 32, sind damit aus). Schrift **Archivo** (selbst gehostet,
+  `assets/fonts/archivo.woff2`, variabel: Breite 62–125 %, Gewicht 100–900, OFL) statt Fraunces: große Titel 900, 75 % Breite,
+  GROSSBUCHSTABEN (Seitentitel, Begrüßung, Rezeptname auf dem Foto, Heute-Karte, Karten in der Blätter-Liste),
+  Abschnitte/Karten 750–850 normal geschrieben; Fließtext/Bedienung SF. `theme-color` hell `#F3E6DA`, dunkel `#2A160D`.
+  Logo bleibt (Terrakotta/Kräutergrün). Abschnitte 31–33 beschreiben die Vorstufen.
 - **Neuer Look „Porzellan & Kräuter“ (Nov. 2026, Abschnitt 31 in `assets/styles.css`, gilt vor allem anderen):**
   Neuentwurf auf Wunsch des Besitzers (Superpowers-Brainstorming + Skill `frontend-design`, Leitfaden „Prompting for frontend
   aesthetics“). Weg vom Creme-Serifen-Terrakotta-Einheitslook: Hintergrund kühles Porzellanweiß `#F1F4F0` (auch
