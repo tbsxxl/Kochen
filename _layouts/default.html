@@ -21,7 +21,7 @@
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:image" content="{{ og_image }}">
   <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
-  <meta name="theme-color" content="#F6F1E9">
+  <meta name="theme-color" content="#F1F4F0">
   <script>
     // Darstellung vor dem ersten Rendern setzen, damit nichts aufblitzt.
     // Standard „auto“: folgt dem iPhone (Hell/Dunkel); „light“/„dark“ nur, wenn unter „Mehr“ fest gewählt.
@@ -37,7 +37,7 @@
       } catch(e){}
       var dark = t === 'dark' || (t === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
       if (dark) document.documentElement.setAttribute('data-theme', 'dark');
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#000000' : '#F6F1E9');
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#000000' : '#F1F4F0');
     })();
     // Rezeptliste: Raster (Standard) oder große Karten (Einstellung unter „Mehr“)
     try { if (JSON.parse(localStorage.getItem('kochbuch.ui.listView')) === 'cards') document.documentElement.classList.add('listCards'); } catch(e){}
@@ -86,9 +86,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Kochbuch">
   {% if page.image %}<link rel="preload" as="image" href="{{ page.image | relative_url }}?v={{ site.image_version }}" imagesrcset="{% include srcset.html src=page.image %}" imagesizes="(min-width:960px) 928px, 100vw" fetchpriority="high">{% endif %}
-  {%- if page.layout == 'recipe' or page.layout == 'home' %}
   <link rel="preload" href="{{ '/assets/fonts/fraunces.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  {%- endif %}
   <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <script defer src="{{ '/assets/utils.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   <script defer src="{{ '/assets/account.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
@@ -266,7 +264,7 @@
       const dark = mode === 'dark' || (mode === 'auto' && !!darkMq?.matches);
       if (dark) document.documentElement.setAttribute('data-theme','dark');
       else document.documentElement.removeAttribute('data-theme');
-      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#000000' : '#F6F1E9');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#000000' : '#F1F4F0');
       themeOpts.forEach(b=>{ const on = b.dataset.themeOpt === mode; b.classList.toggle('active', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
       const list = get(listKey,'grid') === 'cards' ? 'cards' : 'grid';
       document.documentElement.classList.toggle('listCards', list === 'cards');

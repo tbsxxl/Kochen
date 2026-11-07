@@ -2202,3 +2202,45 @@ h1.homeGreetingTitle,h2.homeSectionTitle{margin:0}
 /* „+n“-Kapsel: Tippfläche 44 pt wie die anderen Kapseln */
 .recipeTags .chipMore{position:relative}
 .recipeTags .chipMore::after{content:"";position:absolute;inset:-7px -2px}
+
+/* ==========================================================================
+   31. Neuer Look „Porzellan & Kräuter“ (Nov. 2026, Neuentwurf mit frontend-design)
+   Weg vom Creme+Serife+Terrakotta-Einheitslook: kühles, leicht grünes Porzellanweiß, tiefe Waldtinte
+   statt Fast-Schwarz, Kräutergrün bleibt die eine Farbe. Die Stimme ist die Logo-Schrift Fraunces:
+   alle großen Überschriften, Abschnitte und Kartentitel. Keine Großbuchstaben-Etiketten mehr.
+   Dunkelmodus bleibt Apples neutrales Schwarz, nur die Schrift wechselt mit.
+   ========================================================================== */
+:root:not([data-theme="dark"]){
+  --bg:#F1F4F0;           /* Porzellan */
+  --surface:#FFFFFF;      /* Teller */
+  --surface2:#E6EBE5;
+  --fill:rgba(60,85,66,.09);
+  --line:#DCE3DB;
+  --lineStrong:#C2CCC1;
+  --text:#17201A;         /* Waldtinte */
+  --sub:#47524A;          /* 7,6 : 1 auf Porzellan */
+  --sub2:#47524A;
+  --muted:#7C877E;
+  --glass:rgba(247,250,246,.74);
+  --glassLine:rgba(40,70,50,.08);
+  --glassShadow:0 10px 30px rgba(30,50,36,.12), 0 1px 3px rgba(30,50,36,.06);
+  --sh1:0 1px 2px rgba(30,50,36,.05);
+  --sh2:0 2px 6px rgba(30,50,36,.05), 0 12px 32px rgba(30,50,36,.08);
+}
+body.highContrast:not([data-theme="dark"] *){--text:#000;--sub:#2C352F;--sub2:#2C352F;--line:#C2CCC1}
+
+/* Stimme: Fraunces für Überschriften */
+.h1,.pageTitleBlock .h1,.homeGreetingTitle,.homeSectionTitle,.h2,.recipeTitle,.sheetTitle,.accountTitle,.catTileName,.navCompact{
+  font-family:var(--fontDisplay);font-weight:600;letter-spacing:-.015em}
+.pageTitleBlock .h1,.homeGreetingTitle{font-size:clamp(2.1rem, 9vw, 2.6rem);line-height:1.04;letter-spacing:-.025em}
+.homeSectionTitle,.h2{font-size:var(--fs22);line-height:1.15}
+.recipeTitle{font-weight:600;letter-spacing:-.01em;line-height:1.18}
+.navCompact{font-weight:600}
+
+/* Etiketten in normaler Schreibung statt GROSSBUCHSTABEN */
+.sheetSectionLabel,.cardCategory,.shopSectionHead,.ingSection,.homeDate,.continueEyebrow,.catGroupTitle,
+.cookStepIngsLabel,.cookIngSection{text-transform:none;letter-spacing:0}
+.homeDate,.catGroupTitle,.shopSectionHead,.sheetSectionLabel{font-size:var(--fs14);font-weight:600;color:var(--sub)}
+.ingSection{font-family:var(--fontDisplay);font-size:var(--fs18);font-weight:600;color:var(--text)}
+.catGroupTitle{font-family:var(--fontDisplay);font-size:var(--fs18);color:var(--text);padding:20px 4px 8px}
+.homeFeatured .homeFeaturedTitle,.continueTitle{font-family:var(--fontDisplay);font-weight:600;letter-spacing:-.02em}
