@@ -2703,3 +2703,16 @@ html.retro body .homeGreetingTitle.homeGreetingTitle{font-size:min(2.6rem, 9.5vw
 html.retro .homeFeatured .rcBody{padding:16px 16px 14px}
 html.retro .homeFeatured .heroOverlayCat{left:16px;top:16px}
 html.retro{background-color:#000080}
+
+/* ---------- 47. Am Computer (Nov. 2026, Screenshot „aufm pc“) ----------
+   Ab 1100 px breitere Spalte (bis 1320 px) und Raster mit so vielen Spalten, wie Platz ist (mind. 260 px je Karte).
+   Große Fotos (Heute-Karte, Rezeptfoto) höchstens 46/50 % der Fensterhöhe, Rezeptseite nur bis 1120 px breit (Zeilenlänge), damit darunter noch Inhalt zu sehen ist. */
+@media (min-width:1100px){
+  .container{max-width:1320px}
+  :root:not(.listCards) .grid,html.listCards .grid{grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:28px 20px}
+  html.listCards .grid .recipeTitle{font-size:var(--fs22)}
+  .catTiles{grid-template-columns:repeat(auto-fill, minmax(220px, 1fr))}
+  .homeToday .homeFeatured .rcImg,.homeFeatured .rcImg{height:min(46vh, 460px)}
+  body.layout-recipe .container{max-width:1120px}
+  .recipePageHero .recipeHeroImg{height:min(50vh, 560px)}
+}
