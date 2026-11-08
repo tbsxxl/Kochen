@@ -51,7 +51,7 @@
     // Versteckter Retro-Modus (5× auf „Tobis Kochbuch“ auf der Startseite tippen)
     // Skins (Nov. 2026): Standard, Retro und acht weitere; gewählt unter „Mehr“ → „Skin“ (kochbuch.ui.skin, pro Gerät).
     // Wert = Farbe der Statusleiste/theme-color. Skins außer Standard haben ein festes Aussehen (kein Hell/Dunkel).
-    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#000000', diner:'#B3122E', kreide:'#1E2422', zeitung:'#111111', aqua:'#2A78D4', synthwave:'#2A0B45', kladde:'#24356F', bauhaus:'#1E4FB8' };
+    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#23271F', diner:'#B3122E', bauhaus:'#111111', nordwall:'#1C2126', zauberschule:'#4A1420', jahr3000:'#3B2A6B', zweistaedte:'#1F4D52', insel:'#1F3B2A', akte:'#2B3A48', brigade:'#2A2F33' };
     window.KOCHBUCH_SKIN = function(){
       var s = null;
       try { s = JSON.parse(localStorage.getItem('kochbuch.ui.skin')); if (!s && JSON.parse(localStorage.getItem('kochbuch.ui.retro'))) s = 'retro'; } catch(e){}
@@ -126,7 +126,7 @@
     }
   </script>
 </head>
-<body class="{% if page.layout %}layout-{{ page.layout }}{% endif %}{% if page.grouped %} grouped{% endif %}{% if field_page %} fieldPage{% endif %}">
+<body data-page="{{ page.url | slugify }}" class="{% if page.layout %}layout-{{ page.layout }}{% endif %}{% if page.grouped %} grouped{% endif %}{% if field_page %} fieldPage{% endif %}">
 
   <main class="container appMain" role="main">
     {{ content }}
@@ -206,14 +206,16 @@
       <div class="skinGrid" role="radiogroup" aria-label="Skin">
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="standard" style="--swField:#1D4A33;--swBg:#FFFFFF;--swAcc:#1D4A33"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Standard</span></button>
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="retro" style="--swField:#000080;--swBg:#C3C3C3;--swAcc:#FFFF00"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Retro</span></button>
-        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="terminal" style="--swField:#000000;--swBg:#0A0F0A;--swAcc:#33FF66"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Terminal</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="terminal" style="--swField:#23271F;--swBg:#050A06;--swAcc:#33FF66"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Terminal</span></button>
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="diner" style="--swField:#B3122E;--swBg:#FFFFFF;--swAcc:#2BB59A"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Diner</span></button>
-        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="kreide" style="--swField:#1E2422;--swBg:#2E3633;--swAcc:#F2E27D"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Kreidetafel</span></button>
-        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="zeitung" style="--swField:#E9E9E4;--swBg:#F4F4F0;--swAcc:#111111"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Zeitung</span></button>
-        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="aqua" style="--swField:#2A78D4;--swBg:#E6EAF0;--swAcc:#4FA3FF"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Aqua 2000</span></button>
-        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="synthwave" style="--swField:#2A0B45;--swBg:#1A0B2E;--swAcc:#FF3DBF"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Synthwave</span></button>
-        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="kladde" style="--swField:#24356F;--swBg:#FFFFFF;--swAcc:#1F3FBF"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Kochkladde</span></button>
-        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="bauhaus" style="--swField:#1E4FB8;--swBg:#FFFFFF;--swAcc:#D7262E"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Bauhaus</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="bauhaus" style="--swField:#111111;--swBg:#FFFFFF;--swAcc:#C8202A"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Bauhaus</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="nordwall" style="--swField:#1C2126;--swBg:#E7E1D4;--swAcc:#7D1C1C"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Nordwall</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="zauberschule" style="--swField:#4A1420;--swBg:#F1E6CC;--swAcc:#B08A2E"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Zauberschule</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="jahr3000" style="--swField:#3B2A6B;--swBg:#E9F7F1;--swAcc:#7FE0C0"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Jahr 3000</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="zweistaedte" style="--swField:#1F4D52;--swBg:#16131E;--swAcc:#FF3FA4"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Zwei Städte</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="insel" style="--swField:#1F3B2A;--swBg:#E8E1CF;--swAcc:#1A1A17"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Die Insel</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="akte" style="--swField:#2B3A48;--swBg:#DDE2E5;--swAcc:#E4CFA0"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Akte</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="brigade" style="--swField:#2A2F33;--swBg:#E4E7E9;--swAcc:#7FB2EE"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Brigade</span></button>
       </div>
     </div>
   </section>
