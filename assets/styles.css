@@ -2693,3 +2693,9 @@ html.retro body::before{background:#000080}
 .homeFeatured .recipeMeta .metaIcon,.homeFeatured .recipeMeta .metaRating{color:inherit}
 /* Datum auf der Startseite: höchstens so groß, dass „7. November“ in eine Zeile passt (auch bei großer Schrift) */
 :root:not(.retro) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(1.9rem, 8.5vw, 2.4rem), 10.5vw);line-height:1.08}
+
+/* Retro-Modus: Logo als Pixel-Version (assets/logo-retro.svg: gleiche Form und Farben, grobe Pixel, schwarze Kontur) */
+.homeBrand .logoRetro{display:none}
+html.retro .homeBrand .logoLight,html.retro .homeBrand .logoDark{display:none !important}
+html.retro .homeBrand .logoRetro{display:block;width:32px;height:32px;image-rendering:pixelated}
+html.retro body .homeGreetingTitle.homeGreetingTitle{font-size:min(2.6rem, 9.5vw);white-space:pre-line}

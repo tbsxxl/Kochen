@@ -170,6 +170,8 @@ getrennt (Wunsch des Besitzers).
   Graue Fenster mit harten Kanten und schwarzem Versatz, weiße Lesefelder, Navy-Titelleisten, Gelb = Hauptaktion,
   Lila = gedrückte Auswahl, Petrol = aktiver Tab, Pink = Hauptkategorie; eckig, kein Blur. Schriften Host Grotesk /
   IBM Plex Sans / IBM Plex Mono (selbst gehostet aus npm `@fontsource…`, OFL, nicht vorgeladen). Gilt hell und dunkel gleich.
+  Logo im Retro-Modus: Pixel-Version `assets/logo-retro.svg` (aus dem echten Logo gerastert, 27 × 13 Pixel, gleiche Farben,
+  schwarze Kontur, Lücke zwischen den Seiten offen; `.logoRetro` auf der Startseite, `image-rendering:pixelated`).
 - Rezeptliste: „Raster“/„Karten“ unter „Mehr“ speichert jetzt beide Werte (vorher sprang „Raster“ zurück).
   Bewertung ★ auf Karten zeigt alle eigenen Bewertungen 1–5 (nicht mehr nur ab 4), damit unbewertet ≠ schlecht.
 - **Vorstufe „Kaffee & Tangerine“ (Abschnitt 34, Farben durch 35 ersetzt):** nach einer Vorlage des Besitzers
