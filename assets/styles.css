@@ -2716,3 +2716,14 @@ html.retro{background-color:#000080}
   body.layout-recipe .container{max-width:1120px}
   .recipePageHero .recipeHeroImg{height:min(50vh, 560px)}
 }
+/* 47b. Große Bildschirme: Spalte wächst mit (92 % der Breite, bis 1680 px → 5–6 Karten nebeneinander).
+   Mit Maus/Trackpad hat html die Blatt-Farbe als Grundfarbe (sonst grüner Streifen neben dem Scrollbalken);
+   das Feld-Grün als Grundfarbe braucht nur Safari auf dem iPhone. */
+@media (min-width:1100px){
+  .container{max-width:min(92vw, 1680px)}
+  body.layout-recipe .container{max-width:1120px}
+}
+@media (hover:hover) and (pointer:fine){
+  :root:not(.retro):has(body.fieldPage){background-color:var(--bg)}
+  :root:not(.retro):not([data-theme="dark"]):has(body.grouped.fieldPage){background-color:#F2F4F2}
+}
