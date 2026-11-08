@@ -575,7 +575,9 @@
     new IntersectionObserver(([e])=>{
       const show = !e.isIntersecting && e.boundingClientRect.top < 0;
       bar.classList.toggle('show', show);
-    }, { rootMargin: '-40px 0px 0px 0px' }).observe(big);
+    }, { rootMargin: '-40px 0px 0px 0px' }).observe(
+      // Seiten mit grünem Feld: die kleine Leiste erst zeigen, wenn das ganze Feld (inkl. Suche/Schnellknöpfe) weggescrollt ist
+      document.body.classList.contains('fieldPage') ? (document.querySelector('.homeQuick, .pageTitleBlock') || big) : big);
   }
 
   // Blätter wie in iOS mit dem Finger nach unten wegziehen (Skill apple-design-web):
