@@ -7,7 +7,7 @@
 //
 // Prüft je Rezept: Titel, Untertitel, Zutaten, Schritte, keine Reste wie „[1 EL | 2 EL]“ oder „Öl*“, keine JS-Fehler.
 // Abläufe: Kochmodus (öffnen, weiter, schließen → „Kochen läuft“-Kapsel), Zur Liste, Planen, Favorit,
-// Kategorie-Kachel → gefilterte Liste, Suche + Trefferzahl, Einstellungen „Darstellung“ und „Rezeptliste“.
+// Kategorie-Kachel → gefilterte Liste, Suche + Trefferzahl, Einstellungen „Darstellung“, „Rezeptliste“ und „Skin“.
 const fs = require('fs');
 const path = require('path');
 let chromium;
@@ -114,6 +114,17 @@ const RECIPES = fs.readdirSync(path.join(__dirname, '..', '_recipes')).filter(f 
   check(await page.evaluate(() => document.documentElement.getAttribute('data-theme') === 'dark'), 'Darstellung „Dunkel“ wirkt nicht');
   await page.tap('[data-list-opt="cards"]');
   check(await page.evaluate(() => getComputedStyle(document.querySelector('#recipeGrid')).gridTemplateColumns.split(' ').length === 1), 'Rezeptliste „Karten“ wirkt nicht');
+
+  // ---------- Skin („Mehr“ → „Skin“): jeder Skin setzt seine Klasse, Standard nimmt sie wieder weg ----------
+  for (const skin of ['terminal', 'diner', 'kreide', 'zeitung', 'aqua', 'synthwave', 'kladde', 'bauhaus', 'retro', 'standard']) {
+    if (!(await page.evaluate(() => document.getElementById('sheet').classList.contains('open')))) { await page.tap('#moreBtn'); await page.waitForTimeout(300); }
+    await page.tap('#skinRow'); await page.waitForTimeout(300);
+    await page.tap(`[data-skin-opt="${skin}"]`); await page.waitForTimeout(100);
+    const ok = await page.evaluate(s => { const r = document.documentElement;
+      return s === 'standard' ? !r.classList.contains('skin') && !r.classList.contains('retro') : s === 'retro' ? r.classList.contains('retro') : r.classList.contains('skin-' + s); }, skin);
+    check(ok, `Skin „${skin}“ wirkt nicht`);
+    await page.tap('#skinClose'); await page.waitForTimeout(300);
+  }
 
   await browser.close();
   if (problems.length) { console.error(problems.join('\n')); console.error(`\n${problems.length} Problem(e).`); process.exit(1); }

@@ -168,8 +168,25 @@ getrennt (Wunsch des Besitzers).
   Logo: ein Umfärben auf Tinte/Grün hat der Besitzer zurückgenommen – **das Logo behält seine Farben
   (Terrakotta/Kräutergrün, siehe unten)**, auch wenn die App kein Terrakotta mehr nutzt. Icons `-v10`
   (Inhalt wie früher `-v8`), `logo.svg?v=9`, `logo-dark.svg?v=11`, `favicon.svg?v=13`, `favicon.ico?v=11`.
-- **Versteckter Retro-Modus (Abschnitt 36, `html.retro`, `kochbuch.ui.retro`):** Startseite 5× schnell auf Logo/„Tobis Kochbuch“
-  tippen (Hinweis mit Rückgängig); danach steht „Retro-Modus“ als Schalter unter „Mehr“ (`kochbuch.ui.retroFound`).
+- **Skins (Abschnitt 48, Nov. 2026, Wunsch des Besitzers):** „Mehr“ → „Skin ›“ öffnet ein Blatt mit Vorschau-Kacheln
+  (`#skinSheet`); gespeichert in `kochbuch.ui.skin` (pro Gerät, fehlt = Standard; alte `kochbuch.ui.retro` wird übernommen).
+  Liste und Statusleisten-Farben in `window.KOCHBUCH_SKINS` im Kopf von `_layouts/default.html` (`KOCHBUCH_APPLY_SKIN()`).
+  Standard (Markthalle), Retro (`html.retro`, Abschnitt 36) und acht weitere mit `html.skin.skin-<name>`: **terminal**
+  (grüne Leuchtschrift, Bildschirmzeilen, blinkender Cursor, „[ KOCHEN ]“, Kochmodus tippt den Schritt – `typeStep()` in
+  `assets/recipe.js`), **diner** (Kirschrot/Mint/Chrom, Schachbrett-Streifen am Feldrand, Leuchtschrift, Tresen-Tab-Leiste),
+  **kreide** (Schiefer, Kreideschrift, Holz-Kreideablage, schräge Fotos, Kreidestrich beim Abhaken), **zeitung**
+  (Zeitungspapier, Playfair, Fraktur-Kopf „Tobis Kochbuch“ + „Ausgabe vom …“ aus `data-edition` in `_layouts/home.html`,
+  Fotos schwarz-weiß gerastert, Antippen/Hover = Farbe), **aqua** (Gel-Knöpfe Blau/Silber, gebürstetes Metall, Blasen in
+  Fortschrittsbalken), **synthwave** (Neon auf Violett, Sonne + Gitterboden im Feld), **kladde** (kariertes Papier,
+  Kugelschreiber-Blau, Caveat, Fotos mit Klebeband), **bauhaus** (Rot/Gelb/Blau/Schwarz, Kreis + Balken im Feld,
+  Kleinschreibung in Titeln, Jost). Skins bauen auf dem hellen Standard-Layout auf (data-theme wird entfernt, festes
+  Aussehen), ersetzen Tokens (`--field`, `--bg`, `--brand`, `--leaf`, Kochmodus `--cBg … --cOnLeaf`, optional `--statusBar`)
+  mit Selektoren `html.skin-x:not(._a):not(._b):not(._c):not(._d)` (Spezifität über den Standard-Regeln). Schriften selbst
+  gehostet (OFL, npm @fontsource): VT323, Pacifico, Cabin Sketch, Playfair Display, UnifrakturMaguntia, Orbitron, Caveat, Jost.
+  `tools/flows.js` schaltet jeden Skin einmal durch. Neue Bedienelemente in allen Skins ansehen (`skinshots.js`-Ablauf:
+  iPhone-Screenshots je Skin von Start, Rezeptliste, Rezept, Kochmodus, Einkaufsliste).
+- **Retro-Modus (Abschnitt 36, `html.retro`, Skin „Retro“):** zusätzlich als verstecktes Extra: Startseite 5× schnell auf
+  Logo/„Tobis Kochbuch“ tippen schaltet Retro an/aus (Hinweis mit Rückgängig).
   Graue Fenster mit harten Kanten und schwarzem Versatz, weiße Lesefelder, Navy-Titelleisten, Gelb = Hauptaktion,
   Lila = gedrückte Auswahl, Petrol = aktiver Tab, Pink = Hauptkategorie; eckig, kein Blur. Schriften Host Grotesk /
   IBM Plex Sans / IBM Plex Mono (selbst gehostet aus npm `@fontsource…`, OFL, nicht vorgeladen). Gilt hell und dunkel gleich.

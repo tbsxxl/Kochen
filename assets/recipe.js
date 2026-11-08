@@ -510,12 +510,35 @@ const cookOverlay = $("#cookOverlay");
       .slice(0, 30);
   }
 
+  // Skin „Terminal“: Schritt erscheint Zeichen für Zeichen (Antippen zeigt sofort alles; nicht bei „Bewegung reduzieren“)
+  let typeTimer = null;
+  function typeStep(el){
+    clearInterval(typeTimer);
+    if(!document.documentElement.classList.contains('skin-terminal') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = []; for(let n; (n = walker.nextNode());) nodes.push([n, n.textContent]);
+    nodes.forEach(([n])=> n.textContent = '');
+    el.setAttribute('aria-busy', 'true'); el.classList.add('isTyping');
+    let i = 0, pos = 0;
+    const finish = ()=>{ clearInterval(typeTimer); nodes.forEach(([n, t])=> n.textContent = t); el.removeAttribute('aria-busy'); el.classList.remove('isTyping'); el.removeEventListener('click', finish, true); };
+    el.addEventListener('click', finish, true);
+    typeTimer = setInterval(()=>{
+      for(let k = 0; k < 3; k++){
+        if(i >= nodes.length) return finish();
+        const [n, t] = nodes[i];
+        n.textContent = t.slice(0, ++pos);
+        if(pos >= t.length){ i++; pos = 0; }
+      }
+    }, 16);
+  }
+
   function renderCookStep(){
     if(!cookStepText || !cookStepPill) return;
     const total = steps.length || 1;
     stepIdx = Math.max(0, Math.min(total-1, stepIdx));
     if(T) cookStepText.innerHTML = T.linkify(steps[stepIdx] || '—');
     else cookStepText.textContent = steps[stepIdx] || '—';
+    typeStep(cookStepText);
     cookStepPill.textContent = `${stepIdx+1}/${total}`;
     cookStepPill.setAttribute('aria-label', `Schritt ${stepIdx+1} von ${total}`);
     if(cookOverlay?.classList.contains('open')) saveCookProgress();
