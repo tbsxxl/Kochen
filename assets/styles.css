@@ -2687,17 +2687,9 @@ html.retro body::before{background:#000080}
 :root:not(.retro) .homeEmptyIcon svg{width:24px;height:24px}
 
 /* ==========================================================================
-   45. Geschirrtuch-Streifen (Nov. 2026, Wahl des Besitzers „A“): zwei feine weiße Linien quer über den unteren Rand
-   des grünen Felds, kurz bevor das Blatt beginnt (4 px + 2 px, 55 % Weiß). Startseite unter den Schnellknöpfen,
-   Listenseiten unter Titel bzw. Suche. Abstand zur Blattkante überall 14 px. Retro-Modus ohne.
+   45. Geschirrtuch-Streifen am Feldrand: wieder entfernt (wirkte unruhig, Besitzer Nov. 2026).
+   46. Heute-Karte: Symbole der Infozeile auf dem Foto hell wie der Text (Abschnitt 37 hatte sie grau gemacht).
    ========================================================================== */
-:root:not(.retro) body.fieldPage .pageTitleBlock{padding-bottom:62px}
-:root:not(.retro) body.layout-home .homeQuick{position:relative;padding-bottom:24px}
-:root:not(.retro) body.layout-home .homeToday{margin-top:14px}
-:root:not(.retro) body.fieldPage .pageTitleBlock::after,
-:root:not(.retro) body.layout-home .homeQuick::after{content:"";position:absolute;left:calc(50% - 50vw);width:100vw;height:10px;pointer-events:none;
-  background:linear-gradient(to bottom, rgba(255,255,255,.55) 0 4px, transparent 4px 8px, rgba(255,255,255,.55) 8px 10px)}
-:root:not(.retro) body.fieldPage .pageTitleBlock::after{bottom:38px}
-:root:not(.retro) body.layout-home .homeQuick::after{bottom:0}
+.homeFeatured .recipeMeta .metaIcon,.homeFeatured .recipeMeta .metaRating{color:inherit}
 /* Datum auf der Startseite: höchstens so groß, dass „7. November“ in eine Zeile passt (auch bei großer Schrift) */
 :root:not(.retro) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(1.9rem, 8.5vw, 2.4rem), 10.5vw);line-height:1.08}
