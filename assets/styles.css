@@ -3098,3 +3098,110 @@ html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlertIcon{display:n
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlertSub,html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlertLabel{color:#4E473E !important}
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlertBtn:not(.primary){background:rgba(40,36,30,.08) !important;color:#221E19 !important}
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlertBtn.primary{background:#7D1C1C !important;color:#F6EFE3 !important}
+
+/* ==== 10. Erkennbare Welten (Nov. 2026, Wunsch des Besitzers „man soll die Serie erkennen“): selbst gezeichnete Motive
+   im Kopfbereich (.skinScene aus assets/skins.js, erstes Kind von body, z-index -1 über dem Feld) und Verhalten je Skin.
+   Bewegung nur im Kopf; bei „Bewegung reduzieren“ steht alles still. ==== */
+html.skin:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{box-shadow:none}
+.skinScene{position:absolute;z-index:-1;top:0;left:0;right:0;pointer-events:none;overflow:hidden}
+.skinScene svg{position:absolute;display:block}
+@media (prefers-reduced-motion: reduce){ .skinScene *,.skinScene{animation:none !important} }
+.tubePod{position:fixed;z-index:9000;width:18px;height:18px;border-radius:9px;pointer-events:none;
+  background:radial-gradient(circle at 35% 35%, #FFFFFF 0 18%, #FF8A3D 40%, #D9480F 100%);box-shadow:0 0 0 3px rgba(127,224,192,.6)}
+
+/* Nordwall: Karte und Kompass; Wappenbanner je Hauptzutat auf den Karten; Rabe bringt den Timer-Brief */
+.skinScene-nordwall .scMap{left:0;bottom:24px;width:100%;height:60%}
+.skinScene-nordwall .scCompass{right:max(12px, calc(50% - 640px));top:calc(env(safe-area-inset-top) + 66px);width:112px;height:112px;opacity:.75}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein]{position:relative}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein]::before{content:"";position:absolute;z-index:3;left:12px;top:0;width:34px;height:50px;pointer-events:none;
+  clip-path:polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);box-shadow:none;
+  background:var(--sigil) center 42%/22px 22px no-repeat, linear-gradient(to bottom, rgba(0,0,0,.25), transparent 30%), var(--banner, #7D1C1C)}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein="rind"],html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein="hack"]{--banner:#4E5862;--sigil:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 3l4 5h8l4-5-1 8 2 3-4 1-3 6h-4l-3-6-4-1 2-3z' fill='%23ECE6DA'/%3E%3Ccircle cx='9.5' cy='11' r='1' fill='%234E5862'/%3E%3Ccircle cx='14.5' cy='11' r='1' fill='%234E5862'/%3E%3C/svg%3E")}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein="schwein"],html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein="ente"]{--banner:#7D1C1C;--sigil:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23E2B84F'%3E%3Cpath d='M12 2l2 3 3-2 0 4 4 0-2 3 3 2-3 2 2 3-4 0 0 4-3-2-2 3-2-3-3 2 0-4-4 0 2-3-3-2 3-2-2-3 4 0 0-4 3 2z'/%3E%3C/g%3E%3Ccircle cx='12' cy='12' r='5' fill='%237D1C1C'/%3E%3Cpath d='M10 11h1M13 11h1M11 14h2' stroke='%23E2B84F' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E")}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein="haehnchen"]{--banner:#2E4A6B;--sigil:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 6c1.5 0 2.5 1 2.5 2.5L22 6l-5 6 4 0-6 3-1 6-2-4-2 4-1-6-6-3 4 0-5-6 7.5 2.5C9.5 7 10.5 6 12 6z' fill='%23ECE6DA'/%3E%3C/svg%3E")}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein="fisch"]{--banner:#1F3B33;--sigil:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='7' rx='5' ry='4.5' fill='%23C9A55A'/%3E%3Cg fill='none' stroke='%23C9A55A' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M8 10c-2 4-5 5-6 9M10 11c-1 4-2 6-1 10M14 11c1 4 2 6 1 10M16 10c2 4 5 5 6 9'/%3E%3C/g%3E%3C/svg%3E")}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein="veg"]{--banner:#3E5A2E;--sigil:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23E2B84F'%3E%3Ccircle cx='12' cy='8' r='3.2'/%3E%3Ccircle cx='8.5' cy='10.5' r='3.2'/%3E%3Ccircle cx='15.5' cy='10.5' r='3.2'/%3E%3Ccircle cx='10' cy='14' r='3.2'/%3E%3Ccircle cx='14' cy='14' r='3.2'/%3E%3C/g%3E%3Ccircle cx='12' cy='11.5' r='2' fill='%233E5A2E'/%3E%3Cpath d='M12 17v5M12 20l-3-2M12 20l3-2' stroke='%23E2B84F' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E")}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlert .timerAlertCard::after{content:"";position:absolute;right:18px;top:-58px;width:64px;height:48px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 48'%3E%3Cpath d='M2 22c10-10 22-14 30-8 2-6 8-10 14-9l8-4-4 7c4 2 6 6 6 9l-8-2c-2 4-6 8-12 10l6 14-10-9-4 10-2-13C18 28 8 30 2 22z' fill='%23111'/%3E%3Ccircle cx='48' cy='9' r='1.3' fill='%23ddd'/%3E%3C/svg%3E") center/contain no-repeat;
+  transform-origin:50% 100%}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlert.open .timerAlertCard::after{animation:ravenIn .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes ravenIn{from{transform:translate(-160px,-120px) rotate(-18deg) scale(.6);opacity:0}to{transform:none;opacity:1}}
+
+/* Zauberschule: Sternenhimmel mit schwebenden Kerzen; Fotos atmen; Fußspuren als Fortschritt */
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d),html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body{--field:#151A36;--onField:#F4E7C8;--onField2:rgba(244,231,200,.82);--fieldFill:rgba(244,231,200,.12)}
+.skinScene-zauberschule .scStars{position:absolute;inset:0;
+  background:radial-gradient(1px 1px at 12% 20%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 28% 62%, #fff 50%, transparent 52%),
+    radial-gradient(1.5px 1.5px at 44% 34%, #F4E7C8 50%, transparent 52%), radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 52%),
+    radial-gradient(1px 1px at 77% 54%, #fff 50%, transparent 52%), radial-gradient(1.5px 1.5px at 88% 26%, #F4E7C8 50%, transparent 52%),
+    radial-gradient(1px 1px at 6% 78%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 52% 80%, #fff 50%, transparent 52%),
+    radial-gradient(1px 1px at 95% 72%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 36% 8%, #fff 50%, transparent 52%);
+  opacity:.7}
+.skinScene-zauberschule .scCandle{position:absolute;width:7px;height:26px;border-radius:2px;background:linear-gradient(to right, #E9DFC6, #FFF8E6 45%, #CFC3A4);
+  box-shadow:0 0 0 1px rgba(0,0,0,.08);animation:candleFloat 5s ease-in-out var(--d) infinite alternate}
+.skinScene-zauberschule .scCandle::before{content:"";position:absolute;left:50%;top:-11px;width:7px;height:11px;margin-left:-3.5px;border-radius:50% 50% 45% 45% / 60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 70%, #FFF6C9 0 30%, #FFC24A 55%, rgba(255,140,40,0) 75%);box-shadow:0 0 14px 4px rgba(255,190,80,.35);
+  animation:flameFlick 1.6s ease-in-out var(--d) infinite alternate}
+@keyframes candleFloat{to{transform:translateY(-8px)}}
+@keyframes flameFlick{to{transform:scale(.88, 1.08);opacity:.85}}
+@media (prefers-reduced-motion: no-preference){
+  html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeFeatured .rcImg img,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .recipePageHero .recipeHeroImg{animation:photoBreathe 9s ease-in-out infinite alternate}
+}
+@keyframes photoBreathe{to{transform:scale(1.035)}}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookProgress{position:relative;height:22px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22'%3E%3Cg fill='%236E1A2A' opacity='.18'%3E%3Cellipse cx='7' cy='7' rx='2.6' ry='4'/%3E%3Cellipse cx='21' cy='15' rx='2.6' ry='4'/%3E%3C/g%3E%3C/svg%3E") 0 0/28px 22px repeat-x !important;border-radius:0}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookProgress .cookProgressBar{opacity:0}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookProgress::after{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(var(--p, 0) * 100%);transition:width .4s var(--ease);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22'%3E%3Cg fill='%237A5A12'%3E%3Cellipse cx='7' cy='7' rx='2.6' ry='4'/%3E%3Ccircle cx='7' cy='1.6' r='1'/%3E%3Cellipse cx='21' cy='15' rx='2.6' ry='4'/%3E%3Ccircle cx='21' cy='9.6' r='1'/%3E%3C/g%3E%3C/svg%3E") 0 0/28px 22px repeat-x}
+
+/* Jahr 3000: Skyline mit Röhren; Tab-Leiste als Glasröhre */
+.skinScene-jahr3000 .scSkyline{left:0;bottom:24px;width:100%;height:84px;opacity:.75}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#3B2A6B !important;box-shadow:inset 0 7px 8px -5px rgba(255,255,255,.55), inset 0 -5px 8px -3px rgba(0,0,0,.35), 0 0 0 3px #7FE0C0, 0 8px 18px rgba(30,24,56,.3) !important}
+
+/* Zwei Städte: Hex-Kristalle oben rechts, Farbspritzer am Feldrand; „Kochen“ leuchtet wie ein Kristall */
+.skinScene-zweistaedte .scHex{right:max(8px, calc(50% - 640px));top:calc(env(safe-area-inset-top) + 74px);width:104px;height:104px;filter:drop-shadow(0 0 14px rgba(95,212,201,.55))}
+.skinScene-zweistaedte .scSplash{left:0;bottom:26px;width:100%;height:56px;opacity:.9}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn{background:linear-gradient(to bottom, #6FE6F2, #2A9DD8) !important;color:#08202B !important;box-shadow:0 0 18px rgba(95,212,201,.55), inset 0 1px 0 rgba(255,255,255,.5) !important}
+
+/* Die Insel: Vorspann-Titel (weiße, gesperrte Serifenschrift taucht aus dem Dunkel auf), Strand mit Palmen, Hieroglyphen beim Timer-Ablauf */
+html.skin-insel:not(._a):not(._b):not(._c):not(._d),html.skin-insel:not(._a):not(._b):not(._c):not(._d) body{--field:#050607;--onField:#F2F2EE;--onField2:rgba(242,242,238,.72);--fieldFill:rgba(255,255,255,.12);--statusBar:#050607}
+.skinScene-insel{background:linear-gradient(to bottom, #050607 30%, #10293A 72%, #24506A)}
+.skinScene-insel::before{content:"";position:absolute;right:18%;top:calc(env(safe-area-inset-top) + 58px);width:34px;height:34px;border-radius:50%;background:#E9E4D2;box-shadow:0 0 30px 8px rgba(233,228,210,.18);opacity:.85}
+.skinScene-insel .scIsland{left:0;bottom:24px;width:100%;height:110px}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle){font-family:"Times New Roman", Times, Georgia, serif;font-weight:400;letter-spacing:.14em;color:#F2F2EE}
+@media (prefers-reduced-motion: no-preference){
+  html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle){animation:islandTitle 2.2s cubic-bezier(.2,.7,.2,1) both}
+}
+@keyframes islandTitle{from{opacity:0;filter:blur(6px);transform:scale(1.35) translateZ(0)}to{opacity:1;filter:none;transform:none}}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .cookTimer.isDone .cookTimerTime{color:transparent !important;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 24'%3E%3Cg fill='none' stroke='%23E2372B' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 20V4h8M10 12h6'/%3E%3Ccircle cx='28' cy='12' r='6'/%3E%3Cpath d='M28 6v12'/%3E%3Cpath d='M42 20l6-16 6 16M44 14h8'/%3E%3Cpath d='M62 4v16M62 12c6-8 10 0 4 8'/%3E%3Cpath d='M80 6c-4 0-4 6 0 6s4 6 0 6M88 4v16'/%3E%3C/g%3E%3C/svg%3E") center/86% 70% no-repeat, #0B0B0A !important}
+
+/* Akte: Sturm mit Regen, Leuchtturm mit kreisendem Lichtkegel; Mappen nummeriert, „Gekocht“-Stempel */
+html.skin-akte:not(._a):not(._b):not(._c):not(._d),html.skin-akte:not(._a):not(._b):not(._c):not(._d) body{--field:#1E2933}
+.skinScene-akte{background:radial-gradient(ellipse 60% 40% at 20% 10%, rgba(120,140,160,.25), transparent 70%), radial-gradient(ellipse 50% 35% at 75% 25%, rgba(90,110,130,.22), transparent 70%)}
+.skinScene-akte .scRain{position:absolute;inset:0;background:repeating-linear-gradient(105deg, rgba(220,230,240,.13) 0 1px, transparent 1px 11px);
+  background-size:200% 200%;animation:rainFall .7s linear infinite}
+@keyframes rainFall{to{background-position:-22px 60px}}
+.skinScene-akte .scTower{right:max(14px, calc(50% - 630px));bottom:24px;width:60px;height:150px}
+.skinScene-akte .scBeam{position:absolute;right:calc(max(14px, calc(50% - 630px)) + 30px);bottom:calc(24px + 150px * .68);width:0;height:0}
+.skinScene-akte .scBeam::before{content:"";position:absolute;left:-260px;top:-260px;width:520px;height:520px;border-radius:50%;
+  background:conic-gradient(from 0deg, rgba(244,227,161,.32) 0deg, rgba(244,227,161,0) 18deg, rgba(244,227,161,0) 342deg, rgba(244,227,161,.32) 360deg);
+  animation:beamTurn 6s linear infinite}
+@keyframes beamTurn{to{transform:rotate(360deg)}}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid{counter-reset:akte}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .linkCard{counter-increment:akte}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .recipeCard .rcBody::before{content:"Akte Nr. " counter(akte, decimal-leading-zero);display:block;font-family:var(--fontDisplay);font-size:var(--fs12);color:#5A4A2A;margin-bottom:2px}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) :is(.grid,.hScroll) .recipeCard.wasCooked .rcImg::after{content:"Gekocht";position:absolute;z-index:4;right:10px;top:12px;padding:2px 8px;border:2.5px solid #A3262A;border-radius:4px;
+  color:#A3262A;background:rgba(236,239,241,.82);font-family:var(--fontDisplay);font-size:var(--fs14);transform:rotate(-9deg);letter-spacing:.06em}
+
+/* Brigade: Wärmelampen über dem Pass, Bon-Leiste mit Zetteln */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d),html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body{--field:#1E2226}
+.skinScene-brigade .scLamps{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 0px);display:flex;justify-content:space-around}
+.skinScene-brigade .scLamp{position:relative;width:64px;height:24px;border-radius:0 0 30px 30px;background:linear-gradient(to bottom, #3A4046, #22272B);box-shadow:0 1px 0 rgba(255,255,255,.08)}
+.skinScene-brigade .scLamp::before{content:"";position:absolute;left:50%;top:6px;width:4px;height:0;margin-left:-2px}
+.skinScene-brigade .scLamp::after{content:"";position:absolute;left:50%;top:20px;width:220px;height:200px;margin-left:-110px;
+  background:radial-gradient(ellipse 50% 60% at 50% 0, rgba(255,150,60,.30), rgba(255,120,40,.10) 50%, transparent 75%)}
+.skinScene-brigade .scRail{position:absolute;left:0;right:0;bottom:30px;height:8px;background:linear-gradient(to bottom, #EEF0F2, #9AA1A7);box-shadow:0 2px 4px rgba(0,0,0,.35);
+  display:flex;justify-content:flex-end;gap:10px;padding-right:max(16px, calc(50% - 620px))}
+.skinScene-brigade .scRail span{width:40px;height:30px;margin-top:3px;background:#FAFAF7;box-shadow:0 2px 4px rgba(0,0,0,.25);
+  -webkit-mask:radial-gradient(circle at 4px 100%, transparent 3px, #000 3.5px) 0 0/8px 100% repeat-x;mask:radial-gradient(circle at 4px 100%, transparent 3px, #000 3.5px) 0 0/8px 100% repeat-x}
+.skinScene-brigade .scRail span:nth-child(2){transform:rotate(3deg)}
+.skinScene-brigade .scRail span:nth-child(3){transform:rotate(-2deg)}

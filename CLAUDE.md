@@ -187,6 +187,19 @@ getrennt (Wunsch des Besitzers).
   Reiter; Bewertung als Stempel), **brigade** (The Bear: Edelstahl, Malerband-Etiketten mit Permanent Marker, Einkaufsliste
   heißt „Mise en place“; Kochschritt als Bon an der Leiste). `body[data-page]` (slugify der Adresse) für seitenbezogene Regeln.
   Kreidetafel, Zeitung, Aqua, Synthwave und Kladde hat der Besitzer gestrichen.
+  **Erkennbare Welten (Wunsch „man soll die Serie erkennen“, nicht nur Farbe):** `assets/skins.js` (auf jeder Seite) setzt
+  auf Feld-Seiten eine selbst gezeichnete Szene `.skinScene` als erstes Kind von `body` (z-index -1, Höhe bis Blattkante;
+  `.pageTitleBlock` hat in Skins keinen Feld-Schatten, das Feld kommt vom `html`-Hintergrund) und steuert das Verhalten:
+  Nordwall = Karte + Kompassrose, Wappenbanner je Hauptzutat auf Karten (`data-protein` aus beiden Kartendateien:
+  Wolf = Rind/Hack, Löwe = Schwein/Ente, Falke = Hähnchen, Kraken = Fisch, Rose = vegetarisch), Rabe fliegt zum
+  Timer-Brief; Zauberschule = Sternenhimmel mit schwebenden Kerzen (Feld Nachtblau), Fotos atmen leicht, Fortschritt im
+  Kochmodus als Fußspuren (`--p` aus dem scaleX der Leiste); Jahr 3000 = Skyline mit Röhrenbahn und fahrender Kapsel,
+  Datum „… 3026“, „Zur Liste“ schickt eine Kapsel zum Listen-Tab; Zwei Städte = leuchtende Hex-Kristalle, Farbspritzer,
+  „Kochen“ wie ein blauer Kristall; Die Insel = Vorspann-Titel (weiße gesperrte Serife taucht aus dem Dunkel auf),
+  Nachtstrand mit Mond, Palmen und Wrackteil, Hieroglyphen beim Timer-Ablauf; Akte = Sturm mit Regen, Leuchtturm mit
+  kreisendem Lichtkegel, Karten „Akte Nr. 01 …“, Stempel „Gekocht“ (aus `kochbuch.stats`); Brigade = Wärmelampen, Bon-Leiste,
+  Küchenrufe als Hinweis beim Abhaken („Gehört, Chef“, „Hinter dir“, „Ecke“ …). Bewegung nur im Kopf, bei „Bewegung
+  reduzieren“ alles still.
   **Regeln (nach `unslop`, Wunsch „Bilder müssen erkennbar sein“):** Fotos in jedem Skin unverfälscht (keine Filter),
   der Skin prägt nur die Oberfläche, jedes Erkennungsdetail soll beim Kochen nützen.
   Aufbau: helles Standard-Layout (data-theme wird entfernt, festes Aussehen), Tokens (`--field`, `--bg`, `--brand`, `--leaf`,
