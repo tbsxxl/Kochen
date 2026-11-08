@@ -172,6 +172,7 @@ getrennt (Wunsch des Besitzers).
   IBM Plex Sans / IBM Plex Mono (selbst gehostet aus npm `@fontsource…`, OFL, nicht vorgeladen). Gilt hell und dunkel gleich.
   Logo im Retro-Modus: Pixel-Version `assets/logo-retro.svg` (aus dem echten Logo gerastert, 27 × 13 Pixel, gleiche Farben,
   schwarze Kontur, Lücke zwischen den Seiten offen; `.logoRetro` auf der Startseite, `image-rendering:pixelated`).
+  Heute-Karte im Retro-Modus mit 16 px Innenabstand; `html` im Retro-Modus Navy (Safari färbt den Bereich unter der Uhr danach).
 - Rezeptliste: „Raster“/„Karten“ unter „Mehr“ speichert jetzt beide Werte (vorher sprang „Raster“ zurück).
   Bewertung ★ auf Karten zeigt alle eigenen Bewertungen 1–5 (nicht mehr nur ab 4), damit unbewertet ≠ schlecht.
 - **Vorstufe „Kaffee & Tangerine“ (Abschnitt 34, Farben durch 35 ersetzt):** nach einer Vorlage des Besitzers
