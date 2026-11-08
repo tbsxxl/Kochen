@@ -2699,3 +2699,7 @@ html.retro body::before{background:#000080}
 html.retro .homeBrand .logoLight,html.retro .homeBrand .logoDark{display:none !important}
 html.retro .homeBrand .logoRetro{display:block;width:32px;height:32px;image-rendering:pixelated}
 html.retro body .homeGreetingTitle.homeGreetingTitle{font-size:min(2.6rem, 9.5vw);white-space:pre-line}
+/* Retro: Heute-Karte mit Innenabstand für Titel und Infozeile; Bereich unter der Uhr (Safari) in Navy */
+html.retro .homeFeatured .rcBody{padding:16px 16px 14px}
+html.retro .homeFeatured .heroOverlayCat{left:16px;top:16px}
+html.retro{background-color:#000080}
