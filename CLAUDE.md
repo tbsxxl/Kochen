@@ -183,6 +183,16 @@ getrennt (Wunsch des Besitzers).
   Aussehen), ersetzen Tokens (`--field`, `--bg`, `--brand`, `--leaf`, Kochmodus `--cBg … --cOnLeaf`, optional `--statusBar`)
   mit Selektoren `html.skin-x:not(._a):not(._b):not(._c):not(._d)` (Spezifität über den Standard-Regeln). Schriften selbst
   gehostet (OFL, npm @fontsource): VT323, Pacifico, Cabin Sketch, Playfair Display, UnifrakturMaguntia, Orbitron, Caveat, Jost.
+  **Nach `unslop` (Wunsch des Besitzers „Bilder müssen erkennbar sein“, „ein paar sehen nicht besonders/nützlich aus“):**
+  Fotos sind in jedem Skin unverfälscht (kein Grün-/Schwarz-Weiß-Filter mehr), der Skin prägt nur die Oberfläche, und jedes
+  Erkennungsdetail soll beim Kochen nützen. **bauhaus** = Kantinen-Speiseplan: Oberfläche nur Schwarz/Weiß, rotes Quadrat =
+  Fleisch, gelber Kreis = vegetarisch, blaues Dreieck = Fisch (`data-kind` auf `.recipeCard`, Regel in `recipe-card.html`
+  und `kindOf()` in `assets/cards.js`; Legende `.kindLegend` in `_includes/recipe-search.html`). **aqua** = Gel nur auf
+  „Kochen“/„Weiter“, beide extra groß (nasse Hände), Blasen nur im laufenden Timer, sonst ruhiges Silber. **synthwave** =
+  Abendmodus (gedämpftes Violett, ein Akzent Pink, Leuchten nur an „Kochen“ und laufendem Timer, Sonne auf der Startseite
+  nach Uhrzeit über `--sunY` aus `_layouts/home.html`, nachts unter dem Horizont). **kladde** = Omas Rezeptheft
+  (Handschrift nur Seitentitel, Rezeptname, „Meine Notizen“ inkl. Notizfeld; gezeichnete Abhak-Kästchen; Klebeband nur am
+  großen Foto). Terminal ohne Leuchten/„-rw-“, Diner leuchtet nur im Seitentitel, Kreidetafel ohne Kreidewolken.
   `tools/flows.js` schaltet jeden Skin einmal durch. Neue Bedienelemente in allen Skins ansehen (`skinshots.js`-Ablauf:
   iPhone-Screenshots je Skin von Start, Rezeptliste, Rezept, Kochmodus, Einkaufsliste).
 - **Retro-Modus (Abschnitt 36, `html.retro`, Skin „Retro“):** zusätzlich als verstecktes Extra: Startseite 5× schnell auf

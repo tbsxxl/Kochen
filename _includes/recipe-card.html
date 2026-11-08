@@ -14,8 +14,16 @@
 {%- capture hay %}{{ r.title }} {{ r.subtitle }} {{ r.source }} {{ r.category }} {{ r.categories | join: " " }} {{ r.time }} {{ r.servings }} {{ tags }} {{ author }} {{ ings }}{% endcapture -%}
 {%- capture flags %}{% if r.category == "Schnell" or r.categories contains "Schnell" %} schnell{% endif %}{% assign tagsDown = tags | downcase %}{% if r.category == "Vegetarisch" or r.categories contains "Vegetarisch" or tagsDown contains "vegetarisch" or tagsDown contains "vegan" %} veg{% endif %}{% endcapture -%}
 {%- endif -%}
+{%- comment -%} Hauptzutat als Art (Skin „Bauhaus“: Kantinen-Farbcode Rot = Fleisch, Gelb = vegetarisch, Blau = Fisch) {%- endcomment -%}
+{%- capture allcats %}|{{ r.category }}|{{ r.categories | join: "|" }}|{% endcapture -%}
+{%- assign kTags = r.tags | join: " " | downcase -%}
+{%- assign kind = "" -%}
+{%- if allcats contains "|Fisch|" -%}{%- assign kind = "fisch" -%}
+{%- elsif allcats contains "|Hähnchen|" or allcats contains "|Rind|" or allcats contains "|Hackfleisch|" or allcats contains "|Schwein|" or allcats contains "|Ente|" -%}{%- assign kind = "fleisch" -%}
+{%- elsif allcats contains "|Vegetarisch|" or kTags contains "vegetarisch" or kTags contains "vegan" -%}{%- assign kind = "veg" -%}
+{%- endif -%}
 <a class="linkCard{% if include.hcard %} hCard homeFavCard{% endif %}" href="{{ rid }}"{% if include.index %} data-flags="{{ flags | strip }}" data-recipe-card data-recipe-id="{{ rid }}" data-title="{{ r.title | escape }}" data-category="{{ r.category | escape }}" data-categories="|{{ r.categories | join: '|' | escape }}|" data-author="{{ author | escape }}" data-haystack="{{ hay | escape }}"{% endif %}>
-  <div class="card recipeCard cardHover">
+  <div class="card recipeCard cardHover"{% if kind != "" %} data-kind="{{ kind }}"{% endif %}>
     {%- if r.image %}
     <div class="rcImg">
       <img src="{{ r.image | relative_url }}?v={{ site.image_version }}" srcset="{% include srcset.html src=r.image %}" sizes="(min-width:900px) 300px, {% if include.hcard %}78vw{% else %}46vw{% endif %}" alt=""{% if include.eager %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">

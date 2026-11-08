@@ -2790,7 +2790,7 @@ html.skin:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookChk::after{backg
 html.retro .skinTile .skinSwatch{box-shadow:var(--rSink)}
 html.retro .skinTile.active .skinSwatch{box-shadow:var(--rSink), 0 0 0 3px #6600ff}
 
-/* ==== 1. Terminal: grüne Leuchtschrift auf Schwarz, Bildschirmzeilen, blinkender Cursor ==== */
+/* ==== 1. Terminal: grüne Schrift auf Schwarz, feine Bildschirmzeilen, blinkender Cursor; Fotos in Farbe ==== */
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d),html.skin-terminal:not(._a):not(._b):not(._c):not(._d) body{
   --field:#000000;--onField:#5CFF8A;--onField2:#3FD46E;--fieldFill:rgba(92,255,138,.10);
   --bg:#050A06;--surface:#0B140D;--surface2:#102014;--fill:rgba(92,255,138,.09);--line:rgba(92,255,138,.28);--lineStrong:rgba(92,255,138,.55);
@@ -2804,9 +2804,9 @@ html.skin-terminal:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#050A06
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#050A06;--cCard:#0B140D;--cFill:rgba(92,255,138,.10);--cLine:rgba(92,255,138,.25);--cText:#7DFFA0;--cSub:#4CC872;--cLeaf:#33FF66;--cOnLeaf:#001A08}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) *,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) *::before,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) *::after{border-radius:0 !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) body::after{content:"";position:fixed;inset:0;z-index:2147483000;pointer-events:none;
-  background:repeating-linear-gradient(to bottom, rgba(0,0,0,.24) 0 1px, transparent 1px 3px)}
+  background:repeating-linear-gradient(to bottom, rgba(0,0,0,.12) 0 1px, transparent 1px 3px)}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact,.ingSection,.catGroupTitle){
-  font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;letter-spacing:0;text-transform:uppercase;text-shadow:0 0 6px rgba(51,255,102,.55)}
+  font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;letter-spacing:0;text-transform:uppercase}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeGreetingTitle{font-size:clamp(2.6rem, 12vw, 3.4rem);line-height:.95}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(2.4rem, 11vw, 3.2rem), 12vw)}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .h2{font-size:1.75rem}
@@ -2816,18 +2816,13 @@ html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1::befo
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1::after,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeGreetingTitle::after{content:"_";animation:termBlink 1.06s steps(1) infinite}
 @keyframes termBlink{50%{opacity:0}}
 @media (prefers-reduced-motion: reduce){ html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1::after,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeGreetingTitle::after{animation:none} }
-html.skin-terminal:not(._a):not(._b):not(._c):not(._d) img{filter:grayscale(1) sepia(1) hue-rotate(72deg) saturate(2.4) brightness(.85) contrast(1.1)}
-html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeBrand img,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .skinSwatch img{filter:none}
-html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .btn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .cookNavBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeQuickBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .filterChip,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .segBtn{text-transform:uppercase;letter-spacing:.04em}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn svg{display:none}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn span::before{content:"[ "}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn span::after{content:" ]"}
-html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .btn.action,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .btn.brandBtn{box-shadow:0 0 12px rgba(51,255,102,.45)}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeActBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .filterChip,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .chip,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .navIconBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .stepBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipePortionStep,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .searchRow,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeQuickBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .segmented,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .profileBadge,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) #recipeBack{
   background:transparent !important;box-shadow:inset 0 0 0 1px var(--line) !important;color:var(--text)}
-html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .ingRow .ingName::before{content:"-rw- ";color:var(--muted)}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeBody ol > li::marker{color:var(--sub)}
-html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .bottomRail{border:1px solid var(--line);box-shadow:0 0 16px rgba(51,255,102,.18)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .bottomRail{border:1px solid var(--line);box-shadow:none}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:var(--brand) !important;color:var(--onBrand) !important}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeFeatured .rcImg::after,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipePageHero::after{background:linear-gradient(to top, rgba(0,8,2,.9) 0%, rgba(0,8,2,.4) 45%, transparent 75%) !important}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .cookStep{font-family:var(--fontUi)}
@@ -2848,7 +2843,7 @@ html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#EAF7F2;--
 html.skin-diner:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#EAF7F2;--cCard:#FFFFFF;--cFill:rgba(179,18,46,.08);--cLine:#B7DDCF;--cText:#1A1A1A;--cSub:#4A4A4A;--cLeaf:#B3122E;--cOnLeaf:#FFFFFF}
 html.skin-diner:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.brandWordmark){
   font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;letter-spacing:0;line-height:1.25}
-html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock .h1,html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreetingTitle,html.skin-diner:not(._a):not(._b):not(._c):not(._d) .recipeHeroText .recipeName,html.skin-diner:not(._a):not(._b):not(._c):not(._d) .homeFeatured .homeFeaturedTitle{
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock .h1,html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreetingTitle{
   color:#FFFFFF;text-shadow:0 0 2px #fff, 0 0 10px #FF6B81, 0 0 22px #FF2D55}
 html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{padding-bottom:64px}
 html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock::after,html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeQuick::after{content:"";position:absolute;left:calc(50% - 50vw);width:100vw;height:16px;
@@ -2880,9 +2875,6 @@ html.skin-kreide:not(._a):not(._b):not(._c):not(._d),html.skin-kreide:not(._a):n
   color-scheme:dark}
 html.skin-kreide:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#2E3633;--surface:#38413D}
 html.skin-kreide:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#2E3633;--cCard:#38413D;--cFill:rgba(255,255,255,.09);--cLine:rgba(255,255,255,.18);--cText:#F1F1EA;--cSub:#C9CEC8;--cLeaf:#F2E27D;--cOnLeaf:#1E2422}
-html.skin-kreide:not(._a):not(._b):not(._c):not(._d) body:not(.fieldPage),html.skin-kreide:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-kreide:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-kreide:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday ~ .section{
-  background-image:radial-gradient(ellipse 60% 40% at 20% 15%, rgba(255,255,255,.05), transparent 70%),
-    radial-gradient(ellipse 50% 35% at 85% 65%, rgba(255,255,255,.04), transparent 70%)}
 html.skin-kreide:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact,.notesTitle){
   font-family:var(--fontDisplay);font-weight:700;letter-spacing:.01em}
 html.skin-kreide:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1,html.skin-kreide:not(._a):not(._b):not(._c):not(._d) .homeGreetingTitle,html.skin-kreide:not(._a):not(._b):not(._c):not(._d) .recipeHeroText .recipeName,html.skin-kreide:not(._a):not(._b):not(._c):not(._d) .homeFeatured .homeFeaturedTitle{color:#F4F4EE;text-shadow:0 0 1px rgba(255,255,255,.5)}
@@ -2898,7 +2890,7 @@ html.skin-kreide:not(._a):not(._b):not(._c):not(._d) .uRow.checked .uName,html.s
 html.skin-kreide:not(._a):not(._b):not(._c):not(._d) .recipeBody ol > li.stepDone{opacity:.65}
 html.skin-kreide:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:rgba(242,226,125,.16) !important}
 
-/* ==== 4. Zeitung: Druckschwarz auf Zeitungspapier, Serifen, Linien, Schwarz-Weiß-Raster (Antippen = Farbe), Zeitungskopf ==== */
+/* ==== 4. Zeitung: Druckschwarz auf Zeitungspapier, Serifen, Linien, Zeitungskopf; Fotos in Farbe ==== */
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d),html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) body{
   --field:#E9E9E4;--onField:#111111;--onField2:#3A3A37;--fieldFill:rgba(0,0,0,.07);--statusBar:#111111;
   --bg:#E9E9E4;--surface:#F3F3EF;--surface2:#FBFBF8;--fill:rgba(0,0,0,.06);--line:#9A9A94;--lineStrong:#111111;
@@ -2914,9 +2906,9 @@ html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) *,html.skin-zeitung:not(._
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .recipeActBtn,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .navIconBtn,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .stepBtn,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .recipePortionStep,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .authorAvatar,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .profileBadge,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .sheetSwitch,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .sheetSwitch::after,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .star{border-radius:999px !important}
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.notesTitle,.catGroupTitle){
   font-family:var(--fontDisplay);letter-spacing:-.01em}
-html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1{font-weight:900;font-size:clamp(2.4rem, 11vw, 3.2rem);line-height:1;padding-bottom:10px;border-bottom:4px double #111}
-html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .recipeTitle,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .h2{font-weight:800}
-html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .recipeHeroText .recipeName,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .homeFeatured .homeFeaturedTitle{font-weight:900}
+html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1{font-weight:800;font-size:clamp(2.4rem, 11vw, 3.2rem);line-height:1;padding-bottom:10px;border-bottom:4px double #111}
+html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .recipeTitle,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .h2{font-weight:700}
+html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .recipeHeroText .recipeName,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .homeFeatured .homeFeaturedTitle{font-weight:800}
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-top:1px solid #111}
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .homeBrand{justify-content:center;position:relative;padding:4px 0 8px;border-bottom:1px solid #111}
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .homeBrand img{display:none !important}
@@ -2927,161 +2919,123 @@ html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) body .homeGreetingTitle::a
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .homeGreetingSub{font-family:var(--fontDisplay);font-size:1.6rem;font-weight:800;color:#111;text-align:center}
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeQuickBtn,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) body.layout-home .searchRowCompact,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) body.fieldPage .fieldExtra .searchRow{background:#F7F7F3;box-shadow:inset 0 0 0 1px #111}
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .grid > *{border-top:1px solid #111;padding-top:12px}
-html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .rcImg img{filter:grayscale(1) contrast(1.15);transition:filter .3s var(--ease)}
-html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply;
-  background:radial-gradient(circle, rgba(0,0,0,.32) .9px, transparent 1.4px) 0 0/4px 4px;transition:opacity .3s var(--ease)}
-html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .linkCard.isPressed .rcImg img,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .linkCard:active .rcImg img{filter:none}
-html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .linkCard.isPressed .rcImg::before,html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .linkCard:active .rcImg::before{opacity:0}
-@media (hover:hover) and (pointer:fine){ html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .linkCard:hover .rcImg img{filter:none} html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .linkCard:hover .rcImg::before{opacity:0} }
+html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px #111}
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#F3F3EF !important;box-shadow:0 0 0 1px #111, 0 4px 0 #111 !important;border:0}
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:#111 !important;color:#F3F3EF !important}
 html.skin-zeitung:not(._a):not(._b):not(._c):not(._d) body.fieldPage .homeBrand .logoLight{display:none}
 
-/* ==== 5. Aqua 2000: Gel-Knöpfe in Blau und Silber, gebürstetes Metall, Glanzlichter, Blasen im Fortschritt ==== */
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d),html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body{
-  --field:#2A78D4;--onField:#FFFFFF;--onField2:rgba(255,255,255,.9);--fieldFill:rgba(255,255,255,.24);
-  --bg:#E6EAF0;--surface:#FFFFFF;--surface2:#F4F6F9;--fill:#E1E6ED;--line:#C3CBD6;--lineStrong:#8F9AA8;
-  --text:#1B2633;--sub:#4A5666;--sub2:#4A5666;--muted:#5D6878;
-  --brand:#1E6FD6;--onBrand:#FFFFFF;--leaf:#1A62C2;--onLeaf:#FFFFFF;--brandSoft:#D6E6FB;--leafSoft:#D6E6FB;
-  --sel:#1E6FD6;--onSel:#FFFFFF;--accent:#1A62C2;--accentSoft:#D6E6FB;--onAccent:#FFFFFF;--herb:#1E6FD6;--coffee:#1A62C2;
-  --glass:rgba(236,239,243,.94);
-  --fontUi:"Lucida Grande", -apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Lucida Grande", -apple-system, "Inter", sans-serif;
-  --gelBlue:linear-gradient(to bottom, #A6D2FF 0%, #5AA6F5 46%, #2275DE 52%, #4FA6FF 100%);
-  --gelSilver:linear-gradient(to bottom, #FFFFFF 0%, #EEF1F4 46%, #D8DDE4 52%, #F3F5F8 100%);
-  color-scheme:light}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#E6EAF0;--surface:#FFFFFF}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#E6EAF0;--cCard:#FFFFFF;--cFill:#DCE3EC;--cLine:#C3CBD6;--cText:#1B2633;--cSub:#4A5666;--cLeaf:#1E6FD6;--cOnLeaf:#FFFFFF}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body:not(.fieldPage),html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday ~ .section,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookOverlay{
-  background-image:repeating-linear-gradient(to bottom, rgba(255,255,255,.45) 0 1px, rgba(0,0,0,.025) 1px 2px, transparent 2px 3px),
-    linear-gradient(to bottom, #EEF1F5, #DDE2E9)}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle){text-shadow:0 1px 2px rgba(0,30,80,.35)}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .btn.action,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .btn.brandBtn,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookNavBtn.primary,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .filterChip.active,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .segBtn.active,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .tabItem.active,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .pillToggle[aria-pressed="true"]{
-  background:var(--gelBlue) !important;color:#FFFFFF !important;border:1px solid #1857A8;text-shadow:0 -1px 0 rgba(0,0,0,.25);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.75), 0 2px 5px rgba(0,50,120,.3) !important}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .recipeActBtn,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .filterChip:not(.active),html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .chip,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .navIconBtn,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .stepBtn,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .recipePortionStep,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .btn:not(.action):not(.brandBtn),html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .profileBadge,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) #recipeBack,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .segmented{
-  background:var(--gelSilver) !important;color:#1B2633;border:1px solid #A3ABB6;box-shadow:inset 0 1px 0 #fff, 0 1px 3px rgba(0,0,0,.15) !important}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeQuickBtn,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body.layout-home .searchRowCompact,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body.fieldPage .fieldExtra .searchRow,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body.layout-home .profileBadge{
-  background:linear-gradient(to bottom, rgba(255,255,255,.38), rgba(255,255,255,.14) 50%, rgba(255,255,255,.08) 51%, rgba(255,255,255,.2)) !important;
-  border:1px solid rgba(255,255,255,.45);color:#fff}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:var(--gelSilver) !important;border:1px solid #9AA3AF;box-shadow:inset 0 1px 0 #fff, 0 6px 18px rgba(0,30,80,.25) !important}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px #A3ABB6, 0 3px 8px rgba(0,30,80,.2)}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookProgressBar,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookTimerBar,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .nowCookingBar{
-  background:radial-gradient(circle, rgba(255,255,255,.8) 1.2px, transparent 1.8px) 0 0/9px 9px, var(--gelBlue) !important;
-  animation:aquaBubbles 1.4s linear infinite}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookProgress{height:10px}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookTimerBar{height:6px}
-@keyframes aquaBubbles{to{background-position:0 -9px, 0 0}}
-@media (prefers-reduced-motion: reduce){ html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookProgressBar,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookTimerBar,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .nowCookingBar{animation:none} }
+html.skin:not(._a):not(._b):not(._c):not(._d) body.grouped .searchRow{background:var(--surface)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sheet{background:#050A06 !important;box-shadow:0 0 0 1px var(--line) !important}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px var(--line)}
 
-/* ==== 6. Synthwave: Neon-Pink und Türkis auf Violett, Sonne und Gitterboden im Feld ==== */
+/* ==== 5. Aqua 2000 (nach unslop): ruhiges Silber, Gel nur auf „Kochen“ und „Weiter“ – extra groß für nasse Hände;
+   Blasen nur im laufenden Timer; gebürstetes Metall nur an der Tab-Leiste ==== */
+html.skin-aqua:not(._a):not(._b):not(._c):not(._d),html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body{
+  --field:#2A78D4;--onField:#FFFFFF;--onField2:rgba(255,255,255,.9);--fieldFill:rgba(255,255,255,.22);
+  --bg:#ECEFF3;--surface:#FFFFFF;--surface2:#F5F7FA;--fill:#E2E7EE;--line:rgba(27,38,51,.12);--lineStrong:#8F9AA8;
+  --text:#1B2633;--sub:#4A5666;--sub2:#4A5666;--muted:#5D6878;
+  --brand:#1E6FD6;--onBrand:#FFFFFF;--leaf:#1A62C2;--onLeaf:#FFFFFF;--brandSoft:#DCE9FA;--leafSoft:#DCE9FA;
+  --sel:#1A62C2;--onSel:#FFFFFF;--accent:#1A62C2;--accentSoft:#DCE9FA;--onAccent:#FFFFFF;--herb:#1E6FD6;--coffee:#1A62C2;
+  --glass:rgba(240,242,245,.96);
+  --fontUi:"Lucida Grande", -apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Lucida Grande", -apple-system, "Inter", sans-serif;
+  --gelBlue:linear-gradient(to bottom, #8EC4FF 0%, #4A9AF0 48%, #1F6FD8 52%, #3E92F0 100%);
+  color-scheme:light}
+html.skin-aqua:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#ECEFF3;--surface:#FFFFFF}
+html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#ECEFF3;--cCard:#FFFFFF;--cFill:#E2E7EE;--cLine:rgba(27,38,51,.12);--cText:#1B2633;--cSub:#4A5666;--cLeaf:#1E6FD6;--cOnLeaf:#FFFFFF}
+html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn,html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookNavBtn.primary{background:var(--gelBlue) !important;color:#FFFFFF !important;border:1px solid #1857A8;
+  text-shadow:0 -1px 0 rgba(0,0,0,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 2px 4px rgba(0,40,100,.2) !important}
+html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .recipeActions .recipeCookBtn{min-height:56px;font-size:var(--fs18)}
+html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookNavBtn{min-height:64px;font-size:var(--fs18)}
+html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:repeating-linear-gradient(to bottom, rgba(255,255,255,.5) 0 1px, rgba(0,0,0,.025) 1px 2px), linear-gradient(to bottom, #F7F8FA, #DCE1E7) !important;
+  border:1px solid rgba(27,38,51,.18);box-shadow:inset 0 1px 0 #fff, 0 4px 12px rgba(27,38,51,.12) !important}
+html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:#DCE9FA !important;color:#1A62C2 !important}
+html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookTimer:not(.isDone) .cookTimerBar{height:6px;background:radial-gradient(circle, rgba(255,255,255,.85) 1.2px, transparent 1.8px) 0 0/9px 9px, var(--gelBlue) !important;
+  animation:aquaBubbles 1.4s linear infinite}
+@keyframes aquaBubbles{to{background-position:0 -9px, 0 0}}
+@media (prefers-reduced-motion: reduce){ html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookTimerBar{animation:none !important} }
+
+/* ==== 6. Synthwave (nach unslop): Abendmodus – gedämpftes Violett, schont abends die Augen. Ein Akzent (Pink),
+   Leuchten nur am Kochen-Knopf und am laufenden Timer. Die Sonne auf der Startseite steht je nach Uhrzeit
+   (--sunY aus _layouts/home.html; nachts unter dem Horizont) ==== */
 html.skin-synthwave:not(._a):not(._b):not(._c):not(._d),html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body{
-  --field:#2A0B45;--onField:#FFE8FB;--onField2:rgba(255,232,251,.82);--fieldFill:rgba(255,255,255,.12);
-  --bg:#1A0B2E;--surface:#25113F;--surface2:#2F1650;--fill:rgba(255,255,255,.08);--line:rgba(255,61,191,.35);--lineStrong:rgba(255,61,191,.6);
-  --text:#F7EAFF;--sub:#CDB6EA;--sub2:#CDB6EA;--muted:#B39BD6;
-  --brand:#FF3DBF;--onBrand:#1A0B2E;--leaf:#2DE2E6;--onLeaf:#1A0B2E;--brandSoft:rgba(255,61,191,.18);--leafSoft:rgba(45,226,230,.16);
-  --sel:#2DE2E6;--onSel:#1A0B2E;--accent:#2DE2E6;--accentSoft:rgba(45,226,230,.16);--onAccent:#1A0B2E;--herb:#FF3DBF;--coffee:#2F1650;
-  --glass:rgba(26,11,46,.94);--glassLine:rgba(255,61,191,.4);
+  --field:#231830;--onField:#F1E9F7;--onField2:rgba(241,233,247,.78);--fieldFill:rgba(255,255,255,.10);
+  --bg:#17121F;--surface:#211A2C;--surface2:#2A2236;--fill:rgba(255,255,255,.07);--line:rgba(255,255,255,.10);--lineStrong:rgba(255,255,255,.22);
+  --text:#EDE6F5;--sub:#B9AFCB;--sub2:#B9AFCB;--muted:#9F94B3;
+  --brand:#F25CA2;--onBrand:#1F0E19;--leaf:#F48DC0;--onLeaf:#1F0E19;--brandSoft:rgba(242,92,162,.16);--leafSoft:rgba(242,92,162,.16);
+  --sel:#F25CA2;--onSel:#1F0E19;--accent:#F48DC0;--accentSoft:rgba(242,92,162,.16);--onAccent:#1F0E19;--herb:#F25CA2;--coffee:#2A2236;
+  --glass:rgba(23,18,31,.94);--glassLine:rgba(255,255,255,.1);
   --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Synth", "Avenir Next", sans-serif;
   color-scheme:dark}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#1A0B2E;--surface:#25113F}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#1A0B2E;--cCard:#25113F;--cFill:rgba(255,255,255,.08);--cLine:rgba(255,61,191,.3);--cText:#F7EAFF;--cSub:#CDB6EA;--cLeaf:#FF3DBF;--cOnLeaf:#1A0B2E}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact){
-  font-family:var(--fontDisplay);font-weight:800;text-transform:uppercase;letter-spacing:.03em}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .homeGreetingTitle,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .recipeHeroText .recipeName,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .homeFeatured .homeFeaturedTitle{
-  color:#FFFFFF;text-shadow:0 0 6px #FF3DBF, 0 0 18px rgba(255,61,191,.7)}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(1.8rem, 8vw, 2.4rem), 9vw);line-height:1.1}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .recipeTitle,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .h2{font-size:1.15rem;line-height:1.2}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d).listCards .grid .recipeTitle{font-size:1.3rem}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .recipeHeroText .recipeName,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .homeFeatured .homeFeaturedTitle{font-size:min(clamp(1.7rem, 7.5vw, 2.2rem), 40px)}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreeting{position:relative;isolation:isolate}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock::before,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreeting::before{content:"";position:absolute;z-index:-1;right:2px;top:-6px;width:88px;height:88px;border-radius:50%;
-  background:linear-gradient(to bottom, #FFD23F 0%, #FF8A3D 45%, #FF3DBF 100%);
-  -webkit-mask:linear-gradient(to bottom, #000 0 52%, transparent 52% 58%, #000 58% 68%, transparent 68% 74%, #000 74% 82%, transparent 82% 88%, #000 88%);
-  mask:linear-gradient(to bottom, #000 0 52%, transparent 52% 58%, #000 58% 68%, transparent 68% 74%, #000 74% 82%, transparent 82% 88%, #000 88%);
-  box-shadow:0 0 40px rgba(255,61,191,.5);opacity:.95}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{padding-bottom:72px}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock::after,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeQuick::after{content:"";position:absolute;z-index:-1;left:calc(50% - 50vw);width:100vw;height:70px;
-  background:repeating-linear-gradient(to right, rgba(45,226,230,.75) 0 1px, transparent 1px 44px),
-    repeating-linear-gradient(to bottom, rgba(45,226,230,.75) 0 1px, transparent 1px 14px);
-  transform:perspective(140px) rotateX(55deg);transform-origin:50% 100%;
-  -webkit-mask:linear-gradient(to bottom, transparent, #000 60%);mask:linear-gradient(to bottom, transparent, #000 60%)}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock::after{bottom:24px}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeQuick{position:relative;isolation:isolate}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeQuick::after{bottom:-34px}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{margin-top:44px}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .btn.action,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .btn.brandBtn{box-shadow:0 0 14px rgba(255,61,191,.6)}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px rgba(45,226,230,.5), 0 0 16px rgba(45,226,230,.25)}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .bottomRail{border:1px solid rgba(255,61,191,.45);box-shadow:0 0 18px rgba(255,61,191,.3)}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:rgba(45,226,230,.16) !important}
+html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#17121F;--surface:#211A2C}
+html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#17121F;--cCard:#211A2C;--cFill:rgba(255,255,255,.07);--cLine:rgba(255,255,255,.1);--cText:#EDE6F5;--cSub:#B9AFCB;--cLeaf:#F25CA2;--cOnLeaf:#1F0E19}
+html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.brandWordmark){font-family:var(--fontDisplay);font-weight:600;letter-spacing:.02em}
+html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(1.7rem, 7.5vw, 2.2rem), 8.5vw);line-height:1.15}
+html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn,html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) .cookTimer:not(.isDone){box-shadow:0 0 16px rgba(242,92,162,.45)}
+html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreeting{position:relative;isolation:isolate}
+html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreeting::before{content:"";position:absolute;z-index:-1;right:0;top:56px;width:96px;height:64px;
+  border-bottom:1px solid rgba(242,92,162,.6);
+  background:radial-gradient(circle at 50% var(--sunY, 60%), #FFC46B 0, #FF8F6B 20px, #F25CA2 30px, transparent 31px);
+  -webkit-mask:linear-gradient(to bottom, #000 0 62%, transparent 62% 68%, #000 68% 78%, transparent 78% 84%, #000 84%);
+  mask:linear-gradient(to bottom, #000 0 62%, transparent 62% 68%, #000 68% 78%, transparent 78% 84%, #000 84%)}
 
-/* ==== 7. Kochkladde: kariertes Papier, Kugelschreiber-Blau, Handschrift, Fotos mit Klebeband ==== */
+/* ==== 7. Kochkladde (nach unslop): Omas Rezeptheft – kariertes Papier, Tinte; Handschrift nur für Seitentitel,
+   Rezeptname und „Meine Notizen“ (auch das Notizfeld); gezeichnete Abhak-Kästchen; Klebeband nur am großen Foto ==== */
 html.skin-kladde:not(._a):not(._b):not(._c):not(._d),html.skin-kladde:not(._a):not(._b):not(._c):not(._d) body{
   --field:#24356F;--onField:#FFFFFF;--onField2:rgba(255,255,255,.85);--fieldFill:rgba(255,255,255,.18);
-  --bg:#FFFFFF;--surface:#FFFFFF;--surface2:#F5F8FE;--fill:rgba(31,63,191,.07);--line:rgba(31,63,191,.22);--lineStrong:rgba(31,63,191,.45);
+  --bg:#FFFFFF;--surface:#FFFFFF;--surface2:#F5F8FE;--fill:rgba(31,63,191,.07);--line:rgba(27,42,107,.14);--lineStrong:rgba(27,42,107,.35);
   --text:#1B2A6B;--sub:#3B4C8C;--sub2:#3B4C8C;--muted:#55639C;
   --brand:#1F3FBF;--onBrand:#FFFFFF;--leaf:#1F3FBF;--onLeaf:#FFFFFF;--brandSoft:#E2E8FA;--leafSoft:#E2E8FA;
   --sel:#1F3FBF;--onSel:#FFFFFF;--accent:#1F3FBF;--accentSoft:#E2E8FA;--onAccent:#FFFFFF;--herb:#1F3FBF;--coffee:#24356F;
-  --glass:rgba(255,255,255,.94);
+  --glass:rgba(255,255,255,.96);
   --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Kladde", "Bradley Hand", cursive;
-  --kariert:linear-gradient(rgba(70,120,210,.17) 1px, transparent 1px) 0 0/20px 20px, linear-gradient(to right, rgba(70,120,210,.17) 1px, transparent 1px) 0 0/20px 20px;
+  --kariert:linear-gradient(rgba(70,120,210,.14) 1px, transparent 1px) 0 0/20px 20px, linear-gradient(to right, rgba(70,120,210,.14) 1px, transparent 1px) 0 0/20px 20px;
   color-scheme:light}
 html.skin-kladde:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#FFFFFF;--surface:#FFFFFF}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#FFFFFF;--cCard:#F5F8FE;--cFill:rgba(31,63,191,.07);--cLine:rgba(31,63,191,.22);--cText:#1B2A6B;--cSub:#3B4C8C;--cLeaf:#1F3FBF;--cOnLeaf:#FFFFFF}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#FFFFFF;--cCard:#F5F8FE;--cFill:rgba(31,63,191,.07);--cLine:rgba(27,42,107,.14);--cText:#1B2A6B;--cSub:#3B4C8C;--cLeaf:#1F3FBF;--cOnLeaf:#FFFFFF}
 html.skin-kladde:not(._a):not(._b):not(._c):not(._d) body:not(.fieldPage),html.skin-kladde:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-kladde:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-kladde:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday ~ .section{background:var(--kariert), #FFFFFF}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .cookOverlay{background:var(--kariert), #FFFFFF}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact,.notesTitle){
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.notesTitle,.brandWordmark){
   font-family:var(--fontDisplay);font-weight:700;letter-spacing:0}
 html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1,html.skin-kladde:not(._a):not(._b):not(._c):not(._d) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(2.8rem, 13vw, 3.6rem), 13vw);line-height:.95}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .recipeTitle{font-size:1.75rem;line-height:1}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d).listCards .grid .recipeTitle{font-size:2.1rem}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle,html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .h2,html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .notesTitle{font-size:1.9rem}
 html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .recipeHeroText .recipeName,html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .homeFeatured .homeFeaturedTitle{font-size:clamp(2.8rem, 13vw, 3.6rem);line-height:.95}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .recipeCard{overflow:visible;position:relative}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{border-radius:2px;box-shadow:0 0 0 6px #FFFFFF, 0 0 0 7px rgba(27,42,107,.12), 0 6px 14px rgba(27,42,107,.18)}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d).listCards .grid .recipeCard .rcImg{margin:8px 0 10px}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .recipeCard::before{content:"";position:absolute;z-index:3;top:-6px;left:50%;width:76px;height:22px;transform:translateX(-50%) rotate(-3deg);
-  background:rgba(250,232,150,.82);box-shadow:0 1px 2px rgba(0,0,0,.12);pointer-events:none}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .grid .linkCard:nth-child(even) .recipeCard::before{transform:translateX(-50%) rotate(4deg);left:40%}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .homeFeatured::before{display:none}
-html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .uRow.checked .uName,html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .ingRow.checked .ingName{text-decoration-color:#1F3FBF;text-decoration-thickness:2px}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .notesTitle{font-size:1.9rem}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .notesArea{font-family:var(--fontDisplay);font-size:1.35rem;line-height:1.3;color:#1B2A6B}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .uLead{border-radius:4px 7px 3px 6px / 6px 3px 7px 4px !important;border:2px solid #1B2A6B !important;transform:rotate(-2deg)}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .uRow.checked .uLead{background:transparent !important;color:#1F3FBF !important}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .uRow.checked .uName{text-decoration-color:#1F3FBF;text-decoration-thickness:2px}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard,html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .recipePageHero{position:relative}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::before,html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .recipePageHero::before{content:"";position:absolute;z-index:5;top:-6px;left:50%;width:96px;height:26px;
+  transform:translateX(-50%) rotate(-3deg);background:rgba(250,232,150,.85);box-shadow:0 1px 2px rgba(0,0,0,.12);pointer-events:none}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) .recipePageHero::before{top:10px}
 
-/* ==== 8. Bauhaus: Rot, Gelb, Blau und Schwarz, Kreis und Balken, Kleinschreibung in Titeln ==== */
+/* ==== 8. Bauhaus (nach unslop): Kantinen-Speiseplan – Oberfläche nur Schwarz und Weiß, Farbe und Form tragen Bedeutung:
+   rotes Quadrat = Fleisch, gelber Kreis = vegetarisch, blaues Dreieck = Fisch (data-kind auf jeder Karte, Legende in der
+   Rezeptliste). Form + Farbe, damit es auch ohne Farbsehen lesbar bleibt ==== */
 html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d),html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body{
-  --field:#1E4FB8;--onField:#FFFFFF;--onField2:rgba(255,255,255,.88);--fieldFill:rgba(255,255,255,.2);
-  --bg:#FFFFFF;--surface:#F2F2F2;--surface2:#FAFAFA;--fill:#EDEDED;--line:#111111;--lineStrong:#111111;
+  --field:#111111;--onField:#FFFFFF;--onField2:rgba(255,255,255,.8);--fieldFill:rgba(255,255,255,.14);
+  --bg:#FFFFFF;--surface:#F3F3F3;--surface2:#FAFAFA;--fill:#EEEEEE;--line:rgba(17,17,17,.14);--lineStrong:#111111;
   --text:#111111;--sub:#3A3A3A;--sub2:#3A3A3A;--muted:#4F4F4F;
-  --brand:#C8202A;--onBrand:#FFFFFF;--leaf:#1E4FB8;--onLeaf:#FFFFFF;--brandSoft:#FCE4E5;--leafSoft:#DEE6F7;
-  --sel:#F2C230;--onSel:#111111;--accent:#1E4FB8;--accentSoft:#DEE6F7;--onAccent:#FFFFFF;--herb:#C8202A;--coffee:#111111;
+  --brand:#111111;--onBrand:#FFFFFF;--leaf:#111111;--onLeaf:#FFFFFF;--brandSoft:#EEEEEE;--leafSoft:#EEEEEE;
+  --sel:#111111;--onSel:#FFFFFF;--accent:#111111;--accentSoft:#EEEEEE;--onAccent:#FFFFFF;--herb:#111111;--coffee:#111111;
   --glass:#FFFFFF;
+  --kFleisch:#C8202A;--kVeg:#F2C230;--kFisch:#1E4FB8;
   --fontUi:"Skin Bauhaus", -apple-system, "Inter", sans-serif;--fontDisplay:"Skin Bauhaus", "Futura", sans-serif;
   color-scheme:light}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#FFFFFF;--surface:#F2F2F2}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#FFFFFF;--cCard:#F2F2F2;--cFill:#EDEDED;--cLine:#111;--cText:#111;--cSub:#3A3A3A;--cLeaf:#C8202A;--cOnLeaf:#FFFFFF}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#FFFFFF;--surface:#F3F3F3}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#FFFFFF;--cCard:#F3F3F3;--cFill:#EEEEEE;--cLine:rgba(17,17,17,.14);--cText:#111;--cSub:#3A3A3A;--cLeaf:#111;--cOnLeaf:#FFFFFF}
 html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) *,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) *::before,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) *::after{border-radius:0 !important}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeActBtn,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .navIconBtn,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .stepBtn,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipePortionStep,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .authorAvatar,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .profileBadge,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .sheetSwitch,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .sheetSwitch::after,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .star,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .tabItem,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .uLead,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) #recipeBack{border-radius:999px !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeActBtn,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .navIconBtn,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .stepBtn,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipePortionStep,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .authorAvatar,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .profileBadge,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .sheetSwitch,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .sheetSwitch::after,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .star,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .tabItem,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) #recipeBack{border-radius:999px !important}
 html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact){
-  font-family:var(--fontDisplay);font-weight:700;text-transform:lowercase;letter-spacing:-.01em}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body .homeGreetingTitle.homeGreetingTitle{font-weight:800}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreeting{
-  background:radial-gradient(circle at calc(100% - 34px) 34px, #F2C230 0 28px, transparent 29px),
-    linear-gradient(#C8202A, #C8202A) calc(100% - 74px) 28px/12px 44px no-repeat}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreeting{background:radial-gradient(circle at calc(100% - 44px) 60%, #F2C230 0 34px, transparent 35px),
-    linear-gradient(#C8202A, #C8202A) calc(100% - 4px) 100%/14px 70px no-repeat}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{box-shadow:0 0 0 100vmax var(--field)}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle::before,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .h2::before{content:"";display:inline-block;width:.55em;height:.55em;margin-right:.35em;background:#C8202A;vertical-align:.05em}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .homeSectionHead:nth-of-type(3n+2) .homeSectionTitle::before{background:#1E4FB8;border-radius:999px !important}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .homeSectionHead:nth-of-type(3n) .homeSectionTitle::before{background:#F2C230}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{border-bottom:6px solid #111}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .grid .linkCard:nth-child(3n+1) .rcImg{border-bottom-color:#C8202A}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .grid .linkCard:nth-child(3n+2) .rcImg{border-bottom-color:#1E4FB8}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .grid .linkCard:nth-child(3n) .rcImg{border-bottom-color:#F2C230}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#111111 !important;border:0;box-shadow:6px 6px 0 #C8202A !important}
+  font-family:var(--fontDisplay);font-weight:600;letter-spacing:-.01em}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-kind] .recipeTitle::before,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend span::before{content:"";display:inline-block;flex:0 0 auto;width:.62em;height:.62em;margin-right:.4em;vertical-align:.04em;background:var(--kFleisch)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-kind="veg"] .recipeTitle::before,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend [data-kind="veg"]::before{background:var(--kVeg);border-radius:50% !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-kind="fisch"] .recipeTitle::before,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend [data-kind="fisch"]::before{background:var(--kFisch);clip-path:polygon(50% 0, 100% 100%, 0 100%);width:.72em}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend{display:flex !important;gap:16px;margin-top:12px;font-size:var(--fs14);color:var(--onField2)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend span{display:inline-flex;align-items:center}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#111111 !important;border:0;box-shadow:none !important}
 html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#FFFFFF !important}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:#F2C230 !important;color:#111111 !important}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .filterChip,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .chip,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .segmented,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .searchRow:not(.searchRowCompact){box-shadow:inset 0 0 0 2px #111 !important;background:#FFFFFF}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .filterChip.active{background:#F2C230 !important;color:#111 !important}
-html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) #recipeBack{background:#FFFFFF !important;color:#111 !important;box-shadow:inset 0 0 0 2px #111 !important}
-html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreeting::before{top:52px}
-html.skin:not(._a):not(._b):not(._c):not(._d) body.grouped .searchRow{background:var(--surface)}
-html.skin-aqua:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookTop .navIconBtn{color:#1B2633}
-html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sheet{background:#050A06 !important;box-shadow:0 0 0 1px var(--line) !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:#FFFFFF !important;color:#111111 !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .filterChip,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .chip,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .segmented{box-shadow:inset 0 0 0 1.5px #111 !important;background:#FFFFFF}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) #recipeBack{background:#FFFFFF !important;color:#111 !important;box-shadow:inset 0 0 0 1.5px #111 !important}
+.kindLegend{display:none}
+html.skin-synthwave:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.ingSection,.catGroupTitle,.accountTitle,.notesTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle){font-family:var(--fontUi)}
+html.skin-kladde:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.ingSection,.catGroupTitle,.accountTitle){font-family:var(--fontUi)}
