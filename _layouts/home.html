@@ -16,6 +16,7 @@ layout: default
   // Überschrift = das Datum (statt einer Begrüßung, unslop Abschnitt 43)
   var d = new Date(), el = document.getElementById('homeGreeting');
   el.textContent = d.toLocaleDateString('de-DE', { weekday:'long' }) + '\n' + d.toLocaleDateString('de-DE', { day:'numeric', month:'long' }).replace(' ', '\u00A0');
+  el.dataset.edition = 'Ausgabe vom ' + d.toLocaleDateString('de-DE', { weekday:'long' }) + ', ' + d.toLocaleDateString('de-DE', { day:'numeric', month:'long' });
 })();
 </script>
 
