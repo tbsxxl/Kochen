@@ -169,32 +169,31 @@ getrennt (Wunsch des Besitzers).
   (Terrakotta/Kräutergrün, siehe unten)**, auch wenn die App kein Terrakotta mehr nutzt. Icons `-v10`
   (Inhalt wie früher `-v8`), `logo.svg?v=9`, `logo-dark.svg?v=11`, `favicon.svg?v=13`, `favicon.ico?v=11`.
 - **Skins (Abschnitt 48, Nov. 2026, Wunsch des Besitzers):** „Mehr“ → „Skin ›“ öffnet ein Blatt mit Vorschau-Kacheln
-  (`#skinSheet`); gespeichert in `kochbuch.ui.skin` (pro Gerät, fehlt = Standard; alte `kochbuch.ui.retro` wird übernommen).
+  (`#skinSheet`); gespeichert in `kochbuch.ui.skin` (pro Gerät, fehlt/unbekannt = Standard; alte `kochbuch.ui.retro` wird übernommen).
   Liste und Statusleisten-Farben in `window.KOCHBUCH_SKINS` im Kopf von `_layouts/default.html` (`KOCHBUCH_APPLY_SKIN()`).
-  Standard (Markthalle), Retro (`html.retro`, Abschnitt 36) und acht weitere mit `html.skin.skin-<name>`: **terminal**
-  (grüne Leuchtschrift, Bildschirmzeilen, blinkender Cursor, „[ KOCHEN ]“, Kochmodus tippt den Schritt – `typeStep()` in
-  `assets/recipe.js`), **diner** (Kirschrot/Mint/Chrom, Schachbrett-Streifen am Feldrand, Leuchtschrift, Tresen-Tab-Leiste),
-  **kreide** (Schiefer, Kreideschrift, Holz-Kreideablage, schräge Fotos, Kreidestrich beim Abhaken), **zeitung**
-  (Zeitungspapier, Playfair, Fraktur-Kopf „Tobis Kochbuch“ + „Ausgabe vom …“ aus `data-edition` in `_layouts/home.html`,
-  Fotos schwarz-weiß gerastert, Antippen/Hover = Farbe), **aqua** (Gel-Knöpfe Blau/Silber, gebürstetes Metall, Blasen in
-  Fortschrittsbalken), **synthwave** (Neon auf Violett, Sonne + Gitterboden im Feld), **kladde** (kariertes Papier,
-  Kugelschreiber-Blau, Caveat, Fotos mit Klebeband), **bauhaus** (Rot/Gelb/Blau/Schwarz, Kreis + Balken im Feld,
-  Kleinschreibung in Titeln, Jost). Skins bauen auf dem hellen Standard-Layout auf (data-theme wird entfernt, festes
-  Aussehen), ersetzen Tokens (`--field`, `--bg`, `--brand`, `--leaf`, Kochmodus `--cBg … --cOnLeaf`, optional `--statusBar`)
-  mit Selektoren `html.skin-x:not(._a):not(._b):not(._c):not(._d)` (Spezifität über den Standard-Regeln). Schriften selbst
-  gehostet (OFL, npm @fontsource): VT323, Pacifico, Cabin Sketch, Playfair Display, UnifrakturMaguntia, Orbitron, Caveat, Jost.
-  **Nach `unslop` (Wunsch des Besitzers „Bilder müssen erkennbar sein“, „ein paar sehen nicht besonders/nützlich aus“):**
-  Fotos sind in jedem Skin unverfälscht (kein Grün-/Schwarz-Weiß-Filter mehr), der Skin prägt nur die Oberfläche, und jedes
-  Erkennungsdetail soll beim Kochen nützen. **bauhaus** = Kantinen-Speiseplan: Oberfläche nur Schwarz/Weiß, rotes Quadrat =
-  Fleisch, gelber Kreis = vegetarisch, blaues Dreieck = Fisch (`data-kind` auf `.recipeCard`, Regel in `recipe-card.html`
-  und `kindOf()` in `assets/cards.js`; Legende `.kindLegend` in `_includes/recipe-search.html`). **aqua** = Gel nur auf
-  „Kochen“/„Weiter“, beide extra groß (nasse Hände), Blasen nur im laufenden Timer, sonst ruhiges Silber. **synthwave** =
-  Abendmodus (gedämpftes Violett, ein Akzent Pink, Leuchten nur an „Kochen“ und laufendem Timer, Sonne auf der Startseite
-  nach Uhrzeit über `--sunY` aus `_layouts/home.html`, nachts unter dem Horizont). **kladde** = Omas Rezeptheft
-  (Handschrift nur Seitentitel, Rezeptname, „Meine Notizen“ inkl. Notizfeld; gezeichnete Abhak-Kästchen; Klebeband nur am
-  großen Foto). Terminal ohne Leuchten/„-rw-“, Diner leuchtet nur im Seitentitel, Kreidetafel ohne Kreidewolken.
-  `tools/flows.js` schaltet jeden Skin einmal durch. Neue Bedienelemente in allen Skins ansehen (`skinshots.js`-Ablauf:
-  iPhone-Screenshots je Skin von Start, Rezeptliste, Rezept, Kochmodus, Einkaufsliste).
+  **12 Skins:** Standard (Markthalle), Retro (`html.retro`, Abschnitt 36), **terminal** (grüne Schrift, Bildschirmzeilen,
+  Cursor, „[ KOCHEN ]“, Kochmodus tippt den Schritt – `typeStep()` in `assets/recipe.js`; seit Wunsch „mehr Fallout“:
+  Metallblende mit Schrauben an Tab-Leiste/Kochmodus-Kopf, gewölbter Bildschirm, Fortschritt in Segmenten), **diner**
+  (Kirschrot/Mint/Chrom, Schachbrett-Streifen, Leuchtschrift nur im Seitentitel), **bauhaus** (Kantinen-Speiseplan:
+  Schwarz/Weiß, rotes Quadrat = Fleisch, gelber Kreis = vegetarisch, blaues Dreieck = Fisch; `data-kind` auf `.recipeCard`
+  aus `recipe-card.html` und `kindOf()` in `assets/cards.js`, Legende `.kindLegend` in `_includes/recipe-search.html`) –
+  diese fünf „sollen gleich bleiben“ – und sieben in der Stimmung von Serien/Filmen des Besitzers, **mit eigenen Namen,
+  ohne Logos, Figuren, Zitate oder Original-Schriften**: **nordwall** (Game of Thrones: Stein/Pergament, Blutrot, Cinzel;
+  Timer-Hinweis als Brief mit Wachssiegel), **zauberschule** (Harry Potter: Pergament, Weinrot/Gold, IM Fell; Mengen in
+  den Zutaten golden), **jahr3000** (Futurama: Mint/Lila, Righteous, Röhren-TV-Rahmen um Fotos; Einkaufsliste als
+  Lieferschein „Paket n“), **zweistaedte** (Arcane: Teal/Messing oben, Neon-Pink auf Tinte, Bebas Neue, Pinselkante am
+  Blatt; aktueller Kochschritt mit pinkem Farbstrich), **insel** (Lost: 70er-Konsole beige/Dschungelgrün, Share Tech Mono;
+  Kochtimer als große Klappziffern), **akte** (Shutter Island: Sturmblau, Special Elite, Rezeptkarten als Aktenmappen mit
+  Reiter; Bewertung als Stempel), **brigade** (The Bear: Edelstahl, Malerband-Etiketten mit Permanent Marker, Einkaufsliste
+  heißt „Mise en place“; Kochschritt als Bon an der Leiste). `body[data-page]` (slugify der Adresse) für seitenbezogene Regeln.
+  Kreidetafel, Zeitung, Aqua, Synthwave und Kladde hat der Besitzer gestrichen.
+  **Regeln (nach `unslop`, Wunsch „Bilder müssen erkennbar sein“):** Fotos in jedem Skin unverfälscht (keine Filter),
+  der Skin prägt nur die Oberfläche, jedes Erkennungsdetail soll beim Kochen nützen.
+  Aufbau: helles Standard-Layout (data-theme wird entfernt, festes Aussehen), Tokens (`--field`, `--bg`, `--brand`, `--leaf`,
+  Kochmodus `--cBg … --cOnLeaf`, optional `--statusBar`) mit Selektoren `html.skin-x:not(._a):not(._b):not(._c):not(._d)`.
+  Schriften selbst gehostet (npm @fontsource, OFL bzw. Apache 2.0 bei Special Elite/Permanent Marker; Lizenzen in
+  `assets/fonts/`). `tools/flows.js` schaltet jeden Skin einmal durch. Neue Bedienelemente in allen Skins ansehen
+  (iPhone-Screenshots je Skin von Start, Rezeptliste, Rezept, Kochmodus, Einkaufsliste).
 - **Retro-Modus (Abschnitt 36, `html.retro`, Skin „Retro“):** zusätzlich als verstecktes Extra: Startseite 5× schnell auf
   Logo/„Tobis Kochbuch“ tippen schaltet Retro an/aus (Hinweis mit Rückgängig).
   Graue Fenster mit harten Kanten und schwarzem Versatz, weiße Lesefelder, Navy-Titelleisten, Gelb = Hauptaktion,

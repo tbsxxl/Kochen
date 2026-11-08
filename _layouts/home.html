@@ -16,9 +16,6 @@ layout: default
   // Überschrift = das Datum (statt einer Begrüßung, unslop Abschnitt 43)
   var d = new Date(), el = document.getElementById('homeGreeting');
   el.textContent = d.toLocaleDateString('de-DE', { weekday:'long' }) + '\n' + d.toLocaleDateString('de-DE', { day:'numeric', month:'long' }).replace(' ', '\u00A0');
-  // Skin „Synthwave“ (Abendmodus): Sonne steht je nach Uhrzeit, mittags hoch, nachts unter dem Horizont
-  { const h = d.getHours() + d.getMinutes() / 60; document.documentElement.style.setProperty('--sunY', (h < 6 || h > 21 ? 150 : 20 + Math.abs(h - 13.5) * 13) + '%'); }
-  el.dataset.edition = 'Ausgabe vom ' + d.toLocaleDateString('de-DE', { weekday:'long' }) + ', ' + d.toLocaleDateString('de-DE', { day:'numeric', month:'long' });
 })();
 </script>
 
