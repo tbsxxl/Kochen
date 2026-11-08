@@ -21,6 +21,14 @@
     return "";
   }
 
+  // Hauptzutat genauer (Skin „Nordwall“: Wappen je Zutat), gleiche Regel wie _includes/recipe-card.html
+  function proteinOf(r){
+    const cats = [r.category, ...(r.categories || [])];
+    const map = [["Fisch","fisch"],["Rind","rind"],["Hackfleisch","hack"],["Schwein","schwein"],["Hähnchen","haehnchen"],["Ente","ente"]];
+    for (const [c, v] of map) if (cats.includes(c)) return v;
+    return kindOf(r) === "veg" ? "veg" : "";
+  }
+
   // opts: { hCard: Karte in waagerechter Leiste, fav: Herz gleich gefüllt zeigen, meta: eigener Metatext (HTML) }
   function recipeCard(r, opts = {}){
     const id = r.id || r.url || "";
@@ -32,7 +40,7 @@
       <div class="rcImg rcImgEmpty" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16v3a6 6 0 01-6 6h-4a6 6 0 01-6-6z"/><path d="M2 11h2M20 11h2M9 7c0-1 1-1 1-2M14 7c0-1 1-1 1-2"/></svg><span class="freezerFlag" data-freezer-badge data-recipe-id="${esc(id)}" hidden title="In der Kühltruhe">${SVG_ICE}<span data-count></span></span></div>`;
     return `
       <a class="linkCard${opts.hCard ? " hCard homeFavCard" : ""}" href="${esc(r.url || id)}">
-        <div class="card recipeCard cardHover"${kindOf(r) ? ` data-kind="${kindOf(r)}"` : ""}>
+        <div class="card recipeCard cardHover"${kindOf(r) ? ` data-kind="${kindOf(r)}"` : ""}${proteinOf(r) ? ` data-protein="${proteinOf(r)}"` : ""}>
           ${img}
           <div class="rcBody">
             <${opts.hLevel || "h2"} class="recipeTitle">${esc(r.title)}</${opts.hLevel || "h2"}>
