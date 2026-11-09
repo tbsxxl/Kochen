@@ -462,11 +462,33 @@
 
 
 (function(){
+  // Android: navigator.vibrate. iPhone (Safari ab iOS 18) kennt kein vibrate, gibt aber beim Umlegen eines
+  // <input type="checkbox" switch> ein spürbares Tippen ab – ein unsichtbarer Schalter wird dafür angeklickt.
+  let hapLabel = null;
+  function iosTick(){
+    if(!hapLabel){
+      hapLabel = document.createElement("label");
+      hapLabel.setAttribute("aria-hidden", "true");
+      hapLabel.style.cssText = "position:fixed;left:-200px;top:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none";
+      const i = document.createElement("input");
+      i.type = "checkbox"; i.setAttribute("switch", ""); i.tabIndex = -1;
+      hapLabel.appendChild(i); document.body.appendChild(hapLabel);
+    }
+    const prev = document.activeElement;
+    hapLabel.click();
+    if(prev && prev !== document.activeElement) try{ prev.focus({ preventScroll:true }); }catch{}
+  }
+  const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   function haptic(kind){
     try{
-      if(!navigator.vibrate) return;
-      const map = { light:[8], medium:[14], success:[10,22,10], warning:[18,24,18] };
-      navigator.vibrate(map[kind] || map.light);
+      if(navigator.vibrate){
+        const map = { light:[8], medium:[14], success:[10,22,10], warning:[18,24,18] };
+        navigator.vibrate(map[kind] || map.light);
+        return;
+      }
+      if(!isIOS) return;
+      iosTick();
+      if(kind === "success" || kind === "warning") setTimeout(iosTick, 110);
     }catch{}
   }
 

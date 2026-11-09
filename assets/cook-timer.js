@@ -57,6 +57,8 @@
   function ring(){
     try{ navigator.vibrate?.([300,150,300,150,600]); }catch{}
     try{ window.KOCHBUCH_UI?.haptic?.("success"); }catch{}
+    // Skins mit eigenem Alarm (assets/skins.js) übernehmen den Ton; meldet auch den Ablauf für Bild-Effekte
+    try{ if(window.KOCHBUCH_SKIN_RING?.(audio)) return; }catch{}
     if(!audio) return;
     try{
       const t0 = audio.currentTime;

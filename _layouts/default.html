@@ -218,6 +218,10 @@
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="akte" style="--swField:#1E2933;--swBg:#DDE2E5;--swAcc:#E4CFA0"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Akte</span></button>
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="brigade" style="--swField:#CDD1D5;--swBg:#F2F3F3;--swAcc:#D9822B"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Brigade</span></button>
       </div>
+      <div class="skinSoundGroup">
+        <button class="sheetRow" id="toggleSkinSound" type="button" role="switch" aria-checked="false"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></span><span>Klänge der Welten</span><span class="sheetSwitch" aria-hidden="true"></span></button>
+        <p class="skinSoundHint">Kurze Klänge beim Tippen in Nordwall, Zauberschule, Jahr 3000, Zwei Städte, Insel, Akte und Brigade.</p>
+      </div>
     </div>
   </section>
 
@@ -346,6 +350,13 @@
 
     document.getElementById('toggleCompact')?.addEventListener('click', ()=>{ set(compactKey,!get(compactKey,false)); apply(); });
     document.getElementById('toggleContrast')?.addEventListener('click', ()=>{ set(contrastKey,!get(contrastKey,false)); apply(); });
+    // Klänge der Welten (assets/skins.js): pro Gerät, Standard aus
+    (function(){
+      const b = document.getElementById('toggleSkinSound'); if(!b) return;
+      const on = ()=>{ try{ return localStorage.getItem('kochbuch.ui.skinSound') === '1'; }catch(e){ return false; } };
+      b.setAttribute('aria-checked', on() ? 'true' : 'false');
+      b.addEventListener('click', ()=>{ try{ if(on()) localStorage.removeItem('kochbuch.ui.skinSound'); else localStorage.setItem('kochbuch.ui.skinSound', '1'); }catch(e){} b.setAttribute('aria-checked', on() ? 'true' : 'false'); });
+    })();
     // Skin-Blatt: öffnet sich aus „Mehr“ (Mehr schließt dabei)
     const skinSheet = document.getElementById('skinSheet'), skinOverlay = document.getElementById('skinOverlay');
     const closeSkin = ()=>{ skinOverlay.classList.remove('open'); skinSheet.classList.remove('open'); skinSheet.setAttribute('aria-hidden','true'); if(!document.querySelector('.sheet.open')) document.body.classList.remove('noScroll'); };

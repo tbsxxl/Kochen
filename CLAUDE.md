@@ -326,6 +326,29 @@ getrennt (Wunsch des Besitzers).
   Schriften selbst gehostet (npm @fontsource, OFL bzw. Apache 2.0 bei Special Elite/Permanent Marker; Lizenzen in
   `assets/fonts/`). `tools/flows.js` schaltet jeden Skin einmal durch. Neue Bedienelemente in allen Skins ansehen
   (iPhone-Screenshots je Skin von Start, Rezeptliste, Rezept, Kochmodus, Einkaufsliste).
+  **Welten bis ins Detail (Abschnitt 48 · 17 in `skins.js`, Abschnitt 18 in `styles.css`, Dez. 2026, Blaupause des Besitzers mit Tokens/Bauteilen
+  je Serie; Figuren, Logos, Namen, Zitate daraus bewusst weggelassen, z. B. kein Roboterkopf, keine Hauswappen, kein „Every Second Counts“):**
+  Jahr 3000 = Hangar-Türkis `#58C4C3`, weiße Flächen mit 4-px-Konturen `#1A1A1A` (unregelmäßige Rundung `--j3Hand`), Comic Neue,
+  Schriftzug gelb/schräg, Raumschiff oben rechts blinzelt beim Antippen (`.j3Ship`), Suche mit Raumschiff statt Lupe und Filzstift-Platzhalter,
+  Knöpfe schief + Quetschen, Fotos hart mit Kontur, Aufkleber „Roboter-geprüft“, Uhr als Visier mit grünen Segmentziffern, gelbe Tab-Leiste,
+  aktives Symbol ploppt hoch. Nordwall = Kriegstisch aus Schiefer `#121215` (Karte in den Stein geritzt), Leder `#23211C` mit Naht,
+  Knochenweiß/Altgold `#C5A059`, Drachenfeuer-Rot `#8B0000` nur für „Kochen“, Cinzel Decorative, Text Baskerville, Schriftzug auf Eisenplakette,
+  Suche als Rinne (Text glüht wie Erz), Knöpfe als Eisenplatten mit Nieten (senken sich), Bronzerahmen, Astrolabium mit Schwertzeiger,
+  Holzleiste mit Metall-Einlagen. Zauberschule = Ledereinband `#1F1A17` um eine Pergamentseite mit Brandrändern, Tinte `#2B2118`, Gold, Purpur
+  `#581845`, EB Garamond kursiv, eigene Notiz als Randnotiz in Federschrift (Caveat, `.zsMargin`), abgehakte Zutaten goldglühend durchgestrichen,
+  Siegel als Wasserzeichen, Lesebändchen öffnet das Menü, Ecken-Knöpfe, Tinte fließt beim Tippen, Rauchwolke beim Timer-Ablauf, Lederleiste.
+  Zwei Städte = Nachtblau `#0A0E1A` mit Pinselstruktur, Messinglinien symmetrisch, Schriftzug in Hextech-Cyan, Josefin Sans, Suche mit
+  laufendem Stromimpuls, 45°-Knöpfe mit Funken, Zutaten als Bauplan (Raster, Messing), Zubereitung als Unterstadt (Sprühfarbe, Schweißnähte),
+  Kristall-Uhr mit Energiebahnen bei Timer, Tab-Leiste auf goldener Stromschiene. Insel = Röhrenmonitor `#050505`, Bernstein, grüne Statuslampe,
+  VT323 + Courier Prime, Titel flackert, Suche als beiger Plastikkasten mit Block-Cursor (`.inCaret`, per Canvas gemessen), Tasten rasten ein,
+  „Protokoll n · Rationen“ auf der Rezeptseite, Fallblatt-Uhr unter 4 Min rot + blinkende Zahlenreihe. Akte = verregnetes Büro `#161513`
+  (Regen am Fenster als Szene), Manila `#D4C5A9` mit Kaffeeflecken, Schreibmaschine schlägt ungleich an (`typeJitter()`, Buchstaben als `.tj`),
+  Akten-Rot `#A93226`. Brigade bleibt hell (Wunsch des Besitzers), Überschriften SF fett in Versalien eng, LED `#FF2D55`, „Küche läuft“,
+  Bon kommt beim Öffnen aus einem Druckerschlitz. Klänge (WebAudio, je Welt: Plopp, Eisenplatte, Papier, Elektroklick, Taste, Schreibmaschine,
+  Bondrucker; Jahr 3000 eigener Roboter-Alarm über `KOCHBUCH_SKIN_RING`) nur mit Schalter „Klänge der Welten“ im Skin-Blatt
+  (`kochbuch.ui.skinSound`, Standard aus). Haptik: `KOCHBUCH_UI.haptic` nutzt auf dem iPhone (kein `navigator.vibrate`) einen unsichtbaren
+  `<input type="checkbox" switch>` (ab iOS 18). Selektoren in Abschnitt 18 mit `:not(._f)`; achtet auf die Spezifität von `:is()` (zählt das
+  stärkste Glied) – zum Überschreiben notfalls `:not(#_x#_y)`.
 - **Retro-Modus (Abschnitt 36, `html.retro`, Skin „Retro“):** zusätzlich als verstecktes Extra: Startseite 5× schnell auf
   Logo/„Tobis Kochbuch“ tippen schaltet Retro an/aus (Hinweis mit Rückgängig).
   Graue Fenster mit harten Kanten und schwarzem Versatz, weiße Lesefelder, Navy-Titelleisten, Gelb = Hauptaktion,
