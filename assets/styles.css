@@ -3110,8 +3110,6 @@ html.skin:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{box
   background:radial-gradient(circle at 35% 35%, #FFFFFF 0 18%, #FF8A3D 40%, #D9480F 100%);box-shadow:0 0 0 3px rgba(127,224,192,.6)}
 
 /* Nordwall: Karte und Kompass; Wappenbanner je Hauptzutat auf den Karten; Rabe bringt den Timer-Brief */
-.skinScene-nordwall .scMap{left:0;bottom:24px;width:100%;height:60%}
-.skinScene-nordwall .scCompass{right:max(12px, calc(50% - 640px));top:calc(env(safe-area-inset-top) + 66px);width:112px;height:112px;opacity:.75}
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein]{position:relative}
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-protein]::before{content:"";position:absolute;z-index:3;left:12px;top:0;width:34px;height:50px;pointer-events:none;
   clip-path:polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);box-shadow:none;
@@ -3129,63 +3127,25 @@ html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlert.open .timerAl
 
 /* Zauberschule: Sternenhimmel mit schwebenden Kerzen; Fotos atmen; Fußspuren als Fortschritt */
 html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d),html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body{--field:#151A36;--onField:#F4E7C8;--onField2:rgba(244,231,200,.82);--fieldFill:rgba(244,231,200,.12)}
-.skinScene-zauberschule .scStars{position:absolute;inset:0;
-  background:radial-gradient(1px 1px at 12% 20%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 28% 62%, #fff 50%, transparent 52%),
-    radial-gradient(1.5px 1.5px at 44% 34%, #F4E7C8 50%, transparent 52%), radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 52%),
-    radial-gradient(1px 1px at 77% 54%, #fff 50%, transparent 52%), radial-gradient(1.5px 1.5px at 88% 26%, #F4E7C8 50%, transparent 52%),
-    radial-gradient(1px 1px at 6% 78%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 52% 80%, #fff 50%, transparent 52%),
-    radial-gradient(1px 1px at 95% 72%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 36% 8%, #fff 50%, transparent 52%);
-  opacity:.7}
-.skinScene-zauberschule .scCandle{position:absolute;width:7px;height:26px;border-radius:2px;background:linear-gradient(to right, #E9DFC6, #FFF8E6 45%, #CFC3A4);
-  box-shadow:0 0 0 1px rgba(0,0,0,.08);animation:candleFloat 5s ease-in-out var(--d) infinite alternate}
-.skinScene-zauberschule .scCandle::before{content:"";position:absolute;left:50%;top:-11px;width:7px;height:11px;margin-left:-3.5px;border-radius:50% 50% 45% 45% / 60% 60% 40% 40%;
-  background:radial-gradient(circle at 50% 70%, #FFF6C9 0 30%, #FFC24A 55%, rgba(255,140,40,0) 75%);box-shadow:0 0 14px 4px rgba(255,190,80,.35);
-  animation:flameFlick 1.6s ease-in-out var(--d) infinite alternate}
-@keyframes candleFloat{to{transform:translateY(-8px)}}
-@keyframes flameFlick{to{transform:scale(.88, 1.08);opacity:.85}}
-@media (prefers-reduced-motion: no-preference){
-  html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeFeatured .rcImg img,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .recipePageHero .recipeHeroImg{animation:photoBreathe 9s ease-in-out infinite alternate}
-}
-@keyframes photoBreathe{to{transform:scale(1.035)}}
 html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookProgress{position:relative;height:22px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22'%3E%3Cg fill='%236E1A2A' opacity='.18'%3E%3Cellipse cx='7' cy='7' rx='2.6' ry='4'/%3E%3Cellipse cx='21' cy='15' rx='2.6' ry='4'/%3E%3C/g%3E%3C/svg%3E") 0 0/28px 22px repeat-x !important;border-radius:0}
 html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookProgress .cookProgressBar{opacity:0}
 html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookProgress::after{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(var(--p, 0) * 100%);transition:width .4s var(--ease);
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22'%3E%3Cg fill='%237A5A12'%3E%3Cellipse cx='7' cy='7' rx='2.6' ry='4'/%3E%3Ccircle cx='7' cy='1.6' r='1'/%3E%3Cellipse cx='21' cy='15' rx='2.6' ry='4'/%3E%3Ccircle cx='21' cy='9.6' r='1'/%3E%3C/g%3E%3C/svg%3E") 0 0/28px 22px repeat-x}
 
 /* Jahr 3000: Skyline mit Röhren; Tab-Leiste als Glasröhre */
-.skinScene-jahr3000 .scSkyline{left:0;bottom:24px;width:100%;height:84px;opacity:.75}
 html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#3B2A6B !important;box-shadow:inset 0 7px 8px -5px rgba(255,255,255,.55), inset 0 -5px 8px -3px rgba(0,0,0,.35), 0 0 0 3px #7FE0C0, 0 8px 18px rgba(30,24,56,.3) !important}
 
 /* Zwei Städte: Hex-Kristalle oben rechts, Farbspritzer am Feldrand; „Kochen“ leuchtet wie ein Kristall */
-.skinScene-zweistaedte .scHex{right:max(8px, calc(50% - 640px));top:calc(env(safe-area-inset-top) + 74px);width:104px;height:104px;filter:drop-shadow(0 0 14px rgba(95,212,201,.55))}
-.skinScene-zweistaedte .scSplash{left:0;bottom:26px;width:100%;height:56px;opacity:.9}
 html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn{background:linear-gradient(to bottom, #6FE6F2, #2A9DD8) !important;color:#08202B !important;box-shadow:0 0 18px rgba(95,212,201,.55), inset 0 1px 0 rgba(255,255,255,.5) !important}
 
 /* Die Insel: Vorspann-Titel (weiße, gesperrte Serifenschrift taucht aus dem Dunkel auf), Strand mit Palmen, Hieroglyphen beim Timer-Ablauf */
 html.skin-insel:not(._a):not(._b):not(._c):not(._d),html.skin-insel:not(._a):not(._b):not(._c):not(._d) body{--field:#050607;--onField:#F2F2EE;--onField2:rgba(242,242,238,.72);--fieldFill:rgba(255,255,255,.12);--statusBar:#050607}
-.skinScene-insel{background:linear-gradient(to bottom, #050607 30%, #10293A 72%, #24506A)}
-.skinScene-insel::before{content:"";position:absolute;right:18%;top:calc(env(safe-area-inset-top) + 58px);width:34px;height:34px;border-radius:50%;background:#E9E4D2;box-shadow:0 0 30px 8px rgba(233,228,210,.18);opacity:.85}
-.skinScene-insel .scIsland{left:0;bottom:24px;width:100%;height:110px}
 html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle){font-family:"Times New Roman", Times, Georgia, serif;font-weight:400;letter-spacing:.14em;color:#F2F2EE}
-@media (prefers-reduced-motion: no-preference){
-  html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle){animation:islandTitle 2.2s cubic-bezier(.2,.7,.2,1) both}
-}
-@keyframes islandTitle{from{opacity:0;filter:blur(6px);transform:scale(1.35) translateZ(0)}to{opacity:1;filter:none;transform:none}}
 html.skin-insel:not(._a):not(._b):not(._c):not(._d) .cookTimer.isDone .cookTimerTime{color:transparent !important;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 24'%3E%3Cg fill='none' stroke='%23E2372B' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 20V4h8M10 12h6'/%3E%3Ccircle cx='28' cy='12' r='6'/%3E%3Cpath d='M28 6v12'/%3E%3Cpath d='M42 20l6-16 6 16M44 14h8'/%3E%3Cpath d='M62 4v16M62 12c6-8 10 0 4 8'/%3E%3Cpath d='M80 6c-4 0-4 6 0 6s4 6 0 6M88 4v16'/%3E%3C/g%3E%3C/svg%3E") center/86% 70% no-repeat, #0B0B0A !important}
 
 /* Akte: Sturm mit Regen, Leuchtturm mit kreisendem Lichtkegel; Mappen nummeriert, „Gekocht“-Stempel */
 html.skin-akte:not(._a):not(._b):not(._c):not(._d),html.skin-akte:not(._a):not(._b):not(._c):not(._d) body{--field:#1E2933}
-.skinScene-akte{background:radial-gradient(ellipse 60% 40% at 20% 10%, rgba(120,140,160,.25), transparent 70%), radial-gradient(ellipse 50% 35% at 75% 25%, rgba(90,110,130,.22), transparent 70%)}
-.skinScene-akte .scRain{position:absolute;inset:0;background:repeating-linear-gradient(105deg, rgba(220,230,240,.13) 0 1px, transparent 1px 11px);
-  background-size:200% 200%;animation:rainFall .7s linear infinite}
-@keyframes rainFall{to{background-position:-22px 60px}}
-.skinScene-akte .scTower{right:max(14px, calc(50% - 630px));bottom:24px;width:60px;height:150px}
-.skinScene-akte .scBeam{position:absolute;right:calc(max(14px, calc(50% - 630px)) + 30px);bottom:calc(24px + 150px * .68);width:0;height:0}
-.skinScene-akte .scBeam::before{content:"";position:absolute;left:-260px;top:-260px;width:520px;height:520px;border-radius:50%;
-  background:conic-gradient(from 0deg, rgba(244,227,161,.32) 0deg, rgba(244,227,161,0) 18deg, rgba(244,227,161,0) 342deg, rgba(244,227,161,.32) 360deg);
-  animation:beamTurn 6s linear infinite}
-@keyframes beamTurn{to{transform:rotate(360deg)}}
 html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid{counter-reset:akte}
 html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .linkCard{counter-increment:akte}
 html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .recipeCard .rcBody::before{content:"Akte Nr. " counter(akte, decimal-leading-zero);display:block;font-family:var(--fontDisplay);font-size:var(--fs12);color:#5A4A2A;margin-bottom:2px}
@@ -3194,19 +3154,167 @@ html.skin-akte:not(._a):not(._b):not(._c):not(._d) :is(.grid,.hScroll) .recipeCa
 
 /* Brigade: Wärmelampen über dem Pass, Bon-Leiste mit Zetteln */
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d),html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body{--field:#1E2226}
-.skinScene-brigade .scLamps{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 0px);display:flex;justify-content:space-around}
-.skinScene-brigade .scLamp{position:relative;width:64px;height:24px;border-radius:0 0 30px 30px;background:linear-gradient(to bottom, #3A4046, #22272B);box-shadow:0 1px 0 rgba(255,255,255,.08)}
-.skinScene-brigade .scLamp::before{content:"";position:absolute;left:50%;top:6px;width:4px;height:0;margin-left:-2px}
-.skinScene-brigade .scLamp::after{content:"";position:absolute;left:50%;top:20px;width:220px;height:200px;margin-left:-110px;
-  background:radial-gradient(ellipse 50% 60% at 50% 0, rgba(255,150,60,.30), rgba(255,120,40,.10) 50%, transparent 75%)}
-.skinScene-brigade .scRail{position:absolute;left:0;right:0;bottom:30px;height:8px;background:linear-gradient(to bottom, #EEF0F2, #9AA1A7);box-shadow:0 2px 4px rgba(0,0,0,.35);
-  display:flex;justify-content:flex-end;gap:10px;padding-right:max(16px, calc(50% - 620px))}
-.skinScene-brigade .scRail span{width:40px;height:30px;margin-top:3px;background:#FAFAF7;box-shadow:0 2px 4px rgba(0,0,0,.25);
-  -webkit-mask:radial-gradient(circle at 4px 100%, transparent 3px, #000 3.5px) 0 0/8px 100% repeat-x;mask:radial-gradient(circle at 4px 100%, transparent 3px, #000 3.5px) 0 0/8px 100% repeat-x}
-.skinScene-brigade .scRail span:nth-child(2){transform:rotate(3deg)}
-.skinScene-brigade .scRail span:nth-child(3){transform:rotate(-2deg)}
 
 /* Logo je Skin (assets/logos/, gesetzt von assets/skins.js): ersetzt in Skins das Standard-Logo */
 .homeBrand .logoSkin{width:28px;height:28px}
 .homeBrand .logoSkin[hidden]{display:none}
 html.skin:not(._a):not(._b):not(._c):not(._d) body .homeBrand .logoLight,html.skin:not(._a):not(._b):not(._c):not(._d) body .homeBrand .logoDark{display:none !important}
+
+/* ==== 11. Mehr Stimmung (Nov. 2026, Wunsch des Besitzers „noch viel mehr den Vibe der Serien“; nach taste-skill,
+   impeccable und review-animations): eigene Blattkanten, Rahmen der Heute-Karte, Überschriften und Leertexte je Skin
+   (Texte in VOICE in assets/skins.js), reichere Szenen; Bewegung nur per transform/opacity und angehalten, wenn der
+   Kopf weggescrollt ist (.scPaused). Der Leuchtturm-Kegel streicht waagerecht über das Meer. ==== */
+.skinScene{position:absolute;z-index:-1;top:0;left:0;right:0;pointer-events:none;overflow:hidden}
+.skinScene svg{position:absolute;display:block}
+.skinScene .scHorizon{right:0;bottom:30px;width:min(100%, 640px);height:auto;aspect-ratio:400/64}
+.skinScene.scPaused *,.skinScene.scPaused *::before,.skinScene.scPaused *::after{animation-play-state:paused !important}
+@media (prefers-reduced-motion: reduce){ .skinScene *,.skinScene *::before,.skinScene *::after,.skinScene{animation:none !important} }
+.tubePod{position:fixed;z-index:9000;width:18px;height:18px;border-radius:9px;pointer-events:none;
+  background:radial-gradient(circle at 35% 35%, #FFFFFF 0 18%, #FF8A3D 40%, #D9480F 100%);box-shadow:0 0 0 3px rgba(127,224,192,.6)}
+.magicSpark{position:fixed;z-index:9000;width:9px;height:9px;pointer-events:none;
+  background:radial-gradient(circle, #FFF6C9 0 25%, #E2B84F 45%, transparent 70%);clip-path:polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%)}
+.bonSlip{position:fixed;z-index:9000;left:50%;top:0;width:min(78vw, 300px);padding:calc(env(safe-area-inset-top) + 14px) 16px 16px;
+  background:#FAFAF7;color:#16191B;font:500 14px/1.4 ui-monospace, "SF Mono", Menlo, monospace;display:flex;flex-direction:column;gap:2px;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);transform:translate(-50%,-110%);
+  -webkit-mask:radial-gradient(circle at 5px 100%, transparent 4px, #000 4.5px) 0 0/10px 100% repeat-x;mask:radial-gradient(circle at 5px 100%, transparent 4px, #000 4.5px) 0 0/10px 100% repeat-x}
+.bonSlip b{font-weight:700;color:#B3261E;border-bottom:1px dashed #999;padding-bottom:4px;margin-bottom:4px}
+
+/* Blattkanten (statt runder Ecken): Pergament, Büttenrand, Brandung; Akte mit Klemmbrett, Brigade eckiger Stahl */
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:0}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before,
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{content:"";position:absolute;left:0;right:0;height:16px;top:-15px;background:var(--bg);pointer-events:none;
+  -webkit-mask:var(--edge) 0 0/100% 100%;mask:var(--edge) 0 0/100% 100%}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d){--edge:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 16' preserveAspectRatio='none'%3E%3Cpath d='M0 16 L0 6.2 L7.206793391396015 9.5 L13.786283684736357 8.4 L22.71179502003704 3.6 L32.7712808855524 3.4 L42.240446354851485 3.7 L48.9661504616024 7.2 L61.580967458978705 4.2 L69.36687917583482 9.3 L82.94855071549087 8.8 L92.12199451269711 12.8 L98.49465595763917 11.6 L106.81153024829257 4.4 L113.75386815291952 6.1 L126.28287902587978 4.8 L136.9356803351795 9.4 L145.91486067698537 8.5 L152.41717247677195 3.6 L160.06484217932658 9.8 L169.4855806246818 6.1 L180.1700755327429 7.5 L188.56821150765236 10.9 L200.16016697748893 5.4 L210.7555566595583 8.3 L223.75665662414573 10.3 L232.06015874326724 12.8 L239.00468496930694 7.2 L251.06181240582893 4.5 L260.97351720963536 3.4 L272.3192440619105 10.6 L282.9034515841296 11.8 L291.41343168691435 10.0 L302.1683907037545 8.8 L311.8180333541658 11.4 L325.3754821150293 7.7 L336.68869975882666 3.6 L348.30063592926206 9.5 L362.24540344499513 11.2 L370.52216770174834 6.9 L381.87138942882183 3.2 L391.56495171921995 4.7 L398.5017180750738 3.6 L400 16Z'/%3E%3C/svg%3E")}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d){--edge:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 12' preserveAspectRatio='none'%3E%3Cpath d='M0 12 L0 5.6 L3.742844501090743 7.0 L9.357110423469642 5.4 L13.704672626317635 7.7 L19.354824105642173 9.1 L24.946777514737718 6.4 L29.192667066372813 6.8 L34.845245547967465 9.8 L38.29800826534079 5.9 L41.993878865799395 6.2 L46.44876705682346 7.9 L50.237006914719075 5.0 L54.49384641809506 6.8 L59.19287008921424 9.8 L64.26435106062218 7.6 L69.11712930884956 8.4 L72.27910798852092 9.5 L77.61901646063914 9.4 L83.01263582422884 7.0 L87.20957232118965 5.5 L92.11244101824678 5.3 L95.31448386577586 6.0 L98.80139342909214 6.7 L101.95912024076294 5.0 L105.41291503760122 5.5 L109.50374480370493 5.1 L115.12674193582639 8.1 L118.57239339181906 6.3 L122.61456202998016 6.8 L125.98308872226674 9.2 L131.9623968873809 7.3 L136.4139008566297 5.4 L139.72046370687423 6.7 L143.51473438202578 9.1 L146.99905021360507 5.1 L152.8520069322292 7.6 L156.29181454892645 7.7 L159.37294202319296 7.6 L165.3084457513499 9.3 L170.3970361090733 6.3 L174.49713548435685 5.8 L179.81294920956293 7.7 L185.15011388357746 6.6 L188.819238902887 9.1 L194.77401705465968 9.3 L200.19225280901668 9.1 L205.4118718701438 6.1 L209.96478804287432 6.8 L213.05172849509842 5.1 L216.88998411224551 6.3 L221.9675499373459 9.8 L226.30923297064606 9.7 L232.27334714525463 9.8 L236.36725480134024 6.1 L240.04779228153242 6.0 L243.6609123713611 8.1 L249.36183738501344 9.2 L253.80025766379805 8.3 L259.199188898347 5.4 L264.1809458489617 9.5 L269.52785450125594 8.8 L273.9619527350379 5.9 L279.32935902809874 6.7 L284.7318297347888 9.9 L288.9193452199971 7.0 L294.7597362393918 8.6 L298.26974721930753 5.6 L301.723199320452 9.5 L307.1427052665486 5.7 L312.6222367021248 9.9 L317.5940415803328 6.8 L322.2400217122932 5.7 L325.2827505267615 9.9 L330.231774535783 7.6 L336.0326489509553 7.2 L341.64787773492355 9.1 L345.281004746908 6.3 L349.1599047049187 6.2 L353.91921620941656 6.3 L358.1762538676802 5.7 L363.90630503662686 6.8 L368.2807879960421 7.9 L373.9936783196682 7.1 L379.7468415726962 7.5 L384.342316460004 7.6 L387.39843106372024 7.2 L390.9477547255368 5.0 L396.3452660770135 5.9 L400 12Z'/%3E%3C/svg%3E")}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d){--edge:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 14' preserveAspectRatio='none'%3E%3Cpath d='M0 14 V8 C10 2 20 2 30 7 S50 13 60 8 S75 3 80 6 V14Z'/%3E%3C/svg%3E")}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{-webkit-mask-size:80px 100%;mask-size:80px 100%;-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-top:0}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{content:"";position:absolute;left:50%;top:-16px;width:120px;height:30px;margin-left:-60px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30'%3E%3Crect x='10' y='8' width='100' height='18' rx='4' fill='%239AA1A7'/%3E%3Crect x='14' y='10' width='92' height='4' rx='2' fill='%23D5DADE'/%3E%3Crect x='44' y='0' width='32' height='14' rx='5' fill='%237A8187'/%3E%3Ccircle cx='60' cy='7' r='3' fill='%23DDE2E5'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none;z-index:2}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{box-shadow:inset 0 3px 0 #F4F6F7, inset 0 4px 0 #9AA1A7}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:40px 40px 0 0;box-shadow:inset 0 3px 0 #7FE0C0}
+
+/* Überschriften je Welt */
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){padding-left:46px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M2 6 H28' stroke='%237D1C1C' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M28 1 V11' stroke='%234E473E' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M30 6 H37' stroke='%234E473E' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='38.5' cy='6' r='1.6' fill='%234E473E'/%3E%3C/svg%3E") left center/40px 12px no-repeat}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){padding-bottom:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 10'%3E%3Cpath d='M2 5 C30 1 50 9 70 5 S110 1 138 5' fill='none' stroke='%23B08A2E' stroke-width='1.4'/%3E%3Cpath d='M70 1 L73 5 L70 9 L67 5Z' fill='%23B08A2E'/%3E%3C/svg%3E") left bottom/140px 10px no-repeat}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){padding-bottom:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 8'%3E%3Cg fill='none' stroke='%230E8F7A' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M2 7 L5 1 L8 7 M12 1 V7 M12 4 H16 M20 7 C20 1 26 1 26 7 M30 1 L34 7 L38 1 M42 7 V1 L46 4 L50 1 V7 M54 4 a3 3 0 1 0 6 0 a3 3 0 1 0 -6 0 M64 1 H70 M67 1 V7 M74 7 L78 1 L82 7 H74 M86 1 V7 H92'/%3E%3C/g%3E%3C/svg%3E") left bottom/96px 8px no-repeat}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M4 12 C40 6 90 4 140 7 S190 10 196 9 L194 16 C150 14 100 13 60 15 S10 17 6 16Z' fill='%23FF3FA4' opacity='.85'/%3E%3C/svg%3E") left 85%/100% 45% no-repeat;padding:0 6px}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){display:inline-block;border:2px solid currentColor;padding:4px 10px 2px;font-size:1.05rem;text-transform:uppercase;letter-spacing:.08em}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2)::before{content:"Betr.: ";color:var(--sub)}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){border-bottom:1px solid var(--lineStrong);padding-bottom:4px}
+
+/* Heute-Karte gerahmt */
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard,html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard,html.skin-akte:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard{margin:0;position:relative}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:4px;box-shadow:0 0 0 4px #3A434C, 0 0 0 6px #1C2126, 0 12px 26px rgba(0,0,0,.3)}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured .rcImg{border-radius:2px}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:3px;box-shadow:0 0 0 3px #E2B84F, 0 0 0 7px #7A5A12, 0 0 0 9px #C9A55A, 0 14px 30px rgba(42,26,18,.35)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured .rcImg{border-radius:0}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:6px;box-shadow:8px 8px 0 #FF3FA4}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::after{content:"";position:absolute;z-index:5;left:18px;top:-14px;width:22px;height:52px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 56'%3E%3Cpath d='M8 52 V10 a4 4 0 0 1 8 0 V46 a7 7 0 0 1 -14 0 V14' fill='none' stroke='%23A7AEB5' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;transform:rotate(-8deg);pointer-events:none}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:2px;box-shadow:0 0 0 8px #ECEFF1, 0 10px 22px rgba(0,0,0,.25)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::before,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::after{content:"";position:absolute;z-index:5;top:-8px;width:64px;height:20px;background:rgba(127,178,238,.92);pointer-events:none}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::before{left:-6px;transform:rotate(-14deg)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::after{right:-6px;transform:rotate(12deg)}
+
+/* Haken je Welt */
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .uRow.checked .uLead{background:#FF3FA4 !important;border-color:#FF3FA4 !important;color:#1A0A14 !important;border-radius:46% 54% 42% 58% / 52% 44% 56% 48% !important}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .uRow.checked .uLead{background:#7D1C1C !important;border-color:#7D1C1C !important;border-radius:50% 50% 46% 54% !important}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .uRow.checked .uLead{background:#B08A2E !important;border-color:#B08A2E !important;color:#2A1A12 !important}
+
+/* -------- Szenen -------- */
+/* Nordwall: Schnee (zwei Ebenen, transform), Kompass, Eismauer mit Burg */
+.skinScene-nordwall .scSnow,.skinScene-nordwall .scSnow::after{position:absolute;left:0;right:0;top:-100%;height:200%;background:radial-gradient(1.6px 1.6px at 10% 20%, #fff 60%, transparent 62%), radial-gradient(1.2px 1.2px at 30% 60%, #fff 60%, transparent 62%), radial-gradient(2px 2px at 55% 35%, #fff 60%, transparent 62%), radial-gradient(1.2px 1.2px at 75% 80%, #fff 60%, transparent 62%), radial-gradient(1.6px 1.6px at 90% 15%, #fff 60%, transparent 62%), radial-gradient(1px 1px at 45% 90%, #fff 60%, transparent 62%);background-size:180px 180px;opacity:.55;animation:snowFall 14s linear infinite}
+.skinScene-nordwall .scSnow::after{content:"";top:0;height:100%;background-size:120px 120px;opacity:.35;animation-duration:9s}
+@keyframes snowFall{to{transform:translateY(50%)}}
+.skinScene-nordwall .scCompass{right:max(12px, calc(50% - 640px));top:calc(env(safe-area-inset-top) + 66px);width:104px;height:104px;opacity:.7}
+/* Zauberschule: Sterne, Kerzen, Schloss */
+.skinScene-zauberschule .scStars,.skinScene-jahr3000 .scStars{position:absolute;inset:0;background:radial-gradient(1px 1px at 12% 20%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 28% 62%, #fff 50%, transparent 52%), radial-gradient(1.5px 1.5px at 44% 34%, #F4E7C8 50%, transparent 52%), radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 77% 54%, #fff 50%, transparent 52%), radial-gradient(1.5px 1.5px at 88% 26%, #F4E7C8 50%, transparent 52%), radial-gradient(1px 1px at 6% 78%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 52% 80%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 95% 72%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 36% 8%, #fff 50%, transparent 52%);opacity:.7}
+.skinScene-zauberschule .scCandle{position:absolute;width:7px;height:26px;border-radius:2px;background:linear-gradient(to right, #E9DFC6, #FFF8E6 45%, #CFC3A4);
+  animation:candleFloat 5s ease-in-out var(--d) infinite alternate}
+.skinScene-zauberschule .scCandle::before{content:"";position:absolute;left:50%;top:-11px;width:7px;height:11px;margin-left:-3.5px;border-radius:50% 50% 45% 45% / 60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 70%, #FFF6C9 0 30%, #FFC24A 55%, rgba(255,140,40,0) 75%);box-shadow:0 0 14px 4px rgba(255,190,80,.35);
+  animation:flameFlick 1.6s ease-in-out var(--d) infinite alternate}
+@keyframes candleFloat{to{transform:translateY(-8px)}}
+@keyframes flameFlick{to{transform:scale(.88, 1.08);opacity:.85}}
+/* Jahr 3000: Ringplanet oben rechts */
+.skinScene-jahr3000 .scPlanet{right:max(10px, calc(50% - 640px));top:calc(env(safe-area-inset-top) + 64px);width:110px;height:66px;opacity:.9}
+/* Zwei Städte: Kristall, Luftschiff (gleitet langsam), Dunst der Unterstadt */
+.skinScene-zweistaedte .scHex{right:max(8px, calc(50% - 640px));top:calc(env(safe-area-inset-top) + 74px);width:96px;height:96px;filter:drop-shadow(0 0 12px rgba(95,212,201,.5));animation:hexBob 6s ease-in-out infinite alternate}
+@keyframes hexBob{to{transform:translateY(-6px)}}
+.skinScene-zweistaedte .scShip{right:max(110px, calc(50% - 530px));top:calc(env(safe-area-inset-top) + 58px);width:64px;height:24px;opacity:.85;animation:shipDrift 18s ease-in-out infinite alternate}
+@keyframes shipDrift{to{transform:translateX(-46px)}}
+.skinScene-zweistaedte .scHaze{z-index:0;position:absolute;left:0;right:0;bottom:30px;height:60px;background:linear-gradient(to top, rgba(124,242,154,.18), transparent)}
+/* Die Insel: Abendrot, Meer mit Wellen (transform), Dschungelblätter */
+.skinScene-insel{background:linear-gradient(to bottom, #050607 0%, #0D1A20 42%, #3A2A2A 70%, #C46A3E 86%, #E8A15F 100%)}
+.skinScene-insel .scSea{position:absolute;left:0;right:0;bottom:30px;height:46px;overflow:hidden;background:linear-gradient(to bottom, #1E3F52, #0E2633)}
+.skinScene-insel .scSea span{position:absolute;left:0;width:200%;height:8px;
+  background:repeating-linear-gradient(90deg, transparent 0 22px, rgba(255,220,180,.35) 22px 40px, transparent 40px 64px);animation:seaMove 9s linear infinite}
+.skinScene-insel .scSea span:first-child{top:8px}
+.skinScene-insel .scSea span:last-child{top:22px;opacity:.6;animation-duration:13s;animation-direction:reverse}
+@keyframes seaMove{to{transform:translateX(-50%)}}
+.skinScene-insel .scLeaves{right:0;top:0;width:150px;height:130px}
+.skinScene-insel .scHorizon{bottom:30px}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle){font-family:"Times New Roman", Times, Georgia, serif;font-weight:400;letter-spacing:.12em;color:#F2F2EE}
+@media (prefers-reduced-motion: no-preference){
+  html.islandIntro.skin-insel :is(.pageTitleBlock .h1,.homeGreetingTitle){animation:islandTitle .9s cubic-bezier(.2,.7,.2,1) both}
+}
+@keyframes islandTitle{from{opacity:0;transform:scale(1.18)}to{opacity:1;transform:none}}
+/* Akte: Sturmwolken, Regen (transform), Nebel, Blitz; Leuchtturm mit waagerecht kreisendem Kegel */
+.skinScene-akte{background:radial-gradient(ellipse 70% 45% at 25% 0%, rgba(140,160,180,.28), transparent 70%), radial-gradient(ellipse 60% 40% at 80% 20%, rgba(100,120,140,.25), transparent 70%)}
+.skinScene-akte .scRain{position:absolute;left:-10%;right:-10%;top:-100%;height:200%;background:repeating-linear-gradient(100deg, rgba(220,230,240,.12) 0 1px, transparent 1px 13px);animation:rainFall .6s linear infinite}
+@keyframes rainFall{to{transform:translate(-8px, 50%)}}
+.skinScene-akte .scFog{position:absolute;left:-50%;width:200%;bottom:30px;height:70px;background:radial-gradient(ellipse 30% 60% at 25% 70%, rgba(200,210,220,.18), transparent 70%), radial-gradient(ellipse 30% 60% at 75% 80%, rgba(200,210,220,.14), transparent 70%);animation:fogDrift 40s linear infinite alternate}
+@keyframes fogDrift{to{transform:translateX(25%)}}
+.skinScene-akte .scFlash{position:absolute;inset:0;background:rgba(220,230,255,.5);opacity:0;animation:flash 13s linear infinite}
+@keyframes flash{0%,92%,100%{opacity:0}92.6%{opacity:.55}93.2%{opacity:.05}93.8%{opacity:.35}95%{opacity:0}}
+.skinScene-akte .scTower{right:max(16px, calc(50% - 630px));bottom:30px;width:48px;height:108px}
+.skinScene-akte .scBeam{position:absolute;right:calc(max(16px, calc(50% - 630px)) + 24px);bottom:calc(30px + 108px * .652 - 22px);width:min(70vw, 420px);height:44px;
+  transform-origin:100% 50%;clip-path:polygon(100% 44%, 0 0, 0 100%, 100% 56%);
+  background:linear-gradient(to left, rgba(255,240,180,.75), rgba(255,240,180,.2) 60%, transparent);animation:beamSweep 8s linear infinite}
+@keyframes beamSweep{0%{transform:scaleX(1);opacity:.55}25%{transform:scaleX(.06);opacity:1}50%{transform:scaleX(-1);opacity:.2}75%{transform:scaleX(.06);opacity:0}100%{transform:scaleX(1);opacity:.55}}
+.skinScene-akte .scLampGlow{position:absolute;right:calc(max(16px, calc(50% - 630px)) + 24px - 22px);bottom:calc(30px + 108px * .652 - 22px);width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,245,200,.95) 0 18%, rgba(255,235,160,.35) 45%, transparent 70%);animation:lampFlash 8s linear infinite}
+@keyframes lampFlash{0%,50%,100%{opacity:.35;transform:scale(.8)}25%{opacity:1;transform:scale(1.7)}75%{opacity:.1;transform:scale(.6)}}
+/* Brigade: Lampen flackern leicht, hängendes Werkzeug, Bon-Leiste mit Tischnummern, Dampf */
+.skinScene-brigade .scLamps{position:absolute;left:0;right:min(140px, 30%);top:calc(env(safe-area-inset-top));display:flex;justify-content:space-around}
+.skinScene-brigade .scLamp{position:relative;width:60px;height:22px;border-radius:0 0 30px 30px;background:linear-gradient(to bottom, #3A4046, #22272B)}
+.skinScene-brigade .scLamp::after{content:"";position:absolute;left:50%;top:18px;width:220px;height:190px;margin-left:-110px;
+  background:radial-gradient(ellipse 50% 60% at 50% 0, rgba(255,150,60,.32), rgba(255,120,40,.10) 50%, transparent 75%);animation:lampHum 3.2s ease-in-out infinite alternate}
+@keyframes lampHum{to{opacity:.75}}
+.skinScene-brigade .scHang{right:max(8px, calc(50% - 640px));top:calc(env(safe-area-inset-top) + 50px);width:120px;height:70px;opacity:.85}
+.skinScene-brigade .scRail{position:absolute;left:0;right:0;bottom:30px;height:8px;background:linear-gradient(to bottom, #EEF0F2, #9AA1A7);box-shadow:0 2px 4px rgba(0,0,0,.35);
+  display:flex;justify-content:flex-end;gap:10px;padding-right:max(16px, calc(50% - 620px))}
+.skinScene-brigade .scRail span{display:flex;flex-direction:column;gap:3px;width:46px;height:40px;margin-top:-34px;padding:5px 5px 0;background:#FAFAF7;box-shadow:0 2px 4px rgba(0,0,0,.25);
+  font:700 6px/1 ui-monospace, monospace;color:#B3261E;
+  -webkit-mask:radial-gradient(circle at 3px 100%, transparent 2.5px, #000 3px) 0 0/6px 100% repeat-x;mask:radial-gradient(circle at 3px 100%, transparent 2.5px, #000 3px) 0 0/6px 100% repeat-x}
+.skinScene-brigade .scRail span i{display:block;height:2px;background:#9AA1A7;width:80%}
+.skinScene-brigade .scRail span:nth-child(2){transform:rotate(3deg)}
+.skinScene-brigade .scRail span:nth-child(3){transform:rotate(-2deg)}
+.skinScene-brigade .scSteam{position:absolute;left:12%;bottom:40px;width:120px;height:120px}
+.skinScene-brigade .scSteam span{position:absolute;bottom:0;width:26px;height:60px;border-radius:50%;background:radial-gradient(ellipse, rgba(255,255,255,.16), transparent 70%);animation:steam 4s ease-out infinite}
+.skinScene-brigade .scSteam span:nth-child(2){left:34px;animation-delay:1.3s}
+.skinScene-brigade .scSteam span:nth-child(3){left:68px;animation-delay:2.6s}
+@keyframes steam{from{transform:translateY(0) scale(.6);opacity:0}30%{opacity:1}to{transform:translateY(-60px) scale(1.3);opacity:0}}
+
+/* Jahr 3000 ohne Violett: Nachthimmel-Blau, Mint und Orange */
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d),html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body{--field:#0B1E3B;--onField:#F2FFF8;--onField2:rgba(242,255,248,.8);--leaf:#0B5C5C;--sel:#0B5C5C;--accent:#0B5C5C;--onLeaf:#FFFFFF;--onSel:#FFFFFF;--coffee:#0B1E3B;
+  --text:#0E1F33;--sub:#3C4F63;--sub2:#3C4F63;--muted:#4E6276;--line:rgba(11,30,59,.14);--fill:rgba(11,30,59,.07);--brandSoft:rgba(11,92,92,.10);--leafSoft:rgba(11,92,92,.10)}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cText:#0E1F33;--cSub:#3C4F63;--cFill:rgba(11,30,59,.07)}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 5px #0B1E3B, 0 0 0 7px #7FE0C0}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#0B1E3B !important;box-shadow:inset 0 7px 8px -5px rgba(255,255,255,.45), inset 0 -5px 8px -3px rgba(0,0,0,.35), 0 0 0 3px #7FE0C0, 0 8px 18px rgba(11,30,59,.3) !important}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .shopSection{border-color:rgba(11,30,59,.3)}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#CFE7F0 !important}
+
+/* Horizont-Motive bekommen freien Platz unter den Schnellknöpfen bzw. der Suche (nicht hinter Bedienelementen) */
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{margin-top:84px}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock,html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock,html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{padding-bottom:96px !important}
+
+/* Listenseiten: Eck-Motive in die Titelzeile (über dem Suchfeld), kleiner */
+.skinScene.scList .scCompass,.skinScene.scList .scPlanet,.skinScene.scList .scHex{top:calc(env(safe-area-inset-top) + 4px);transform:scale(.7);transform-origin:100% 0}
+.skinScene.scList .scHex{animation:none}
+.skinScene.scList .scShip{top:calc(env(safe-area-inset-top) + 8px);right:max(90px, calc(50% - 550px))}
+.skinScene.scList .scCandle{margin-top:-56px}
+.skinScene.scList .scCandle:nth-of-type(n+6){display:none}
+.skinScene.scList .scLeaves{width:110px;height:96px}
+.skinScene.scList .scHang{top:calc(env(safe-area-inset-top) + 6px);transform:scale(.8);transform-origin:100% 0}
