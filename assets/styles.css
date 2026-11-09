@@ -3484,21 +3484,21 @@ html.skin-insel .cineIntroWord{--cineFont:Georgia,"Times New Roman",serif;letter
 html.skin-akte .cineIntroWord{--cineFont:"Skin Akte","Courier New",monospace;letter-spacing:.3em;margin-right:-.3em}
 
 /* ==== 14. Brigade neu (Nov. 2026, Wunsch des Besitzers nach Kritik „unruhig, verspielt“): Küchen-Terminal an der Pass-Station.
-   Tiefes Anthrazit, Karten #1C1C1E mit Haarlinien statt weicher Schatten, ein einziger Akzent Kupfer, rote LED-Uhr.
+   Seit Dez. 2026 hell (Besitzer: „sieht aus wie Dark Mode“): gebürsteter Edelstahl im Feld, weiße Flächen mit Stahlkanten, ein einziger Akzent Kupfer, rote LED-Uhr.
    Überschriften: Archivo schmal (72 %) 800 in Versalien mit straffem Tracking, Text SF. Keine Handschrift, kein Malerband,
    kein Küchenbild im Hintergrund (nur ein feines Stahlraster), kantige 6-px-Ecken statt Kapseln. */
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d),html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body{
-  --field:#0E0F10;--onField:#F2F2F0;--onField2:rgba(242,242,240,.68);--fieldFill:rgba(255,255,255,.04);
-  --bg:#121212;--surface:#1C1C1E;--surface2:#232325;--fill:rgba(255,255,255,.06);--line:rgba(255,255,255,.09);--lineStrong:rgba(255,255,255,.22);
-  --text:#F2F2F0;--sub:#A8A8A4;--sub2:#A8A8A4;--muted:#8E8E8A;
+  --field:#CDD1D5;--onField:#16191B;--onField2:#454B50;--fieldFill:rgba(255,255,255,.6);--statusBar:#2A2F33;
+  --bg:#F2F3F3;--surface:#FFFFFF;--surface2:#F7F8F8;--fill:rgba(22,25,27,.06);--line:#D5D9DC;--lineStrong:#9AA1A7;
+  --text:#16191B;--sub:#4A5157;--sub2:#4A5157;--muted:#5E656A;
   --brand:#D9822B;--onBrand:#140C04;--leaf:#D9822B;--onLeaf:#140C04;--brandSoft:rgba(217,130,43,.14);--leafSoft:rgba(217,130,43,.14);
-  --sel:#D9822B;--onSel:#140C04;--accent:#D9822B;--accentSoft:rgba(217,130,43,.14);--onAccent:#140C04;--herb:#D9822B;--coffee:#232325;--petrol:#D9822B;
-  --led:#FF3B30;--glass:rgba(22,22,24,.94);--glassLine:rgba(255,255,255,.08);--glassShadow:0 12px 32px rgba(0,0,0,.55);
+  --sel:#D9822B;--onSel:#140C04;--accent:#9A4F12;--accentSoft:rgba(217,130,43,.14);--onAccent:#FFFFFF;--herb:#9A4F12;--coffee:#2A2F33;--petrol:#9A4F12;
+  --led:#FF3B30;--glass:rgba(248,249,249,.95);--glassLine:#D5D9DC;--glassShadow:0 12px 28px rgba(22,25,27,.18);
   --rPill:6px;--rCard:6px;--rBtn:6px;--rInner:4px;
   --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Archivo", -apple-system, sans-serif;
-  color-scheme:dark}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#121212;--surface:#1C1C1E}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#0E0F10;--cCard:#1C1C1E;--cFill:rgba(255,255,255,.06);--cLine:rgba(255,255,255,.09);--cText:#F2F2F0;--cSub:#A8A8A4;--cLeaf:#D9822B;--cOnLeaf:#140C04}
+  color-scheme:light}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#F2F3F3;--surface:#FFFFFF}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#ECEEEF;--cCard:#FFFFFF;--cFill:rgba(22,25,27,.06);--cLine:#D5D9DC;--cText:#16191B;--cSub:#4A5157;--cLeaf:#D9822B;--cOnLeaf:#140C04}
 /* Überschriften: schmal, fett, Versalien */
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.notesTitle,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact,.catGroupTitle,.ingSection,.miseHead b){
   font-family:var(--fontDisplay);font-stretch:72%;font-weight:800;text-transform:uppercase;letter-spacing:.015em;font-synthesis:none;font-style:normal}
@@ -3507,50 +3507,52 @@ html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.h
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .recipeTitle{letter-spacing:.03em;line-height:1.08}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeGreetingSub{text-transform:uppercase;letter-spacing:.14em;font-size:var(--fs12);font-weight:600;color:var(--onField2)}
 /* Feld: feines Stahlraster, nach unten ausgeblendet; Blatt mit gerader Haarlinie statt Rundung */
-.skinScene-brigade::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-  background-size:28px 28px;background-position:-1px -1px;-webkit-mask:linear-gradient(to bottom, #000 30%, transparent 96%);mask:linear-gradient(to bottom, #000 30%, transparent 96%)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:0 !important;box-shadow:0 -1px 0 rgba(255,255,255,.08) !important;-webkit-mask:none !important;mask:none !important}
+.skinScene-brigade::before{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.38) 0 1px,rgba(0,0,0,.025) 1px 3px),
+  linear-gradient(115deg,rgba(255,255,255,0) 20%,rgba(255,255,255,.55) 42%,rgba(255,255,255,0) 60%),linear-gradient(#DADDE0,#C3C8CC)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:0 !important;box-shadow:0 -1px 0 #9AA1A7,0 -2px 0 rgba(255,255,255,.6) !important;-webkit-mask:none !important;mask:none !important}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{display:none}
 /* Bedienelemente im Feld: flach, feine Rahmenlinie */
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16) !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:#FFFFFF !important;color:#16191B !important;box-shadow:inset 0 0 0 1px #AEB4B9,0 1px 0 rgba(255,255,255,.7) !important}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .searchRowIcon input{background:transparent !important;box-shadow:none !important}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{padding-bottom:24px !important}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeQuickBtn{font-weight:600}
-@media (hover:hover) and (pointer:fine){ html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeQuickBtn:hover{box-shadow:inset 0 0 0 1px rgba(217,130,43,.7) !important;color:#F2B57A} }
+@media (hover:hover) and (pointer:fine){ html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeQuickBtn:hover{box-shadow:inset 0 0 0 1px rgba(217,130,43,.7) !important;color:#9A4F12} }
 /* Karten: Haarlinie, keine weichen Schatten */
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.card,.listGroup,.notesCard){box-shadow:inset 0 0 0 1px var(--line) !important}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{border-radius:4px}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:4px;box-shadow:0 0 0 1px rgba(255,255,255,.1) !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:4px;box-shadow:0 0 0 1px #D5D9DC !important}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;vertical-align:.12em;background:var(--brand)}
 /* Tab-Leiste: festes dunkles Paneel, Linien-Symbole, aktiv = Kupfer ohne Blase */
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#161618 !important;border:1px solid rgba(255,255,255,.08) !important;box-shadow:0 14px 34px rgba(0,0,0,.6) !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;border-radius:10px !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:linear-gradient(#F6F7F7,#D9DDE0) !important;border:1px solid #AEB4B9 !important;box-shadow:inset 0 1px 0 #fff,0 10px 24px rgba(22,25,27,.18) !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;border-radius:10px !important}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabItem{border-radius:6px !important}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:transparent !important;color:var(--brand) !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#2A2F33 !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:transparent !important;color:#9A4F12 !important}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabItem.active .tabIcon svg :is(path,rect,polygon){fill-opacity:0 !important}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabLabel{text-transform:uppercase;letter-spacing:.08em;font-size:10px;font-weight:700}
 /* Kochmodus: Schritt als Karte mit Kupferkante, Zeiten als rote LED */
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookStep{border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);border-top:3px solid var(--brand)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookStep{border-radius:6px;box-shadow:inset 0 0 0 1px #D5D9DC;border-top:3px solid var(--brand)}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.cookTimerTime,.cookPill,.nowCookingSub){font-family:"Skin Insel", ui-monospace, monospace;font-variant-numeric:tabular-nums}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookTimerTime{color:var(--led);text-shadow:0 0 10px rgba(255,59,48,.55)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookTimerTime{color:var(--led);text-shadow:0 0 10px rgba(255,59,48,.55);background:#0E0F10;padding:2px 8px;border-radius:4px}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookProgressBar,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookTimerBar,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .nowCookingBar{background:var(--brand) !important}
 /* „Kochen läuft“: dunkles Paneel mit LED-Zeitstempel */
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .nowCooking{background:#161618;color:#F2F2F0;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.09),0 14px 30px rgba(0,0,0,.55)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .nowCooking{background:#FFFFFF;color:#16191B;border-radius:8px;box-shadow:0 0 0 1px #D5D9DC,0 12px 26px rgba(22,25,27,.2)}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .bonTime{position:absolute;top:-9px;left:12px;padding:1px 7px;background:#0E0F10;color:var(--led);font:600 11px/1.4 "Skin Insel", ui-monospace, monospace;letter-spacing:.08em;border-radius:3px;box-shadow:0 0 0 1px rgba(255,59,48,.35);text-shadow:0 0 6px rgba(255,59,48,.6)}
 /* Timer-Hinweis */
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .timerAlertCard{background:#161618;color:#F2F2F0;border-radius:10px;box-shadow:0 0 0 1px rgba(255,255,255,.09)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .timerAlertCard{background:#FFFFFF;color:#16191B;border-radius:10px;box-shadow:0 0 0 1px #D5D9DC}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .timerAlertTitle{font-family:var(--fontDisplay);font-stretch:72%;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .timerAlertBtn{border-radius:6px}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .timerAlertBtn.primary{background:var(--brand);color:var(--onBrand)}
 /* Mise en place: dunkel, kantig */
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseCard{background:#161618;color:#F2F2F0;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.09),0 20px 50px -20px rgba(0,0,0,.8)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseHead{border-bottom:1px solid rgba(255,255,255,.09)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseHead b{background:none;color:#F2F2F0;padding:0;transform:none;font-size:var(--fs28)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseCard{background:#FFFFFF;color:#16191B;border-radius:8px;box-shadow:0 0 0 1px #D5D9DC,0 20px 50px -20px rgba(22,25,27,.45)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseHead{border-bottom:1px solid #E2E5E7}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseHead b{background:none;color:#16191B;padding:0;transform:none;font-size:var(--fs28)}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseHead span{color:var(--sub)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseList label{border-bottom-color:rgba(255,255,255,.07)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseList label{border-bottom-color:#E9ECEE}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseList input{accent-color:#D9822B}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseList span,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseCount{color:var(--sub)}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseList input:checked ~ em{color:var(--muted)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseFoot{border-top:1px solid rgba(255,255,255,.09)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseFoot{border-top:1px solid #E2E5E7}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseFoot button{border-radius:6px;text-transform:uppercase;letter-spacing:.08em;font-size:var(--fs14);font-weight:700}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseSkip{color:var(--sub)}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseGo{background:var(--brand);color:var(--onBrand)}
