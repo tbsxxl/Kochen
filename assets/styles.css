@@ -3693,3 +3693,289 @@ html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .worldClock.isTimer .w
 html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .wcGem{transform-origin:0 0}
 @media (prefers-reduced-motion: no-preference){ html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .wcGem{animation:wcPulse 2.4s ease-in-out infinite} html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .worldClock.isTimer .wcGem{animation-duration:.9s} }
 @keyframes wcPulse{50%{opacity:.7;transform:scale(.92)}}
+
+/* ==== 16. Welten mit eigenem Material und Aufbau (Nov. 2026, nach den Entwürfen, Wahl des Besitzers „setze alles um“).
+   Zauberschule = Buch, Nordwall = Kartentisch, Insel = Monitor der Station, Jahr 3000 = Zeichentrick, Zwei Städte = geteilte
+   Stadt, Akte = Schreibtisch. Selektoren mit .skin + :not(._e) schlagen die älteren Abschnitte 11/15. ==== */
+
+/* ---------- gemeinsam: alte Blattkanten, Horizont-Abstand und Überschrift-Schmuck aus Abschnitt 11 aus ---------- */
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageContent::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday::before{display:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageContent,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday ~ .section{
+  -webkit-mask:none !important;mask:none !important;border-radius:0 !important;box-shadow:none !important;background:transparent !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday{margin-top:28px !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageTitleBlock{padding-bottom:20px !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2){background-image:none !important;padding-left:0 !important;padding-bottom:0 !important;border:0 !important;box-shadow:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2)::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2)::after{content:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) .homeToday .linkCard::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) .homeToday .linkCard::after{content:none !important}
+
+/* ============ ZAUBERSCHULE: aufgeschlagenes Buch ============ */
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body{--field:#F1E3C2;--onField:#2A1A12;--onField2:#6A5240;--fieldFill:rgba(110,70,30,.08);--bg:#F1E3C2;--surface:#F8EED6;--statusBar:#2A1712;--gold:#9A7628}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e){background:#2A1712 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body{background:radial-gradient(120% 60% at 70% 10%,rgba(255,250,235,.55),transparent 60%),linear-gradient(90deg,rgba(90,55,25,.36),rgba(90,55,25,.06) 6%,transparent 12%),#F1E3C2 !important;
+  margin-left:8px;box-shadow:-6px 0 0 #E2CFA8,-8px 0 0 #CDB689;min-height:100vh}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body::before{background:#2A1712 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeGreetingTitle,.pageTitleBlock .h1,.homeGreetingSub,.brandWordmark){color:#2A1A12 !important;text-shadow:none !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeGreetingSub{font-family:var(--fontDisplay);font-style:italic;font-size:var(--fs18)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun{text-align:center;font:italic var(--fs14) var(--fontDisplay);color:#7A5A3A;letter-spacing:.08em;margin:2px 0 10px}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun b{font-style:normal;color:var(--gold);margin:0 8px}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRibbon{position:absolute;right:104px;top:0;width:20px;height:calc(env(safe-area-inset-top) + 130px);z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,#6E1A2A,#8E2436 50%,#6E1A2A);clip-path:polygon(0 0,100% 0,100% 100%,50% 88%,0 100%);filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsIntro{margin:0 0 22px;font:var(--fs18)/1.45 var(--fontDisplay);color:#3B2A1A}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsIntro::first-letter{float:left;font-size:3.6em;line-height:.8;color:#6E1A2A;margin:6px 10px 0 0;padding:4px 7px;border:1.5px solid var(--gold);background:#F8EED6;box-shadow:inset 0 0 0 3px #F1E3C2,inset 0 0 0 4px rgba(154,118,40,.6)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:rgba(255,250,235,.6) !important;color:#2A1A12 !important;box-shadow:inset 0 0 0 1px rgba(154,118,40,.55) !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .searchRowIcon input{background:transparent !important;color:#2A1A12 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(input)::placeholder{color:#7A5A3A !important;font-style:italic}
+/* Gericht des Tages als ovales Goldrahmen-Porträt mit Namensschild */
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured{background:none !important;box-shadow:none !important;border-radius:0 !important;padding:0 0 30px !important;overflow:visible !important;display:flex;flex-direction:column;align-items:center}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcImg{width:min(62vw,260px);aspect-ratio:236/290;height:auto !important;border-radius:50% !important;padding:9px;
+  background:conic-gradient(from 200deg,#8A6A22,#F3D27A,#B08A2E,#F7E0A0,#8A6A22,#F3D27A,#8A6A22) !important;box-shadow:0 12px 26px rgba(60,30,10,.35) !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcImg img{border-radius:50% !important;border:4px solid #3A2410}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .heroOverlayCat{display:none}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcBody{position:relative !important;inset:auto !important;background:none !important;padding:0 !important;margin-top:-18px;display:flex;flex-direction:column;align-items:center;color:#2A1A12 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .homeFeaturedTitle{padding:6px 18px 5px;font:italic var(--fs18) var(--fontDisplay) !important;color:#2A1A12 !important;background:linear-gradient(#F7E0A0,#C9A55A);border-radius:3px;box-shadow:0 2px 0 #8A6A22;text-shadow:none !important;text-align:center}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .recipeMeta{color:#6A5240 !important;margin-top:8px;justify-content:center}
+/* Abschnitte wie Kapitel, Karten als kleine gerahmte Bilder */
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2){font-size:var(--fs14) !important;letter-spacing:.24em !important;text-transform:uppercase;color:var(--gold) !important;width:100%;text-align:center}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeSectionHead{justify-content:center;position:relative}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeSectionHead .homeAllLink{position:absolute;right:0}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2)::before{content:"❦  " !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2)::after{content:"  ❦" !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeCard .rcImg{border-radius:2px !important;box-shadow:0 0 0 1px #9A7628,0 0 0 4px #F8EED6,0 0 0 5px rgba(154,118,40,.5),0 6px 14px rgba(60,30,10,.25) !important}
+/* Rezeptliste als Inhaltsverzeichnis: Seitenzahl je Rezept */
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid{counter-reset:zsPage 6}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .linkCard{counter-increment:zsPage 7}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .rcBody{display:flex !important;flex-direction:row !important;flex-wrap:wrap;align-items:baseline}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .recipeTitle{flex:0 1 auto}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .rcBody::before{content:"";order:1;flex:1 1 20px;min-width:20px;margin:0 6px;border-bottom:1.5px dotted rgba(122,90,58,.6);transform:translateY(-.35em)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .rcBody::after{content:"S. " counter(zsPage);order:2;font:italic var(--fs16) var(--fontDisplay);color:#6E1A2A}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .recipeMeta{order:3;flex-basis:100%}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeBody ol{list-style:upper-roman}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .bottomRail{background:linear-gradient(#4A1A22,#38121A) !important;border-radius:8px !important;border:0 !important;box-shadow:inset 0 0 0 1px #9A7628,inset 0 0 0 4px #38121A,inset 0 0 0 5px rgba(201,165,90,.5),0 6px 18px rgba(0,0,0,.35) !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem{color:#E9D6A8 !important;border-radius:6px !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem.active{background:rgba(201,165,90,.18) !important;color:#FFE7A3 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .tabLabel{font-family:var(--fontDisplay)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .worldClock{background:rgba(255,250,235,.55) !important;box-shadow:inset 0 0 0 1px rgba(154,118,40,.6) !important;color:#2A1A12 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .wcTime{color:#6E1A2A !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .wcLabel{color:#7A5A3A !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .houseCup{background:rgba(255,250,235,.55);box-shadow:inset 0 0 0 1px rgba(154,118,40,.6);color:#2A1A12}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .houseCup b{color:#6E1A2A}
+
+/* ============ NORDWALL: Kartentisch ============ */
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) body{--field:#2B1D14;--onField:#ECE6DA;--onField2:#C9A55A;--bg:#22170F;--surface:#2B2B30;--statusBar:#1B120C}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e){background:radial-gradient(130% 60% at 50% 10%,#3B2A1E,#1B120C 70%) fixed,#1B120C !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) body{background:transparent !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .skinScene-nordwall{overflow:visible}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .nwMap{position:absolute;left:10px;right:10px;top:calc(env(safe-area-inset-top) + 6px);bottom:36px;border-radius:4px;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 40%,#D9C49A,#B89A68 70%,#8E7246);box-shadow:0 16px 40px rgba(0,0,0,.6),inset 0 0 50px rgba(70,45,20,.6)}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .nwMap svg{position:absolute !important;inset:0;width:100%;height:100%}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .scList .nwMap{bottom:18px}
+/* Datum auf einer Eisenplatte mit Nieten */
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeGreetingTitle,.pageTitleBlock .h1){position:relative;display:block;margin:8px 4px 0;padding:16px 18px 14px;text-align:center;color:#E9E2D2 !important;text-shadow:0 2px 0 #121417 !important;
+  font-weight:700 !important;letter-spacing:.06em;background:radial-gradient(circle at 10px 10px,#C8CDD2 0 2px,#5A5F65 2.5px,transparent 3.5px),radial-gradient(circle at calc(100% - 10px) 10px,#C8CDD2 0 2px,#5A5F65 2.5px,transparent 3.5px),linear-gradient(160deg,#4A4F55,#2C3036 60%,#3A3F45);
+  border-radius:3px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -2px 0 rgba(0,0,0,.4),0 10px 24px rgba(0,0,0,.55)}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreetingTitle{font-size:min(8.6vw,2.2rem) !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .homeGreetingSub{text-align:center;color:#3B2A14 !important;font:700 var(--fs12) Inter !important;letter-spacing:.32em;text-transform:uppercase;margin-top:12px;text-shadow:none !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .homeBrand :is(.brandWordmark){color:#3B2A14 !important;text-shadow:none !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:rgba(43,29,20,.82) !important;color:#ECE6DA !important;box-shadow:inset 0 0 0 1px rgba(201,165,90,.5),0 4px 10px rgba(0,0,0,.35) !important;border-radius:4px !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .searchRowIcon input{background:transparent !important}
+/* Rezepte als Wappenfahnen (Farbe und Zeichen je Hauptzutat aus data-protein) */
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard{background:linear-gradient(var(--banner,#5A1212),color-mix(in srgb,var(--banner,#5A1212) 70%,#000)) !important;border-radius:0 !important;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 90%,0 100%);padding:12px 10px 34px !important;box-shadow:inset 0 0 0 3px rgba(201,165,90,.6) !important;text-align:center}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard::before{display:none !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .linkCard{padding-top:10px;position:relative}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .linkCard::before{content:"";position:absolute;left:-6px;right:-6px;top:2px;height:7px;border-radius:4px;background:linear-gradient(#6B5A3C,#3B301E);box-shadow:0 2px 3px rgba(0,0,0,.5);z-index:1}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard .rcImg{width:76%;margin:0 auto;aspect-ratio:1;border-radius:50% !important;box-shadow:0 0 0 2px #C9A55A,0 0 0 4px rgba(0,0,0,.4) !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard .rcImg img{border-radius:50%}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard .recipeTitle{font:700 var(--fs14)/1.15 var(--fontDisplay) !important;letter-spacing:.06em;text-transform:uppercase;color:#F3EADA !important;margin-top:10px}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard .recipeMeta{justify-content:center;color:rgba(243,234,218,.75) !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured{border-radius:3px !important;box-shadow:0 0 0 3px #3A3F45,0 0 0 5px #121417,0 16px 30px rgba(0,0,0,.6) !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2){color:#E9CF8F !important;letter-spacing:.12em !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .bottomRail{background:linear-gradient(#3A3F45,#24282D) !important;border-radius:6px !important;border:0 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 20px rgba(0,0,0,.6) !important}
+
+/* ============ DIE INSEL: Monitor der Station ============ */
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body{--field:#050403;--onField:#FFB000;--onField2:rgba(255,176,0,.75);--bg:#050403;--surface:#0E0C08;--statusBar:#2A2618;
+  --fontUi:"Skin Insel", ui-monospace, monospace;--fontDisplay:"Skin Insel", ui-monospace, monospace}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e){background:#050403 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body{padding:0 10px;background:radial-gradient(130% 70% at 50% 30%,#1A1408,#050403 75%) fixed,#050403 !important;font-family:var(--fontUi)}
+/* Gehäuse: beiger Rahmen um den ganzen Bildschirm, Röhrenwölbung, Bildschirmzeilen */
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body::after{content:"";position:fixed;inset:0;z-index:1200;pointer-events:none;border:10px solid #CFC4A8;border-top-width:calc(env(safe-area-inset-top) + 10px);border-bottom-width:0;
+  border-radius:0;box-shadow:inset 0 0 0 3px #1E1A10,inset 0 0 50px rgba(0,0,0,.85);background:repeating-linear-gradient(to bottom,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body::before{background:#2A2618 !important;z-index:1300}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .pageContent::after{content:none !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeGreetingTitle,.pageTitleBlock .h1){font-family:"Skin Insel", ui-monospace, monospace !important;color:#FFB000 !important;letter-spacing:.08em !important;text-transform:uppercase;text-shadow:0 0 10px rgba(255,176,0,.55) !important;font-size:min(8.4vw,2.2rem) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeGreetingSub,.brandWordmark){color:rgba(255,176,0,.8) !important;text-transform:uppercase;letter-spacing:.14em;font-size:var(--fs12) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .inHdr{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,176,0,.7);margin-bottom:12px}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:transparent !important;color:#FFB000 !important;box-shadow:inset 0 0 0 1px rgba(255,176,0,.5) !important;border-radius:4px !important;font-family:var(--fontUi)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .searchRowIcon input{background:transparent !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) input::placeholder{color:rgba(255,176,0,.6) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .homeQuickBtn{background:linear-gradient(#EFE8D6,#CFC4A8) !important;color:#2A2618 !important;border-radius:8px !important;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),0 3px 0 #6B6450 !important;text-shadow:none}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .worldClock{margin:18px auto 0 !important;width:100% !important;justify-content:center;background:transparent !important;box-shadow:none !important;padding:0 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .wcText{align-items:center}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .wcTime{font-size:3.4rem !important;gap:6px !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .wcFlap{min-width:.82em !important;padding:8px 6px 4px !important}
+/* Rezepte als nummerierte Einträge, Heute-Karte als Fenster mit Titelleiste */
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured{border-radius:4px !important;box-shadow:0 0 0 1px rgba(255,176,0,.5) !important;background:#050403 !important;overflow:hidden}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .inBar{display:flex;justify-content:space-between;padding:6px 10px;background:rgba(255,176,0,.14);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#FFB000}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcImg{border-radius:0 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2){font-size:var(--fs14) !important;letter-spacing:.2em !important;text-transform:uppercase;color:#FFB000 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2)::before{content:">: " !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid{counter-reset:inEntry}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .linkCard{counter-increment:inEntry}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeCard .rcImg{border-radius:2px !important;box-shadow:0 0 0 1px rgba(255,176,0,.4) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeTitle{font-family:var(--fontUi) !important;text-transform:uppercase;letter-spacing:.04em;color:#FFB000 !important;font-size:var(--fs16) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .recipeTitle::before{content:"[" counter(inEntry, decimal-leading-zero) "] ";opacity:.6}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeMeta{color:rgba(255,176,0,.7) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .bottomRail{background:transparent !important;border:0 !important;box-shadow:none !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;gap:6px}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem{background:linear-gradient(#EFE8D6,#CFC4A8) !important;color:#2A2618 !important;border-radius:8px !important;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),0 3px 0 #6B6450 !important;text-shadow:none}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem.active{background:linear-gradient(#FFC94A,#E09A00) !important;color:#1A1300 !important}
+
+/* ============ JAHR 3000: Zeichentrick ============ */
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) body{--field:#5FD3FF;--onField:#14141A;--onField2:#14141A;--bg:#B6F2E4;--surface:#FFFFFF;--surface2:#F2FBFF;--fill:rgba(20,20,26,.06);--line:#14141A;--lineStrong:#14141A;
+  --text:#14141A;--sub:#33334A;--sub2:#33334A;--muted:#45455C;--brand:#FFD23F;--onBrand:#14141A;--leaf:#FFD23F;--onLeaf:#14141A;--sel:#FFD23F;--onSel:#14141A;--accent:#14141A;--onAccent:#FFFFFF;
+  --statusBar:#14141A;--ink:#14141A;color-scheme:light}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay{--cBg:#B6F2E4;--cCard:#FFFFFF;--cFill:rgba(20,20,26,.06);--cLine:#14141A;--cText:#14141A;--cSub:#33334A;--cLeaf:#FFD23F;--cOnLeaf:#14141A}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e){background:linear-gradient(#5FD3FF,#B6F2E4 55vh,#FFE7A8 120vh) !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) body{background:transparent !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .j3Planet{position:absolute;right:-36px;top:calc(env(safe-area-inset-top) + 196px);width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFC46B,#FF8A1F 70%);border:3px solid #14141A}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .j3Planet::after{content:"";position:absolute;left:-34px;top:44px;width:172px;height:24px;border:3px solid #14141A;border-radius:50%;transform:rotate(-14deg);border-top-color:transparent}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .j3Cloud{position:absolute;background:#fff;border:3px solid #14141A;border-radius:40px}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeGreetingTitle,.pageTitleBlock .h1){color:#FFD23F !important;-webkit-text-stroke:3px #14141A;paint-order:stroke fill;text-shadow:4px 4px 0 #14141A !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeGreetingSub,.brandWordmark){color:#14141A !important;font-weight:700;text-shadow:none !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.card,.listGroup,.notesCard,.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon,.recipeCookBtn,.btn,.chip,.segmented){border:3px solid #14141A !important;box-shadow:4px 4px 0 #14141A !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:#fff !important;color:#14141A !important;border-radius:26px !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .searchRowIcon input{border:0 !important;box-shadow:none !important;background:transparent !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeCard .rcImg{border-radius:14px !important;box-shadow:0 0 0 3px #14141A !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard{background:#5EE6B0 !important;border:3px solid #14141A;border-radius:18px;padding:8px;box-shadow:4px 4px 0 #14141A !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .linkCard:nth-child(even) .recipeCard{background:#FFD23F !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured{background:#FF8A1F !important;padding:12px !important;border:3px solid #14141A;border-radius:28px !important;box-shadow:6px 6px 0 #14141A !important;overflow:visible}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcImg{border-radius:22px/30px !important;border:3px solid #14141A;box-shadow:none !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday{position:relative}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .j3Bubble{position:absolute;right:12px;top:78px;z-index:3;padding:9px 14px;background:#fff;border:3px solid #14141A;border-radius:18px;font:var(--fs16) var(--fontDisplay);color:#14141A;box-shadow:3px 3px 0 #14141A}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .j3Bubble::after{content:"";position:absolute;left:24px;bottom:-13px;width:16px;height:13px;background:#fff;border:3px solid #14141A;border-top:0;border-left:0;transform:skewX(-30deg)}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2){color:#14141A !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .bottomRail{background:#fff !important;border:3px solid #14141A !important;border-radius:32px !important;box-shadow:5px 5px 0 #14141A !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem{color:#14141A !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem.active{background:#FFD23F !important;color:#14141A !important;box-shadow:inset 0 0 0 3px #14141A !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .worldClock{background:#fff !important;border:3px solid #14141A;box-shadow:4px 4px 0 #14141A !important;color:#14141A}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .wcTime{color:#14141A !important;text-shadow:none !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .wcLabel{color:#33334A !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .tvSet{border:3px solid #14141A;box-shadow:6px 6px 0 #14141A !important}
+
+/* ============ ZWEI STÄDTE: oben golden, unten Neon ============ */
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body{--field:#F6ECD3;--onField:#152039;--onField2:#6B5A3A;--statusBar:#152039}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e){background:#F6ECD3 !important}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) .zwRays{position:absolute;inset:0;background:repeating-conic-gradient(from 180deg at 50% 118%,rgba(201,165,90,.16) 0 4deg,transparent 4deg 9deg),linear-gradient(#FBF3DF,#EADBB4)}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeGreetingTitle,.pageTitleBlock .h1){color:#152039 !important;text-shadow:none !important}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreetingTitle::first-line{color:#152039}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeGreetingSub,html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) .brandWordmark{color:#6B5A3A !important;text-shadow:none !important}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) .zwTop{font:600 var(--fs12) Inter;letter-spacing:.32em;text-transform:uppercase;color:#9A7628;margin:6px 0 2px}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .homeGreeting{border-top:2px solid #B08A2E;padding-top:12px;margin-top:8px}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:rgba(255,255,255,.55) !important;color:#152039 !important;border-radius:0 !important;box-shadow:inset 0 0 0 1.5px #B08A2E !important;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .searchRowIcon input{background:transparent !important;box-shadow:none !important;clip-path:none}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) input::placeholder{color:#6B5A3A !important}
+/* Riss in die Unterstadt */
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .pageContent,html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeToday,html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeToday ~ .section{background:#0A0E1A !important}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .pageContent,html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeToday{border-radius:0 !important;box-shadow:none !important;-webkit-mask:none !important;mask:none !important;
+  background-image:radial-gradient(80% 40% at 85% 6%,rgba(255,63,164,.22),transparent 60%),radial-gradient(70% 30% at 10% 40%,rgba(0,240,255,.12),transparent 60%) !important}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .pageContent::after,html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeToday::after{content:"";position:absolute;left:0;right:0;top:-34px;height:36px;background:#0A0E1A;pointer-events:none;
+  clip-path:polygon(0 40%,6% 22%,12% 46%,19% 18%,27% 50%,33% 26%,41% 44%,48% 14%,55% 48%,63% 24%,70% 52%,78% 20%,85% 46%,92% 26%,100% 40%,100% 100%,0 100%)}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .pageContent,html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeToday{position:relative}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2){color:#FF3FA4 !important;transform:rotate(-3deg);transform-origin:0 50%;text-shadow:0 0 14px rgba(255,63,164,.7) !important;display:inline-block}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2)::after{content:"" !important;display:block;height:4px;margin-top:-2px;background:#FF3FA4;border-radius:2px;transform:skewX(-20deg)}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) .worldClock{background:rgba(255,255,255,.5) !important;box-shadow:inset 0 0 0 1.5px #B08A2E !important}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) .wcTime{color:#152039 !important;text-shadow:none !important}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) .wcLabel{color:#6B5A3A !important}
+
+/* ============ AKTE: Schreibtisch mit Papier ============ */
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body{--field:#2B1D14;--onField:#F0E6D6;--onField2:#C9B79B;--bg:#2B1D14;--statusBar:#1E140D;--text:#F0E6D6;--sub:#C9B79B;--sub2:#C9B79B;--muted:#B5A486;--fill:rgba(255,255,255,.08);--line:rgba(255,255,255,.14)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e){background:#2B1D14 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body{background:repeating-linear-gradient(92deg,rgba(0,0,0,.06) 0 2px,transparent 2px 9px),linear-gradient(160deg,#4A3424,#2B1D14) fixed,#2B1D14 !important}
+/* Aktendeckel mit Reiter, darin das Blatt */
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreeting{position:relative;margin:34px 4px 0;padding:20px 18px 18px;background:#F4EFE3;transform:rotate(-.5deg);
+  box-shadow:0 0 0 12px #D5BC86,0 2px 0 12px #B89B62,0 18px 30px 12px rgba(0,0,0,.45)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreeting::before{content:attr(data-akte);position:absolute;left:-12px;top:-44px;padding:7px 14px 8px;background:#D5BC86;border-radius:8px 8px 0 0;font:var(--fs12) var(--fontDisplay);color:#3A2A14;letter-spacing:.06em}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreeting::after{content:"";position:absolute;right:42px;top:-24px;width:20px;height:54px;border:3px solid #9AA1A7;border-radius:12px;border-bottom-color:transparent}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home :is(.homeGreetingTitle,.homeGreetingSub,.brandWordmark){color:#1C252E !important;text-shadow:none !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeBrand{opacity:.75}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .akMeta{display:flex;flex-direction:column;gap:2px;margin-top:12px;padding-top:10px;border-top:1px dashed #9AA3AB;font:var(--fs14)/1.5 var(--fontDisplay);color:#46525E}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .akMeta b{font-weight:400;color:#1C252E}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .akStamp{position:absolute;right:14px;top:58px;padding:3px 10px;border:3px solid #A3262A;color:#A3262A;font:var(--fs18) var(--fontDisplay);letter-spacing:.14em;text-transform:uppercase;transform:rotate(-10deg);opacity:.85}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:#F4EFE3 !important;color:#1C252E !important;border-radius:2px !important;box-shadow:0 4px 10px rgba(0,0,0,.35) !important;font-family:var(--fontDisplay)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .searchRowIcon input{background:transparent !important;box-shadow:none !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreeting ~ .section{margin-top:26px}
+/* Gericht des Tages als Polaroid */
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured{background:#FCFBF7 !important;padding:12px 12px 0 !important;border-radius:0 !important;box-shadow:0 12px 24px rgba(0,0,0,.45) !important;transform:rotate(1.6deg);overflow:hidden}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcImg{border-radius:0 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .heroOverlayCat{display:none}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcBody{position:relative !important;inset:auto !important;background:none !important;padding:10px 4px 14px !important;color:#1C252E !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .homeFeaturedTitle{color:#1C252E !important;text-shadow:none !important;font-size:var(--fs22) !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .recipeMeta{color:#46525E !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .akCaption{display:block;font:var(--fs12) var(--fontDisplay);letter-spacing:.14em;text-transform:uppercase;color:#A3262A;margin-bottom:2px}
+/* weitere Rezepte als Karteikarten */
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard{background:#F4EFE3 !important;padding:8px !important;border-radius:0 !important;box-shadow:0 4px 10px rgba(0,0,0,.35) !important;
+  background-image:linear-gradient(transparent calc(100% - 36px),rgba(163,38,42,.45) calc(100% - 36px),rgba(163,38,42,.45) calc(100% - 35px),transparent calc(100% - 35px)) !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .linkCard:nth-child(odd) .recipeCard{transform:rotate(-1deg)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard .recipeTitle{color:#1C252E !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2){color:#F0E6D6 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .bottomRail{background:#1E2A22 !important;border-radius:6px !important;border:0 !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 8px 18px rgba(0,0,0,.5) !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem{color:#C9C2B0 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem.active{background:rgba(244,239,227,.12) !important;color:#F4EFE3 !important}
+
+/* ============ BRIGADE: mehr Küche aus der Serie ============ */
+/* Bon des Tages: Thermopapier mit Abrisskante über der Heute-Karte */
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .brTicket{position:relative;z-index:2;width:min(76%,300px);margin:0 0 -14px 14px;padding:12px 14px 16px;background:#FAFAF7;color:#16191B;
+  font:500 var(--fs14)/1.45 ui-monospace,"SF Mono",Menlo,monospace;transform:rotate(-1.5deg);box-shadow:0 10px 20px rgba(0,0,0,.45);
+  -webkit-mask:radial-gradient(circle at 5px 100%,transparent 4px,#000 4.5px) 0 0/10px 100% repeat-x;mask:radial-gradient(circle at 5px 100%,transparent 4px,#000 4.5px) 0 0/10px 100% repeat-x}
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .brTicket::before{content:"";position:absolute;left:50%;top:-8px;width:56px;height:14px;transform:translateX(-50%);background:linear-gradient(#C9CDD1,#7D858B);border-radius:2px;box-shadow:0 2px 3px rgba(0,0,0,.4)}
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .btHead{display:flex;justify-content:space-between;font-weight:700;border-bottom:1px dashed #999;padding-bottom:4px;margin-bottom:6px}
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .btLine{display:flex;gap:10px;font-size:var(--fs18);font-weight:700;text-transform:uppercase}
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .btLine b{color:#B3261E}
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .btMeta{color:#555}
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .btFoot{margin-top:6px;padding-top:4px;border-top:1px dashed #999;font-size:var(--fs12);letter-spacing:.12em;text-transform:uppercase;color:#555}
+/* Kategorien und Tags auf der Rezeptseite als blaues Malerband mit schmaler Versalschrift */
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeTags .chip{background:#7FB2EE !important;color:#0E1A2E !important;border-radius:1px !important;font:800 var(--fs12) "Archivo",sans-serif !important;font-stretch:72% !important;text-transform:uppercase;letter-spacing:.06em;
+  -webkit-mask:linear-gradient(90deg,transparent 0,#000 3px,#000 calc(100% - 3px),transparent 100%);mask:linear-gradient(90deg,transparent 0,#000 3px,#000 calc(100% - 3px),transparent 100%)}
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeTags .chip:nth-child(odd){transform:rotate(-1.2deg)}html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeTags .chip:nth-child(even){transform:rotate(.8deg)}
+/* Zutaten wie beschriftete Behälter: Menge auf Malerband */
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) #ingredientsList .uRight{background:#7FB2EE;color:#0E1A2E;padding:1px 6px;font:800 var(--fs12) "Archivo",sans-serif;font-stretch:72%;text-transform:uppercase;letter-spacing:.04em;border-radius:1px}
+
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .scList .j3Planet{top:calc(env(safe-area-inset-top) + 14px);right:-60px;width:90px;height:90px}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .scList .j3Cloud{display:none}
+
+/* Nachbesserungen nach Screenshots */
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.card,.listGroup,.recipePageCard,.notesCard,.sheet,.hScroll .recipeCard,.miseCard){--text:#1C252E;--sub:#46525E;--sub2:#46525E;--muted:#57636F;--fill:rgba(43,58,72,.08);--line:rgba(43,58,72,.16);color:#1C252E}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay{--cBg:#2B1D14;--cCard:#F4EFE3;--cText:#1C252E;--cSub:#46525E;--cFill:rgba(255,255,255,.1);--cLine:rgba(43,58,72,.16)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay .cookStep{font-family:var(--fontDisplay);color:#1C252E;box-shadow:0 6px 14px rgba(0,0,0,.35);transform:rotate(-.4deg)}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .pageContent::after{top:-16px;height:18px}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .pageTitleBlock{padding-bottom:34px !important}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .pageTitleBlock .h1{font-size:min(7.2vw,1.9rem) !important;hyphens:manual}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .segBtn{color:#14141A !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .segBtn.active{background:#FFD23F !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .navCompact{background:#fff !important;color:#14141A !important;border:3px solid #14141A;box-shadow:3px 3px 0 #14141A}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay .cookStep{border:3px solid #14141A;box-shadow:4px 4px 0 #14141A}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay .cookStep{font-family:var(--fontDisplay);background:#F8EED6;color:#2A1A12;box-shadow:inset 0 0 0 1px rgba(154,118,40,.55),inset 0 0 0 4px #F8EED6,inset 0 0 0 5px rgba(154,118,40,.3)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay .cookStep::first-letter{float:left;font-size:3em;line-height:.8;color:#6E1A2A;margin:6px 8px 0 0}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay .cookStep{color:#FFB000;text-shadow:0 0 8px rgba(255,176,0,.4);box-shadow:inset 0 0 0 1px rgba(255,176,0,.4)}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.segBtn,.segBtn *){color:#14141A !important;opacity:1 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) input::placeholder{color:#57636F !important;opacity:1}
+
+/* impeccable-Kritik: keine verschachtelten Karten auf der Rezeptseite, Leuchten nur für Überschriften, Markierung/Cursor je Welt */
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .recipePageCard .card,html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) .recipePageCard .card,html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .recipePageCard .card,html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) .recipePageCard .card{box-shadow:none !important;border:0 !important;clip-path:none !important;background:transparent !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:rgba(154,118,40,.3)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#6E1A2A}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:rgba(201,165,90,.35)}
+html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#C9A55A}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:rgba(255,176,0,.35)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#FFB000}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:#FFD23F}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#14141A}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:rgba(0,240,255,.3)}
+html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#FF3FA4}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:rgba(163,38,42,.25)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#A3262A}
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:rgba(217,130,43,.35)}
+html.skin.skin-brigade:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#D9822B}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 6px);margin:0 !important;font-size:var(--fs12) !important;pointer-events:none}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun{text-align:left;padding-left:30px}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRibbon{right:76px !important}
+html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .j3Bubble{top:150px !important}

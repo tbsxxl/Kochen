@@ -51,7 +51,7 @@
     // Versteckter Retro-Modus (5× auf „Tobis Kochbuch“ auf der Startseite tippen)
     // Skins (Nov. 2026): Standard, Retro und acht weitere; gewählt unter „Mehr“ → „Skin“ (kochbuch.ui.skin, pro Gerät).
     // Wert = Farbe der Statusleiste/theme-color. Skins außer Standard haben ein festes Aussehen (kein Hell/Dunkel).
-    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#23271F', diner:'#B3122E', bauhaus:'#111111', nordwall:'#1C2126', zauberschule:'#151A36', jahr3000:'#0B1E3B', zweistaedte:'#1F4D52', insel:'#050607', akte:'#1E2933', brigade:'#0E0F10' };
+    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#23271F', diner:'#B3122E', bauhaus:'#111111', nordwall:'#1B120C', zauberschule:'#2A1712', jahr3000:'#14141A', zweistaedte:'#152039', insel:'#2A2618', akte:'#1E140D', brigade:'#0E0F10' };
     window.KOCHBUCH_SKIN = function(){
       var s = null;
       try { s = JSON.parse(localStorage.getItem('kochbuch.ui.skin')); if (!s && JSON.parse(localStorage.getItem('kochbuch.ui.retro'))) s = 'retro'; } catch(e){}

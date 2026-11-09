@@ -11,101 +11,20 @@
   // auf breiten Bildschirmen höchstens 640 px breit), dazu Wetter-Ebenen (Schnee, Regen, Sterne) über die ganze Breite.
   const SCENES = {
     // Nordwall: Schneefall, Kompassrose, die Eismauer am Horizont mit Burg und Fackeln
-    nordwall: ()=> `<div class="scSnow"></div>
-      ${svg("-50 -50 100 100", `
-        <circle r="44" fill="none" stroke="rgba(236,230,218,.22)" stroke-width="1"/>
-        <circle r="36" fill="none" stroke="rgba(236,230,218,.14)" stroke-width="1" stroke-dasharray="2 3"/>
-        <path d="M0-46 L6 0 L0 46 L-6 0Z M-46 0 L0 -6 L46 0 L0 6Z" fill="rgba(236,230,218,.2)"/>
-        <path d="M0-46 L6 0 L-6 0Z" fill="rgba(155,34,34,.9)"/>
-        <text y="-49" text-anchor="middle" font-size="9" fill="rgba(236,230,218,.5)" font-family="serif">N</text>`, 'class="scCompass"')}
-      ${svg("0 0 400 64", `
-        <defs><linearGradient id="scIce" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6F1F6"/><stop offset="1" stop-color="#8FB0C2"/></linearGradient></defs>
-        <path d="M0 14 L60 12 L120 15 L190 11 L260 14 L330 12 L400 15 V64 H0Z" fill="url(#scIce)" opacity=".85"/>
-        <g stroke="#6F93A8" stroke-width=".8" opacity=".6"><path d="M40 14 V40 M95 13 V36 M150 14 V44 M222 12 V38 M290 14 V42 M355 13 V34"/></g>
-        <g fill="#141A1F">
-          <path d="M150 64 V40 h6 v-4 h4 v4 h6 v-4 h4 v4 h6 V64Z"/>
-          <path d="M182 64 V30 h4 v-4 h4 v4 h4 v-4 h4 v4 h4 V64Z"/>
-          <path d="M206 64 V44 h30 V64Z"/><path d="M236 64 V36 h4 v-4 h4 v4 h4 v-4 h4 v4 h4 V64Z"/>
-          <path d="M120 64 Q170 52 270 64Z"/>
-        </g>
-        <path d="M190 30 v-8 l8 3 -8 3" fill="#9B2222"/>
-        <g fill="#FFB347"><circle cx="160" cy="48" r="1.4"/><circle cx="194" cy="40" r="1.4"/><circle cx="224" cy="52" r="1.4"/><circle cx="246" cy="44" r="1.4"/></g>`, 'class="scHorizon" preserveAspectRatio="xMaxYMax meet"')}`,
-    // Zauberschule: verzauberte Decke mit schwebenden Kerzen, Schloss mit erleuchteten Fenstern auf dem Hügel
-    zauberschule: ()=> `<div class="scStars"></div>` +
-      [62, 70, 78, 86, 94, 74, 90].map((x, i)=> `<span class="scCandle" style="left:${x}%;top:calc(env(safe-area-inset-top) + ${[70,104,58,92,66,140,128][i]}px);--d:${(i * .7).toFixed(1)}s"></span>`).join("") +
-      svg("0 0 400 64", `
-        <path d="M150 64 Q250 30 400 40 V64Z" fill="#0D1126"/>
-        <g fill="#0D1126">
-          <path d="M260 40 V22 l5 -12 5 12 V40Z"/><path d="M280 38 V14 l6 -14 6 14 V38Z"/><path d="M300 40 V26 h18 V40Z"/>
-          <path d="M318 40 V18 l5 -12 5 12 V40Z"/><path d="M336 42 V28 l4 -9 4 9 V42Z"/><path d="M270 42 h80 v-6 h-80Z"/>
-        </g>
-        <g fill="#FFD27A"><rect x="285" y="20" width="2" height="3"/><rect x="285" y="28" width="2" height="3"/><rect x="305" y="30" width="2" height="3"/><rect x="311" y="30" width="2" height="3"/><rect x="322" y="24" width="2" height="3"/><rect x="264" y="28" width="2" height="3"/></g>`, 'class="scHorizon" preserveAspectRatio="xMaxYMax meet"'),
-    // Jahr 3000: Ringplanet, Skyline mit Röhrenbahn und Leuchtschild, fliegendes Auto
-    jahr3000: ()=> `<div class="scStars"></div>
-      ${svg("0 0 100 60", `
-        <circle cx="50" cy="30" r="16" fill="#FF8A3D"/><circle cx="44" cy="25" r="5" fill="#FFB27A" opacity=".6"/>
-        <ellipse cx="50" cy="31" rx="34" ry="7" fill="none" stroke="#7FE0C0" stroke-width="2.4" transform="rotate(-12 50 31)"/>
-        <path d="M66 30 a16 16 0 0 1 -32 2" fill="#FF8A3D" transform="rotate(-12 50 31)" opacity="0"/>`, 'class="scPlanet"')}
-      ${svg("0 0 400 64", `
-        <g fill="#13305A">
-          <rect x="150" y="30" width="22" height="34" rx="3"/><rect x="178" y="12" width="14" height="52" rx="7"/><circle cx="185" cy="10" r="8"/>
-          <path d="M200 64 V26 Q212 6 224 26 V64Z"/><rect x="232" y="34" width="26" height="30" rx="8"/>
-          <path d="M266 64 V24 L276 2 L286 24 V64Z"/><rect x="294" y="18" width="28" height="46" rx="4"/><rect x="330" y="30" width="18" height="34" rx="9"/><rect x="354" y="10" width="20" height="54" rx="3"/><rect x="380" y="28" width="20" height="36"/>
-        </g>
-        <g fill="#7FE0C0" opacity=".8"><rect x="155" y="36" width="3" height="3"/><rect x="164" y="44" width="3" height="3"/><rect x="236" y="40" width="3" height="3"/><rect x="248" y="48" width="3" height="3"/><rect x="358" y="18" width="3" height="3"/><rect x="366" y="30" width="3" height="3"/><rect x="384" y="36" width="3" height="3"/></g>
-        <rect x="298" y="24" width="20" height="9" rx="2" fill="none" stroke="#FF8A3D" stroke-width="1.2"/><text x="308" y="31" text-anchor="middle" font-size="6" fill="#FF8A3D" font-family="sans-serif" font-weight="700">24/7</text>
-        <path id="scTube" d="M140 40 C200 20 240 56 300 36 S370 20 410 30" fill="none" stroke="rgba(242,255,248,.38)" stroke-width="5" stroke-linecap="round"/>
-        <circle r="3.2" fill="#FF8A3D"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#scTube"/></animateMotion></circle>
-        <g><path d="M-14 0 q7 -6 14 0 h-14z M-16 0 h18 q-2 3 -9 3 q-7 0 -9 -3z" fill="#7FE0C0"/><animateMotion dur="11s" repeatCount="indefinite" path="M120 8 C220 -2 300 14 420 2"/></g>`, 'class="scHorizon" preserveAspectRatio="xMaxYMax meet"')}`,
-    // Zwei Städte: oben die goldene Stadt mit Luftschiff und Kristall, unten Rohre der Unterstadt mit Graffiti und Dunst
-    zweistaedte: ()=> `
-      ${svg("0 0 120 120", `
-        <defs><radialGradient id="scHexG"><stop offset="0" stop-color="#9FF3FF"/><stop offset="1" stop-color="#2A9DD8" stop-opacity=".2"/></radialGradient></defs>
-        <g stroke="#C9A55A" stroke-width="1.2" fill="url(#scHexG)">
-          <path d="M60 18 l22 13 v26 l-22 13 l-22 -13 v-26z"/>
-          <path d="M96 58 l12 7 v14 l-12 7 l-12 -7 v-14z" opacity=".75"/>
-          <path d="M28 70 l10 6 v12 l-10 6 l-10 -6 v-12z" opacity=".6"/>
-        </g>
-        <path d="M60 18 v52 M38 31 l44 26 M82 31 l-44 26" stroke="rgba(255,255,255,.35)" stroke-width=".8"/>`, 'class="scHex"')}
-      ${svg("0 0 80 30", `<ellipse cx="40" cy="12" rx="30" ry="9" fill="#C9A55A"/><path d="M14 12 h52" stroke="#8C6A2A" stroke-width="1"/><rect x="30" y="20" width="20" height="5" rx="2" fill="#8C6A2A"/><path d="M70 12 l8 -5 v10z" fill="#8C6A2A"/>`, 'class="scShip"')}
-      ${svg("0 0 400 64", `
-        <path d="M0 64 V40 Q120 30 240 42 T400 36 V64Z" fill="#0F2F33" opacity=".7"/>
-        <g fill="none" stroke="#0A1416" stroke-width="7"><path d="M140 64 V34 Q140 24 150 24 H210"/><path d="M230 64 V18 H280 Q292 18 292 30 V64"/><path d="M320 64 V28 H400"/></g>
-        <g fill="#0A1416"><rect x="200" y="14" width="12" height="50"/><rect x="352" y="6" width="10" height="58"/><rect x="262" y="40" width="40" height="24"/></g>
-        <g fill="none" stroke="#FF3FA4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M268 48 l6 8 6 -10 6 10"/><path d="M152 30 l8 8 M160 30 l-8 8"/><path d="M330 34 l4 -6 4 6 -4 6z"/>
-        </g>
-        <g fill="#7CF29A" opacity=".55"><circle cx="208" cy="10" r="4"/><circle cx="214" cy="4" r="3"/><circle cx="357" cy="2" r="3"/></g>`, 'class="scHorizon" preserveAspectRatio="xMaxYMax meet"')}
-      <div class="scHaze"></div>`,
-    // Die Insel: Abendrot über dem Meer mit Wellen, Dschungelblätter, Wrack am Strand, Luke im Sand
-    insel: ()=> `<div class="scSea"><span></span><span></span></div>
-      ${svg("0 0 140 120", `
-        <g fill="#16351F">
-          <path d="M140 0 C110 6 96 26 98 50 C112 38 126 36 140 40Z"/>
-          <path d="M140 30 C112 44 104 70 116 96 C122 74 132 62 140 58Z"/>
-          <path d="M104 0 C92 18 70 26 52 24 C70 34 92 28 110 10Z"/>
-          <path d="M120 0 C118 16 104 30 86 38 C110 40 126 26 130 0Z"/>
-        </g>
-        <g stroke="#24502F" stroke-width="1.2" fill="none"><path d="M98 50 C112 36 126 34 140 40"/><path d="M52 24 C72 30 92 26 110 10"/></g>`, 'class="scLeaves"')}
-      ${svg("0 0 400 64", `
-        <path d="M140 64 C200 52 300 54 400 50 V64Z" fill="#C8B184"/>
-        <g fill="#2B2D2F"><path d="M220 54 l64 -12 l4 3 l-60 13z"/><rect x="292" y="40" width="44" height="14" rx="7"/><path d="M336 42 l10 -8 v20 l-10 -2z"/><circle cx="300" cy="47" r="2.5" fill="#1A1C1E"/><circle cx="310" cy="47" r="2.5" fill="#1A1C1E"/><circle cx="320" cy="47" r="2.5" fill="#1A1C1E"/></g>
-        <ellipse cx="180" cy="58" rx="16" ry="4" fill="#4A5A4A" stroke="#2B352B"/>
-        <text x="180" y="60" text-anchor="middle" font-size="3.4" fill="#C8D6C2" font-family="monospace" letter-spacing=".4">4 8 15 16 23 42</text>`, 'class="scHorizon" preserveAspectRatio="xMaxYMax meet"')}`,
-    // Akte: Sturmwolken, Regen, Nebel, Klippe mit Anstalt und Leuchtturm; der Lichtkegel streicht waagerecht über das Meer
-    akte: ()=> `<div class="scRain"></div><div class="scFog"></div><div class="scFlash"></div>
-      ${svg("0 0 400 64", `
-        <path d="M200 64 V44 C230 36 260 30 300 28 L400 26 V64Z" fill="#161F27"/>
-        <g fill="#0E141A"><rect x="236" y="22" width="44" height="12"/><path d="M234 22 l24 -8 24 8z"/><rect x="284" y="26" width="18" height="8"/></g>
-        <g fill="#C9B66A" opacity=".55"><rect x="240" y="26" width="2" height="3"/><rect x="248" y="26" width="2" height="3"/><rect x="262" y="26" width="2" height="3"/><rect x="270" y="26" width="2" height="3"/></g>
-        <path d="M232 36 h76" stroke="#0E141A" stroke-width="1" stroke-dasharray="1.5 2"/>`, 'class="scHorizon" preserveAspectRatio="xMaxYMax meet"')}
-      ${svg("0 0 60 140", `
-        <path d="M22 140 L26 50 H34 L38 140Z" fill="#11181F"/>
-        <path d="M24 70 h12 M23.4 92 h13.2 M22.8 114 h14.4" stroke="#7A2A2A" stroke-width="5"/>
-        <rect x="24" y="40" width="12" height="10" fill="#F4E3A1"/>
-        <path d="M22 40 H38 L30 30Z" fill="#11181F"/><rect x="21" y="49" width="18" height="3" fill="#11181F"/>`, 'class="scTower" preserveAspectRatio="xMidYMax meet"')}
-      <span class="scBeam"></span><span class="scLampGlow"></span>`,
-    // Brigade: Küchen-Terminal – rote LED-Uhr (Sieben-Segment-Ziffern, unbeleuchtete Segmente schwach sichtbar), sonst nichts
+    // Welten mit eigenem Material (Abschnitt 48 · 16): Szene = Untergrund des Felds, kein Wetter, kein 3D
+    // Nordwall: Landkarte auf dem Kartentisch (Küsten, Berge, Kompassrose)
+    nordwall: ()=> `<div class="nwMap">${svg("0 0 370 400", `
+        <g fill="none" stroke="#6B4E2A" stroke-width="1.4" opacity=".55"><path d="M0 300 C40 280 60 310 90 290 S150 250 170 270 210 320 260 300 330 250 370 270"/>
+        <path d="M30 0 C40 40 20 70 50 100 S60 160 40 190"/><path d="M300 0 C280 50 320 80 300 120 S330 170 370 160"/>
+        <path d="M200 60 c10 -8 22 -8 30 0 c-6 10 -20 12 -30 0z"/><path d="M90 140 c20 -10 40 -6 52 6 c-16 14 -40 12 -52 -6z"/></g>
+        <g fill="#6B4E2A" opacity=".38"><path d="M120 330 l8 -14 8 14z M140 336 l8 -14 8 14z M250 340 l7 -12 7 12z M60 230 l7 -12 7 12z M76 236 l7 -12 7 12z"/></g>
+        <g stroke="#6B4E2A" stroke-dasharray="3 4" fill="none" opacity=".45"><path d="M40 360 C120 330 200 380 330 330"/></g>
+        <g transform="translate(320 352)" fill="none" stroke="#6B4E2A" opacity=".6"><circle r="22"/><circle r="15" stroke-dasharray="2 3"/><path d="M0 -28 L4 0 0 28 -4 0Z" fill="#7D1C1C" stroke="none"/></g>`, 'preserveAspectRatio="none"')}</div>`,
+    // Jahr 3000: Zeichentrick-Himmel mit Ringplanet und Wolken
+    jahr3000: ()=> `<span class="j3Planet"></span><span class="j3Cloud" style="left:-40px;top:calc(env(safe-area-inset-top) + 250px);width:90px;height:34px"></span>
+      <span class="j3Cloud" style="right:-24px;top:calc(env(safe-area-inset-top) + 330px);width:96px;height:32px"></span>`,
+    // Zwei Städte: Art-déco-Strahlen der Oberstadt
+    zweistaedte: ()=> `<span class="zwRays"></span>`,
     brigade: ()=> `<div class="passClock"><span class="pcDigits"></span><span class="pcMeta"><b>Küchenzeit</b><i class="pcDay"></i></span></div>`,
   };
 
@@ -239,7 +158,7 @@
     "Noch keine Favoriten": { nordwall:"Noch kein Haus gewählt", zauberschule:"Noch keine Lieblingsrezepte", jahr3000:"Noch nichts gespeichert", zweistaedte:"Noch keine Lieblinge", insel:"Noch nichts gefunden", akte:"Keine Vermerke", brigade:"Noch keine Signature-Gerichte" },
     "Keine Rezepte gefunden": { nordwall:"Kein Rezept in diesen Landen", zauberschule:"Kein Rezept in der Bibliothek", jahr3000:"Kein Treffer im Speicher", zweistaedte:"Nichts gefunden, oben wie unten", insel:"Nichts gefunden. Noch nicht.", akte:"Keine passende Akte", brigade:"Steht nicht auf der Karte" },
     "Noch nichts eingefroren": { nordwall:"Die Eiskammer ist leer", zauberschule:"Noch nichts konserviert", jahr3000:"Kryo-Fach leer", zweistaedte:"Nichts auf Eis", insel:"Nichts in der Kühlung", akte:"Kein Eintrag im Kühlraum", brigade:"Walk-in leer" },
-    "Heute für dich": { nordwall:"Heute an der Tafel", zauberschule:"Heute in der Großen Halle", jahr3000:"Heute aus dem Menü-o-mat", zweistaedte:"Heute oben und unten", insel:"Heute auf der Insel", akte:"Der heutige Fall", brigade:"Heute auf dem Pass" },
+    "Heute für dich": { nordwall:"Heute an der Tafel", zauberschule:"Heute in der Großen Halle", jahr3000:"Heute aus dem Menü-o-mat", zweistaedte:"Unten kocht es", insel:"Heute auf der Insel", akte:"Der heutige Fall", brigade:"Heute auf dem Pass" },
     "Ton aus": { insel:"Eingabe", brigade:"Gehört, Chef", nordwall:"Gelesen", zauberschule:"Verstanden" },
     "Timer abgelaufen": { nordwall:"Ein Rabe bringt Nachricht", zauberschule:"Eine Eule bringt Nachricht", jahr3000:"Ding. Fertig.", zweistaedte:"Fertig.", insel:"Die Zeit ist um", akte:"Zeit ist um", brigade:"Hände, Chef!" },
   };
@@ -585,10 +504,63 @@
     tick(); worldT = setInterval(tick, 1000);
   }
 
-  function enhance(){ cleanBits(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); }
+  // ---------- Welt-Elemente der Startseite (Abschnitt 48 · 16) ----------
+  const WD = ()=> new Date();
+  function isoWeek(d){ const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); const day = t.getUTCDay() || 7; t.setUTCDate(t.getUTCDate() + 4 - day); const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1)); return Math.ceil(((t - y0) / 864e5 + 1) / 7); }
+  const ROMAN = (n)=>{ const m = [[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]]; let r = ""; for(const [v, s] of m) while(n >= v){ r += s; n -= v; } return r; };
+  function featuredInfo(){
+    const link = $("#todayLink"), title = $("#todayTitle")?.textContent.trim() || "";
+    const url = link?.getAttribute("href") || "";
+    const r = allRecipes().find((x)=> x.url === url) || {};
+    return { title, url, subtitle: r.subtitle || "", time: r.time || "", servings: r.servings || "", category: r.category || "" };
+  }
+  function worldHome(){
+    const sk = skin(), g = $(".homeGreeting"), today = $(".homeToday");
+    if(!g || !today) return;
+    const d = WD(), wd = d.toLocaleDateString("de-DE", { weekday: "long" }), f = featuredInfo();
+    const put = (cls, where, html, tag = "div")=>{
+      let el = document.querySelector("." + cls);
+      if(!el){ el = bit(cls, sk, tag); el.setAttribute("aria-hidden", "true"); where(el); }
+      if(el.innerHTML !== html) el.innerHTML = html;
+      return el;
+    };
+    if(sk === "zauberschule"){
+      put("zsRun", (el)=> g.querySelector(".homeGreetingTitle").before(el), `Kapitel ${ROMAN(Math.min(39, isoWeek(d) % 40 || 1))} <b>❧</b> ${wd}`);
+      put("zsRibbon", (el)=> document.body.append(el), "");
+      const intro = put("zsIntro", (el)=> today.querySelector("#todayLink").before(el), "", "p");
+      intro.removeAttribute("aria-hidden");
+      intro.textContent = f.title ? `Heute empfiehlt das Buch ${f.title}${f.subtitle ? ", " + f.subtitle.replace(/^mit /, "mit ") : ""}. Ein Gericht für diesen ${wd}.` : "";
+    }
+    if(sk === "akte"){
+      g.dataset.akte = `AKTE ${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+      const st = readLS("kochbuch.stats", {}), cookedToday = Object.values(st).some((e)=> (e?.history || []).some((h)=> new Date(h).toDateString() === d.toDateString()));
+      const meta = put("akMeta", (el)=> g.querySelector(".homeGreetingSub").after(el),
+        `<span><b>Betreff:</b> Abendessen</span><span><b>Status:</b> ${cookedToday ? "abgeschlossen" : "ungeklärt"}</span>${f.title ? `<span><b>Hinweis:</b> ${esc2(f.category || f.title)}${f.time ? ", " + esc2(f.time) : ""}</span>` : ""}`);
+      meta.removeAttribute("aria-hidden");
+      put("akStamp", (el)=> g.append(el), cookedToday ? "Erledigt" : "Offen", "span");
+      const cap = put("akCaption", (el)=> today.querySelector(".homeFeatured .rcBody").prepend(el), "Beweisstück A", "span");
+    }
+    if(sk === "insel"){
+      put("inHdr", (el)=> g.prepend(el), `<span>Versorgung · Terminal 2</span><span>${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}</span>`);
+      put("inBar", (el)=> today.querySelector(".homeFeatured").prepend(el), `<span>Eintrag ${String((isoWeek(d) * 7 + d.getDay()) % 1000).padStart(3, "0")} · heute</span><span>[ öffnen ]</span>`);
+    }
+    if(sk === "jahr3000") put("j3Bubble", (el)=> today.querySelector("#todayLink").before(el), "Frisch aus dem Menü-o-mat", "span");
+    if(sk === "zweistaedte") put("zwTop", (el)=> g.querySelector(".homeGreetingTitle").after(el), "Oben · die goldene Stadt");
+    if(sk === "brigade" && f.title){
+      const now = new Date(), hh = String(now.getHours()).padStart(2, "0"), mm = String(now.getMinutes()).padStart(2, "0");
+      put("brTicket", (el)=> today.querySelector("#todayLink").before(el),
+        `<div class="btHead"><span>Bon ${String((now.getDate() * 37 + now.getMonth() * 11) % 9000 + 100).padStart(4, "0")}</span><span>${hh}:${mm}</span></div>
+         <div class="btLine"><b>1×</b><span>${esc2(f.title)}</span></div>
+         <div class="btMeta">${f.servings ? esc2(f.servings) + " Port. · " : ""}${esc2(f.time || "")}</div><div class="btFoot">Heute · Tisch 1</div>`);
+    }
+  }
+
+  function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); }
 
   // ---------- Kino-Kopf (Three.js + GSAP, assets/cinema/<skin>.js, nur Feld-Seiten, nur mit WebGL) ----------
-  const CINEMA = { nordwall: 5, zauberschule: 5, jahr3000: 5, zweistaedte: 5, insel: 5, akte: 5 };
+  // Seit Abschnitt 48 · 16 tragen die Welten ihr Material selbst (Buch, Karte, Monitor …); 3D bleibt gebaut, ist aber aus.
+  // Wieder einschalten: z. B. { nordwall: 6 }.
+  const CINEMA = {};
   let cine = null, cineSkin = null, prevSkin = null;
   function cinema(){
     const sk = skin(), changed = prevSkin !== null && prevSkin !== sk;
