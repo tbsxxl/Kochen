@@ -803,6 +803,78 @@
       <path d="M0 -44 L9 -9 44 0 9 9 0 44 -9 9 -44 0 -9 -9Z" fill="#2B2118"/><circle r="6" fill="#F4EEDB"/>`);
     g.style.position = "relative"; g.prepend(el);
   }
+  // ---------- Vorspann je Welt (Abschnitt 48 · 18): einmal pro Sitzung auf der Startseite und beim Wechsel auf den Skin ----------
+  // Vollbild-Ebene, nur transform/opacity (Insel/Zauberschule zusätzlich clip-path), Antippen überspringt, „Bewegung reduzieren“ = keiner.
+  const INTRO = {
+    // Die Insel: Schriftzug treibt aus dem Dunkel auf die Kamera zu, dreht sich, rauscht vorbei – Schnitt auf Schwarz
+    insel: { ms: 3400, html: ()=> `<div class="ivStage"><div class="ivWord">${[..."DIE INSEL"].map((c, i)=> c === " " ? '<i class="sp"></i>' : `<span style="--z:${[40, -30, 60, 0, -50, 30, -20, 50][i % 8]}px">${c}</span>`).join("")}</div></div>`,
+      snd: (a)=>{ noise(a, { d: 2.6, type: "lowpass", f: 180, v: .5 }); tone(a, { f: 55, f2: 38, d: 2.8, v: .25 }); tone(a, { f: 70, f2: 30, t: 2.85, d: .7, v: .5 }); noise(a, { t: 2.85, d: .5, type: "lowpass", f: 400, v: .5 }); } },
+    // Nordwall: Uhrwerk – Astrolabium dreht sich auf, die Karte zeichnet sich, Türme steigen ruckweise aus dem Tisch
+    nordwall: { ms: 3200, html: ()=> `<svg class="ivMap" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#C5A059" stroke-width="1.6">
+        <path d="M0 220 C60 200 90 240 140 215 S220 170 260 200 330 250 400 210"/><path d="M40 0 C55 50 25 90 60 130 S70 190 50 230"/><path d="M340 0 C320 60 360 90 340 140 S370 190 400 180"/>
+        <path d="M60 260 C140 240 220 290 360 250" stroke-dasharray="4 6"/></g></svg>
+      <div class="ivAstro">${EMBLEM.nordwall()}</div>
+      <div class="ivTowers"><i style="--h:120px;--d:.0s"></i><i style="--h:170px;--d:.18s"></i><i style="--h:96px;--d:.32s"></i><i style="--h:140px;--d:.1s"></i><i style="--h:80px;--d:.26s"></i></div>
+      <div class="ivWord">Nordwall</div>`,
+      snd: (a)=>{ for(let i = 0; i < 14; i++) noise(a, { t: .2 + i * .17, d: .03, f: 2400 + (i % 2) * 900, q: 4, v: .25 }); tone(a, { f: 60, f2: 45, t: 2.3, d: .8, v: .35 }); } },
+    // Zauberschule: der Name schreibt sich mit goldener Tinte, eine Funkenspitze führt die Feder, dann Funkenregen
+    zauberschule: { ms: 3000, html: ()=> `<div class="ivPage"><div class="ivInk">Zauberschule<b class="ivNib"></b></div><div class="ivSub">Das Buch der Rezepte</div></div>${'<i class="ivStar"></i>'.repeat(14)}`,
+      snd: (a)=>{ [1568, 1976, 2349, 2637, 3136].forEach((f, i)=> tone(a, { f, t: .3 + i * .22, d: .9, v: .06 })); noise(a, { t: .25, d: 1.3, f: 4200, q: .6, v: .05 }); } },
+    // Jahr 3000: Raumschiff rauscht mit Rauchwölkchen heran und kracht in die Werbetafel
+    jahr3000: { ms: 2800, html: ()=> `<div class="ivBoard"><b>Tobis Kochbuch</b><span>Jetzt mit 1000 Jahren Garzeit</span></div><div class="ivBonk">Bonk</div>
+      <div class="ivShip">${SHIP}</div>${'<i class="ivPuff"></i>'.repeat(5)}`,
+      snd: (a)=>{ tone(a, { f: 200, f2: 900, d: 1.3, type: "sawtooth", v: .05 }); tone(a, { f: 160, f2: 60, t: 1.42, d: .3, v: .4 }); noise(a, { t: 1.42, d: .25, f: 700, v: .4 }); tone(a, { f: 880, f2: 440, t: 1.5, d: .5, type: "square", v: .05 }); } },
+    // Zwei Städte: Sprühfarbe zieht über den Schirm, dann flammt der Kristall auf und sendet einen Ring aus
+    zweistaedte: { ms: 2900, html: ()=> `<svg class="ivPaint" viewBox="0 0 400 600" preserveAspectRatio="none">
+        <path class="p1" d="M-20 150 C80 120 180 190 420 130 L420 175 C200 230 90 160 -20 200Z" fill="#FF3FA4"/>
+        <path class="p2" d="M-20 420 C120 380 240 470 420 400 L420 430 C250 500 110 420 -20 455Z" fill="#00F0FF"/>
+        <path class="p3" d="M-20 290 C140 270 260 330 420 280 L420 300 C260 350 150 300 -20 312Z" fill="#9D00FF"/></svg>
+      <div class="ivGem">${EMBLEM.zweistaedte()}</div><i class="ivRing"></i><div class="ivWord">Zwei Städte</div>`,
+      snd: (a)=>{ noise(a, { d: .5, type: "highpass", f: 5000, v: .18 }); noise(a, { t: .45, d: .45, type: "highpass", f: 4500, v: .14 }); tone(a, { f: 220, f2: 1760, t: 1.3, d: .5, type: "sawtooth", v: .07 }); tone(a, { f: 2637, t: 1.75, d: .7, v: .06 }); } },
+    // Akte: Blitze im Sturm, dann knallt der Stempel auf die Akte
+    akte: { ms: 2900, html: ()=> `<i class="ivRain"></i><i class="ivFlash"></i><div class="ivFolder"><span>Akte ${new Date().getFullYear()}/${String(new Date().getMonth() + 1).padStart(2, "0")}</span><b>Abendessen</b><em>Fall offen</em></div>`,
+      snd: (a)=>{ noise(a, { d: 1.6, type: "lowpass", f: 260, v: .55 }); noise(a, { t: .35, d: 1.2, type: "lowpass", f: 160, v: .45 }); tone(a, { f: 90, f2: 40, t: 1.55, d: .25, v: .55 }); noise(a, { t: 1.55, d: .12, f: 900, v: .4 }); } },
+    // Brigade: Selbsttest der LED-Uhr (88:88:88), dann läuft die Zeit und der erste Bon kommt aus dem Drucker
+    brigade: { ms: 2400, html: ()=> `<div class="ivPanel"><div class="ivLed"></div><div class="ivLabel">Küche läuft</div></div><div class="ivSlot"></div><div class="ivBon"><b>Bon 0001</b><span>Service beginnt</span></div>`,
+      snd: (a)=>{ [0, .25, .5].forEach((t)=> tone(a, { f: 2900, t, d: .08, type: "square", v: .05 })); for(let i = 0; i < 9; i++) noise(a, { t: 1.2 + i * .07, d: .04, f: 3000, q: 3, v: .12 }); } },
+  };
+  let introOn = false;
+  function playIntro(force){
+    const sk = skin(), def = INTRO[sk];
+    if(!def || introOn || reduce() || !document.body.classList.contains("layout-home")) return;
+    let seen = ""; try{ seen = sessionStorage.getItem("kochbuch.ui.intro") || ""; }catch{}
+    if(seen === sk && !force) return;
+    try{ sessionStorage.setItem("kochbuch.ui.intro", sk); }catch{}
+    introOn = true;
+    const el = document.createElement("div");
+    el.className = `skIntro skIntro-${sk}`; el.setAttribute("aria-hidden", "true");
+    el.innerHTML = def.html();
+    if(sk === "brigade"){
+      const led = el.querySelector(".ivLed"), d = new Date();
+      const show = (s)=> led.innerHTML = [...s].map((c)=> c === ":" ? ledColon : ledDigit(+c)).join("");
+      show("88:88:88");
+      setTimeout(()=> show(`${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`), 1050);
+    }
+    document.body.appendChild(el);
+    if(soundOn()){ const a = ac(); if(a && a.state === "running") try{ def.snd(a); }catch{} }
+    let done = false;
+    const end = ()=>{ if(done) return; done = true; el.classList.add("out"); setTimeout(()=>{ el.remove(); introOn = false; }, 450); };
+    el.addEventListener("pointerdown", end);
+    setTimeout(end, def.ms);
+  }
+  // Wechsel auf einen Skin: Vorspann, sobald das Skin-Blatt geschlossen ist
+  let introSkin = null;
+  function introOnSwitch(){
+    const sk = skin(), changed = introSkin !== null && introSkin !== sk;
+    introSkin = sk;
+    if(!changed){ playIntro(false); return; }
+    const sheet = document.getElementById("skinSheet");
+    const go = ()=> setTimeout(()=> playIntro(true), 150);
+    if(!sheet || !sheet.classList.contains("open")) return go();
+    const mo = new MutationObserver(()=>{ if(!sheet.classList.contains("open")){ mo.disconnect(); go(); } });
+    mo.observe(sheet, { attributes: true, attributeFilter: ["class"] });
+  }
+
   function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); }
 
   function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
@@ -856,7 +928,7 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=2`;
   }
 
-  function apply(){ mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); homeTimer(); cinema(); }
+  function apply(){ mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); homeTimer(); cinema(); introOnSwitch(); }
   function init(){
     apply();
     watchProgress();

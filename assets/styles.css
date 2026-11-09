@@ -4336,3 +4336,128 @@ html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f)
 :is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f)) .cookOverlay .cookTab:not(.active){color:#E9DCC0 !important;opacity:1 !important}
 html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .recipePageCard .listGroup{border:0 !important;box-shadow:none !important}
 :is(html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f)) div.recipePageCard :is(div.card,div.listGroup):not(#_x#_y){border:0 !important;box-shadow:none !important;outline:0 !important}
+
+/* ==== 19. Vorspann je Welt (Dez. 2026, Wunsch des Besitzers „markante Animation“; Logik playIntro() in assets/skins.js).
+   Vollbild-Ebene über allem, einmal pro Sitzung auf der Startseite und beim Wechsel auf den Skin; Antippen überspringt.
+   Nur transform/opacity (Zauberschule: clip-path fürs Schreiben, Nordwall: stroke-dashoffset für die Karte). ==== */
+.skIntro{position:fixed;inset:0;z-index:5000;overflow:hidden;display:grid;place-items:center;transition:opacity .45s cubic-bezier(.2,.8,.2,1);cursor:pointer;
+  -webkit-user-select:none;user-select:none;contain:strict}
+.skIntro.out{opacity:0}
+.skIntro *{animation-fill-mode:both}
+
+/* Die Insel: Buchstaben treiben aus dem Dunkel auf die Kamera zu, drehen sich, rauschen vorbei – Schnitt auf Schwarz */
+.skIntro-insel{background:#000;perspective:520px}
+.skIntro-insel .ivStage{transform-style:preserve-3d;animation:ivFloat 3s cubic-bezier(.35,.05,.6,1) both}
+.skIntro-insel .ivWord{display:flex;gap:.06em;font:400 clamp(44px,13vw,110px) "Times New Roman", Times, Georgia, serif;letter-spacing:.14em;color:#F4F4F0;white-space:nowrap;transform-style:preserve-3d;
+  text-shadow:0 0 18px rgba(255,255,255,.35)}
+.skIntro-insel .ivWord span{display:inline-block;transform:translateZ(var(--z));animation:ivDrift 3s ease-in-out both}
+.skIntro-insel .ivWord .sp{width:.45em}
+@keyframes ivFloat{0%{opacity:0;transform:translateZ(-700px) rotateY(32deg) rotateX(8deg) rotateZ(-5deg)}12%{opacity:.85}
+  72%{opacity:1;transform:translateZ(-60px) rotateY(-10deg) rotateX(-3deg) rotateZ(2deg)}90%{opacity:1;transform:translateZ(480px) rotateY(-26deg) rotateX(-6deg) rotateZ(4deg)}
+  90.1%,100%{opacity:0;transform:translateZ(480px)}}
+@keyframes ivDrift{0%{transform:translateZ(calc(var(--z) * 3))}100%{transform:translateZ(var(--z))}}
+
+/* Nordwall: Uhrwerk auf dem Kartentisch */
+.skIntro-nordwall{background:var(--nwSlate,none),radial-gradient(80% 60% at 50% 45%,#22232A,#0B0B0D 75%);background-size:180px 180px,auto;animation:ivZoomOut 3.2s cubic-bezier(.4,0,.2,1) both}
+.skIntro-nordwall .ivMap{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.skIntro-nordwall .ivMap path{stroke-dasharray:700;stroke-dashoffset:700;animation:ivDraw 2s cubic-bezier(.4,0,.2,1) .2s forwards}
+.skIntro-nordwall .ivAstro{width:min(56vw,240px);aspect-ratio:1;animation:ivAstro 2.6s cubic-bezier(.2,.8,.2,1) both}
+.skIntro-nordwall .ivAstro svg{width:100%;height:100%}
+.skIntro-nordwall .ivAstro .wcRingH{animation:ivSpin 2.4s cubic-bezier(.3,0,.2,1) both}
+.skIntro-nordwall .ivAstro .wcRingM{animation:ivSpin 2.4s cubic-bezier(.3,0,.2,1) reverse both}
+.skIntro-nordwall .ivAstro .wcGear,.skIntro-nordwall .ivAstro .wcHand{animation:ivSpin 1.2s steps(12) 2 both}
+.skIntro-nordwall .ivAstro :is(.wcRingH,.wcRingM,.wcGear,.wcHand){transform-box:view-box;transform-origin:0 0}
+.skIntro-nordwall .ivTowers{position:absolute;left:0;right:0;bottom:0;height:200px;display:flex;justify-content:center;align-items:flex-end;gap:14px}
+.skIntro-nordwall .ivTowers i{width:30px;height:var(--h);background:linear-gradient(90deg,#2A2C31,#4A4E55 50%,#2A2C31);transform-origin:50% 100%;
+  clip-path:polygon(0 12px,20% 12px,20% 0,40% 0,40% 12px,60% 12px,60% 0,80% 0,80% 12px,100% 12px,100% 100%,0 100%);animation:ivRise 1.1s steps(7,end) calc(.9s + var(--d)) both}
+.skIntro-nordwall .ivWord{position:absolute;top:calc(env(safe-area-inset-top) + 16%);font:700 clamp(30px,9vw,64px) "Skin Edikt", "Skin Nordwall", serif;letter-spacing:.16em;text-transform:uppercase;color:#D9D2C6;
+  text-shadow:0 -1px 0 #000,0 1px 0 rgba(255,255,255,.12);animation:ivFadeUp 1s cubic-bezier(.2,.8,.2,1) 1.6s both}
+@keyframes ivDraw{to{stroke-dashoffset:0}}
+@keyframes ivAstro{0%{opacity:0;transform:scale(.6) rotate(-40deg)}40%{opacity:1}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes ivSpin{from{transform:rotate(-360deg)}to{transform:rotate(0)}}
+@keyframes ivRise{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes ivFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes ivZoomOut{0%{transform:scale(1.18)}100%{transform:scale(1)}}
+
+/* Zauberschule: Name schreibt sich mit goldener Tinte, Funkenregen */
+.skIntro-zauberschule{background:var(--zsLeather,none),radial-gradient(90% 70% at 50% 40%,#3A2E26,#151110 75%);background-size:140px 140px,auto}
+.skIntro-zauberschule .ivPage{padding:42px 30px;background:radial-gradient(140% 90% at 50% 40%,transparent 55%,rgba(110,60,20,.3)),#F4EEDB;box-shadow:0 20px 50px rgba(0,0,0,.6);text-align:center;
+  animation:ivOpen .7s cubic-bezier(.2,.8,.2,1) both;transform-origin:50% 50%}
+.skIntro-zauberschule .ivInk{position:relative;font:500 italic clamp(38px,11vw,76px) "Skin Garamond", Georgia, serif;color:#8A6A1E;
+  background:linear-gradient(100deg,#7A5A16,#D4AF37 40%,#8A6A1E 60%,#F3D27A 80%,#7A5A16);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  clip-path:inset(0 100% 0 0);animation:ivWrite 1.5s cubic-bezier(.45,.05,.4,1) .5s forwards}
+.skIntro-zauberschule .ivNib{position:absolute;top:50%;left:0;width:10px;height:10px;margin:-5px;border-radius:50%;background:#FFF2C0;box-shadow:0 0 10px 4px rgba(255,215,110,.9);animation:ivNib 1.5s cubic-bezier(.45,.05,.4,1) .5s both}
+.skIntro-zauberschule .ivSub{margin-top:10px;font:500 italic 18px "Skin Garamond", Georgia, serif;color:#5A4632;animation:ivFadeUp .8s ease 1.9s both}
+.skIntro-zauberschule .ivStar{position:absolute;left:50%;top:48%;width:6px;height:6px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 8px #FFD36E;opacity:0;animation:ivStar 1.1s cubic-bezier(.2,.8,.2,1) 1.95s both}
+.skIntro-zauberschule .ivStar:nth-of-type(odd){--dx:-1}
+.skIntro-zauberschule .ivStar:nth-of-type(2){--a:30deg}.skIntro-zauberschule .ivStar:nth-of-type(3){--a:60deg}.skIntro-zauberschule .ivStar:nth-of-type(4){--a:95deg}.skIntro-zauberschule .ivStar:nth-of-type(5){--a:125deg}
+.skIntro-zauberschule .ivStar:nth-of-type(6){--a:150deg}.skIntro-zauberschule .ivStar:nth-of-type(7){--a:185deg}.skIntro-zauberschule .ivStar:nth-of-type(8){--a:210deg}.skIntro-zauberschule .ivStar:nth-of-type(9){--a:240deg}
+.skIntro-zauberschule .ivStar:nth-of-type(10){--a:265deg}.skIntro-zauberschule .ivStar:nth-of-type(11){--a:290deg}.skIntro-zauberschule .ivStar:nth-of-type(12){--a:315deg}.skIntro-zauberschule .ivStar:nth-of-type(13){--a:340deg}.skIntro-zauberschule .ivStar:nth-of-type(14){--a:5deg}
+@keyframes ivOpen{from{opacity:0;transform:scaleX(.08)}to{opacity:1;transform:none}}
+@keyframes ivWrite{to{clip-path:inset(0 0 0 0)}}
+@keyframes ivNib{0%{opacity:0;transform:translateX(0)}8%{opacity:1}92%{opacity:1}100%{opacity:0;transform:translateX(calc(min(11vw,76px) * 6.3))}}
+@keyframes ivStar{0%{opacity:0;transform:rotate(var(--a,0deg)) translateY(0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:rotate(var(--a,0deg)) translateY(-150px) scale(1)}}
+
+/* Jahr 3000: Raumschiff kracht in die Werbetafel */
+.skIntro-jahr3000{background:radial-gradient(rgba(26,26,26,.1) 1.1px,transparent 1.6px) 0 0/11px 11px,#58C4C3;animation:ivDrop 2.8s cubic-bezier(.6,0,.8,.4) both}
+.skIntro-jahr3000 .ivBoard{max-width:84vw;padding:20px 22px;background:#fff;border:5px solid #1A1A1A;border-radius:18px 10px 22px 12px/12px 22px 10px 18px;box-shadow:8px 8px 0 #1A1A1A;text-align:center;transform:rotate(-3deg);
+  animation:ivWobble .6s cubic-bezier(.3,1.6,.5,1) 1.42s both}
+.skIntro-jahr3000 .ivBoard b{display:block;font:400 clamp(30px,8.6vw,64px) var(--fontDisplay, sans-serif);color:#FFD23F;-webkit-text-stroke:3px #1A1A1A;paint-order:stroke fill;text-shadow:4px 4px 0 #1A1A1A;text-transform:uppercase}
+.skIntro-jahr3000 .ivBoard span{font:700 16px "Skin Comic", sans-serif;color:#1A1A1A}
+.skIntro-jahr3000 .ivShip{position:absolute;left:50%;top:50%;width:120px;margin:-40px 0 0 -60px;animation:ivFly 1.45s cubic-bezier(.5,0,.75,.4) both}
+.skIntro-jahr3000 .ivShip svg{width:120px;height:76px;overflow:visible}
+.skIntro-jahr3000 .ivPuff{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px;border-radius:50%;background:#fff;border:3px solid #1A1A1A;opacity:0;animation:ivPuff .9s ease-out both}
+.skIntro-jahr3000 .ivPuff:nth-of-type(1){--x:-40vw;--y:28vh;animation-delay:.25s}.skIntro-jahr3000 .ivPuff:nth-of-type(2){--x:-30vw;--y:20vh;animation-delay:.45s}
+.skIntro-jahr3000 .ivPuff:nth-of-type(3){--x:-20vw;--y:12vh;animation-delay:.65s}.skIntro-jahr3000 .ivPuff:nth-of-type(4){--x:-11vw;--y:6vh;animation-delay:.85s}.skIntro-jahr3000 .ivPuff:nth-of-type(5){--x:-4vw;--y:2vh;animation-delay:1.05s}
+.skIntro-jahr3000 .ivBonk{position:absolute;right:4%;top:calc(50% - 150px);z-index:2;padding:16px 22px;background:#FF6B35;color:#1A1A1A;border:4px solid #1A1A1A;font:400 34px var(--fontDisplay, sans-serif);text-transform:uppercase;
+  clip-path:polygon(50% 0,61% 30%,96% 18%,72% 46%,100% 66%,64% 66%,58% 100%,44% 70%,8% 90%,28% 60%,0 34%,38% 34%);transform:scale(0) rotate(-12deg);animation:ivBonk .5s cubic-bezier(.3,1.8,.5,1) 1.42s both}
+@keyframes ivFly{0%{transform:translate(-75vw,40vh) rotate(-24deg) scale(.4)}100%{transform:translate(0,0) rotate(8deg) scale(1)}}
+@keyframes ivPuff{0%{opacity:0;transform:translate(var(--x),var(--y)) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.6)}}
+@keyframes ivWobble{0%{transform:rotate(-3deg)}25%{transform:rotate(5deg) translateX(10px)}50%{transform:rotate(-6deg) translateX(-6px)}75%{transform:rotate(2deg)}100%{transform:rotate(-3deg)}}
+@keyframes ivBonk{from{transform:scale(0) rotate(-30deg)}to{transform:scale(1) rotate(-12deg)}}
+@keyframes ivDrop{0%,82%{transform:none}100%{transform:translateY(105%)}}
+
+/* Zwei Städte: Sprühfarbe zieht über den Schirm, der Kristall flammt auf */
+.skIntro-zweistaedte{background:var(--zwBrush,none),radial-gradient(80% 60% at 50% 45%,#16223F,#06080F 75%);background-size:260px 260px,auto}
+.skIntro-zweistaedte .ivPaint{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+.skIntro-zweistaedte .ivPaint path{transform-box:fill-box;transform-origin:0 50%;transform:scaleX(0);animation:ivSpray .55s cubic-bezier(.2,.8,.2,1) forwards}
+.skIntro-zweistaedte .ivPaint .p2{animation-delay:.35s}.skIntro-zweistaedte .ivPaint .p3{animation-delay:.7s}
+.skIntro-zweistaedte .ivGem{width:150px;height:150px;animation:ivGem 1.2s cubic-bezier(.2,.8,.2,1) 1.1s both;filter:drop-shadow(0 0 22px rgba(0,240,255,.8))}
+.skIntro-zweistaedte .ivGem svg{width:100%;height:100%}
+.skIntro-zweistaedte .ivRing{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px;border-radius:50%;border:3px solid #7DF6FF;box-shadow:0 0 20px #00F0FF,inset 0 0 20px #00F0FF;animation:ivRing 1s cubic-bezier(.2,.8,.2,1) 1.6s both}
+.skIntro-zweistaedte .ivWord{position:absolute;bottom:22%;font:700 clamp(28px,8vw,56px) "Skin Deko", sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#E8E2D5;text-shadow:0 0 18px rgba(0,240,255,.6);animation:ivFadeUp .8s ease 1.7s both}
+@keyframes ivSpray{to{transform:scaleX(1)}}
+@keyframes ivGem{0%{opacity:0;transform:scale(.2) rotate(-90deg)}60%{opacity:1;transform:scale(1.15) rotate(10deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes ivRing{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(5)}}
+
+/* Akte: Blitze im Sturm, Stempel knallt auf die Akte */
+.skIntro-akte{background:radial-gradient(90% 60% at 60% 20%,#2A3036,#0B0B0C 75%)}
+.skIntro-akte .ivRain{position:absolute;left:0;right:0;top:-100%;height:200%;background:repeating-linear-gradient(104deg,transparent 0 13px,rgba(190,205,215,.22) 13px 14px,transparent 14px 31px);animation:akRain .7s linear infinite}
+.skIntro-akte .ivFlash{position:absolute;inset:0;background:#E8EEF2;opacity:0;animation:ivFlash 1.3s linear .15s both}
+.skIntro-akte .ivFolder{position:relative;width:min(78vw,340px);padding:30px 24px 78px;background:radial-gradient(circle at 82% 18%,transparent 15px,rgba(110,70,30,.22) 16px,rgba(110,70,30,.08) 19px,transparent 21px),#D4C5A9;
+  box-shadow:0 24px 50px rgba(0,0,0,.7);transform:rotate(-2deg);animation:ivFolder .6s cubic-bezier(.2,.8,.2,1) .9s both,ivShake .3s linear 1.58s}
+.skIntro-akte .ivFolder span{display:block;font:15px "Skin Akte", monospace;letter-spacing:.08em;color:#3A2E1E}
+.skIntro-akte .ivFolder b{display:block;margin-top:10px;font:400 clamp(30px,9vw,46px) "Skin Akte", monospace;color:#1A1A1A}
+.skIntro-akte .ivFolder em{position:absolute;right:16px;bottom:16px;padding:6px 12px;border:4px solid #A93226;color:#A93226;font:400 24px "Skin Akte", monospace;font-style:normal;letter-spacing:.14em;text-transform:uppercase;
+  transform:rotate(-12deg) scale(3);opacity:0;animation:ivStamp .3s cubic-bezier(.6,0,.9,.5) 1.3s both}
+@keyframes ivFlash{0%,6%{opacity:0}8%{opacity:.9}11%{opacity:0}15%{opacity:.6}18%,62%{opacity:0}64%{opacity:.7}67%,100%{opacity:0}}
+@keyframes ivFolder{from{opacity:0;transform:translateY(30px) rotate(-6deg)}to{opacity:1;transform:rotate(-2deg)}}
+@keyframes ivStamp{from{opacity:0;transform:rotate(-20deg) scale(3)}to{opacity:.9;transform:rotate(-12deg) scale(1)}}
+@keyframes ivShake{0%,100%{translate:0 0}25%{translate:3px 2px}50%{translate:-3px -1px}75%{translate:2px -2px}}
+
+/* Brigade: LED-Selbsttest, dann kommt der erste Bon */
+.skIntro-brigade{background:linear-gradient(180deg,#E9ECEE,#CDD1D5);align-content:center;gap:0}
+.skIntro-brigade .ivPanel{padding:18px 22px 14px;background:#0E0F10;border-radius:8px;box-shadow:inset 0 0 0 2px #2A2F33,0 18px 40px rgba(20,24,28,.35);text-align:center;animation:ivFadeUp .4s ease both}
+.skIntro-brigade .ivLed{display:flex;gap:4px;align-items:center;justify-content:center;height:62px}
+.skIntro-brigade .ivLed svg{height:58px;width:auto}
+.skIntro-brigade .ivLed polygon{fill:rgba(255,45,85,.08)}
+.skIntro-brigade .ivLed :is(polygon.on,circle.on){fill:#FF2D55;filter:drop-shadow(0 0 4px rgba(255,45,85,.8))}
+.skIntro-brigade .ivLed{animation:ivTest .5s steps(1,end) 2 both}
+.skIntro-brigade .ivLabel{margin-top:8px;font:800 13px -apple-system, "SF Pro Display", sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#AEB4B9}
+.skIntro-brigade .ivSlot{width:min(70vw,280px);height:12px;margin:28px auto 0;border-radius:3px;background:linear-gradient(#2A2F33,#121416)}
+.skIntro-brigade .ivBon{width:min(62vw,250px);margin:0 auto;padding:12px 14px 18px;background:#FAFAF7;font:600 15px ui-monospace, "SF Mono", Menlo, monospace;color:#16191B;box-shadow:0 10px 20px rgba(0,0,0,.2);
+  clip-path:inset(0 0 100% 0);animation:ivPrint .9s steps(9,end) 1.2s forwards}
+.skIntro-brigade .ivBon b{display:block;border-bottom:1px dashed #999;padding-bottom:4px;margin-bottom:6px}
+@keyframes ivTest{0%{opacity:1}50%{opacity:.15}}
+@keyframes ivPrint{to{clip-path:inset(0 0 0 0)}}
+@media (prefers-reduced-motion: reduce){ .skIntro{display:none} }

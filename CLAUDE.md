@@ -349,6 +349,16 @@ getrennt (Wunsch des Besitzers).
   (`kochbuch.ui.skinSound`, Standard aus). Haptik: `KOCHBUCH_UI.haptic` nutzt auf dem iPhone (kein `navigator.vibrate`) einen unsichtbaren
   `<input type="checkbox" switch>` (ab iOS 18). Selektoren in Abschnitt 18 mit `:not(._f)`; achtet auf die Spezifität von `:is()` (zählt das
   stärkste Glied) – zum Überschreiben notfalls `:not(#_x#_y)`.
+  **Vorspann je Welt (Abschnitt 19 in `styles.css`, `playIntro()` in `skins.js`, Dez. 2026, Wunsch „markante Animation“):** Vollbild-Ebene
+  `.skIntro`, einmal pro Sitzung auf der Startseite (`sessionStorage kochbuch.ui.intro`) und beim Wechsel auf den Skin (nach dem Schließen
+  des Skin-Blatts); Antippen überspringt, „Bewegung reduzieren“ = keiner, Klang nur mit „Klänge der Welten“. Insel: „Die Insel“ in weißer
+  Serife treibt in 3D aus dem Dunkel auf die Kamera zu und rauscht vorbei, Schnitt auf Schwarz (der alte CSS-Titel-Vorspann wurde von
+  Abschnitt 18 überdeckt). Nordwall: Uhrwerk – Astrolabium dreht sich auf, Karte zeichnet sich, Türme steigen ruckweise. Zauberschule: Name
+  schreibt sich mit Goldtinte, Funkenregen. Jahr 3000: Raumschiff kracht in die Werbetafel („Bonk“). Zwei Städte: Sprühfarbe, Kristall flammt
+  auf, Ring. Akte: Blitze, Stempel „Fall offen“ knallt auf die Akte. Brigade: LED-Selbsttest 88:88:88, erster Bon. Im SVG mit
+  `transform-box:view-box` liegt der Ursprung bei 0 0 des viewBox-Koordinatensystems (nicht in der Mitte).
+  **Timer-Mitteilung:** wird nur beim Start und bei „+1 Min“ gesetzt; beim Laden einer Seite nur ergänzt, wenn sie für diesen Timer noch nie
+  gezeigt wurde (`kochbuch.ui.timerNotified`) – iOS meldet jede ersetzte Mitteilung neu (Fehler: 10 Mitteilungen beim Herumtippen).
 - **Retro-Modus (Abschnitt 36, `html.retro`, Skin „Retro“):** zusätzlich als verstecktes Extra: Startseite 5× schnell auf
   Logo/„Tobis Kochbuch“ tippen schaltet Retro an/aus (Hinweis mit Rückgängig).
   Graue Fenster mit harten Kanten und schwarzem Versatz, weiße Lesefelder, Navy-Titelleisten, Gelb = Hauptaktion,
