@@ -53,11 +53,12 @@ const def = {
     // Partikel: grüne Sporen von unten, pinke Funken
     scene.add(particles({ count: small ? 240 : 400, area: { w: 70, h: 26, z0: -36, z1: 4, y0: -6 }, size: [1.2, 2.4], color: [.45, 1, .65], speed: -.5, wind: .15, sway: .5, opacity: .55, flicker: 1, add: true, seed: 2 }));
     scene.add(particles({ count: small ? 60 : 110, area: { w: 50, h: 22, z0: -26, z1: 2, y0: -4 }, size: [1.5, 3], color: [1, .3, .65], speed: -.8, wind: -.3, sway: .8, opacity: .7, flicker: 1, add: true, seed: 12 }));
+    let spin = 0, lastT = 0;
     return {
       update(t){
         s.material.uniforms.uTime.value = t;
         flickTop(t);
-        crystal.rotation.y = t * .35; crystal.position.y = 34 + Math.sin(t * .7) * .8;
+        spin += (t - lastT) * (window.KOCHBUCH_TIMER_ACTIVE ? 1.6 : .35); lastT = t; crystal.rotation.y = spin; crystal.position.y = 34 + Math.sin(t * .7) * .8;
         halo.material.opacity = .55 + .2 * Math.sin(t * 1.6);
         signs.forEach((o)=>{ o.m.opacity = (Math.sin(t * 13 + o.seed * 9) > -.92 ? 1 : .2) * (.75 + .25 * Math.sin(t * 2 + o.seed)); });
       }

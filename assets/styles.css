@@ -3571,3 +3571,125 @@ html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcMeta{display:flex;flex-
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcMeta b{color:var(--onField);font-weight:700}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcMeta i{font-style:normal;font-family:"Skin Insel", ui-monospace, monospace;letter-spacing:.1em}
 html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .scList .passClock{display:none}
+
+/* ==== 15. Serienwelten nach der Design-Analyse (Nov. 2026, vom Besitzer geschickt). Ohne Logos, Figuren, Namen, Zitate.
+   Jede Welt: eigene Palette, eigene Rahmen, eigenes Uhr-Element (.worldClock, skins.js), Suchfeld-Text je Welt. ==== */
+.worldClock{display:none}
+html.skin .worldClock{display:flex;align-items:center;gap:14px;margin-top:18px;padding:10px 16px 10px 10px;width:fit-content;max-width:100%;
+  border-radius:14px;background:rgba(0,0,0,.28);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);color:var(--onField)}
+html.skin .wcEmblem{width:56px;height:56px;flex:none;overflow:visible}
+html.skin .wcText{display:flex;flex-direction:column;gap:2px;min-width:0}
+html.skin .wcTime{font-size:var(--fs28);line-height:1;font-weight:400;font-variant-numeric:tabular-nums;font-family:var(--fontDisplay)}
+html.skin .wcLabel{font-size:var(--fs12);letter-spacing:.12em;text-transform:uppercase;color:var(--onField2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60vw}
+html.skin .worldClock :is(.wcRingH,.wcRingM,.wcGear,.wcHand){transition:transform .6s var(--ease)}
+@media (prefers-reduced-motion: reduce){ html.skin .worldClock *{transition:none !important;animation:none !important} }
+
+/* ---------- Nordwall: Schiefer und Stahl, Drachenfeuer-Rot, Gold; Meißel-Versalien; Astrolabium ---------- */
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d),html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body{
+  --bg:#1A1A1D;--surface:#232327;--surface2:#2B2B30;--fill:rgba(255,255,255,.06);--line:rgba(255,255,255,.10);--lineStrong:rgba(255,255,255,.26);
+  --text:#ECE6DA;--sub:#B7AE9F;--sub2:#B7AE9F;--muted:#9C9383;
+  --brand:#C8323C;--onBrand:#FFF6EE;--leaf:#C8323C;--onLeaf:#FFF6EE;--brandSoft:rgba(200,50,60,.16);--leafSoft:rgba(200,50,60,.16);
+  --sel:#C9A55A;--onSel:#17130B;--accent:#D9A94E;--accentSoft:rgba(201,165,90,.14);--onAccent:#17130B;--herb:#C8323C;--coffee:#2B2B30;
+  --glass:rgba(26,26,29,.95);color-scheme:dark}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#1A1A1D;--surface:#232327}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#141417;--cCard:#232327;--cFill:rgba(255,255,255,.06);--cLine:rgba(255,255,255,.1);--cText:#ECE6DA;--cSub:#B7AE9F;--cLeaf:#C8323C;--cOnLeaf:#FFF6EE}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle){text-transform:uppercase;letter-spacing:.06em}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) :is(.recipeBody ol > li,.cookStep,.notesArea){font-family:"Baskerville","Iowan Old Style",Georgia,serif}
+/* Karten wie dunkle Metallplatten mit Nieten */
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) :is(.card,.listGroup,.notesCard){background:radial-gradient(circle at 9px 9px,#7A6F5C 0 1.6px,transparent 2.2px),radial-gradient(circle at calc(100% - 9px) 9px,#7A6F5C 0 1.6px,transparent 2.2px),radial-gradient(circle at 9px calc(100% - 9px),#7A6F5C 0 1.6px,transparent 2.2px),radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#7A6F5C 0 1.6px,transparent 2.2px),linear-gradient(160deg,#2A2A2F,#1F1F23) !important;
+  box-shadow:inset 0 0 0 1px rgba(201,165,90,.22),inset 0 1px 0 rgba(255,255,255,.05) !important;border-radius:6px}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px rgba(201,165,90,.35)}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#141417 !important;border:1px solid rgba(201,165,90,.25) !important}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#B7AE9F !important}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:rgba(201,165,90,.14) !important;color:#E9CF8F !important}
+/* Fortschritt als geschmiedete Klinge */
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .cookProgress{height:8px;background:rgba(255,255,255,.06)}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .cookProgressBar{background:linear-gradient(to bottom,#E9EDF0,#9AA3AB 55%,#5F676E) !important;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,0 100%);border-radius:0 !important}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .worldClock{background:rgba(10,11,13,.55);box-shadow:inset 0 0 0 1px rgba(201,165,90,.35);border-radius:6px}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .wcTime{font-family:var(--fontDisplay);letter-spacing:.06em}
+
+/* ---------- Zauberschule: Pergament, vergoldete Rahmen, Kerzengold; Sanduhr ---------- */
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d){--candle:#F4C430}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) :is(.card,.listGroup,.notesCard){box-shadow:inset 0 0 0 1px rgba(154,118,40,.55),inset 0 0 0 4px rgba(248,240,220,1),inset 0 0 0 5px rgba(154,118,40,.3) !important}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px #9A7628,0 0 0 4px #F8F0DC,0 0 0 5px rgba(154,118,40,.45)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .notesArea{font-family:var(--fontDisplay);font-style:italic;color:#3B2414;font-size:var(--fs18)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .worldClock{background:rgba(10,12,30,.5);box-shadow:inset 0 0 0 1px rgba(232,196,106,.45);border-radius:10px}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .wcTime{color:#F4D58A;font-family:var(--fontDisplay)}
+@media (prefers-reduced-motion: no-preference){ html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .wcStream{stroke-dasharray:2 3;animation:wcSand .6s linear infinite} }
+@keyframes wcSand{to{stroke-dashoffset:-5}}
+
+/* ---------- Die Insel: Röhrenmonitor-Schwarz, Bernstein, beige Tasten; Klappziffern ---------- */
+html.skin-insel:not(._a):not(._b):not(._c):not(._d),html.skin-insel:not(._a):not(._b):not(._c):not(._d) body{
+  --bg:#0A0A08;--surface:#14130F;--surface2:#1C1A15;--fill:rgba(255,176,0,.07);--line:rgba(255,176,0,.16);--lineStrong:rgba(255,176,0,.38);
+  --text:#F1E7D0;--sub:#C9B98F;--sub2:#C9B98F;--muted:#A8996F;
+  --brand:#D8CFB8;--onBrand:#1A1810;--leaf:#FFB000;--onLeaf:#1A1300;--brandSoft:rgba(255,176,0,.12);--leafSoft:rgba(255,176,0,.12);
+  --sel:#FFB000;--onSel:#1A1300;--accent:#FFB000;--accentSoft:rgba(255,176,0,.12);--onAccent:#1A1300;--herb:#FFB000;--coffee:#1C1A15;--petrol:#FFB000;
+  --glass:rgba(10,10,8,.95);color-scheme:dark}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#0A0A08;--surface:#14130F}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#050505;--cCard:#14130F;--cFill:rgba(255,176,0,.07);--cLine:rgba(255,176,0,.16);--cText:#F1E7D0;--cSub:#C9B98F;--cLeaf:#FFB000;--cOnLeaf:#1A1300}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.notesTitle){color:#FFB000;text-shadow:0 0 8px rgba(255,176,0,.35)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){border-color:rgba(255,176,0,.6) !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body:not(.fieldPage)::after,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+/* beige Retro-Tasten für Hauptaktionen */
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.recipeCookBtn,.btn.primary,.miseGo,.timerAlertBtn.primary){background:linear-gradient(to bottom,#E6DDC6,#CFC4A8) !important;color:#1A1810 !important;border-radius:8px !important;box-shadow:inset 0 -4px 0 rgba(0,0,0,.22),0 2px 0 #000 !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px rgba(255,176,0,.3)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#0E0D0A !important;border:1px solid rgba(255,176,0,.25) !important;box-shadow:0 10px 30px rgba(0,0,0,.6) !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#C9B98F !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:rgba(255,176,0,.12) !important;color:#FFB000 !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .cookTimerTime{background:#050505 !important;color:#FFB000 !important;text-shadow:0 0 10px rgba(255,176,0,.5)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .worldClock{background:#050505;box-shadow:inset 0 0 0 1px rgba(255,176,0,.35);border-radius:8px;padding:12px 16px}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .worldClock .wcEmblem{display:none}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcTime{display:flex;gap:4px;font-family:var(--fontDisplay);font-size:var(--fs36)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcFlap{position:relative;display:inline-block;min-width:.72em;padding:4px 4px 2px;text-align:center;color:#F2EBDA;
+  background:linear-gradient(to bottom,#2A2E2A 50%,#1C1F1C 50%);border-radius:5px;box-shadow:0 2px 0 #000,inset 0 0 0 1px rgba(255,255,255,.06)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcFlap::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#000}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcSep{font-style:normal;color:#FFB000;align-self:center}
+@media (prefers-reduced-motion: no-preference){ html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcFlap.flip{animation:icFlip .32s cubic-bezier(.3,.7,.3,1) both;transform-origin:50% 50%} }
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcLabel{color:#FFB000}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcNums{font-family:var(--fontDisplay);font-size:11px;letter-spacing:.3em;color:rgba(255,176,0,.45)}
+
+/* ---------- Jahr 3000: Raumschiff-Blau, Neon-Grün, Stahlblau, Magenta; Cel-Shading-Kanten; Holo-Ring ---------- */
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d),html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body{
+  --bg:#0C1828;--surface:#122338;--surface2:#173049;--fill:rgba(76,201,254,.08);--line:rgba(76,201,254,.18);--lineStrong:rgba(76,201,254,.4);
+  --text:#EAF6FF;--sub:#A9C7DA;--sub2:#A9C7DA;--muted:#8DAFC4;
+  --brand:#39FF14;--onBrand:#04210A;--leaf:#39FF14;--onLeaf:#04210A;--brandSoft:rgba(57,255,20,.12);--leafSoft:rgba(57,255,20,.12);
+  --sel:#4CC9FE;--onSel:#04192A;--accent:#4CC9FE;--accentSoft:rgba(76,201,254,.12);--onAccent:#04192A;--herb:#FF3FB4;--coffee:#173049;--petrol:#4CC9FE;
+  --glass:rgba(12,24,40,.95);color-scheme:dark}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#0C1828;--surface:#122338}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#081322;--cCard:#122338;--cFill:rgba(76,201,254,.08);--cLine:rgba(76,201,254,.18);--cText:#EAF6FF;--cSub:#A9C7DA;--cLeaf:#39FF14;--cOnLeaf:#04210A}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) :is(.card,.listGroup,.notesCard){box-shadow:0 0 0 2px #050C16,4px 4px 0 #050C16 !important;border-radius:16px}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 3px #050C16,0 0 0 5px #39FF14 !important}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#081322 !important;box-shadow:0 0 0 2px #050C16,0 0 0 4px #4CC9FE,0 10px 26px rgba(0,0,0,.5) !important}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#A9C7DA !important}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:#39FF14 !important;color:#04210A !important}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .shopSection{background:var(--surface) !important;border-color:rgba(76,201,254,.35) !important}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .worldClock{background:rgba(5,12,22,.6);box-shadow:inset 0 0 0 2px #050C16,0 0 0 2px rgba(76,201,254,.45);border-radius:999px;padding-right:22px}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .wcTime{color:#39FF14;text-shadow:0 0 10px rgba(57,255,20,.6)}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .wcLabel{color:#4CC9FE}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .wcSpin{transform-origin:0 0}
+@media (prefers-reduced-motion: no-preference){ html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .wcSpin{animation:wcSpin 8s linear infinite} html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .worldClock.isTimer .wcSpin{animation-duration:2.5s} }
+@keyframes wcSpin{to{transform:rotate(360deg)}}
+
+/* ---------- Zwei Städte: tiefes Hex-Blau, Messing-Art-déco, Hextech-Cyan, Chemtech-Pink; Kristall ---------- */
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d),html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) body{
+  --bg:#0A0E1A;--surface:#121829;--surface2:#182036;--fill:rgba(0,240,255,.07);--line:rgba(201,165,90,.2);--lineStrong:rgba(201,165,90,.45);
+  --text:#EEF2FA;--sub:#AEB7CC;--sub2:#AEB7CC;--muted:#8E98B0;
+  --brand:#00F0FF;--onBrand:#03141A;--leaf:#00F0FF;--onLeaf:#03141A;--brandSoft:rgba(0,240,255,.12);--leafSoft:rgba(0,240,255,.12);
+  --sel:#00F0FF;--onSel:#03141A;--accent:#00F0FF;--accentSoft:rgba(0,240,255,.12);--onAccent:#03141A;--herb:#FF3FA4;--coffee:#182036;--petrol:#00F0FF;
+  --glass:rgba(10,14,26,.95);color-scheme:dark}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#0A0E1A;--surface:#121829}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#070A14;--cCard:#121829;--cFill:rgba(0,240,255,.07);--cLine:rgba(201,165,90,.2);--cText:#EEF2FA;--cSub:#AEB7CC;--cLeaf:#00F0FF;--cOnLeaf:#03141A}
+/* Art-déco: Ecken im 45-Grad-Winkel, feine Messinglinie */
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) :is(.card,.listGroup,.notesCard){border-radius:0 !important;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px);
+  background:linear-gradient(135deg,#C9A55A 0 9px,transparent 9px) top left/18px 18px no-repeat,linear-gradient(225deg,#C9A55A 0 9px,transparent 9px) top right/18px 18px no-repeat,linear-gradient(315deg,#C9A55A 0 9px,transparent 9px) bottom right/18px 18px no-repeat,linear-gradient(45deg,#C9A55A 0 9px,transparent 9px) bottom left/18px 18px no-repeat,var(--surface) !important;
+  box-shadow:inset 0 0 0 1px rgba(201,165,90,.35) !important}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{border-radius:0;clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#0A0E1A !important;border:1px solid rgba(201,165,90,.45) !important}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:rgba(0,240,255,.14) !important;color:#7DF6FF !important}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{background-image:radial-gradient(120% 60% at 10% 0,rgba(0,240,255,.07),transparent 60%),radial-gradient(90% 50% at 100% 20%,rgba(255,63,164,.06),transparent 60%)}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .worldClock{background:rgba(7,10,20,.6);box-shadow:inset 0 0 0 1px rgba(201,165,90,.5);border-radius:0;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .wcTime{color:#7DF6FF;text-shadow:0 0 12px rgba(0,240,255,.6)}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .worldClock.isTimer .wcTime{color:#FF8CC6;text-shadow:0 0 12px rgba(255,63,164,.6)}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .wcGem{transform-origin:0 0}
+@media (prefers-reduced-motion: no-preference){ html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .wcGem{animation:wcPulse 2.4s ease-in-out infinite} html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .worldClock.isTimer .wcGem{animation-duration:.9s} }
+@keyframes wcPulse{50%{opacity:.7;transform:scale(.92)}}
