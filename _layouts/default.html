@@ -51,7 +51,7 @@
     // Versteckter Retro-Modus (5× auf „Tobis Kochbuch“ auf der Startseite tippen)
     // Skins (Nov. 2026): Standard, Retro und acht weitere; gewählt unter „Mehr“ → „Skin“ (kochbuch.ui.skin, pro Gerät).
     // Wert = Farbe der Statusleiste/theme-color. Skins außer Standard haben ein festes Aussehen (kein Hell/Dunkel).
-    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#23271F', diner:'#B3122E', bauhaus:'#111111', nordwall:'#1C2126', zauberschule:'#151A36', jahr3000:'#0B1E3B', zweistaedte:'#1F4D52', insel:'#050607', akte:'#1E2933', brigade:'#1E2226' };
+    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#23271F', diner:'#B3122E', bauhaus:'#111111', nordwall:'#1C2126', zauberschule:'#151A36', jahr3000:'#0B1E3B', zweistaedte:'#1F4D52', insel:'#050607', akte:'#1E2933', brigade:'#0E0F10' };
     window.KOCHBUCH_SKIN = function(){
       var s = null;
       try { s = JSON.parse(localStorage.getItem('kochbuch.ui.skin')); if (!s && JSON.parse(localStorage.getItem('kochbuch.ui.retro'))) s = 'retro'; } catch(e){}
@@ -216,7 +216,7 @@
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="zweistaedte" style="--swField:#1F4D52;--swBg:#16131E;--swAcc:#FF3FA4"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Zwei Städte</span></button>
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="insel" style="--swField:#050607;--swBg:#E8E1CF;--swAcc:#1A1A17"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Die Insel</span></button>
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="akte" style="--swField:#1E2933;--swBg:#DDE2E5;--swAcc:#E4CFA0"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Akte</span></button>
-        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="brigade" style="--swField:#1E2226;--swBg:#E4E7E9;--swAcc:#7FB2EE"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Brigade</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="brigade" style="--swField:#0E0F10;--swBg:#1C1C1E;--swAcc:#D9822B"><span class="skinSwatch" aria-hidden="true"><span></span></span><span class="skinName">Brigade</span></button>
       </div>
     </div>
   </section>
