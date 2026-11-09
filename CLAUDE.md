@@ -276,7 +276,7 @@ getrennt (Wunsch des Besitzers).
   **Seit Dez. 2026 hell** (Besitzer: „sieht aus wie Dark Mode“): Feld gebürsteter Edelstahl (`--field:#CDD1D5`, feine
   Schliff-Linien + Glanzstreifen in `.skinScene-brigade::before`), Grund `#F2F3F3`, weiße Flächen mit Stahlkanten `#D5D9DC`,
   Text `#16191B`, Kupfer `#D9822B` als Füllung (Schrift `#140C04`), als Text `#9A4F12`; Tab-Leiste helles Stahlpaneel,
-  aktiv Kupfer. LED-Uhr, Timer-Zeiten und Bon-Zeitstempel bleiben dunkle Anzeigen (Gerät). Statusleiste Graphit `#2A2F33`.
+  aktiv Kupfer. LED-Uhr, Timer-Zeiten und Bon-Zeitstempel bleiben dunkle Anzeigen (Gerät). **Seit Dez. 2026 Schürzenblau statt Kupfer** (Wunsch des Besitzers „The-Bear-Blau“): Füllung `#2E62A8` mit weißer Schrift (6,1 : 1), als Text `#1F4E8C`, Logo-Band blau (`?v=2` an den Skin-Logos). Statusleiste Graphit `#2A2F33`.
   **Serienwelten nach Design-Analyse (Abschnitt 48 · 15, Nov. 2026, vom Besitzer geschickt; ohne Logos/Figuren/Namen/Zitate,
   daher z. B. kein DHARMA-Logo, keine Stark/Targaryen-Wappen, kein „Dinner is Coming“, kein Bender/Slurm):**
   Nordwall dunkel (Schiefer `#1A1A1D`, Karten als Metallplatten mit Nieten und Goldlinie, Drachenfeuer-Rot `#C8323C` für
