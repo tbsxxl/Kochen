@@ -198,8 +198,11 @@
       return await navigator.serviceWorker.getRegistration();
     }catch{ return null; }
   }
+  const NOTIFIED_KEY = "kochbuch.ui.timerNotified";
+  const notified = ()=>{ try{ return JSON.parse(localStorage.getItem(NOTIFIED_KEY) || "[]"); }catch{ return []; } };
   async function notifyRunning(t){
     const reg = await swReg(); if(!reg || !t || t.end <= Date.now()) return;
+    try{ localStorage.setItem(NOTIFIED_KEY, JSON.stringify([...new Set([...notified(), t.id])].slice(-20))); }catch{}
     try{
       await reg.showNotification(`${t.label} läuft`, {
         body: `Fertig um ${hhmm(t.end)}${t.title ? " · " + t.title : ""}`,
@@ -213,8 +216,15 @@
     const reg = await swReg(); if(!reg) return;
     try{ (await reg.getNotifications({ tag: `timer-${id}` })).forEach((n)=> n.close()); }catch{}
   }
-  // beim Öffnen: Mitteilungen laufender Timer auffrischen (z. B. nach Neustart des Geräts)
-  setTimeout(()=> timers.filter((t)=> !t.rang && t.end > Date.now()).forEach(notifyRunning), 1500);
+  // beim Öffnen nur ergänzen, was fehlt (z. B. nach Neustart des Geräts). Nie neu setzen: iOS meldet eine ersetzte
+  // Mitteilung jedes Mal neu (Fehler Dez. 2026: bei jedem Seitenwechsel kam eine weitere Mitteilung).
+  setTimeout(async ()=>{
+    const reg = await swReg(); if(!reg || !reg.getNotifications) return;
+    const done = notified();
+    for(const t of timers.filter((x)=> !x.rang && x.end > Date.now() && !done.includes(x.id))){
+      try{ if(!(await reg.getNotifications({ tag: `timer-${t.id}` })).length) notifyRunning(t); }catch{}
+    }
+  }, 1500);
 
   // Ohne Mitteilungs-Abo meldet sich der Timer nur, solange die App offen ist → einmal pro Woche darauf hinweisen
   const HINT_KEY = "kochbuch.ui.timerPushHint";
