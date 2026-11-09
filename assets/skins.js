@@ -463,7 +463,7 @@
   function enhance(){ cleanBits(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); }
 
   // ---------- Kino-Kopf (Three.js + GSAP, assets/cinema/<skin>.js, nur Feld-Seiten, nur mit WebGL) ----------
-  const CINEMA = { nordwall: 1 };
+  const CINEMA = { nordwall: 2, zauberschule: 2, jahr3000: 2, zweistaedte: 2, insel: 2, akte: 2, brigade: 2 };
   let cine = null, cineSkin = null, prevSkin = null;
   function cinema(){
     const sk = skin(), changed = prevSkin !== null && prevSkin !== sk;
