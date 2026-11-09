@@ -217,8 +217,9 @@ getrennt (Wunsch des Besitzers).
   Schriftzeichen (Jahr 3000), Pinselstrich (Zwei Städte), Stationsschild (Insel), „Betr.:“ (Akte), Malerband (Brigade).
   Heute-Karte gerahmt (Eisenrahmen, Goldrahmen, Sticker-Versatz, Büroklammer, Klebeband). Stimme (`VOICE` in skins.js):
   Leertexte, „Heute für dich“ und Timer-Titel je Skin („Heute an der Tafel“, „Hände, Chef!“ …). Verhalten: Zauberschule
-  goldene Funken beim Abhaken/Kochen, Brigade druckt bei „Zur Liste“ einen Bon, Insel-Vorspann nur einmal am Tag (0,9 s,
-  `kochbuch.ui.islandIntro`), Kapsel 0,45 s, „Fotos atmen“ entfernt. Szenen-Bewegung nur per transform/opacity und
+  goldene Funken beim Abhaken/Kochen, Brigade druckt bei „Zur Liste“ einen Bon, Kapsel 0,45 s. **Auf Wunsch des Besitzers
+  zurück:** Zauberschule-Fotos leben wie verzauberte Porträts (Heute-Karte + Rezeptfoto, `portraitLive` 9 s) und der
+  Insel-Vorspann läuft bei jedem Öffnen (2,2 s, unscharf und groß → scharf; reines CSS, kein Skript). Szenen-Bewegung nur per transform/opacity und
   angehalten, wenn der Kopf weggescrollt ist (`.scPaused`, IntersectionObserver, SMIL `pauseAnimations`).
   **Logo je Skin** (Wunsch des Besitzers): `assets/logos/<skin>.svg` – gleiche Buchform „Zwei Seiten“, Material je Welt
   (Terminal grüne Umrisse mit Zeilen, Diner Neonröhren gelb/mint, Bauhaus Rot/Blau + gelber Kreis, Nordwall Stahl mit Nieten
