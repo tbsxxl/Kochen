@@ -21,6 +21,7 @@
   bar.innerHTML = `
     <a class="nowCookingMain pressable" href="#">
       <img class="nowCookingImg" alt="" hidden>
+      <span class="nowCookingEgg" aria-hidden="true" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 15.5a6.5 6.5 0 0 0 13 0c0-4.5-3-9-6.5-9s-6.5 4.5-6.5 9z"/><path d="M12 6.5V4M10.5 4h3"/><path d="M12 15l2.5-2"/></svg></span>
       <span class="nowCookingText"><span class="nowCookingTitle"></span><span class="nowCookingSub"></span></span>
     </a>
     <a class="nowCookingPlay pressable" href="#" aria-label="Kochmodus öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.9l10-6.5a1 1 0 000-1.7l-10-6.5A1 1 0 008 5.5z" fill="currentColor"/></svg></a>
@@ -49,8 +50,11 @@
     $(".nowCookingSub").innerHTML = parts.join(" · ");
     bar.classList.toggle("isDone", done);
     const img = $(".nowCookingImg");
-    if(c && c.image){ if(img.getAttribute("src") !== c.image) img.src = c.image; img.hidden = false; }
+    // Foto: Kochmodus, sonst das des Timers; fehlt beides, eine Kachel mit Eieruhr statt einer Lücke
+    const pic = (c && c.image) || (next && next.image) || "";
+    if(pic){ if(img.getAttribute("src") !== pic) img.src = pic; img.hidden = false; }
     else img.hidden = true;
+    $(".nowCookingEgg").hidden = !!pic;
     $(".nowCookingBar span").style.transform = `scaleX(${c ? (c.step + 1) / c.total : 0})`;
     $(".nowCookingClose").hidden = !c;
     bar.querySelectorAll("a").forEach(a=> a.href = target || "#");

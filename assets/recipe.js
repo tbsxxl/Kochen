@@ -674,7 +674,7 @@ const cookOverlay = $("#cookOverlay");
   });
   cookStepText?.addEventListener('click', (e)=>{
     const tb = e.target.closest('.cookTime');
-    if(tb){ T?.start(Number(tb.dataset.secs), `Schritt ${stepIdx+1} · ${tb.dataset.label}`, { title: data.title, url: location.pathname + '?kochen=1' }); successTap(); pop(tb); return; }
+    if(tb){ T?.start(Number(tb.dataset.secs), `Schritt ${stepIdx+1} · ${tb.dataset.label}`, { title: data.title, url: location.pathname + '?kochen=1', image: data.image }); successTap(); pop(tb); return; }
     if(stepIdx < steps.length-1){ stepIdx++; renderCookStep(); lightTap(); } });
   // 2) Wischen: nach links = weiter, nach rechts = zurück
   let swipeX = null, swipeY = null;

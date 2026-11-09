@@ -473,7 +473,7 @@ getrennt (Wunsch des Besitzers).
   schließt sie (`clearRunning()`). Eine sekundengenaue Live-Anzeige (wie iOS-Live-Aktivitäten) können Web-Apps nicht.
 - Kochmodus: Wischen links/rechts; Fortschritt in `cooking` (12 Std). „Kochen läuft“-Kapsel über der unteren Leiste
   (`assets/now-cooking.js`, wie der Mini-Player in Apple Music) auf jeder Seite, solange Fortschritt oder Timer laufen:
-  Foto, Name, Timer-Restzeit (Eieruhr-SVG), „Schritt n von m“, Fortschritt grün; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt
+  Foto (aus dem Kochmodus, sonst `image` des Timers – `start()` in cook-timer.js speichert `RECIPE_DATA.image`; ältere Timer ohne Foto: grüne Kachel mit Eieruhr), Name, Timer-Restzeit (Eieruhr-SVG), „Schritt n von m“, Fortschritt grün; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt
   `KOCHBUCH_OPENCOOK`). recipe.js meldet `kochbuch:cooking` / `kochbuch:cookmode`.
   **Farben seit Abschnitt 41 (Wunsch des Besitzers):** im Dunkelmodus wie bisher neutrales Schwarz mit hellgrünem „Weiter“;
   im hellen Modus hell mit grünem Kopf (Kopfzeile Feld-Grün, Grund `#F2F4F2`, weiße Karten, „Weiter“/Haken/Timer-Feld

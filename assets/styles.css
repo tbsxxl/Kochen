@@ -1514,6 +1514,9 @@ body.hasNowCooking .uiToast{bottom:calc(var(--tabbarH) + env(safe-area-inset-bot
 .nowCooking[hidden]{display:none}
 .nowCookingMain{flex:1;min-width:0;display:flex;align-items:center;gap:10px;height:100%;color:inherit;text-decoration:none}
 .nowCookingImg{width:44px;height:44px;border-radius:12px;object-fit:cover;flex-shrink:0}
+.nowCookingEgg{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;flex-shrink:0;background:var(--brand);color:var(--onBrand)}
+.nowCookingEgg[hidden]{display:none}
+.nowCookingEgg svg{width:24px;height:24px}
 .nowCookingText{display:flex;flex-direction:column;min-width:0;padding-left:4px}
 .nowCookingTitle,.nowCookingSub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nowCookingTitle{font-size:var(--fs16);font-weight:600;line-height:1.25}
