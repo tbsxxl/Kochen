@@ -234,6 +234,18 @@ getrennt (Wunsch des Besitzers).
   Terminal: Statusbalken ZEIT/PORT/WERT/GEKO in Segmenten (`clip-path`). Diner: Speisekarte mit Punktlinie zwischen Name und Zeit.
   Bauhaus: Wochenplan-Einträge mit Form je Art (`data-kind`), Wochenbilanz als Balken. Retro: einmal am Tag ein Startfenster
   „Kochbuch.exe“ mit Ladebalken (`kochbuch.ui.retroBoot`). Letzter-Knopf-Texte auch Zauberschule „Vollbracht“, Brigade „Service!“.
+  **Kino-Köpfe (Abschnitt 48 · 13, Nov. 2026, Wunsch „cineastisch, nicht billig“; Muster Nordwall, die anderen folgen nach
+  Freigabe):** Auf Feld-Seiten ersetzt eine Three.js-Szene die SVG-Szene (`.cineCanvas`, fest hinter dem Feld, `html.cine`).
+  Quelle `tools/cinema/<skin>.js`, gebaut mit `sh tools/cinema/build.sh` (einmalig `npm install` in `tools/cinema`; esbuild bündelt
+  three + gsap/ScrollTrigger zu `assets/cinema/<skin>.js`, ~180 KB gz, nur in diesem Skin geladen, `CINEMA` in `skins.js` mit `?v=`).
+  Nordwall: Nachthimmel mit Mond und Sternen hinter dem Titel, Eismauer mit Mondlicht-Krone im unteren Drittel, Burg-Silhouette
+  mit flackernden Fenstern/Fackeln, Zickzack-Treppe aus Lichtern, dunkle Hügel vorn, Schnee als Partikel. Startseite: Feld
+  ~90 % der Bildschirmhöhe (`marginTop` der Heute-Karte per Skript), Datum Buchstabe für Buchstabe, dann Suche/Knöpfe; Scrollen hebt
+  die Kamera (ScrollTrigger), Titel blendet aus, Heute-Foto weitet sich (scale 1,22 → 1). Computer: Kamera folgt leicht der Maus,
+  Schnellknöpfe glühen beim Überfahren. Wechsel auf Nordwall: Vorspann „Nordwall“ (startet erst, wenn das Skin-Blatt zu ist;
+  Antippen überspringt). `gsap.ticker.lagSmoothing(0)` + Sicherung: Inhalt ist nach spätestens ~2,5 s sichtbar, auch bei langsamem
+  Rendern. Ohne WebGL bleibt die SVG-Szene; „Bewegung reduzieren“ = Standbild ohne Einblendungen. Rendern pausiert, wenn das Feld
+  weggescrollt oder die Seite verborgen ist. Testen mit Chromium-Optionen `--use-gl=angle --use-angle=swiftshader --enable-unsafe-swiftshader`.
   **Logo je Skin** (Wunsch des Besitzers): `assets/logos/<skin>.svg` – gleiche Buchform „Zwei Seiten“, Material je Welt
   (Terminal grüne Umrisse mit Zeilen, Diner Neonröhren gelb/mint, Bauhaus Rot/Blau + gelber Kreis, Nordwall Stahl mit Nieten
   und rotem Lesebändchen, Zauberschule Pergament mit Goldkante und Stern, Jahr 3000 mit Umlaufbahn, Zwei Städte Gold mit Hex
