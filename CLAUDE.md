@@ -290,6 +290,26 @@ getrennt (Wunsch des Besitzers).
   bei Timer), Zwei Städte Hex-Kristall (pulsiert schneller bei Timer; `window.KOCHBUCH_TIMER_ACTIVE` lässt auch den
   3D-Kristall schneller drehen). Suchfeld-Text je Welt (`PLACEHOLDER` in `skins.js`, z. B. „Im Zauberbuch suchen“).
   Tab-Symbole bleiben überall gleich (Navigation muss eindeutig bleiben).
+  **Welten mit eigenem Material (Abschnitt 48 · 16, Nov. 2026; Kritik des Besitzers „sehen alle gleich aus“, Entwürfe als Bilder
+  gezeigt, dann „setze alles um“):** Charakter kommt aus Material und Aufbau, nicht aus Farbe. Zauberschule = aufgeschlagenes
+  Buch (Pergament über die ganze Seite, Buchschnitt links, Lesebändchen, Kopfzeile „Kapitel … ❧ Wochentag“ am oberen Rand,
+  Einleitungssatz mit Initiale zum Gericht des Tages, Gericht als ovales Goldrahmen-Porträt mit Namensschild, Rezeptliste mit
+  Seitenzahlen und Punktlinie, Schritte römisch nummeriert, Leiste als Ledereinband). Nordwall = Kartentisch (Holz, gezeichnete
+  Landkarte als Szene `.nwMap`, Datum auf Eisenplatte mit Nieten, Rezepte in den Reihen als Wappenfahnen in `--banner`-Farbe).
+  Insel = Monitor der Station (alles Share Tech Mono in Bernstein, beiger Gehäuserahmen über den ganzen Bildschirm, Kopfzeile
+  „Versorgung · Terminal 2“, große Klappziffern, Heute-Karte als Fenster „Eintrag … · heute [ öffnen ]“, Rezepte nummeriert
+  „[01]“, Tabs als beige Tasten). Jahr 3000 = Zeichentrick (hell: Himmelblau→Mint→Sand, 3 px schwarze Konturen, harter Versatz,
+  Gelb/Mint/Orange flach, Ringplanet und Wolken als Szene, Sprechblase „Frisch aus dem Menü-o-mat“). Zwei Städte = geteilte Stadt
+  (Feld hell-golden mit Art-déco-Strahlen, Blatt dunkel mit gezacktem Riss, Abschnitts-Titel als pinkes Graffiti
+  „Unten kocht es“). Akte = Schreibtisch (Holz, Begrüßung als Blatt im Aktendeckel mit Reiter „AKTE jjjj/mm-tt“, Büroklammer,
+  Betreff/Status/Hinweis, Stempel „Offen“/„Erledigt“, Heute-Karte als Polaroid „Beweisstück A“, Karten als Karteikarten;
+  Grund-Schrift hell, Papierflächen setzen ihre Tokens lokal dunkel). Brigade zusätzlich: gedruckter Bon des Tages über der
+  Heute-Karte (Bon-Nr., Uhrzeit, „1× Gericht“, Portionen/Zeit, Tisch), Kapseln und Zutatenmengen auf der Rezeptseite als blaues
+  Malerband in schmaler Versalschrift. Elemente kommen aus `worldHome()` in `skins.js` (`.skinBit`). Die 3D-Köpfe sind für diese
+  Welten aus (`CINEMA = {}`, Code bleibt). Regeln mit `html.skin.skin-x:not(._a)…:not(._e)` (schlagen Abschnitt 11/15).
+  Hintergründe von Welten mit Szene (Nordwall, Jahr 3000, Zwei Städte) gehören auf `html`, nicht auf `body` (sonst deckt der
+  Body-Hintergrund die Szene mit z-index -1 zu). Nach `impeccable`-Kritik: keine Karte in der Karte auf der Rezeptseite,
+  Leuchten bei der Insel nur für Überschriften, `::selection` und `caret-color` je Welt.
   **Logo je Skin** (Wunsch des Besitzers): `assets/logos/<skin>.svg` – gleiche Buchform „Zwei Seiten“, Material je Welt
   (Terminal grüne Umrisse mit Zeilen, Diner Neonröhren gelb/mint, Bauhaus Rot/Blau + gelber Kreis, Nordwall Stahl mit Nieten
   und rotem Lesebändchen, Zauberschule Pergament mit Goldkante und Stern, Jahr 3000 mit Umlaufbahn, Zwei Städte Gold mit Hex
