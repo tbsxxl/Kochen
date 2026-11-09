@@ -25,7 +25,9 @@
       <span class="j3Cloud" style="right:-24px;top:calc(env(safe-area-inset-top) + 330px);width:96px;height:32px"></span>`,
     // Zwei Städte: Art-déco-Strahlen der Oberstadt
     zweistaedte: ()=> `<span class="zwRays"></span>`,
-    brigade: ()=> `<div class="passClock"><span class="pcDigits"></span><span class="pcMeta"><b>Küchenzeit</b><i class="pcDay"></i></span></div>`,
+    // Akte: Regen läuft am Fenster des Büros herab, Fensterkreuz
+    akte: ()=> `<span class="akWindow"></span><span class="akRain"></span><span class="akRain akRain2"></span>`,
+    brigade: ()=> `<div class="passClock"><span class="pcDigits"></span><span class="pcMeta"><b>Küche läuft</b><i class="pcDay"></i></span></div>`,
   };
 
   // ---------- Brigade: LED-Uhr ----------
@@ -45,7 +47,7 @@
       if(document.hidden) return;
       const d = new Date(), p = (n)=> String(n).padStart(2, "0"), t = activeTimer();
       const str = t ? fmtLeft(t.left) : `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
-      const meta = document.querySelector(".passClock .pcMeta b"); if(meta) meta.textContent = t ? t.label : "Küchenzeit";
+      const meta = document.querySelector(".passClock .pcMeta b"); if(meta) meta.textContent = t ? t.label : "Küche läuft";
       if(el.dataset.t === str) return;
       el.dataset.t = str;
       el.innerHTML = [...str].map((c)=> c === ":" ? ledColon : ledDigit(+c)).join("");
@@ -441,15 +443,11 @@
       <g class="wcRingM">${Array.from({ length: 60 }, (_, i)=> `<rect x="-.35" y="-23.5" width=".7" height="${i % 5 ? 1.6 : 3}" fill="#9C8F78" transform="rotate(${i * 6})"/>`).join("")}</g>
       <circle class="wcArc" r="19" fill="none" stroke="#C8323C" stroke-width="2.4" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90)"/>
       <g class="wcGear">${Array.from({ length: 10 }, (_, i)=> `<rect x="-1.4" y="-15.5" width="2.8" height="3.4" fill="#6F6146" transform="rotate(${i * 36})"/>`).join("")}<circle r="13" fill="#2A2620" stroke="#6F6146"/></g>
-      <path class="wcHand" d="M0 -21 L1.6 0 L0 3 L-1.6 0Z" fill="#E8DCC0"/><circle r="2" fill="#C9A55A"/></svg>`,
+      <g class="wcHand"><path d="M0 -22 L1.5 -17 L1.5 2 L-1.5 2 L-1.5 -17Z" fill="#D9DEE3"/><path d="M-4 2 H4 V3.6 H-4Z" fill="#C5A059"/><path d="M-.9 3.6 H.9 V8 H-.9Z" fill="#5A3A22"/></g><circle r="2" fill="#C9A55A"/></svg>`,
     // Klappziffern-Kasten mit Zahlenreihe
     insel: ()=> ``,
-    // Holo-Ring: drehender Strich-Ring, Timer als Bogen
-    jahr3000: ()=> `<svg viewBox="-32 -32 64 64" class="wcEmblem" aria-hidden="true">
-      <circle r="29" fill="rgba(76,201,254,.06)" stroke="rgba(76,201,254,.35)" stroke-width="1"/>
-      <circle class="wcSpin" r="25" fill="none" stroke="#39FF14" stroke-width="2" stroke-dasharray="6 5" opacity=".8"/>
-      <circle class="wcArc" r="20" fill="none" stroke="#4CC9FE" stroke-width="3" stroke-dasharray="125.7" stroke-dashoffset="125.7" transform="rotate(-90)" stroke-linecap="round"/>
-      <circle r="14" fill="none" stroke="rgba(57,255,20,.35)" stroke-width="1"/><circle r="3" fill="#39FF14"/></svg>`,
+    // Visier: dunkles, breites Anzeigefeld; die Ziffern (Segmente in Neon-Grün) setzt worldClock()
+    jahr3000: ()=> ``,
     // Hex-Kristall in Messingfassung
     zweistaedte: ()=> `<svg viewBox="-32 -32 64 64" class="wcEmblem" aria-hidden="true">
       <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15" fill="#0E1426" stroke="#C9A55A" stroke-width="1.6"/>
@@ -457,7 +455,7 @@
       <g class="wcGem"><polygon points="0,-16 9,0 0,16 -9,0" fill="#00C8E0"/><polygon points="0,-16 9,0 0,0" fill="#7DF6FF"/><polygon points="0,16 -9,0 0,0" fill="#0090B0"/></g>
       <circle class="wcArc" r="27.5" fill="none" stroke="#FF3FA4" stroke-width="2" stroke-dasharray="172.8" stroke-dashoffset="172.8" transform="rotate(-90)"/></svg>`,
   };
-  const CLOCK_LABEL = { zauberschule: "Zeit im Schloss", nordwall: "Stunde der Wache", insel: "Stationszeit", jahr3000: "Bordzeit", zweistaedte: "Hextech-Zeit" };
+  const CLOCK_LABEL = { zauberschule: "Zeit im Schloss", nordwall: "Stunde der Wache", insel: "Stationszeit", jahr3000: "Bordzeit · Visier", zweistaedte: "Hextech-Zeit" };
   // ---------- Timer auf der Startseite für alle Skins ohne eigenes Uhr-Element (Standard, Retro, Terminal, Diner, Bauhaus, Akte) ----------
   // Nur sichtbar, solange ein Kochtimer läuft; Antippen öffnet den Kochmodus des Rezepts.
   let homeTimerT = null;
@@ -517,7 +515,12 @@
           timeEl.innerHTML = [...str].map((c, i)=> c === ":" ? `<i class="wcSep">:</i>` : `<span class="wcFlap${old[i] !== undefined && old[i] !== c ? " flip" : ""}">${c}</span>`).join("");
           timeEl.dataset.t = str;
         }
+      } else if(sk === "jahr3000"){
+        // Visier: Segmentziffern springen blockweise weiter
+        if(timeEl.dataset.t !== str){ timeEl.innerHTML = [...str].map((c)=> c === ":" ? ledColon : ledDigit(+c)).join(""); timeEl.dataset.t = str; }
       } else timeEl.textContent = str;
+      // Insel: unter 4 Minuten Alarm-Rot, die Zahlenreihe blinkt
+      el.classList.toggle("isAlarm", !!t && t.left < 240);
       labelEl.textContent = t ? t.label : CLOCK_LABEL[sk];
       el.setAttribute("aria-label", t ? `Timer ${t.label}: noch ${str}` : `Uhrzeit ${str}`);
       if(sk === "zauberschule"){
@@ -589,7 +592,220 @@
     }
   }
 
-  function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); }
+  // =====================================================================================================
+  // Abschnitt 48 · 17: Welten bis ins Detail (Blaupause des Besitzers, Dez. 2026). Klänge nur mit Schalter im Skin-Blatt
+  // (kochbuch.ui.skinSound), Haptik über KOCHBUCH_UI.haptic. Keine Figuren, Logos, Zitate oder Namen aus den Serien.
+  // =====================================================================================================
+  const WORLDS = { nordwall: 1, zauberschule: 1, jahr3000: 1, zweistaedte: 1, insel: 1, akte: 1, brigade: 1 };
+  const soundOn = ()=>{ try{ return localStorage.getItem("kochbuch.ui.skinSound") === "1"; }catch{ return false; } };
+  let actx = null;
+  function ac(){
+    try{
+      if(!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+      if(actx.state === "suspended") actx.resume();
+      return actx;
+    }catch{ return null; }
+  }
+  // Grundbausteine: Ton mit Hüllkurve, Rauschen durch Filter
+  function tone(a, { f = 440, f2 = null, type = "sine", t = 0, d = .12, v = .2 }){
+    const o = a.createOscillator(), g = a.createGain(), st = a.currentTime + t;
+    o.type = type; o.frequency.setValueAtTime(f, st); if(f2) o.frequency.exponentialRampToValueAtTime(f2, st + d);
+    g.gain.setValueAtTime(.0001, st); g.gain.exponentialRampToValueAtTime(v, st + .008); g.gain.exponentialRampToValueAtTime(.0001, st + d);
+    o.connect(g); g.connect(a.destination); o.start(st); o.stop(st + d + .02);
+  }
+  function noise(a, { t = 0, d = .08, v = .2, type = "bandpass", f = 2000, q = 1 }){
+    const len = Math.max(1, Math.floor(a.sampleRate * d)), buf = a.createBuffer(1, len, a.sampleRate), ch = buf.getChannelData(0);
+    for(let i = 0; i < len; i++) ch[i] = (Math.random() * 2 - 1) * (1 - i / len);
+    const s = a.createBufferSource(), fl = a.createBiquadFilter(), g = a.createGain(), st = a.currentTime + t;
+    s.buffer = buf; fl.type = type; fl.frequency.value = f; fl.Q.value = q; g.gain.value = v;
+    s.connect(fl); fl.connect(g); g.connect(a.destination); s.start(st);
+  }
+  const SFX = {
+    // Zeichentrick-Plopp (Holz), Roboter-Alarm
+    jahr3000: { tap: (a)=>{ tone(a, { f: 720, f2: 160, d: .09, v: .25 }); noise(a, { d: .03, f: 900, v: .12 }); },
+      alarm: (a)=>{ for(let i = 0; i < 8; i++) tone(a, { f: i % 2 ? 520 : 1040, type: "square", t: i * .16, d: .13, v: .09 }); } },
+    // schwere Eisenplatte, Siegel
+    nordwall: { tap: (a)=>{ tone(a, { f: 90, f2: 48, d: .22, v: .35 }); noise(a, { d: .09, type: "lowpass", f: 380, v: .3 }); } },
+    // raschelndes Papier, heller Funke
+    zauberschule: { tap: (a)=>{ noise(a, { d: .07, f: 3800, q: .7, v: .16 }); noise(a, { t: .06, d: .09, f: 2600, q: .7, v: .12 }); tone(a, { f: 2350, t: .03, d: .18, v: .05 }); } },
+    // elektrischer Klick mit Knistern
+    zweistaedte: { tap: (a)=>{ tone(a, { f: 2200, f2: 900, type: "square", d: .025, v: .07 }); noise(a, { t: .01, d: .06, type: "highpass", f: 4500, v: .14 }); } },
+    // mechanische Taste
+    insel: { tap: (a)=>{ noise(a, { d: .03, f: 1600, q: 2, v: .3 }); tone(a, { f: 140, f2: 70, t: .012, d: .07, v: .22 }); } },
+    // Schreibmaschine
+    akte: { tap: (a)=>{ noise(a, { d: .025, type: "highpass", f: 3000, v: .3 }); tone(a, { f: 180, f2: 90, d: .05, v: .15 }); } },
+    // Bondrucker-Tick
+    brigade: { tap: (a)=>{ tone(a, { f: 1900, type: "triangle", d: .03, v: .08 }); noise(a, { t: .01, d: .02, f: 5000, v: .08 }); } },
+  };
+  function sfx(kind){
+    const s = SFX[skin()]?.[kind];
+    if(!s || !soundOn()) return;
+    const a = ac(); if(a) try{ s(a); }catch{}
+  }
+  // Timer-Ablauf: eigener Alarm je Welt (sonst der normale Ton aus cook-timer.js), dazu ein Bild-Effekt
+  window.KOCHBUCH_SKIN_RING = (a)=>{
+    const s = SFX[skin()]?.alarm;
+    document.dispatchEvent(new CustomEvent("kochbuch:timerdone"));
+    if(!s || !a) return false;
+    try{ s(a); return true; }catch{ return false; }
+  };
+
+  const TAPS = ".homeQuickBtn, .recipeCookBtn, .recipeActBtn, .tabItem, .segBtn, .btn, #cookNext, #cookPrev, .cookNavBtn, .skinBitTap, .zsRibbon, .j3Ship";
+  document.addEventListener("pointerdown", (e)=>{
+    if(!WORLDS[skin()] || !e.target.closest(TAPS)) return;
+    sfx("tap");
+    // Insel: Taste rastet hörbar ein und bleibt kurz unten
+    const key = skin() === "insel" && e.target.closest(".homeQuickBtn, .tabItem, .recipeCookBtn");
+    if(key){ key.classList.add("keyDown"); setTimeout(()=> key.classList.remove("keyDown"), 160); }
+  }, { passive: true });
+  document.addEventListener("click", (e)=>{
+    if(!WORLDS[skin()]) return;
+    const hit = e.target.closest(TAPS);
+    if(hit) try{ window.KOCHBUCH_UI?.haptic?.(skin() === "nordwall" ? "medium" : "light"); }catch{}
+    // Zwei Städte: Funke in Hextech-Cyan an Knöpfen; Zauberschule: Gold auch an den Seitenecken-Knöpfen
+    const sk = skin();
+    if(reduce()) return;
+    if(sk === "zweistaedte" && e.target.closest(".homeQuickBtn, .recipeCookBtn, .recipeActBtn")) sparks(e.clientX, e.clientY, "#00F0FF", 6);
+    if(sk === "zauberschule" && e.target.closest(".homeQuickBtn, .recipeActBtn")) sparks(e.clientX, e.clientY, "#F3D27A", 7);
+  });
+  function sparks(x, y, color, n){
+    for(let i = 0; i < n; i++){
+      const sp = document.createElement("span");
+      sp.className = "magicSpark"; sp.style.left = x + "px"; sp.style.top = y + "px"; sp.style.background = color; sp.style.boxShadow = `0 0 6px ${color}`;
+      document.body.appendChild(sp);
+      const a = (i / n) * Math.PI * 2 + Math.random() * .6, d = 18 + Math.random() * 16;
+      sp.animate([{ transform: "translate(-50%,-50%) scale(1)", opacity: 1 }, { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d}px)) scale(.2)`, opacity: 0 }],
+        { duration: 380, easing: "cubic-bezier(.2,.8,.2,1)" }).onfinish = ()=> sp.remove();
+    }
+  }
+
+  // Timer-Ablauf als Bild: Zauberschule Rauchwolke von unten, Insel rotes Aufblitzen
+  document.addEventListener("kochbuch:timerdone", ()=>{
+    const sk = skin();
+    if(sk !== "zauberschule" || reduce()) return;
+    const sm = document.createElement("div");
+    sm.className = "zsSmoke"; sm.setAttribute("aria-hidden", "true");
+    sm.innerHTML = "<i></i><i></i><i></i><i></i><i></i>";
+    document.body.appendChild(sm);
+    setTimeout(()=> sm.remove(), 3200);
+  });
+
+  // ---------- Jahr 3000: kleines Raumschiff oben rechts, blinzelt beim Antippen ----------
+  const SHIP = svg("0 0 64 40", `<path d="M6 30 C2 30 2 24 8 23 L18 20" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+    <path d="M14 22 C20 10 42 6 58 18 C46 30 24 32 14 22Z" fill="#58C4C3" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M28 12 C30 6 38 4 44 10" fill="#FF6B35" stroke="#1A1A1A" stroke-width="3" stroke-linejoin="round"/>
+    <circle class="j3Eye" cx="40" cy="17" r="4.5" fill="#fff" stroke="#1A1A1A" stroke-width="2.5"/><circle class="j3Eye" cx="29" cy="19" r="3.5" fill="#fff" stroke="#1A1A1A" stroke-width="2.5"/>
+    <path d="M18 26 L10 34 M24 28 L20 36" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>`, 'class="j3ShipSvg"');
+  function j3Ship(){
+    const brand = $(".homeBrand");
+    if(skin() !== "jahr3000" || !brand || $(".j3Ship")) return;
+    const b = bit("j3Ship", "jahr3000", "button");
+    b.type = "button"; b.setAttribute("aria-label", "Raumschiff"); b.innerHTML = SHIP;
+    b.addEventListener("click", ()=>{ b.classList.remove("blink"); void b.offsetWidth; b.classList.add("blink"); });
+    brand.querySelector(".profileBadge")?.before(b);
+  }
+
+  // ---------- Zauberschule: Lesebändchen öffnet das Menü, Tinte fließt beim Tippen, eigene Notiz am Rand ----------
+  function zsRibbonMenu(){
+    const r = $(".zsRibbon");
+    if(!r || r.dataset.menu) return;
+    r.dataset.menu = "1"; r.removeAttribute("aria-hidden"); r.setAttribute("role", "button"); r.setAttribute("aria-label", "Menü"); r.tabIndex = 0;
+    const open = ()=> document.getElementById("moreBtn")?.click();
+    r.addEventListener("click", open);
+    r.addEventListener("keydown", (e)=>{ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); open(); } });
+  }
+  document.addEventListener("input", (e)=>{
+    const el = e.target;
+    if(el.id === "notesText"){ clearTimeout(marginNote.t); marginNote.t = setTimeout(marginNote, 300); }
+    if(!el.matches?.("#homeSearch, #searchInput, #notesText") || reduce()) return;
+    const cls = { zauberschule: "inkFlow", nordwall: "oreGlow" }[skin()];
+    if(!cls) return;
+    el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls);
+  });
+  function marginNote(){
+    if(skin() !== "zauberschule") return;
+    const id = window.RECIPE_DATA?.id, host = $(".recipeNameBlock, .recipeHeroText");
+    const pane = $("#ingPane");
+    if(!id || !pane) return;
+    const e = readLS("kochbuch.notes", {})[id] || {};
+    const txt = String(e.text || "").trim().split(/\n/)[0].slice(0, 80);
+    let el = $(".zsMargin");
+    if(!txt){ el?.remove(); return; }
+    if(!el){ el = bit("zsMargin", "zauberschule", "p"); pane.prepend(el); }
+    el.textContent = txt;
+  }
+
+  // ---------- Die Insel: Block-Cursor im Suchfeld, Protokollkopf auf der Rezeptseite ----------
+  let caretCtx = null;
+  function blockCaret(){
+    document.querySelectorAll("#homeSearch, #searchInput").forEach((inp)=>{
+      const row = inp.closest(".searchRow"); if(!row) return;
+      let c = row.querySelector(".inCaret");
+      if(skin() !== "insel"){ c?.remove(); return; }
+      if(!c){ c = bit("inCaret", "insel", "span"); c.setAttribute("aria-hidden", "true"); row.appendChild(c); }
+      const place = ()=>{
+        const cs = getComputedStyle(inp);
+        caretCtx = caretCtx || document.createElement("canvas").getContext("2d");
+        caretCtx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+        const txt = inp.value.slice(0, inp.selectionStart ?? inp.value.length);
+        const x = inp.offsetLeft + parseFloat(cs.paddingLeft) + caretCtx.measureText(txt).width - inp.scrollLeft;
+        c.style.transform = `translateX(${Math.min(x, inp.offsetLeft + inp.clientWidth - 12)}px)`;
+        c.classList.toggle("on", document.activeElement === inp);
+      };
+      if(!inp.dataset.caret){
+        inp.dataset.caret = "1";
+        ["input", "focus", "blur", "keyup", "click", "select"].forEach((ev)=> inp.addEventListener(ev, ()=> skin() === "insel" && place()));
+        document.addEventListener("selectionchange", ()=>{ if(document.activeElement === inp && skin() === "insel") place(); });
+      }
+      place();
+    });
+  }
+  function protoHead(){
+    const name = $(".recipeHeroText"), d = window.RECIPE_DATA;
+    if(skin() !== "insel" || !name || !d) return;
+    const n = [...String(d.id || "")].reduce((s, ch)=> (s * 31 + ch.charCodeAt(0)) % 900, 7) + 100;
+    let el = $(".inProto");
+    if(!el){ el = bit("inProto", "insel"); el.setAttribute("aria-hidden", "true"); name.prepend(el); }
+    el.textContent = `Protokoll ${n} · Rationen · ${d.baseServings || 2} Port.`;
+  }
+
+  // ---------- Akte: Schreibmaschine schlägt ungleichmäßig an (Überschriften) ----------
+  function typeJitter(){
+    const on = skin() === "akte";
+    document.querySelectorAll(".homeGreetingTitle, .pageTitleBlock .h1, .homeSectionTitle, .recipeName").forEach((el)=>{
+      if(!on){ if(el.dataset.jit){ el.textContent = el.textContent; delete el.dataset.jit; } return; }
+      if(el.dataset.jit === el.textContent) return;
+      const txt = el.textContent;
+      let seed = 0; for(const ch of txt) seed = (seed * 33 + ch.charCodeAt(0)) % 9973;
+      const rnd = ()=>{ seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+      el.innerHTML = [...txt].map((ch)=> ch === "\n" || ch === " " || ch === " " ? esc2(ch)
+        : `<span class="tj" style="--y:${((rnd() - .5) * .07).toFixed(3)}em;--o:${(.74 + rnd() * .26).toFixed(2)}">${esc2(ch)}</span>`).join("");
+      el.dataset.jit = txt;
+    });
+  }
+
+  // ---------- Brigade: Bon kommt aus dem Drucker ----------
+  function bonPrint(){
+    const t = $(".brTicket");
+    if(skin() !== "brigade" || !t || t.dataset.printed) return;
+    t.dataset.printed = "1";
+    if(reduce()) return;
+    t.animate([{ clipPath: "inset(0 0 100% 0)", transform: "translateY(-18px) rotate(-1.5deg)" }, { clipPath: "inset(0 0 0 0)", transform: "translateY(0) rotate(-1.5deg)" }],
+      { duration: 900, easing: "steps(9, end)" });
+  }
+
+  // ---------- Zauberschule: Siegel als Wasserzeichen im Kopf (frei gezeichnet: Stern in doppeltem Ring) ----------
+  function zsSeal(){
+    const g = $(".homeGreeting");
+    if(skin() !== "zauberschule" || !g || $(".zsSeal")) return;
+    const el = bit("zsSeal", "zauberschule"); el.setAttribute("aria-hidden", "true");
+    el.innerHTML = svg("-60 -60 120 120", `<g fill="none" stroke="#2B2118" stroke-width="2"><circle r="56"/><circle r="48" stroke-dasharray="2 4"/><circle r="30"/></g>
+      <path d="M0 -44 L9 -9 44 0 9 9 0 44 -9 9 -44 0 -9 -9Z" fill="#2B2118"/><circle r="6" fill="#F4EEDB"/>`);
+    g.style.position = "relative"; g.prepend(el);
+  }
+  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); }
+
+  function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
 
   // ---------- Kino-Kopf (Three.js + GSAP, assets/cinema/<skin>.js, nur Feld-Seiten, nur mit WebGL) ----------
   // Seit Abschnitt 48 · 16 tragen die Welten ihr Material selbst (Buch, Karte, Monitor …); 3D bleibt gebaut, ist aber aus.
