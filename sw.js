@@ -1,7 +1,7 @@
 /* Tobis Kochbuch — Service Worker
    Offline: Seiten „netzwerk-zuerst“, aber nach 3 s Warten (schlechter Empfang im Supermarkt) aus dem Cache.
    CSS/JS/Bilder „Cache zuerst“, im Hintergrund aktualisieren. /api/ nie cachen. */
-const VERSION = 'kochbuch-v86';
+const VERSION = 'kochbuch-v87';
 const ASSET_CACHE = `${VERSION}-assets`;
 const IMAGE_CACHE = `${VERSION}-images`;
 const PAGE_CACHE = `${VERSION}-pages`;
@@ -12,7 +12,7 @@ const PAGE_TIMEOUT = 3000;
 const PRECACHE_PAGES = ['/', '/rezeptindex/', '/shopping/', '/wochenplan/', '/was-koche-ich/', '/kuehltruhe/', '/kategorien/', '/backup/', '/konto/', '/offline/'];
 const PRECACHE_ASSETS = [
   '/assets/styles.css', '/assets/utils.js', '/assets/account.js', '/assets/shopping.js', '/assets/plan.js',
-  '/assets/recipe.js', '/assets/cook-timer.js', '/assets/now-cooking.js', '/assets/skins.js', '/assets/home-reco.js', '/assets/cards.js', '/assets/what-to-cook.js', '/assets/freezer.js',
+  '/assets/recipe.js', '/assets/cook-timer.js', '/assets/now-cooking.js', '/assets/skins.js', '/assets/logos/terminal.svg', '/assets/logos/diner.svg', '/assets/logos/bauhaus.svg', '/assets/logos/nordwall.svg', '/assets/logos/zauberschule.svg', '/assets/logos/jahr3000.svg', '/assets/logos/zweistaedte.svg', '/assets/logos/insel.svg', '/assets/logos/akte.svg', '/assets/logos/brigade.svg', '/assets/home-reco.js', '/assets/cards.js', '/assets/what-to-cook.js', '/assets/freezer.js',
   '/assets/logo.svg?v=9', '/assets/logo-dark.svg?v=11', '/assets/fonts/inter.woff2', '/assets/fonts/fraunces.woff2'
 ];
 

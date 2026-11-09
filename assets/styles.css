@@ -3205,3 +3205,8 @@ html.skin-brigade:not(._a):not(._b):not(._c):not(._d),html.skin-brigade:not(._a)
   -webkit-mask:radial-gradient(circle at 4px 100%, transparent 3px, #000 3.5px) 0 0/8px 100% repeat-x;mask:radial-gradient(circle at 4px 100%, transparent 3px, #000 3.5px) 0 0/8px 100% repeat-x}
 .skinScene-brigade .scRail span:nth-child(2){transform:rotate(3deg)}
 .skinScene-brigade .scRail span:nth-child(3){transform:rotate(-2deg)}
+
+/* Logo je Skin (assets/logos/, gesetzt von assets/skins.js): ersetzt in Skins das Standard-Logo */
+.homeBrand .logoSkin{width:28px;height:28px}
+.homeBrand .logoSkin[hidden]{display:none}
+html.skin:not(._a):not(._b):not(._c):not(._d) body .homeBrand .logoLight,html.skin:not(._a):not(._b):not(._c):not(._d) body .homeBrand .logoDark{display:none !important}

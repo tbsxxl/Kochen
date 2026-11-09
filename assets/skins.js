@@ -163,7 +163,17 @@
     });
   }
 
-  function apply(){ mountScene(); futureDate(); markCooked(); }
+  // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
+  const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade"];
+  function skinLogo(){
+    const img = document.querySelector(".homeBrand .logoSkin");
+    if(!img) return;
+    const on = LOGOS.includes(skin());
+    img.hidden = !on;
+    if(on) img.src = `/assets/logos/${skin()}.svg?v=1`;
+  }
+
+  function apply(){ mountScene(); futureDate(); markCooked(); skinLogo(); }
   function init(){
     apply();
     watchProgress();

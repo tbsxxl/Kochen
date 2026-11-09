@@ -203,6 +203,11 @@ getrennt (Wunsch des Besitzers).
   kreisendem Lichtkegel, Karten „Akte Nr. 01 …“, Stempel „Gekocht“ (aus `kochbuch.stats`); Brigade = Wärmelampen, Bon-Leiste,
   Küchenrufe als Hinweis beim Abhaken („Gehört, Chef“, „Hinter dir“, „Ecke“ …). Bewegung nur im Kopf, bei „Bewegung
   reduzieren“ alles still.
+  **Logo je Skin** (Wunsch des Besitzers): `assets/logos/<skin>.svg` – gleiche Buchform „Zwei Seiten“, Material je Welt
+  (Terminal grüne Umrisse mit Zeilen, Diner Neonröhren gelb/mint, Bauhaus Rot/Blau + gelber Kreis, Nordwall Stahl mit Nieten
+  und rotem Lesebändchen, Zauberschule Pergament mit Goldkante und Stern, Jahr 3000 mit Umlaufbahn, Zwei Städte Gold mit Hex
+  links / Pink mit Farbläufern rechts, Insel Sand/Dschungel mit Welle, Akte Mappe mit Stempel, Brigade Edelstahl mit
+  Malerband). `<img class="logoSkin">` auf der Startseite, `src` setzt `skinLogo()` in `assets/skins.js`.
   **Regeln (nach `unslop`, Wunsch „Bilder müssen erkennbar sein“):** Fotos in jedem Skin unverfälscht (keine Filter),
   der Skin prägt nur die Oberfläche, jedes Erkennungsdetail soll beim Kochen nützen.
   Aufbau: helles Standard-Layout (data-theme wird entfernt, festes Aussehen), Tokens (`--field`, `--bg`, `--brand`, `--leaf`,
