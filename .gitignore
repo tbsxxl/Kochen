@@ -6,3 +6,6 @@ _site/
 node_modules/
 .wrangler/
 .dev.vars
+
+# taste-skill: Bild-/Render-Sammlung (38 MB) nicht im Repo; bei Bedarf mit npx skills add leonxlnx/taste-skill neu holen
+.agents/skills/design-taste-frontend/assets/
