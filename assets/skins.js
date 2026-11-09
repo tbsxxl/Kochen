@@ -243,6 +243,17 @@
     "Ton aus": { insel:"Eingabe", brigade:"Gehört, Chef", nordwall:"Gelesen", zauberschule:"Verstanden" },
     "Timer abgelaufen": { nordwall:"Ein Rabe bringt Nachricht", zauberschule:"Eine Eule bringt Nachricht", jahr3000:"Ding. Fertig.", zweistaedte:"Fertig.", insel:"Die Zeit ist um", akte:"Zeit ist um", brigade:"Hände, Chef!" },
   };
+  const PLACEHOLDER = {
+    "Rezept suchen": { zauberschule:"Im Zauberbuch suchen", nordwall:"In den Archiven suchen", insel:"Datenbank der Station durchsuchen", jahr3000:"Im Weltraum-Netz suchen", zweistaedte:"Baupläne durchsuchen" },
+    "Rezept oder Zutat": { zauberschule:"Rezept oder Zutat finden", nordwall:"Rezept oder Zutat", insel:"Eintrag oder Zutat", jahr3000:"Rezept oder Zutat scannen", zweistaedte:"Bauplan oder Zutat" },
+  };
+  function placeholders(){
+    document.querySelectorAll("#homeSearch, #searchInput").forEach((el)=>{
+      const orig = el.dataset.phOrig || el.placeholder;
+      el.dataset.phOrig = orig;
+      el.placeholder = PLACEHOLDER[orig]?.[skin()] || orig;
+    });
+  }
   function voice(root = document){
     root.querySelectorAll(".uEmptyTitle, .homeEmptyTitle, .homeSectionTitle, .timerAlertTitle, .timerAlertBtn.primary").forEach(el=>{
       const orig = el.dataset.voiceOrig || el.textContent.trim();
@@ -477,10 +488,107 @@
     setTimeout(()=> ov.remove(), 1600);
   }
 
+  // ---------- Uhr-Element je Welt (Startseite, im Feld unter den Schnellknöpfen) ----------
+  // Läuft ein Kochtimer, zeigt es dessen Restzeit und Fortschritt, sonst die Uhrzeit. Eigene Zeichnungen, keine Serien-Logos.
+  const WORLD_CLOCK = { zauberschule: 1, nordwall: 1, insel: 1, jahr3000: 1, zweistaedte: 1 };
+  let worldT = null;
+  function activeTimer(){
+    const list = readLS("kochbuch.timers", []), now = Date.now();
+    const run = (Array.isArray(list) ? list : []).filter((t)=> t && t.end > now).sort((a, b)=> a.end - b.end)[0];
+    window.KOCHBUCH_TIMER_ACTIVE = !!run;
+    if(!run) return null;
+    const left = Math.max(0, Math.round((run.end - now) / 1000)), total = Math.max(1, run.total || left);
+    return { left, total, f: Math.min(1, 1 - left / total), label: run.label || "Timer" };
+  }
+  const pad2 = (n)=> String(n).padStart(2, "0");
+  const fmtLeft = (s)=> s >= 3600 ? `${Math.floor(s / 3600)}:${pad2(Math.floor(s % 3600 / 60))}:${pad2(s % 60)}` : `${pad2(Math.floor(s / 60))}:${pad2(s % 60)}`;
+  const EMBLEM = {
+    // Sanduhr: Sand oben/unten als Rechtecke, beschnitten durch die Glasform
+    zauberschule: ()=> `<svg viewBox="0 0 48 64" class="wcEmblem" aria-hidden="true">
+      <defs><clipPath id="wcGlassTop"><path d="M12 8 H36 C36 20 28 26 24 31 C20 26 12 20 12 8Z"/></clipPath>
+      <clipPath id="wcGlassBot"><path d="M24 33 C28 38 36 44 36 56 H12 C12 44 20 38 24 33Z"/></clipPath>
+      <linearGradient id="wcGold" x1="0" x2="1"><stop offset="0" stop-color="#8A6A22"/><stop offset=".5" stop-color="#F3D27A"/><stop offset="1" stop-color="#8A6A22"/></linearGradient></defs>
+      <g clip-path="url(#wcGlassTop)"><rect class="wcSandTop" x="10" y="8" width="28" height="24" fill="#E8C46A"/></g>
+      <g clip-path="url(#wcGlassBot)"><rect class="wcSandBot" x="10" y="32" width="28" height="24" fill="#E8C46A"/></g>
+      <line class="wcStream" x1="24" y1="30" x2="24" y2="54" stroke="#E8C46A" stroke-width="1.2"/>
+      <path d="M12 8 H36 C36 20 28 26 24 31 C20 26 12 20 12 8Z M24 33 C28 38 36 44 36 56 H12 C12 44 20 38 24 33Z" fill="rgba(255,255,255,.06)" stroke="rgba(244,231,200,.7)" stroke-width="1.2"/>
+      <rect x="7" y="3" width="34" height="5" rx="1.5" fill="url(#wcGold)"/><rect x="7" y="56" width="34" height="5" rx="1.5" fill="url(#wcGold)"/>
+      <path d="M9 8 V56 M39 8 V56" stroke="url(#wcGold)" stroke-width="2"/></svg>`,
+    // Astrolabium: Stundenring, Minutenring, Zahnrad; Timer als roter Bogen
+    nordwall: ()=> `<svg viewBox="-32 -32 64 64" class="wcEmblem" aria-hidden="true">
+      <circle r="30" fill="#141619" stroke="#8C7A55" stroke-width="1.5"/>
+      <g class="wcRingH">${Array.from({ length: 12 }, (_, i)=> `<rect x="-.8" y="-29" width="1.6" height="${i % 3 ? 3 : 5}" fill="#C9A55A" transform="rotate(${i * 30})"/>`).join("")}<circle r="25" fill="none" stroke="#5A4C33" stroke-width=".8"/></g>
+      <g class="wcRingM">${Array.from({ length: 60 }, (_, i)=> `<rect x="-.35" y="-23.5" width=".7" height="${i % 5 ? 1.6 : 3}" fill="#9C8F78" transform="rotate(${i * 6})"/>`).join("")}</g>
+      <circle class="wcArc" r="19" fill="none" stroke="#C8323C" stroke-width="2.4" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90)"/>
+      <g class="wcGear">${Array.from({ length: 10 }, (_, i)=> `<rect x="-1.4" y="-15.5" width="2.8" height="3.4" fill="#6F6146" transform="rotate(${i * 36})"/>`).join("")}<circle r="13" fill="#2A2620" stroke="#6F6146"/></g>
+      <path class="wcHand" d="M0 -21 L1.6 0 L0 3 L-1.6 0Z" fill="#E8DCC0"/><circle r="2" fill="#C9A55A"/></svg>`,
+    // Klappziffern-Kasten mit Zahlenreihe
+    insel: ()=> ``,
+    // Holo-Ring: drehender Strich-Ring, Timer als Bogen
+    jahr3000: ()=> `<svg viewBox="-32 -32 64 64" class="wcEmblem" aria-hidden="true">
+      <circle r="29" fill="rgba(76,201,254,.06)" stroke="rgba(76,201,254,.35)" stroke-width="1"/>
+      <circle class="wcSpin" r="25" fill="none" stroke="#39FF14" stroke-width="2" stroke-dasharray="6 5" opacity=".8"/>
+      <circle class="wcArc" r="20" fill="none" stroke="#4CC9FE" stroke-width="3" stroke-dasharray="125.7" stroke-dashoffset="125.7" transform="rotate(-90)" stroke-linecap="round"/>
+      <circle r="14" fill="none" stroke="rgba(57,255,20,.35)" stroke-width="1"/><circle r="3" fill="#39FF14"/></svg>`,
+    // Hex-Kristall in Messingfassung
+    zweistaedte: ()=> `<svg viewBox="-32 -32 64 64" class="wcEmblem" aria-hidden="true">
+      <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15" fill="#0E1426" stroke="#C9A55A" stroke-width="1.6"/>
+      <polygon points="0,-24 20.8,-12 20.8,12 0,24 -20.8,12 -20.8,-12" fill="none" stroke="rgba(201,165,90,.45)" stroke-width=".8"/>
+      <g class="wcGem"><polygon points="0,-16 9,0 0,16 -9,0" fill="#00C8E0"/><polygon points="0,-16 9,0 0,0" fill="#7DF6FF"/><polygon points="0,16 -9,0 0,0" fill="#0090B0"/></g>
+      <circle class="wcArc" r="27.5" fill="none" stroke="#FF3FA4" stroke-width="2" stroke-dasharray="172.8" stroke-dashoffset="172.8" transform="rotate(-90)"/></svg>`,
+  };
+  const CLOCK_LABEL = { zauberschule: "Zeit im Schloss", nordwall: "Stunde der Wache", insel: "Stationszeit", jahr3000: "Bordzeit", zweistaedte: "Hextech-Zeit" };
+  function worldClock(){
+    clearInterval(worldT);
+    const sk = skin();
+    const host = $(".homeQuick");
+    if(!WORLD_CLOCK[sk] || !host || !document.body.classList.contains("layout-home")) return;
+    let el = $(".worldClock");
+    if(!el){
+      el = bit("worldClock", sk);
+      el.setAttribute("role", "timer"); el.setAttribute("aria-live", "off");
+      el.innerHTML = `${EMBLEM[sk]()}<div class="wcText"><b class="wcTime"></b><span class="wcLabel"></span>${sk === "insel" ? '<span class="wcNums" aria-hidden="true">4 8 15 16 23 42</span>' : ""}</div>`;
+      host.after(el);
+    }
+    const timeEl = el.querySelector(".wcTime"), labelEl = el.querySelector(".wcLabel");
+    const tick = ()=>{
+      if(document.hidden) return;
+      const t = activeTimer(), d = new Date();
+      const str = t ? fmtLeft(t.left) : `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+      const f = t ? t.f : d.getSeconds() / 60;
+      el.classList.toggle("isTimer", !!t);
+      if(sk === "insel"){
+        // Klappziffern: nur geänderte Felder klappen
+        if(timeEl.dataset.t !== str){
+          const old = timeEl.dataset.t || "";
+          timeEl.innerHTML = [...str].map((c, i)=> c === ":" ? `<i class="wcSep">:</i>` : `<span class="wcFlap${old[i] !== undefined && old[i] !== c ? " flip" : ""}">${c}</span>`).join("");
+          timeEl.dataset.t = str;
+        }
+      } else timeEl.textContent = str;
+      labelEl.textContent = t ? t.label : CLOCK_LABEL[sk];
+      el.setAttribute("aria-label", t ? `Timer ${t.label}: noch ${str}` : `Uhrzeit ${str}`);
+      if(sk === "zauberschule"){
+        const ff = t ? t.f : f;
+        el.querySelector(".wcSandTop").setAttribute("y", String(8 + 24 * ff));
+        el.querySelector(".wcSandBot").setAttribute("y", String(56 - 24 * ff));
+        el.querySelector(".wcStream").style.opacity = t || !reduce() ? 1 : 0;
+      }
+      if(sk === "nordwall"){
+        el.querySelector(".wcRingH").style.transform = `rotate(${(d.getHours() % 12) * 30 + d.getMinutes() / 2}deg)`;
+        el.querySelector(".wcRingM").style.transform = `rotate(${-d.getMinutes() * 6}deg)`;
+        el.querySelector(".wcGear").style.transform = `rotate(${d.getSeconds() * 6}deg)`;
+        el.querySelector(".wcHand").style.transform = `rotate(${d.getSeconds() * 6}deg)`;
+      }
+      const arc = el.querySelector(".wcArc");
+      if(arc){ const L = +arc.getAttribute("stroke-dasharray"); arc.style.strokeDashoffset = String(t ? L * (1 - t.f) : L); }
+    };
+    tick(); worldT = setInterval(tick, 1000);
+  }
+
   function enhance(){ cleanBits(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); }
 
   // ---------- Kino-Kopf (Three.js + GSAP, assets/cinema/<skin>.js, nur Feld-Seiten, nur mit WebGL) ----------
-  const CINEMA = { nordwall: 4, zauberschule: 4, jahr3000: 4, zweistaedte: 4, insel: 4, akte: 4 };
+  const CINEMA = { nordwall: 5, zauberschule: 5, jahr3000: 5, zweistaedte: 5, insel: 5, akte: 5 };
   let cine = null, cineSkin = null, prevSkin = null;
   function cinema(){
     const sk = skin(), changed = prevSkin !== null && prevSkin !== sk;
@@ -526,7 +634,7 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=1`;
   }
 
-  function apply(){ mountScene(); passClock(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); cinema(); }
+  function apply(){ mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); cinema(); }
   function init(){
     apply();
     watchProgress();

@@ -273,6 +273,23 @@ getrennt (Wunsch des Besitzers).
   Paneel, Linien-Symbole, aktiv = Kupfer ohne Blase. Kochmodus-Schritt mit Kupferkante, Timer in roter LED-Schrift,
   „Kochen läuft“ dunkel mit LED-Zeitstempel, Mise en place dunkel. Statusleiste `#0E0F10`, Logo-Band Kupfer.
   Den Serien-Spruch „Every Second Counts“ bewusst nicht übernommen (keine Zitate), die Uhr trägt die Idee.
+  **Serienwelten nach Design-Analyse (Abschnitt 48 · 15, Nov. 2026, vom Besitzer geschickt; ohne Logos/Figuren/Namen/Zitate,
+  daher z. B. kein DHARMA-Logo, keine Stark/Targaryen-Wappen, kein „Dinner is Coming“, kein Bender/Slurm):**
+  Nordwall dunkel (Schiefer `#1A1A1D`, Karten als Metallplatten mit Nieten und Goldlinie, Drachenfeuer-Rot `#C8323C` für
+  Hauptaktion, Gold `#C9A55A` für Auswahl, Überschriften Cinzel in Versalien, Schritte/Notizen in Baskerville/Georgia,
+  Kochfortschritt als Klinge). Zauberschule bleibt Pergament (vergoldete Doppelrahmen um Karten und Fotos, Notizen kursiv wie
+  Tinte). Insel dunkel wie ein Röhrenmonitor (`#0A0A08`, Bernstein `#FFB000` statt Phosphor-Grün, damit sie sich vom
+  Terminal-Skin abhebt; Hauptknöpfe als beige Tasten; feine Bildschirmzeilen; Titel behält den Serifen-Vorspann).
+  Jahr 3000 dunkel in Raumschiff-Blau (`#0C1828`, kein Violett), Neon-Grün `#39FF14` (Schrift `#04210A`), Stahlblau
+  `#4CC9FE`, Cel-Shading-Kanten (2 px dunkle Linie + harter Versatz). Zwei Städte tiefes Hex-Blau `#0A0E1A`, Hextech-Cyan
+  `#00F0FF`, Chemtech-Pink für Timer, Art-déco-Karten mit 45°-Ecken und Messingwinkeln.
+  **Uhr-Element je Welt** (`worldClock()` in `skins.js`, Startseite unter den Schnellknöpfen, `.worldClock`): läuft ein
+  Kochtimer (`kochbuch.timers`, frühestes `end`), zeigt es Restzeit, Fortschritt und Namen, sonst die Uhrzeit.
+  Zauberschule Sanduhr (Sand oben/unten nach Fortschritt), Nordwall Astrolabium (Stunden-/Minutenring, Zahnrad, roter Bogen),
+  Insel Klappziffern (nur geänderte Felder klappen) mit „4 8 15 16 23 42“ klein darunter, Jahr 3000 Holo-Ring (dreht schneller
+  bei Timer), Zwei Städte Hex-Kristall (pulsiert schneller bei Timer; `window.KOCHBUCH_TIMER_ACTIVE` lässt auch den
+  3D-Kristall schneller drehen). Suchfeld-Text je Welt (`PLACEHOLDER` in `skins.js`, z. B. „Im Zauberbuch suchen“).
+  Tab-Symbole bleiben überall gleich (Navigation muss eindeutig bleiben).
   **Logo je Skin** (Wunsch des Besitzers): `assets/logos/<skin>.svg` – gleiche Buchform „Zwei Seiten“, Material je Welt
   (Terminal grüne Umrisse mit Zeilen, Diner Neonröhren gelb/mint, Bauhaus Rot/Blau + gelber Kreis, Nordwall Stahl mit Nieten
   und rotem Lesebändchen, Zauberschule Pergament mit Goldkante und Stern, Jahr 3000 mit Umlaufbahn, Zwei Städte Gold mit Hex
