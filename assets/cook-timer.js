@@ -180,7 +180,9 @@
   function start(secs, label, meta){
     unlockAudio();
     const t = { id: Date.now().toString(36) + Math.random().toString(36).slice(2,6), end: Date.now() + secs*1000, total: secs,
-      label: label || fmt(secs), title: (meta && meta.title) || "", url: (meta && meta.url) || "", rang: false };
+      label: label || fmt(secs), title: (meta && meta.title) || "", url: (meta && meta.url) || "", rang: false,
+      // Foto für die „Kochen läuft“-Kapsel (auf der Rezeptseite aus RECIPE_DATA)
+      image: (meta && meta.image) || (window.RECIPE_DATA && window.RECIPE_DATA.image) || "" };
     timers.push(t);
     save(); ensureLoop(); emit();
     remoteSet(t);
