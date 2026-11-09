@@ -3324,3 +3324,180 @@ html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitle
 .skinScene.scList .scCandle:nth-of-type(n+6){display:none}
 .skinScene.scList .scLeaves{width:110px;height:96px}
 .skinScene.scList .scHang{top:calc(env(safe-area-inset-top) + 6px);transform:scale(.8);transform-origin:100% 0}
+
+/* ==== 12. Ausbau je Skin (Nov. 2026, Wunsch des Besitzers; Logik in assets/skins.js, Elemente .skinBit) ==== */
+.skinBit{box-sizing:border-box}
+
+/* Nordwall: Schritt entrollt sich wie eine Schriftrolle, Festmahl-Banner im Wochenplan */
+@media (prefers-reduced-motion: no-preference){
+  html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .cookStep.unroll{animation:nwUnroll .5s var(--easeSheet) both;transform-origin:50% 0}
+}
+@keyframes nwUnroll{from{opacity:0;transform:scaleY(.82) translateY(-6px)}to{opacity:1;transform:none}}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .cookStep{position:relative;background:linear-gradient(to bottom,rgba(122,90,40,.10),transparent 18%,transparent 82%,rgba(122,90,40,.10)),#F3EBDB;color:#221E19;
+  border-radius:4px;padding:28px 22px 30px;box-shadow:0 1px 0 rgba(0,0,0,.08),0 10px 28px -14px rgba(40,30,15,.5);
+  border-top:7px solid #B79C6E;border-bottom:7px solid #B79C6E;border-image:linear-gradient(90deg,#8C7248,#D2BA8C 50%,#8C7248) 7 0}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .cookStep::after{content:"";position:absolute;right:16px;bottom:-16px;width:34px;height:34px;border-radius:50%;
+  background:radial-gradient(circle at 38% 34%,#B4383A,#7D1C1C 62%,#5A1212);box-shadow:0 2px 4px rgba(0,0,0,.35),inset 0 0 0 4px rgba(0,0,0,.12)}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .planDayCard.isFeast{position:relative;overflow:visible;margin-top:22px}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .planDayCard.isFeast::before{content:"Festmahl";position:absolute;left:50%;top:0;transform:translate(-50%,-62%);z-index:2;
+  font-family:var(--fontDisplay);font-size:var(--fs14);letter-spacing:.08em;color:#F6EFE3;padding:7px 26px 9px;
+  background:#7D1C1C;clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%,6% 50%);box-shadow:0 2px 0 #5A1212}
+
+/* Zauberschule: Wochenpunkte-Pokal, Einkaufsliste als Pergamentrolle mit verblassender Tinte */
+.houseCup{display:none}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .houseCup{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:8px 16px 8px 10px;border-radius:999px;
+  background:rgba(244,231,200,.10);box-shadow:inset 0 0 0 1px rgba(226,184,79,.45);color:var(--onField);font-size:var(--fs14);line-height:1.2}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .houseCup svg{width:30px;height:35px;flex:none;filter:drop-shadow(0 0 6px rgba(226,184,79,.45))}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .houseCup b{font-family:var(--fontDisplay);font-size:var(--fs18);color:#F3D27A;font-weight:400}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList{position:relative;padding:22px 4px;
+  background:linear-gradient(90deg,rgba(110,70,20,.10),transparent 6%,transparent 94%,rgba(110,70,20,.10)),#F8F0DC;border-radius:6px;
+  box-shadow:0 14px 30px -18px rgba(60,30,10,.55)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList::before,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList::after{content:"";position:absolute;left:-8px;right:-8px;height:16px;border-radius:8px;
+  background:linear-gradient(to bottom,#C9AE7C,#F1E1B8 45%,#A88A55);box-shadow:0 2px 4px rgba(60,30,10,.3)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList::before{top:-8px}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList::after{bottom:-8px}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .listGroup{background:transparent;box-shadow:none}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .uRow .uName{font-family:var(--fontDisplay);font-size:var(--fs18);color:#2A1A12}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .uRow{transition:opacity .6s ease}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .uRow.checked{opacity:.38}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .uRow.checked .uName{text-decoration:none}
+
+/* Jahr 3000: Werbespot im Röhrenfernseher, Kryo-Kammer mit laufender Uhr */
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvAd{margin-top:24px}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvSet{display:flex;gap:12px;align-items:stretch;padding:12px;border-radius:26px;text-decoration:none;
+  background:linear-gradient(160deg,#F09A3E,#C9661A);box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -3px 0 rgba(0,0,0,.18),0 12px 24px -14px rgba(11,30,59,.6)}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvScreen{position:relative;flex:1;aspect-ratio:16/9;border-radius:22px/30px;overflow:hidden;background:#0B1E3B;box-shadow:inset 0 0 0 4px #2A1A08}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvScreen img{width:100%;height:100%;object-fit:cover;display:block}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvScreen::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(0,0,0,.45)),repeating-linear-gradient(to bottom,rgba(255,255,255,.05) 0 1px,transparent 1px 3px)}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvCopy{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:28px 16px 14px;color:#fff;line-height:1.2;
+  background:linear-gradient(to top,rgba(11,30,59,.92),transparent);display:flex;flex-direction:column;gap:2px}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvCopy small{align-self:flex-start;font-size:var(--fs12);padding:2px 8px;border-radius:999px;background:#7CF2C8;color:#0B1E3B;font-weight:700;margin-bottom:4px}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvCopy b{font-family:var(--fontDisplay);font-weight:400;font-size:var(--fs14);color:#7CF2C8}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvCopy span{font-family:var(--fontDisplay);font-size:var(--fs22);text-wrap:balance}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvKnobs{display:flex;flex-direction:column;justify-content:center;gap:12px;width:22px}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .tvKnobs i{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFE2B8,#8B4A12);box-shadow:0 1px 2px rgba(0,0,0,.4)}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .cryoClock{margin-left:auto;align-self:center;text-align:right;padding:6px 10px;border-radius:12px;background:#0B1E3B;color:#7CF2C8;
+  box-shadow:inset 0 0 0 1px rgba(124,242,200,.4),0 0 14px -4px rgba(124,242,200,.6);line-height:1.15}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .cryoClock small{display:block;font-size:11px;color:rgba(124,242,200,.75)}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .cryoClock b{font-family:var(--fontDisplay);font-weight:400;font-size:var(--fs16);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) .cryoClock i{font-style:normal;font-size:.75em;margin-left:1px}
+
+/* Zwei Städte: Farbstrich unter dem aktiven Reiter, Aufkleber „oben“/„unten“ auf Karten */
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) #recipeSegWrap .segBtn{position:relative}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) #recipeSegWrap .segBtn.active::after{content:"";position:absolute;left:14%;right:14%;bottom:3px;height:7px;border-radius:4px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M1 5 C20 1 40 7 60 3 S90 6 99 2 L99 6 C80 8 60 4 40 7 S10 8 1 7Z' fill='%23FF3FA4'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+  filter:drop-shadow(0 0 6px rgba(255,63,164,.6))}
+@media (prefers-reduced-motion: no-preference){ html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) #recipeSegWrap .segBtn.active::after{animation:zwSpray .35s var(--easeSheet) both;transform-origin:0 50%} }
+@keyframes zwSpray{from{transform:scaleX(0);opacity:.4}to{transform:none;opacity:1}}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-level] .rcImg::after{position:absolute;top:10px;right:10px;z-index:2;padding:4px 10px 5px;transform:rotate(4deg);
+  font-family:var(--fontDisplay);font-size:var(--fs16);letter-spacing:.06em;line-height:1;border-radius:3px;box-shadow:0 3px 8px rgba(0,0,0,.35)}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-level="oben"] .rcImg::after{content:"Oben";background:#E9C46A;color:#2A1E05;clip-path:polygon(0 6%,100% 0,97% 100%,3% 94%)}
+html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-level="unten"] .rcImg::after{content:"Unten";background:#FF3FA4;color:#1A0A14;transform:rotate(-5deg);clip-path:polygon(2% 0,100% 5%,98% 96%,0 100%)}
+
+/* Die Insel: Countdown mit Klappziffern vor „Überrasch mich“, großer Knopf „Eingabe“ im Timer-Hinweis */
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .islandCount{position:fixed;inset:0;z-index:5500;display:grid;place-items:center;background:rgba(5,6,7,.9)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icPanel{display:flex;flex-direction:column;align-items:center;gap:14px;color:#EFE7D2;font-family:var(--fontDisplay)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icPanel small{font-size:var(--fs14);letter-spacing:.2em;opacity:.8}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits{display:flex;gap:6px}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span{position:relative;min-width:44px;padding:10px 8px;text-align:center;font-size:var(--fs28);color:#F2EBDA;
+  background:linear-gradient(to bottom,#2A2E2A 50%,#1C1F1C 50%);border-radius:6px;box-shadow:0 2px 0 #000,inset 0 0 0 1px rgba(255,255,255,.06)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#000}
+@media (prefers-reduced-motion: no-preference){
+  html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span{animation:icFlip .26s cubic-bezier(.3,.7,.3,1) both;transform-origin:50% 50%}
+  html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(2){animation-delay:.18s}html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(3){animation-delay:.36s}
+  html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(4){animation-delay:.54s}html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(5){animation-delay:.72s}html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(6){animation-delay:.9s}
+}
+@keyframes icFlip{from{transform:perspective(200px) rotateX(-90deg);opacity:0}to{transform:none;opacity:1}}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .timerAlertBtn.primary{min-height:72px;font-family:var(--fontDisplay);font-size:var(--fs22);letter-spacing:.14em;
+  background:#EFE7D2;color:#1E241C;border-radius:8px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
+
+/* Akte: Aktenkopf auf der Rezeptseite, eigene Notizen in roter Tinte am Rand */
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseHead{margin:4px 16px 18px;padding:14px 16px 14px 20px;background:#E9DDBF;color:#1C252E;border-radius:3px 3px 10px 3px;
+  font-family:var(--fontDisplay);font-size:var(--fs14);box-shadow:0 1px 0 rgba(0,0,0,.1),0 10px 18px -14px rgba(28,37,46,.6);
+  background-image:linear-gradient(90deg,transparent 0 10px,rgba(163,38,42,.35) 10px 11px,transparent 11px)}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseTop{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:8px;margin-bottom:8px;border-bottom:1px dashed rgba(28,37,46,.35)}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseTop > span:first-child{font-size:var(--fs16);letter-spacing:.04em}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseStamp{color:var(--stamp);border:2px solid currentColor;border-radius:3px;padding:2px 8px;transform:rotate(-4deg);font-size:var(--fs12);letter-spacing:.12em;opacity:.85}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseHead dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseHead dt{color:#57636F}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseHead dd{margin:0;overflow-wrap:anywhere}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .notesArea{font-family:"Skin Brigade","Bradley Hand","Segoe Print",cursive;color:#A3262A;font-size:var(--fs16);line-height:1.5;
+  background:repeating-linear-gradient(to bottom,transparent 0 calc(1.5em - 1px),rgba(43,58,72,.16) calc(1.5em - 1px) 1.5em) 0 10px/100% 1.5em,#F5F7F8;
+  border-left:3px double rgba(163,38,42,.5);border-radius:2px 12px 12px 2px}
+
+/* Brigade: „Kochen läuft“ als Bon mit Uhrzeit, Mise en place vor dem Kochen */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .nowCooking{background:#FBFAF6;color:#16191B;border-radius:4px 4px 2px 2px;overflow:visible;
+  box-shadow:0 10px 24px -10px rgba(0,0,0,.45);-webkit-mask:none;mask:none}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .nowCooking::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;
+  background:linear-gradient(-45deg,transparent 4px,#FBFAF6 0) 0 0/8px 8px repeat-x,linear-gradient(45deg,transparent 4px,#FBFAF6 0) 0 0/8px 8px repeat-x}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .bonTime{position:absolute;top:-10px;left:14px;padding:2px 8px;background:#16191B;color:#FBFAF6;font:600 11px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.08em;border-radius:2px}
+.miseOverlay{position:fixed;inset:0;z-index:5500;display:flex;align-items:flex-end;justify-content:center;padding:16px;
+  padding-bottom:calc(16px + env(safe-area-inset-bottom));background:rgba(22,25,27,.55)}
+@media (prefers-reduced-motion: no-preference){ .miseOverlay .miseCard{animation:miseIn .35s var(--easeSheet) both} }
+@keyframes miseIn{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+.miseCard{width:100%;max-width:520px;max-height:82vh;display:flex;flex-direction:column;background:#FBFAF6;color:#16191B;border-radius:6px;
+  box-shadow:0 20px 50px -20px rgba(0,0,0,.6)}
+.miseHead{padding:18px 20px 14px;border-bottom:2px dashed rgba(22,25,27,.25);display:flex;flex-direction:column;gap:2px}
+.miseHead b{font-family:var(--fontDisplay);font-weight:400;font-size:var(--fs28);line-height:1.1;align-self:flex-start;
+  padding:4px 12px 2px;background:var(--tape);color:#0E1A2E;transform:rotate(-1.5deg)}
+.miseHead span{color:#454B50;font-size:var(--fs14);margin-top:6px}
+.miseList{list-style:none;margin:0;padding:6px 8px;overflow:auto;-webkit-overflow-scrolling:touch}
+.miseList label{display:flex;align-items:baseline;gap:12px;min-height:44px;padding:10px 12px;cursor:pointer;border-bottom:1px solid rgba(22,25,27,.08)}
+.miseList input{width:22px;height:22px;flex:none;accent-color:#1F5FBF;align-self:center;margin:0}
+.miseList span{font:600 var(--fs14)/1.3 ui-monospace,Menlo,monospace;min-width:5.5em;color:#454B50}
+.miseList em{font-style:normal;font-size:var(--fs16)}
+.miseList input:checked ~ em{text-decoration:line-through;text-decoration-thickness:2px;color:#575E63}
+.miseFoot{display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:2px dashed rgba(22,25,27,.25)}
+.miseCount{flex:1 0 auto;margin-right:auto;white-space:nowrap;font:600 var(--fs14) ui-monospace,Menlo,monospace;color:#454B50}
+.miseFoot{flex-wrap:wrap}
+.miseFoot button{min-height:44px;border:0;border-radius:999px;padding:0 16px;font-size:var(--fs16);font-weight:600;cursor:pointer}
+.miseSkip{background:transparent;color:#454B50}
+.miseGo{background:#1F5FBF;color:#fff}
+.miseOverlay.isReady .miseGo{box-shadow:0 0 0 4px rgba(31,95,191,.25)}
+
+/* Terminal: Werte als Statusbalken in Segmenten */
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .statBars{display:grid;gap:8px;margin:14px 0 4px;padding:12px 14px;border:1px solid var(--line);background:rgba(92,255,138,.04);font-family:var(--fontUi);font-size:var(--fs14)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbRow{display:grid;grid-template-columns:4.2em 1fr auto;gap:10px;align-items:center}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbRow > span:first-child{color:var(--sub);letter-spacing:.08em}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbBar{height:12px;border:1px solid var(--lineStrong);padding:2px;position:relative}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbBar i{display:block;height:100%;
+  clip-path:inset(0 calc((1 - var(--f)) * 100%) 0 0);background:repeating-linear-gradient(90deg,var(--leaf) 0 6px,transparent 6px 8px);filter:drop-shadow(0 0 4px rgba(92,255,138,.55))}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbRow b{font-weight:400;color:var(--text);min-width:4.5em;text-align:right}
+
+/* Diner: Rezeptliste wie eine Speisekarte, gepunktete Linie zwischen Name und Zeit */
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody{display:flex !important;flex-direction:row !important;align-items:last baseline;flex-wrap:nowrap;gap:0}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody{flex-wrap:wrap !important}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody .recipeTitle{flex:1 1 100%;min-width:0}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d).listCards .grid .rcBody{flex-wrap:nowrap !important}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d).listCards .grid .rcBody .recipeTitle{flex:0 1 auto}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody::after{content:"";order:1;flex:1 1 16px;min-width:16px;margin:0 8px;height:0;border-bottom:3px dotted #B3122E;opacity:.55;transform:translateY(-.3em)}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody .recipeMeta{order:2;flex:none;margin:0;font-weight:700;color:#A3102A}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody .recipeMeta .metaItem + .metaItem{display:none}
+
+/* Bauhaus: Wochenplan nach Art eingefärbt, Wochenbilanz oben */
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind]{position:relative;padding-left:30px}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind]::before{content:"";position:absolute;left:4px;top:50%;width:14px;height:14px;transform:translateY(-50%)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind="fleisch"]::before{background:var(--kFleisch)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind="veg"]::before{background:var(--kVeg);border-radius:50%}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind="fisch"]::before{background:var(--kFisch);clip-path:polygon(50% 0,100% 100%,0 100%)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .weekBalance{margin:0 0 20px;padding:14px 16px;border:2px solid #111;background:#fff}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbBar{display:flex;height:16px;gap:3px;margin-bottom:10px}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbBar i[data-kind="fleisch"]{background:var(--kFleisch)}html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbBar i[data-kind="veg"]{background:var(--kVeg)}html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbBar i[data-kind="fisch"]{background:var(--kFisch)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:var(--fs14);font-weight:600}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend span{display:inline-flex;align-items:center;gap:6px}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend span::before{content:"";width:10px;height:10px}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend [data-kind="fleisch"]::before{background:var(--kFleisch)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend [data-kind="veg"]::before{background:var(--kVeg);border-radius:50%}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend [data-kind="fisch"]::before{background:var(--kFisch);clip-path:polygon(50% 0,100% 100%,0 100%)}
+
+/* Retro: einmal am Tag ein Startfenster mit Ladebalken */
+html.retro .retroBoot{position:fixed;inset:0;z-index:5500;display:grid;place-items:center;background:#008080;transition:opacity .25s ease}
+html.retro .retroBoot.rbDone{opacity:0}
+html.retro .rbWin{width:min(300px,86vw);background:#C0C0C0;border:2px solid;border-color:#fff #000 #000 #fff;box-shadow:4px 4px 0 #000}
+html.retro .rbTitle{background:#000080;color:#fff;font:700 var(--fs14) var(--fontUi);padding:4px 8px}
+html.retro .rbBody{display:grid;grid-template-columns:auto 1fr;gap:10px 12px;align-items:center;padding:16px;font:var(--fs14) var(--fontUi);color:#000}
+html.retro .rbBody img{image-rendering:pixelated}
+html.retro .rbBar{grid-column:1/-1;height:18px;border:2px solid;border-color:#808080 #fff #fff #808080;background:#fff;padding:2px}
+html.retro .rbBar i{display:block;height:100%;transform-origin:0 50%;background:repeating-linear-gradient(90deg,#000080 0 10px,transparent 10px 12px);animation:rbLoad 1.2s steps(12,end) both}
+@keyframes rbLoad{from{transform:scaleX(0)}to{transform:scaleX(1)}}

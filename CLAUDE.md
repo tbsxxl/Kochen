@@ -221,6 +221,19 @@ getrennt (Wunsch des Besitzers).
   zurück:** Zauberschule-Fotos leben wie verzauberte Porträts (Heute-Karte + Rezeptfoto, `portraitLive` 9 s) und der
   Insel-Vorspann läuft bei jedem Öffnen (2,2 s, unscharf und groß → scharf; reines CSS, kein Skript). Szenen-Bewegung nur per transform/opacity und
   angehalten, wenn der Kopf weggescrollt ist (`.scPaused`, IntersectionObserver, SMIL `pauseAnimations`).
+  **Ausbau je Skin (Abschnitt 48 · 12, Wunsch des Besitzers „hochwertig, nicht billig“):** Logik in `enhance()` in `assets/skins.js`,
+  eingefügte Elemente tragen `.skinBit` + `data-for` und verschwinden beim Skin-Wechsel. Nordwall: Kochschritt als Schriftrolle mit
+  Siegel (entrollt sich), letzter Knopf „Das Mahl ist bereitet“, Wochenplan-Tage mit mehr Portionen als im Rezept = Banner „Festmahl“
+  (`data-serv`/`data-base` auf `.planEntry`, `assets/plan.js`). Zauberschule: Wochenpunkte-Pokal im Feld (gekocht seit Montag aus
+  `kochbuch.stats`, Ziel 5), Einkaufsliste als Pergamentrolle, Abgehaktes verblasst. Jahr 3000: Werbespot im Röhrenfernseher unter der
+  Heute-Karte (Rezept des Tages), Kühltruhe heißt „Kryo-Kammer“ mit sekundengenauer Uhr seit `added`. Zwei Städte: pinker Farbstrich
+  unter dem aktiven Reiter Zutaten/Zubereitung, Aufkleber „Oben“ (Wochenendprojekt) / „Unten“ (Schnell) über `data-level` auf
+  `.recipeCard` (beide Kartendateien). Insel: „Überrasch mich“ zeigt 1,5 s Klappziffern „4 8 15 16 23 42“, Timer-Knopf „Eingabe“ groß.
+  Akte: Aktenkopf (Akte Nr., Betreff, Abteilung, zuletzt gekocht, Bewertung, Stempel) über dem Reiter, Notizen in roter Tinte.
+  Brigade: „Kochen läuft“ als Bon mit Uhrzeit, vor dem Kochmodus Mise-en-place-Liste („Alles da, Chef“ / „Überspringen“).
+  Terminal: Statusbalken ZEIT/PORT/WERT/GEKO in Segmenten (`clip-path`). Diner: Speisekarte mit Punktlinie zwischen Name und Zeit.
+  Bauhaus: Wochenplan-Einträge mit Form je Art (`data-kind`), Wochenbilanz als Balken. Retro: einmal am Tag ein Startfenster
+  „Kochbuch.exe“ mit Ladebalken (`kochbuch.ui.retroBoot`). Letzter-Knopf-Texte auch Zauberschule „Vollbracht“, Brigade „Service!“.
   **Logo je Skin** (Wunsch des Besitzers): `assets/logos/<skin>.svg` – gleiche Buchform „Zwei Seiten“, Material je Welt
   (Terminal grüne Umrisse mit Zeilen, Diner Neonröhren gelb/mint, Bauhaus Rot/Blau + gelber Kreis, Nordwall Stahl mit Nieten
   und rotem Lesebändchen, Zauberschule Pergament mit Goldkante und Stern, Jahr 3000 mit Umlaufbahn, Zwei Städte Gold mit Hex

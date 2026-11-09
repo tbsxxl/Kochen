@@ -34,6 +34,16 @@
     });
   }
 
+  // Hauptzutat als Art (für Skins: Bauhaus-Farbcode im Plan), gleiche Regel wie _includes/recipe-card.html
+  function kindOf(r){
+    const cats = [r.category, ...(r.categories || [])];
+    const tags = (r.tags || []).join(" ").toLowerCase();
+    if (cats.includes("Fisch")) return "fisch";
+    if (["Hähnchen","Rind","Hackfleisch","Schwein","Ente"].some(c => cats.includes(c))) return "fleisch";
+    if (cats.includes("Vegetarisch") || /vegetarisch|vegan/.test(tags)) return "veg";
+    return "";
+  }
+
   function render(){
     const plan = U.plan.get();
     const dates = weekDates();
@@ -50,7 +60,7 @@
       const rows = entries.map(e=>{
         const r = byId.get(e.id);
         const s = servingsOf(e, r);
-        return `<div class="planEntry" data-day="${k}" data-id="${esc(e.id)}">
+        return `<div class="planEntry" data-day="${k}" data-id="${esc(e.id)}" data-kind="${kindOf(r)}" data-serv="${s}" data-base="${Number(r.servings) || 1}"${e.leftover ? ' data-leftover' : ''}>
           <a class="planEntryLink" href="${esc(r.id)}">
             ${r.image ? `<img class="planThumb" src="${esc(r.image)}" srcset="${esc(r.srcset||"")}" sizes="56px" alt="" loading="lazy">` : `<span class="planThumb"></span>`}
             <span class="planEntryTitle">${esc(r.title)}</span>
