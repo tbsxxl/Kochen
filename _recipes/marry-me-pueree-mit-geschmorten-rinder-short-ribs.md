@@ -13,7 +13,7 @@ ingredients:
   - { qty: 1, unit: "kg", item: "Maris-Piper-Kartoffeln" }
   - { qty: 200, unit: "ml", item: "Vollmilch" }
   - { qty: 200, unit: "ml", item: "Schlagsahne" }
-  - { qty: 4, unit: "Zehen", item: "Knoblauch, gehackt" }
+  - { qty: 3, unit: "Zehen", item: "Knoblauch , in Scheiben" }
   - { qty: 3, unit: "Zweige", item: "Thymian" }
   - { qty: 150, unit: "g", item: "Butter, geschmolzen" }
   - { qty: "n. B.", unit: "", item: "Feines Salz" }
@@ -28,7 +28,7 @@ ingredients:
   - { qty: 2, unit: "Stangen", item: "Sellerie, gewürfelt" }
   - { qty: 2, unit: "", item: "Karotten, gewürfelt" }
   - { qty: 2, unit: "EL", item: "Tomatenmark" }
-  - { qty: 3, unit: "Zehen", item: "Knoblauch, in Scheiben" }
+  - { qty: 4, unit: "Zehen", item: "Knoblauch, gehackt" }
   - { qty: 3, unit: "Zweige", item: "Thymian" }
   - { qty: 2, unit: "", item: "Lorbeerblätter" }
   - { qty: 500, unit: "ml", item: "Rotwein" }
