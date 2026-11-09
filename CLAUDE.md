@@ -234,10 +234,21 @@ getrennt (Wunsch des Besitzers).
   Terminal: Statusbalken ZEIT/PORT/WERT/GEKO in Segmenten (`clip-path`). Diner: Speisekarte mit Punktlinie zwischen Name und Zeit.
   Bauhaus: Wochenplan-Einträge mit Form je Art (`data-kind`), Wochenbilanz als Balken. Retro: einmal am Tag ein Startfenster
   „Kochbuch.exe“ mit Ladebalken (`kochbuch.ui.retroBoot`). Letzter-Knopf-Texte auch Zauberschule „Vollbracht“, Brigade „Service!“.
-  **Kino-Köpfe (Abschnitt 48 · 13, Nov. 2026, Wunsch „cineastisch, nicht billig“; Muster Nordwall, die anderen folgen nach
-  Freigabe):** Auf Feld-Seiten ersetzt eine Three.js-Szene die SVG-Szene (`.cineCanvas`, fest hinter dem Feld, `html.cine`).
-  Quelle `tools/cinema/<skin>.js`, gebaut mit `sh tools/cinema/build.sh` (einmalig `npm install` in `tools/cinema`; esbuild bündelt
-  three + gsap/ScrollTrigger zu `assets/cinema/<skin>.js`, ~180 KB gz, nur in diesem Skin geladen, `CINEMA` in `skins.js` mit `?v=`).
+  **Kino-Köpfe (Abschnitt 48 · 13, Nov. 2026, Wunsch „cineastisch, nicht billig“; erst Nordwall als Muster, nach Freigabe
+  alle sieben Serien-Skins):** Auf Feld-Seiten ersetzt eine Three.js-Szene die SVG-Szene (`.cineCanvas`, fest hinter dem Feld, `html.cine`).
+  Quelle `tools/cinema/`: `core.js` (Kamera, Scrollen, Einblendung, Vorspann, Pause, Helfer `sky`/`ridge`/`water`/`particles`/
+  `windowsOn`/`glow`) und je Skin eine Szene `<skin>.js` (Beschreibung: Farben, `cam`, `intro`, `build()` → `update(t)`).
+  Gebaut mit `sh tools/cinema/build.sh` (einmalig `npm install` in `tools/cinema`; esbuild mit `--splitting`: geteilter Kern
+  `assets/cinema/core-<hash>.js` ~180 KB gz, einmal geladen; jede Szene 2–4 KB; nur in Skins aus `CINEMA` in `skins.js`, `?v=` dort hochzählen).
+  Szenen: Zauberschule = Schloss mit vielen Türmen und Fenstern über einem See, schwebende Kerzen, goldene Funken; Jahr 3000 =
+  Ringplanet, Skyline mit Kuppeln/Untertassen-Dächern und Fensterreihen, Röhrenbahn mit Kapseln, fliegende Autos (kein Violett);
+  Zwei Städte = Oberstadt aus Messing auf einem Plateau, blauer Kristall im Himmel, Unterstadt mit grünem Dunst und pinken
+  Leuchtzeichen (Scrollen senkt die Kamera nach unten); Insel = Sonnenuntergang über dem Meer, Palmen, Flugzeugwrack, Lagerfeuer,
+  Glühwürmchen (Titel ohne Buchstaben-Einblendung, der CSS-Vorspann bleibt: `splitTitle: false`); Akte = Sturm mit Wolken, Blitzen,
+  Regen-Streifen, Anstalt auf der Klippe, Leuchtturm mit waagerecht streichendem Kegel; Brigade = Fliesenwand, Wärmelampen,
+  hängende Pfannen, Bons an der Leiste, Dampf. Bildaufbau-Regel: Himmel/Licht hinter Titel und Datum, Bauten im unteren Drittel
+  des Felds unter den Schnellknöpfen. Vorspann-Schrift je Skin über `--cineFont`, Glühfarbe beim Überfahren `--cineGlow`.
+  Zeit im Kern nie negativ (erstes Bild kann vor dem Start liegen).
   Nordwall: Nachthimmel mit Mond und Sternen hinter dem Titel, Eismauer mit Mondlicht-Krone im unteren Drittel, Burg-Silhouette
   mit flackernden Fenstern/Fackeln, Zickzack-Treppe aus Lichtern, dunkle Hügel vorn, Schnee als Partikel. Startseite: Feld
   ~90 % der Bildschirmhöhe (`marginTop` der Heute-Karte per Skript), Datum Buchstabe für Buchstabe, dann Suche/Knöpfe; Scrollen hebt

@@ -3509,16 +3509,31 @@ html.retro .rbBar i{display:block;height:100%;transform-origin:0 50%;background:
 html.cine .skinScene{display:none}
 .cineW{display:inline-block;white-space:nowrap}
 .cineCh{display:inline-block}
-html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine body.layout-home .homeGreetingTitle{font-weight:600;letter-spacing:.03em;text-shadow:0 2px 28px rgba(5,8,12,.55)}
-html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine body.layout-home .homeGreetingSub{color:rgba(236,230,218,.82);letter-spacing:.02em;text-shadow:0 1px 16px rgba(5,8,12,.6)}
-html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine .pageTitleBlock .h1{text-shadow:0 2px 24px rgba(5,8,12,.55)}
-html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine body.fieldPage :is(.homeQuickBtn,.searchRow input,.fieldExtra input){background:rgba(12,17,23,.42);box-shadow:inset 0 0 0 1px rgba(236,230,218,.16)}
+/* Gilt für alle Skins mit Kino-Kopf: Titel mit weichem Schatten (lesbar über der Szene), Felder dunkel durchscheinend,
+   Schnellknöpfe glühen beim Überfahren in der Lichtfarbe der Welt (--cineGlow) */
+html.cine:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreetingTitle{text-shadow:0 2px 28px rgba(5,8,12,.55)}
+html.cine:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreetingSub{text-shadow:0 1px 16px rgba(5,8,12,.6)}
+html.cine:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1{text-shadow:0 2px 24px rgba(5,8,12,.55)}
+html.cine:not(._a):not(._b):not(._c):not(._d) body.fieldPage :is(.homeQuickBtn,.searchRow input,.fieldExtra input){background:rgba(8,12,16,.42);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine body.layout-home .homeGreetingTitle{font-weight:600;letter-spacing:.03em}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine body.layout-home .homeGreetingSub{color:rgba(236,230,218,.82);letter-spacing:.02em}
+html.cine{--cineGlow:255,186,110}
+html.skin-jahr3000.cine{--cineGlow:124,242,200}
+html.skin-zweistaedte.cine{--cineGlow:255,63,164}
+html.skin-akte.cine{--cineGlow:232,217,168}
+html.skin-zauberschule.cine{--cineGlow:255,206,120}
 @media (hover:hover) and (pointer:fine){
-  html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine .homeQuickBtn{transition:box-shadow .3s var(--ease),transform .2s var(--ease)}
-  html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine .homeQuickBtn:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1px rgba(255,186,110,.55),0 10px 30px -8px rgba(255,140,50,.45)}
+  html.cine .homeQuickBtn{transition:box-shadow .3s var(--ease),transform .2s var(--ease)}
+  html.cine .homeQuickBtn:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1px rgba(var(--cineGlow),.55),0 10px 30px -8px rgba(var(--cineGlow),.45)}
 }
 .cineIntro{position:fixed;inset:0;z-index:8000;display:grid;place-items:center;background:#05080C;cursor:pointer}
 .cineIntroInner{display:flex;flex-direction:column;align-items:center;gap:18px;padding:0 24px;text-align:center}
-.cineIntroWord{font-family:"Skin Nordwall",Georgia,serif;font-size:min(10vw,5.5rem);letter-spacing:.2em;margin-right:-.2em;color:#ECE6DA;line-height:1}
+.cineIntroWord{font-family:var(--cineFont,"Skin Nordwall",Georgia,serif);font-size:min(10vw,5.5rem);letter-spacing:.2em;margin-right:-.2em;color:#ECE6DA;line-height:1}
 .cineIntroRule{display:block;width:min(46vw,260px);height:1px;background:linear-gradient(90deg,transparent,#B79C6E,transparent)}
 .cineIntroSub{font-size:var(--fs14);letter-spacing:.18em;color:rgba(236,230,218,.66)}
+html.skin-zauberschule .cineIntroWord{--cineFont:"Skin Zauber",Georgia,serif;letter-spacing:.08em;margin-right:-.08em}
+html.skin-jahr3000 .cineIntroWord{--cineFont:"Skin Zukunft","Avenir Next",sans-serif;letter-spacing:.1em;margin-right:-.1em;color:#7CF2C8}
+html.skin-zweistaedte .cineIntroWord{--cineFont:"Skin Zwei","Avenir Next Condensed",sans-serif;letter-spacing:.14em;margin-right:-.14em;font-size:min(14vw,6.5rem)}
+html.skin-insel .cineIntroWord{--cineFont:Georgia,"Times New Roman",serif;letter-spacing:.32em;margin-right:-.32em;font-size:min(9vw,4.5rem)}
+html.skin-akte .cineIntroWord{--cineFont:"Skin Akte","Courier New",monospace;letter-spacing:.3em;margin-right:-.3em}
+html.skin-brigade .cineIntroWord{--cineFont:"Skin Brigade","Marker Felt",sans-serif;letter-spacing:.06em;margin-right:-.06em}
