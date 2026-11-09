@@ -46,6 +46,8 @@ permalink: /wochenplan/
     "id": "{{ r.url | relative_url }}",
     "title": {{ r.title | jsonify }},
     "category": {{ r.category | jsonify }},
+    "categories": {{ r.categories | jsonify }},
+    "tags": {{ r.tags | jsonify }},
     "time": {{ r.time | jsonify }},
     "servings": {{ r.servings | default: 1 | jsonify }},
     "ingredients": {{ r.ingredients | jsonify }},

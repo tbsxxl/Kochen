@@ -223,10 +223,11 @@
     "Keine Rezepte gefunden": { nordwall:"Kein Rezept in diesen Landen", zauberschule:"Kein Rezept in der Bibliothek", jahr3000:"Kein Treffer im Speicher", zweistaedte:"Nichts gefunden, oben wie unten", insel:"Nichts gefunden. Noch nicht.", akte:"Keine passende Akte", brigade:"Steht nicht auf der Karte" },
     "Noch nichts eingefroren": { nordwall:"Die Eiskammer ist leer", zauberschule:"Noch nichts konserviert", jahr3000:"Kryo-Fach leer", zweistaedte:"Nichts auf Eis", insel:"Nichts in der Kühlung", akte:"Kein Eintrag im Kühlraum", brigade:"Walk-in leer" },
     "Heute für dich": { nordwall:"Heute an der Tafel", zauberschule:"Heute in der Großen Halle", jahr3000:"Heute aus dem Menü-o-mat", zweistaedte:"Heute oben und unten", insel:"Heute auf der Insel", akte:"Der heutige Fall", brigade:"Heute auf dem Pass" },
+    "Ton aus": { insel:"Eingabe", brigade:"Gehört, Chef", nordwall:"Gelesen", zauberschule:"Verstanden" },
     "Timer abgelaufen": { nordwall:"Ein Rabe bringt Nachricht", zauberschule:"Eine Eule bringt Nachricht", jahr3000:"Ding. Fertig.", zweistaedte:"Fertig.", insel:"Die Zeit ist um", akte:"Zeit ist um", brigade:"Hände, Chef!" },
   };
   function voice(root = document){
-    root.querySelectorAll(".uEmptyTitle, .homeEmptyTitle, .homeSectionTitle, .timerAlertTitle").forEach(el=>{
+    root.querySelectorAll(".uEmptyTitle, .homeEmptyTitle, .homeSectionTitle, .timerAlertTitle, .timerAlertBtn.primary").forEach(el=>{
       const orig = el.dataset.voiceOrig || el.textContent.trim();
       const map = VOICE[orig];
       if(!map) return;
@@ -264,6 +265,203 @@
     bon.animate(kf, { duration: 1600, easing: "cubic-bezier(.2,.8,.2,1)" }).onfinish = ()=> bon.remove();
   });
 
+  // =====================================================================================================
+  // Ausbau je Skin (Wunsch des Besitzers, Nov. 2026): Elemente tragen .skinBit + data-for und verschwinden beim Skin-Wechsel.
+  // =====================================================================================================
+  const $ = (q, r = document)=> r.querySelector(q);
+  const esc2 = (t)=> String(t ?? "").replace(/[&<>"']/g, m=>({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[m]));
+  const readLS = (k, fb)=>{ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : fb; }catch{ return fb; } };
+  const allRecipes = ()=>{ try{ return JSON.parse($("#allRecipesJson")?.textContent || "[]"); }catch{ return []; } };
+  function bit(cls, forSkin, tag = "div"){ const el = document.createElement(tag); el.className = `skinBit ${cls}`; el.dataset.for = forSkin; return el; }
+  function cleanBits(){ document.querySelectorAll(".skinBit").forEach(el=>{ if(el.dataset.for !== skin()) el.remove(); }); }
+  const rating = (id)=>{ const n = readLS("kochbuch.notes", {}); const e = n[id] || n[id?.replace(/\/$/, "")]; return Number(e?.rating || 0); };
+  const statOf = (id)=>{ const st = readLS("kochbuch.stats", {}); return st[id] || st[id?.replace(/\/$/, "")] || {}; };
+
+  // Zauberschule: Wochenpunkte-Pokal im Feld der Startseite (gekochte Gerichte seit Montag, Ziel 5)
+  function houseCup(){
+    const host = $(".homeGreeting");
+    if(skin() !== "zauberschule" || !host || $(".houseCup")) return;
+    const st = readLS("kochbuch.stats", {});
+    const mon = new Date(); mon.setHours(0,0,0,0); mon.setDate(mon.getDate() - ((mon.getDay() + 6) % 7));
+    let n = 0;
+    Object.values(st).forEach(e=> (e?.history || []).forEach(h=>{ if(Date.parse(h) >= mon.getTime()) n++; }));
+    const fill = Math.min(1, n / 5);
+    const el = bit("houseCup", "zauberschule");
+    el.setAttribute("role", "img"); el.setAttribute("aria-label", `Wochenpunkte: ${n} Gerichte diese Woche gekocht`);
+    el.innerHTML = `<svg viewBox="0 0 48 56" aria-hidden="true"><defs><clipPath id="cupIn"><path d="M10 6 H38 C38 22 32 30 24 30 C16 30 10 22 10 6Z"/></clipPath>
+      <linearGradient id="cupGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9C7A2A"/><stop offset=".45" stop-color="#F3D27A"/><stop offset="1" stop-color="#9C7A2A"/></linearGradient></defs>
+      <g clip-path="url(#cupIn)"><rect x="8" y="${6 + 24 * (1 - fill)}" width="32" height="26" fill="#E2B84F"/><rect x="8" y="${6 + 24 * (1 - fill)}" width="32" height="2" fill="#FFF0B8"/></g>
+      <path d="M10 6 H38 C38 22 32 30 24 30 C16 30 10 22 10 6Z" fill="none" stroke="url(#cupGold)" stroke-width="2.4"/>
+      <path d="M10 10 C3 10 3 20 12 21 M38 10 C45 10 45 20 36 21" fill="none" stroke="url(#cupGold)" stroke-width="2.2"/>
+      <path d="M24 30 V40 M16 48 H32 L30 42 H18Z" fill="url(#cupGold)" stroke="url(#cupGold)" stroke-width="2" stroke-linejoin="round"/></svg>
+      <span><b>${n}</b> ${n === 1 ? "Gericht" : "Gerichte"}<br>diese Woche</span>`;
+    host.appendChild(el);
+  }
+
+  // Jahr 3000: Werbespot im Röhrenfernseher (zufälliges Rezept des Tages) unter der Heute-Karte
+  function tvAd(){
+    const after = $(".homeToday");
+    if(skin() !== "jahr3000" || !after || $(".tvAd")) return;
+    const list = allRecipes().filter(r=> r.image);
+    if(!list.length) return;
+    const day = Math.floor(Date.now() / 864e5), r = list[(day * 7 + 3) % list.length];
+    const el = bit("tvAd section", "jahr3000", "section");
+    el.innerHTML = `<a class="tvSet" href="${esc2(r.url)}"><span class="tvScreen"><img src="${esc2(r.image)}" alt="" loading="lazy"><span class="tvCopy"><small>Werbung</small><b>Jetzt neu im Menü-o-mat</b><span>${esc2(r.title)}</span></span></span><span class="tvKnobs" aria-hidden="true"><i></i><i></i></span></a>`;
+    after.after(el);
+  }
+
+  // Jahr 3000: Kryo-Kammer – jede Portion zeigt, wie lange sie schon eingefroren ist (läuft live)
+  let cryoTimer = null;
+  function cryo(){
+    clearInterval(cryoTimer);
+    const t1 = $(".pageTitleBlock .h1[data-orig]"); if(t1 && skin() !== "jahr3000"){ t1.textContent = t1.dataset.orig; delete t1.dataset.orig; }
+    if(skin() !== "jahr3000" || !$("#freezerList")) return;
+    const f = readLS("kochbuch.freezer", {});
+    const tick = ()=> document.querySelectorAll(".freezerCard").forEach(card=>{
+      const added = Date.parse(f[card.dataset.id]?.added || ""); if(!added) return;
+      let el = card.querySelector(".cryoClock");
+      if(!el){ el = bit("cryoClock", "jahr3000"); el.setAttribute("aria-hidden", "true"); card.querySelector(".freezerTop")?.appendChild(el); }
+      const s = Math.max(0, Math.floor((Date.now() - added) / 1000)), d = Math.floor(s / 86400), p = (n)=> String(n).padStart(2, "0");
+      el.innerHTML = `<small>Kryo-Schlaf</small><b>${d}<i>T</i> ${p(Math.floor(s % 86400 / 3600))}:${p(Math.floor(s % 3600 / 60))}:${p(s % 60)}</b>`;
+    });
+    const h1 = $(".pageTitleBlock .h1");
+    if(h1 && document.body.dataset.page === "kuehltruhe"){ h1.dataset.orig ||= h1.textContent; h1.textContent = "Kryo-Kammer"; }
+    tick(); cryoTimer = setInterval(tick, 1000);
+  }
+
+  // Akte: Aktenkopf auf der Rezeptseite (Fall-Nr., zuletzt gekocht, Bewertung, Status)
+  function caseHeader(){
+    const seg = $("#recipeSegWrap"), D = window.RECIPE_DATA;
+    if(skin() !== "akte" || !seg || !D || $(".caseHead")) return;
+    let h = 0; for(const c of D.id) h = (h * 31 + c.charCodeAt(0)) % 997;
+    const st = statOf(D.id), r = rating(D.id), last = st.lastCooked ? new Date(st.lastCooked).toLocaleDateString("de-DE") : "—";
+    const el = bit("caseHead", "akte");
+    el.innerHTML = `<div class="caseTop"><span>Akte Nr. ${String(h).padStart(3, "0")}</span><span class="caseStamp">${st.cookedCount ? "Abgeschlossen" : "Offen"}</span></div>
+      <dl><dt>Betreff</dt><dd>${esc2(D.title)}</dd><dt>Abteilung</dt><dd>${esc2(D.category || "—")}</dd>
+      <dt>Zuletzt gekocht</dt><dd>${last}${st.cookedCount ? ` (${st.cookedCount}×)` : ""}</dd><dt>Bewertung</dt><dd>${r ? "★".repeat(r) + "☆".repeat(5 - r) : "keine"}</dd></dl>`;
+    seg.before(el);
+  }
+
+  // Terminal: Werte als Statusbalken (Zeit, Portionen, Bewertung, gekocht)
+  function statBars(){
+    const facts = $(".recipeFacts"), D = window.RECIPE_DATA;
+    if(skin() !== "terminal" || !facts || !D || $(".statBars")) return;
+    const txt = facts.textContent;
+    const h = /(\d+)\s*Std/.exec(txt), m = /(\d+)(?:–\d+)?\s*Min/.exec(txt);
+    const mins = (h ? +h[1] * 60 : 0) + (m ? +m[1] : 0);
+    const st = statOf(D.id), r = rating(D.id);
+    const row = (k, v, frac)=> `<div class="sbRow"><span>${k}</span><span class="sbBar"><i style="--f:${Math.max(0, Math.min(1, frac)).toFixed(2)}"></i></span><b>${v}</b></div>`;
+    const el = bit("statBars", "terminal");
+    el.innerHTML = row("ZEIT", mins ? `${mins} MIN` : "—", mins / 120) + row("PORT", D.baseServings, D.baseServings / 8)
+      + row("WERT", r ? `${r}/5` : "—", r / 5) + row("GEKO", `${st.cookedCount || 0}×`, (st.cookedCount || 0) / 10);
+    facts.after(el);
+  }
+
+  // Bauhaus: Wochenbilanz über dem Plan (Anteil Fleisch / vegetarisch / Fisch als Balken)
+  function weekBalance(){
+    const days = $("#weekDays");
+    if(skin() !== "bauhaus" || !days) return;
+    const k = { fleisch: 0, veg: 0, fisch: 0 };
+    days.querySelectorAll(".planEntry:not([data-leftover])").forEach(e=>{ if(k[e.dataset.kind] !== undefined) k[e.dataset.kind]++; });
+    const total = k.fleisch + k.veg + k.fisch;
+    let el = $(".weekBalance");
+    if(!el){ el = bit("weekBalance", "bauhaus"); days.before(el); }
+    const sig = JSON.stringify(k); if(el.dataset.sig === sig) return; el.dataset.sig = sig;
+    el.innerHTML = total ? `<div class="wbBar">${["fleisch","veg","fisch"].map(t=> k[t] ? `<i data-kind="${t}" style="flex:${k[t]}"></i>` : "").join("")}</div>
+      <div class="wbLegend">${[["fleisch","Fleisch"],["veg","vegetarisch"],["fisch","Fisch"]].filter(([t])=> k[t]).map(([t, n])=> `<span data-kind="${t}">${k[t]} ${n}</span>`).join("")}</div>` : `<div class="wbLegend">Noch nichts geplant</div>`;
+  }
+
+  // Nordwall: Festmahl – Tage mit mehr Portionen als im Rezept bekommen ein Banner
+  function feasts(){
+    if(skin() !== "nordwall") return;
+    document.querySelectorAll(".planDayCard").forEach(card=>{
+      const feast = [...card.querySelectorAll(".planEntry")].some(e=> +e.dataset.serv > +e.dataset.base);
+      card.classList.toggle("isFeast", feast);
+    });
+  }
+
+  // Nordwall: letzter Schritt heißt „Das Mahl ist bereitet“; Schritte entrollen sich wie Schriftrollen
+  function cookVoice(){
+    const nx = $("#cookNext"); if(!nx) return;
+    const t = [...nx.childNodes].find(n=> n.nodeType === 3 && n.nodeValue.trim());
+    if(!t) return;
+    const orig = nx.dataset.voiceOrig && t.nodeValue.trim() !== nx.dataset.voiceSet ? t.nodeValue.trim() : (nx.dataset.voiceOrig || t.nodeValue.trim());
+    nx.dataset.voiceOrig = orig;
+    const want = orig === "Fertig" ? ({ nordwall:"Das Mahl ist bereitet", brigade:"Service!", zauberschule:"Vollbracht", insel:"Eingabe" }[skin()] || orig) : orig;
+    nx.dataset.voiceSet = want;
+    if(t.nodeValue !== want) t.nodeValue = want;
+  }
+  function watchCook(){
+    const step = $("#cookStepText"), nx = $("#cookNext");
+    if(step) new MutationObserver(()=>{
+      if(skin() !== "nordwall" || reduce()) return;
+      step.classList.remove("unroll"); void step.offsetWidth; step.classList.add("unroll");
+    }).observe(step, { childList: true });
+    if(nx) new MutationObserver(cookVoice).observe(nx, { childList: true });
+  }
+
+  // Brigade: „Kochen läuft“ als Bon mit Uhrzeit
+  function bonClock(){
+    const nc = $(".nowCooking");
+    if(!nc) return;
+    let el = nc.querySelector(".bonTime");
+    if(skin() !== "brigade"){ el?.remove(); return; }
+    if(!el){ el = bit("bonTime", "brigade", "span"); el.setAttribute("aria-hidden", "true"); nc.appendChild(el); }
+    const c = readLS("kochbuch.ui.cooking", null);
+    el.textContent = `BON ${new Date(c?.t || Date.now()).toLocaleTimeString("de-DE", { hour:"2-digit", minute:"2-digit" })} · TISCH 1`;
+  }
+
+  // Brigade: Mise en place vor dem Kochen – alle Zutaten einmal abhaken („Alles da, Chef?“)
+  let misePassed = false;
+  document.addEventListener("click", (e)=>{
+    const btn = e.target.closest("#cookingModeQuick");
+    if(!btn || skin() !== "brigade" || misePassed || !window.RECIPE_DATA) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    const secOf = window.KOCHBUCH_UTILS?.sectionOf || ((i)=> i && i.section);
+    const ings = (window.RECIPE_DATA.ingredients || []).map(i=> typeof i === "string" ? { item: i } : i).filter(i=> i && !secOf(i));
+    const ov = bit("miseOverlay", "brigade");
+    ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-labelledby", "miseTitle");
+    ov.innerHTML = `<div class="miseCard"><div class="miseHead"><b id="miseTitle">Mise en place</b><span>${esc2(window.RECIPE_DATA.title)}</span></div>
+      <ul class="miseList">${ings.map((i, n)=> `<li><label><input type="checkbox"><span>${esc2([i.qty, i.unit].filter(Boolean).join(" "))}</span><em>${esc2(i.item)}</em></label></li>`).join("")}</ul>
+      <div class="miseFoot"><span class="miseCount">0 von ${ings.length}</span><button type="button" class="miseSkip">Überspringen</button><button type="button" class="miseGo">Alles da, Chef</button></div></div>`;
+    document.body.appendChild(ov);
+    const go = ()=>{ ov.remove(); misePassed = true; btn.click(); setTimeout(()=> misePassed = false, 500); };
+    const upd = ()=>{ const n = ov.querySelectorAll("input:checked").length; ov.querySelector(".miseCount").textContent = `${n} von ${ings.length}`; ov.classList.toggle("isReady", n === ings.length); };
+    ov.addEventListener("change", upd);
+    ov.querySelector(".miseGo").addEventListener("click", go);
+    ov.querySelector(".miseSkip").addEventListener("click", go);
+    ov.addEventListener("click", (ev)=>{ if(ev.target === ov) ov.remove(); });
+    ov.querySelector(".miseGo").focus({ preventScroll: true });
+  }, true);
+
+  // Die Insel: „Überrasch mich“ startet einen Countdown mit Klappziffern
+  document.addEventListener("click", (e)=>{
+    const a = e.target.closest('a[href*="zufall=1"]');
+    if(!a || skin() !== "insel" || reduce()) return;
+    e.preventDefault();
+    const ov = bit("islandCount", "insel");
+    ov.setAttribute("aria-hidden", "true");
+    ov.innerHTML = `<div class="icPanel"><small>Die Insel wählt</small><div class="icDigits">${"4 8 15 16 23 42".split(" ").map(n=> `<span>${n}</span>`).join("")}</div></div>`;
+    document.body.appendChild(ov);
+    setTimeout(()=>{ location.href = a.href; }, 1500);
+  });
+
+  // Retro: einmal am Tag ein kurzes Startfenster mit Ladebalken
+  function retroBoot(){
+    if(skin() !== "retro" || reduce()) return;
+    const today = new Date().toDateString();
+    if(readLS("kochbuch.ui.retroBoot", "") === today) return;
+    try{ localStorage.setItem("kochbuch.ui.retroBoot", JSON.stringify(today)); }catch{}
+    const ov = bit("retroBoot", "retro");
+    ov.setAttribute("aria-hidden", "true");
+    ov.innerHTML = `<div class="rbWin"><div class="rbTitle">Kochbuch.exe</div><div class="rbBody"><img src="/assets/logo-retro.svg" alt="" width="32" height="32"><span>Rezepte werden geladen …</span><div class="rbBar"><i></i></div></div></div>`;
+    document.body.appendChild(ov);
+    setTimeout(()=> ov.classList.add("rbDone"), 1300);
+    setTimeout(()=> ov.remove(), 1600);
+  }
+
+  function enhance(){ cleanBits(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); }
+
   // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
   const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade"];
   function skinLogo(){
@@ -274,10 +472,14 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=1`;
   }
 
-  function apply(){ mountScene(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); }
+  function apply(){ mountScene(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); }
   function init(){
     apply();
     watchProgress();
+    watchCook();
+    retroBoot();
+    addEventListener("kochbuch:cooking", bonClock);
+    const fl = $("#freezerList"); if(fl) new MutationObserver(()=>{ clearTimeout(init.f); init.f = setTimeout(cryo, 50); }).observe(fl, { childList: true });
     new MutationObserver(apply).observe(R, { attributes: true, attributeFilter: ["data-skin"] });
     addEventListener("resize", sizeScene, { passive: true });
     document.fonts?.ready?.then(sizeScene);
@@ -285,7 +487,7 @@
     addEventListener("kochbuch:stats", markCooked);
     // Startseite füllt Karten per Skript nach
     const home = document.querySelector(".appMain");
-    if(home) new MutationObserver(()=>{ clearTimeout(init.t); init.t = setTimeout(()=>{ markCooked(); sizeScene(); voice(); }, 60); }).observe(home, { childList: true, subtree: true });
+    if(home) new MutationObserver(()=>{ clearTimeout(init.t); init.t = setTimeout(()=>{ markCooked(); sizeScene(); voice(); enhance(); }, 60); }).observe(home, { childList: true, subtree: true });
     // Timer-Hinweis (entsteht in cook-timer.js) bekommt beim Öffnen die Stimme des Skins
     new MutationObserver(()=>{ const t = document.querySelector('.timerAlert.open'); if(t) voice(t); }).observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
   }

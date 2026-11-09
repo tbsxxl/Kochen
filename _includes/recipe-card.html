@@ -24,8 +24,9 @@
 {%- endif -%}
 {%- assign protein = "" -%}
 {%- if allcats contains "|Fisch|" -%}{%- assign protein = "fisch" -%}{%- elsif allcats contains "|Rind|" -%}{%- assign protein = "rind" -%}{%- elsif allcats contains "|Hackfleisch|" -%}{%- assign protein = "hack" -%}{%- elsif allcats contains "|Schwein|" -%}{%- assign protein = "schwein" -%}{%- elsif allcats contains "|Hähnchen|" -%}{%- assign protein = "haehnchen" -%}{%- elsif allcats contains "|Ente|" -%}{%- assign protein = "ente" -%}{%- elsif kind == "veg" -%}{%- assign protein = "veg" -%}{%- endif -%}
+{%- assign level = "" -%}{%- if allcats contains "|Wochenendprojekt|" -%}{%- assign level = "oben" -%}{%- elsif allcats contains "|Schnell|" -%}{%- assign level = "unten" -%}{%- endif -%}
 <a class="linkCard{% if include.hcard %} hCard homeFavCard{% endif %}" href="{{ rid }}"{% if include.index %} data-flags="{{ flags | strip }}" data-recipe-card data-recipe-id="{{ rid }}" data-title="{{ r.title | escape }}" data-category="{{ r.category | escape }}" data-categories="|{{ r.categories | join: '|' | escape }}|" data-author="{{ author | escape }}" data-haystack="{{ hay | escape }}"{% endif %}>
-  <div class="card recipeCard cardHover"{% if kind != "" %} data-kind="{{ kind }}"{% endif %}{% if protein != "" %} data-protein="{{ protein }}"{% endif %}>
+  <div class="card recipeCard cardHover"{% if kind != "" %} data-kind="{{ kind }}"{% endif %}{% if protein != "" %} data-protein="{{ protein }}"{% endif %}{% if level != "" %} data-level="{{ level }}"{% endif %}>
     {%- if r.image %}
     <div class="rcImg">
       <img src="{{ r.image | relative_url }}?v={{ site.image_version }}" srcset="{% include srcset.html src=r.image %}" sizes="(min-width:900px) 300px, {% if include.hcard %}78vw{% else %}46vw{% endif %}" alt=""{% if include.eager %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
