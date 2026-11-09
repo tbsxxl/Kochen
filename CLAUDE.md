@@ -87,8 +87,8 @@ in `.claude/skills/` nur Verweise): `impeccable` (pbakaus/impeccable: Kritik, Au
 `skills update` prüfen) und `shadcn` (shadcn/ui; nur relevant für React-Projekte, diese Seite nutzt kein shadcn).
 Bewegung: `review-animations`/`remove-animations`; Mobil-Feinheiten: `mobile-native`.
 `design-taste-frontend` (leonxlnx/taste-skill, Nov. 2026, `npx skills add leonxlnx/taste-skill --agent claude-code --all -y`;
-den dabei angelegten Ordner `agent/` löschen): Anti-Slop-Skill mit Prüf-Skripten; der Ordner `assets/` (38 MB Fotos/Renders
-für Firmen-Webseiten) steht in `.gitignore`. Für Design-Reviews zusammen mit `impeccable` (impeccable.style) und Emil Kowalskis Paket.
+den dabei angelegten Ordner `agent/` löschen): Anti-Slop-Skill mit Prüf-Skripten, vollständig im Repo
+(inkl. `assets/`, 38 MB Fotos/Renders; Wunsch des Besitzers). Für Design-Reviews zusammen mit `impeccable` (impeccable.style) und Emil Kowalskis Paket.
 `unslop` (heydamir/unslop, CC BY 4.0, Nov. 2026 von Hand übernommen: Ordner `skills/unslop` nach `.agents/skills/unslop`, Verweis in
 `.claude/skills/`, Eintrag in `skills-lock.json`): räumt KI-typische Merkmale auf (Abstände, Farben, Symbole, Texte, Bewegung).
 Erster Lauf (Abschnitt 42): nur leichter Feinschliff nötig – Bewertung auf Karten mit SVG-Stern (`.rateStar`) statt „★“,
