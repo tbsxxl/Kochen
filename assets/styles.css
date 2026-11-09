@@ -1802,7 +1802,7 @@ html.tabbarMin .nowCooking{transform:translate3d(0,18px,0)}
 .cookIngRow.isStep{background:rgba(157,187,163,.14)}
 .cookIngRow.isStep .cookIngQty{color:var(--cLeaf)}
 @media (min-width:768px){ .cookIngsHead{background:var(--cBg)} }
-.nowCookingClock{width:15px;height:15px;vertical-align:-2px;margin-right:4px}
+.nowCookingClock{display:inline-block !important;width:15px;height:15px;vertical-align:-2px;margin-right:4px}
 :root[data-theme="dark"] .recipeBody ol > li.stepDone::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%2317140F' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
 .filterBarLeft{--fl:0px;--fr:0px;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%)}
 .filterBarLeft.fadeL{--fl:28px} .filterBarLeft.fadeR{--fr:28px}
