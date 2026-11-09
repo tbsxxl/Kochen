@@ -853,7 +853,7 @@
     if(!img) return;
     const on = LOGOS.includes(skin());
     img.hidden = !on;
-    if(on) img.src = `/assets/logos/${skin()}.svg?v=1`;
+    if(on) img.src = `/assets/logos/${skin()}.svg?v=2`;
   }
 
   function apply(){ mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); homeTimer(); cinema(); }
