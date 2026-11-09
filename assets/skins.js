@@ -264,17 +264,6 @@
     bon.animate(kf, { duration: 1600, easing: "cubic-bezier(.2,.8,.2,1)" }).onfinish = ()=> bon.remove();
   });
 
-  // ---------- Die Insel: Vorspann-Titel nur beim ersten Öffnen am Tag ----------
-  function islandIntro(){
-    if(skin() !== "insel") return R.classList.remove("islandIntro");
-    const today = new Date().toDateString();
-    let last = null; try { last = localStorage.getItem("kochbuch.ui.islandIntro"); } catch {}
-    if(last === today) return;
-    try { localStorage.setItem("kochbuch.ui.islandIntro", today); } catch {}
-    R.classList.add("islandIntro");
-    setTimeout(()=> R.classList.remove("islandIntro"), 1400);
-  }
-
   // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
   const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade"];
   function skinLogo(){
@@ -285,7 +274,7 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=1`;
   }
 
-  function apply(){ mountScene(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); islandIntro(); }
+  function apply(){ mountScene(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); }
   function init(){
     apply();
     watchProgress();
