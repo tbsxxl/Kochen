@@ -43,8 +43,9 @@
     const day = document.querySelector(".passClock .pcDay");
     const tick = ()=>{
       if(document.hidden) return;
-      const d = new Date(), p = (n)=> String(n).padStart(2, "0");
-      const str = `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+      const d = new Date(), p = (n)=> String(n).padStart(2, "0"), t = activeTimer();
+      const str = t ? fmtLeft(t.left) : `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+      const meta = document.querySelector(".passClock .pcMeta b"); if(meta) meta.textContent = t ? t.label : "Küchenzeit";
       if(el.dataset.t === str) return;
       el.dataset.t = str;
       el.innerHTML = [...str].map((c)=> c === ":" ? ledColon : ledDigit(+c)).join("");
@@ -457,6 +458,39 @@
       <circle class="wcArc" r="27.5" fill="none" stroke="#FF3FA4" stroke-width="2" stroke-dasharray="172.8" stroke-dashoffset="172.8" transform="rotate(-90)"/></svg>`,
   };
   const CLOCK_LABEL = { zauberschule: "Zeit im Schloss", nordwall: "Stunde der Wache", insel: "Stationszeit", jahr3000: "Bordzeit", zweistaedte: "Hextech-Zeit" };
+  // ---------- Timer auf der Startseite für alle Skins ohne eigenes Uhr-Element (Standard, Retro, Terminal, Diner, Bauhaus, Akte) ----------
+  // Nur sichtbar, solange ein Kochtimer läuft; Antippen öffnet den Kochmodus des Rezepts.
+  let homeTimerT = null;
+  const EGG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 15.5a6.5 6.5 0 0 0 13 0c0-4.5-3-9-6.5-9s-6.5 4.5-6.5 9z"/><path d="M12 6.5V4M10.5 4h3"/><path d="M12 15l2.5-2"/></svg>`;
+  function homeTimer(){
+    clearInterval(homeTimerT);
+    const quick = document.querySelector(".homeQuick");
+    const off = WORLD_CLOCK[skin()] || skin() === "brigade" || !quick || !document.body.classList.contains("layout-home");
+    if(off){ document.querySelector(".homeTimer")?.remove(); return; }
+    const tick = ()=>{
+      if(document.hidden) return;
+      const list = readLS("kochbuch.timers", []), now = Date.now();
+      const run = (Array.isArray(list) ? list : []).filter((t)=> t && t.end > now).sort((a, b)=> a.end - b.end);
+      let el = document.querySelector(".homeTimer");
+      if(!run.length){ el?.remove(); return; }
+      const t = run[0], left = Math.round((t.end - now) / 1000), f = Math.min(1, Math.max(0, 1 - left / Math.max(1, t.total || left)));
+      if(!el){
+        el = document.createElement("a");
+        el.className = "homeTimer pressable";
+        el.innerHTML = `<span class="htIcon">${EGG}</span><span class="htText"><b class="htTime"></b><span class="htLabel"></span></span><span class="htMore"></span><i class="htBar" aria-hidden="true"></i>`;
+        quick.after(el);
+      }
+      el.href = t.url ? t.url + (t.url.includes("?") ? "&" : "?") + "kochen=1" : "#";
+      const str = fmtLeft(left);
+      el.querySelector(".htTime").textContent = str;
+      el.querySelector(".htLabel").textContent = [t.label, t.title].filter(Boolean).join(" · ");
+      el.querySelector(".htMore").textContent = run.length > 1 ? `+${run.length - 1}` : "";
+      el.querySelector(".htBar").style.transform = `scaleX(${f.toFixed(3)})`;
+      el.setAttribute("aria-label", `Timer ${t.label}: noch ${str}`);
+    };
+    tick(); homeTimerT = setInterval(tick, 1000);
+  }
+
   function worldClock(){
     clearInterval(worldT);
     const sk = skin();
@@ -606,7 +640,7 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=1`;
   }
 
-  function apply(){ mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); cinema(); }
+  function apply(){ mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); homeTimer(); cinema(); }
   function init(){
     apply();
     watchProgress();

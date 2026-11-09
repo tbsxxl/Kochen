@@ -164,7 +164,7 @@
       if(!t.rang && t.end <= now){
         t.rang = true; changed = true;
         if(now - t.end < 120000) ring();        // lange vorbei (Seite war zu): ohne Ton, nur Hinweis
-        if(document.visibilityState === "visible") remoteCancel(t.id);  // hier bemerkt → keine Push-Mitteilung mehr
+        if(document.visibilityState === "visible"){ remoteCancel(t.id); clearRunning(t.id); }  // hier bemerkt → keine Push-Mitteilung mehr
         if(!alertId) showAlert(t);
       }
     }
@@ -182,8 +182,38 @@
     timers.push(t);
     save(); ensureLoop(); emit();
     remoteSet(t);
+    notifyRunning(t);
     pushHint();
   }
+  // ---------- Laufender Timer als Mitteilung (Wunsch des Besitzers) ----------
+  // Bleibt in der Mitteilungszentrale stehen (still, ohne Ton) und zeigt, wann der Timer fertig ist. Web-Apps können keine
+  // sekundengenaue Live-Anzeige wie iOS-Live-Aktivitäten bauen, daher „fertig um 18:42“. Gleiche Kennung wie die Push-Mitteilung
+  // des Workers beim Ablauf (`timer-<id>`): die ersetzt diese Mitteilung dann durch „fertig“. Nur mit erteilter Erlaubnis.
+  const hhmm = (ms)=> new Date(ms).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+  async function swReg(){
+    try{
+      if(!("serviceWorker" in navigator) || !("Notification" in window) || Notification.permission !== "granted") return null;
+      return await navigator.serviceWorker.getRegistration();
+    }catch{ return null; }
+  }
+  async function notifyRunning(t){
+    const reg = await swReg(); if(!reg || !t || t.end <= Date.now()) return;
+    try{
+      await reg.showNotification(`${t.label} läuft`, {
+        body: `Fertig um ${hhmm(t.end)}${t.title ? " · " + t.title : ""}`,
+        tag: `timer-${t.id}`, silent: true, renotify: false, requireInteraction: true,
+        icon: "/assets/icon-512-v10.png", badge: "/assets/icon-512-v10.png", timestamp: t.end,
+        data: { url: t.url ? t.url + (t.url.includes("?") ? "&" : "?") + "kochen=1" : "/" }
+      });
+    }catch{}
+  }
+  async function clearRunning(id){
+    const reg = await swReg(); if(!reg) return;
+    try{ (await reg.getNotifications({ tag: `timer-${id}` })).forEach((n)=> n.close()); }catch{}
+  }
+  // beim Öffnen: Mitteilungen laufender Timer auffrischen (z. B. nach Neustart des Geräts)
+  setTimeout(()=> timers.filter((t)=> !t.rang && t.end > Date.now()).forEach(notifyRunning), 1500);
+
   // Ohne Mitteilungs-Abo meldet sich der Timer nur, solange die App offen ist → einmal pro Woche darauf hinweisen
   const HINT_KEY = "kochbuch.ui.timerPushHint";
   function pushHint(){
@@ -200,7 +230,7 @@
     const had = timers.some(t=>t.id === id);
     timers = timers.filter(t=>t.id !== id); save(); emit();
     if(alertId === id){ hideAlert(); showNextAlert(); }
-    if(had) remoteCancel(id);
+    if(had){ remoteCancel(id); clearRunning(id); }
   }
   function addTime(id, secs){
     const t = timers.find(x=>x.id === id); if(!t) return;
@@ -208,6 +238,7 @@
     if(alertId === id){ hideAlert(); showNextAlert(); }
     save(); ensureLoop(); emit();
     remoteSet(t);
+    notifyRunning(t);
   }
 
   // Leiste mit laufenden Timern in einen Container rendern

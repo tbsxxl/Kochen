@@ -430,6 +430,14 @@ getrennt (Wunsch des Besitzers).
   Kategorie für das PDF steht in `RECIPE_DATA.category`.
 - Rezeptseite: Schritte antippen = abhaken (`stepsDone`, 12 Std), Portionen pro Rezept (`servings`),
   „Ähnliche Rezepte“ (gleiche Kategorie, Liquid `sample`, Karten mit `hcard=true`).
+- **Timer auf der Startseite (Dez. 2026, Wunsch des Besitzers):** solange ein Kochtimer läuft, zeigt die Startseite unter den
+  Schnellknöpfen eine Karte `.homeTimer` (Eieruhr, Restzeit, Timer-Name · Rezept, „+n“ bei mehreren, Fortschrittslinie; Antippen
+  öffnet `?kochen=1`) – in allen Skins ohne eigenes Uhr-Element (`homeTimer()` in `skins.js`, Abschnitt 17 in `styles.css`).
+  Welten mit Uhr-Element zeigen den Timer dort; Brigades LED-Uhr zählt dann den Timer herunter (Beschriftung = Timer-Name).
+- **Laufender Timer als Mitteilung:** mit erteilter Mitteilungs-Erlaubnis legt `cook-timer.js` beim Start eine stille,
+  stehenbleibende Mitteilung „<Name> läuft · Fertig um 18:42 · Rezept“ ab (`notifyRunning()`, Kennung `timer-<id>` wie der
+  Ablauf-Push des Workers, der sie dann durch „fertig“ ersetzt); „+1 Min“ aktualisiert sie, Beenden oder Ablauf bei offener App
+  schließt sie (`clearRunning()`). Eine sekundengenaue Live-Anzeige (wie iOS-Live-Aktivitäten) können Web-Apps nicht.
 - Kochmodus: Wischen links/rechts; Fortschritt in `cooking` (12 Std). „Kochen läuft“-Kapsel über der unteren Leiste
   (`assets/now-cooking.js`, wie der Mini-Player in Apple Music) auf jeder Seite, solange Fortschritt oder Timer laufen:
   Foto, Name, Timer-Restzeit (Eieruhr-SVG), „Schritt n von m“, Fortschritt grün; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt

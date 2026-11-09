@@ -3981,3 +3981,19 @@ html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun{
 html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun{text-align:left;padding-left:30px}
 html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRibbon{right:76px !important}
 html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e) .j3Bubble{top:150px !important}
+
+/* ==== 17. Timer auf der Startseite (Dez. 2026, Wunsch des Besitzers): erscheint nur, solange ein Kochtimer läuft,
+   in allen Skins ohne eigenes Uhr-Element; Antippen öffnet den Kochmodus. Farben aus den Feld-Tokens. ==== */
+.homeTimer{position:relative;display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 16px 14px 14px;min-height:64px;
+  border-radius:var(--rCard,16px);background:var(--fieldFill,rgba(255,255,255,.14));color:var(--onField,#fff);text-decoration:none;overflow:hidden}
+.homeTimer .htIcon{display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:var(--rPill,999px);background:var(--brand);color:var(--onBrand)}
+.homeTimer .htIcon svg{width:22px;height:22px}
+.homeTimer .htText{display:flex;flex-direction:column;min-width:0;flex:1}
+.homeTimer .htTime{font-size:var(--fs28);line-height:1.05;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.homeTimer .htLabel{font-size:var(--fs14);color:var(--onField2,rgba(255,255,255,.8));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.homeTimer .htMore{font-size:var(--fs14);font-weight:600;color:var(--onField2,rgba(255,255,255,.8))}
+.homeTimer .htBar{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--onField,#fff);opacity:.6;transform-origin:0 50%;transition:transform .9s linear}
+@media (prefers-reduced-motion: reduce){ .homeTimer .htBar{transition:none} }
+html.retro .homeTimer{border-radius:0;background:#C0C0C0;color:#000;box-shadow:var(--rWin)}
+html.retro .homeTimer .htLabel,html.retro .homeTimer .htMore{color:#000}
+html.retro .homeTimer .htBar{background:#000080;opacity:1}
