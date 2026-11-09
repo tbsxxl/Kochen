@@ -105,17 +105,34 @@
         <rect x="24" y="40" width="12" height="10" fill="#F4E3A1"/>
         <path d="M22 40 H38 L30 30Z" fill="#11181F"/><rect x="21" y="49" width="18" height="3" fill="#11181F"/>`, 'class="scTower" preserveAspectRatio="xMidYMax meet"')}
       <span class="scBeam"></span><span class="scLampGlow"></span>`,
-    // Brigade: Dunstabzug, hängende Kellen und Pfannen, Wärmelampen, Bon-Leiste mit Bons, Dampf
-    brigade: ()=> `<div class="scLamps">${[0,1,2].map(()=>'<span class="scLamp"></span>').join("")}</div>
-      ${svg("0 0 120 70", `
-        <path d="M0 4 H120" stroke="#8A9196" stroke-width="3"/>
-        <g fill="#AEB5BA"><path d="M14 4 v30" stroke="#AEB5BA" stroke-width="2"/><ellipse cx="14" cy="40" rx="7" ry="5"/>
-        <path d="M44 4 v18" stroke="#AEB5BA" stroke-width="2"/><circle cx="44" cy="34" r="12"/><circle cx="44" cy="34" r="8" fill="#5E666C"/>
-        <path d="M80 4 v22" stroke="#AEB5BA" stroke-width="2"/><path d="M73 26 h14 v14 a7 7 0 0 1 -14 0z"/>
-        <path d="M106 4 v36" stroke="#AEB5BA" stroke-width="2"/><path d="M101 40 h10 l-2 14 h-6z"/></g>`, 'class="scHang"')}
-      <div class="scRail">${["Tisch 4","Tisch 9","Tisch 12"].map(t=>`<span><b>${t}</b><i></i><i></i><i></i></span>`).join("")}</div>
-      <div class="scSteam"><span></span><span></span><span></span></div>`,
+    // Brigade: Küchen-Terminal – rote LED-Uhr (Sieben-Segment-Ziffern, unbeleuchtete Segmente schwach sichtbar), sonst nichts
+    brigade: ()=> `<div class="passClock"><span class="pcDigits"></span><span class="pcMeta"><b>Küchenzeit</b><i class="pcDay"></i></span></div>`,
   };
+
+  // ---------- Brigade: LED-Uhr ----------
+  // Segmente a–g als Sechsecke in einem 20 × 34 großen Feld; leuchtende in Rot, die anderen als schwacher Schatten
+  const SEG = { a:"4,2 16,2 18,4 16,6 4,6 2,4", b:"18,4 20,6 20,15 18,17 16,15 16,6", c:"18,17 20,19 20,28 18,30 16,28 16,19",
+    d:"4,28 16,28 18,30 16,32 4,32 2,30", e:"2,17 4,19 4,28 2,30 0,28 0,19", f:"2,4 4,6 4,15 2,17 0,15 0,6", g:"4,15 16,15 18,17 16,19 4,19 2,17" };
+  const ON = ["abcdef","bc","abged","abgcd","fgbc","afgcd","afgedc","abc","abcdefg","abcfgd"];
+  const ledDigit = (n)=> `<svg viewBox="-1 0 22 34" class="pcD" aria-hidden="true">${Object.entries(SEG).map(([k, pts])=> `<polygon points="${pts}"${ON[n].includes(k) ? ' class="on"' : ""}/>`).join("")}</svg>`;
+  const ledColon = `<svg viewBox="0 0 6 34" class="pcC" aria-hidden="true"><circle cx="3" cy="11" r="2" class="on"/><circle cx="3" cy="23" r="2" class="on"/></svg>`;
+  let clockT = null;
+  function passClock(){
+    clearInterval(clockT);
+    const el = document.querySelector(".passClock .pcDigits");
+    if(skin() !== "brigade" || !el) return;
+    const day = document.querySelector(".passClock .pcDay");
+    const tick = ()=>{
+      if(document.hidden) return;
+      const d = new Date(), p = (n)=> String(n).padStart(2, "0");
+      const str = `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+      if(el.dataset.t === str) return;
+      el.dataset.t = str;
+      el.innerHTML = [...str].map((c)=> c === ":" ? ledColon : ledDigit(+c)).join("");
+      if(day) day.textContent = d.toLocaleDateString("de-DE", { weekday: "short", day: "2-digit", month: "2-digit" }).toUpperCase();
+    };
+    tick(); clockT = setInterval(tick, 1000);
+  }
 
   function mountScene(){
     document.querySelectorAll(".skinScene").forEach(el=> el.remove());
@@ -463,7 +480,7 @@
   function enhance(){ cleanBits(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); }
 
   // ---------- Kino-Kopf (Three.js + GSAP, assets/cinema/<skin>.js, nur Feld-Seiten, nur mit WebGL) ----------
-  const CINEMA = { nordwall: 2, zauberschule: 2, jahr3000: 2, zweistaedte: 2, insel: 2, akte: 2, brigade: 2 };
+  const CINEMA = { nordwall: 4, zauberschule: 4, jahr3000: 4, zweistaedte: 4, insel: 4, akte: 4 };
   let cine = null, cineSkin = null, prevSkin = null;
   function cinema(){
     const sk = skin(), changed = prevSkin !== null && prevSkin !== sk;
@@ -471,7 +488,17 @@
     if(cineSkin === sk) return;
     cine?.stop?.(); cine = null; cineSkin = null;
     if(!CINEMA[sk] || !document.body.classList.contains("fieldPage")) return;
-    try{ const c = document.createElement("canvas"); if(!(c.getContext("webgl2") || c.getContext("webgl"))) return; }catch{ return; }
+    // nur mit echter Grafikkarte: reine Software-Grafik (SwiftShader, llvmpipe) zeichnet langsam und fehlerhaft → SVG-Szene bleibt.
+    // Zum Testen erzwingen: localStorage kochbuch.ui.cineForce = "1"
+    try{
+      const c = document.createElement("canvas"), gl = c.getContext("webgl2") || c.getContext("webgl");
+      if(!gl) return;
+      let force = false; try{ force = localStorage.getItem("kochbuch.ui.cineForce") === "1"; }catch{}
+      const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+      const rend = String(dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER));
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      if(!force && /swiftshader|llvmpipe|software|softpipe/i.test(rend)) return;
+    }catch{ return; }
     cineSkin = sk;
     const intro = changed;
     // Vorspann erst, wenn das Skin-Blatt geschlossen ist (so lassen sich Skins in Ruhe durchprobieren)
@@ -499,7 +526,7 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=1`;
   }
 
-  function apply(){ mountScene(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); cinema(); }
+  function apply(){ mountScene(); passClock(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); cinema(); }
   function init(){
     apply();
     watchProgress();

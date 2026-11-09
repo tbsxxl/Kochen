@@ -150,8 +150,8 @@ export function particles({ count, area, size = [1, 2], color = [.93, .96, 1], s
         p.x += sin(uTime * (.4 + aSeed) + aSeed * 30.) * ${sway.toFixed(3)} + uTime * ${wind.toFixed(3)} * (.6 + aSeed * .6);
         p.x = mod(p.x + uW * .5, uW) - uW * .5;
         vec4 mv = modelViewMatrix * vec4(p, 1.);
-        gl_PointSize = aSize * uPx * (60. / -mv.z);
-        vA = smoothstep(90., 8., -mv.z); vS = aSeed;
+        gl_PointSize = -mv.z < 2. ? 0. : min(aSize * uPx * (60. / -mv.z), 64.);
+        vA = smoothstep(90., 8., -mv.z) * smoothstep(2., 5., -mv.z); vS = aSeed;
         gl_Position = projectionMatrix * mv;
       }`,
     fragmentShader: `varying float vA; varying float vS; uniform float uOp, uTime;
@@ -237,7 +237,9 @@ export function start(def, { home, reduce, intro }){
   }
   function play(){ if(running) return; running = true; if(!raf) raf = requestAnimationFrame(frame); }
   function pause(){ running = false; if(raf){ cancelAnimationFrame(raf); raf = 0; } }
-  const check = ()=>{ (document.hidden || scrollY > fieldBottom()) ? pause() : play(); if(reduce) frame(performance.now()); };
+  // nur den Feldbereich zeigen: auf kurzen Seiten liegt unter dem Blatt sonst die Szene frei
+  const clip = ()=>{ const visible = Math.max(0, fieldBottom() - 40 - scrollY); canvas.style.clipPath = `inset(0 0 ${Math.max(0, innerHeight - visible - 2)}px 0)`; };
+  const check = ()=>{ clip(); (document.hidden || scrollY > fieldBottom()) ? pause() : play(); if(reduce) frame(performance.now()); };
 
   // ---------- GSAP: Einblendung, Scrollen, Bild ----------
   const k0 = ()=> st.intro ? 2.4 : .15;

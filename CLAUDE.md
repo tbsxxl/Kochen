@@ -245,10 +245,15 @@ getrennt (Wunsch des Besitzers).
   Zwei Städte = Oberstadt aus Messing auf einem Plateau, blauer Kristall im Himmel, Unterstadt mit grünem Dunst und pinken
   Leuchtzeichen (Scrollen senkt die Kamera nach unten); Insel = Sonnenuntergang über dem Meer, Palmen, Flugzeugwrack, Lagerfeuer,
   Glühwürmchen (Titel ohne Buchstaben-Einblendung, der CSS-Vorspann bleibt: `splitTitle: false`); Akte = Sturm mit Wolken, Blitzen,
-  Regen-Streifen, Anstalt auf der Klippe, Leuchtturm mit waagerecht streichendem Kegel; Brigade = Fliesenwand, Wärmelampen,
-  hängende Pfannen, Bons an der Leiste, Dampf. Bildaufbau-Regel: Himmel/Licht hinter Titel und Datum, Bauten im unteren Drittel
+  Regen-Streifen, Anstalt auf der Klippe, Leuchtturm mit waagerecht streichendem Kegel. Brigade hat keinen Kino-Kopf mehr (siehe unten). Bildaufbau-Regel: Himmel/Licht hinter Titel und Datum, Bauten im unteren Drittel
   des Felds unter den Schnellknöpfen. Vorspann-Schrift je Skin über `--cineFont`, Glühfarbe beim Überfahren `--cineGlow`.
   Zeit im Kern nie negativ (erstes Bild kann vor dem Start liegen).
+  3D nur mit echter Grafikkarte: meldet WebGL einen Software-Renderer (SwiftShader, llvmpipe), bleibt die SVG-Szene
+  (zeichnete in Tests fehlerhafte Zacken). Für Screenshots erzwingen mit `localStorage['kochbuch.ui.cineForce'] = '1'`
+  plus Chromium-Optionen `--use-gl=angle --use-angle=swiftshader --enable-unsafe-swiftshader`. Das Canvas wird per
+  `clip-path` auf den sichtbaren Feldbereich beschnitten (kurze Seiten), Partikel direkt vor der Kamera werden ausgeblendet.
+  Vorsicht beim Entfernen von Skin-Regeln per Skript: Selektorlisten über mehrere Zeilen (z. B. „…akte …,⏎html.skin-brigade …{…}“)
+  hinterlassen sonst ein hängendes Komma, die Regel verschmilzt mit der nächsten (so geschehen, `flows.js` fiel dadurch).
   Nordwall: Nachthimmel mit Mond und Sternen hinter dem Titel, Eismauer mit Mondlicht-Krone im unteren Drittel, Burg-Silhouette
   mit flackernden Fenstern/Fackeln, Zickzack-Treppe aus Lichtern, dunkle Hügel vorn, Schnee als Partikel. Startseite: Feld
   ~90 % der Bildschirmhöhe (`marginTop` der Heute-Karte per Skript), Datum Buchstabe für Buchstabe, dann Suche/Knöpfe; Scrollen hebt
@@ -257,6 +262,17 @@ getrennt (Wunsch des Besitzers).
   Antippen überspringt). `gsap.ticker.lagSmoothing(0)` + Sicherung: Inhalt ist nach spätestens ~2,5 s sichtbar, auch bei langsamem
   Rendern. Ohne WebGL bleibt die SVG-Szene; „Bewegung reduzieren“ = Standbild ohne Einblendungen. Rendern pausiert, wenn das Feld
   weggescrollt oder die Seite verborgen ist. Testen mit Chromium-Optionen `--use-gl=angle --use-angle=swiftshader --enable-unsafe-swiftshader`.
+  **Brigade neu (Abschnitt 48 · 14, Nov. 2026, nach einer Kritik, die der Besitzer übernommen hat: „unruhig, verspielt“):**
+  Küchen-Terminal an der Pass-Station statt Edelstahl/Malerband/Handschrift. Dunkel: Feld `#0E0F10`, Grund `#121212`, Karten
+  `#1C1C1E` mit Haarlinien (keine weichen Schatten), Text `#F2F2F0`/`#A8A8A4`, einziger Akzent Kupfer `#D9822B` (Schrift darauf
+  `#140C04`), rote LED `#FF3B30` nur für Uhr und Timer. Überschriften Archivo schmal (`font-stretch:72%`, 800) in Versalien,
+  Text SF; Knöpfe normal geschrieben. Ecken 6 px über `--rPill/--rCard/--rBtn` (auch Kapseln werden kantig). Feld nur mit feinem
+  Stahlraster (`.skinScene-brigade::before`), kein Küchenbild, keine 3D-Szene. Auf der Startseite unten im Feld eine rote
+  LED-Uhr mit Sekunden (`passClock()` in `skins.js`: Sieben-Segment-SVG, unbeleuchtete Segmente schwach sichtbar; `.passClock svg`
+  braucht `position:static`, weil Szenen-SVGs sonst absolut liegen), auf Listenseiten keine Uhr. Tab-Leiste festes dunkles
+  Paneel, Linien-Symbole, aktiv = Kupfer ohne Blase. Kochmodus-Schritt mit Kupferkante, Timer in roter LED-Schrift,
+  „Kochen läuft“ dunkel mit LED-Zeitstempel, Mise en place dunkel. Statusleiste `#0E0F10`, Logo-Band Kupfer.
+  Den Serien-Spruch „Every Second Counts“ bewusst nicht übernommen (keine Zitate), die Uhr trägt die Idee.
   **Logo je Skin** (Wunsch des Besitzers): `assets/logos/<skin>.svg` – gleiche Buchform „Zwei Seiten“, Material je Welt
   (Terminal grüne Umrisse mit Zeilen, Diner Neonröhren gelb/mint, Bauhaus Rot/Blau + gelber Kreis, Nordwall Stahl mit Nieten
   und rotem Lesebändchen, Zauberschule Pergament mit Goldkante und Stern, Jahr 3000 mit Umlaufbahn, Zwei Städte Gold mit Hex

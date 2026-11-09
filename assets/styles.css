@@ -3068,32 +3068,6 @@ html.skin-akte:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:rg
 
 /* ==== 9. Brigade (Stimmung: The Bear): Edelstahl, blaues Malerband mit Filzstift.
    Detail: Kochmodus-Schritt als Bon an der Leiste; Einkaufsliste als „Mise en place“ ==== */
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d),html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body{
-  --field:#2A2F33;--onField:#F2F4F5;--onField2:rgba(242,244,245,.78);--fieldFill:rgba(255,255,255,.12);
-  --bg:#E4E7E9;--surface:#F4F5F6;--surface2:#FFFFFF;--fill:rgba(42,47,51,.08);--line:rgba(42,47,51,.14);--lineStrong:rgba(42,47,51,.4);
-  --text:#16191B;--sub:#454B50;--sub2:#454B50;--muted:#575E63;
-  --brand:#1F5FBF;--onBrand:#FFFFFF;--leaf:#1F5FBF;--onLeaf:#FFFFFF;--brandSoft:rgba(31,95,191,.10);--leafSoft:rgba(31,95,191,.10);
-  --sel:#1F5FBF;--onSel:#FFFFFF;--accent:#1F5FBF;--accentSoft:rgba(31,95,191,.10);--onAccent:#FFFFFF;--herb:#1F5FBF;--coffee:#2A2F33;
-  --tape:#7FB2EE;--glass:rgba(244,245,246,.97);
-  --steel:repeating-linear-gradient(90deg, rgba(255,255,255,.35) 0 1px, rgba(0,0,0,.03) 1px 3px), linear-gradient(to bottom, #EEF0F2, #D5D9DC);
-  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Brigade", "Marker Felt", sans-serif;
-  color-scheme:light}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#E4E7E9;--surface:#F4F5F6}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#E4E7E9;--cCard:#FFFFFF;--cFill:rgba(42,47,51,.08);--cLine:rgba(42,47,51,.14);--cText:#16191B;--cSub:#454B50;--cLeaf:#1F5FBF;--cOnLeaf:#FFFFFF}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body:not(.fieldPage),html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday ~ .section{background:var(--steel)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle){font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;letter-spacing:.01em}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.h2,.notesTitle){display:inline-block;font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;color:#16191B;
-  background:var(--tape);padding:2px 12px 0;transform:rotate(-1.2deg);box-shadow:0 1px 1px rgba(0,0,0,.15);
-  -webkit-mask:linear-gradient(90deg, transparent 0, #000 3px, #000 calc(100% - 3px), transparent 100%);mask:linear-gradient(90deg, transparent 0, #000 3px, #000 calc(100% - 3px), transparent 100%)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .pageTitleBlock .h1{font-size:0}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .pageTitleBlock .h1::after{content:"Mise en place";font-size:clamp(2.1rem, 9.5vw, 2.6rem)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{border-radius:6px;box-shadow:0 0 0 1px rgba(42,47,51,.25)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookPanel#cookPanelSteps{position:relative;padding-top:20px}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookPanel#cookPanelSteps::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;border-radius:5px;background:linear-gradient(to bottom, #F7F8F9, #A9AFB4);box-shadow:0 2px 3px rgba(0,0,0,.2)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookStep{background:#FFFFFF;border-radius:0 0 4px 4px;padding:18px 16px 22px;box-shadow:0 4px 10px rgba(0,0,0,.12);
-  -webkit-mask:radial-gradient(circle at 6px 100%, transparent 4px, #000 4.5px) 0 0/12px 100% repeat-x;mask:radial-gradient(circle at 6px 100%, transparent 4px, #000 4.5px) 0 0/12px 100% repeat-x}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:var(--steel) !important;border:1px solid rgba(42,47,51,.25);box-shadow:inset 0 1px 0 #fff, 0 6px 14px rgba(0,0,0,.15) !important}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:var(--tape) !important;color:#16191B !important}
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlertIcon{display:none}
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlertSub,html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlertLabel{color:#4E473E !important}
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) .timerAlertBtn:not(.primary){background:rgba(40,36,30,.08) !important;color:#221E19 !important}
@@ -3153,7 +3127,6 @@ html.skin-akte:not(._a):not(._b):not(._c):not(._d) :is(.grid,.hScroll) .recipeCa
   color:#A3262A;background:rgba(236,239,241,.82);font-family:var(--fontDisplay);font-size:var(--fs14);transform:rotate(-9deg);letter-spacing:.06em}
 
 /* Brigade: Wärmelampen über dem Pass, Bon-Leiste mit Zetteln */
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d),html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body{--field:#1E2226}
 
 /* Logo je Skin (assets/logos/, gesetzt von assets/skins.js): ersetzt in Skins das Standard-Logo */
 .homeBrand .logoSkin{width:28px;height:28px}
@@ -3181,8 +3154,7 @@ html.skin:not(._a):not(._b):not(._c):not(._d) body .homeBrand .logoLight,html.sk
 
 /* Blattkanten (statt runder Ecken): Pergament, Büttenrand, Brandung; Akte mit Klemmbrett, Brigade eckiger Stahl */
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,
-html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:0}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:0}
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before,
 html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{content:"";position:absolute;left:0;right:0;height:16px;top:-15px;background:var(--bg);pointer-events:none;
   -webkit-mask:var(--edge) 0 0/100% 100%;mask:var(--edge) 0 0/100% 100%}
@@ -3192,7 +3164,6 @@ html.skin-insel:not(._a):not(._b):not(._c):not(._d){--edge:url("data:image/svg+x
 html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{-webkit-mask-size:80px 100%;mask-size:80px 100%;-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x}
 html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-nordwall:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-top:0}
 html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{content:"";position:absolute;left:50%;top:-16px;width:120px;height:30px;margin-left:-60px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30'%3E%3Crect x='10' y='8' width='100' height='18' rx='4' fill='%239AA1A7'/%3E%3Crect x='14' y='10' width='92' height='4' rx='2' fill='%23D5DADE'/%3E%3Crect x='44' y='0' width='32' height='14' rx='5' fill='%237A8187'/%3E%3Ccircle cx='60' cy='7' r='3' fill='%23DDE2E5'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none;z-index:2}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{box-shadow:inset 0 3px 0 #F4F6F7, inset 0 4px 0 #9AA1A7}
 html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-jahr3000:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:40px 40px 0 0;box-shadow:inset 0 3px 0 #7FE0C0}
 
 /* Überschriften je Welt */
@@ -3213,9 +3184,6 @@ html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatu
 html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:6px;box-shadow:8px 8px 0 #FF3FA4}
 html.skin-akte:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::after{content:"";position:absolute;z-index:5;left:18px;top:-14px;width:22px;height:52px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 56'%3E%3Cpath d='M8 52 V10 a4 4 0 0 1 8 0 V46 a7 7 0 0 1 -14 0 V14' fill='none' stroke='%23A7AEB5' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;transform:rotate(-8deg);pointer-events:none}
 html.skin-akte:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:2px;box-shadow:0 0 0 8px #ECEFF1, 0 10px 22px rgba(0,0,0,.25)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::before,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::after{content:"";position:absolute;z-index:5;top:-8px;width:64px;height:20px;background:rgba(127,178,238,.92);pointer-events:none}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::before{left:-6px;transform:rotate(-14deg)}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::after{right:-6px;transform:rotate(12deg)}
 
 /* Haken je Welt */
 html.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d) .uRow.checked .uLead{background:#FF3FA4 !important;border-color:#FF3FA4 !important;color:#1A0A14 !important;border-radius:46% 54% 42% 58% / 52% 44% 56% 48% !important}
@@ -3283,24 +3251,7 @@ html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.hom
   background:radial-gradient(circle, rgba(255,245,200,.95) 0 18%, rgba(255,235,160,.35) 45%, transparent 70%);animation:lampFlash 8s linear infinite}
 @keyframes lampFlash{0%,50%,100%{opacity:.35;transform:scale(.8)}25%{opacity:1;transform:scale(1.7)}75%{opacity:.1;transform:scale(.6)}}
 /* Brigade: Lampen flackern leicht, hängendes Werkzeug, Bon-Leiste mit Tischnummern, Dampf */
-.skinScene-brigade .scLamps{position:absolute;left:0;right:min(140px, 30%);top:calc(env(safe-area-inset-top));display:flex;justify-content:space-around}
-.skinScene-brigade .scLamp{position:relative;width:60px;height:22px;border-radius:0 0 30px 30px;background:linear-gradient(to bottom, #3A4046, #22272B)}
-.skinScene-brigade .scLamp::after{content:"";position:absolute;left:50%;top:18px;width:220px;height:190px;margin-left:-110px;
-  background:radial-gradient(ellipse 50% 60% at 50% 0, rgba(255,150,60,.32), rgba(255,120,40,.10) 50%, transparent 75%);animation:lampHum 3.2s ease-in-out infinite alternate}
 @keyframes lampHum{to{opacity:.75}}
-.skinScene-brigade .scHang{right:max(8px, calc(50% - 640px));top:calc(env(safe-area-inset-top) + 50px);width:120px;height:70px;opacity:.85}
-.skinScene-brigade .scRail{position:absolute;left:0;right:0;bottom:30px;height:8px;background:linear-gradient(to bottom, #EEF0F2, #9AA1A7);box-shadow:0 2px 4px rgba(0,0,0,.35);
-  display:flex;justify-content:flex-end;gap:10px;padding-right:max(16px, calc(50% - 620px))}
-.skinScene-brigade .scRail span{display:flex;flex-direction:column;gap:3px;width:46px;height:40px;margin-top:-34px;padding:5px 5px 0;background:#FAFAF7;box-shadow:0 2px 4px rgba(0,0,0,.25);
-  font:700 6px/1 ui-monospace, monospace;color:#B3261E;
-  -webkit-mask:radial-gradient(circle at 3px 100%, transparent 2.5px, #000 3px) 0 0/6px 100% repeat-x;mask:radial-gradient(circle at 3px 100%, transparent 2.5px, #000 3px) 0 0/6px 100% repeat-x}
-.skinScene-brigade .scRail span i{display:block;height:2px;background:#9AA1A7;width:80%}
-.skinScene-brigade .scRail span:nth-child(2){transform:rotate(3deg)}
-.skinScene-brigade .scRail span:nth-child(3){transform:rotate(-2deg)}
-.skinScene-brigade .scSteam{position:absolute;left:12%;bottom:40px;width:120px;height:120px}
-.skinScene-brigade .scSteam span{position:absolute;bottom:0;width:26px;height:60px;border-radius:50%;background:radial-gradient(ellipse, rgba(255,255,255,.16), transparent 70%);animation:steam 4s ease-out infinite}
-.skinScene-brigade .scSteam span:nth-child(2){left:34px;animation-delay:1.3s}
-.skinScene-brigade .scSteam span:nth-child(3){left:68px;animation-delay:2.6s}
 @keyframes steam{from{transform:translateY(0) scale(.6);opacity:0}30%{opacity:1}to{transform:translateY(-60px) scale(1.3);opacity:0}}
 
 /* Jahr 3000 ohne Violett: Nachthimmel-Blau, Mint und Orange */
@@ -3427,11 +3378,6 @@ html.skin-akte:not(._a):not(._b):not(._c):not(._d) .notesArea{font-family:"Skin 
   border-left:3px double rgba(163,38,42,.5);border-radius:2px 12px 12px 2px}
 
 /* Brigade: „Kochen läuft“ als Bon mit Uhrzeit, Mise en place vor dem Kochen */
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .nowCooking{background:#FBFAF6;color:#16191B;border-radius:4px 4px 2px 2px;overflow:visible;
-  box-shadow:0 10px 24px -10px rgba(0,0,0,.45);-webkit-mask:none;mask:none}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .nowCooking::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;
-  background:linear-gradient(-45deg,transparent 4px,#FBFAF6 0) 0 0/8px 8px repeat-x,linear-gradient(45deg,transparent 4px,#FBFAF6 0) 0 0/8px 8px repeat-x}
-html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .bonTime{position:absolute;top:-10px;left:14px;padding:2px 8px;background:#16191B;color:#FBFAF6;font:600 11px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.08em;border-radius:2px}
 .miseOverlay{position:fixed;inset:0;z-index:5500;display:flex;align-items:flex-end;justify-content:center;padding:16px;
   padding-bottom:calc(16px + env(safe-area-inset-bottom));background:rgba(22,25,27,.55)}
 @media (prefers-reduced-motion: no-preference){ .miseOverlay .miseCard{animation:miseIn .35s var(--easeSheet) both} }
@@ -3536,4 +3482,92 @@ html.skin-jahr3000 .cineIntroWord{--cineFont:"Skin Zukunft","Avenir Next",sans-s
 html.skin-zweistaedte .cineIntroWord{--cineFont:"Skin Zwei","Avenir Next Condensed",sans-serif;letter-spacing:.14em;margin-right:-.14em;font-size:min(14vw,6.5rem)}
 html.skin-insel .cineIntroWord{--cineFont:Georgia,"Times New Roman",serif;letter-spacing:.32em;margin-right:-.32em;font-size:min(9vw,4.5rem)}
 html.skin-akte .cineIntroWord{--cineFont:"Skin Akte","Courier New",monospace;letter-spacing:.3em;margin-right:-.3em}
-html.skin-brigade .cineIntroWord{--cineFont:"Skin Brigade","Marker Felt",sans-serif;letter-spacing:.06em;margin-right:-.06em}
+
+/* ==== 14. Brigade neu (Nov. 2026, Wunsch des Besitzers nach Kritik „unruhig, verspielt“): Küchen-Terminal an der Pass-Station.
+   Tiefes Anthrazit, Karten #1C1C1E mit Haarlinien statt weicher Schatten, ein einziger Akzent Kupfer, rote LED-Uhr.
+   Überschriften: Archivo schmal (72 %) 800 in Versalien mit straffem Tracking, Text SF. Keine Handschrift, kein Malerband,
+   kein Küchenbild im Hintergrund (nur ein feines Stahlraster), kantige 6-px-Ecken statt Kapseln. */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d),html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body{
+  --field:#0E0F10;--onField:#F2F2F0;--onField2:rgba(242,242,240,.68);--fieldFill:rgba(255,255,255,.04);
+  --bg:#121212;--surface:#1C1C1E;--surface2:#232325;--fill:rgba(255,255,255,.06);--line:rgba(255,255,255,.09);--lineStrong:rgba(255,255,255,.22);
+  --text:#F2F2F0;--sub:#A8A8A4;--sub2:#A8A8A4;--muted:#8E8E8A;
+  --brand:#D9822B;--onBrand:#140C04;--leaf:#D9822B;--onLeaf:#140C04;--brandSoft:rgba(217,130,43,.14);--leafSoft:rgba(217,130,43,.14);
+  --sel:#D9822B;--onSel:#140C04;--accent:#D9822B;--accentSoft:rgba(217,130,43,.14);--onAccent:#140C04;--herb:#D9822B;--coffee:#232325;--petrol:#D9822B;
+  --led:#FF3B30;--glass:rgba(22,22,24,.94);--glassLine:rgba(255,255,255,.08);--glassShadow:0 12px 32px rgba(0,0,0,.55);
+  --rPill:6px;--rCard:6px;--rBtn:6px;--rInner:4px;
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Archivo", -apple-system, sans-serif;
+  color-scheme:dark}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#121212;--surface:#1C1C1E}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#0E0F10;--cCard:#1C1C1E;--cFill:rgba(255,255,255,.06);--cLine:rgba(255,255,255,.09);--cText:#F2F2F0;--cSub:#A8A8A4;--cLeaf:#D9822B;--cOnLeaf:#140C04}
+/* Überschriften: schmal, fett, Versalien */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.notesTitle,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact,.catGroupTitle,.ingSection,.miseHead b){
+  font-family:var(--fontDisplay);font-stretch:72%;font-weight:800;text-transform:uppercase;letter-spacing:.015em;font-synthesis:none;font-style:normal}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.h2,.notesTitle,.sheetTitle,.catGroupTitle){letter-spacing:.06em;font-weight:750}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle){line-height:.98}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .recipeTitle{letter-spacing:.03em;line-height:1.08}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeGreetingSub{text-transform:uppercase;letter-spacing:.14em;font-size:var(--fs12);font-weight:600;color:var(--onField2)}
+/* Feld: feines Stahlraster, nach unten ausgeblendet; Blatt mit gerader Haarlinie statt Rundung */
+.skinScene-brigade::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:28px 28px;background-position:-1px -1px;-webkit-mask:linear-gradient(to bottom, #000 30%, transparent 96%);mask:linear-gradient(to bottom, #000 30%, transparent 96%)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:0 !important;box-shadow:0 -1px 0 rgba(255,255,255,.08) !important;-webkit-mask:none !important;mask:none !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{display:none}
+/* Bedienelemente im Feld: flach, feine Rahmenlinie */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16) !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .searchRowIcon input{background:transparent !important;box-shadow:none !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{padding-bottom:24px !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeQuickBtn{font-weight:600}
+@media (hover:hover) and (pointer:fine){ html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeQuickBtn:hover{box-shadow:inset 0 0 0 1px rgba(217,130,43,.7) !important;color:#F2B57A} }
+/* Karten: Haarlinie, keine weichen Schatten */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.card,.listGroup,.notesCard){box-shadow:inset 0 0 0 1px var(--line) !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{border-radius:4px}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:4px;box-shadow:0 0 0 1px rgba(255,255,255,.1) !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;vertical-align:.12em;background:var(--brand)}
+/* Tab-Leiste: festes dunkles Paneel, Linien-Symbole, aktiv = Kupfer ohne Blase */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#161618 !important;border:1px solid rgba(255,255,255,.08) !important;box-shadow:0 14px 34px rgba(0,0,0,.6) !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;border-radius:10px !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabItem{border-radius:6px !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:transparent !important;color:var(--brand) !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabItem.active .tabIcon svg :is(path,rect,polygon){fill-opacity:0 !important}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .tabLabel{text-transform:uppercase;letter-spacing:.08em;font-size:10px;font-weight:700}
+/* Kochmodus: Schritt als Karte mit Kupferkante, Zeiten als rote LED */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookStep{border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);border-top:3px solid var(--brand)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) :is(.cookTimerTime,.cookPill,.nowCookingSub){font-family:"Skin Insel", ui-monospace, monospace;font-variant-numeric:tabular-nums}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookTimerTime{color:var(--led);text-shadow:0 0 10px rgba(255,59,48,.55)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookProgressBar,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .cookTimerBar,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .nowCookingBar{background:var(--brand) !important}
+/* „Kochen läuft“: dunkles Paneel mit LED-Zeitstempel */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .nowCooking{background:#161618;color:#F2F2F0;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.09),0 14px 30px rgba(0,0,0,.55)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .bonTime{position:absolute;top:-9px;left:12px;padding:1px 7px;background:#0E0F10;color:var(--led);font:600 11px/1.4 "Skin Insel", ui-monospace, monospace;letter-spacing:.08em;border-radius:3px;box-shadow:0 0 0 1px rgba(255,59,48,.35);text-shadow:0 0 6px rgba(255,59,48,.6)}
+/* Timer-Hinweis */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .timerAlertCard{background:#161618;color:#F2F2F0;border-radius:10px;box-shadow:0 0 0 1px rgba(255,255,255,.09)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .timerAlertTitle{font-family:var(--fontDisplay);font-stretch:72%;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .timerAlertBtn{border-radius:6px}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .timerAlertBtn.primary{background:var(--brand);color:var(--onBrand)}
+/* Mise en place: dunkel, kantig */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseCard{background:#161618;color:#F2F2F0;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.09),0 20px 50px -20px rgba(0,0,0,.8)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseHead{border-bottom:1px solid rgba(255,255,255,.09)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseHead b{background:none;color:#F2F2F0;padding:0;transform:none;font-size:var(--fs28)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseHead span{color:var(--sub)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseList label{border-bottom-color:rgba(255,255,255,.07)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseList input{accent-color:#D9822B}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseList span,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseCount{color:var(--sub)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseList input:checked ~ em{color:var(--muted)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseFoot{border-top:1px solid rgba(255,255,255,.09)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseFoot button{border-radius:6px;text-transform:uppercase;letter-spacing:.08em;font-size:var(--fs14);font-weight:700}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseSkip{color:var(--sub)}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .miseGo{background:var(--brand);color:var(--onBrand)}
+/* Einkaufsliste heißt Mise en place */
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .pageTitleBlock .h1{font-size:0}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .pageTitleBlock .h1::after{content:"Mise en place";font-size:clamp(2.1rem, 9.5vw, 2.6rem)}
+/* LED-Uhr im Feld */
+.passClock{display:none}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .passClock{position:absolute;left:max(16px, calc(50% - 640px));bottom:44px;display:flex;align-items:center;gap:14px}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcDigits{display:flex;align-items:center;gap:3px;padding:8px 12px;background:#070707;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),inset 0 6px 14px rgba(0,0,0,.8);
+  filter:drop-shadow(0 0 6px rgba(255,59,48,.45))}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .passClock svg{position:static}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcD{width:22px;height:36px;display:block}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcC{width:7px;height:36px;display:block}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcD polygon,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcC circle{fill:var(--led);opacity:.08}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcD polygon.on,html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcC circle.on{opacity:1}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcMeta{display:flex;flex-direction:column;gap:3px;color:var(--onField2);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:1.1}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcMeta b{color:var(--onField);font-weight:700}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .pcMeta i{font-style:normal;font-family:"Skin Insel", ui-monospace, monospace;letter-spacing:.1em}
+html.skin-brigade:not(._a):not(._b):not(._c):not(._d) .scList .passClock{display:none}
