@@ -203,6 +203,23 @@ getrennt (Wunsch des Besitzers).
   kreisendem Lichtkegel, Karten „Akte Nr. 01 …“, Stempel „Gekocht“ (aus `kochbuch.stats`); Brigade = Wärmelampen, Bon-Leiste,
   Küchenrufe als Hinweis beim Abhaken („Gehört, Chef“, „Hinter dir“, „Ecke“ …). Bewegung nur im Kopf, bei „Bewegung
   reduzieren“ alles still.
+  **Mehr Stimmung (Abschnitt 48 · 11, Wunsch „noch viel mehr den Vibe der Serien“, nach taste-skill/impeccable/review-animations):**
+  Szenen neu: Nordwall = Schneefall + Eismauer mit Burg und Fackeln; Zauberschule = Kerzen + Schloss mit erleuchteten Fenstern;
+  Jahr 3000 = Ringplanet, Skyline mit Leuchtschild und Röhrenbahn, fliegendes Auto, **kein Violett** (Feld Nachtblau `#0B1E3B`);
+  Zwei Städte = Kristall, Luftschiff, Rohre der Unterstadt mit Graffiti und grünem Dunst; Insel = Abendrot, Meer mit Wellen,
+  Dschungelblätter, Flugzeugwrack, Luke mit „4 8 15 16 23 42“; Akte = Regen, Nebel, gelegentlicher Blitz, Klippe mit Anstalt,
+  Leuchtturm, dessen **Kegel waagerecht über das Meer streicht** (scaleX-Wechsel, Lampe blitzt auf, wenn er zum Betrachter
+  zeigt – nicht im Kreis nach oben); Brigade = Wärmelampen, hängendes Werkzeug, Bons mit Tischnummern, Dampf.
+  Horizonte (`.scHorizon`) liegen frei unter Schnellknöpfen/Suche (Feld dafür höher: Heute-Karte `margin-top:84px`,
+  `.pageTitleBlock` unten 96 px); auf Listenseiten (`.scList`) rücken Eck-Motive in die Titelzeile. Blattkanten statt runder
+  Ecken: Nordwall gerissenes Pergament, Zauberschule Büttenrand, Insel Brandung, Akte Klemmbrett, Brigade Stahlkante,
+  Jahr 3000 große Rundung mit Mint-Linie. Überschriften: Schwert (Nordwall), Goldschnörkel (Zauberschule), erfundene
+  Schriftzeichen (Jahr 3000), Pinselstrich (Zwei Städte), Stationsschild (Insel), „Betr.:“ (Akte), Malerband (Brigade).
+  Heute-Karte gerahmt (Eisenrahmen, Goldrahmen, Sticker-Versatz, Büroklammer, Klebeband). Stimme (`VOICE` in skins.js):
+  Leertexte, „Heute für dich“ und Timer-Titel je Skin („Heute an der Tafel“, „Hände, Chef!“ …). Verhalten: Zauberschule
+  goldene Funken beim Abhaken/Kochen, Brigade druckt bei „Zur Liste“ einen Bon, Insel-Vorspann nur einmal am Tag (0,9 s,
+  `kochbuch.ui.islandIntro`), Kapsel 0,45 s, „Fotos atmen“ entfernt. Szenen-Bewegung nur per transform/opacity und
+  angehalten, wenn der Kopf weggescrollt ist (`.scPaused`, IntersectionObserver, SMIL `pauseAnimations`).
   **Logo je Skin** (Wunsch des Besitzers): `assets/logos/<skin>.svg` – gleiche Buchform „Zwei Seiten“, Material je Welt
   (Terminal grüne Umrisse mit Zeilen, Diner Neonröhren gelb/mint, Bauhaus Rot/Blau + gelber Kreis, Nordwall Stahl mit Nieten
   und rotem Lesebändchen, Zauberschule Pergament mit Goldkante und Stern, Jahr 3000 mit Umlaufbahn, Zwei Städte Gold mit Hex
