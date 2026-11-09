@@ -462,6 +462,33 @@
 
   function enhance(){ cleanBits(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); }
 
+  // ---------- Kino-Kopf (Three.js + GSAP, assets/cinema/<skin>.js, nur Feld-Seiten, nur mit WebGL) ----------
+  const CINEMA = { nordwall: 1 };
+  let cine = null, cineSkin = null, prevSkin = null;
+  function cinema(){
+    const sk = skin(), changed = prevSkin !== null && prevSkin !== sk;
+    prevSkin = sk;
+    if(cineSkin === sk) return;
+    cine?.stop?.(); cine = null; cineSkin = null;
+    if(!CINEMA[sk] || !document.body.classList.contains("fieldPage")) return;
+    try{ const c = document.createElement("canvas"); if(!(c.getContext("webgl2") || c.getContext("webgl"))) return; }catch{ return; }
+    cineSkin = sk;
+    const intro = changed;
+    // Vorspann erst, wenn das Skin-Blatt geschlossen ist (so lassen sich Skins in Ruhe durchprobieren)
+    const go = ()=> import(`/assets/cinema/${sk}.js?v=${CINEMA[sk]}`).then(m=>{
+      if(skin() !== sk) return;
+      cine = m.start({ home: document.body.classList.contains("layout-home"), reduce: reduce(), intro });
+      if(!cine) cineSkin = null;
+    }).catch(()=>{ cineSkin = null; });
+    if(!intro || !document.body.classList.contains("noScroll")) return go();
+    const mo = new MutationObserver(()=>{
+      if(document.body.classList.contains("noScroll")) return;
+      mo.disconnect();
+      if(skin() === sk && cineSkin === sk && !cine) go();
+    });
+    mo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  }
+
   // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
   const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade"];
   function skinLogo(){
@@ -472,13 +499,14 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=1`;
   }
 
-  function apply(){ mountScene(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); }
+  function apply(){ mountScene(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); cinema(); }
   function init(){
     apply();
     watchProgress();
     watchCook();
     retroBoot();
     addEventListener("kochbuch:cooking", bonClock);
+    addEventListener("kochbuch:sceneresize", sizeScene);
     const fl = $("#freezerList"); if(fl) new MutationObserver(()=>{ clearTimeout(init.f); init.f = setTimeout(cryo, 50); }).observe(fl, { childList: true });
     new MutationObserver(apply).observe(R, { attributes: true, attributeFilter: ["data-skin"] });
     addEventListener("resize", sizeScene, { passive: true });

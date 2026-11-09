@@ -3501,3 +3501,24 @@ html.retro .rbBody img{image-rendering:pixelated}
 html.retro .rbBar{grid-column:1/-1;height:18px;border:2px solid;border-color:#808080 #fff #fff #808080;background:#fff;padding:2px}
 html.retro .rbBar i{display:block;height:100%;transform-origin:0 50%;background:repeating-linear-gradient(90deg,#000080 0 10px,transparent 10px 12px);animation:rbLoad 1.2s steps(12,end) both}
 @keyframes rbLoad{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ==== 13. Kino-Köpfe (Nov. 2026, Wunsch des Besitzers „cineastisch“; Muster: Nordwall) ====
+   Three.js-Szene als festes Canvas hinter dem Feld (assets/cinema/<skin>.js, Quelle tools/cinema/), GSAP für Einblendung,
+   Scrollen (Kamera hebt sich, Titel blendet aus, Heute-Foto weitet sich) und den Vorspann beim Skin-Wechsel. */
+.cineCanvas{position:fixed;left:0;top:0;z-index:-1;display:block;pointer-events:none}
+html.cine .skinScene{display:none}
+.cineW{display:inline-block;white-space:nowrap}
+.cineCh{display:inline-block}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine body.layout-home .homeGreetingTitle{font-weight:600;letter-spacing:.03em;text-shadow:0 2px 28px rgba(5,8,12,.55)}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine body.layout-home .homeGreetingSub{color:rgba(236,230,218,.82);letter-spacing:.02em;text-shadow:0 1px 16px rgba(5,8,12,.6)}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine .pageTitleBlock .h1{text-shadow:0 2px 24px rgba(5,8,12,.55)}
+html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine body.fieldPage :is(.homeQuickBtn,.searchRow input,.fieldExtra input){background:rgba(12,17,23,.42);box-shadow:inset 0 0 0 1px rgba(236,230,218,.16)}
+@media (hover:hover) and (pointer:fine){
+  html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine .homeQuickBtn{transition:box-shadow .3s var(--ease),transform .2s var(--ease)}
+  html.skin-nordwall:not(._a):not(._b):not(._c):not(._d).cine .homeQuickBtn:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1px rgba(255,186,110,.55),0 10px 30px -8px rgba(255,140,50,.45)}
+}
+.cineIntro{position:fixed;inset:0;z-index:8000;display:grid;place-items:center;background:#05080C;cursor:pointer}
+.cineIntroInner{display:flex;flex-direction:column;align-items:center;gap:18px;padding:0 24px;text-align:center}
+.cineIntroWord{font-family:"Skin Nordwall",Georgia,serif;font-size:min(10vw,5.5rem);letter-spacing:.2em;margin-right:-.2em;color:#ECE6DA;line-height:1}
+.cineIntroRule{display:block;width:min(46vw,260px);height:1px;background:linear-gradient(90deg,transparent,#B79C6E,transparent)}
+.cineIntroSub{font-size:var(--fs14);letter-spacing:.18em;color:rgba(236,230,218,.66)}
