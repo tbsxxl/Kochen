@@ -18,6 +18,11 @@ ingredients:
   - { qty: 0.5, unit: "TL", item: "Salz" }
   - { qty: 1, unit: "Pck.", item: "Vanillezucker" }
   - { qty: 200, unit: "g", item: "Schokolade (grob gehackt) oder Nüsse" }
+prep:
+  - { start: "Backofen auf 190 °C Umluft vorheizen" }
+  - "Butter rechtzeitig weich werden lassen"
+  - "Schokolade und Nüsse hacken"
+  - "Bleche mit Backpapier belegen"
 ---
 
 ## Schritte

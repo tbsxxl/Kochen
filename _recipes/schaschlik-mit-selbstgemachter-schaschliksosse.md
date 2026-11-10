@@ -23,6 +23,11 @@ ingredients:
   - { qty: "n. B.", unit: "", item: "Paprikapulver, edelsüß" }
   - { qty: 3, unit: "EL", item: "Öl" }
   - { qty: 150, unit: "ml", item: "Fleischbrühe" }
+prep:
+  - "Schweinenacken, Speck, Zwiebeln und Paprika in grobe Würfel schneiden"
+  - "Spieße stecken"
+  - "Reste von Zwiebeln, Speck und Paprika kleiner würfeln (für die Soße)"
+  - "Fleischbrühe und passierte Tomaten bereitstellen"
 ---
 
 ## Schritte

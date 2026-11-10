@@ -471,6 +471,15 @@ getrennt (Wunsch des Besitzers).
   stehenbleibende Mitteilung „<Name> läuft · Fertig um 18:42 · Rezept“ ab (`notifyRunning()`, Kennung `timer-<id>` wie der
   Ablauf-Push des Workers, der sie dann durch „fertig“ ersetzt); „+1 Min“ aktualisiert sie, Beenden oder Ablauf bei offener App
   schließt sie (`clearRunning()`). Eine sekundengenaue Live-Anzeige (wie iOS-Live-Aktivitäten) können Web-Apps nicht.
+- **Vorbereiten (Mise en place, Dez. 2026, Wunsch des Besitzers):** Im Kochmodus steht vor Schritt 1 die Seite „Vorbereiten“ (Brigade:
+  „Mise en place“) mit drei Gruppen: „Zuerst anstellen“ (Ofen, Wasser), „Schneiden und bereitstellen“, „Erst später dran“ (Teile, die
+  während einer langen Garzeit gemacht werden). Abhaken gilt 12 Std (`kochbuch.ui.prepDone`), „Los geht’s“ → Schritt 1, von Schritt 1
+  führt „Zurück“ wieder hin; beim Weiterkochen erscheint sie nicht. Quelle: Front Matter `prep:` (Liste aus Texten, `{ start: "…" }`,
+  `{ later: "…" }`; im Formular Feld „Vorbereiten“, Zeilen mit „zuerst:“/„später:“), sonst erkennt `assets/prep.js` die Aufgaben aus
+  Schritten (Sätze mit Schneide-Verben ohne Hitze/Zeit, Soßen anrühren nur „in einer Schüssel“) und Zutaten („Zwiebel, gewürfelt“).
+  `node tools/prep-check.js [name] [--steps]` zeigt, was je Rezept erscheint – bei neuen Rezepten ansehen und bei Back-, Frittier- und
+  Mehrtages-Rezepten `prep:` von Hand setzen (27 Rezepte haben es). Reihenfolge der Schritte: was erst spät gebraucht wird, steht
+  auch spät (Short Ribs: erst schmoren, Püree in der letzten Stunde; Nudelwasser erst kurz vor Ende aufsetzen).
 - Kochmodus: Wischen links/rechts; Fortschritt in `cooking` (12 Std). „Kochen läuft“-Kapsel über der unteren Leiste
   (`assets/now-cooking.js`, wie der Mini-Player in Apple Music) auf jeder Seite, solange Fortschritt oder Timer laufen:
   Foto (aus dem Kochmodus, sonst `image` des Timers – `start()` in cook-timer.js speichert `RECIPE_DATA.image`; ältere Timer ohne Foto: grüne Kachel mit Eieruhr), Name, Timer-Restzeit (Eieruhr-SVG), „Schritt n von m“, Fortschritt grün; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt

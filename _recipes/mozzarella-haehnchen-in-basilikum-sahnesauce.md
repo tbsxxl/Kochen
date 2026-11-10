@@ -20,6 +20,12 @@ ingredients:
   - { qty: 125, unit: "g", item: "Mozzarella" }
   - { qty: "optional", unit: "", item: "Parmesan, gerieben" }
   - { qty: "optional", unit: "", item: "Kräuterbutter" }
+prep:
+  - { start: "Backofen auf 200 °C Ober-/Unterhitze (175 °C Umluft) vorheizen" }
+  - "Filets trocken tupfen und würzen"
+  - "Tomaten waschen und halbieren"
+  - "Basilikum abzupfen und fein hacken"
+  - "Mozzarella zerkleinern, Form fetten"
 ---
 
 ## Schritte

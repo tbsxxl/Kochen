@@ -52,6 +52,13 @@ ingredients:
   - { qty: 5, unit: "g", item: "Schnittlauch, fein gehackt" }
   - { section: "Außerdem" }
   - { qty: "", unit: "", item: "Neutrales, hoch erhitzbares Pflanzenöl zum Frittieren" }
+prep:
+  - "Am Vortag: Hähnchen einschneiden und marinieren (Schritte 1–3)"
+  - "Geht auch am Vortag: Hot Honey und Blue-Cheese-Ranch (Schritte 4–6)"
+  - "Trockene Panade mischen"
+  - "Flüssige Panade anrühren"
+  - "Blech mit Gitter zum Abtropfen bereitstellen"
+  - { later: "Öl auf 185 °C erhitzen, sobald alles paniert bereitliegt" }
 ---
 
 ## Schritte

@@ -19,6 +19,10 @@ ingredients:
   - { qty: 1, unit: "", item: "Ei, groß (leicht geschlagen)" }
   - { qty: "n. B.", unit: "", item: "Salz" }
   - { qty: "n. B.", unit: "", item: "Mehl zum Ausrollen" }
+prep:
+  - "Milch lauwarm erwärmen (für die Hefe)"
+  - "Mehl, Salz und Backpulver abwiegen"
+  - "Joghurt und Ei aus dem Kühlschrank nehmen"
 ---
 
 ## Schritte

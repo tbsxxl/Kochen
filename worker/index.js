@@ -691,6 +691,11 @@ function buildMarkdown(r, imagePath, date, author){
     const qty = typeof i.qty === "number" ? String(i.qty) : q(i.qty);
     lines.push(`  - { qty: ${qty}, unit: ${q(i.unit)}, item: ${q(i.item)} }`);
   }
+  // Vorbereiten (Kochmodus, vor Schritt 1): Aufgaben, „start“ = gleich anstellen, „later“ = erst während des Kochens
+  if(r.prep && r.prep.length){
+    lines.push("prep:");
+    for(const p of r.prep) lines.push(p.kind === "task" ? `  - ${q(p.text)}` : `  - { ${p.kind}: ${q(p.text)} }`);
+  }
   // Bearbeiten: Zubereitung wird als Markdown-Text 1:1 übernommen
   if(r.markdown){ lines.push("---", "", r.markdown, ""); return lines.join("\n"); }
   lines.push("---", "", "## Schritte");
@@ -726,7 +731,8 @@ function validateRecipe(b){
     categories: list(b.categories, 10, 60).filter(c => c !== category),
     tags: list(b.tags, 20, 40),
     time: clean(b.time, 160),
-    notes: clean(b.notes, 3000)
+    notes: clean(b.notes, 3000),
+    prep: (Array.isArray(b.prep) ? b.prep : []).map(p => ({ kind: ["start", "later"].includes(p && p.kind) ? p.kind : "task", text: clean(p && p.text, 200).replace(/\s*\n\s*/g, " ") })).filter(p => p.text).slice(0, 30)
   };
 }
 

@@ -19,6 +19,11 @@ ingredients:
   - { qty: "optional", unit: "", item: "Grüne Paprika" }
   - { qty: "optional", unit: "", item: "Champignons" }
   - { qty: "optional", unit: "", item: "Jalapeños" }
+prep:
+  - { start: "Fleisch 30–45 Min anfrieren" }
+  - "Fleisch in sehr feine Streifen schneiden"
+  - "Zwiebel in feine Streifen schneiden"
+  - "Brötchen längs aufschneiden, Käse bereitlegen"
 ---
 
 ## Schritte

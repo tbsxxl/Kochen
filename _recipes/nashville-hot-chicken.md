@@ -35,6 +35,12 @@ ingredients:
   - { section: "Zum Servieren" }
   - { qty: 8, unit: "Stk.", item: "Toastbrot-Scheiben" }
   - { qty: 24, unit: "Stk.", item: "Essiggurken-Scheiben" }
+prep:
+  - "Mind. 4 Std vorher: Hähnchen in Buttermilch marinieren"
+  - "Panade mischen"
+  - "Gewürze für die Cayenne-Glasur in einer hitzefesten Schüssel abwiegen"
+  - "Gitter zum Abtropfen, Toastbrot und Essiggurken bereitlegen"
+  - { later: "Öl auf 165 °C erhitzen, während die Panade anzieht" }
 ---
 
 ## Schritte

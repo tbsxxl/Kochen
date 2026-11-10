@@ -20,6 +20,11 @@ ingredients:
   - { qty: 1, unit: "Kugel", item: "Mozzarella" }
   - { qty: "n. B.", unit: "", item: "Salz" }
   - { qty: "n. B.", unit: "", item: "Pfeffer" }
+prep:
+  - { start: "Backofen auf 175 °C Umluft vorheizen" }
+  - "Mozzarella in Scheiben schneiden"
+  - "Soße anrühren: Tomaten, Sahne, Kräuter, Tomatenmark und Zucker"
+  - { later: "Reis kochen, während die Bällchen im Ofen sind" }
 ---
 
 ## Schritte

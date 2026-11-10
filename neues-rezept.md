@@ -85,6 +85,10 @@ permalink: /neues-rezept/
     <label class="fieldLabel" for="stepsIn">Schritte – einer pro Zeile</label>
     <textarea class="codeArea uploadArea" id="stepsIn" rows="8" placeholder="Knoblauch hacken und in Olivenöl anschwitzen.&#10;Tomaten dazugeben und 10 Min köcheln lassen.&#10;…"></textarea>
 
+    <label class="fieldLabel" for="prepIn">Vorbereiten (optional) – eine Aufgabe pro Zeile</label>
+    <textarea class="codeArea uploadArea" id="prepIn" rows="4" placeholder="Zwiebel würfeln&#10;zuerst: Backofen auf 200 °C vorheizen&#10;später: Kartoffeln schälen, während das Fleisch schmort"></textarea>
+    <div class="fieldHint">Erscheint im Kochmodus vor Schritt 1. Leer lassen: die App liest die Vorbereitung selbst aus den Schritten. „zuerst:“ = gleich anstellen, „später:“ = erst während des Kochens.</div>
+
     <label class="fieldLabel" for="notesIn">Tipps (optional)</label>
     <textarea class="codeArea uploadArea" id="notesIn" rows="3" placeholder="z. B. Schmeckt auch mit Mozzarella."></textarea>
   </div>

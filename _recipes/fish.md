@@ -31,6 +31,14 @@ ingredients:
   - { qty: 1, unit: "TL", item: "Kapern, gehackt" }
   - { qty: "Prise", unit: "", item: "Salz" }
   - { qty: "Prise", unit: "", item: "Schwarzer Pfeffer" }
+prep:
+  - "Teig anrühren und 30–60 Min kalt stellen"
+  - "Kartoffeln schälen und in 1 cm dicke Stifte schneiden"
+  - "Tartarsoße: Gurken, Kapern und Zwiebel fein hacken, alles verrühren und kalt stellen"
+  - "Fischfilets trocken tupfen und leicht salzen, 2 EL Mehl zum Wenden bereitstellen"
+  - "Küchenpapier und Gitter zum Abtropfen bereitlegen"
+  - { later: "Backofen auf 95 °C stellen (zum Warmhalten)" }
+  - { later: "Frittieröl auf 175 °C erhitzen, wenn alles bereitsteht" }
 ---
 
 ## Schritte

@@ -32,6 +32,13 @@ ingredients:
   - { qty: 150, unit: "ml", item: "Sahne" }
   - { section: "Zum Servieren" }
   - { qty: "optional", unit: "", item: "Korianderblätter" }
+prep:
+  - "Mind. 1 Std vorher (besser am Vortag): Hähnchen schneiden und marinieren"
+  - { start: "Ofen auf 200 °C Ober-/Unterhitze vorheizen" }
+  - "Zwiebel fein hacken"
+  - "Ingwer und Knoblauch für die Soße vorbereiten"
+  - "Passierte Tomaten, Sahne, Butter und Honig abmessen"
+  - { later: "Reis kochen oder Naan aufbacken, während die Soße köchelt" }
 ---
 
 ## Schritte

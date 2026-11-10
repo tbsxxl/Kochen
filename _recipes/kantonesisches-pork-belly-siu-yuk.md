@@ -21,6 +21,11 @@ ingredients:
   - { qty: 1, unit: "TL", item: "Knoblauchsalz" }
   - { qty: 0.5, unit: "TL", item: "Salz, für die Würzmischung" }
   - { qty: 1, unit: "EL", item: "grobes Meersalz, zum Auflegen auf die Schwarte" }
+prep:
+  - "Am Vortag: blanchieren, einstechen, würzen und mind. 12 Std im Kühlschrank trocknen (Schritte 1–5)"
+  - "Schüssel mit Eiswasser, Gitter, dünnen Spieß und Alufolie bereitlegen"
+  - "Gewürzmischung mit dem Kochwein anrühren"
+  - { later: "Am Serviertag: Backofen auf 190 °C vorheizen, 200 ml Wasser für die Fettpfanne abmessen" }
 ---
 
 ## Schritte
