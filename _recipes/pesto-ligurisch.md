@@ -15,6 +15,10 @@ ingredients:
   - { qty: 0.5, unit: "TL", item: "Salz" }
   - { qty: 200, unit: "ml", item: "Olivenöl, extra vergine" }
   - { qty: 2, unit: "EL", item: "Parmesan, frisch gerieben" }
+prep:
+  - "Parmesan frisch reiben"
+  - "Basilikumblätter abzupfen"
+  - "Sauberes Glas bereitstellen"
 ---
 
 ## Schritte

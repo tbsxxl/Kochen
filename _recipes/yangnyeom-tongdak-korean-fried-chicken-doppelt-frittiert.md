@@ -28,6 +28,12 @@ ingredients:
   - { section: "Zum Servieren" }
   - { qty: 1, unit: "EL", item: "Sesam, geröstet" }
   - { qty: "optional", unit: "", item: "Chicken-mu (eingelegter Rettich)" }
+prep:
+  - { start: "Öl (ca. 5 cm hoch) auf 165–175 °C erhitzen" }
+  - "Wings mit Salz, Pfeffer, Stärke, Mehl, Natron und Eiern vermengen"
+  - "Knoblauch fein hacken"
+  - "Ketchup, Reissirup, Gochujang und Essig für die Soße abmessen"
+  - "Gitter zum Abtropfen bereitstellen"
 ---
 
 ## Schritte

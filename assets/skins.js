@@ -361,28 +361,7 @@
     el.textContent = `BON ${new Date(c?.t || Date.now()).toLocaleTimeString("de-DE", { hour:"2-digit", minute:"2-digit" })} · TISCH 1`;
   }
 
-  // Brigade: Mise en place vor dem Kochen – alle Zutaten einmal abhaken („Alles da, Chef?“)
-  let misePassed = false;
-  document.addEventListener("click", (e)=>{
-    const btn = e.target.closest("#cookingModeQuick");
-    if(!btn || skin() !== "brigade" || misePassed || !window.RECIPE_DATA) return;
-    e.preventDefault(); e.stopImmediatePropagation();
-    const secOf = window.KOCHBUCH_UTILS?.sectionOf || ((i)=> i && i.section);
-    const ings = (window.RECIPE_DATA.ingredients || []).map(i=> typeof i === "string" ? { item: i } : i).filter(i=> i && !secOf(i));
-    const ov = bit("miseOverlay", "brigade");
-    ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-labelledby", "miseTitle");
-    ov.innerHTML = `<div class="miseCard"><div class="miseHead"><b id="miseTitle">Mise en place</b><span>${esc2(window.RECIPE_DATA.title)}</span></div>
-      <ul class="miseList">${ings.map((i, n)=> `<li><label><input type="checkbox"><span>${esc2([i.qty, i.unit].filter(Boolean).join(" "))}</span><em>${esc2(i.item)}</em></label></li>`).join("")}</ul>
-      <div class="miseFoot"><span class="miseCount">0 von ${ings.length}</span><button type="button" class="miseSkip">Überspringen</button><button type="button" class="miseGo">Alles da, Chef</button></div></div>`;
-    document.body.appendChild(ov);
-    const go = ()=>{ ov.remove(); misePassed = true; btn.click(); setTimeout(()=> misePassed = false, 500); };
-    const upd = ()=>{ const n = ov.querySelectorAll("input:checked").length; ov.querySelector(".miseCount").textContent = `${n} von ${ings.length}`; ov.classList.toggle("isReady", n === ings.length); };
-    ov.addEventListener("change", upd);
-    ov.querySelector(".miseGo").addEventListener("click", go);
-    ov.querySelector(".miseSkip").addEventListener("click", go);
-    ov.addEventListener("click", (ev)=>{ if(ev.target === ov) ov.remove(); });
-    ov.querySelector(".miseGo").focus({ preventScroll: true });
-  }, true);
+  // Brigade: die frühere Zutaten-Schranke vor dem Kochmodus ist entfallen – „Vorbereiten“ im Kochmodus (recipe.js) übernimmt das für alle Skins.
 
   // Die Insel: „Überrasch mich“ startet einen Countdown mit Klappziffern
   document.addEventListener("click", (e)=>{

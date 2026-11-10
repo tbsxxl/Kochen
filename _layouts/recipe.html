@@ -12,6 +12,7 @@ layout: default
     baseServings: {{ page.servings | default: 1 | jsonify }},
     ingredients: {{ page.ingredients | jsonify }},
     category: {{ page.category | default: "" | jsonify }},
+    prep: {{ page.prep | default: nil | jsonify }},
     mealPrep: {% if page.category == "Meal Prep" or page.categories contains "Meal Prep" %}true{% else %}false{% endif %}
   };
 </script>
@@ -281,6 +282,8 @@ layout: default
 
   <div class="cookBody" id="cookBody">
     <div class="cookPanel" id="cookPanelSteps" role="tabpanel">
+      <!-- Vorbereiten (Mise en place): vor Schritt 1, Inhalt aus assets/prep.js bzw. `prep:` im Front Matter -->
+      <div class="cookPrep" id="cookPrep" hidden></div>
       <div class="cookStep" id="cookStepText" aria-live="polite"></div>
       <div class="cookStepIngs" id="cookStepIngs" hidden>
         <div class="cookStepIngsLabel">Dafür brauchst du</div>
@@ -303,6 +306,7 @@ layout: default
 </div>
 
 
+<script defer src="{{ '/assets/prep.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script defer src="{{ '/assets/recipe.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script defer src="{{ '/assets/recipe-pdf.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 

@@ -24,6 +24,11 @@ ingredients:
   - { qty: 2, unit: "EL", item: "Milch" }
   - { qty: 2, unit: "EL", item: "Wasser" }
   - { qty: "n. B.", unit: "", item: "Sesam" }
+prep:
+  - "Butter weich werden lassen"
+  - "Mehl, Zucker und Salz abwiegen"
+  - { later: "Backofen auf 200 °C vorheizen, während die Teiglinge zum zweiten Mal gehen" }
+  - { later: "Ei mit Wasser und Milch verquirlen (zum Bestreichen)" }
 ---
 
 ## Schritte

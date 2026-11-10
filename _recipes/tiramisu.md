@@ -16,6 +16,10 @@ ingredients:
   - { qty: 200, unit: "g", item: "Löffelbiskuits (ca., je nach Form)" }
   - { qty: 200, unit: "ml", item: "Espresso oder starker Kaffee, abgekühlt" }
   - { qty: 4, unit: "EL", item: "Kakaopulver, ungesüßt" }
+prep:
+  - { start: "Espresso kochen und vollständig abkühlen lassen" }
+  - "Eier trennen"
+  - "Form bereitstellen"
 ---
 
 ## Schritte

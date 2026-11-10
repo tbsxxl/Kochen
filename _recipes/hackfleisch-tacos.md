@@ -25,6 +25,11 @@ ingredients:
   - { qty: 4, unit: "Blätter", item: "Eisbergsalat, zerkleinert" }
   - { qty: 190, unit: "g", item: "Cheddar, gerieben" }
   - { qty: 100, unit: "g", item: "Salsa (Tomatensalsa)" }
+prep:
+  - { start: "Backofen auf 180 °C Ober-/Unterhitze vorheizen" }
+  - "Zwiebel fein würfeln, Knoblauch hacken"
+  - "Gewürze in einem Schälchen abmessen"
+  - "Salat zerkleinern, Cheddar reiben, Salsa bereitstellen"
 ---
 
 ## Schritte

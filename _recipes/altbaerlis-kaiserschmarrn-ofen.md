@@ -19,6 +19,11 @@ ingredients:
   - { qty: 50, unit: "g", item: "Rosinen, in Rum eingelegt" }
   - { qty: 30, unit: "g", item: "Zucker zum Karamellisieren" }
   - { qty: "n. B.", unit: "", item: "Puderzucker zum Bestreuen" }
+prep:
+  - { start: "Backofen auf 200 °C Ober-/Unterhitze vorheizen" }
+  - "Eier trennen"
+  - "Mehl, Milch und Zucker abwiegen"
+  - "Ofenfeste Pfanne bereitstellen"
 ---
 
 ## Schritte

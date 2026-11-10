@@ -25,6 +25,13 @@ ingredients:
   - { qty: 1, unit: "Handvoll", item: "Rucola" }
   - { qty: "n. B.", unit: "", item: "Frisch geriebener Parmesan" }
   - { qty: 1, unit: "EL", item: "Hochwertiges Olivenöl" }
+prep:
+  - "Am Vortag: Teig kneten und 24 Std im Kühlschrank reifen lassen"
+  - "2–3 Std vorher: Teiglinge portionieren und bei Raumtemperatur entspannen lassen"
+  - { start: "Ofen mit Stein oder Stahl auf höchster Stufe mind. 45 Min vorheizen" }
+  - "Tomaten zerdrücken und salzen"
+  - "Mozzarella abtropfen lassen und zupfen"
+  - "Parmaschinken, Rucola und Parmesan bereitlegen"
 ---
 
 ## Schritte

@@ -23,6 +23,12 @@ ingredients:
   - { qty: 30, unit: "ml", item: "Bourbon" }
   - { qty: 30, unit: "g", item: "ungesalzene Butter" }
   - { qty: 1, unit: "l", item: "neutrales Öl, zum Confieren" }
+prep:
+  - "1–2 Tage vorher: Schweinebauch trockenpökeln (6–12 Std)"
+  - "Am Vortag: Glasur einkochen, Bauch 6–8 Std bei 90 °C garen und über Nacht kühlen"
+  - { start: "Am Serviertag: Backofen auf 140 °C vorheizen" }
+  - "Kalten Bauch in 4 cm große Würfel schneiden"
+  - "Bourbon und Butter für die Glasur bereitstellen"
 ---
 
 ## Schritte

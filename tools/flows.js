@@ -56,6 +56,13 @@ const RECIPES = fs.readdirSync(path.join(__dirname, '..', '_recipes')).filter(f 
   check(await page.evaluate(() => !localStorage.getItem('kochbuch.ui.cooking')), 'Kochmodus: bloßes Öffnen merkt sich schon Fortschritt');
   await page.tap('#cookingModeQuick'); await page.waitForTimeout(300);
   check(await page.evaluate(() => document.querySelector('#cookOverlay')?.classList.contains('open')), 'Kochmodus öffnet nicht');
+  // Vorbereiten-Seite (Mise en place) vor Schritt 1: Aufgaben abhaken, „Los geht’s“ führt zu Schritt 1
+  check((await page.textContent('#cookStepPill')) === 'Vorbereiten', 'Kochmodus: Vorbereiten-Seite fehlt');
+  check(await page.locator('#cookPrep .prepRow').count() > 0, 'Vorbereiten: keine Aufgaben');
+  await page.tap('#cookPrep .prepRow'); await page.waitForTimeout(100);
+  check(await page.locator('#cookPrep .prepRow.isDone').count() === 1, 'Vorbereiten: Abhaken geht nicht');
+  await page.tap('#cookNext'); await page.waitForTimeout(150);
+  check((await page.textContent('#cookStepPill'))?.startsWith('1/'), 'Vorbereiten: „Los geht’s“ führt nicht zu Schritt 1');
   await page.tap('#cookNext'); await page.waitForTimeout(150);
   check((await page.textContent('#cookStepPill'))?.startsWith('2/'), 'Kochmodus: „Weiter“ geht nicht zu Schritt 2');
   await page.tap('#cookClose'); await page.waitForTimeout(300);

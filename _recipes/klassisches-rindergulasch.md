@@ -21,6 +21,12 @@ ingredients:
   - { qty: 0.5, unit: "TL", item: "Majoran, getrocknet" }
   - { qty: 1, unit: "Msp.", item: "Cayennepfeffer" }
   - { qty: 1, unit: "Prise", item: "Salz" }
+prep:
+  - { start: "Fleisch 30 Min vorher aus dem Kühlschrank nehmen" }
+  - "Fleisch in 3 × 3 cm Stücke schneiden"
+  - "Schalotten schälen und halbieren"
+  - "Knoblauch fein würfeln, Zitrone abreiben"
+  - "Rotwein und Fond abmessen, Gewürze bereitstellen"
 ---
 
 ## Schritte

@@ -532,8 +532,66 @@ const cookOverlay = $("#cookOverlay");
     }, 16);
   }
 
+  // ---------- Vorbereiten (Mise en place): Seite vor Schritt 1 ----------
+  // Zeigt, was sich vor dem Kochen erledigen lässt (schneiden, abwiegen, Ofen/Wasser anstellen) und was erst später dran ist.
+  // Quelle: `prep:` im Front Matter, sonst erkannt aus Schritten und Zutaten (assets/prep.js). Haken gelten 12 Stunden.
+  const cookPrep = $("#cookPrep");
+  const PREP_KEY = "kochbuch.ui.prepDone";
+  let prepMode = false, prepData = null;
+  function prepGroups(){
+    if(prepData) return prepData;
+    const ings = (data.ingredients || []).filter((i)=> i && i.item);
+    try{ prepData = window.KOCHBUCH_PREP ? window.KOCHBUCH_PREP.build({ steps, ingredients: ings, prep: data.prep }) : null; }catch{ prepData = null; }
+    prepData = prepData || { start: [], tasks: [], later: [] };
+    prepData.count = prepData.start.length + prepData.tasks.length + prepData.later.length;
+    return prepData;
+  }
+  const hasPrep = ()=> prepGroups().count > 0;
+  function prepDone(){ const e = (ls.get(PREP_KEY, {}) || {})[data.id]; return e && Date.now() - e.t < 12 * 3600e3 ? e.done : []; }
+  function renderPrep(){
+    if(!cookPrep) return;
+    const g = prepGroups(), done = new Set(prepDone());
+    const CHECK = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    const row = (t, k)=> `<button type="button" class="prepRow${done.has(k) ? " isDone" : ""}" role="checkbox" aria-checked="${done.has(k)}" data-k="${k}"><span class="prepBox">${CHECK}</span><span class="prepText">${escHtml(t.text)}</span></button>`;
+    const group = (title, list, pre)=> list.length ? `<div class="prepGroup prepGroup-${pre}"><div class="prepGroupTitle">${title}</div>${list.map((t, i)=> row(t, pre + i)).join("")}</div>` : "";
+    const todo = g.start.length + g.tasks.length;
+    cookPrep.innerHTML = `<div class="prepHead"><h2 class="prepTitle">${document.documentElement.classList.contains("skin-brigade") ? "Mise en place" : "Vorbereiten"}</h2><p class="prepSub">Erst alles bereitstellen, dann kochen. So muss am Herd nichts mehr schnell geschnitten werden.</p></div>
+      ${group("Zuerst anstellen", g.start, "s")}${group("Schneiden und bereitstellen", g.tasks, "t")}${group("Erst später dran", g.later, "l")}
+      <div class="prepCount" aria-live="polite">${todo ? `${[...done].filter((k)=> k[0] !== "l").length} von ${todo} erledigt` : ""}</div>`;
+  }
+  cookPrep?.addEventListener("click", (e)=>{
+    const r = e.target.closest(".prepRow"); if(!r) return;
+    const all = ls.get(PREP_KEY, {}) || {}, set = new Set(prepDone());
+    set.has(r.dataset.k) ? set.delete(r.dataset.k) : set.add(r.dataset.k);
+    all[data.id] = { t: Date.now(), done: [...set] };
+    // alte Einträge anderer Rezepte verfallen lassen
+    for(const k of Object.keys(all)) if(Date.now() - all[k].t > 12 * 3600e3) delete all[k];
+    ls.set(PREP_KEY, all);
+    lightTap(); renderPrep();
+    cookPrep.querySelector(`[data-k="${r.dataset.k}"]`)?.focus({ preventScroll: true });
+  });
+  function showPrep(on){
+    prepMode = !!on && hasPrep();
+    if(cookPrep) cookPrep.hidden = !prepMode;
+    cookOverlay?.classList.toggle("isPrep", prepMode);
+    if(prepMode) renderPrep();
+    renderCookStep();
+  }
+
   function renderCookStep(){
     if(!cookStepText || !cookStepPill) return;
+    if(prepMode){
+      cookStepText.hidden = true;
+      if(cookStepIngs) cookStepIngs.hidden = true;
+      const np = $("#cookNextPreview"); if(np) np.hidden = true;
+      cookStepPill.textContent = "Vorbereiten";
+      cookStepPill.setAttribute("aria-label", "Vorbereiten, vor Schritt 1");
+      if(cookProgressBar) cookProgressBar.style.transform = "scaleX(0)";
+      if(cookPrev) cookPrev.disabled = true;
+      if(cookNext){ cookNext.innerHTML = "Los geht’s" + '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'; cookNext.dataset.last = ""; }
+      return;
+    }
+    cookStepText.hidden = false;
     const total = steps.length || 1;
     stepIdx = Math.max(0, Math.min(total-1, stepIdx));
     if(T) cookStepText.innerHTML = T.linkify(steps[stepIdx] || '—');
@@ -555,7 +613,7 @@ const cookOverlay = $("#cookOverlay");
       nextPrev.hidden = !nx;
       nextText.textContent = nx || '';
     }
-    if(cookPrev) cookPrev.disabled = stepIdx===0;
+    if(cookPrev) cookPrev.disabled = stepIdx===0 && !hasPrep();
     if(cookNext){
       const last = stepIdx>=total-1;
       cookNext.innerHTML = last ? 'Fertig<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' : 'Weiter<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -638,7 +696,9 @@ const cookOverlay = $("#cookOverlay");
     cookOverlay.setAttribute('aria-hidden','false');
     document.body.classList.add('noScroll');
     renderCookIngredients();
-    renderCookStep();
+    prepData = null;
+    // Neu begonnen (kein gemerkter Fortschritt) → erst die Vorbereiten-Seite
+    showPrep(stepIdx === 0 && !(ls.get(COOK_KEY, null)?.id === data.id));
     requestWakeLock();
     window.dispatchEvent(new CustomEvent("kochbuch:cookmode", { detail: { open: true } }));
   }
@@ -664,8 +724,9 @@ const cookOverlay = $("#cookOverlay");
   cookingQuick?.addEventListener('click', openCook);
   cookClose?.addEventListener('click', closeCook);
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
-  cookPrev?.addEventListener('click', ()=>{ stepIdx--; renderCookStep(); lightTap(); });
+  cookPrev?.addEventListener('click', ()=>{ if(stepIdx === 0){ showPrep(true); lightTap(); return; } stepIdx--; renderCookStep(); lightTap(); });
   cookNext?.addEventListener('click', ()=>{
+    if(prepMode){ showPrep(false); lightTap(); return; }
     if(cookNext.dataset.last){ try{ localStorage.removeItem(COOK_KEY); }catch{} closeCook(); markCooked(); successTap(); window.dispatchEvent(new Event("kochbuch:cooking"));
       // kleiner Abschluss: der „Kochen“-Knopf poppt kurz auf, die Gekocht-Zeile blinkt einmal
       setTimeout(()=>{ pop(cookingQuick); flash(statsLine); }, 280);
@@ -685,8 +746,10 @@ const cookOverlay = $("#cookOverlay");
     const dx = t.clientX - swipeX, dy = t.clientY - swipeY;
     swipeX = null;
     if(Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if(prepMode){ if(dx < 0){ showPrep(false); lightTap(); } return; }
     if(dx < 0 && stepIdx < steps.length - 1){ stepIdx++; renderCookStep(); lightTap(); }
     else if(dx > 0 && stepIdx > 0){ stepIdx--; renderCookStep(); lightTap(); }
+    else if(dx > 0 && stepIdx === 0 && hasPrep()){ showPrep(true); lightTap(); }
   }, { passive: true });
 
   cookTabSteps?.addEventListener('click', ()=>{ setTab('steps'); lightTap(); });

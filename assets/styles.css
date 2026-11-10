@@ -4464,3 +4464,26 @@ html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .r
 @keyframes ivTest{0%{opacity:1}50%{opacity:.15}}
 @keyframes ivPrint{to{clip-path:inset(0 0 0 0)}}
 @media (prefers-reduced-motion: reduce){ .skIntro{display:none} }
+
+/* ==== 20. Vorbereiten (Mise en place) im Kochmodus (Dez. 2026, Wunsch des Besitzers): Seite vor Schritt 1 mit allem, was sich
+   vor dem Kochen erledigen lässt; „Erst später dran“ für Teile, die während einer langen Garzeit gemacht werden. ==== */
+.cookPrep{display:flex;flex-direction:column;gap:16px;padding-bottom:8px}
+.cookPrep[hidden]{display:none}
+.prepHead{padding:16px;background:var(--cCard);border-radius:var(--rList,16px)}
+.prepTitle{margin:0;font-family:var(--fontDisplay);font-size:var(--fs28);font-weight:600;line-height:1.15;color:var(--cText)}
+.prepSub{margin:6px 0 0;font-size:var(--fs16);line-height:1.4;color:var(--cSub)}
+.prepGroup{background:var(--cCard);border-radius:var(--rList,16px);overflow:hidden}
+.prepGroupTitle{padding:12px 16px 4px;font-size:var(--fs14);font-weight:600;color:var(--cSub)}
+.prepRow{display:flex;align-items:flex-start;gap:12px;width:100%;min-height:52px;padding:13px 16px;border:0;background:none;color:var(--cText);font:inherit;font-size:var(--fs18);line-height:1.35;text-align:left;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+.prepRow + .prepRow{box-shadow:inset 0 1px 0 var(--cLine)}
+.prepBox{display:grid;place-items:center;flex:none;width:26px;height:26px;margin-top:-1px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--cSub);color:transparent;transition:background-color .15s var(--ease),box-shadow .15s var(--ease)}
+.prepBox .ico{width:16px;height:16px}
+.prepRow.isDone .prepBox{background:var(--cLeaf);box-shadow:none;color:var(--cOnLeaf)}
+.prepRow.isDone .prepText{color:var(--cSub);text-decoration:line-through;text-decoration-thickness:1px}
+.prepRow:focus-visible{outline:2px solid var(--cLeaf);outline-offset:-2px}
+.prepGroup-l .prepBox{border-radius:8px}
+.prepGroup-l .prepGroupTitle::after{content:" – nicht jetzt";font-weight:400}
+.prepCount{padding:0 4px;font-size:var(--fs14);color:var(--cSub);font-variant-numeric:tabular-nums}
+.cookOverlay.isPrep .cookProgress{opacity:.35}
+@media (min-width:768px){ .cookOverlay.isPrep .cookPrep{max-width:640px} .prepRow{font-size:var(--fs22)} }

@@ -17,6 +17,10 @@ ingredients:
   - { qty: 7, unit: "g", item: "Backpulver (½ Päckchen)" }
   - { qty: 8, unit: "g", item: "Vanillezucker (1 Päckchen)" }
   - { qty: "optional", unit: "", item: "Zimt, Kakaopulver oder Kokosraspeln" }
+prep:
+  - "Butter weich werden lassen"
+  - "Mehl, Zucker und Milch abmessen"
+  - { later: "Waffeleisen vorheizen, sobald der Teig fertig ist" }
 ---
 
 ## Schritte

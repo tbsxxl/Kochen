@@ -21,6 +21,14 @@ ingredients:
   - { qty: 500, unit: "g", item: "Spaghetti, getrocknet" }
   - { qty: "n. B.", unit: "", item: "Parmesan, frisch gerieben" }
   - { qty: "n. B.", unit: "", item: "Natives Olivenöl extra" }
+prep:
+  - { start: "Backofen auf 180 °C (Umluft 160 °C) vorheizen" }
+  - "Knoblauch und Zwiebel fein hacken"
+  - "Rosmarinnadeln abzupfen und fein schneiden"
+  - "Speck in feine Streifen schneiden"
+  - "Getrocknete Tomaten abtropfen lassen und pürieren"
+  - { later: "Nudelwasser aufsetzen – etwa 15 Min bevor die Bolognese fertig ist" }
+  - { later: "Parmesan reiben" }
 ---
 
 ## Schritte

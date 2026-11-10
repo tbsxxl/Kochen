@@ -27,6 +27,13 @@ ingredients:
   - { qty: "n. B.", unit: "", item: "Salz" }
   - { qty: 350, unit: "ml", item: "Wasser" }
   - { qty: 1, unit: "EL", item: "Butter" }
+prep:
+  - { start: "350 ml Wasser im Wasserkocher erhitzen" }
+  - { start: "Backofen auf 220 °C Ober-/Unterhitze (200 °C Umluft) vorheizen" }
+  - "Zwiebel und Knoblauch fein hacken"
+  - "Karotte schälen und in 1 cm Scheiben schneiden"
+  - "Kürbis entkernen und in 2 cm Würfel schneiden"
+  - { later: "Blätterteig-Schnecken füllen, rollen und backen, während die Suppe köchelt" }
 ---
 
 ## Schritte

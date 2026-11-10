@@ -34,6 +34,13 @@ ingredients:
   - { section: "Gastrique" }
   - { qty: 100, unit: "g", item: "Balsamicoessig" }
   - { qty: 50, unit: "g", item: "Zucker" }
+prep:
+  - { start: "Backofen auf 120 °C vorheizen" }
+  - "Zwiebeln, Karotten und Staudensellerie sehr fein würfeln"
+  - "Pancetta und Schweinebauch würfeln"
+  - "Knoblauch fein reiben"
+  - "Passata, Fond, Rotwein und Milch abmessen"
+  - { later: "Gastrique kochen (Balsamico und Zucker), kurz bevor das Ragù aus dem Ofen kommt" }
 ---
 
 ## Schritte

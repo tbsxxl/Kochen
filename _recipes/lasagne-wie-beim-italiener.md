@@ -31,6 +31,13 @@ ingredients:
   - { qty: 300, unit: "g", item: "Lasagneplatten" }
   - { qty: "n. B.", unit: "", item: "Käse, gerieben" }
   - { qty: "n. B.", unit: "", item: "Butterflöckchen" }
+prep:
+  - "Zwiebel hacken, Knoblauch in feine Scheiben schneiden"
+  - "Petersilie hacken"
+  - "Milch, Butter und Mehl für die Béchamel abwiegen"
+  - "Käse reiben, Form buttern"
+  - { later: "Béchamel kochen, während das Ragù einkocht" }
+  - { later: "Backofen auf 180 °C Umluft vorheizen, bevor geschichtet wird" }
 ---
 
 ## Schritte

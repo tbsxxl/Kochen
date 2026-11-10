@@ -17,6 +17,10 @@ ingredients:
   - { qty: 1, unit: "TL", item: "Oregano" }
   - { qty: 0.5, unit: "TL", item: "Salz" }
   - { qty: 1, unit: "Prise", item: "schwarzer Pfeffer aus der Mühle" }
+prep:
+  - "2 Std vorher: Fleisch schneiden und marinieren (Schritte 1–3)"
+  - "Holzspieße 10 Min. in Wasser einweichen"
+  - { later: "Tzatziki und Krautsalat anrichten, während die Spieße grillen" }
 ---
 
 ## Schritte

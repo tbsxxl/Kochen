@@ -179,7 +179,13 @@
   });
 
   // ---------- Entwurf ----------
-  const FIELDS = ["titleIn","subtitleIn","sourceIn","catIn","timeIn","servIn","tagsIn","ingIn","stepsIn","notesIn"];
+  const FIELDS = ["titleIn","subtitleIn","sourceIn","catIn","timeIn","servIn","tagsIn","ingIn","stepsIn","prepIn","notesIn"];
+  // Vorbereiten: eine Aufgabe pro Zeile; „zuerst:“ = gleich anstellen, „später:“ = erst während des Kochens
+  const prepLines = ()=> ($("#prepIn")?.value || "").split(/\n+/).map((l)=> l.replace(/^\s*[-•*]\s+/, "").trim()).filter(Boolean).map((l)=>{
+    const m = l.match(/^(zuerst|später|spaeter)\s*:\s*(.+)$/i);
+    return m ? { kind: /^zuerst/i.test(m[1]) ? "start" : "later", text: m[2] } : { kind: "task", text: l };
+  });
+  const prepText = (list)=> (Array.isArray(list) ? list : []).map((p)=> typeof p === "string" ? p : p && p.start ? "zuerst: " + p.start : p && p.later ? "später: " + p.later : (p && p.text) || "").filter(Boolean).join("\n");
 
   // ---------- Stichwörter zum Antippen (Liste aus _data/tags.yml) ----------
   const tagList = ()=> $("#tagsIn").value.split(",").map(s=>s.trim()).filter(Boolean);
@@ -236,6 +242,7 @@
       steps: editing ? [] : steps(),
       markdown: editing ? $("#stepsIn").value.trim() : undefined,
       notes: editing ? "" : $("#notesIn").value.trim(),
+      prep: prepLines(),
       image: photo || undefined
     };
     if(!payload.title) return showErr("Bitte einen Titel angeben.");
@@ -340,6 +347,7 @@
     syncTagChips();
     (fm.ingredients || []).forEach(i=> addRow(i));
     $("#stepsIn").value = m[2].trim();
+    if($("#prepIn")) $("#prepIn").value = prepText(fm.prep);
     if(fm.image){
       const prev = $("#photoPreview");
       prev.src = fm.image; prev.hidden = false;
