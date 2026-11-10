@@ -47,7 +47,8 @@
       if(document.hidden) return;
       const d = new Date(), p = (n)=> String(n).padStart(2, "0"), t = activeTimer();
       const str = t ? fmtLeft(t.left) : `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
-      const meta = document.querySelector(".passClock .pcMeta b"); if(meta) meta.textContent = t ? t.label : "Küche läuft";
+      const meta = document.querySelector(".passClock .pcMeta b"); if(meta) meta.textContent = t ? timerLine(t.label, t.title) : "Küche läuft";
+      el.closest(".passClock")?.classList.toggle("isTimer", !!t); markTimerVisible();
       if(el.dataset.t === str) return;
       el.dataset.t = str;
       el.innerHTML = [...str].map((c)=> c === ":" ? ledColon : ledDigit(+c)).join("");
@@ -166,7 +167,7 @@
     "Timer abgelaufen": { nordwall:"Ein Rabe bringt Nachricht", zauberschule:"Eine Eule bringt Nachricht", jahr3000:"Ding. Fertig.", zweistaedte:"Fertig.", insel:"Die Zeit ist um", akte:"Zeit ist um", brigade:"Hände, Chef!" },
   };
   const PLACEHOLDER = {
-    "Rezept suchen": { zauberschule:"Im Zauberbuch suchen", nordwall:"In den Archiven suchen", insel:"Datenbank der Station durchsuchen", jahr3000:"Im Weltraum-Netz suchen", zweistaedte:"Baupläne durchsuchen" },
+    "Rezept suchen": { zauberschule:"Im Zauberbuch suchen", nordwall:"In den Archiven suchen", insel:"Datenbank durchsuchen", jahr3000:"Im Weltraum-Netz suchen", zweistaedte:"Baupläne durchsuchen" },
     "Rezept oder Zutat": { zauberschule:"Rezept oder Zutat finden", nordwall:"Rezept oder Zutat", insel:"Eintrag oder Zutat", jahr3000:"Rezept oder Zutat scannen", zweistaedte:"Bauplan oder Zutat" },
   };
   function placeholders(){
@@ -399,9 +400,23 @@
     window.KOCHBUCH_TIMER_ACTIVE = !!run;
     if(!run) return null;
     const left = Math.max(0, Math.round((run.end - now) / 1000)), total = Math.max(1, run.total || left);
-    return { left, total, f: Math.min(1, 1 - left / total), label: run.label || "Timer" };
+    return { left, total, f: Math.min(1, 1 - left / total), label: run.label || "Timer", title: run.title || "", end: run.end };
   }
   const pad2 = (n)=> String(n).padStart(2, "0");
+  // wie in der „Kochen läuft“-Kapsel: 2:28, ab einer Stunde 1:02:28 (LED-Anzeigen behalten die feste Breite aus fmtLeft)
+  const fmtShort = (s)=> s >= 3600 ? `${Math.floor(s / 3600)}:${pad2(Math.floor(s % 3600 / 60))}:${pad2(s % 60)}` : `${Math.floor(s / 60)}:${pad2(s % 60)}`;
+  const hhmm = (ms)=> new Date(ms).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+  // „Schritt 8 · 4 Stunden“ + „Short Ribs“ → „Short Ribs · Schritt 8“
+  const timerLine = (label, title)=> [title, String(label || "").split(" · ")[0]].filter(Boolean).join(" · ") || "Timer";
+  // Timer auf der Startseite gerade im Bild? Dann blendet styles.css die „Kochen läuft“-Kapsel aus (kein doppelter Timer).
+  let tvRaf = 0;
+  function markTimerVisible(){
+    const el = document.querySelector(".homeTimer, .worldClock.isTimer, .passClock.isTimer");
+    let on = false;
+    if(el){ const r = el.getBoundingClientRect(); on = r.bottom > 60 && r.top < innerHeight - 120; }
+    document.body.classList.toggle("homeTimerVisible", on);
+  }
+  addEventListener("scroll", ()=>{ if(tvRaf) return; tvRaf = requestAnimationFrame(()=>{ tvRaf = 0; markTimerVisible(); }); }, { passive: true });
   const fmtLeft = (s)=> s >= 3600 ? `${Math.floor(s / 3600)}:${pad2(Math.floor(s % 3600 / 60))}:${pad2(s % 60)}` : `${pad2(Math.floor(s / 60))}:${pad2(s % 60)}`;
   const EMBLEM = {
     // Sanduhr: Sand oben/unten als Rechtecke, beschnitten durch die Glasform
@@ -443,7 +458,7 @@
     clearInterval(homeTimerT);
     const quick = document.querySelector(".homeQuick");
     const off = WORLD_CLOCK[skin()] || skin() === "brigade" || !quick || !document.body.classList.contains("layout-home");
-    if(off){ document.querySelector(".homeTimer")?.remove(); return; }
+    if(off){ document.querySelector(".homeTimer")?.remove(); markTimerVisible(); return; }
     const tick = ()=>{
       if(document.hidden) return;
       const list = readLS("kochbuch.timers", []), now = Date.now();
@@ -454,18 +469,20 @@
       if(!el){
         el = document.createElement("a");
         el.className = "homeTimer pressable";
-        el.innerHTML = `<span class="htIcon">${EGG}</span><span class="htText"><b class="htTime"></b><span class="htLabel"></span></span><span class="htMore"></span><i class="htBar" aria-hidden="true"></i>`;
+        el.innerHTML = `<span class="htIcon">${EGG}</span><span class="htText"><span class="htTop"><b class="htTime"></b><span class="htEnd"></span></span><span class="htLabel"></span></span><span class="htMore"></span><i class="htBar" aria-hidden="true"></i>`;
         quick.after(el);
       }
       el.href = t.url ? t.url + (t.url.includes("?") ? "&" : "?") + "kochen=1" : "#";
-      const str = fmtLeft(left);
+      const str = fmtShort(left);
       el.querySelector(".htTime").textContent = str;
-      el.querySelector(".htLabel").textContent = [t.label, t.title].filter(Boolean).join(" · ");
+      el.querySelector(".htEnd").textContent = `fertig um ${hhmm(t.end)}`;
+      el.querySelector(".htLabel").textContent = timerLine(t.label, t.title);
       el.querySelector(".htMore").textContent = run.length > 1 ? `+${run.length - 1}` : "";
       el.querySelector(".htBar").style.transform = `scaleX(${f.toFixed(3)})`;
-      el.setAttribute("aria-label", `Timer ${t.label}: noch ${str}`);
+      el.setAttribute("aria-label", `Timer ${timerLine(t.label, t.title)}: noch ${str}, fertig um ${hhmm(t.end)}`);
+      markTimerVisible();
     };
-    tick(); homeTimerT = setInterval(tick, 1000);
+    const tick0 = tick; tick0(); homeTimerT = setInterval(()=>{ tick0(); if(!document.querySelector(".homeTimer")) markTimerVisible(); }, 1000);
   }
 
   function worldClock(){
@@ -487,6 +504,7 @@
       const str = t ? fmtLeft(t.left) : `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
       const f = t ? t.f : d.getSeconds() / 60;
       el.classList.toggle("isTimer", !!t);
+      el.classList.toggle("wcIdle", !t);
       if(sk === "insel"){
         // Klappziffern: nur geänderte Felder klappen
         if(timeEl.dataset.t !== str){
@@ -500,7 +518,8 @@
       } else timeEl.textContent = str;
       // Insel: unter 4 Minuten Alarm-Rot, die Zahlenreihe blinkt
       el.classList.toggle("isAlarm", !!t && t.left < 240);
-      labelEl.textContent = t ? t.label : CLOCK_LABEL[sk];
+      labelEl.textContent = t ? `bis ${hhmm(t.end)} · ${timerLine(t.label, t.title)}` : CLOCK_LABEL[sk];
+      markTimerVisible();
       el.setAttribute("aria-label", t ? `Timer ${t.label}: noch ${str}` : `Uhrzeit ${str}`);
       if(sk === "zauberschule"){
         const ff = t ? t.f : f;
@@ -824,6 +843,11 @@
     let seen = ""; try{ seen = sessionStorage.getItem("kochbuch.ui.intro") || ""; }catch{}
     if(seen === sk && !force) return;
     try{ sessionStorage.setItem("kochbuch.ui.intro", sk); }catch{}
+    // voll: beim Wechsel auf den Skin und beim ersten Öffnen des Tages; sonst Kurzfassung
+    const today = new Date().toDateString(), dayKey = "kochbuch.ui.introDay";
+    let short = false;
+    try{ short = !force && localStorage.getItem(dayKey) === `${sk}|${today}`; localStorage.setItem(dayKey, `${sk}|${today}`); }catch{}
+    const SPEED = short ? 4 : 1;
     introOn = true;
     const el = document.createElement("div");
     el.className = `skIntro skIntro-${sk}`; el.setAttribute("aria-hidden", "true");
@@ -832,14 +856,15 @@
       const led = el.querySelector(".ivLed"), d = new Date();
       const show = (s)=> led.innerHTML = [...s].map((c)=> c === ":" ? ledColon : ledDigit(+c)).join("");
       show("88:88:88");
-      setTimeout(()=> show(`${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`), 1050);
+      setTimeout(()=> show(`${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`), 1050 / SPEED);
     }
     document.body.appendChild(el);
-    if(soundOn()){ const a = ac(); if(a && a.state === "running") try{ def.snd(a); }catch{} }
+    if(short) try{ el.getAnimations({ subtree: true }).forEach((an)=>{ an.playbackRate = SPEED; }); }catch{}
+    if(soundOn() && !short){ const a = ac(); if(a && a.state === "running") try{ def.snd(a); }catch{} }
     let done = false;
     const end = ()=>{ if(done) return; done = true; el.classList.add("out"); setTimeout(()=>{ el.remove(); introOn = false; }, 450); };
     el.addEventListener("pointerdown", end);
-    setTimeout(end, def.ms);
+    setTimeout(end, def.ms / SPEED);
   }
   // Wechsel auf einen Skin: Vorspann, sobald das Skin-Blatt geschlossen ist
   let introSkin = null;
