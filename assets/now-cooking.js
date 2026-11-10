@@ -43,7 +43,9 @@
     const title = c ? c.title : (next.title || next.label);
     target = c ? c.id + "?kochen=1" : (next.url || "");
     const parts = [];
-    if(next) parts.push(done ? "Timer abgelaufen" : `${CLOCK}${esc(T.fmt(next.left))}${timers.length > 1 ? ` (+${timers.length - 1})` : ""}`);
+    // Restzeit und Uhrzeit, zu der der Timer fertig ist (gleiche Schreibweise wie die Timer-Karte auf der Startseite)
+    const endAt = next ? new Date(next.end).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" }) : "";
+    if(next) parts.push(done ? "Timer abgelaufen" : `${CLOCK}${esc(T.fmt(next.left))} · bis ${endAt}${timers.length > 1 ? ` (+${timers.length - 1})` : ""}`);
     if(c) parts.push(`Schritt ${c.step + 1} von ${c.total}`);
 
     $(".nowCookingTitle").textContent = title || "Kochen";

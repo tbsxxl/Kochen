@@ -4487,3 +4487,67 @@ html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .r
 .prepCount{padding:0 4px;font-size:var(--fs14);color:var(--cSub);font-variant-numeric:tabular-nums}
 .cookOverlay.isPrep .cookProgress{opacity:.35}
 @media (min-width:768px){ .cookOverlay.isPrep .cookPrep{max-width:640px} .prepRow{font-size:var(--fs22)} }
+
+/* ==== 21. Feinschliff Bedienung (Dez. 2026, Vorschläge nach Screenshots, vom Besitzer freigegeben). `:not(#_x#_y)` hebt die Regeln
+   über alle Skin-Abschnitte, ohne deren Selektoren nachzubauen. ==== */
+/* Startseite: Kopf kürzer, damit das Gericht des Tages beim Öffnen zu sehen ist */
+body.layout-home .homeGreetingSub:not(#_x#_y){display:none !important}
+/* Uhr der Welten: ohne laufenden Timer nur eine kleine Zeile, mit Timer groß */
+html.skin .worldClock.wcIdle:not(#_x#_y){margin:12px 0 0 !important;padding:5px 12px 5px 6px !important;gap:8px !important;width:fit-content !important;justify-content:flex-start !important}
+html.skin .worldClock.wcIdle:not(#_x#_y) .wcEmblem{width:26px !important;height:26px !important}
+html.skin .worldClock.wcIdle:not(#_x#_y) .wcText{flex-direction:row !important;align-items:baseline !important;gap:8px !important}
+html.skin .worldClock.wcIdle:not(#_x#_y) .wcTime{font-size:var(--fs16) !important;padding:0 !important;gap:2px !important}
+html.skin .worldClock.wcIdle:not(#_x#_y) .wcLabel{font-size:11px !important;margin:0 !important}
+html.skin .worldClock.wcIdle:not(#_x#_y) .wcNums{display:none !important}
+html.skin-insel .worldClock.wcIdle:not(#_x#_y){padding:5px 0 !important}
+html.skin-insel .worldClock.wcIdle:not(#_x#_y) .wcTime{font-size:1.5rem !important}
+html.skin-insel .worldClock.wcIdle:not(#_x#_y) .wcFlap{padding:3px 4px 1px !important;min-width:.7em !important}
+html.skin-jahr3000 .worldClock.wcIdle:not(#_x#_y) .wcTime{padding:4px 8px !important;border-width:2px !important;border-radius:10px !important}
+html.skin-jahr3000 .worldClock.wcIdle:not(#_x#_y) .wcTime svg{height:15px !important}
+/* Timer: auf der Startseite nur einmal (Karte/Uhr im Bild → Kapsel aus); Karte mit Endzeit */
+body.homeTimerVisible .nowCooking:not(#_x#_y){display:none !important}
+.homeTimer .htTop{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.homeTimer .htEnd{font-size:var(--fs14);color:var(--onField2,rgba(255,255,255,.8));font-variant-numeric:tabular-nums}
+/* „Kochen läuft“-Kapsel flacher: eine Zeile (Foto, Name, Zeit) */
+.nowCooking{height:48px}
+.nowCookingImg,.nowCookingEgg{width:34px;height:34px;border-radius:10px}
+.nowCookingEgg svg{width:20px;height:20px}
+.nowCookingText{flex-direction:row;align-items:baseline;gap:10px;flex:1}
+.nowCookingTitle{flex:0 1 auto;min-width:3ch}
+.nowCookingSub{flex:0 0 auto;max-width:62%}
+.nowCookingPlay,.nowCookingClose{width:40px;height:40px}
+body.hasNowCooking .uiToast{bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 64px)}
+body.hasNowCooking .appMain{padding-bottom:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 80px)}
+/* Kochmodus: Lesbarkeit vor Stimmung – Schritt, Vorbereitung und Zutaten in klarer Schrift (Welt bleibt im Rahmen sichtbar) */
+:is(html.skin-zauberschule,html.skin-akte,html.skin-insel) .cookOverlay :is(.cookStep,.prepRow,.prepSub,.cookStepIng,.cookNextText,.cookIngs):not(#_x#_y){
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif !important;font-style:normal !important;letter-spacing:0 !important;text-transform:none !important;text-shadow:none !important}
+html.skin-zauberschule .cookOverlay .cookStep:not(#_x#_y)::first-letter{float:none !important;font-size:inherit !important;line-height:inherit !important;color:inherit !important;margin:0 !important}
+html.skin-akte .cookOverlay .cookStep:not(#_x#_y){transform:none !important}
+/* Kleine Fehler aus den Screenshots */
+html.skin-nordwall .recipeActions:not(#_x#_y){gap:8px !important}
+html.skin-nordwall .recipeCookBtn:not(#_x#_y){padding-inline:16px !important;letter-spacing:.02em !important;font-size:var(--fs14) !important}
+html.skin-jahr3000 #recipeBack:not(#_x#_y){background:#FFD23F !important;color:#1A1A1A !important;border:3px solid #1A1A1A !important;box-shadow:3px 3px 0 #1A1A1A !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin-akte #recipeBack:not(#_x#_y){background:#161513 !important;color:#E9E2D2 !important;box-shadow:0 2px 8px rgba(0,0,0,.5) !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin-zweistaedte body.fieldPage .homeQuickBtn:not(#_x#_y){font-size:var(--fs12) !important;letter-spacing:.02em !important;white-space:nowrap !important;color:#F4EFE4 !important;background:linear-gradient(160deg,#22305A,#17203A) !important;gap:6px !important;padding-inline:10px !important}
+/* Insel: Titel flackert nur einmal beim Öffnen, nicht dauernd */
+@media (prefers-reduced-motion: no-preference){
+  html.skin-insel :is(.homeGreetingTitle,.pageTitleBlock .h1,.brandWordmark):not(#_x#_y){animation:inFlicker 1.6s steps(1,end) 1 !important}
+}
+html.skin-jahr3000 .nowCooking:not(#_x#_y){background:#FFFFFF !important;color:#1A1A1A !important;border:3px solid #1A1A1A !important;box-shadow:4px 4px 0 #1A1A1A !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin-jahr3000 .nowCooking:not(#_x#_y) :is(.nowCookingTitle,.nowCookingSub){color:#1A1A1A !important}
+html.skin-akte .nowCooking:not(#_x#_y){background:#D4C5A9 !important;color:#1A1A1A !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin-akte .nowCooking:not(#_x#_y) :is(.nowCookingTitle,.nowCookingSub){color:#1A1A1A !important}
+/* Funde aus der Prüfung der übrigen Seiten in den Welten (Einkaufsliste, Wochenplan, Kategorien, Konto, Kühltruhe, Blätter) */
+html.skin-jahr3000 .sheet:not(#_x#_y){background:#FFFFFF !important;color:#1A1A1A !important;border:4px solid #1A1A1A !important;border-bottom:0 !important;
+  --text:#1A1A1A;--sub:#2E3338;--sub2:#2E3338;--muted:#3A4046;--fill:rgba(26,26,26,.07);--line:rgba(26,26,26,.25);--surface:#FFFFFF;--surface2:#F3FBFB;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin-jahr3000 .sheet:not(#_x#_y) :is(.sheetTitle,.sheetRow,.sheetRow span,.sheetSub,.planDayName,.planDayRow,.dim,p,label,b,strong){color:#1A1A1A !important}
+html.skin-jahr3000 .sheet:not(#_x#_y) .rowGlyph{color:#0E8F4A !important}
+html.skin-jahr3000 .sheet:not(#_x#_y) :is(.listGroup,.card){background:#F3FBFB !important;border-width:3px !important;box-shadow:3px 3px 0 #1A1A1A !important}
+html.skin-akte :is(.listGroup,.freezerCard):not(#_x#_y),html.skin-akte body:not(.layout-home) .card:not(.recipeCard):not(#_x#_y){background-image:none !important}
+html.skin-akte body .segBtn.active:not(#_x#_y){color:#1A1A1A !important}
+html.skin-zweistaedte body.fieldPage .pageTitleBlock .h1:not(#_x#_y){font-size:min(7.6vw,2rem) !important;letter-spacing:.04em !important;hyphens:manual !important;-webkit-hyphens:manual !important;overflow-wrap:normal !important}
+/* Skin-Auswahl: echte Vorschau der Startseite je Welt statt drei Farbflächen (Bilder aus tools/skin-previews.js) */
+.skinGrid{grid-template-columns:repeat(auto-fill, minmax(104px, 1fr))}
+.skinSwatch.skinShot{aspect-ratio:3/4;background:var(--swField)}
+.skinSwatch.skinShot::before,.skinSwatch.skinShot::after{content:none}
+.skinSwatch.skinShot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}

@@ -359,6 +359,18 @@ getrennt (Wunsch des Besitzers).
   `transform-box:view-box` liegt der Ursprung bei 0 0 des viewBox-Koordinatensystems (nicht in der Mitte).
   **Timer-Mitteilung:** wird nur beim Start und bei „+1 Min“ gesetzt; beim Laden einer Seite nur ergänzt, wenn sie für diesen Timer noch nie
   gezeigt wurde (`kochbuch.ui.timerNotified`) – iOS meldet jede ersetzte Mitteilung neu (Fehler: 10 Mitteilungen beim Herumtippen).
+  **Feinschliff Bedienung (Abschnitt 21 in `styles.css`, Dez. 2026, Vorschläge nach Screenshots, vom Besitzer freigegeben):**
+  Startseite ohne die Zeile „Was kochst du heute?“; die Uhr der Welten ist ohne Timer nur eine kleine Zeile (`.wcIdle`), mit Timer groß –
+  so ist das Gericht des Tages beim Öffnen zu sehen. Timer überall gleich geschrieben („2:28“, ab 1 Std „1:02:28“) mit Endzeit
+  („fertig um 21:30“ bzw. „bis 21:30“) und „Rezept · Schritt n“ (`timerLine()`). Ist der Timer auf der Startseite im Bild
+  (`body.homeTimerVisible`, `markTimerVisible()`), blendet die „Kochen läuft“-Kapsel aus; die Kapsel ist einzeilig (48 px).
+  Kochmodus in Zauberschule, Akte und Insel: Schritt, Vorbereitung und Zutaten in Systemschrift (Lesbarkeit am Herd), die Welt bleibt im
+  Rahmen. Vorspann voll nur beim Skin-Wechsel und beim ersten Öffnen des Tages (`kochbuch.ui.introDay`), sonst Kurzfassung
+  (vierfache Geschwindigkeit, ohne Klang). Skin-Auswahl mit echten Vorschaubildern (`assets/skins/<skin>.jpg`, `tools/skin-previews.js`;
+  nach sichtbaren Änderungen an einem Skin neu erzeugen und `?v=` hochzählen). Insel-Titel flackert nur einmal beim Öffnen.
+  Alle Seiten in den sieben Welten geprüft (Einkaufsliste, Wochenplan, Kategorien, Konto, Kühltruhe, Was koche ich?, Blätter):
+  Jahr 3000 hatte dunkle Blätter mit dunkler Schrift (jetzt weiß mit Kontur), Akte einen unsichtbaren aktiven Reiter.
+  Abschnitt 21 nutzt `:not(#_x#_y)` (ID-Gewicht), um über allen Skin-Abschnitten zu liegen.
 - **Retro-Modus (Abschnitt 36, `html.retro`, Skin „Retro“):** zusätzlich als verstecktes Extra: Startseite 5× schnell auf
   Logo/„Tobis Kochbuch“ tippen schaltet Retro an/aus (Hinweis mit Rückgängig).
   Graue Fenster mit harten Kanten und schwarzem Versatz, weiße Lesefelder, Navy-Titelleisten, Gelb = Hauptaktion,
