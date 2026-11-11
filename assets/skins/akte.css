@@ -1,0 +1,150 @@
+/* Skin „akte“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Regeln in der Reihenfolge ihrer Entstehung; spätere Abschnitte überschreiben frühere (Selektoren mit :not(._a)… bzw. :not(#_x#_y)). */
+html.skin-akte:not(._a):not(._b):not(._c):not(._d),html.skin-akte:not(._a):not(._b):not(._c):not(._d) body{
+  --field:#2B3A48;--onField:#E9EEF2;--onField2:rgba(233,238,242,.78);--fieldFill:rgba(233,238,242,.12);
+  --bg:#DDE2E5;--surface:#ECEFF1;--surface2:#F5F7F8;--fill:rgba(43,58,72,.08);--line:rgba(43,58,72,.16);--lineStrong:rgba(43,58,72,.4);
+  --text:#1C252E;--sub:#46525E;--sub2:#46525E;--muted:#57636F;
+  --brand:#2B3A48;--onBrand:#E9EEF2;--leaf:#2B3A48;--onLeaf:#E9EEF2;--brandSoft:rgba(43,58,72,.10);--leafSoft:rgba(43,58,72,.10);
+  --sel:#2B3A48;--onSel:#E9EEF2;--accent:#2B3A48;--accentSoft:rgba(43,58,72,.10);--onAccent:#E9EEF2;--herb:#2B3A48;--coffee:#2B3A48;
+  --stamp:#A3262A;--glass:rgba(236,239,241,.97);
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Akte", "American Typewriter", "Courier New", monospace;
+  color-scheme:light}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#DDE2E5;--surface:#ECEFF1}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#DDE2E5;--cCard:#ECEFF1;--cFill:rgba(43,58,72,.08);--cLine:rgba(43,58,72,.16);--cText:#1C252E;--cSub:#46525E;--cLeaf:#2B3A48;--cOnLeaf:#E9EEF2}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact,.notesTitle){
+  font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;letter-spacing:0}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .recipeCard{position:relative;overflow:visible;background:#E4CFA0 !important;border-radius:4px 12px 4px 4px;padding:10px 10px 12px;margin-top:14px}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .recipeCard::before{content:"";position:absolute;left:0;top:-14px;width:42%;height:16px;background:#E4CFA0;border-radius:8px 10px 0 0}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .recipeCard .rcImg{border-radius:2px}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .recipeCard .recipeTitle,html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .recipeCard .recipeMeta{color:#2A2213}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .recipeCard .rcBody{padding:10px 2px 0}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .metaRating,html.skin-akte:not(._a):not(._b):not(._c):not(._d) .kvRating{display:inline-flex;align-items:center;gap:2px;color:var(--stamp) !important;border:2px solid var(--stamp);border-radius:4px;padding:0 5px;
+  transform:rotate(-6deg);font-family:var(--fontDisplay);font-weight:400;opacity:.9}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .metaRating .ico,html.skin-akte:not(._a):not(._b):not(._c):not(._d) .kvRating .ico{color:var(--stamp) !important}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#2B3A48 !important;border:0}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#C9D3DB !important}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:rgba(233,238,242,.16) !important;color:#FFFFFF !important}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d),html.skin-akte:not(._a):not(._b):not(._c):not(._d) body{--field:#1E2933}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid{counter-reset:akte}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .linkCard{counter-increment:akte}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .grid .recipeCard .rcBody::before{content:"Akte Nr. " counter(akte, decimal-leading-zero);display:block;font-family:var(--fontDisplay);font-size:var(--fs12);color:#5A4A2A;margin-bottom:2px}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) :is(.grid,.hScroll) .recipeCard.wasCooked .rcImg::after{content:"Gekocht";position:absolute;z-index:4;right:10px;top:12px;padding:2px 8px;border:2.5px solid #A3262A;border-radius:4px;
+  color:#A3262A;background:rgba(236,239,241,.82);font-family:var(--fontDisplay);font-size:var(--fs14);transform:rotate(-9deg);letter-spacing:.06em}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:0}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{content:"";position:absolute;left:50%;top:-16px;width:120px;height:30px;margin-left:-60px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30'%3E%3Crect x='10' y='8' width='100' height='18' rx='4' fill='%239AA1A7'/%3E%3Crect x='14' y='10' width='92' height='4' rx='2' fill='%23D5DADE'/%3E%3Crect x='44' y='0' width='32' height='14' rx='5' fill='%237A8187'/%3E%3Ccircle cx='60' cy='7' r='3' fill='%23DDE2E5'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none;z-index:2}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2)::before{content:"Betr.: ";color:var(--sub)}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){border-bottom:1px solid var(--lineStrong);padding-bottom:4px}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard{margin:0;position:relative}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard::after{content:"";position:absolute;z-index:5;left:18px;top:-14px;width:22px;height:52px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 56'%3E%3Cpath d='M8 52 V10 a4 4 0 0 1 8 0 V46 a7 7 0 0 1 -14 0 V14' fill='none' stroke='%23A7AEB5' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;transform:rotate(-8deg);pointer-events:none}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:2px;box-shadow:0 0 0 8px #ECEFF1, 0 10px 22px rgba(0,0,0,.25)}
+.skinScene-akte{background:radial-gradient(ellipse 70% 45% at 25% 0%, rgba(140,160,180,.28), transparent 70%), radial-gradient(ellipse 60% 40% at 80% 20%, rgba(100,120,140,.25), transparent 70%)}
+.skinScene-akte .scRain{position:absolute;left:-10%;right:-10%;top:-100%;height:200%;background:repeating-linear-gradient(100deg, rgba(220,230,240,.12) 0 1px, transparent 1px 13px);animation:rainFall .6s linear infinite}
+.skinScene-akte .scFog{position:absolute;left:-50%;width:200%;bottom:30px;height:70px;background:radial-gradient(ellipse 30% 60% at 25% 70%, rgba(200,210,220,.18), transparent 70%), radial-gradient(ellipse 30% 60% at 75% 80%, rgba(200,210,220,.14), transparent 70%);animation:fogDrift 40s linear infinite alternate}
+.skinScene-akte .scFlash{position:absolute;inset:0;background:rgba(220,230,255,.5);opacity:0;animation:flash 13s linear infinite}
+.skinScene-akte .scTower{right:max(16px, calc(50% - 630px));bottom:30px;width:48px;height:108px}
+.skinScene-akte .scBeam{position:absolute;right:calc(max(16px, calc(50% - 630px)) + 24px);bottom:calc(30px + 108px * .652 - 22px);width:min(70vw, 420px);height:44px;
+  transform-origin:100% 50%;clip-path:polygon(100% 44%, 0 0, 0 100%, 100% 56%);
+  background:linear-gradient(to left, rgba(255,240,180,.75), rgba(255,240,180,.2) 60%, transparent);animation:beamSweep 8s linear infinite}
+.skinScene-akte .scLampGlow{position:absolute;right:calc(max(16px, calc(50% - 630px)) + 24px - 22px);bottom:calc(30px + 108px * .652 - 22px);width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,245,200,.95) 0 18%, rgba(255,235,160,.35) 45%, transparent 70%);animation:lampFlash 8s linear infinite}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{margin-top:84px}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{padding-bottom:96px !important}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseHead{margin:4px 16px 18px;padding:14px 16px 14px 20px;background:#E9DDBF;color:#1C252E;border-radius:3px 3px 10px 3px;
+  font-family:var(--fontDisplay);font-size:var(--fs14);box-shadow:0 1px 0 rgba(0,0,0,.1),0 10px 18px -14px rgba(28,37,46,.6);
+  background-image:linear-gradient(90deg,transparent 0 10px,rgba(163,38,42,.35) 10px 11px,transparent 11px)}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseTop{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:8px;margin-bottom:8px;border-bottom:1px dashed rgba(28,37,46,.35)}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseTop > span:first-child{font-size:var(--fs16);letter-spacing:.04em}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseStamp{color:var(--stamp);border:2px solid currentColor;border-radius:3px;padding:2px 8px;transform:rotate(-4deg);font-size:var(--fs12);letter-spacing:.12em;opacity:.85}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseHead dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseHead dt{color:#57636F}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .caseHead dd{margin:0;overflow-wrap:anywhere}
+html.skin-akte:not(._a):not(._b):not(._c):not(._d) .notesArea{font-family:"Skin Brigade","Bradley Hand","Segoe Print",cursive;color:#A3262A;font-size:var(--fs16);line-height:1.5;
+  background:repeating-linear-gradient(to bottom,transparent 0 calc(1.5em - 1px),rgba(43,58,72,.16) calc(1.5em - 1px) 1.5em) 0 10px/100% 1.5em,#F5F7F8;
+  border-left:3px double rgba(163,38,42,.5);border-radius:2px 12px 12px 2px}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageContent::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday::before{display:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageContent,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday ~ .section{
+  -webkit-mask:none !important;mask:none !important;border-radius:0 !important;box-shadow:none !important;background:transparent !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday{margin-top:28px !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageTitleBlock{padding-bottom:20px !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2){background-image:none !important;padding-left:0 !important;padding-bottom:0 !important;border:0 !important;box-shadow:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2)::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2)::after{content:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) .homeToday .linkCard::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) .homeToday .linkCard::after{content:none !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body{--field:#2B1D14;--onField:#F0E6D6;--onField2:#C9B79B;--bg:#2B1D14;--statusBar:#1E140D;--text:#F0E6D6;--sub:#C9B79B;--sub2:#C9B79B;--muted:#B5A486;--fill:rgba(255,255,255,.08);--line:rgba(255,255,255,.14)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e){background:#2B1D14 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body{background:repeating-linear-gradient(92deg,rgba(0,0,0,.06) 0 2px,transparent 2px 9px),linear-gradient(160deg,#4A3424,#2B1D14) fixed,#2B1D14 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreeting{position:relative;margin:34px 4px 0;padding:20px 18px 18px;background:#F4EFE3;transform:rotate(-.5deg);
+  box-shadow:0 0 0 12px #D5BC86,0 2px 0 12px #B89B62,0 18px 30px 12px rgba(0,0,0,.45)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreeting::before{content:attr(data-akte);position:absolute;left:-12px;top:-44px;padding:7px 14px 8px;background:#D5BC86;border-radius:8px 8px 0 0;font:var(--fs12) var(--fontDisplay);color:#3A2A14;letter-spacing:.06em}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreeting::after{content:"";position:absolute;right:42px;top:-24px;width:20px;height:54px;border:3px solid #9AA1A7;border-radius:12px;border-bottom-color:transparent}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home :is(.homeGreetingTitle,.homeGreetingSub,.brandWordmark){color:#1C252E !important;text-shadow:none !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeBrand{opacity:.75}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .akMeta{display:flex;flex-direction:column;gap:2px;margin-top:12px;padding-top:10px;border-top:1px dashed #9AA3AB;font:var(--fs14)/1.5 var(--fontDisplay);color:#46525E}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .akMeta b{font-weight:400;color:#1C252E}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .akStamp{position:absolute;right:14px;top:58px;padding:3px 10px;border:3px solid #A3262A;color:#A3262A;font:var(--fs18) var(--fontDisplay);letter-spacing:.14em;text-transform:uppercase;transform:rotate(-10deg);opacity:.85}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:#F4EFE3 !important;color:#1C252E !important;border-radius:2px !important;box-shadow:0 4px 10px rgba(0,0,0,.35) !important;font-family:var(--fontDisplay)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .searchRowIcon input{background:transparent !important;box-shadow:none !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) body.layout-home .homeGreeting ~ .section{margin-top:26px}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured{background:#FCFBF7 !important;padding:12px 12px 0 !important;border-radius:0 !important;box-shadow:0 12px 24px rgba(0,0,0,.45) !important;transform:rotate(1.6deg);overflow:hidden}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcImg{border-radius:0 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .heroOverlayCat{display:none}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcBody{position:relative !important;inset:auto !important;background:none !important;padding:10px 4px 14px !important;color:#1C252E !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .homeFeaturedTitle{color:#1C252E !important;text-shadow:none !important;font-size:var(--fs22) !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .recipeMeta{color:#46525E !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .akCaption{display:block;font:var(--fs12) var(--fontDisplay);letter-spacing:.14em;text-transform:uppercase;color:#A3262A;margin-bottom:2px}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard{background:#F4EFE3 !important;padding:8px !important;border-radius:0 !important;box-shadow:0 4px 10px rgba(0,0,0,.35) !important;
+  background-image:linear-gradient(transparent calc(100% - 36px),rgba(163,38,42,.45) calc(100% - 36px),rgba(163,38,42,.45) calc(100% - 35px),transparent calc(100% - 35px)) !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .linkCard:nth-child(odd) .recipeCard{transform:rotate(-1deg)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .hScroll .recipeCard .recipeTitle{color:#1C252E !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2){color:#F0E6D6 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .bottomRail{background:#1E2A22 !important;border-radius:6px !important;border:0 !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 8px 18px rgba(0,0,0,.5) !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem{color:#C9C2B0 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem.active{background:rgba(244,239,227,.12) !important;color:#F4EFE3 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.card,.listGroup,.recipePageCard,.notesCard,.sheet,.hScroll .recipeCard,.miseCard){--text:#1C252E;--sub:#46525E;--sub2:#46525E;--muted:#57636F;--fill:rgba(43,58,72,.08);--line:rgba(43,58,72,.16);color:#1C252E}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay{--cBg:#2B1D14;--cCard:#F4EFE3;--cText:#1C252E;--cSub:#46525E;--cFill:rgba(255,255,255,.1);--cLine:rgba(43,58,72,.16)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay .cookStep{font-family:var(--fontDisplay);color:#1C252E;box-shadow:0 6px 14px rgba(0,0,0,.35);transform:rotate(-.4deg)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) input::placeholder{color:#57636F !important;opacity:1}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:rgba(163,38,42,.25)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#A3262A}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body{--field:#161513;--bg:#161513;--onField:#E9E2D2;--onField2:#B9AF9A;--statusBar:#0E0D0C;--text:#E9E2D2;--sub:#B9AF9A;--sub2:#B9AF9A;--brand:#A93226;--onBrand:#FFF4EC;--leaf:#A93226;--onLeaf:#FFF4EC;
+  --akManila:#D4C5A9;--akStain:radial-gradient(circle at 82% 18%,transparent 15px,rgba(110,70,30,.22) 16px,rgba(110,70,30,.08) 19px,transparent 21px),radial-gradient(closest-side at 18% 86%,rgba(90,70,40,.12),transparent 70%)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f){background:#161513 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body{background:radial-gradient(90% 50% at 70% 0%,#25282B,#161513 70%) fixed,#161513 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .skinScene-akte{overflow:hidden}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .akWindow{position:absolute;inset:0;background:linear-gradient(90deg,transparent calc(50% - 3px),rgba(0,0,0,.55) calc(50% - 3px),rgba(0,0,0,.55) calc(50% + 3px),transparent calc(50% + 3px)),
+  linear-gradient(transparent calc(42% - 3px),rgba(0,0,0,.55) calc(42% - 3px),rgba(0,0,0,.55) calc(42% + 3px),transparent calc(42% + 3px)),radial-gradient(70% 60% at 60% 30%,rgba(120,140,155,.25),transparent 70%)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .akRain{position:absolute;left:0;right:0;top:-100%;height:200%;background:repeating-linear-gradient(104deg,transparent 0 13px,rgba(190,205,215,.16) 13px 14px,transparent 14px 31px);opacity:.8}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .akRain2{background:repeating-linear-gradient(100deg,transparent 0 23px,rgba(190,205,215,.1) 23px 24px,transparent 24px 47px);opacity:.7}
+@media (prefers-reduced-motion: no-preference){
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .akRain{animation:akRain .9s linear infinite}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .akRain2{animation-duration:1.4s}
+}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .scPaused .akRain{animation-play-state:paused}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.layout-home .homeGreeting{background:var(--akStain),#E4D8BE !important;box-shadow:0 0 0 12px var(--akManila),0 2px 0 12px #B5A585,0 18px 30px 12px rgba(0,0,0,.6) !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.layout-home .homeGreeting::before{background:var(--akManila) !important;color:#1A1A1A !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) :is(.hScroll .recipeCard,.listGroup,.notesCard,.card:not(.homeFeatured):not(.recipeCard),.miseCard){background:var(--akStain),var(--akManila) !important;color:#1A1A1A}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:#E4D8BE !important;color:#1A1A1A !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage .searchRowIcon input{background:transparent !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .akStamp,html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .akCaption{color:#A93226 !important;border-color:#A93226 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .recipeCookBtn{background:#A93226 !important;color:#FFF4EC !important;border-radius:2px !important;font-family:var(--fontDisplay)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .tj{display:inline-block;transform:translateY(var(--y));opacity:var(--o)}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) :is(.homeGreetingTitle,.pageTitleBlock .h1,.recipeName,.homeSectionTitle){text-shadow:.4px .2px 0 currentColor,0 0 .6px currentColor !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .pageTitleBlock .h1{color:#E9E2D2 !important}
+html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .bottomRail{background:#1E1D1B !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f)) .cookOverlay .cookTab:not(.active){color:#E9DCC0 !important;opacity:1 !important}
+.skIntro-akte{background:radial-gradient(90% 60% at 60% 20%,#2A3036,#0B0B0C 75%)}
+.skIntro-akte .ivRain{position:absolute;left:0;right:0;top:-100%;height:200%;background:repeating-linear-gradient(104deg,transparent 0 13px,rgba(190,205,215,.22) 13px 14px,transparent 14px 31px);animation:akRain .7s linear infinite}
+.skIntro-akte .ivFlash{position:absolute;inset:0;background:#E8EEF2;opacity:0;animation:ivFlash 1.3s linear .15s both}
+.skIntro-akte .ivFolder{position:relative;width:min(78vw,340px);padding:30px 24px 78px;background:radial-gradient(circle at 82% 18%,transparent 15px,rgba(110,70,30,.22) 16px,rgba(110,70,30,.08) 19px,transparent 21px),#D4C5A9;
+  box-shadow:0 24px 50px rgba(0,0,0,.7);transform:rotate(-2deg);animation:ivFolder .6s cubic-bezier(.2,.8,.2,1) .9s both,ivShake .3s linear 1.58s}
+.skIntro-akte .ivFolder span{display:block;font:15px "Skin Akte", monospace;letter-spacing:.08em;color:#3A2E1E}
+.skIntro-akte .ivFolder b{display:block;margin-top:10px;font:400 clamp(30px,9vw,46px) "Skin Akte", monospace;color:#1A1A1A}
+.skIntro-akte .ivFolder em{position:absolute;right:16px;bottom:16px;padding:6px 12px;border:4px solid #A93226;color:#A93226;font:400 24px "Skin Akte", monospace;font-style:normal;letter-spacing:.14em;text-transform:uppercase;
+  transform:rotate(-12deg) scale(3);opacity:0;animation:ivStamp .3s cubic-bezier(.6,0,.9,.5) 1.3s both}
+:is(html.skin-zauberschule,html.skin-akte,html.skin-insel) .cookOverlay :is(.cookStep,.prepRow,.prepSub,.cookStepIng,.cookNextText,.cookIngs):not(#_x#_y){
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif !important;font-style:normal !important;letter-spacing:0 !important;text-transform:none !important;text-shadow:none !important}
+html.skin-akte .cookOverlay .cookStep:not(#_x#_y){transform:none !important}
+html.skin-akte #recipeBack:not(#_x#_y){background:#161513 !important;color:#E9E2D2 !important;box-shadow:0 2px 8px rgba(0,0,0,.5) !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin-akte .nowCooking:not(#_x#_y){background:#D4C5A9 !important;color:#1A1A1A !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin-akte .nowCooking:not(#_x#_y) :is(.nowCookingTitle,.nowCookingSub){color:#1A1A1A !important}
+html.skin-akte :is(.listGroup,.freezerCard):not(#_x#_y),html.skin-akte body:not(.layout-home) .card:not(.recipeCard):not(#_x#_y){background-image:none !important}
+html.skin-akte body .segBtn.active:not(#_x#_y){color:#1A1A1A !important}

@@ -65,7 +65,22 @@
       if (s !== 'standard' && s !== 'retro') { r.classList.add('skin-' + s); r.removeAttribute('data-theme'); }
       r.dataset.skin = s;
       if (s !== 'standard') document.querySelector('meta[name="theme-color"]').setAttribute('content', window.KOCHBUCH_SKINS[s]);
+      window.KOCHBUCH_SKIN_CSS(s);
       return s;
+    };
+    // Jeder Skin hat seine eigene CSS-Datei (assets/skins/<skin>.css), geladen wird nur die des aktiven Skins – nach styles.css,
+    // damit die Reihenfolge der Regeln stimmt. Beim ersten Aufbau schreibt das Skript direkt hinter dem styles.css-Link den Link
+    // (blockiert das Zeichnen, kein Aufblitzen); beim Wechsel wird die neue Datei eingehängt und die alte danach entfernt.
+    window.KOCHBUCH_SKIN_HREF = function(s){ return s === 'standard' || s === 'retro' ? '' : "{{ '/assets/skins/' | relative_url }}" + s + ".css?v={{ site.time | date: '%s' }}"; };
+    window.KOCHBUCH_SKIN_CSS = function(s){
+      var main = document.getElementById('mainCss'); if (!main) return;      // Kopf wird noch gelesen → übernimmt das Skript hinter dem Link
+      var want = window.KOCHBUCH_SKIN_HREF(s), old = document.querySelectorAll('link[data-skin-css]');
+      if (old.length === 1 && old[0].getAttribute('href') === want) return;
+      var drop = function(){ old.forEach(function(el){ el.remove(); }); };
+      if (!want) return drop();
+      var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = want; l.setAttribute('data-skin-css', s);
+      l.onload = l.onerror = drop;
+      (old.length ? old[old.length - 1] : main).after(l);
     };
     try { window.KOCHBUCH_APPLY_SKIN(); } catch(e){}
     window.KOCHBUCH_RENAMED = {{ site.data.renamed | jsonify }};
@@ -113,7 +128,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Kochbuch">
   {% if page.image %}<link rel="preload" as="image" href="{{ page.image | relative_url }}?v={{ site.image_version }}" imagesrcset="{% include srcset.html src=page.image %}" imagesizes="(min-width:960px) 928px, 100vw" fetchpriority="high">{% endif %}
-  <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <link rel="stylesheet" id="mainCss" href="{{ '/assets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <script>(function(){ try{ var s = window.KOCHBUCH_SKIN(), h = window.KOCHBUCH_SKIN_HREF(s); if(h) document.write('<link rel="stylesheet" data-skin-css="' + s + '" href="' + h + '">'); }catch(e){} })();</script>
   <script defer src="{{ '/assets/utils.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   <script defer src="{{ '/assets/account.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   <script defer src="{{ '/assets/cook-timer.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>

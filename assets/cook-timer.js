@@ -203,6 +203,8 @@
   const NOTIFIED_KEY = "kochbuch.ui.timerNotified";
   const notified = ()=>{ try{ return JSON.parse(localStorage.getItem(NOTIFIED_KEY) || "[]"); }catch{ return []; } };
   async function notifyRunning(t){
+    // abschaltbar unter Profil & Sync → Mitteilungen („Laufenden Timer als Mitteilung zeigen“)
+    try{ if(localStorage.getItem("kochbuch.ui.timerNotify") === "0") return; }catch{}
     const reg = await swReg(); if(!reg || !t || t.end <= Date.now()) return;
     try{ localStorage.setItem(NOTIFIED_KEY, JSON.stringify([...new Set([...notified(), t.id])].slice(-20))); }catch{}
     try{

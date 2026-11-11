@@ -1,6 +1,0 @@
-{
-  "name": "kochbuch-cinema",
-  "private": true,
-  "description": "Bauwerkzeug für die Kino-Köpfe der Skins (assets/cinema). Nicht Teil der Seite.",
-  "devDependencies": { "esbuild": "0.25.10", "gsap": "3.13.0", "three": "0.180.0" }
-}

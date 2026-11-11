@@ -1,0 +1,57 @@
+/* Skin „terminal“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Regeln in der Reihenfolge ihrer Entstehung; spätere Abschnitte überschreiben frühere (Selektoren mit :not(._a)… bzw. :not(#_x#_y)). */
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d),html.skin-terminal:not(._a):not(._b):not(._c):not(._d) body{
+  --field:#000000;--onField:#5CFF8A;--onField2:#3FD46E;--fieldFill:rgba(92,255,138,.10);
+  --bg:#050A06;--surface:#0B140D;--surface2:#102014;--fill:rgba(92,255,138,.09);--line:rgba(92,255,138,.28);--lineStrong:rgba(92,255,138,.55);
+  --text:#7DFFA0;--sub:#4CC872;--sub2:#4CC872;--muted:#3FAE62;
+  --brand:#33FF66;--onBrand:#001A08;--leaf:#5CFF8A;--onLeaf:#001A08;--brandSoft:rgba(51,255,102,.14);--leafSoft:rgba(51,255,102,.14);
+  --sel:#33FF66;--onSel:#001A08;--accent:#5CFF8A;--accentSoft:rgba(51,255,102,.14);--onAccent:#001A08;--herb:#33FF66;--coffee:#0B140D;
+  --glass:rgba(5,10,6,.94);--glassLine:rgba(92,255,138,.4);--glassShadow:none;
+  --fontUi:"Retro Mono", ui-monospace, Menlo, monospace;--fontDisplay:"Skin Terminal", "Retro Mono", ui-monospace, monospace;
+  color-scheme:dark}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#050A06;--surface:#0B140D}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#050A06;--cCard:#0B140D;--cFill:rgba(92,255,138,.10);--cLine:rgba(92,255,138,.25);--cText:#7DFFA0;--cSub:#4CC872;--cLeaf:#33FF66;--cOnLeaf:#001A08}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) *,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) *::before,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) *::after{border-radius:0 !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) body::after{content:"";position:fixed;inset:0;z-index:2147483000;pointer-events:none;
+  background:repeating-linear-gradient(to bottom, rgba(0,0,0,.12) 0 1px, transparent 1px 3px)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact,.ingSection,.catGroupTitle){
+  font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;letter-spacing:0;text-transform:uppercase}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeGreetingTitle{font-size:clamp(2.6rem, 12vw, 3.4rem);line-height:.95}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(2.4rem, 11vw, 3.2rem), 12vw)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .h2{font-size:1.75rem}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d).listCards .grid .recipeTitle,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeTitle{font-size:1.6rem;line-height:1}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeHeroText .recipeName,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeFeatured .homeFeaturedTitle{font-size:clamp(2.6rem, 12vw, 3.4rem);color:#7DFFA0}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1::before{content:"> "}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1::after,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeGreetingTitle::after{content:"_";animation:termBlink 1.06s steps(1) infinite}
+@media (prefers-reduced-motion: reduce){
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1::after,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeGreetingTitle::after{animation:none} }
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn svg{display:none}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn span::before{content:"[ "}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn span::after{content:" ]"}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeActBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .filterChip,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .chip,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .navIconBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .stepBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipePortionStep,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .searchRow,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeQuickBtn,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .segmented,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .profileBadge,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) #recipeBack{
+  background:transparent !important;box-shadow:inset 0 0 0 1px var(--line) !important;color:var(--text)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeBody ol > li::marker{color:var(--sub)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .bottomRail{border:1px solid var(--line);box-shadow:none}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:var(--brand) !important;color:var(--onBrand) !important}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .homeFeatured .rcImg::after,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipePageHero::after{background:linear-gradient(to top, rgba(0,8,2,.9) 0%, rgba(0,8,2,.4) 45%, transparent 75%) !important}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .cookStep{font-family:var(--fontUi)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .cookStep.isTyping::after{content:"█";animation:termBlink .7s steps(1) infinite;margin-left:2px}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) ::selection{background:#33FF66;color:#001A08}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sheet{background:#050A06 !important;box-shadow:0 0 0 1px var(--line) !important}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px var(--line)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d){--bezel:linear-gradient(to bottom, #3A3F37, #23271F);--screw:radial-gradient(circle, #9AA08F 0 2px, #4B5045 2.5px 3.5px, transparent 4px)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:var(--screw) 10px 50%/14px 14px no-repeat, var(--screw) calc(100% - 10px) 50%/14px 14px no-repeat, var(--bezel) !important;
+  border:1px solid #11140F;box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 4px 0 #0B0D0A !important;padding-left:26px;padding-right:26px}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#9FE6B0 !important}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) body::after{background:repeating-linear-gradient(to bottom, rgba(0,0,0,.12) 0 1px, transparent 1px 3px),
+  radial-gradient(ellipse 120% 90% at 50% 50%, transparent 62%, rgba(0,0,0,.45) 100%)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .cookOverlay .cookTop{background:var(--screw) 12px 12px/14px 14px no-repeat, var(--screw) calc(100% - 12px) 12px/14px 14px no-repeat, var(--bezel);border-bottom:2px solid #11140F}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .cookProgressBar,html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .nowCookingBar{-webkit-mask:repeating-linear-gradient(to right, #000 0 10px, transparent 10px 13px);mask:repeating-linear-gradient(to right, #000 0 10px, transparent 10px 13px)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .cookProgress{height:8px}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .statBars{display:grid;gap:8px;margin:14px 0 4px;padding:12px 14px;border:1px solid var(--line);background:rgba(92,255,138,.04);font-family:var(--fontUi);font-size:var(--fs14)}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbRow{display:grid;grid-template-columns:4.2em 1fr auto;gap:10px;align-items:center}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbRow > span:first-child{color:var(--sub);letter-spacing:.08em}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbBar{height:12px;border:1px solid var(--lineStrong);padding:2px;position:relative}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbBar i{display:block;height:100%;
+  clip-path:inset(0 calc((1 - var(--f)) * 100%) 0 0);background:repeating-linear-gradient(90deg,var(--leaf) 0 6px,transparent 6px 8px);filter:drop-shadow(0 0 4px rgba(92,255,138,.55))}
+html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbRow b{font-weight:400;color:var(--text);min-width:4.5em;text-align:right}

@@ -33,7 +33,10 @@
   function render(){
     const c = cooking();
     const timers = T ? T.list() : [];
-    const show = !cookOpen && (c || timers.length);
+    // Auf der Seite des Rezepts selbst steht „Kochen“ direkt unter dem Foto – dort verdeckt die Kapsel nur Inhalt
+    // (außer es läuft ein Timer, dessen Restzeit sie zeigt).
+    const here = c && !timers.length && (window.RECIPE_DATA && window.RECIPE_DATA.id === c.id);
+    const show = !cookOpen && !here && (c || timers.length);
     bar.hidden = !show;
     document.body.classList.toggle("hasNowCooking", !!show);
     if(!show) return;
@@ -46,7 +49,7 @@
     // Restzeit und Uhrzeit, zu der der Timer fertig ist (gleiche Schreibweise wie die Timer-Karte auf der Startseite)
     const endAt = next ? new Date(next.end).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" }) : "";
     if(next) parts.push(done ? "Timer abgelaufen" : `${CLOCK}${esc(T.fmt(next.left))} · bis ${endAt}${timers.length > 1 ? ` (+${timers.length - 1})` : ""}`);
-    if(c) parts.push(`Schritt ${c.step + 1} von ${c.total}`);
+    if(c) parts.push(c.prep ? "Vorbereiten" : `Schritt ${c.step + 1} von ${c.total}`);
 
     $(".nowCookingTitle").textContent = title || "Kochen";
     $(".nowCookingSub").innerHTML = parts.join(" · ");
