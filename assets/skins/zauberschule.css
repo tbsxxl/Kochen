@@ -1,0 +1,195 @@
+/* Skin „zauberschule“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Regeln in der Reihenfolge ihrer Entstehung; spätere Abschnitte überschreiben frühere (Selektoren mit :not(._a)… bzw. :not(#_x#_y)). */
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d),html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body{
+  --field:#4A1420;--onField:#F4E7C8;--onField2:rgba(244,231,200,.8);--fieldFill:rgba(244,231,200,.14);
+  --bg:#F1E6CC;--surface:#F8F0DC;--surface2:#FCF7EA;--fill:rgba(74,20,32,.07);--line:rgba(74,20,32,.16);--lineStrong:rgba(74,20,32,.4);
+  --text:#2A1A12;--sub:#594231;--sub2:#594231;--muted:#6A5240;
+  --brand:#6E1A2A;--onBrand:#F8EED6;--leaf:#6E1A2A;--onLeaf:#F8EED6;--brandSoft:rgba(110,26,42,.10);--leafSoft:rgba(110,26,42,.10);
+  --sel:#6E1A2A;--onSel:#F8EED6;--accent:#6E1A2A;--accentSoft:rgba(110,26,42,.10);--onAccent:#F8EED6;--herb:#6E1A2A;--coffee:#4A1420;
+  --gold:#7A5A12;--glass:rgba(248,240,220,.97);
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Zauber", "Hoefler Text", Georgia, serif;
+  color-scheme:light}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#F1E6CC;--surface:#F8F0DC}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#F1E6CC;--cCard:#F8F0DC;--cFill:rgba(74,20,32,.07);--cLine:rgba(74,20,32,.16);--cText:#2A1A12;--cSub:#594231;--cLeaf:#6E1A2A;--cOnLeaf:#F8EED6}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact,.notesTitle){
+  font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;letter-spacing:0}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .pageTitleBlock .h1,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(2.3rem, 10vw, 2.9rem), 10.5vw)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) #ingredientsList .uRight,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookIngQty,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookIngRow .cookIngQty,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookStepIng b{color:var(--gold) !important;font-weight:700}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .uRow:not(.checked) .uQty{font-variant-numeric:tabular-nums}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{box-shadow:inset 0 2px 0 #B08A2E}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px rgba(122,90,18,.55), 0 0 0 4px #F8F0DC, 0 0 0 5px rgba(122,90,18,.35)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#4A1420 !important;border:1px solid #2E0C14;box-shadow:inset 0 1px 0 rgba(176,138,46,.5), 0 6px 16px rgba(42,26,18,.25) !important}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#E8D6AE !important}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:rgba(176,138,46,.28) !important;color:#F8EED6 !important}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d),html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body{--field:#151A36;--onField:#F4E7C8;--onField2:rgba(244,231,200,.82);--fieldFill:rgba(244,231,200,.12)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookProgress{position:relative;height:22px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22'%3E%3Cg fill='%236E1A2A' opacity='.18'%3E%3Cellipse cx='7' cy='7' rx='2.6' ry='4'/%3E%3Cellipse cx='21' cy='15' rx='2.6' ry='4'/%3E%3C/g%3E%3C/svg%3E") 0 0/28px 22px repeat-x !important;border-radius:0}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookProgress .cookProgressBar{opacity:0}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .cookProgress::after{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(var(--p, 0) * 100%);transition:width .4s var(--ease);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22'%3E%3Cg fill='%237A5A12'%3E%3Cellipse cx='7' cy='7' rx='2.6' ry='4'/%3E%3Ccircle cx='7' cy='1.6' r='1'/%3E%3Cellipse cx='21' cy='15' rx='2.6' ry='4'/%3E%3Ccircle cx='21' cy='9.6' r='1'/%3E%3C/g%3E%3C/svg%3E") 0 0/28px 22px repeat-x}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:0}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{content:"";position:absolute;left:0;right:0;height:16px;top:-15px;background:var(--bg);pointer-events:none;
+  -webkit-mask:var(--edge) 0 0/100% 100%;mask:var(--edge) 0 0/100% 100%}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d){--edge:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 12' preserveAspectRatio='none'%3E%3Cpath d='M0 12 L0 5.6 L3.742844501090743 7.0 L9.357110423469642 5.4 L13.704672626317635 7.7 L19.354824105642173 9.1 L24.946777514737718 6.4 L29.192667066372813 6.8 L34.845245547967465 9.8 L38.29800826534079 5.9 L41.993878865799395 6.2 L46.44876705682346 7.9 L50.237006914719075 5.0 L54.49384641809506 6.8 L59.19287008921424 9.8 L64.26435106062218 7.6 L69.11712930884956 8.4 L72.27910798852092 9.5 L77.61901646063914 9.4 L83.01263582422884 7.0 L87.20957232118965 5.5 L92.11244101824678 5.3 L95.31448386577586 6.0 L98.80139342909214 6.7 L101.95912024076294 5.0 L105.41291503760122 5.5 L109.50374480370493 5.1 L115.12674193582639 8.1 L118.57239339181906 6.3 L122.61456202998016 6.8 L125.98308872226674 9.2 L131.9623968873809 7.3 L136.4139008566297 5.4 L139.72046370687423 6.7 L143.51473438202578 9.1 L146.99905021360507 5.1 L152.8520069322292 7.6 L156.29181454892645 7.7 L159.37294202319296 7.6 L165.3084457513499 9.3 L170.3970361090733 6.3 L174.49713548435685 5.8 L179.81294920956293 7.7 L185.15011388357746 6.6 L188.819238902887 9.1 L194.77401705465968 9.3 L200.19225280901668 9.1 L205.4118718701438 6.1 L209.96478804287432 6.8 L213.05172849509842 5.1 L216.88998411224551 6.3 L221.9675499373459 9.8 L226.30923297064606 9.7 L232.27334714525463 9.8 L236.36725480134024 6.1 L240.04779228153242 6.0 L243.6609123713611 8.1 L249.36183738501344 9.2 L253.80025766379805 8.3 L259.199188898347 5.4 L264.1809458489617 9.5 L269.52785450125594 8.8 L273.9619527350379 5.9 L279.32935902809874 6.7 L284.7318297347888 9.9 L288.9193452199971 7.0 L294.7597362393918 8.6 L298.26974721930753 5.6 L301.723199320452 9.5 L307.1427052665486 5.7 L312.6222367021248 9.9 L317.5940415803328 6.8 L322.2400217122932 5.7 L325.2827505267615 9.9 L330.231774535783 7.6 L336.0326489509553 7.2 L341.64787773492355 9.1 L345.281004746908 6.3 L349.1599047049187 6.2 L353.91921620941656 6.3 L358.1762538676802 5.7 L363.90630503662686 6.8 L368.2807879960421 7.9 L373.9936783196682 7.1 L379.7468415726962 7.5 L384.342316460004 7.6 L387.39843106372024 7.2 L390.9477547255368 5.0 L396.3452660770135 5.9 L400 12Z'/%3E%3C/svg%3E")}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){padding-bottom:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 10'%3E%3Cpath d='M2 5 C30 1 50 9 70 5 S110 1 138 5' fill='none' stroke='%23B08A2E' stroke-width='1.4'/%3E%3Cpath d='M70 1 L73 5 L70 9 L67 5Z' fill='%23B08A2E'/%3E%3C/svg%3E") left bottom/140px 10px no-repeat}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeToday .linkCard{margin:0;position:relative}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured{border-radius:3px;box-shadow:0 0 0 3px #E2B84F, 0 0 0 7px #7A5A12, 0 0 0 9px #C9A55A, 0 14px 30px rgba(42,26,18,.35)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeToday .homeFeatured .rcImg{border-radius:0}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .uRow.checked .uLead{background:#B08A2E !important;border-color:#B08A2E !important;color:#2A1A12 !important}
+.skinScene-zauberschule .scStars{position:absolute;inset:0;background:radial-gradient(1px 1px at 12% 20%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 28% 62%, #fff 50%, transparent 52%), radial-gradient(1.5px 1.5px at 44% 34%, #F4E7C8 50%, transparent 52%), radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 77% 54%, #fff 50%, transparent 52%), radial-gradient(1.5px 1.5px at 88% 26%, #F4E7C8 50%, transparent 52%), radial-gradient(1px 1px at 6% 78%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 52% 80%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 95% 72%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 36% 8%, #fff 50%, transparent 52%);opacity:.7}
+.skinScene-zauberschule .scCandle{position:absolute;width:7px;height:26px;border-radius:2px;background:linear-gradient(to right, #E9DFC6, #FFF8E6 45%, #CFC3A4);
+  animation:candleFloat 5s ease-in-out var(--d) infinite alternate}
+.skinScene-zauberschule .scCandle::before{content:"";position:absolute;left:50%;top:-11px;width:7px;height:11px;margin-left:-3.5px;border-radius:50% 50% 45% 45% / 60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 70%, #FFF6C9 0 30%, #FFC24A 55%, rgba(255,140,40,0) 75%);box-shadow:0 0 14px 4px rgba(255,190,80,.35);
+  animation:flameFlick 1.6s ease-in-out var(--d) infinite alternate}
+@media (prefers-reduced-motion: no-preference){
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .homeFeatured .rcImg img,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .recipePageHero .recipeHeroImg{animation:portraitLive 9s ease-in-out infinite alternate}
+}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{margin-top:84px}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{padding-bottom:96px !important}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .houseCup{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:8px 16px 8px 10px;border-radius:999px;
+  background:rgba(244,231,200,.10);box-shadow:inset 0 0 0 1px rgba(226,184,79,.45);color:var(--onField);font-size:var(--fs14);line-height:1.2}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .houseCup svg{width:30px;height:35px;flex:none;filter:drop-shadow(0 0 6px rgba(226,184,79,.45))}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .houseCup b{font-family:var(--fontDisplay);font-size:var(--fs18);color:#F3D27A;font-weight:400}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList{position:relative;padding:22px 4px;
+  background:linear-gradient(90deg,rgba(110,70,20,.10),transparent 6%,transparent 94%,rgba(110,70,20,.10)),#F8F0DC;border-radius:6px;
+  box-shadow:0 14px 30px -18px rgba(60,30,10,.55)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList::before,html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList::after{content:"";position:absolute;left:-8px;right:-8px;height:16px;border-radius:8px;
+  background:linear-gradient(to bottom,#C9AE7C,#F1E1B8 45%,#A88A55);box-shadow:0 2px 4px rgba(60,30,10,.3)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList::before{top:-8px}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] #shopList::after{bottom:-8px}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .listGroup{background:transparent;box-shadow:none}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .uRow .uName{font-family:var(--fontDisplay);font-size:var(--fs18);color:#2A1A12}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .uRow{transition:opacity .6s ease}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .uRow.checked{opacity:.38}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) body[data-page="shopping"] .uRow.checked .uName{text-decoration:none}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d){--candle:#F4C430}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) :is(.card,.listGroup,.notesCard){box-shadow:inset 0 0 0 1px rgba(154,118,40,.55),inset 0 0 0 4px rgba(248,240,220,1),inset 0 0 0 5px rgba(154,118,40,.3) !important}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px #9A7628,0 0 0 4px #F8F0DC,0 0 0 5px rgba(154,118,40,.45)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .notesArea{font-family:var(--fontDisplay);font-style:italic;color:#3B2414;font-size:var(--fs18)}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .worldClock{background:rgba(10,12,30,.5);box-shadow:inset 0 0 0 1px rgba(232,196,106,.45);border-radius:10px}
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .wcTime{color:#F4D58A;font-family:var(--fontDisplay)}
+@media (prefers-reduced-motion: no-preference){
+html.skin-zauberschule:not(._a):not(._b):not(._c):not(._d) .wcStream{stroke-dasharray:2 3;animation:wcSand .6s linear infinite} }
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageContent::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday::before{display:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageContent,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday ~ .section{
+  -webkit-mask:none !important;mask:none !important;border-radius:0 !important;box-shadow:none !important;background:transparent !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday{margin-top:28px !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageTitleBlock{padding-bottom:20px !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2){background-image:none !important;padding-left:0 !important;padding-bottom:0 !important;border:0 !important;box-shadow:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2)::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2)::after{content:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) .homeToday .linkCard::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) .homeToday .linkCard::after{content:none !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body{--field:#F1E3C2;--onField:#2A1A12;--onField2:#6A5240;--fieldFill:rgba(110,70,30,.08);--bg:#F1E3C2;--surface:#F8EED6;--statusBar:#2A1712;--gold:#9A7628}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e){background:#2A1712 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body{background:radial-gradient(120% 60% at 70% 10%,rgba(255,250,235,.55),transparent 60%),linear-gradient(90deg,rgba(90,55,25,.36),rgba(90,55,25,.06) 6%,transparent 12%),#F1E3C2 !important;
+  margin-left:8px;box-shadow:-6px 0 0 #E2CFA8,-8px 0 0 #CDB689;min-height:100vh}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body::before{background:#2A1712 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeGreetingTitle,.pageTitleBlock .h1,.homeGreetingSub,.brandWordmark){color:#2A1A12 !important;text-shadow:none !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeGreetingSub{font-family:var(--fontDisplay);font-style:italic;font-size:var(--fs18)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun{text-align:center;font:italic var(--fs14) var(--fontDisplay);color:#7A5A3A;letter-spacing:.08em;margin:2px 0 10px}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun b{font-style:normal;color:var(--gold);margin:0 8px}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRibbon{position:absolute;right:104px;top:0;width:20px;height:calc(env(safe-area-inset-top) + 130px);z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,#6E1A2A,#8E2436 50%,#6E1A2A);clip-path:polygon(0 0,100% 0,100% 100%,50% 88%,0 100%);filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsIntro{margin:0 0 22px;font:var(--fs18)/1.45 var(--fontDisplay);color:#3B2A1A}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsIntro::first-letter{float:left;font-size:3.6em;line-height:.8;color:#6E1A2A;margin:6px 10px 0 0;padding:4px 7px;border:1.5px solid var(--gold);background:#F8EED6;box-shadow:inset 0 0 0 3px #F1E3C2,inset 0 0 0 4px rgba(154,118,40,.6)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.homeQuickBtn,.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:rgba(255,250,235,.6) !important;color:#2A1A12 !important;box-shadow:inset 0 0 0 1px rgba(154,118,40,.55) !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .searchRowIcon input{background:transparent !important;color:#2A1A12 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(input)::placeholder{color:#7A5A3A !important;font-style:italic}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured{background:none !important;box-shadow:none !important;border-radius:0 !important;padding:0 0 30px !important;overflow:visible !important;display:flex;flex-direction:column;align-items:center}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcImg{width:min(62vw,260px);aspect-ratio:236/290;height:auto !important;border-radius:50% !important;padding:9px;
+  background:conic-gradient(from 200deg,#8A6A22,#F3D27A,#B08A2E,#F7E0A0,#8A6A22,#F3D27A,#8A6A22) !important;box-shadow:0 12px 26px rgba(60,30,10,.35) !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcImg img{border-radius:50% !important;border:4px solid #3A2410}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .heroOverlayCat{display:none}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcBody{position:relative !important;inset:auto !important;background:none !important;padding:0 !important;margin-top:-18px;display:flex;flex-direction:column;align-items:center;color:#2A1A12 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .homeFeaturedTitle{padding:6px 18px 5px;font:italic var(--fs18) var(--fontDisplay) !important;color:#2A1A12 !important;background:linear-gradient(#F7E0A0,#C9A55A);border-radius:3px;box-shadow:0 2px 0 #8A6A22;text-shadow:none !important;text-align:center}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .recipeMeta{color:#6A5240 !important;margin-top:8px;justify-content:center}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2){font-size:var(--fs14) !important;letter-spacing:.24em !important;text-transform:uppercase;color:var(--gold) !important;width:100%;text-align:center}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeSectionHead{justify-content:center;position:relative}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .homeSectionHead .homeAllLink{position:absolute;right:0}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2)::before{content:"❦  " !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2)::after{content:"  ❦" !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeCard .rcImg{border-radius:2px !important;box-shadow:0 0 0 1px #9A7628,0 0 0 4px #F8EED6,0 0 0 5px rgba(154,118,40,.5),0 6px 14px rgba(60,30,10,.25) !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid{counter-reset:zsPage 6}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .linkCard{counter-increment:zsPage 7}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .rcBody{display:flex !important;flex-direction:row !important;flex-wrap:wrap;align-items:baseline}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .recipeTitle{flex:0 1 auto}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .rcBody::before{content:"";order:1;flex:1 1 20px;min-width:20px;margin:0 6px;border-bottom:1.5px dotted rgba(122,90,58,.6);transform:translateY(-.35em)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .rcBody::after{content:"S. " counter(zsPage);order:2;font:italic var(--fs16) var(--fontDisplay);color:#6E1A2A}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .recipeMeta{order:3;flex-basis:100%}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeBody ol{list-style:upper-roman}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .bottomRail{background:linear-gradient(#4A1A22,#38121A) !important;border-radius:8px !important;border:0 !important;box-shadow:inset 0 0 0 1px #9A7628,inset 0 0 0 4px #38121A,inset 0 0 0 5px rgba(201,165,90,.5),0 6px 18px rgba(0,0,0,.35) !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem{color:#E9D6A8 !important;border-radius:6px !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem.active{background:rgba(201,165,90,.18) !important;color:#FFE7A3 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .tabLabel{font-family:var(--fontDisplay)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .worldClock{background:rgba(255,250,235,.55) !important;box-shadow:inset 0 0 0 1px rgba(154,118,40,.6) !important;color:#2A1A12 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .wcTime{color:#6E1A2A !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .wcLabel{color:#7A5A3A !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .houseCup{background:rgba(255,250,235,.55);box-shadow:inset 0 0 0 1px rgba(154,118,40,.6);color:#2A1A12}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .houseCup b{color:#6E1A2A}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay .cookStep{font-family:var(--fontDisplay);background:#F8EED6;color:#2A1A12;box-shadow:inset 0 0 0 1px rgba(154,118,40,.55),inset 0 0 0 4px #F8EED6,inset 0 0 0 5px rgba(154,118,40,.3)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay .cookStep::first-letter{float:left;font-size:3em;line-height:.8;color:#6E1A2A;margin:6px 8px 0 0}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .recipePageCard .card{box-shadow:none !important;border:0 !important;clip-path:none !important;background:transparent !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:rgba(154,118,40,.3)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#6E1A2A}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 6px);margin:0 !important;font-size:var(--fs12) !important;pointer-events:none}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRun{text-align:left;padding-left:30px}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e) .zsRibbon{right:76px !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body{--field:#F4EEDB;--bg:#F4EEDB;--surface:#F8F3E3;--onField:#2B2118;--onField2:#6A5240;--text:#2B2118;--sub:#5A4632;--sub2:#5A4632;--gold:#A8862A;--brand:#581845;--onBrand:#F8EDD8;--leaf:#581845;--onLeaf:#F8EDD8;--sel:#581845;--onSel:#F8EDD8;
+  --statusBar:#1F1A17;--fontDisplay:"Skin Garamond", "Skin Zauber", "Hoefler Text", Georgia, serif;--fontQuill:"Skin Feder", "Bradley Hand", cursive;
+  --zsLeather:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .05 0 0 0 0 .03 0 0 0 0 .02 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f){background:var(--zsLeather),radial-gradient(120% 80% at 50% 0%,#3A2E26,#1F1A17 70%) fixed,#1F1A17 !important;background-size:140px 140px,auto,auto !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body{margin:0 9px !important;box-shadow:none !important;
+  background:radial-gradient(140% 70% at 50% 30%,transparent 55%,rgba(110,60,20,.28) 85%,rgba(60,30,10,.55)),
+    radial-gradient(30% 12% at 92% 4%,rgba(70,35,10,.35),transparent 70%),radial-gradient(26% 10% at 6% 60%,rgba(70,35,10,.28),transparent 70%),
+    linear-gradient(90deg,rgba(60,30,10,.4),transparent 3%,transparent 97%,rgba(60,30,10,.4)),#F4EEDB !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .cookOverlay{--cBg:#1F1A17;--cCard:#F4EEDB;--cText:#2B2118;--cSub:#5A4632;--cLeaf:#581845;--cOnLeaf:#F8EDD8}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .homeBrand .brandWordmark{font:500 italic var(--fs22) var(--fontDisplay) !important;background:linear-gradient(100deg,#8A6A1E,#E9C860 35%,#B08A2E 55%,#F3D27A 75%,#8A6A1E);-webkit-background-clip:text;background-clip:text;color:transparent !important;
+  filter:drop-shadow(0 1px 0 rgba(60,30,10,.25))}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) :is(.homeGreetingTitle,.pageTitleBlock .h1,.recipeName,.homeSectionTitle,.pageContent .h2,.recipeBody h2){font-family:var(--fontDisplay) !important;font-style:italic !important;font-weight:500 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .zsSeal{position:absolute;right:18px;top:calc(env(safe-area-inset-top) + 64px);width:120px;height:120px;opacity:.09;pointer-events:none}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .zsRibbon{background:linear-gradient(90deg,#7A1420,#A41E2E 50%,#7A1420) !important;pointer-events:auto !important;cursor:pointer;width:22px !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .zsRibbon::after{content:"";position:absolute;left:-12px;right:-12px;top:0;bottom:-6px}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .zsRibbon:focus-visible{outline:2px solid #D4AF37;outline-offset:2px}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage :is(.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:transparent !important;border-radius:0 !important;box-shadow:inset 0 -1.5px 0 #B08A2E,0 1px 0 rgba(212,175,55,.35) !important;color:#2B2118 !important;font:italic var(--fs18) var(--fontDisplay)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .inkFlow{animation:zsInk .5s ease-out}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage .homeQuickBtn{background:#EFE5C8 !important;border-radius:0 !important;box-shadow:inset 0 0 0 1px rgba(168,134,42,.55),0 3px 6px rgba(60,30,10,.18) !important;
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);position:relative;font-family:var(--fontDisplay);font-style:italic;font-size:var(--fs16)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage .homeQuickBtn::after{content:"";position:absolute;right:0;top:0;width:16px;height:16px;background:linear-gradient(225deg,transparent 50%,#D9C99E 50%,#F6EDD3);box-shadow:-1px 1px 2px rgba(60,30,10,.3)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .recipeCookBtn{background:linear-gradient(#6A1F55,#4A1238) !important;color:#F8EDD8 !important;font-family:var(--fontDisplay);font-style:italic}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .zsMargin{margin:0 0 10px auto;max-width:78%;font:500 var(--fs22)/1.1 var(--fontQuill);color:#6A1F2A;transform:rotate(-2.5deg);text-align:right}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .zsMargin::before{content:"✎ ";color:#A8862A}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .notesArea{font:500 var(--fs22)/1.2 var(--fontQuill) !important;color:#3A2418 !important;background:repeating-linear-gradient(transparent 0 26px,rgba(88,24,69,.16) 26px 27px) !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) #ingredientsList .uRow.checked .uLabel{text-decoration:line-through;text-decoration-color:#D4AF37;text-decoration-thickness:2px;text-shadow:0 0 6px rgba(212,175,55,.55);opacity:.7}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .bottomRail{background:var(--zsLeather),linear-gradient(#2E2520,#1F1A17) !important;background-size:140px 140px,auto !important;
+  box-shadow:inset 0 0 0 1px #000,inset 0 0 0 3px #2E2520,inset 0 0 0 4px rgba(212,175,55,.55),0 8px 20px rgba(0,0,0,.45) !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .tabItem{color:#D4AF37 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .tabItem.active{background:radial-gradient(closest-side,rgba(212,175,55,.28),transparent) !important;color:#FFE7A3 !important}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .tabItem.active .tabIcon{filter:drop-shadow(0 0 6px rgba(255,215,110,.85))}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) ::selection{background:rgba(88,24,69,.22)}
+html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.layout-home .homeBrand{padding-top:16px}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f)) .cookOverlay .cookTab:not(.active){color:#E9DCC0 !important;opacity:1 !important}
+.skIntro-zauberschule{background:var(--zsLeather,none),radial-gradient(90% 70% at 50% 40%,#3A2E26,#151110 75%);background-size:140px 140px,auto}
+.skIntro-zauberschule .ivPage{padding:42px 30px;background:radial-gradient(140% 90% at 50% 40%,transparent 55%,rgba(110,60,20,.3)),#F4EEDB;box-shadow:0 20px 50px rgba(0,0,0,.6);text-align:center;
+  animation:ivOpen .7s cubic-bezier(.2,.8,.2,1) both;transform-origin:50% 50%}
+.skIntro-zauberschule .ivInk{position:relative;font:500 italic clamp(38px,11vw,76px) "Skin Garamond", Georgia, serif;color:#8A6A1E;
+  background:linear-gradient(100deg,#7A5A16,#D4AF37 40%,#8A6A1E 60%,#F3D27A 80%,#7A5A16);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  clip-path:inset(0 100% 0 0);animation:ivWrite 1.5s cubic-bezier(.45,.05,.4,1) .5s forwards}
+.skIntro-zauberschule .ivNib{position:absolute;top:50%;left:0;width:10px;height:10px;margin:-5px;border-radius:50%;background:#FFF2C0;box-shadow:0 0 10px 4px rgba(255,215,110,.9);animation:ivNib 1.5s cubic-bezier(.45,.05,.4,1) .5s both}
+.skIntro-zauberschule .ivSub{margin-top:10px;font:500 italic 18px "Skin Garamond", Georgia, serif;color:#5A4632;animation:ivFadeUp .8s ease 1.9s both}
+.skIntro-zauberschule .ivStar{position:absolute;left:50%;top:48%;width:6px;height:6px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 8px #FFD36E;opacity:0;animation:ivStar 1.1s cubic-bezier(.2,.8,.2,1) 1.95s both}
+.skIntro-zauberschule .ivStar:nth-of-type(odd){--dx:-1}
+.skIntro-zauberschule .ivStar:nth-of-type(2){--a:30deg}
+.skIntro-zauberschule .ivStar:nth-of-type(3){--a:60deg}
+.skIntro-zauberschule .ivStar:nth-of-type(4){--a:95deg}
+.skIntro-zauberschule .ivStar:nth-of-type(5){--a:125deg}
+.skIntro-zauberschule .ivStar:nth-of-type(6){--a:150deg}
+.skIntro-zauberschule .ivStar:nth-of-type(7){--a:185deg}
+.skIntro-zauberschule .ivStar:nth-of-type(8){--a:210deg}
+.skIntro-zauberschule .ivStar:nth-of-type(9){--a:240deg}
+.skIntro-zauberschule .ivStar:nth-of-type(10){--a:265deg}
+.skIntro-zauberschule .ivStar:nth-of-type(11){--a:290deg}
+.skIntro-zauberschule .ivStar:nth-of-type(12){--a:315deg}
+.skIntro-zauberschule .ivStar:nth-of-type(13){--a:340deg}
+.skIntro-zauberschule .ivStar:nth-of-type(14){--a:5deg}
+:is(html.skin-zauberschule,html.skin-akte,html.skin-insel) .cookOverlay :is(.cookStep,.prepRow,.prepSub,.cookStepIng,.cookNextText,.cookIngs):not(#_x#_y){
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif !important;font-style:normal !important;letter-spacing:0 !important;text-transform:none !important;text-shadow:none !important}
+html.skin-zauberschule .cookOverlay .cookStep:not(#_x#_y)::first-letter{float:none !important;font-size:inherit !important;line-height:inherit !important;color:inherit !important;margin:0 !important}

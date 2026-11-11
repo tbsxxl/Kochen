@@ -1,0 +1,42 @@
+/* Skin „diner“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Regeln in der Reihenfolge ihrer Entstehung; spätere Abschnitte überschreiben frühere (Selektoren mit :not(._a)… bzw. :not(#_x#_y)). */
+html.skin-diner:not(._a):not(._b):not(._c):not(._d),html.skin-diner:not(._a):not(._b):not(._c):not(._d) body{
+  --field:#B3122E;--onField:#FFFFFF;--onField2:rgba(255,255,255,.88);--fieldFill:rgba(255,255,255,.20);
+  --bg:#FFFFFF;--surface:#E6F6F0;--surface2:#F3FBF8;--fill:#DDF2EA;--line:#B7DDCF;--lineStrong:#7DBFAA;
+  --text:#1A1A1A;--sub:#4A4A4A;--sub2:#4A4A4A;--muted:#5E5E5E;
+  --brand:#B3122E;--onBrand:#FFFFFF;--leaf:#A3102A;--onLeaf:#FFFFFF;--brandSoft:#FBE3E7;--leafSoft:#FBE3E7;
+  --sel:#B3122E;--onSel:#FFFFFF;--accent:#A3102A;--accentSoft:#FBE3E7;--onAccent:#FFFFFF;--herb:#B3122E;--coffee:#B3122E;
+  --glass:rgba(255,255,255,.92);
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Diner", cursive;
+  color-scheme:light}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#EAF7F2;--surface:#FFFFFF}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#EAF7F2;--cCard:#FFFFFF;--cFill:rgba(179,18,46,.08);--cLine:#B7DDCF;--cText:#1A1A1A;--cSub:#4A4A4A;--cLeaf:#B3122E;--cOnLeaf:#FFFFFF}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.brandWordmark){
+  font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;letter-spacing:0;line-height:1.25}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock .h1,html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeGreetingTitle{
+  color:#FFFFFF;text-shadow:0 0 2px #fff, 0 0 10px #FF6B81, 0 0 22px #FF2D55}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{padding-bottom:64px}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock::after,html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeQuick::after{content:"";position:absolute;left:calc(50% - 50vw);width:100vw;height:16px;
+  background:repeating-conic-gradient(#111 0 25%, #FFFFFF 0 50%) 0 0/16px 16px}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock::after{bottom:30px}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeQuick{position:relative}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeQuick::after{bottom:-24px}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{margin-top:34px}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg,html.skin-diner:not(._a):not(._b):not(._c):not(._d) .catTile{box-shadow:0 0 0 3px #E9ECEF, 0 0 0 4px #9CA4AC, 0 6px 14px rgba(0,0,0,.14)}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .recipeCard{overflow:visible}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d).listCards .grid .recipeCard .rcImg{margin:4px 0}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .recipeTitle,html.skin-diner:not(._a):not(._b):not(._c):not(._d) .homeSectionTitle,html.skin-diner:not(._a):not(._b):not(._c):not(._d) .h2{font-weight:800}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:linear-gradient(to bottom, #FAFBFC 0%, #E3E7EB 55%, #C7CDD3 100%) !important;border:0;border-top:4px solid #B3122E;
+  border-radius:14px 14px 22px 22px;box-shadow:0 8px 20px rgba(0,0,0,.22), inset 0 1px 0 #fff}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#3A3A3A}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:#B3122E !important;color:#FFFFFF !important}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .recipeCookBtn,html.skin-diner:not(._a):not(._b):not(._c):not(._d) .btn.action,html.skin-diner:not(._a):not(._b):not(._c):not(._d) .btn.brandBtn{box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .chipMainCat{background:#2BB59A;color:#08241D}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody{display:flex !important;flex-direction:row !important;align-items:last baseline;flex-wrap:nowrap;gap:0}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody{flex-wrap:wrap !important}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody .recipeTitle{flex:1 1 100%;min-width:0}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d).listCards .grid .rcBody{flex-wrap:nowrap !important}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d).listCards .grid .rcBody .recipeTitle{flex:0 1 auto}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody::after{content:"";order:1;flex:1 1 16px;min-width:16px;margin:0 8px;height:0;border-bottom:3px dotted #B3122E;opacity:.55;transform:translateY(-.3em)}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody .recipeMeta{order:2;flex:none;margin:0;font-weight:700;color:#A3102A}
+html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody .recipeMeta .metaItem + .metaItem{display:none}

@@ -1,0 +1,44 @@
+/* Skin „bauhaus“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Regeln in der Reihenfolge ihrer Entstehung; spätere Abschnitte überschreiben frühere (Selektoren mit :not(._a)… bzw. :not(#_x#_y)). */
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d),html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body{
+  --field:#111111;--onField:#FFFFFF;--onField2:rgba(255,255,255,.8);--fieldFill:rgba(255,255,255,.14);
+  --bg:#FFFFFF;--surface:#F3F3F3;--surface2:#FAFAFA;--fill:#EEEEEE;--line:rgba(17,17,17,.14);--lineStrong:#111111;
+  --text:#111111;--sub:#3A3A3A;--sub2:#3A3A3A;--muted:#4F4F4F;
+  --brand:#111111;--onBrand:#FFFFFF;--leaf:#111111;--onLeaf:#FFFFFF;--brandSoft:#EEEEEE;--leafSoft:#EEEEEE;
+  --sel:#111111;--onSel:#FFFFFF;--accent:#111111;--accentSoft:#EEEEEE;--onAccent:#FFFFFF;--herb:#111111;--coffee:#111111;
+  --glass:#FFFFFF;
+  --kFleisch:#C8202A;--kVeg:#F2C230;--kFisch:#1E4FB8;
+  --fontUi:"Skin Bauhaus", -apple-system, "Inter", sans-serif;--fontDisplay:"Skin Bauhaus", "Futura", sans-serif;
+  color-scheme:light}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#FFFFFF;--surface:#F3F3F3}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#FFFFFF;--cCard:#F3F3F3;--cFill:#EEEEEE;--cLine:rgba(17,17,17,.14);--cText:#111;--cSub:#3A3A3A;--cLeaf:#111;--cOnLeaf:#FFFFFF}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) *,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) *::before,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) *::after{border-radius:0 !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeActBtn,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .navIconBtn,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .stepBtn,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipePortionStep,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .authorAvatar,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .profileBadge,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .sheetSwitch,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .sheetSwitch::after,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .star,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .tabItem,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) #recipeBack{border-radius:999px !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact){
+  font-family:var(--fontDisplay);font-weight:600;letter-spacing:-.01em}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-kind] .recipeTitle::before,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend span::before{content:"";display:inline-block;flex:0 0 auto;width:.62em;height:.62em;margin-right:.4em;vertical-align:.04em;background:var(--kFleisch)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-kind="veg"] .recipeTitle::before,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend [data-kind="veg"]::before{background:var(--kVeg);border-radius:50% !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .recipeCard[data-kind="fisch"] .recipeTitle::before,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend [data-kind="fisch"]::before{background:var(--kFisch);clip-path:polygon(50% 0, 100% 100%, 0 100%);width:.72em}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend{display:flex !important;gap:16px;margin-top:12px;font-size:var(--fs14);color:var(--onField2)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .kindLegend span{display:inline-flex;align-items:center}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#111111 !important;border:0;box-shadow:none !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#FFFFFF !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:#FFFFFF !important;color:#111111 !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .filterChip,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .chip,html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .segmented{box-shadow:inset 0 0 0 1.5px #111 !important;background:#FFFFFF}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) #recipeBack{background:#FFFFFF !important;color:#111 !important;box-shadow:inset 0 0 0 1.5px #111 !important}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind]{position:relative;padding-left:30px}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind]::before{content:"";position:absolute;left:4px;top:50%;width:14px;height:14px;transform:translateY(-50%)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind="fleisch"]::before{background:var(--kFleisch)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind="veg"]::before{background:var(--kVeg);border-radius:50%}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .planEntry[data-kind="fisch"]::before{background:var(--kFisch);clip-path:polygon(50% 0,100% 100%,0 100%)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .weekBalance{margin:0 0 20px;padding:14px 16px;border:2px solid #111;background:#fff}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbBar{display:flex;height:16px;gap:3px;margin-bottom:10px}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbBar i[data-kind="fleisch"]{background:var(--kFleisch)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbBar i[data-kind="veg"]{background:var(--kVeg)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbBar i[data-kind="fisch"]{background:var(--kFisch)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:var(--fs14);font-weight:600}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend span{display:inline-flex;align-items:center;gap:6px}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend span::before{content:"";width:10px;height:10px}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend [data-kind="fleisch"]::before{background:var(--kFleisch)}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend [data-kind="veg"]::before{background:var(--kVeg);border-radius:50%}
+html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend [data-kind="fisch"]::before{background:var(--kFisch);clip-path:polygon(50% 0,100% 100%,0 100%)}

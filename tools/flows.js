@@ -66,7 +66,9 @@ const RECIPES = fs.readdirSync(path.join(__dirname, '..', '_recipes')).filter(f 
   await page.tap('#cookNext'); await page.waitForTimeout(150);
   check((await page.textContent('#cookStepPill'))?.startsWith('2/'), 'Kochmodus: „Weiter“ geht nicht zu Schritt 2');
   await page.tap('#cookClose'); await page.waitForTimeout(300);
-  check(await page.evaluate(() => !document.querySelector('.nowCooking')?.hidden), '„Kochen läuft“-Kapsel fehlt nach dem Schließen');
+  // Auf der Seite des Rezepts selbst bleibt die Kapsel aus (dort steht „Kochen“), der Fortschritt ist aber gemerkt
+  check(await page.evaluate(() => document.querySelector('.nowCooking')?.hidden === true), '„Kochen läuft“-Kapsel verdeckt die eigene Rezeptseite');
+  check(await page.evaluate(() => JSON.parse(localStorage.getItem('kochbuch.ui.cooking') || 'null')?.step === 1), 'Kochmodus: Fortschritt wird nach dem Schließen nicht gemerkt');
 
   await page.tap('#addToShopping'); await page.waitForTimeout(150);
   const shop = await page.evaluate(() => JSON.parse(localStorage.getItem('kochbuch.shopping') || '[]'));

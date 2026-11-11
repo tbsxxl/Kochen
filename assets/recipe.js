@@ -567,6 +567,7 @@ const cookOverlay = $("#cookOverlay");
     // alte Einträge anderer Rezepte verfallen lassen
     for(const k of Object.keys(all)) if(Date.now() - all[k].t > 12 * 3600e3) delete all[k];
     ls.set(PREP_KEY, all);
+    saveCookProgress(true);
     lightTap(); renderPrep();
     cookPrep.querySelector(`[data-k="${r.dataset.k}"]`)?.focus({ preventScroll: true });
   });
@@ -584,6 +585,8 @@ const cookOverlay = $("#cookOverlay");
       cookStepText.hidden = true;
       if(cookStepIngs) cookStepIngs.hidden = true;
       const np = $("#cookNextPreview"); if(np) np.hidden = true;
+      // Zutaten rechts (iPad) ohne Hervorhebung: die gilt erst für Schritt 1
+      cookOverlay?.querySelectorAll(".isStep").forEach((el)=> el.classList.remove("isStep"));
       cookStepPill.textContent = "Vorbereiten";
       cookStepPill.setAttribute("aria-label", "Vorbereiten, vor Schritt 1");
       if(cookProgressBar) cookProgressBar.style.transform = "scaleX(0)";
@@ -669,11 +672,13 @@ const cookOverlay = $("#cookOverlay");
 
   // 3) Fortschritt im Kochmodus merken → Startseite zeigt „Weiter kochen“
   const COOK_KEY = "kochbuch.ui.cooking";
-  function saveCookProgress(){
+  // force: in der Vorbereitung wurde etwas abgehakt bzw. „Los geht’s“ gedrückt → ab jetzt merken
+  function saveCookProgress(force){
     // Nur Reinschauen (Schritt 1, noch nichts gemerkt) startet keine „Kochen läuft“-Kapsel
     const cur = ls.get(COOK_KEY, null);
-    if(stepIdx === 0 && !(cur && cur.id === data.id)) return;
-    ls.set(COOK_KEY, { id: data.id, url: data.id, title: data.title, image: data.image || "", step: stepIdx, total: steps.length, t: Date.now() });
+    if(stepIdx === 0 && !force && !(cur && cur.id === data.id)) return;
+    // prep: true = noch bei der Vorbereitung („Weiterkochen“ zeigt „Vorbereiten“ und öffnet wieder diese Seite)
+    ls.set(COOK_KEY, { id: data.id, url: data.id, title: data.title, image: data.image || "", step: stepIdx, total: steps.length, prep: prepMode || undefined, t: Date.now() });
     window.dispatchEvent(new Event("kochbuch:cooking"));
   }
   function savedCookStep(){
@@ -698,7 +703,8 @@ const cookOverlay = $("#cookOverlay");
     renderCookIngredients();
     prepData = null;
     // Neu begonnen (kein gemerkter Fortschritt) → erst die Vorbereiten-Seite
-    showPrep(stepIdx === 0 && !(ls.get(COOK_KEY, null)?.id === data.id));
+    const saved = ls.get(COOK_KEY, null), mine = saved && saved.id === data.id && Date.now() - saved.t < 12 * 3600e3;
+    showPrep(stepIdx === 0 && (!mine || saved.prep));
     requestWakeLock();
     window.dispatchEvent(new CustomEvent("kochbuch:cookmode", { detail: { open: true } }));
   }
@@ -726,7 +732,7 @@ const cookOverlay = $("#cookOverlay");
   cookOverlay?.addEventListener('click', (e)=>{ if(e.target === cookOverlay) closeCook(); });
   cookPrev?.addEventListener('click', ()=>{ if(stepIdx === 0){ showPrep(true); lightTap(); return; } stepIdx--; renderCookStep(); lightTap(); });
   cookNext?.addEventListener('click', ()=>{
-    if(prepMode){ showPrep(false); lightTap(); return; }
+    if(prepMode){ showPrep(false); saveCookProgress(true); lightTap(); return; }
     if(cookNext.dataset.last){ try{ localStorage.removeItem(COOK_KEY); }catch{} closeCook(); markCooked(); successTap(); window.dispatchEvent(new Event("kochbuch:cooking"));
       // kleiner Abschluss: der „Kochen“-Knopf poppt kurz auf, die Gekocht-Zeile blinkt einmal
       setTimeout(()=>{ pop(cookingQuick); flash(statsLine); }, 280);

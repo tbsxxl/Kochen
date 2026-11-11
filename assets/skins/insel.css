@@ -1,0 +1,183 @@
+/* Skin „insel“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Regeln in der Reihenfolge ihrer Entstehung; spätere Abschnitte überschreiben frühere (Selektoren mit :not(._a)… bzw. :not(#_x#_y)). */
+html.skin-insel:not(._a):not(._b):not(._c):not(._d),html.skin-insel:not(._a):not(._b):not(._c):not(._d) body{
+  --field:#1F3B2A;--onField:#EFE7D2;--onField2:rgba(239,231,210,.8);--fieldFill:rgba(239,231,210,.14);
+  --bg:#E8E1CF;--surface:#F3EEE1;--surface2:#FAF7EF;--fill:rgba(31,59,42,.08);--line:rgba(31,59,42,.16);--lineStrong:rgba(31,59,42,.4);
+  --text:#1E241C;--sub:#4A5244;--sub2:#4A5244;--muted:#5B6354;
+  --brand:#1F3B2A;--onBrand:#EFE7D2;--leaf:#2C5A3E;--onLeaf:#EFE7D2;--brandSoft:rgba(31,59,42,.10);--leafSoft:rgba(31,59,42,.10);
+  --sel:#2C5A3E;--onSel:#EFE7D2;--accent:#2C5A3E;--accentSoft:rgba(31,59,42,.10);--onAccent:#EFE7D2;--herb:#1F3B2A;--coffee:#1F3B2A;
+  --glass:rgba(243,238,225,.97);
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Insel", ui-monospace, monospace;
+  color-scheme:light}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#E8E1CF;--surface:#F3EEE1}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#E8E1CF;--cCard:#F3EEE1;--cFill:rgba(31,59,42,.08);--cLine:rgba(31,59,42,.16);--cText:#1E241C;--cSub:#4A5244;--cLeaf:#1F3B2A;--cOnLeaf:#EFE7D2}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.brandWordmark,.navCompact){
+  font-family:var(--fontDisplay);font-weight:400;font-synthesis:none;letter-spacing:0}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .recipeMeta,html.skin-insel:not(._a):not(._b):not(._c):not(._d) .metaItem,html.skin-insel:not(._a):not(._b):not(._c):not(._d) .resultCount{font-family:var(--fontDisplay)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .cookTimerTime{display:inline-block;font-family:var(--fontDisplay);font-size:2.6rem;line-height:1;padding:8px 12px;border-radius:8px;
+  background:linear-gradient(to bottom, #1A1A17 0 49%, #000 49% 51%, #22221E 51%);color:#F3EAD2;letter-spacing:.08em;font-variant-numeric:tabular-nums;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1), 0 2px 4px rgba(0,0,0,.25)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{border-radius:10px;box-shadow:0 0 0 1px rgba(31,59,42,.25)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#D9D0B8 !important;border:1px solid rgba(31,59,42,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.5), 0 6px 14px rgba(30,36,28,.2) !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:#1F3B2A !important;color:#EFE7D2 !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d),html.skin-insel:not(._a):not(._b):not(._c):not(._d) body{--field:#050607;--onField:#F2F2EE;--onField2:rgba(242,242,238,.72);--fieldFill:rgba(255,255,255,.12);--statusBar:#050607}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle){font-family:"Times New Roman", Times, Georgia, serif;font-weight:400;letter-spacing:.14em;color:#F2F2EE}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .cookTimer.isDone .cookTimerTime{color:transparent !important;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 24'%3E%3Cg fill='none' stroke='%23E2372B' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 20V4h8M10 12h6'/%3E%3Ccircle cx='28' cy='12' r='6'/%3E%3Cpath d='M28 6v12'/%3E%3Cpath d='M42 20l6-16 6 16M44 14h8'/%3E%3Cpath d='M62 4v16M62 12c6-8 10 0 4 8'/%3E%3Cpath d='M80 6c-4 0-4 6 0 6s4 6 0 6M88 4v16'/%3E%3C/g%3E%3C/svg%3E") center/86% 70% no-repeat, #0B0B0A !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{border-radius:0}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{content:"";position:absolute;left:0;right:0;height:16px;top:-15px;background:var(--bg);pointer-events:none;
+  -webkit-mask:var(--edge) 0 0/100% 100%;mask:var(--edge) 0 0/100% 100%}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d){--edge:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 14' preserveAspectRatio='none'%3E%3Cpath d='M0 14 V8 C10 2 20 2 30 7 S50 13 60 8 S75 3 80 6 V14Z'/%3E%3C/svg%3E")}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::before,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday::before{-webkit-mask-size:80px 100%;mask-size:80px 100%;-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){display:inline-block;border:2px solid currentColor;padding:4px 10px 2px;font-size:1.05rem;text-transform:uppercase;letter-spacing:.08em}
+.skinScene-insel{background:linear-gradient(to bottom, #050607 0%, #0D1A20 42%, #3A2A2A 70%, #C46A3E 86%, #E8A15F 100%)}
+.skinScene-insel .scSea{position:absolute;left:0;right:0;bottom:30px;height:46px;overflow:hidden;background:linear-gradient(to bottom, #1E3F52, #0E2633)}
+.skinScene-insel .scSea span{position:absolute;left:0;width:200%;height:8px;
+  background:repeating-linear-gradient(90deg, transparent 0 22px, rgba(255,220,180,.35) 22px 40px, transparent 40px 64px);animation:seaMove 9s linear infinite}
+.skinScene-insel .scSea span:first-child{top:8px}
+.skinScene-insel .scSea span:last-child{top:22px;opacity:.6;animation-duration:13s;animation-direction:reverse}
+.skinScene-insel .scLeaves{right:0;top:0;width:150px;height:130px}
+.skinScene-insel .scHorizon{bottom:30px}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle){font-family:"Times New Roman", Times, Georgia, serif;font-weight:400;letter-spacing:.12em;color:#F2F2EE}
+@media (prefers-reduced-motion: no-preference){
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.pageTitleBlock .h1,.homeGreetingTitle){animation:islandTitle 2.2s cubic-bezier(.2,.7,.2,1) both}
+}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.layout-home .homeToday{margin-top:84px}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageTitleBlock{padding-bottom:96px !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .islandCount{position:fixed;inset:0;z-index:5500;display:grid;place-items:center;background:rgba(5,6,7,.9)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icPanel{display:flex;flex-direction:column;align-items:center;gap:14px;color:#EFE7D2;font-family:var(--fontDisplay)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icPanel small{font-size:var(--fs14);letter-spacing:.2em;opacity:.8}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits{display:flex;gap:6px}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span{position:relative;min-width:44px;padding:10px 8px;text-align:center;font-size:var(--fs28);color:#F2EBDA;
+  background:linear-gradient(to bottom,#2A2E2A 50%,#1C1F1C 50%);border-radius:6px;box-shadow:0 2px 0 #000,inset 0 0 0 1px rgba(255,255,255,.06)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#000}
+@media (prefers-reduced-motion: no-preference){
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span{animation:icFlip .26s cubic-bezier(.3,.7,.3,1) both;transform-origin:50% 50%}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(2){animation-delay:.18s}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(3){animation-delay:.36s}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(4){animation-delay:.54s}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(5){animation-delay:.72s}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .icDigits span:nth-child(6){animation-delay:.9s}
+}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .timerAlertBtn.primary{min-height:72px;font-family:var(--fontDisplay);font-size:var(--fs22);letter-spacing:.14em;
+  background:#EFE7D2;color:#1E241C;border-radius:8px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d),html.skin-insel:not(._a):not(._b):not(._c):not(._d) body{
+  --bg:#0A0A08;--surface:#14130F;--surface2:#1C1A15;--fill:rgba(255,176,0,.07);--line:rgba(255,176,0,.16);--lineStrong:rgba(255,176,0,.38);
+  --text:#F1E7D0;--sub:#C9B98F;--sub2:#C9B98F;--muted:#A8996F;
+  --brand:#D8CFB8;--onBrand:#1A1810;--leaf:#FFB000;--onLeaf:#1A1300;--brandSoft:rgba(255,176,0,.12);--leafSoft:rgba(255,176,0,.12);
+  --sel:#FFB000;--onSel:#1A1300;--accent:#FFB000;--accentSoft:rgba(255,176,0,.12);--onAccent:#1A1300;--herb:#FFB000;--coffee:#1C1A15;--petrol:#FFB000;
+  --glass:rgba(10,10,8,.95);color-scheme:dark}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.grouped{--bg:#0A0A08;--surface:#14130F}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .cookOverlay{--cBg:#050505;--cCard:#14130F;--cFill:rgba(255,176,0,.07);--cLine:rgba(255,176,0,.16);--cText:#F1E7D0;--cSub:#C9B98F;--cLeaf:#FFB000;--cOnLeaf:#1A1300}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.notesTitle){color:#FFB000;text-shadow:0 0 8px rgba(255,176,0,.35)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.homeSectionTitle,.pageContent .h2){border-color:rgba(255,176,0,.6) !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) body:not(.fieldPage)::after,html.skin-insel:not(._a):not(._b):not(._c):not(._d) body.fieldPage .pageContent::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) :is(.recipeCookBtn,.btn.primary,.miseGo,.timerAlertBtn.primary){background:linear-gradient(to bottom,#E6DDC6,#CFC4A8) !important;color:#1A1810 !important;border-radius:8px !important;box-shadow:inset 0 -4px 0 rgba(0,0,0,.22),0 2px 0 #000 !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .recipeCard .rcImg{box-shadow:0 0 0 1px rgba(255,176,0,.3)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .bottomRail{background:#0E0D0A !important;border:1px solid rgba(255,176,0,.25) !important;box-shadow:0 10px 30px rgba(0,0,0,.6) !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .tabItem{color:#C9B98F !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .tabItem.active{background:rgba(255,176,0,.12) !important;color:#FFB000 !important}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .cookTimerTime{background:#050505 !important;color:#FFB000 !important;text-shadow:0 0 10px rgba(255,176,0,.5)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .worldClock{background:#050505;box-shadow:inset 0 0 0 1px rgba(255,176,0,.35);border-radius:8px;padding:12px 16px}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .worldClock .wcEmblem{display:none}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcTime{display:flex;gap:4px;font-family:var(--fontDisplay);font-size:var(--fs36)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcFlap{position:relative;display:inline-block;min-width:.72em;padding:4px 4px 2px;text-align:center;color:#F2EBDA;
+  background:linear-gradient(to bottom,#2A2E2A 50%,#1C1F1C 50%);border-radius:5px;box-shadow:0 2px 0 #000,inset 0 0 0 1px rgba(255,255,255,.06)}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcFlap::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#000}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcSep{font-style:normal;color:#FFB000;align-self:center}
+@media (prefers-reduced-motion: no-preference){
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcFlap.flip{animation:icFlip .32s cubic-bezier(.3,.7,.3,1) both;transform-origin:50% 50%} }
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcLabel{color:#FFB000}
+html.skin-insel:not(._a):not(._b):not(._c):not(._d) .wcNums{font-family:var(--fontDisplay);font-size:11px;letter-spacing:.3em;color:rgba(255,176,0,.45)}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageContent::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday::before{display:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageContent,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday ~ .section{
+  -webkit-mask:none !important;mask:none !important;border-radius:0 !important;box-shadow:none !important;background:transparent !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.layout-home .homeToday{margin-top:28px !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) body.fieldPage .pageTitleBlock{padding-bottom:20px !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2){background-image:none !important;padding-left:0 !important;padding-bottom:0 !important;border:0 !important;box-shadow:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2)::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) :is(.homeSectionTitle,.pageContent .h2)::after{content:none !important}
+:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) .homeToday .linkCard::before,:is(html.skin.skin-zauberschule:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-akte:not(._a):not(._b):not(._c):not(._d):not(._e)) .homeToday .linkCard::after{content:none !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body{--field:#050403;--onField:#FFB000;--onField2:rgba(255,176,0,.75);--bg:#050403;--surface:#0E0C08;--statusBar:#2A2618;
+  --fontUi:"Skin Insel", ui-monospace, monospace;--fontDisplay:"Skin Insel", ui-monospace, monospace}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e){background:#050403 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body{padding:0 10px;background:radial-gradient(130% 70% at 50% 30%,#1A1408,#050403 75%) fixed,#050403 !important;font-family:var(--fontUi)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body::after{content:"";position:fixed;inset:0;z-index:1200;pointer-events:none;border:10px solid #CFC4A8;border-top-width:calc(env(safe-area-inset-top) + 10px);border-bottom-width:0;
+  border-radius:0;box-shadow:inset 0 0 0 3px #1E1A10,inset 0 0 50px rgba(0,0,0,.85);background:repeating-linear-gradient(to bottom,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body::before{background:#2A2618 !important;z-index:1300}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .pageContent::after{content:none !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeGreetingTitle,.pageTitleBlock .h1){font-family:"Skin Insel", ui-monospace, monospace !important;color:#FFB000 !important;letter-spacing:.08em !important;text-transform:uppercase;text-shadow:0 0 10px rgba(255,176,0,.55) !important;font-size:min(8.4vw,2.2rem) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeGreetingSub,.brandWordmark){color:rgba(255,176,0,.8) !important;text-transform:uppercase;letter-spacing:.14em;font-size:var(--fs12) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .inHdr{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,176,0,.7);margin-bottom:12px}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage :is(.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:transparent !important;color:#FFB000 !important;box-shadow:inset 0 0 0 1px rgba(255,176,0,.5) !important;border-radius:4px !important;font-family:var(--fontUi)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .searchRowIcon input{background:transparent !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) input::placeholder{color:rgba(255,176,0,.6) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) body.fieldPage .homeQuickBtn{background:linear-gradient(#EFE8D6,#CFC4A8) !important;color:#2A2618 !important;border-radius:8px !important;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),0 3px 0 #6B6450 !important;text-shadow:none}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .worldClock{margin:18px auto 0 !important;width:100% !important;justify-content:center;background:transparent !important;box-shadow:none !important;padding:0 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .wcText{align-items:center}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .wcTime{font-size:3.4rem !important;gap:6px !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .wcFlap{min-width:.82em !important;padding:8px 6px 4px !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured{border-radius:4px !important;box-shadow:0 0 0 1px rgba(255,176,0,.5) !important;background:#050403 !important;overflow:hidden}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .inBar{display:flex;justify-content:space-between;padding:6px 10px;background:rgba(255,176,0,.14);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#FFB000}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .homeToday .homeFeatured .rcImg{border-radius:0 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2){font-size:var(--fs14) !important;letter-spacing:.2em !important;text-transform:uppercase;color:#FFB000 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(.homeSectionTitle,.pageContent .h2)::before{content:">: " !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid{counter-reset:inEntry}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .linkCard{counter-increment:inEntry}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeCard .rcImg{border-radius:2px !important;box-shadow:0 0 0 1px rgba(255,176,0,.4) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeTitle{font-family:var(--fontUi) !important;text-transform:uppercase;letter-spacing:.04em;color:#FFB000 !important;font-size:var(--fs16) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) #recipeGrid .recipeTitle::before{content:"[" counter(inEntry, decimal-leading-zero) "] ";opacity:.6}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .recipeMeta{color:rgba(255,176,0,.7) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .bottomRail{background:transparent !important;border:0 !important;box-shadow:none !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;gap:6px}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem{background:linear-gradient(#EFE8D6,#CFC4A8) !important;color:#2A2618 !important;border-radius:8px !important;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),0 3px 0 #6B6450 !important;text-shadow:none}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .tabItem.active{background:linear-gradient(#FFC94A,#E09A00) !important;color:#1A1300 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) .cookOverlay .cookStep{color:#FFB000;text-shadow:0 0 8px rgba(255,176,0,.4);box-shadow:inset 0 0 0 1px rgba(255,176,0,.4)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) ::selection{background:rgba(255,176,0,.35)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e) :is(input,textarea){caret-color:#FFB000}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body{--field:#050505;--bg:#050505;--surface:#2B2824;--fill:rgba(255,176,0,.08);--line:rgba(255,176,0,.25);--text:#FFB000;--sub:rgba(255,176,0,.78);--sub2:rgba(255,176,0,.78);--muted:rgba(255,176,0,.7);
+  --brand:#FFB000;--onBrand:#1A1300;--fontUi:"Skin Kurier", "Courier New", ui-monospace, monospace;--fontDisplay:"Skin Röhre", "Skin Insel", ui-monospace, monospace;--statusBar:#2A2618}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f){background:#050505 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body{background:radial-gradient(130% 70% at 50% 30%,#141006,#050505 75%) fixed,#050505 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body::after{background:repeating-linear-gradient(to bottom,rgba(255,255,255,.035) 0 1px,transparent 1px 3px) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) :is(.homeGreetingTitle,.pageTitleBlock .h1,.recipeName){font-family:var(--fontDisplay) !important;font-size:min(11vw,2.9rem) !important;letter-spacing:.06em !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .homeBrand .brandWordmark{font:400 var(--fs22) var(--fontDisplay) !important;letter-spacing:.12em;color:#FFB000 !important;text-shadow:0 0 8px rgba(255,176,0,.6) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .inHdr span:first-child::before{content:"";display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#00FF66;box-shadow:0 0 6px #00FF66;vertical-align:1px}
+@media (prefers-reduced-motion: no-preference){
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) :is(.homeGreetingTitle,.pageTitleBlock .h1,.brandWordmark){animation:inFlicker 7s steps(1,end) infinite}
+}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage :is(.searchRow:not(.searchRowIcon) input,.searchRowIcon){background:#D9CFB4 !important;color:#1E1A10 !important;border-radius:3px !important;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.5),inset 0 -2px 0 rgba(0,0,0,.18),0 0 0 2px #2B2824 !important;font:700 var(--fs16) var(--fontUi) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage .searchRowIcon input{background:transparent !important;box-shadow:none !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage .searchRow{position:relative}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage input::placeholder{color:#5E5644 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .searchRow input{caret-color:transparent !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .inCaret{position:absolute;left:0;top:50%;width:.62em;height:1.15em;margin-top:-.58em;background:#1E1A10;opacity:0;pointer-events:none;font-size:var(--fs16)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .inCaret.on{opacity:1;animation:inBlink 1s steps(1,end) infinite}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) :is(body.fieldPage .homeQuickBtn,.tabItem,.recipeCookBtn){transition:transform .06s linear,box-shadow .06s linear}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) :is(body.fieldPage .homeQuickBtn,.tabItem,.recipeCookBtn):is(.keyDown,:active){transform:translateY(4px) !important;box-shadow:inset 0 -1px 0 rgba(0,0,0,.2),0 0 0 #6B6450 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) body.fieldPage .homeQuickBtn{font:700 var(--fs14) var(--fontUi) !important;text-transform:uppercase;letter-spacing:.06em;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),0 4px 0 #6B6450 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .recipeCookBtn{background:linear-gradient(#EFE8D6,#CFC4A8) !important;color:#1E1A10 !important;border-radius:6px !important;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),0 4px 0 #6B6450 !important;font-family:var(--fontUi);text-transform:uppercase}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) :is(.listGroup,.notesCard,.sheet){background:#2B2824 !important;box-shadow:inset 0 0 0 1px rgba(255,176,0,.25),inset 0 2px 0 rgba(255,255,255,.04) !important;border-radius:4px !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .inProto{font:400 var(--fs16) var(--fontDisplay);letter-spacing:.14em;text-transform:uppercase;color:#00FF66;text-shadow:0 0 6px rgba(0,255,102,.5);margin-bottom:6px}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .inBar span:first-child::after{content:" · Rationen"}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .worldClock.isAlarm .wcFlap{background:linear-gradient(#3A0808 50%,#2A0505 50%) !important;color:#FF3333 !important;text-shadow:0 0 10px rgba(255,51,51,.7) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .worldClock.isAlarm .wcSep{color:#FF3333 !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .worldClock.isAlarm .wcNums{color:#FF3333;animation:inBlink .9s steps(1,end) infinite}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .worldClock .wcFlap{font-family:var(--fontDisplay) !important}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .recipeBody,html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .cookOverlay .cookStep{font-family:var(--fontUi)}
+html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) ::selection{background:rgba(0,255,102,.3)}
+:is(html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f)) .recipePageCard :is(.card,.recipeInnerCard){border:0 !important;box-shadow:none !important;outline:0 !important}
+:is(html.skin.skin-jahr3000:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f),html.skin.skin-insel:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f)) div.recipePageCard :is(div.card,div.listGroup):not(#_x#_y){border:0 !important;box-shadow:none !important;outline:0 !important}
+.skIntro-insel{background:#000;perspective:520px}
+.skIntro-insel .ivStage{transform-style:preserve-3d;animation:ivFloat 3s cubic-bezier(.35,.05,.6,1) both}
+.skIntro-insel .ivWord{display:flex;gap:.06em;font:400 clamp(44px,13vw,110px) "Times New Roman", Times, Georgia, serif;letter-spacing:.14em;color:#F4F4F0;white-space:nowrap;transform-style:preserve-3d;
+  text-shadow:0 0 18px rgba(255,255,255,.35)}
+.skIntro-insel .ivWord span{display:inline-block;transform:translateZ(var(--z));animation:ivDrift 3s ease-in-out both}
+.skIntro-insel .ivWord .sp{width:.45em}
+html.skin-insel .worldClock.wcIdle:not(#_x#_y){padding:5px 0 !important}
+html.skin-insel .worldClock.wcIdle:not(#_x#_y) .wcTime{font-size:1.5rem !important}
+html.skin-insel .worldClock.wcIdle:not(#_x#_y) .wcFlap{padding:3px 4px 1px !important;min-width:.7em !important}
+:is(html.skin-zauberschule,html.skin-akte,html.skin-insel) .cookOverlay :is(.cookStep,.prepRow,.prepSub,.cookStepIng,.cookNextText,.cookIngs):not(#_x#_y){
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif !important;font-style:normal !important;letter-spacing:0 !important;text-transform:none !important;text-shadow:none !important}
+@media (prefers-reduced-motion: no-preference){
+html.skin-insel :is(.homeGreetingTitle,.pageTitleBlock .h1,.brandWordmark):not(#_x#_y){animation:inFlicker 1.6s steps(1,end) 1 !important}
+}

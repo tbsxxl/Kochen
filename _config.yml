@@ -44,6 +44,7 @@ exclude:
   - CLAUDE.md
   - skills-lock.json
   - agent
+  - docs
   - plans
   - tools
   - MaybeRezepte

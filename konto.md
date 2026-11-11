@@ -317,7 +317,9 @@ permalink: /konto/
     }
     host.innerHTML = sub
       ? `<div class="pushOn"><span class="pushDot" aria-hidden="true"></span>Auf diesem Gerät aktiv</div>
-         <div class="fieldRow"><button class="btn accountBtn" id="pushTestBtn" type="button">Test senden</button><button class="btn btnGhost accountBtn" id="pushOffBtn" type="button">Ausschalten</button></div>`
+         <div class="fieldRow"><button class="btn accountBtn" id="pushTestBtn" type="button">Test senden</button><button class="btn btnGhost accountBtn" id="pushOffBtn" type="button">Ausschalten</button></div>
+         <button class="sheetRow timerNotifyRow" id="timerNotifyBtn" type="button" role="switch" aria-checked="true"><span>Laufenden Timer als Mitteilung zeigen</span><span class="sheetSwitch" aria-hidden="true"></span></button>
+         <p class="sub">Solange ein Kochtimer läuft, steht „Fertig um …“ in den Mitteilungen. Die Mitteilung beim Ablauf kommt unabhängig davon.</p>`
       : `<button class="btn secondary accountBtn" id="pushOnBtn" type="button">Mitteilungen aktivieren</button>`;
     document.getElementById('pushOnBtn')?.addEventListener('click', async (e)=>{
       const btn = e.currentTarget; busy(btn, true, 'Einen Moment …');
@@ -332,6 +334,13 @@ permalink: /konto/
       }catch(ex){ showError(ex); }
       renderPush();
     });
+    // Stehende Mitteilung für laufende Timer (pro Gerät, Standard an): kochbuch.ui.timerNotify = "0" schaltet sie ab
+    const tn = document.getElementById('timerNotifyBtn');
+    if(tn){
+      const on = ()=>{ try{ return localStorage.getItem('kochbuch.ui.timerNotify') !== '0'; }catch(e){ return true; } };
+      tn.setAttribute('aria-checked', on() ? 'true' : 'false');
+      tn.addEventListener('click', ()=>{ try{ if(on()) localStorage.setItem('kochbuch.ui.timerNotify', '0'); else localStorage.removeItem('kochbuch.ui.timerNotify'); }catch(e){} tn.setAttribute('aria-checked', on() ? 'true' : 'false'); });
+    }
     document.getElementById('pushTestBtn')?.addEventListener('click', async (e)=>{
       const btn = e.currentTarget; busy(btn, true, 'Wird gesendet …');
       try{ await A().api('/api/push/test', { method: 'POST', body: {} }); toast('Test-Mitteilung gesendet'); }

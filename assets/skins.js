@@ -883,45 +883,6 @@
 
   function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
 
-  // ---------- Kino-Kopf (Three.js + GSAP, assets/cinema/<skin>.js, nur Feld-Seiten, nur mit WebGL) ----------
-  // Seit Abschnitt 48 · 16 tragen die Welten ihr Material selbst (Buch, Karte, Monitor …); 3D bleibt gebaut, ist aber aus.
-  // Wieder einschalten: z. B. { nordwall: 6 }.
-  const CINEMA = {};
-  let cine = null, cineSkin = null, prevSkin = null;
-  function cinema(){
-    const sk = skin(), changed = prevSkin !== null && prevSkin !== sk;
-    prevSkin = sk;
-    if(cineSkin === sk) return;
-    cine?.stop?.(); cine = null; cineSkin = null;
-    if(!CINEMA[sk] || !document.body.classList.contains("fieldPage")) return;
-    // nur mit echter Grafikkarte: reine Software-Grafik (SwiftShader, llvmpipe) zeichnet langsam und fehlerhaft → SVG-Szene bleibt.
-    // Zum Testen erzwingen: localStorage kochbuch.ui.cineForce = "1"
-    try{
-      const c = document.createElement("canvas"), gl = c.getContext("webgl2") || c.getContext("webgl");
-      if(!gl) return;
-      let force = false; try{ force = localStorage.getItem("kochbuch.ui.cineForce") === "1"; }catch{}
-      const dbg = gl.getExtension("WEBGL_debug_renderer_info");
-      const rend = String(dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER));
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
-      if(!force && /swiftshader|llvmpipe|software|softpipe/i.test(rend)) return;
-    }catch{ return; }
-    cineSkin = sk;
-    const intro = changed;
-    // Vorspann erst, wenn das Skin-Blatt geschlossen ist (so lassen sich Skins in Ruhe durchprobieren)
-    const go = ()=> import(`/assets/cinema/${sk}.js?v=${CINEMA[sk]}`).then(m=>{
-      if(skin() !== sk) return;
-      cine = m.start({ home: document.body.classList.contains("layout-home"), reduce: reduce(), intro });
-      if(!cine) cineSkin = null;
-    }).catch(()=>{ cineSkin = null; });
-    if(!intro || !document.body.classList.contains("noScroll")) return go();
-    const mo = new MutationObserver(()=>{
-      if(document.body.classList.contains("noScroll")) return;
-      mo.disconnect();
-      if(skin() === sk && cineSkin === sk && !cine) go();
-    });
-    mo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-  }
-
   // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
   const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade"];
   function skinLogo(){
@@ -932,7 +893,7 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=2`;
   }
 
-  function apply(){ mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); homeTimer(); cinema(); introOnSwitch(); }
+  function apply(){ mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); homeTimer(); introOnSwitch(); }
   function init(){
     apply();
     watchProgress();
