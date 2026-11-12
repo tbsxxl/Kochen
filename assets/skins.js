@@ -1018,7 +1018,7 @@
     bxWatch(); frame();
   }
 
-  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); if(skin() === "standard") bbFooter(); }
+  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); if(skin() === "standard") bbFooter(); document.body.classList.toggle("hasFootLeaves", !!$(".bbFooter")); }
 
   function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
 
