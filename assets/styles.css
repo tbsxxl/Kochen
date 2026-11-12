@@ -3269,12 +3269,12 @@ html.retro .homeTimer .htBar{background:#000080;opacity:1}
    vor dem Kochen erledigen lässt; „Erst später dran“ für Teile, die während einer langen Garzeit gemacht werden. ==== */
 .cookPrep{display:flex;flex-direction:column;gap:16px;padding-bottom:8px}
 .cookPrep[hidden]{display:none}
-.prepHead{padding:16px;background:var(--cCard);border-radius:var(--rList,16px)}
+.prepHead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:16px;background:var(--cCard);border-radius:var(--rList,16px)}
 .prepTitle{margin:0;font-family:var(--fontDisplay);font-size:var(--fs28);font-weight:600;line-height:1.15;color:var(--cText)}
 .prepSub{margin:6px 0 0;font-size:var(--fs16);line-height:1.4;color:var(--cSub)}
 .prepGroup{background:var(--cCard);border-radius:var(--rList,16px);overflow:hidden}
 .prepGroupTitle{padding:12px 16px 4px;font-size:var(--fs14);font-weight:600;color:var(--cSub)}
-.prepRow{display:flex;align-items:flex-start;gap:12px;width:100%;min-height:52px;padding:13px 16px;border:0;background:none;color:var(--cText);font:inherit;font-size:var(--fs18);line-height:1.35;text-align:left;
+.prepRow{display:flex;align-items:flex-start;gap:12px;width:100%;min-height:52px;padding:12px 16px;border:0;background:none;color:var(--cText);font:inherit;font-size:var(--fs18);line-height:1.35;text-align:left;
   cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
 .prepRow + .prepRow{box-shadow:inset 0 1px 0 var(--cLine)}
 .prepBox{display:grid;place-items:center;flex:none;width:26px;height:26px;margin-top:-1px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--cSub);color:transparent;transition:background-color .15s var(--ease),box-shadow .15s var(--ease)}
@@ -3283,8 +3283,7 @@ html.retro .homeTimer .htBar{background:#000080;opacity:1}
 .prepRow.isDone .prepText{color:var(--cSub);text-decoration:line-through;text-decoration-thickness:1px}
 .prepRow:focus-visible{outline:2px solid var(--cLeaf);outline-offset:-2px}
 .prepGroup-l .prepBox{border-radius:8px}
-.prepGroup-l .prepGroupTitle::after{content:" – nicht jetzt";font-weight:400}
-.prepCount{padding:0 4px;font-size:var(--fs14);color:var(--cSub);font-variant-numeric:tabular-nums}
+.prepCount{flex:none;font-size:var(--fs14);color:var(--cSub);font-variant-numeric:tabular-nums}
 .cookOverlay.isPrep .cookProgress{opacity:.35}
 @media (min-width:768px){
 .cookOverlay.isPrep .cookPrep{max-width:none}
@@ -3335,3 +3334,36 @@ html:has(.cookOverlay.open) body{visibility:hidden}
 html:has(.cookOverlay.open) :is(.cookOverlay,.timerAlert,.uiToast,.skIntro,.zsSmoke){visibility:visible}
 html:has(.cookOverlay.open) body::after{visibility:visible}   /* Bildschirmzeilen/Gehäuse der Skins Terminal und Insel liegen auf body::after */
 .nowCooking{padding-left:10px}
+
+/* ==== 22. Skill-Runde Dez. 2026 (impeccable, mobile-native, apple-design, unslop, break-ui) über die neuen Teile ==== */
+/* Vorbereiten: Zeile gibt beim Antippen Rückmeldung (ohne Schrumpfen), Scrollen bleibt im Kochmodus */
+.prepRow.isPressed{transform:none;background:var(--cFill)}
+@media (hover:hover) and (pointer:fine){ .prepRow:hover{background:var(--cFill)} }
+.prepText{min-width:0;overflow-wrap:anywhere}
+.cookBody,.cookPanel{overscroll-behavior:contain}
+/* Kapsel: Tippflächen 44 pt (HIG), der Rezeptname hat Vorrang vor „Schritt n von m“, Zeit bleibt ganz */
+.nowCooking{padding:0 2px 0 8px;gap:0}
+.nowCookingMain{gap:8px}
+.nowCookingPlay,.nowCookingClose{width:44px;height:44px}
+.nowCookingText{gap:8px}
+.nowCookingTitle{flex:0 1 auto;min-width:5ch}
+.nowCookingSub{flex:0 2 auto;min-width:9ch;max-width:none}
+.nowCookingImg,.nowCookingEgg{flex:none}
+/* Timer-Karte: am iPad nicht über die ganze Breite gezogen; lange Namen kürzen, Zeit und Endzeit nie */
+.homeTimer .htTop{gap:8px}
+.homeTimer .htTime,.homeTimer .htEnd,.homeTimer .htMore{white-space:nowrap}
+.homeTimer .htIcon{flex:none}
+@media (min-width:768px){ .homeTimer{max-width:440px} }
+html.skin .worldClock.wcIdle:not(#_x#_y){padding:4px 12px 4px 8px !important}
+html.skin-insel .worldClock.wcIdle:not(#_x#_y){padding:4px 0 !important}
+/* break-ui: fünf Timer gleichzeitig verdeckten im Kochmodus den Inhalt → Leiste höchstens gut zwei Zeilen hoch, der Rest scrollt */
+.cookTimers{max-height:156px;overflow-y:auto;overscroll-behavior:contain;flex:none}
+/* Kapsel: die Restzeit wird nie gekürzt; Endzeit, „(+n)“ und „Schritt n von m“ weichen zuerst, dann der Name */
+.nowCookingSub{display:flex;flex:0 3 auto;min-width:auto;overflow:hidden}
+.nowCookingSub .ncTime{flex:none;white-space:nowrap}
+.nowCookingSub .ncRest{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:pre}
+.nowCookingTitle{min-width:4ch}
+.cookTimers > *{flex:none}
+@media (min-width:768px){ .cookTimers{max-height:none;overflow:visible} }
+.prepHead{flex-wrap:wrap}
+.prepTitle{min-width:0;overflow-wrap:anywhere}
