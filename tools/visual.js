@@ -5,7 +5,7 @@
 // Die Aufnahmen hängen von Schriften und Browser der Maschine ab und werden deshalb nicht eingecheckt.
 const { chromium } = require("playwright");
 const fs = require("fs"), path = require("path");
-const SKINS = ["standard", "retro", "terminal", "diner", "bauhaus", "nordwall", "zauberschule", "jahr3000", "zweistaedte", "insel", "akte", "brigade"];
+const SKINS = ["standard", "retro", "terminal", "diner", "bauhaus", "nordwall", "zauberschule", "jahr3000", "zweistaedte", "insel", "akte", "brigade", "boxengasse", "bildband"];
 const RECIPE = "/rezepte/dal-curry-geroesteter-blumenkohl/";
 const PAGES = {
   home: async (p, B)=>{ await p.goto(B + "/"); },

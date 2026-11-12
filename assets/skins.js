@@ -835,6 +835,12 @@
     // Brigade: Selbsttest der LED-Uhr (88:88:88), dann läuft die Zeit und der erste Bon kommt aus dem Drucker
     brigade: { ms: 2400, html: ()=> `<div class="ivPanel"><div class="ivLed"></div><div class="ivLabel">Küche läuft</div></div><div class="ivSlot"></div><div class="ivBon"><b>Bon 0001</b><span>Service beginnt</span></div>`,
       snd: (a)=>{ [0, .25, .5].forEach((t)=> tone(a, { f: 2900, t, d: .08, type: "square", v: .05 })); for(let i = 0; i < 9; i++) noise(a, { t: 1.2 + i * .07, d: .04, f: 3000, q: 3, v: .12 }); } },
+    // Boxengasse: Limetten-Vorhang mit Zähler, der Titel steigt aus der Zeile, dann fährt der Vorhang nach oben weg
+    boxengasse: { ms: 1700, html: ()=> `<div class="ivLine"><span>Tobis</span><span>Kochbuch</span></div><div class="ivFoot"><span>Küche lädt</span><b class="ivNum">0</b></div>`,
+      snd: (a)=>{ tone(a, { f: 180, f2: 720, d: 1.3, type: "sawtooth", v: .04 }); tone(a, { f: 1320, t: 1.45, d: .25, v: .06 }); } },
+    // Bildband: Titelseite der Ausgabe – Linie zieht sich, Titel und Monat blenden ein
+    bildband: { ms: 2200, html: ()=> `<div><div class="ivRule"></div><div class="ivTitle">Tobis<i>Kochbuch</i></div><div class="ivIssue">Ausgabe ${new Date().toLocaleDateString("de-DE", { month: "long", year: "numeric" })}</div></div>`,
+      snd: (a)=>{ tone(a, { f: 523, t: .2, d: 1.2, v: .04 }); tone(a, { f: 784, t: .55, d: 1.2, v: .03 }); } },
   };
   let introOn = false;
   function playIntro(force){
@@ -858,11 +864,16 @@
       show("88:88:88");
       setTimeout(()=> show(`${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`), 1050 / SPEED);
     }
+    if(sk === "boxengasse"){
+      const num = el.querySelector(".ivNum"), t0 = performance.now(), dur = (def.ms - 250) / SPEED;
+      const tick = (t)=>{ const f = Math.min(1, (t - t0) / dur); num.textContent = String(Math.round(f * f * 100)).padStart(3, "0"); if(f < 1 && el.isConnected) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    }
     document.body.appendChild(el);
     if(short) try{ el.getAnimations({ subtree: true }).forEach((an)=>{ an.playbackRate = SPEED; }); }catch{}
     if(soundOn() && !short){ const a = ac(); if(a && a.state === "running") try{ def.snd(a); }catch{} }
     let done = false;
-    const end = ()=>{ if(done) return; done = true; el.classList.add("out"); setTimeout(()=>{ el.remove(); introOn = false; }, 450); };
+    const end = ()=>{ if(done) return; done = true; el.classList.add("out"); setTimeout(()=>{ el.remove(); introOn = false; }, 520); };
     el.addEventListener("pointerdown", end);
     setTimeout(end, def.ms / SPEED);
   }
@@ -879,12 +890,136 @@
     mo.observe(sheet, { attributes: true, attributeFilter: ["class"] });
   }
 
-  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); }
+
+  // ---------- Boxengasse: Aufbau und Scroll-Bewegung (assets/skins/boxengasse.css) ----------
+  // Einblenden beim Scrollen (nur was beim Aufbau außerhalb des Bildschirms lag), Foto-Parallaxe in den Karten, Fortschrittslinie,
+  // Laufband mit den Kategorien (läuft beim Scrollen schneller), ein Titelwort in Serifenschrift. Nur transform/opacity.
+  let bxIO = null, bxParIO = null, bxRaf = 0, bxOnScroll = null;
+  const bxVis = new Set();
+  function bxOff(){
+    bxIO?.disconnect(); bxParIO?.disconnect(); bxIO = bxParIO = null;
+    if(bxOnScroll){ removeEventListener("scroll", bxOnScroll); bxOnScroll = null; }
+    cancelAnimationFrame(bxRaf); bxVis.clear();
+    document.querySelectorAll(".bxRv").forEach((el)=>{ el.classList.remove("bxRv", "bxRvX", "bxIn"); el.style.transitionDelay = ""; });
+    document.querySelectorAll("img.bxPar").forEach((el)=>{ el.classList.remove("bxPar"); el.style.transform = ""; });
+    document.querySelectorAll("[data-bx-title]").forEach((el)=>{ el.textContent = el.dataset.bxTitle; delete el.dataset.bxTitle; });
+    bbStop?.(); bbStop = null;
+    document.querySelectorAll("[data-bx-seen]").forEach((el)=>{ delete el.dataset.bxSeen; });
+  }
+  function bxTitles(){
+    const esc = (t)=> t.replace(/[&<>]/g, (c)=> ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+    document.querySelectorAll(".homeSectionTitle, .pageTitleBlock .h1, .homeGreetingTitle").forEach((el)=>{
+      if(el.dataset.bxTitle || el.children.length) return;
+      const t = el.textContent, home = el.classList.contains("homeGreetingTitle");
+      const m = home ? t.match(/^([^\n]+)(\n[\s\S]+)$/) : t.match(/^([\s\S]+\s)(\S+)$/);
+      if(!m) return;
+      el.dataset.bxTitle = t;
+      el.innerHTML = home ? `<em class="bxSerif">${esc(m[1])}</em>${esc(m[2])}` : `${esc(m[1])}<em class="bxSerif">${esc(m[2])}</em>`;
+    });
+  }
+  function bxMarquee(){
+    if($(".bxMarquee") || !document.body.classList.contains("layout-home")) return;
+    let cats = []; try{ cats = JSON.parse($("#homeCats")?.textContent || "[]"); }catch{}
+    const before = $(".homeToday") || $(".homeContinue");
+    if(!cats.length || !before) return;
+    const el = bit("bxMarquee", "boxengasse", "nav"); el.setAttribute("aria-label", "Kategorien");
+    const links = (hide)=> cats.map((c)=> `<a href="/rezeptindex/?kategorie=${encodeURIComponent(c)}"${hide ? ' aria-hidden="true" tabindex="-1"' : ""}></a>`).join("");
+    el.innerHTML = `<div class="bxMarqMove"><div class="bxMarqTrack">${links(false)}${links(true)}</div></div>`;
+    el.querySelectorAll("a").forEach((a, i)=>{ a.textContent = cats[i % cats.length]; });
+    before.before(el);
+  }
+  function bxWatch(){
+    if(!bxIO) return;
+    const vh = innerHeight, vw = innerWidth;
+    document.querySelectorAll(".appMain :is(.linkCard, .catTile, .homeSectionHead, .planDay, .catGroupTitle)").forEach((el)=>{
+      if(el.dataset.bxSeen) return; el.dataset.bxSeen = "1";
+      const r = el.getBoundingClientRect();
+      if(!r.width || r.bottom < 0) return;
+      const below = r.top > vh - 8, right = r.left > vw - 8;
+      if(!below && !right) return;
+      el.classList.add("bxRv"); if(right && !below) el.classList.add("bxRvX");
+      bxIO.observe(el);
+    });
+    document.querySelectorAll(".appMain .linkCard:not(.hCard) .rcImg img:not(.bxPar)").forEach((img)=>{ img.classList.add("bxPar"); bxParIO.observe(img); });
+  }
+  // ---------- Bildband: Foto fährt beim Öffnen des Rezepts heran; Schlussseite mit schwebenden Kräuterblättern ----------
+  function bbKen(){ const img = $(".recipePageHero img"); if(img && !reduce() && !img.dataset.bbKen){ img.dataset.bbKen = "1"; img.classList.add("bbKen"); img.addEventListener("animationend", ()=> img.classList.remove("bbKen"), { once: true }); } }
+  let bbStop = null;
+  function bbFooter(){
+    const main = $(".appMain"), b = document.body;
+    if($(".bbFooter") || !main || !(b.classList.contains("layout-home") || $("#recipeGrid"))) return;
+    const el = bit("bbFooter", "bildband", "footer");
+    el.innerHTML = `<canvas aria-hidden="true"></canvas><div class="bbFootText"><b>Guten Appetit.</b><span>Noch nichts gefunden?</span><a href="/was-koche-ich/?zufall=1">Überrasch mich</a></div>`;
+    main.appendChild(el);
+    if(reduce()) return;
+    const cv = el.querySelector("canvas"), g = cv.getContext("2d"), dpr = Math.min(2, devicePixelRatio || 1);
+    let w = 0, h = 0, raf = 0, on = false, px = -999, py = -999;
+    const COL = ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"];
+    const P = Array.from({ length: 46 }, (_, i)=> ({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, r: 4 + Math.random() * 7, a: Math.random() * 6.3, s: (Math.random() - .5) * .012, c: COL[i % COL.length], ph: Math.random() * 6.3 }));
+    const size = ()=>{ const r = el.getBoundingClientRect(); w = r.width; h = r.height; cv.width = w * dpr; cv.height = h * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    const draw = (t)=>{
+      raf = on ? requestAnimationFrame(draw) : 0;
+      g.clearRect(0, 0, w, h);
+      for(const p of P){
+        let x = p.x * w, y = p.y * h;
+        const dx = x - px, dy = y - py, d2 = dx * dx + dy * dy;
+        if(d2 < 12000){ const f = (1 - d2 / 12000) * .9, d = Math.sqrt(d2) || 1; p.vx += dx / d * f; p.vy += dy / d * f; p.s += (dx > 0 ? .004 : -.004) * f; }
+        p.vx = p.vx * .94 + Math.sin(t / 2600 + p.ph) * .012; p.vy = p.vy * .94 - .006 + Math.cos(t / 3100 + p.ph) * .008;
+        x += p.vx; y += p.vy; p.a += p.s; p.s *= .995;
+        if(y < -20) y = h + 20; if(y > h + 20) y = -20; if(x < -20) x = w + 20; if(x > w + 20) x = -20;
+        p.x = x / w; p.y = y / h;
+        g.save(); g.translate(x, y); g.rotate(p.a); g.globalAlpha = .85; g.fillStyle = p.c;
+        g.beginPath(); g.moveTo(-p.r, 0); g.quadraticCurveTo(0, -p.r * .62, p.r, 0); g.quadraticCurveTo(0, p.r * .62, -p.r, 0); g.fill(); g.restore();
+      }
+    };
+    const at = (e)=>{ const r = el.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top; };
+    el.addEventListener("pointermove", at, { passive: true }); el.addEventListener("pointerdown", at, { passive: true });
+    el.addEventListener("pointerleave", ()=>{ px = py = -999; });
+    const io = new IntersectionObserver((es)=>{ on = es[0].isIntersecting; if(on && !raf){ size(); raf = requestAnimationFrame(draw); } });
+    io.observe(el);
+    bbStop?.(); bbStop = ()=>{ on = false; io.disconnect(); cancelAnimationFrame(raf); };
+  }
+  // Dieselbe Scroll-Bewegung nutzen Boxengasse und Bildband (Aussehen je Skin-Datei)
+  const SCROLL_FX = { boxengasse: 1, bildband: 1 };
+  let bxOn = "";
+  function boxengasse(){
+    const sk = skin();
+    if(bxOn && bxOn !== sk){ bxOn = ""; bxOff(); }
+    if(!SCROLL_FX[sk]) return;
+    if(sk === "boxengasse"){ bxTitles(); bxMarquee(); } else { bbFooter(); bbKen(); }
+    if(bxOn){ bxWatch(); return; }   // läuft schon (enhance() kommt bei jeder Änderung im Inhalt wieder)
+    bxOn = sk;
+    let bar = $(".bxProgress"); if(!bar){ bar = bit("bxProgress", sk); bar.setAttribute("aria-hidden", "true"); document.body.appendChild(bar); }
+    if(reduce() || !("IntersectionObserver" in window)) return;
+    bxIO = new IntersectionObserver((es)=>{
+      let n = 0;
+      es.forEach((e)=>{ if(!e.isIntersecting) return;
+        const el = e.target; bxIO.unobserve(el);
+        el.style.transitionDelay = `${Math.min(n++, 5) * 70}ms`; el.classList.add("bxIn");
+        setTimeout(()=>{ el.classList.remove("bxRv", "bxRvX", "bxIn"); el.style.transitionDelay = ""; }, 1400);
+      });
+    }, { rootMargin: "0px 0px -6% 0px" });
+    bxParIO = new IntersectionObserver((es)=>{ es.forEach((e)=>{ e.isIntersecting ? bxVis.add(e.target) : bxVis.delete(e.target); }); frame(); });
+    const move = $(".bxMarqMove");
+    const frame = ()=>{
+      bxRaf = 0;
+      const y = scrollY, vh = innerHeight, max = document.documentElement.scrollHeight - vh;
+      bar.style.transform = `scaleX(${max > vh * .4 ? Math.min(1, Math.max(0, y / max)) : 0})`;
+      if(move) move.style.transform = `translate3d(${-(y * .35) % 400}px,0,0)`;
+      bxVis.forEach((img)=>{ const r = img.parentNode.getBoundingClientRect(); const p = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / (vh / 2)));
+        img.style.transform = `translate3d(0,${(p * -5).toFixed(2)}%,0) scale(1.12)`; });
+    };
+    bxOnScroll = ()=>{ if(!bxRaf) bxRaf = requestAnimationFrame(frame); };
+    addEventListener("scroll", bxOnScroll, { passive: true });
+    bxWatch(); frame();
+  }
+
+  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); }
 
   function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
 
   // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
-  const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade"];
+  const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade","boxengasse","bildband"];
   function skinLogo(){
     const img = document.querySelector(".homeBrand .logoSkin");
     if(!img) return;

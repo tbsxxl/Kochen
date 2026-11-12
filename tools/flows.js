@@ -125,7 +125,7 @@ const RECIPES = fs.readdirSync(path.join(__dirname, '..', '_recipes')).filter(f 
   check(await page.evaluate(() => getComputedStyle(document.querySelector('#recipeGrid')).gridTemplateColumns.split(' ').length === 1), 'Rezeptliste „Karten“ wirkt nicht');
 
   // ---------- Skin („Mehr“ → „Skin“): jeder Skin setzt seine Klasse, Standard nimmt sie wieder weg ----------
-  for (const skin of ['terminal', 'diner', 'bauhaus', 'nordwall', 'zauberschule', 'jahr3000', 'zweistaedte', 'insel', 'akte', 'brigade', 'retro', 'standard']) {
+  for (const skin of ['terminal', 'diner', 'bauhaus', 'nordwall', 'zauberschule', 'jahr3000', 'zweistaedte', 'insel', 'akte', 'brigade', 'boxengasse', 'bildband', 'retro', 'standard']) {
     if (!(await page.evaluate(() => document.getElementById('sheet').classList.contains('open')))) { await page.tap('#moreBtn'); await page.waitForTimeout(300); }
     await page.tap('#skinRow'); await page.waitForTimeout(300);
     await page.tap(`[data-skin-opt="${skin}"]`); await page.waitForTimeout(100);
