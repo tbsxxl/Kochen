@@ -3370,8 +3370,15 @@ html.skin-insel .worldClock.wcIdle:not(#_x#_y){padding:4px 0 !important}
 
 /* ==== 23. Schlussseite mit schwebenden Blättern (Nov. 2026, Wunsch des Besitzers: aus dem Skin „Bildband“ in den Standard-Look).
    Am Ende von Startseite und Rezeptliste; Canvas und Verhalten: bbFooter() in assets/skins.js. Bildband überschreibt das Aussehen. ==== */
-.bbFooter{position:relative;width:100vw;margin:48px 0 0 calc(50% - 50vw);height:min(56vh,420px);background:var(--field);color:var(--onField);overflow:hidden;
+.bbFooter{--bbPad:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 28px);position:relative;box-sizing:border-box;width:100vw;margin:32px 0 0 calc(50% - 50vw);
+  height:calc(min(50vh,380px) + var(--bbPad));padding-bottom:var(--bbPad);background:var(--field);color:var(--onField);overflow:hidden;
   display:grid;place-items:center;text-align:center;touch-action:pan-y}
+/* Das Feld läuft bis zum Seitenende hinter die untere Leiste; der Platz für Leiste (und „Kochen läuft“-Kapsel) liegt deshalb im Feld
+   statt darüber bzw. darunter (body.hasFootLeaves setzt skins.js). */
+body.hasNowCooking .bbFooter{--bbPad:calc(var(--tabbarH) + env(safe-area-inset-bottom) + 92px)}
+:root:not(.retro) body.hasFootLeaves .appMain{padding-bottom:0 !important}
+:root:not(.retro) body.hasFootLeaves.layout-home .appMain::after{display:none}
+:root:not(.retro) body.hasFootLeaves .pageContent{padding-bottom:0 !important}
 .bbFooter canvas{position:absolute;inset:0;width:100%;height:100%}
 .bbFootText{position:relative;padding:0 24px;pointer-events:none}
 .bbFootText b{display:block;font-size:clamp(1.75rem,8vw,2.5rem);line-height:1.1;font-weight:600;letter-spacing:-.02em}

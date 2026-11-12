@@ -69,7 +69,7 @@ html.skin-bildband::view-transition-new(root){animation:bbPageIn .5s cubic-bezie
 html.skin-bildband:not(#_x#_y) .recipePageHero img.bbKen{animation:bbKen 2.4s cubic-bezier(.2,.7,.2,1) both}
 
 /* Schlussseite mit schwebenden Kräuterblättern (Canvas, reagiert auf Finger/Maus; bbFooter() in skins.js) */
-html.skin-bildband:not(#_x#_y) .bbFooter{position:relative;width:100vw;margin:56px 0 0 calc(50% - 50vw);height:min(62vh,460px);background:#2B211A;color:#FAF6EE;overflow:hidden;display:grid;place-items:center;text-align:center;touch-action:pan-y}
+html.skin-bildband:not(#_x#_y) .bbFooter{position:relative;background:#2B211A;color:#FAF6EE;overflow:hidden;display:grid;place-items:center;text-align:center;touch-action:pan-y}
 html.skin-bildband:not(#_x#_y) .bbFooter canvas{position:absolute;inset:0;width:100%;height:100%}
 html.skin-bildband:not(#_x#_y) .bbFootText{position:relative;padding:0 24px;pointer-events:none}
 html.skin-bildband:not(#_x#_y) .bbFootText b{display:block;font:italic 400 clamp(2rem,9vw,3.2rem)/1.05 var(--fontDisplay);letter-spacing:-.015em}
