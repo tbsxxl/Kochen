@@ -1,0 +1,95 @@
+/* Skin „bildband“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Wunsch des Besitzers (Nov. 2026): Kochbuch wie ein Food-Magazin – große Fotos als Grundlage, jedes Rezept ein Kapitel, warme Naturtöne,
+   feine Serifenschrift, ruhige Tiefe beim Scrollen. Bewegung: scrollFx() und bbFooter() in assets/skins.js. Neue Regeln ans Ende. */
+html.skin-bildband:not(#_x#_y),html.skin-bildband:not(#_x#_y) body{
+  --field:#EFE7D8;--onField:#2B211A;--onField2:#5E5146;--fieldFill:rgba(43,33,26,.07);
+  --bg:#FAF6EE;--surface:#FFFFFF;--surface2:#F4EEE2;--fill:#EFE7D8;--line:rgba(43,33,26,.14);--lineStrong:rgba(43,33,26,.5);
+  --text:#2B211A;--sub:#5E5146;--sub2:#5E5146;--muted:#6B5D51;
+  --brand:#8A4B2A;--onBrand:#FFFDF8;--leaf:#5B6236;--onLeaf:#FFFDF8;--brandSoft:#F1E4D8;--leafSoft:#E9EBDB;
+  --sel:#2B211A;--onSel:#FAF6EE;--accent:#8A4B2A;--accentSoft:#F1E4D8;--onAccent:#FFFDF8;--herb:#5B6236;--coffee:#2B211A;
+  --glass:rgba(250,246,238,.94);--glassLine:rgba(43,33,26,.12);
+  --fontDisplay:"Fraunces", Georgia, "Times New Roman", serif;
+  color-scheme:light}
+html.skin-bildband:not(#_x#_y) body.grouped{--bg:#FAF6EE;--surface:#FFFFFF}
+html.skin-bildband:not(#_x#_y) .cookOverlay{--cBg:#FAF6EE;--cCard:#FFFFFF;--cFill:#EFE7D8;--cLine:rgba(43,33,26,.14);--cText:#2B211A;--cSub:#5E5146;--cLeaf:#8A4B2A;--cOnLeaf:#FFFDF8}
+html.skin-bildband:not(#_x#_y) ::selection{background:#E7D3BF;color:#2B211A}
+
+/* Schrift: Serife für alles, was Titel ist; kleine Etiketten gesperrt */
+html.skin-bildband:not(#_x#_y) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark){
+  font-family:var(--fontDisplay);font-weight:400;letter-spacing:-.015em}
+html.skin-bildband:not(#_x#_y) .pageTitleBlock .h1,html.skin-bildband:not(#_x#_y) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(2.6rem, 12vw, 3.8rem), 12.5vw);line-height:1;font-weight:400}
+html.skin-bildband:not(#_x#_y) .homeGreetingTitle::first-line{font-style:italic}
+html.skin-bildband:not(#_x#_y) .homeSectionTitle,html.skin-bildband:not(#_x#_y) .h2{font-size:1.75rem;font-style:italic}
+html.skin-bildband:not(#_x#_y) .recipeHeroText .recipeName,html.skin-bildband:not(#_x#_y) .homeFeatured .homeFeaturedTitle{font-size:clamp(2.2rem, 10vw, 3.4rem);line-height:1.02;font-weight:400}
+html.skin-bildband:not(#_x#_y) :is(.homeGreetingSub,.homeAllLink,.continueEyebrow,.heroOverlayCat,.catTileCount,.ingSection,.resultCount){text-transform:uppercase;letter-spacing:.14em;font-weight:600;font-size:.6875rem}
+html.skin-bildband:not(#_x#_y) .homeAllLink{color:var(--brand)}
+
+/* Flächen: ruhig, fast ohne Rundung, Haarlinien statt Schatten */
+html.skin-bildband:not(#_x#_y) :is(.btn,.recipeCookBtn,.homeQuickBtn,.cookNavBtn,.pillToggle,.filterChip,.chip,.searchRow,.segmented,.recipeActBtn,.navIconBtn,#recipeBack){border-radius:999px !important;box-shadow:none !important}
+html.skin-bildband:not(#_x#_y) :is(.filterChip,.pillToggle,.searchRow){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(43,33,26,.3) !important}
+html.skin-bildband:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"]){background:var(--text) !important;color:var(--bg) !important}
+html.skin-bildband:not(#_x#_y) .homeQuickBtn{background:var(--surface) !important;color:var(--text) !important;box-shadow:inset 0 0 0 1px var(--line) !important}
+html.skin-bildband:not(#_x#_y) .homeQuickBtn .uiIcon{color:var(--brand)}
+html.skin-bildband:not(#_x#_y) .bottomRail{background:var(--glass) !important;border:1px solid var(--glassLine);box-shadow:0 8px 30px rgba(43,33,26,.10) !important}
+html.skin-bildband:not(#_x#_y) .tabItem{color:var(--sub) !important}
+html.skin-bildband:not(#_x#_y) .tabItem.active{background:var(--text) !important;color:var(--bg) !important}
+
+/* Rezepte als Kapitel: Foto trägt die Karte, darunter Nummer, Titel, Zeile */
+html.skin-bildband:not(#_x#_y) .grid{counter-reset:bb}
+html.skin-bildband:not(#_x#_y) .grid .linkCard{counter-increment:bb}
+html.skin-bildband:not(#_x#_y) .recipeCard:not(.homeFeatured){background:transparent !important;box-shadow:none !important;border-radius:0 !important;overflow:visible}
+html.skin-bildband:not(#_x#_y) .recipeCard .rcImg{border-radius:3px !important;overflow:hidden}
+html.skin-bildband:not(#_x#_y) .recipeCard:not(.homeFeatured) .rcBody{padding-left:0;padding-right:0}
+html.skin-bildband:not(#_x#_y) .recipeTitle{font-size:1.15rem;line-height:1.12}
+html.skin-bildband:not(#_x#_y) .grid .recipeTitle::before{content:"Nº " counter(bb);display:block;margin-bottom:6px;font:600 .6875rem/1 var(--fontUi);letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+html.skin-bildband:not(#_x#_y).listCards .grid{row-gap:44px}
+html.skin-bildband:not(#_x#_y).listCards .grid .rcImg{aspect-ratio:4/5 !important}
+html.skin-bildband:not(#_x#_y).listCards .grid .recipeTitle{font-size:2rem;line-height:1.04}
+html.skin-bildband:not(#_x#_y) .homeFeatured,html.skin-bildband:not(#_x#_y) .catTile{border-radius:3px !important;overflow:hidden}
+html.skin-bildband:not(#_x#_y) .homeFeatured .rcImg::after,html.skin-bildband:not(#_x#_y) .recipePageHero::after{background:linear-gradient(to top, rgba(30,20,12,.82) 0%, rgba(30,20,12,.28) 48%, transparent 76%) !important}
+html.skin-bildband:not(#_x#_y) .continueCard{border-radius:3px !important;background:var(--text) !important;color:var(--bg) !important;box-shadow:none !important}
+html.skin-bildband:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:var(--bg) !important}
+html.skin-bildband:not(#_x#_y) .continuePlay{background:var(--bg) !important;color:var(--text) !important}
+
+/* Rezeptseite: Schritte mit großen Serifenziffern, Zutaten mit feiner Linie */
+html.skin-bildband:not(#_x#_y) .recipeBody ol > li::marker{font-family:var(--fontDisplay);font-style:italic;color:var(--brand);font-size:1.35em}
+html.skin-bildband:not(#_x#_y) .recipePageHero img{transform-origin:50% 60%}
+
+/* Bewegung beim Scrollen (Klassen setzt scrollFx() in skins.js): weich einblenden, Foto fährt leicht heran */
+html.skin-bildband:not(#_x#_y) .bxRv{opacity:0;transform:translateY(26px) scale(.985)}
+html.skin-bildband:not(#_x#_y) .bxRv.bxRvX{transform:translateX(26px)}
+html.skin-bildband:not(#_x#_y) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .9s var(--easeSheet),transform 1.1s var(--easeSheet)}
+html.skin-bildband:not(#_x#_y) .rcImg img.bxPar{will-change:transform}
+html.skin-bildband:not(#_x#_y) .bxProgress{position:fixed;left:0;right:0;top:0;height:2px;z-index:900;background:var(--brand);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+html:has(.cookOverlay.open) .bxProgress{display:none}
+html.skin-bildband::view-transition-old(root){animation:vtOut .22s ease both}
+html.skin-bildband::view-transition-new(root){animation:bbPageIn .5s cubic-bezier(.2,.8,.2,1) .06s both}
+@keyframes bbPageIn{from{opacity:0;transform:scale(1.015)}}
+@keyframes bbKen{from{transform:scale(1.09)}}
+html.skin-bildband:not(#_x#_y) .recipePageHero img.bbKen{animation:bbKen 2.4s cubic-bezier(.2,.7,.2,1) both}
+
+/* Schlussseite mit schwebenden Kräuterblättern (Canvas, reagiert auf Finger/Maus; bbFooter() in skins.js) */
+html.skin-bildband:not(#_x#_y) .bbFooter{position:relative;width:100vw;margin:56px 0 0 calc(50% - 50vw);height:min(62vh,460px);background:#2B211A;color:#FAF6EE;overflow:hidden;display:grid;place-items:center;text-align:center;touch-action:pan-y}
+html.skin-bildband:not(#_x#_y) .bbFooter canvas{position:absolute;inset:0;width:100%;height:100%}
+html.skin-bildband:not(#_x#_y) .bbFootText{position:relative;padding:0 24px;pointer-events:none}
+html.skin-bildband:not(#_x#_y) .bbFootText b{display:block;font:italic 400 clamp(2rem,9vw,3.2rem)/1.05 var(--fontDisplay);letter-spacing:-.015em}
+html.skin-bildband:not(#_x#_y) .bbFootText span{display:block;margin-top:12px;font:600 .6875rem/1.4 var(--fontUi);letter-spacing:.14em;text-transform:uppercase;color:#D9CDBB}
+html.skin-bildband:not(#_x#_y) .bbFootText a{pointer-events:auto;display:inline-flex;align-items:center;min-height:44px;margin-top:14px;padding:0 20px;border-radius:999px;background:#FAF6EE;color:#2B211A;font-weight:600;text-decoration:none}
+
+/* Vorspann: Titelseite der Ausgabe */
+.skIntro-bildband{background:#EFE7D8;color:#2B211A;text-align:center}
+.skIntro-bildband .ivRule{width:1px;height:64px;margin:0 auto 18px;background:#2B211A;transform-origin:50% 0;animation:bbRule .7s cubic-bezier(.2,.8,.2,1) both}
+.skIntro-bildband .ivTitle{font:400 clamp(2.6rem,12vw,4.4rem)/1 "Fraunces",Georgia,serif;letter-spacing:-.02em;animation:bbFade .9s ease .25s both}
+.skIntro-bildband .ivTitle i{display:block}
+.skIntro-bildband .ivIssue{margin-top:16px;font:600 .6875rem/1 -apple-system,"Inter",sans-serif;letter-spacing:.18em;text-transform:uppercase;animation:bbFade .8s ease .7s both}
+@keyframes bbRule{from{transform:scaleY(0)}}
+@keyframes bbFade{from{opacity:0;transform:translateY(10px)}}
+
+html.skin-bildband:not(#_x#_y).listCards .grid .recipeCard:not(.homeFeatured) .rcBody{padding-left:16px;padding-right:16px}
+@media (min-width:700px){ html.skin-bildband:not(#_x#_y).listCards .grid .recipeCard:not(.homeFeatured) .rcBody{padding-left:0;padding-right:0} }
+
+@media (prefers-reduced-motion: reduce){
+html.skin-bildband:not(#_x#_y) .bxRv{opacity:1;transform:none}
+html.skin-bildband:not(#_x#_y) .recipePageHero img.bbKen{animation:none}
+html.skin-bildband::view-transition-new(root){animation:vtIn .18s both}
+}

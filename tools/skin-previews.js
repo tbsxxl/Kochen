@@ -5,7 +5,7 @@
 const { chromium } = require("playwright");
 const path = require("path");
 const BASE = process.argv[2] || "http://localhost:8411";
-const SKINS = ["standard", "retro", "terminal", "diner", "bauhaus", "nordwall", "zauberschule", "jahr3000", "zweistaedte", "insel", "akte", "brigade", "boxengasse"];
+const SKINS = ["standard", "retro", "terminal", "diner", "bauhaus", "nordwall", "zauberschule", "jahr3000", "zweistaedte", "insel", "akte", "brigade", "boxengasse", "bildband"];
 (async ()=>{
   const b = await chromium.launch();
   for(const s of SKINS){

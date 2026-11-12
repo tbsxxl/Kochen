@@ -838,6 +838,9 @@
     // Boxengasse: Limetten-Vorhang mit Zähler, der Titel steigt aus der Zeile, dann fährt der Vorhang nach oben weg
     boxengasse: { ms: 1700, html: ()=> `<div class="ivLine"><span>Tobis</span><span>Kochbuch</span></div><div class="ivFoot"><span>Küche lädt</span><b class="ivNum">0</b></div>`,
       snd: (a)=>{ tone(a, { f: 180, f2: 720, d: 1.3, type: "sawtooth", v: .04 }); tone(a, { f: 1320, t: 1.45, d: .25, v: .06 }); } },
+    // Bildband: Titelseite der Ausgabe – Linie zieht sich, Titel und Monat blenden ein
+    bildband: { ms: 2200, html: ()=> `<div><div class="ivRule"></div><div class="ivTitle">Tobis<i>Kochbuch</i></div><div class="ivIssue">Ausgabe ${new Date().toLocaleDateString("de-DE", { month: "long", year: "numeric" })}</div></div>`,
+      snd: (a)=>{ tone(a, { f: 523, t: .2, d: 1.2, v: .04 }); tone(a, { f: 784, t: .55, d: 1.2, v: .03 }); } },
   };
   let introOn = false;
   function playIntro(force){
@@ -900,6 +903,7 @@
     document.querySelectorAll(".bxRv").forEach((el)=>{ el.classList.remove("bxRv", "bxRvX", "bxIn"); el.style.transitionDelay = ""; });
     document.querySelectorAll("img.bxPar").forEach((el)=>{ el.classList.remove("bxPar"); el.style.transform = ""; });
     document.querySelectorAll("[data-bx-title]").forEach((el)=>{ el.textContent = el.dataset.bxTitle; delete el.dataset.bxTitle; });
+    bbStop?.(); bbStop = null;
     document.querySelectorAll("[data-bx-seen]").forEach((el)=>{ delete el.dataset.bxSeen; });
   }
   function bxTitles(){
@@ -938,13 +942,54 @@
     });
     document.querySelectorAll(".appMain .linkCard:not(.hCard) .rcImg img:not(.bxPar)").forEach((img)=>{ img.classList.add("bxPar"); bxParIO.observe(img); });
   }
-  let bxOn = false;
+  // ---------- Bildband: Foto fährt beim Öffnen des Rezepts heran; Schlussseite mit schwebenden Kräuterblättern ----------
+  function bbKen(){ const img = $(".recipePageHero img"); if(img && !reduce() && !img.dataset.bbKen){ img.dataset.bbKen = "1"; img.classList.add("bbKen"); img.addEventListener("animationend", ()=> img.classList.remove("bbKen"), { once: true }); } }
+  let bbStop = null;
+  function bbFooter(){
+    const main = $(".appMain"), b = document.body;
+    if($(".bbFooter") || !main || !(b.classList.contains("layout-home") || $("#recipeGrid"))) return;
+    const el = bit("bbFooter", "bildband", "footer");
+    el.innerHTML = `<canvas aria-hidden="true"></canvas><div class="bbFootText"><b>Guten Appetit.</b><span>Noch nichts gefunden?</span><a href="/was-koche-ich/?zufall=1">Überrasch mich</a></div>`;
+    main.appendChild(el);
+    if(reduce()) return;
+    const cv = el.querySelector("canvas"), g = cv.getContext("2d"), dpr = Math.min(2, devicePixelRatio || 1);
+    let w = 0, h = 0, raf = 0, on = false, px = -999, py = -999;
+    const COL = ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"];
+    const P = Array.from({ length: 46 }, (_, i)=> ({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, r: 4 + Math.random() * 7, a: Math.random() * 6.3, s: (Math.random() - .5) * .012, c: COL[i % COL.length], ph: Math.random() * 6.3 }));
+    const size = ()=>{ const r = el.getBoundingClientRect(); w = r.width; h = r.height; cv.width = w * dpr; cv.height = h * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    const draw = (t)=>{
+      raf = on ? requestAnimationFrame(draw) : 0;
+      g.clearRect(0, 0, w, h);
+      for(const p of P){
+        let x = p.x * w, y = p.y * h;
+        const dx = x - px, dy = y - py, d2 = dx * dx + dy * dy;
+        if(d2 < 12000){ const f = (1 - d2 / 12000) * .9, d = Math.sqrt(d2) || 1; p.vx += dx / d * f; p.vy += dy / d * f; p.s += (dx > 0 ? .004 : -.004) * f; }
+        p.vx = p.vx * .94 + Math.sin(t / 2600 + p.ph) * .012; p.vy = p.vy * .94 - .006 + Math.cos(t / 3100 + p.ph) * .008;
+        x += p.vx; y += p.vy; p.a += p.s; p.s *= .995;
+        if(y < -20) y = h + 20; if(y > h + 20) y = -20; if(x < -20) x = w + 20; if(x > w + 20) x = -20;
+        p.x = x / w; p.y = y / h;
+        g.save(); g.translate(x, y); g.rotate(p.a); g.globalAlpha = .85; g.fillStyle = p.c;
+        g.beginPath(); g.moveTo(-p.r, 0); g.quadraticCurveTo(0, -p.r * .62, p.r, 0); g.quadraticCurveTo(0, p.r * .62, -p.r, 0); g.fill(); g.restore();
+      }
+    };
+    const at = (e)=>{ const r = el.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top; };
+    el.addEventListener("pointermove", at, { passive: true }); el.addEventListener("pointerdown", at, { passive: true });
+    el.addEventListener("pointerleave", ()=>{ px = py = -999; });
+    const io = new IntersectionObserver((es)=>{ on = es[0].isIntersecting; if(on && !raf){ size(); raf = requestAnimationFrame(draw); } });
+    io.observe(el);
+    bbStop?.(); bbStop = ()=>{ on = false; io.disconnect(); cancelAnimationFrame(raf); };
+  }
+  // Dieselbe Scroll-Bewegung nutzen Boxengasse und Bildband (Aussehen je Skin-Datei)
+  const SCROLL_FX = { boxengasse: 1, bildband: 1 };
+  let bxOn = "";
   function boxengasse(){
-    if(skin() !== "boxengasse"){ if(bxOn){ bxOn = false; bxOff(); } return; }
-    bxTitles(); bxMarquee();
+    const sk = skin();
+    if(bxOn && bxOn !== sk){ bxOn = ""; bxOff(); }
+    if(!SCROLL_FX[sk]) return;
+    if(sk === "boxengasse"){ bxTitles(); bxMarquee(); } else { bbFooter(); bbKen(); }
     if(bxOn){ bxWatch(); return; }   // läuft schon (enhance() kommt bei jeder Änderung im Inhalt wieder)
-    bxOn = true;
-    let bar = $(".bxProgress"); if(!bar){ bar = bit("bxProgress", "boxengasse"); bar.setAttribute("aria-hidden", "true"); document.body.appendChild(bar); }
+    bxOn = sk;
+    let bar = $(".bxProgress"); if(!bar){ bar = bit("bxProgress", sk); bar.setAttribute("aria-hidden", "true"); document.body.appendChild(bar); }
     if(reduce() || !("IntersectionObserver" in window)) return;
     bxIO = new IntersectionObserver((es)=>{
       let n = 0;
@@ -974,7 +1019,7 @@
   function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
 
   // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
-  const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade","boxengasse"];
+  const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade","boxengasse","bildband"];
   function skinLogo(){
     const img = document.querySelector(".homeBrand .logoSkin");
     if(!img) return;

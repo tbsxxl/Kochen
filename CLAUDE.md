@@ -92,7 +92,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   `(hover:hover) and (pointer:fine)`. Bewegung nur über `transform`/`opacity` mit den Kurven-Tokens; „Bewegung reduzieren“ lässt
   Bewegung weg. Rezeptkarten gibt es zweimal (`_includes/recipe-card.html`, `assets/cards.js`) – Änderungen in beiden.
   Blätter sind echte Dialoge (`bindDialogs()`), lassen sich wegziehen (`bindSheetDrag()`).
-- **Skins:** „Mehr“ → „Skin“ (`kochbuch.ui.skin`, pro Gerät). 13 Stück (dazu Boxengasse, siehe unten): Standard, Retro (`html.retro`, bleibt in `styles.css`),
+- **Skins:** „Mehr“ → „Skin“ (`kochbuch.ui.skin`, pro Gerät). 14 Stück (dazu Boxengasse und Bildband, siehe unten): Standard, Retro (`html.retro`, bleibt in `styles.css`),
   Terminal, Diner, Bauhaus (diese fünf „sollen gleich bleiben“) und sieben Serien-Welten mit eigenen Namen: Nordwall, Zauberschule,
   Jahr 3000, Zwei Städte, Die Insel, Akte, Brigade. **Keine Logos, Figuren, Namen, Zitate oder Original-Schriften der Serien;
   Fotos unverfälscht; Tab-Symbole überall gleich; jedes Detail soll beim Kochen nützen.**
@@ -110,6 +110,11 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     aus `#homeCats` in `home.html`), Limetten-Vorhang als Vorspann. Selektoren dort: `html.skin-boxengasse:not(#_x#_y)`.
     Ansehen der Vorlage braucht `landonorris.com` + `cdn.prod.website-files.com` in den Netzwerk-Freigaben; ihr Skript-Server
     (`lando.itsoffbrand.io`) ist nicht freigegeben, die Seite bleibt dann im Ladebild (per Skript ausblenden).
+  - **Bildband** (Nov. 2026, Wunsch des Besitzers: Food-Magazin, „jedes Rezept ein Kapitel“): Creme `#FAF6EE`/`#EFE7D8`, Espresso-Text,
+    Erdton `#8A4B2A`, Titel in Fraunces (Abschnittstitel kursiv), Rezeptliste mit hohen Fotos und „Nº n“ (CSS-Zähler), Foto fährt beim
+    Öffnen des Rezepts heran (`bbKen()`), Schlussseite `.bbFooter` auf Start und Rezeptliste mit Kräuterblättern auf einem Canvas, die
+    Finger/Maus ausweichen (`bbFooter()`, läuft nur, solange sichtbar). Scroll-Bewegung teilt er sich mit Boxengasse (`SCROLL_FX`).
+    Creme/Sand ist nur im Standard-Look unerwünscht – hier ausdrücklich gewollt.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Vor und nach Umbauten an CSS/Skins:** `node tools/visual.js shoot <ordner>` vorher und nachher, dann
