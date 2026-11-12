@@ -505,7 +505,7 @@
   // nichts zuckt; bewegt sich der Finger, wird abgebrochen. Kurzes Antippen zeigt den Effekt kurz nach.
   function bindPressables(root){
     const scope = root || document;
-    const sel = '.pressable, .btn, .sheetRow, .tabItem, .recipePortionStep, .stepBtn, .counterBtn, .favBadge, .cookTab, .cookNavBtn, .uRow, .linkCard';
+    const sel = '.pressable, .btn, .sheetRow, .tabItem, .recipePortionStep, .stepBtn, .counterBtn, .favBadge, .cookTab, .cookNavBtn, .uRow, .linkCard, .prepRow';
     let active = null, timer = null, x0 = 0, y0 = 0, shown = false;
 
     function clear(){

@@ -158,6 +158,11 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   Timer). Wer in „Vorbereiten“ etwas abhakt oder „Los geht’s“ drückt, hat begonnen: der Fortschritt wird gemerkt (`prep: true` =
   noch in der Vorbereitung, „Weiterkochen“ zeigt dann „Vorbereiten“ und öffnet diese Seite wieder).
   Die stehende Timer-Mitteilung lässt sich unter Profil & Sync → Mitteilungen abschalten (`kochbuch.ui.timerNotify = "0"`).
+- Skill-Runde Dez. 2026 (`impeccable`, `mobile-native`, `apple-design`, `unslop`, `break-ui`; Abschnitt 22 in `styles.css`): Vorbereiten-Kopf
+  ohne Erklärtext (Titel + Zähler in einer Zeile), Zeilen mit Tipp-Rückmeldung; Kapsel-Knöpfe 44 pt, die Restzeit wird nie gekürzt
+  (`.ncTime`), Endzeit/„(+n)“ weichen zuerst (`.ncRest`), kaputtes Foto → Eieruhr-Kachel; Timer-Leiste im Kochmodus am Handy höchstens
+  gut zwei Zeilen hoch (scrollt), sonst verdecken fünf Timer den Inhalt; Timer-Karte am iPad höchstens 440 px breit.
+  `review-animations` und einige andere Skills lassen sich nur vom Besitzer selbst starten (`/review-animations`).
 - Kochmodus: Wischen links/rechts; Fortschritt in `cooking` (12 Std). „Kochen läuft“-Kapsel über der unteren Leiste
   (`assets/now-cooking.js`, wie der Mini-Player in Apple Music) auf jeder Seite, solange Fortschritt oder Timer laufen:
   Foto (aus dem Kochmodus, sonst `image` des Timers – `start()` in cook-timer.js speichert `RECIPE_DATA.image`; ältere Timer ohne Foto: grüne Kachel mit Eieruhr), Name, Timer-Restzeit (Eieruhr-SVG), „Schritt n von m“, Fortschritt grün; Antippen öffnet `?kochen=1` (auf der Rezeptseite direkt

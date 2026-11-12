@@ -28,6 +28,8 @@
     <button class="nowCookingClose pressable" type="button" aria-label="Ausblenden"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     <span class="nowCookingBar"><span></span></span>`;
   const $ = (s)=>bar.querySelector(s);
+  // Foto lädt nicht (gelöscht, offline) → Eieruhr-Kachel statt des Symbols für ein kaputtes Bild
+  $(".nowCookingImg").addEventListener("error", ()=>{ $(".nowCookingImg").hidden = true; $(".nowCookingEgg").hidden = false; });
 
   let target = "";
   function render(){
@@ -48,11 +50,12 @@
     const parts = [];
     // Restzeit und Uhrzeit, zu der der Timer fertig ist (gleiche Schreibweise wie die Timer-Karte auf der Startseite)
     const endAt = next ? new Date(next.end).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" }) : "";
-    if(next) parts.push(done ? "Timer abgelaufen" : `${CLOCK}${esc(T.fmt(next.left))} · bis ${endAt}${timers.length > 1 ? ` (+${timers.length - 1})` : ""}`);
+    // Restzeit wird nie gekürzt (.ncTime), Endzeit und „(+n)“ weichen zuerst, wenn es eng wird (.ncRest)
+    if(next) parts.push(done ? "Timer abgelaufen" : `<span class="ncTime">${CLOCK}${esc(T.fmt(next.left))}</span><span class="ncRest"> · bis ${endAt}${timers.length > 1 ? ` (+${timers.length - 1})` : ""}</span>`);
     if(c) parts.push(c.prep ? "Vorbereiten" : `Schritt ${c.step + 1} von ${c.total}`);
 
     $(".nowCookingTitle").textContent = title || "Kochen";
-    $(".nowCookingSub").innerHTML = parts.join(" · ");
+    $(".nowCookingSub").innerHTML = parts.map((x, i)=> i ? `<span class="ncRest"> · ${x}</span>` : (x.startsWith("<span") ? x : `<span class="ncTime">${x}</span>`)).join("");
     bar.classList.toggle("isDone", done);
     const img = $(".nowCookingImg");
     // Foto: Kochmodus, sonst das des Timers; fehlt beides, eine Kachel mit Eieruhr statt einer Lücke

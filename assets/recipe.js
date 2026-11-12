@@ -555,9 +555,10 @@ const cookOverlay = $("#cookOverlay");
     const row = (t, k)=> `<button type="button" class="prepRow${done.has(k) ? " isDone" : ""}" role="checkbox" aria-checked="${done.has(k)}" data-k="${k}"><span class="prepBox">${CHECK}</span><span class="prepText">${escHtml(t.text)}</span></button>`;
     const group = (title, list, pre)=> list.length ? `<div class="prepGroup prepGroup-${pre}"><div class="prepGroupTitle">${title}</div>${list.map((t, i)=> row(t, pre + i)).join("")}</div>` : "";
     const todo = g.start.length + g.tasks.length;
-    cookPrep.innerHTML = `<div class="prepHead"><h2 class="prepTitle">${document.documentElement.classList.contains("skin-brigade") ? "Mise en place" : "Vorbereiten"}</h2><p class="prepSub">Erst alles bereitstellen, dann kochen. So muss am Herd nichts mehr schnell geschnitten werden.</p></div>
-      ${group("Zuerst anstellen", g.start, "s")}${group("Schneiden und bereitstellen", g.tasks, "t")}${group("Erst später dran", g.later, "l")}
-      <div class="prepCount" aria-live="polite">${todo ? `${[...done].filter((k)=> k[0] !== "l").length} von ${todo} erledigt` : ""}</div>`;
+    // Kopf: Titel und Zähler in einer Zeile, kein Erklärtext (die Gruppen sagen, was zu tun ist)
+    const nDone = [...done].filter((k)=> k[0] !== "l").length;
+    cookPrep.innerHTML = `<div class="prepHead"><h2 class="prepTitle">${document.documentElement.classList.contains("skin-brigade") ? "Mise en place" : "Vorbereiten"}</h2>${todo ? `<span class="prepCount" aria-live="polite">${nDone} von ${todo}</span>` : ""}</div>
+      ${group("Zuerst anstellen", g.start, "s")}${group("Schneiden und bereitstellen", g.tasks, "t")}${group("Später", g.later, "l")}`;
   }
   cookPrep?.addEventListener("click", (e)=>{
     const r = e.target.closest(".prepRow"); if(!r) return;
