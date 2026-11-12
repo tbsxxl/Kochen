@@ -92,7 +92,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   `(hover:hover) and (pointer:fine)`. Bewegung nur über `transform`/`opacity` mit den Kurven-Tokens; „Bewegung reduzieren“ lässt
   Bewegung weg. Rezeptkarten gibt es zweimal (`_includes/recipe-card.html`, `assets/cards.js`) – Änderungen in beiden.
   Blätter sind echte Dialoge (`bindDialogs()`), lassen sich wegziehen (`bindSheetDrag()`).
-- **Skins:** „Mehr“ → „Skin“ (`kochbuch.ui.skin`, pro Gerät). 12 Stück: Standard, Retro (`html.retro`, bleibt in `styles.css`),
+- **Skins:** „Mehr“ → „Skin“ (`kochbuch.ui.skin`, pro Gerät). 13 Stück (dazu Boxengasse, siehe unten): Standard, Retro (`html.retro`, bleibt in `styles.css`),
   Terminal, Diner, Bauhaus (diese fünf „sollen gleich bleiben“) und sieben Serien-Welten mit eigenen Namen: Nordwall, Zauberschule,
   Jahr 3000, Zwei Städte, Die Insel, Akte, Brigade. **Keine Logos, Figuren, Namen, Zitate oder Original-Schriften der Serien;
   Fotos unverfälscht; Tab-Symbole überall gleich; jedes Detail soll beim Kochen nützen.**
@@ -103,10 +103,17 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   - **Verhalten:** `assets/skins.js` (Szenen `.skinScene`, eingefügte Elemente `.skinBit` + `data-for`, Uhr je Welt `worldClock()`,
     Timer-Karte `homeTimer()`, Vorspann `playIntro()`, Klänge nur mit Schalter „Klänge der Welten“, Stimme `VOICE`).
   - **Vorschaubilder** der Skin-Auswahl: `assets/skins/<skin>.jpg` aus `tools/skin-previews.js` – nach sichtbaren Änderungen neu erzeugen.
+  - **Boxengasse** (Nov. 2026, Wunsch des Besitzers: Aufbau, UI und Scroll-Bewegung wie landonorris.com, nicht der Inhalt): dunkles Oliv
+    `#282C20`, Limette `#D2FF00` als einzige Signalfarbe, fette Versal-Titel mit einem Wort in dünner Serifenschrift (`em.bxSerif`),
+    Karten mit ausgeklinkter Ecke. Bewegung in `boxengasse()` (`skins.js`): Einblenden beim Scrollen (`.bxRv`, nur was beim Aufbau
+    außerhalb des Bildschirms lag), Foto-Parallaxe in Karten, Fortschrittslinie oben, Laufband mit den Kategorien (antippbar, Daten
+    aus `#homeCats` in `home.html`), Limetten-Vorhang als Vorspann. Selektoren dort: `html.skin-boxengasse:not(#_x#_y)`.
+    Ansehen der Vorlage braucht `landonorris.com` + `cdn.prod.website-files.com` in den Netzwerk-Freigaben; ihr Skript-Server
+    (`lando.itsoffbrand.io`) ist nicht freigegeben, die Seite bleibt dann im Ladebild (per Skript ausblenden).
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Vor und nach Umbauten an CSS/Skins:** `node tools/visual.js shoot <ordner>` vorher und nachher, dann
-  `node tools/visual.js diff <vorher> <nachher>` (13 Seiten × 12 Skins, eingefrorene Uhr). So wurde das Zerlegen der CSS-Datei
+  `node tools/visual.js diff <vorher> <nachher>` (13 Seiten × alle Skins, eingefrorene Uhr). So wurde das Zerlegen der CSS-Datei
   geprüft. Neue Bedienelemente in allen Skins ansehen, auch Einkaufsliste, Wochenplan, Kategorien, Konto, Kühltruhe, Blätter
   und am iPad (1000 × 750).
 - **iPad-Homescreen-App:** über fest stehenden Ebenen bleibt oben ein Streifen, in dem die Seite dahinter durchscheint. Bei offenem

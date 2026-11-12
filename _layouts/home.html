@@ -19,6 +19,8 @@ layout: default
 })();
 </script>
 
+<script type="application/json" id="homeCats">{{ site.data.categories | jsonify }}</script>
+
 <!-- Weiterkochen: läuft gerade ein Kochmodus, steht er ganz oben -->
 <div class="section homeContinue" id="homeContinue" hidden>
   <a class="continueCard pressable" id="continueLink" href="#">

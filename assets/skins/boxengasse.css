@@ -1,0 +1,105 @@
+/* Skin „boxengasse“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Vorbild für Aufbau und Bewegung: eine Rennfahrer-Seite (dunkles Oliv, eine Signalfarbe, fette Versal-Titel mit einem Wort in
+   dünner Serifenschrift, Karten mit ausgeklinkter Ecke, Einblenden beim Scrollen). Keine Namen, Logos, Bilder oder Schriften von dort.
+   Scroll-Verhalten: boxengasse() in assets/skins.js. Neue Regeln ans Ende. */
+html.skin-boxengasse:not(#_x#_y),html.skin-boxengasse:not(#_x#_y) body{
+  --field:#282C20;--onField:#F4F4ED;--onField2:#C9CCBB;--fieldFill:rgba(244,244,237,.10);
+  --bg:#282C20;--surface:#15170F;--surface2:#1D2016;--fill:rgba(244,244,237,.09);--line:rgba(244,244,237,.16);--lineStrong:rgba(244,244,237,.4);
+  --text:#F4F4ED;--sub:#C9CCBB;--sub2:#C9CCBB;--muted:#A9AD99;
+  --brand:#D2FF00;--onBrand:#15170F;--leaf:#D2FF00;--onLeaf:#15170F;--brandSoft:rgba(210,255,0,.14);--leafSoft:rgba(210,255,0,.14);
+  --sel:#D2FF00;--onSel:#15170F;--accent:#D2FF00;--accentSoft:rgba(210,255,0,.14);--onAccent:#15170F;--herb:#D2FF00;--coffee:#15170F;
+  --glass:rgba(21,23,15,.96);--glassLine:rgba(244,244,237,.16);--glassShadow:none;
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;--fontDisplay:-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  --bxSerif:"Fraunces", Georgia, "Times New Roman", serif;--bxNotch:14px;
+  color-scheme:dark}
+html.skin-boxengasse:not(#_x#_y) body.grouped{--bg:#282C20;--surface:#15170F}
+html.skin-boxengasse:not(#_x#_y) .cookOverlay{--cBg:#15170F;--cCard:#282C20;--cFill:rgba(244,244,237,.10);--cLine:rgba(244,244,237,.16);--cText:#F4F4ED;--cSub:#C9CCBB;--cLeaf:#D2FF00;--cOnLeaf:#15170F}
+html.skin-boxengasse:not(#_x#_y) ::selection{background:#D2FF00;color:#15170F}
+
+/* Titel: fett, versal, eng – ein Wort in dünner Serifenschrift und Limette (em.bxSerif setzt skins.js) */
+html.skin-boxengasse:not(#_x#_y) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle){
+  font-family:var(--fontDisplay);font-weight:800;letter-spacing:-.025em;text-transform:uppercase;line-height:.98}
+html.skin-boxengasse:not(#_x#_y) .pageTitleBlock .h1,html.skin-boxengasse:not(#_x#_y) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(2.5rem, 11.5vw, 3.6rem), 12vw);line-height:.92}
+html.skin-boxengasse:not(#_x#_y) .homeSectionTitle,html.skin-boxengasse:not(#_x#_y) .h2{font-size:1.65rem}
+html.skin-boxengasse:not(#_x#_y) .recipeHeroText .recipeName,html.skin-boxengasse:not(#_x#_y) .homeFeatured .homeFeaturedTitle{font-size:clamp(2rem, 9vw, 3rem);line-height:.95}
+html.skin-boxengasse:not(#_x#_y) em.bxSerif{font-family:var(--bxSerif);font-style:normal;font-weight:400;letter-spacing:-.01em;color:var(--brand)}
+html.skin-boxengasse:not(#_x#_y) .recipeTitle{font-size:1.02rem;letter-spacing:-.01em;line-height:1.08}
+html.skin-boxengasse:not(#_x#_y).listCards .grid .recipeTitle{font-size:1.35rem}
+/* kleine Etiketten: versal, weit */
+html.skin-boxengasse:not(#_x#_y) :is(.homeGreetingSub,.homeAllLink,.continueEyebrow,.heroOverlayCat,.catTileCount,.tabLabel,.ingSection,.recipeAuthor){text-transform:uppercase;letter-spacing:.06em;font-weight:600;font-size:.75rem}
+html.skin-boxengasse:not(#_x#_y) .homeAllLink{color:var(--brand)}
+
+/* Knöpfe: Limette, eckig-rund, versal */
+html.skin-boxengasse:not(#_x#_y) :is(.btnPrimary,.recipeCookBtn,.homeQuickBtn,.cookNext,.sheetBtnPrimary,button.primary,.btn.primary){
+  background:var(--brand) !important;color:var(--onBrand) !important;border-radius:10px !important;text-transform:uppercase;font-weight:800;letter-spacing:.01em;box-shadow:none !important}
+html.skin-boxengasse:not(#_x#_y) :is(.recipeActBtn,.navIconBtn,.stepBtn,.recipePortionStep,#recipeBack){border-radius:10px !important}
+html.skin-boxengasse:not(#_x#_y) :is(.filterChip,.chip){border-radius:8px !important;background:transparent !important;box-shadow:inset 0 0 0 1px var(--line) !important;text-transform:uppercase;font-size:.75rem;font-weight:700;letter-spacing:.05em;color:var(--text)}
+html.skin-boxengasse:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.chip.active){background:var(--brand) !important;color:var(--onBrand) !important;box-shadow:none !important}
+html.skin-boxengasse:not(#_x#_y) .searchRow{border-radius:10px !important;background:var(--surface) !important;box-shadow:inset 0 0 0 1px var(--line) !important}
+html.skin-boxengasse:not(#_x#_y) .segmented{border-radius:10px !important;background:var(--surface) !important}
+
+/* Karten: dunkle Fläche mit ausgeklinkter Ecke unten links */
+html.skin-boxengasse:not(#_x#_y) .recipeCard:not(.homeFeatured){background:var(--surface) !important;border-radius:12px !important;box-shadow:none !important;
+  clip-path:polygon(0 0,100% 0,100% 100%,42% 100%,calc(42% - var(--bxNotch)) calc(100% - var(--bxNotch)),0 calc(100% - var(--bxNotch)));padding-bottom:var(--bxNotch)}
+html.skin-boxengasse:not(#_x#_y) .recipeCard .rcImg{border-radius:0 !important;overflow:hidden}
+html.skin-boxengasse:not(#_x#_y) .recipeCard .recipeMeta{color:var(--sub)}
+html.skin-boxengasse:not(#_x#_y) .recipeCard .metaItem:first-child{color:var(--brand)}
+html.skin-boxengasse:not(#_x#_y) .homeFeatured{border-radius:18px !important;overflow:hidden}
+html.skin-boxengasse:not(#_x#_y) .catTile{border-radius:12px !important;overflow:hidden}
+html.skin-boxengasse:not(#_x#_y) .continueCard{background:var(--brand) !important;color:var(--onBrand) !important;border-radius:14px !important;box-shadow:none !important}
+html.skin-boxengasse:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:var(--onBrand) !important}
+html.skin-boxengasse:not(#_x#_y) .continuePlay{background:var(--onBrand) !important;color:var(--brand) !important;border-radius:10px !important}
+
+/* untere Leiste */
+html.skin-boxengasse:not(#_x#_y) .bottomRail{background:#15170F !important;border:1px solid var(--line);box-shadow:none !important;border-radius:16px !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.skin-boxengasse:not(#_x#_y) .tabItem{color:#C9CCBB !important;border-radius:10px !important}
+html.skin-boxengasse:not(#_x#_y) .tabItem.active{background:var(--brand) !important;color:var(--onBrand) !important}
+html.skin-boxengasse:not(#_x#_y) .sheet{background:#15170F !important;box-shadow:0 0 0 1px var(--line) !important}
+html.skin-boxengasse:not(#_x#_y) .homeFeatured .rcImg::after,html.skin-boxengasse:not(#_x#_y) .recipePageHero::after{background:linear-gradient(to top, rgba(21,23,15,.92) 0%, rgba(21,23,15,.4) 45%, transparent 75%) !important}
+
+/* Fortschritt beim Scrollen (oben, 3 px) */
+html.skin-boxengasse:not(#_x#_y) .bxProgress{position:fixed;left:0;right:0;top:0;height:3px;z-index:900;background:var(--brand);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+html:has(.cookOverlay.open) .bxProgress{display:none}
+
+/* Laufband mit den Kategorien (Startseite) */
+html.skin-boxengasse:not(#_x#_y) .bxMarquee{width:100vw;margin:6px 0 22px calc(50% - 50vw);overflow:hidden;border-block:1px solid var(--line);padding:2px 0}
+html.skin-boxengasse:not(#_x#_y) .bxMarqMove{will-change:transform}
+html.skin-boxengasse:not(#_x#_y) .bxMarqTrack{display:flex;width:max-content;animation:bxMarq 70s linear infinite}
+html.skin-boxengasse:not(#_x#_y) .bxMarqTrack a{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 4px;font-weight:800;font-size:1.5rem;letter-spacing:-.025em;text-transform:uppercase;color:var(--text);text-decoration:none;white-space:nowrap}
+html.skin-boxengasse:not(#_x#_y) .bxMarqTrack a:nth-child(3n+2){font-family:var(--bxSerif);font-weight:400;color:var(--brand);letter-spacing:-.01em}
+html.skin-boxengasse:not(#_x#_y) .bxMarqTrack a::after{content:"";width:8px;height:8px;margin:0 16px;background:var(--brand);border-radius:2px;flex:none}
+@keyframes bxMarq{to{transform:translateX(-50%)}}
+
+/* Einblenden beim Scrollen: nur was beim Aufbau unter dem Bildschirmrand lag, bekommt .bxRv (skins.js) */
+html.skin-boxengasse:not(#_x#_y) .bxRv{opacity:0;transform:translateY(34px)}
+html.skin-boxengasse:not(#_x#_y) .bxRv.bxRvX{transform:translateX(34px)}
+html.skin-boxengasse:not(#_x#_y) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .6s var(--easeSheet),transform .8s var(--easeSheet)}
+html.skin-boxengasse:not(#_x#_y) .rcImg img.bxPar{will-change:transform}
+
+/* Seitenwechsel: neue Seite steigt kurz auf */
+html.skin-boxengasse::view-transition-new(root){animation:bxPageIn .34s cubic-bezier(.2,.8,.2,1) .04s both}
+@keyframes bxPageIn{from{opacity:0;transform:translateY(18px)}}
+
+/* Vorspann: Limetten-Vorhang mit Zähler, fährt nach oben weg */
+.skIntro-boxengasse{background:#D2FF00;color:#15170F;display:block;transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.skIntro-boxengasse.out{opacity:1;transform:translateY(-101%)}
+.skIntro-boxengasse .ivLine{position:absolute;left:20px;right:20px;top:42%;overflow:hidden;font:800 clamp(2.6rem,13vw,5rem)/.92 -apple-system,"Inter",sans-serif;letter-spacing:-.03em;text-transform:uppercase}
+.skIntro-boxengasse .ivLine span{display:block;animation:bxRise .7s cubic-bezier(.2,.8,.2,1) both}
+.skIntro-boxengasse .ivLine span + span{font-family:"Fraunces",Georgia,serif;font-weight:400;letter-spacing:-.01em;animation-delay:.12s}
+.skIntro-boxengasse .ivFoot{position:absolute;left:20px;right:20px;bottom:calc(24px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;font:700 .8rem/1 -apple-system,"Inter",sans-serif;letter-spacing:.06em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+@keyframes bxRise{from{transform:translateY(105%)}}
+
+/* Nachträge nach der ersten Durchsicht */
+html.skin-boxengasse:not(#_x#_y) .homeQuickBtn .uiIcon{color:var(--onBrand)}
+html.skin-boxengasse:not(#_x#_y) .catTileName{font-size:.95rem;overflow-wrap:anywhere;hyphens:auto}
+html.skin-boxengasse:not(#_x#_y) :is(.pillToggle,.btn,.cookNavBtn,.sortMenu,.cookSeg,.planEntry,.linkCard .card){border-radius:10px !important}
+html.skin-boxengasse:not(#_x#_y) .pillToggle{background:transparent !important;box-shadow:inset 0 0 0 1px var(--line) !important;text-transform:uppercase;font-size:.75rem;font-weight:700;letter-spacing:.05em}
+html.skin-boxengasse:not(#_x#_y) .pillToggle:is(.active,[aria-pressed="true"]){background:var(--brand) !important;color:var(--onBrand) !important;box-shadow:none !important}
+html.skin-boxengasse:not(#_x#_y) .btn.action{background:var(--brand) !important;color:var(--onBrand) !important;text-transform:uppercase;font-weight:800}
+
+@media (prefers-reduced-motion: reduce){
+html.skin-boxengasse:not(#_x#_y) .bxMarquee{overflow-x:auto}
+html.skin-boxengasse:not(#_x#_y) .bxMarqTrack{animation:none}
+html.skin-boxengasse:not(#_x#_y) .bxRv{opacity:1;transform:none}
+html.skin-boxengasse::view-transition-new(root){animation:vtIn .18s both}
+}

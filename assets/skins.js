@@ -835,6 +835,9 @@
     // Brigade: Selbsttest der LED-Uhr (88:88:88), dann läuft die Zeit und der erste Bon kommt aus dem Drucker
     brigade: { ms: 2400, html: ()=> `<div class="ivPanel"><div class="ivLed"></div><div class="ivLabel">Küche läuft</div></div><div class="ivSlot"></div><div class="ivBon"><b>Bon 0001</b><span>Service beginnt</span></div>`,
       snd: (a)=>{ [0, .25, .5].forEach((t)=> tone(a, { f: 2900, t, d: .08, type: "square", v: .05 })); for(let i = 0; i < 9; i++) noise(a, { t: 1.2 + i * .07, d: .04, f: 3000, q: 3, v: .12 }); } },
+    // Boxengasse: Limetten-Vorhang mit Zähler, der Titel steigt aus der Zeile, dann fährt der Vorhang nach oben weg
+    boxengasse: { ms: 1700, html: ()=> `<div class="ivLine"><span>Tobis</span><span>Kochbuch</span></div><div class="ivFoot"><span>Küche lädt</span><b class="ivNum">0</b></div>`,
+      snd: (a)=>{ tone(a, { f: 180, f2: 720, d: 1.3, type: "sawtooth", v: .04 }); tone(a, { f: 1320, t: 1.45, d: .25, v: .06 }); } },
   };
   let introOn = false;
   function playIntro(force){
@@ -858,11 +861,16 @@
       show("88:88:88");
       setTimeout(()=> show(`${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`), 1050 / SPEED);
     }
+    if(sk === "boxengasse"){
+      const num = el.querySelector(".ivNum"), t0 = performance.now(), dur = (def.ms - 250) / SPEED;
+      const tick = (t)=>{ const f = Math.min(1, (t - t0) / dur); num.textContent = String(Math.round(f * f * 100)).padStart(3, "0"); if(f < 1 && el.isConnected) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    }
     document.body.appendChild(el);
     if(short) try{ el.getAnimations({ subtree: true }).forEach((an)=>{ an.playbackRate = SPEED; }); }catch{}
     if(soundOn() && !short){ const a = ac(); if(a && a.state === "running") try{ def.snd(a); }catch{} }
     let done = false;
-    const end = ()=>{ if(done) return; done = true; el.classList.add("out"); setTimeout(()=>{ el.remove(); introOn = false; }, 450); };
+    const end = ()=>{ if(done) return; done = true; el.classList.add("out"); setTimeout(()=>{ el.remove(); introOn = false; }, 520); };
     el.addEventListener("pointerdown", end);
     setTimeout(end, def.ms / SPEED);
   }
@@ -879,12 +887,94 @@
     mo.observe(sheet, { attributes: true, attributeFilter: ["class"] });
   }
 
-  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); }
+
+  // ---------- Boxengasse: Aufbau und Scroll-Bewegung (assets/skins/boxengasse.css) ----------
+  // Einblenden beim Scrollen (nur was beim Aufbau außerhalb des Bildschirms lag), Foto-Parallaxe in den Karten, Fortschrittslinie,
+  // Laufband mit den Kategorien (läuft beim Scrollen schneller), ein Titelwort in Serifenschrift. Nur transform/opacity.
+  let bxIO = null, bxParIO = null, bxRaf = 0, bxOnScroll = null;
+  const bxVis = new Set();
+  function bxOff(){
+    bxIO?.disconnect(); bxParIO?.disconnect(); bxIO = bxParIO = null;
+    if(bxOnScroll){ removeEventListener("scroll", bxOnScroll); bxOnScroll = null; }
+    cancelAnimationFrame(bxRaf); bxVis.clear();
+    document.querySelectorAll(".bxRv").forEach((el)=>{ el.classList.remove("bxRv", "bxRvX", "bxIn"); el.style.transitionDelay = ""; });
+    document.querySelectorAll("img.bxPar").forEach((el)=>{ el.classList.remove("bxPar"); el.style.transform = ""; });
+    document.querySelectorAll("[data-bx-title]").forEach((el)=>{ el.textContent = el.dataset.bxTitle; delete el.dataset.bxTitle; });
+    document.querySelectorAll("[data-bx-seen]").forEach((el)=>{ delete el.dataset.bxSeen; });
+  }
+  function bxTitles(){
+    const esc = (t)=> t.replace(/[&<>]/g, (c)=> ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+    document.querySelectorAll(".homeSectionTitle, .pageTitleBlock .h1, .homeGreetingTitle").forEach((el)=>{
+      if(el.dataset.bxTitle || el.children.length) return;
+      const t = el.textContent, home = el.classList.contains("homeGreetingTitle");
+      const m = home ? t.match(/^([^\n]+)(\n[\s\S]+)$/) : t.match(/^([\s\S]+\s)(\S+)$/);
+      if(!m) return;
+      el.dataset.bxTitle = t;
+      el.innerHTML = home ? `<em class="bxSerif">${esc(m[1])}</em>${esc(m[2])}` : `${esc(m[1])}<em class="bxSerif">${esc(m[2])}</em>`;
+    });
+  }
+  function bxMarquee(){
+    if($(".bxMarquee") || !document.body.classList.contains("layout-home")) return;
+    let cats = []; try{ cats = JSON.parse($("#homeCats")?.textContent || "[]"); }catch{}
+    const before = $(".homeToday") || $(".homeContinue");
+    if(!cats.length || !before) return;
+    const el = bit("bxMarquee", "boxengasse", "nav"); el.setAttribute("aria-label", "Kategorien");
+    const links = (hide)=> cats.map((c)=> `<a href="/rezeptindex/?kategorie=${encodeURIComponent(c)}"${hide ? ' aria-hidden="true" tabindex="-1"' : ""}></a>`).join("");
+    el.innerHTML = `<div class="bxMarqMove"><div class="bxMarqTrack">${links(false)}${links(true)}</div></div>`;
+    el.querySelectorAll("a").forEach((a, i)=>{ a.textContent = cats[i % cats.length]; });
+    before.before(el);
+  }
+  function bxWatch(){
+    if(!bxIO) return;
+    const vh = innerHeight, vw = innerWidth;
+    document.querySelectorAll(".appMain :is(.linkCard, .catTile, .homeSectionHead, .planDay, .catGroupTitle)").forEach((el)=>{
+      if(el.dataset.bxSeen) return; el.dataset.bxSeen = "1";
+      const r = el.getBoundingClientRect();
+      if(!r.width || r.bottom < 0) return;
+      const below = r.top > vh - 8, right = r.left > vw - 8;
+      if(!below && !right) return;
+      el.classList.add("bxRv"); if(right && !below) el.classList.add("bxRvX");
+      bxIO.observe(el);
+    });
+    document.querySelectorAll(".appMain .linkCard:not(.hCard) .rcImg img:not(.bxPar)").forEach((img)=>{ img.classList.add("bxPar"); bxParIO.observe(img); });
+  }
+  let bxOn = false;
+  function boxengasse(){
+    if(skin() !== "boxengasse"){ if(bxOn){ bxOn = false; bxOff(); } return; }
+    bxTitles(); bxMarquee();
+    if(bxOn){ bxWatch(); return; }   // läuft schon (enhance() kommt bei jeder Änderung im Inhalt wieder)
+    bxOn = true;
+    let bar = $(".bxProgress"); if(!bar){ bar = bit("bxProgress", "boxengasse"); bar.setAttribute("aria-hidden", "true"); document.body.appendChild(bar); }
+    if(reduce() || !("IntersectionObserver" in window)) return;
+    bxIO = new IntersectionObserver((es)=>{
+      let n = 0;
+      es.forEach((e)=>{ if(!e.isIntersecting) return;
+        const el = e.target; bxIO.unobserve(el);
+        el.style.transitionDelay = `${Math.min(n++, 5) * 70}ms`; el.classList.add("bxIn");
+        setTimeout(()=>{ el.classList.remove("bxRv", "bxRvX", "bxIn"); el.style.transitionDelay = ""; }, 1400);
+      });
+    }, { rootMargin: "0px 0px -6% 0px" });
+    bxParIO = new IntersectionObserver((es)=>{ es.forEach((e)=>{ e.isIntersecting ? bxVis.add(e.target) : bxVis.delete(e.target); }); frame(); });
+    const move = $(".bxMarqMove");
+    const frame = ()=>{
+      bxRaf = 0;
+      const y = scrollY, vh = innerHeight, max = document.documentElement.scrollHeight - vh;
+      bar.style.transform = `scaleX(${max > vh * .4 ? Math.min(1, Math.max(0, y / max)) : 0})`;
+      if(move) move.style.transform = `translate3d(${-(y * .35) % 400}px,0,0)`;
+      bxVis.forEach((img)=>{ const r = img.parentNode.getBoundingClientRect(); const p = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / (vh / 2)));
+        img.style.transform = `translate3d(0,${(p * -5).toFixed(2)}%,0) scale(1.12)`; });
+    };
+    bxOnScroll = ()=>{ if(!bxRaf) bxRaf = requestAnimationFrame(frame); };
+    addEventListener("scroll", bxOnScroll, { passive: true });
+    bxWatch(); frame();
+  }
+
+  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); }
 
   function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
 
   // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
-  const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade"];
+  const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade","boxengasse"];
   function skinLogo(){
     const img = document.querySelector(".homeBrand .logoSkin");
     if(!img) return;

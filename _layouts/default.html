@@ -51,7 +51,7 @@
     // Versteckter Retro-Modus (5× auf „Tobis Kochbuch“ auf der Startseite tippen)
     // Skins (Nov. 2026): Standard, Retro und acht weitere; gewählt unter „Mehr“ → „Skin“ (kochbuch.ui.skin, pro Gerät).
     // Wert = Farbe der Statusleiste/theme-color. Skins außer Standard haben ein festes Aussehen (kein Hell/Dunkel).
-    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#23271F', diner:'#B3122E', bauhaus:'#111111', nordwall:'#1B120C', zauberschule:'#2A1712', jahr3000:'#14141A', zweistaedte:'#152039', insel:'#2A2618', akte:'#1E140D', brigade:'#2A2F33' };
+    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#23271F', diner:'#B3122E', bauhaus:'#111111', nordwall:'#1B120C', zauberschule:'#2A1712', jahr3000:'#14141A', zweistaedte:'#152039', insel:'#2A2618', akte:'#1E140D', brigade:'#2A2F33', boxengasse:'#282C20' };
     window.KOCHBUCH_SKIN = function(){
       var s = null;
       try { s = JSON.parse(localStorage.getItem('kochbuch.ui.skin')); if (!s && JSON.parse(localStorage.getItem('kochbuch.ui.retro'))) s = 'retro'; } catch(e){}
@@ -233,6 +233,7 @@
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="insel" style="--swField:#050607;--swBg:#E8E1CF;--swAcc:#1A1A17"><span class="skinSwatch skinShot" aria-hidden="true"><img src="{{ '/assets/skins/insel.jpg' | relative_url }}?v=1" alt="" loading="lazy" decoding="async" width="300" height="400"></span><span class="skinName">Die Insel</span></button>
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="akte" style="--swField:#1E2933;--swBg:#DDE2E5;--swAcc:#E4CFA0"><span class="skinSwatch skinShot" aria-hidden="true"><img src="{{ '/assets/skins/akte.jpg' | relative_url }}?v=1" alt="" loading="lazy" decoding="async" width="300" height="400"></span><span class="skinName">Akte</span></button>
         <button class="skinTile pressable" type="button" role="radio" data-skin-opt="brigade" style="--swField:#CDD1D5;--swBg:#F2F3F3;--swAcc:#2E62A8"><span class="skinSwatch skinShot" aria-hidden="true"><img src="{{ '/assets/skins/brigade.jpg' | relative_url }}?v=1" alt="" loading="lazy" decoding="async" width="300" height="400"></span><span class="skinName">Brigade</span></button>
+        <button class="skinTile pressable" type="button" role="radio" data-skin-opt="boxengasse" style="--swField:#282C20;--swBg:#15170F;--swAcc:#D2FF00"><span class="skinSwatch skinShot" aria-hidden="true"><img src="{{ '/assets/skins/boxengasse.jpg' | relative_url }}?v=1" alt="" loading="lazy" decoding="async" width="300" height="400"></span><span class="skinName">Boxengasse</span></button>
       </div>
       <div class="skinSoundGroup">
         <button class="sheetRow" id="toggleSkinSound" type="button" role="switch" aria-checked="false"><span class="rowGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></span><span>Klänge der Welten</span><span class="sheetSwitch" aria-hidden="true"></span></button>
