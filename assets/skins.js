@@ -944,20 +944,23 @@
   }
   // ---------- Bildband: Foto fährt beim Öffnen des Rezepts heran; Schlussseite mit schwebenden Kräuterblättern ----------
   function bbKen(){ const img = $(".recipePageHero img"); if(img && !reduce() && !img.dataset.bbKen){ img.dataset.bbKen = "1"; img.classList.add("bbKen"); img.addEventListener("animationend", ()=> img.classList.remove("bbKen"), { once: true }); } }
+  // Blattfarben je Skin; im Standard-Look (Wunsch des Besitzers, Nov. 2026) Grüntöne auf dem Basilikum-Feld
+  const FOOT_LEAVES = { bildband: ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"], standard: ["#7EC48A", "#A9D8A0", "#4F8F62", "#E4EFE2", "#CFE3B4"] };
   let bbStop = null;
   function bbFooter(){
     const main = $(".appMain"), b = document.body;
-    if($(".bbFooter") || !main || !(b.classList.contains("layout-home") || $("#recipeGrid"))) return;
-    const el = bit("bbFooter", "bildband", "footer");
+    const sk = skin();
+    if(!FOOT_LEAVES[sk] || $(".bbFooter") || !main || !(b.classList.contains("layout-home") || $("#recipeGrid"))) return;
+    const el = bit("bbFooter", sk, "footer");
     el.innerHTML = `<canvas aria-hidden="true"></canvas><div class="bbFootText"><b>Guten Appetit.</b><span>Noch nichts gefunden?</span><a href="/was-koche-ich/?zufall=1">Überrasch mich</a></div>`;
     main.appendChild(el);
-    if(reduce()) return;
     const cv = el.querySelector("canvas"), g = cv.getContext("2d"), dpr = Math.min(2, devicePixelRatio || 1);
     let w = 0, h = 0, raf = 0, on = false, px = -999, py = -999;
-    const COL = ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"];
+    const COL = FOOT_LEAVES[sk];
     const P = Array.from({ length: 46 }, (_, i)=> ({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, r: 4 + Math.random() * 7, a: Math.random() * 6.3, s: (Math.random() - .5) * .012, c: COL[i % COL.length], ph: Math.random() * 6.3 }));
     const size = ()=>{ const r = el.getBoundingClientRect(); w = r.width; h = r.height; cv.width = w * dpr; cv.height = h * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0); };
     const draw = (t)=>{
+      if(!el.isConnected) on = false;
       raf = on ? requestAnimationFrame(draw) : 0;
       g.clearRect(0, 0, w, h);
       for(const p of P){
@@ -972,6 +975,7 @@
         g.beginPath(); g.moveTo(-p.r, 0); g.quadraticCurveTo(0, -p.r * .62, p.r, 0); g.quadraticCurveTo(0, p.r * .62, -p.r, 0); g.fill(); g.restore();
       }
     };
+    if(reduce()){ requestAnimationFrame(()=>{ size(); draw(0); }); return; }   // Blätter stehen still
     const at = (e)=>{ const r = el.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top; };
     el.addEventListener("pointermove", at, { passive: true }); el.addEventListener("pointerdown", at, { passive: true });
     el.addEventListener("pointerleave", ()=>{ px = py = -999; });
@@ -1014,7 +1018,7 @@
     bxWatch(); frame();
   }
 
-  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); }
+  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); if(skin() === "standard") bbFooter(); }
 
   function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
 
