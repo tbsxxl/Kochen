@@ -3367,3 +3367,14 @@ html.skin-insel .worldClock.wcIdle:not(#_x#_y){padding:4px 0 !important}
 @media (min-width:768px){ .cookTimers{max-height:none;overflow:visible} }
 .prepHead{flex-wrap:wrap}
 .prepTitle{min-width:0;overflow-wrap:anywhere}
+
+/* ==== 23. Schlussseite mit schwebenden Blättern (Nov. 2026, Wunsch des Besitzers: aus dem Skin „Bildband“ in den Standard-Look).
+   Am Ende von Startseite und Rezeptliste; Canvas und Verhalten: bbFooter() in assets/skins.js. Bildband überschreibt das Aussehen. ==== */
+.bbFooter{position:relative;width:100vw;margin:48px 0 0 calc(50% - 50vw);height:min(56vh,420px);background:var(--field);color:var(--onField);overflow:hidden;
+  display:grid;place-items:center;text-align:center;touch-action:pan-y}
+.bbFooter canvas{position:absolute;inset:0;width:100%;height:100%}
+.bbFootText{position:relative;padding:0 24px;pointer-events:none}
+.bbFootText b{display:block;font-size:clamp(1.75rem,8vw,2.5rem);line-height:1.1;font-weight:600;letter-spacing:-.02em}
+.bbFootText span{display:block;margin-top:8px;font-size:var(--fs16, 1rem);color:var(--onField2)}
+.bbFootText a{pointer-events:auto;display:inline-flex;align-items:center;min-height:44px;margin-top:16px;padding:0 22px;border-radius:999px;
+  background:var(--onField);color:var(--field);font-weight:600;text-decoration:none}

@@ -115,6 +115,8 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Öffnen des Rezepts heran (`bbKen()`), Schlussseite `.bbFooter` auf Start und Rezeptliste mit Kräuterblättern auf einem Canvas, die
     Finger/Maus ausweichen (`bbFooter()`, läuft nur, solange sichtbar). Scroll-Bewegung teilt er sich mit Boxengasse (`SCROLL_FX`).
     Creme/Sand ist nur im Standard-Look unerwünscht – hier ausdrücklich gewollt.
+    Die Schlussseite gibt es auf Wunsch des Besitzers auch im Standard-Look (Abschnitt 23 in `styles.css`): Feld-Grün, grüne Blätter
+    (`FOOT_LEAVES`), Systemschrift, keine Versalien; bei „Bewegung reduzieren“ stehen die Blätter still.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Vor und nach Umbauten an CSS/Skins:** `node tools/visual.js shoot <ordner>` vorher und nachher, dann
