@@ -8,7 +8,7 @@ category: "Hähnchen"
 categories: ["Meal Prep"]
 tags: ["ofen", "familientauglich"]
 time: "ca. 45 Min"
-image: /recipes/images/haehnchenkeule-vom-blech-mit-blumenkohl-karotte-und-kartoffe.jpg
+image: /recipes/images/haehnchenkeulen-vom-blech-mwf3c8ls.jpg
 servings: 2
 ingredients:
   - { qty: 500, unit: "g", item: "Hähnchenkeulen in Kräutermarinade" }
