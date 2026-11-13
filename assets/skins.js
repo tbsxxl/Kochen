@@ -940,12 +940,36 @@
       el.classList.add("bxRv"); if(right && !below) el.classList.add("bxRvX");
       bxIO.observe(el);
     });
-    document.querySelectorAll(".appMain .linkCard:not(.hCard) .rcImg img:not(.bxPar)").forEach((img)=>{ img.classList.add("bxPar"); bxParIO.observe(img); });
+    if(bxParIO) document.querySelectorAll(".appMain .linkCard:not(.hCard) .rcImg img:not(.bxPar)").forEach((img)=>{ img.classList.add("bxPar"); bxParIO.observe(img); });
   }
   // ---------- Bildband: Foto fährt beim Öffnen des Rezepts heran; Schlussseite mit schwebenden Kräuterblättern ----------
   function bbKen(){ const img = $(".recipePageHero img"); if(img && !reduce() && !img.dataset.bbKen){ img.dataset.bbKen = "1"; img.classList.add("bbKen"); img.addEventListener("animationend", ()=> img.classList.remove("bbKen"), { once: true }); } }
   // Blattfarben je Skin; im Standard-Look (Wunsch des Besitzers, Nov. 2026) Grüntöne auf dem Basilikum-Feld
   const FOOT_LEAVES = { bildband: ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"], standard: ["#7EC48A", "#A9D8A0", "#4F8F62", "#E4EFE2", "#CFE3B4"] };
+  // „Gekocht“ feiern: ein kurzer Wirbel derselben Blätter über den ganzen Bildschirm (recipe.js ruft KOCHBUCH_LEAVES() in markCooked())
+  window.KOCHBUCH_LEAVES = function(){
+    const COL = FOOT_LEAVES[skin()];
+    if(!COL || reduce() || $(".leafBurst")) return;
+    const cv = document.createElement("canvas"); cv.className = "leafBurst"; cv.setAttribute("aria-hidden", "true");
+    document.body.appendChild(cv);
+    const dpr = Math.min(2, devicePixelRatio || 1), w = innerWidth, h = innerHeight, g = cv.getContext("2d");
+    cv.width = w * dpr; cv.height = h * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const P = Array.from({ length: 54 }, (_, i)=>{ const a = -Math.PI / 2 + (Math.random() - .5) * 1.5, v = 9 + Math.random() * 13;
+      return { x: w / 2 + (Math.random() - .5) * w * .5, y: h + 10, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: 5 + Math.random() * 8, a: Math.random() * 6.3, s: (Math.random() - .5) * .3, c: COL[i % COL.length] }; });
+    const t0 = performance.now(), DUR = 2100;
+    const draw = (t)=>{
+      const f = (t - t0) / DUR;
+      g.clearRect(0, 0, w, h);
+      if(f >= 1 || !cv.isConnected){ cv.remove(); return; }
+      for(const p of P){
+        p.vy += .32; p.vx *= .985; p.vy *= .985; p.x += p.vx + Math.sin(t / 240 + p.a) * .6; p.y += p.vy; p.a += p.s;
+        g.save(); g.translate(p.x, p.y); g.rotate(p.a); g.globalAlpha = Math.min(1, (1 - f) * 2.2) * .9; g.fillStyle = p.c;
+        g.beginPath(); g.moveTo(-p.r, 0); g.quadraticCurveTo(0, -p.r * .62, p.r, 0); g.quadraticCurveTo(0, p.r * .62, -p.r, 0); g.fill(); g.restore();
+      }
+      requestAnimationFrame(draw);
+    };
+    requestAnimationFrame(draw);
+  };
   let bbStop = null;
   function bbFooter(){
     const main = $(".appMain"), b = document.body;
@@ -984,16 +1008,18 @@
     bbStop?.(); bbStop = ()=>{ on = false; io.disconnect(); cancelAnimationFrame(raf); };
   }
   // Dieselbe Scroll-Bewegung nutzen Boxengasse und Bildband (Aussehen je Skin-Datei)
-  const SCROLL_FX = { boxengasse: 1, bildband: 1 };
+  // Der Standard-Look bekommt nur das Einblenden der Karten und das Heranfahren des Rezeptfotos (leise Fassung, Abschnitt 24 in styles.css)
+  const SCROLL_FX = { boxengasse: 1, bildband: 1, standard: 1 };
   let bxOn = "";
   function boxengasse(){
     const sk = skin();
     if(bxOn && bxOn !== sk){ bxOn = ""; bxOff(); }
     if(!SCROLL_FX[sk]) return;
+    const lite = sk === "standard";
     if(sk === "boxengasse"){ bxTitles(); bxMarquee(); } else { bbFooter(); bbKen(); }
     if(bxOn){ bxWatch(); return; }   // läuft schon (enhance() kommt bei jeder Änderung im Inhalt wieder)
     bxOn = sk;
-    let bar = $(".bxProgress"); if(!bar){ bar = bit("bxProgress", sk); bar.setAttribute("aria-hidden", "true"); document.body.appendChild(bar); }
+    let bar = $(".bxProgress"); if(!bar && !lite){ bar = bit("bxProgress", sk); bar.setAttribute("aria-hidden", "true"); document.body.appendChild(bar); }
     if(reduce() || !("IntersectionObserver" in window)) return;
     bxIO = new IntersectionObserver((es)=>{
       let n = 0;
@@ -1003,6 +1029,7 @@
         setTimeout(()=>{ el.classList.remove("bxRv", "bxRvX", "bxIn"); el.style.transitionDelay = ""; }, 1400);
       });
     }, { rootMargin: "0px 0px -6% 0px" });
+    if(lite){ bxWatch(); return; }
     bxParIO = new IntersectionObserver((es)=>{ es.forEach((e)=>{ e.isIntersecting ? bxVis.add(e.target) : bxVis.delete(e.target); }); frame(); });
     const move = $(".bxMarqMove");
     const frame = ()=>{
@@ -1018,7 +1045,21 @@
     bxWatch(); frame();
   }
 
-  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); if(skin() === "standard") bbFooter(); document.body.classList.toggle("hasFootLeaves", !!$(".bbFooter")); }
+  // Abhaken: die Zeile bekommt für einen Moment .tickNow, dann zeichnet sich der Haken (Abschnitt 24 in styles.css)
+  document.addEventListener("click", (e)=>{
+    const SEL = ".uRow[role=checkbox], .prepRow";
+    if(!e.target.closest?.(SEL)) return;
+    const x = e.clientX, y = e.clientY;
+    // die Zeile wird beim Abhaken oft neu aufgebaut – deshalb danach an derselben Stelle nachsehen
+    setTimeout(()=>{
+      const row = document.elementFromPoint(x, y)?.closest(SEL);
+      if(!row || !row.matches(".checked, .isDone")) return;
+      row.classList.remove("tickNow"); void row.offsetWidth; row.classList.add("tickNow");
+      setTimeout(()=> row.classList.remove("tickNow"), 500);
+    }, 30);
+  });
+
+  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); document.body.classList.toggle("hasFootLeaves", !!$(".bbFooter")); }
 
   function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
 

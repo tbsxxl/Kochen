@@ -119,6 +119,12 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     (`FOOT_LEAVES`), Systemschrift, keine Versalien; bei „Bewegung reduzieren“ stehen die Blätter still.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
+- **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
+  Karten blenden beim Scrollen ein (`SCROLL_FX.standard`, leise Fassung ohne Parallaxe/Fortschrittslinie), Rezeptfoto fährt beim Öffnen
+  heran (`stdKen`), Haken zeichnet sich beim Abhaken (`.tickNow` auf `.uRow`/`.prepRow`; die Zeile wird beim Abhaken neu aufgebaut, darum
+  sucht der Klick-Lauscher sie per `elementFromPoint` wieder), Blätter-Wirbel bei „Gekocht“ (`KOCHBUCH_LEAVES()` aus `markCooked()`, auch
+  im Bildband), Herz federt (`#favQuick.heartPop`), leere Zustände mit stillen Blättern (`.uEmpty::before`, `.homeEmpty::after`).
+  Laufband und Foto-Parallaxe bleiben den Skins vorbehalten.
 - **Vor und nach Umbauten an CSS/Skins:** `node tools/visual.js shoot <ordner>` vorher und nachher, dann
   `node tools/visual.js diff <vorher> <nachher>` (13 Seiten × alle Skins, eingefrorene Uhr). So wurde das Zerlegen der CSS-Datei
   geprüft. Neue Bedienelemente in allen Skins ansehen, auch Einkaufsliste, Wochenplan, Kategorien, Konto, Kühltruhe, Blätter

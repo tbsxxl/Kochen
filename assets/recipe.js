@@ -317,7 +317,7 @@ function renderGroup(container, items, checks){
     e.favorite=!e.favorite;
     if(e.favorite) e.favoriteAt=new Date().toISOString();
     setEntry(e);
-    renderStats(); successTap(); pop(favBtn); pop(favPill);
+    renderStats(); successTap(); pop(favBtn); pop(favPill); favBtn.classList.toggle("heartPop", !!e.favorite);
     UI.toast?.(e.favorite ? "Zu Favoriten hinzugefügt" : "Aus Favoriten entfernt");
     if(typeof window.updateFavBadges === "function") window.updateFavBadges();
     window.dispatchEvent(new Event("kochbuch:stats"));
@@ -333,6 +333,7 @@ function renderGroup(container, items, checks){
     setEntry(e);
     renderStats();
     flash(statsLine);
+    try{ window.KOCHBUCH_LEAVES?.(); }catch{}
   }
   cookedBtn?.addEventListener("click", ()=>{
     markCooked();
