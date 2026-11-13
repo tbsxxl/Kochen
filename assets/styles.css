@@ -3385,3 +3385,34 @@ body.hasNowCooking .bbFooter{--bbPad:calc(var(--tabbarH) + env(safe-area-inset-b
 .bbFootText span{display:block;margin-top:8px;font-size:var(--fs16, 1rem);color:var(--onField2)}
 .bbFootText a{pointer-events:auto;display:inline-flex;align-items:center;min-height:44px;margin-top:16px;padding:0 22px;border-radius:999px;
   background:var(--onField);color:var(--field);font-weight:600;text-decoration:none}
+
+/* ==== 24. Leise Bewegung im Standard-Look (Nov. 2026, vom Besitzer aus sechs Vorschlägen alle gewählt). Nur ohne Skin (`html:not(.skin):not(.retro)`),
+   alles aus bei „Bewegung reduzieren“. Logik: boxengasse()/bbKen()/KOCHBUCH_LEAVES() in skins.js, heartPop in recipe.js. ==== */
+/* 1 Karten blenden beim ersten Erscheinen ein (nur was beim Aufbau außerhalb des Bildschirms lag) */
+html:not(.skin):not(.retro) .bxRv{opacity:0;transform:translateY(14px)}
+html:not(.skin):not(.retro) .bxRv.bxRvX{transform:translateX(14px)}
+html:not(.skin):not(.retro) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .4s var(--ease),transform .55s var(--easeSheet)}
+/* 2 Rezeptfoto fährt beim Öffnen heran */
+@keyframes stdKen{from{transform:scale(1.06)}}
+html:not(.skin):not(.retro) .recipePageHero img.bbKen{animation:stdKen 1.5s cubic-bezier(.2,.7,.2,1) both}
+/* 3 Haken zeichnet sich beim Abhaken (Strichlänge des Hakens ≈ 21) */
+@keyframes tickDraw{from{stroke-dashoffset:22}to{stroke-dashoffset:0}}
+html:not(.skin):not(.retro) :is(.uRow.tickNow .uLead,.prepRow.tickNow .prepBox) .ico path{stroke-dasharray:22;animation:tickDraw .3s var(--ease) .04s both}
+html:not(.skin):not(.retro) :is(.uRow.tickNow .uLead,.prepRow.tickNow .prepBox){animation:uiPop .34s var(--easeSheet)}
+/* 4 Blätter-Wirbel bei „Gekocht“ */
+.leafBurst{position:fixed;inset:0;width:100%;height:100%;z-index:4500;pointer-events:none}
+html:has(.cookOverlay.open) .leafBurst{visibility:visible}
+/* 5 Herz federt beim Favorisieren */
+@keyframes heartPop{0%{transform:scale(1)}30%{transform:scale(1.38)}55%{transform:scale(.9)}78%{transform:scale(1.08)}100%{transform:scale(1)}}
+html:not(.skin):not(.retro) #favQuick.heartPop .ico{animation:heartPop .55s var(--easeSheet)}
+/* 6 Leere Zustände: ein paar stille Blätter statt des Kreis-Symbols */
+html:not(.skin):not(.retro) .uEmpty::before{-webkit-mask:none;mask:none;width:96px;height:56px;border-radius:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 56'%3E%3Cg%3E%3Cpath d='M-11 0Q0 -7 11 0Q0 7 -11 0Z' fill='%234F8F62' transform='translate(30 34) rotate(-38)'/%3E%3Cpath d='M-13 0Q0 -8 13 0Q0 8 -13 0Z' fill='%237EC48A' transform='translate(50 22) rotate(-72)'/%3E%3Cpath d='M-10 0Q0 -6 10 0Q0 6 -10 0Z' fill='%23A9D8A0' transform='translate(68 36) rotate(-128)'/%3E%3Cpath d='M-6 0Q0 -4 6 0Q0 4 -6 0Z' fill='%237EC48A' transform='translate(14 16) rotate(20)'/%3E%3Cpath d='M-5 0Q0 -3.5 5 0Q0 3.5 -5 0Z' fill='%234F8F62' transform='translate(84 14) rotate(-20)'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
+html:not(.skin):not(.retro) .homeEmpty{position:relative;overflow:hidden}
+html:not(.skin):not(.retro) .homeEmpty::after{content:"";position:absolute;right:-6px;bottom:-8px;width:84px;height:49px;opacity:.55;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 56'%3E%3Cg%3E%3Cpath d='M-11 0Q0 -7 11 0Q0 7 -11 0Z' fill='%234F8F62' transform='translate(30 34) rotate(-38)'/%3E%3Cpath d='M-13 0Q0 -8 13 0Q0 8 -13 0Z' fill='%237EC48A' transform='translate(50 22) rotate(-72)'/%3E%3Cpath d='M-10 0Q0 -6 10 0Q0 6 -10 0Z' fill='%23A9D8A0' transform='translate(68 36) rotate(-128)'/%3E%3Cpath d='M-6 0Q0 -4 6 0Q0 4 -6 0Z' fill='%237EC48A' transform='translate(14 16) rotate(20)'/%3E%3Cpath d='M-5 0Q0 -3.5 5 0Q0 3.5 -5 0Z' fill='%234F8F62' transform='translate(84 14) rotate(-20)'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
+@media (prefers-reduced-motion: reduce){
+  html:not(.skin):not(.retro) .bxRv{opacity:1;transform:none}
+  html:not(.skin):not(.retro) .recipePageHero img.bbKen,html:not(.skin):not(.retro) #favQuick.heartPop .ico,
+  html:not(.skin):not(.retro) :is(.uRow.tickNow .uLead,.prepRow.tickNow .prepBox),html:not(.skin):not(.retro) :is(.uRow.tickNow .uLead,.prepRow.tickNow .prepBox) .ico path{animation:none}
+}
