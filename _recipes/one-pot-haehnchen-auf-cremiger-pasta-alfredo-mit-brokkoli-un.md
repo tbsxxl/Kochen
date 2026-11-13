@@ -8,7 +8,7 @@ category: "Pasta"
 categories: ["Hähnchen", "Schnell"]
 tags: ["one-pot", "familientauglich"]
 time: "ca. 25 Min"
-image: /recipes/images/one-pot-haehnchen-auf-cremiger-pasta-alfredo-mit-brokkoli-un.jpg
+image: /recipes/images/chicken-alfredo-mwf3a3aj.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchengeschnetzeltes" }
