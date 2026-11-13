@@ -117,6 +117,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Creme/Sand ist nur im Standard-Look unerwünscht – hier ausdrücklich gewollt.
     Die Schlussseite gibt es auf Wunsch des Besitzers auch im Standard-Look (Abschnitt 23 in `styles.css`): Feld-Grün, grüne Blätter
     (`FOOT_LEAVES`), Systemschrift, keine Versalien; bei „Bewegung reduzieren“ stehen die Blätter still.
+    Braucht `z-index:2`: am PC malt `.pageContent` (z-index 1) seinen Grund per `box-shadow:0 0 0 100vmax` und verdeckte das Feld sonst.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**

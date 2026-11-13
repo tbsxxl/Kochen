@@ -981,7 +981,7 @@
     const cv = el.querySelector("canvas"), g = cv.getContext("2d"), dpr = Math.min(2, devicePixelRatio || 1);
     let w = 0, h = 0, raf = 0, on = false, px = -999, py = -999;
     const COL = FOOT_LEAVES[sk];
-    const P = Array.from({ length: 46 }, (_, i)=> ({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, r: 4 + Math.random() * 7, a: Math.random() * 6.3, s: (Math.random() - .5) * .012, c: COL[i % COL.length], ph: Math.random() * 6.3 }));
+    const P = Array.from({ length: Math.round(Math.min(110, Math.max(46, innerWidth / 14))) }, (_, i)=> ({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, r: 4 + Math.random() * 7, a: Math.random() * 6.3, s: (Math.random() - .5) * .012, c: COL[i % COL.length], ph: Math.random() * 6.3 }));
     const size = ()=>{ const r = el.getBoundingClientRect(); w = r.width; h = r.height; cv.width = w * dpr; cv.height = h * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0); };
     const draw = (t)=>{
       if(!el.isConnected) on = false;
