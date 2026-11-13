@@ -8,7 +8,7 @@ category: "Burger & Sandwiches"
 categories: ["Hähnchen", "Asiatisch", "Knusprig & Frittiert"]
 tags: ["scharf", "streetfood"]
 time: "ca. 35 Min"
-image: /recipes/images/hot-honey-chicken-bao-buns-knusprigen-kartoffelwedges-und-br.jpg
+image: /recipes/images/hot-honey-chicken-bao-buns-mwf35w9c.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähnchenbrustfilet" }
