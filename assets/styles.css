@@ -3379,6 +3379,8 @@ body.hasNowCooking .bbFooter{--bbPad:calc(var(--tabbarH) + env(safe-area-inset-b
 :root:not(.retro) body.hasFootLeaves .appMain{padding-bottom:0 !important}
 :root:not(.retro) body.hasFootLeaves.layout-home .appMain::after{display:none}
 :root:not(.retro) body.hasFootLeaves .pageContent{padding-bottom:0 !important}
+/* Am PC malt das Blatt (.pageContent, z-index 1) seinen Grund per Schatten über die ganze Breite – das Feld muss darüber liegen */
+.bbFooter{z-index:2}
 .bbFooter canvas{position:absolute;inset:0;width:100%;height:100%}
 .bbFootText{position:relative;padding:0 24px;pointer-events:none}
 .bbFootText b{display:block;font-size:clamp(1.75rem,8vw,2.5rem);line-height:1.1;font-weight:600;letter-spacing:-.02em}
