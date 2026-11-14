@@ -6,12 +6,8 @@ category: "Pasta"
 categories: ["Italienisch", "Vegetarisch", "Schnell"]
 tags: ["klassiker"]
 time: "ca. 30 Min"
+image: /recipes/images/pasta-alla-vodka-mwgfq0qr.jpg
 servings: 4
-prep:
-  - { start: "Großen Topf Salzwasser für die Rigatoni aufsetzen" }
-  - "Zwiebel schälen und fein hacken"
-  - "Knoblauch fein hacken"
-  - "Pecorino reiben"
 ingredients:
   - { qty: 500, unit: "g", item: "Rigatoni" }
   - { qty: 2, unit: "Dosen", item: "geschälte Tomaten" }
@@ -26,6 +22,11 @@ ingredients:
   - { qty: 0.25, unit: "TL", item: "Chiliflocken" }
   - { qty: "", unit: "", item: "schwarzer Pfeffer, frisch gemahlen" }
   - { qty: "", unit: "", item: "Salz" }
+prep:
+  - { start: "Großen Topf Salzwasser für die Rigatoni aufsetzen" }
+  - "Zwiebel schälen und fein hacken"
+  - "Knoblauch fein hacken"
+  - "Pecorino reiben"
 ---
 
 ## Schritte
