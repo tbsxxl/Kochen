@@ -6,14 +6,8 @@ category: "Pasta"
 categories: ["Italienisch", "Vegetarisch", "Schnell"]
 tags: ["scharf"]
 time: "ca. 20 Min"
+image: /recipes/images/spaghetti-aglio-e-olio-mwgfoymr.jpg
 servings: 4
-prep:
-  - { start: "Großen Topf Salzwasser für die Spaghetti aufsetzen" }
-  - "Hartkäse fein reiben"
-  - "Tomate in kleine Würfel schneiden"
-  - "Knoblauch klein schneiden, salzen und zerdrücken"
-  - "Peperoni entkernen und in feine Ringe schneiden"
-  - "Petersilie hacken"
 ingredients:
   - { qty: 500, unit: "g", item: "Spaghetti" }
   - { qty: 100, unit: "ml", item: "Olivenöl" }
@@ -27,6 +21,13 @@ ingredients:
   - { qty: 2, unit: "TL", item: "Gemüsebrühpulver" }
   - { qty: 0.5, unit: "TL", item: "Salz" }
   - { qty: "", unit: "", item: "frisches Basilikum zum Garnieren" }
+prep:
+  - { start: "Großen Topf Salzwasser für die Spaghetti aufsetzen" }
+  - "Hartkäse fein reiben"
+  - "Tomate in kleine Würfel schneiden"
+  - "Knoblauch klein schneiden, salzen und zerdrücken"
+  - "Peperoni entkernen und in feine Ringe schneiden"
+  - "Petersilie hacken"
 ---
 
 ## Schritte
