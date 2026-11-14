@@ -6,7 +6,7 @@ author: "Tobi"
 category: "Pasta"
 tags: ["Pasta", "Pasta al Tartufo", "Trüffel-Pasta"]
 time: "ca. 25 Min"
-image: /recipes/images/trueffel-pasta.jpg
+image: /recipes/images/trueffel-pasta-mwgknq2z.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Pasta, z.B. Tagliatelle" }
