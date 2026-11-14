@@ -6,6 +6,7 @@ category: "Schmorgerichte"
 categories: ["Rind", "Meal Prep"]
 tags: ["one-pot"]
 time: "ca. 1 Std 35 Min"
+image: /recipes/images/biergulasch-mwgfpdqk.jpg
 servings: 4
 ingredients:
   - { qty: 500, unit: "g", item: "Rindergulasch" }
