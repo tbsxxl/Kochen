@@ -1,58 +1,133 @@
 /* Skin „wortwelt“ (in der Auswahl „Bilderbuch“) – wird nur geladen, wenn dieser Skin aktiv ist.
-   Nov. 2026 neu nach Vergleich mit dem Vorbild (einem illustrierten Online-Buch): dunkler, diagonal gestrichener Grund, Pastellseiten,
-   Handschrift für Titel, Serife für Text. Auf der Startseite ein 3D-Kochbuch (wortwelt.js, wortwelt-3d.js). Neue Regeln ans Ende. */
+   Dez. 2026 zweiter Neubau (Besitzer: „zu nah am Standard“), nach genauem Vergleich mit dem Vorbild (illustriertes Online-Buch): dunkler,
+   diagonal gestrichener Grund; die Startseite ist das Buch (geschlossen mit Kreide-Deckel und Widmung, dann je Rezept eine Doppelseite in
+   kräftiger Farbe mit riesigem handgemaltem Wort, Bildunterschrift, Pfeile, farbige Seitenpunkte). Karten überall als farbige Buchseiten.
+   Handschrift („Skin Feder“) für große Wörter, Serife für Text. Verhalten: wortwelt.js, wortwelt-3d.js. Neue Regeln ans Ende. */
 html.skin-wortwelt:not(#_x#_y),html.skin-wortwelt:not(#_x#_y) body{
   --field:#161515;--onField:#F4EEE8;--onField2:#CFC5BD;--fieldFill:rgba(255,255,255,.08);
   --bg:#161515;--surface:#22201F;--surface2:#2B2827;--fill:rgba(255,255,255,.07);--line:rgba(255,255,255,.12);--lineStrong:rgba(255,255,255,.4);
   --text:#F4EEE8;--sub:#CFC5BD;--sub2:#CFC5BD;--muted:#B9AEA6;
-  --brand:#EDB9B1;--onBrand:#2A1714;--leaf:#EDB9B1;--onLeaf:#2A1714;--brandSoft:rgba(237,185,177,.14);--leafSoft:rgba(237,185,177,.14);
-  --sel:#EDB9B1;--onSel:#2A1714;--accent:#EDB9B1;--accentSoft:rgba(237,185,177,.14);--onAccent:#2A1714;--herb:#EDB9B1;--coffee:#22201F;
+  --brand:#F4EEE8;--onBrand:#161515;--leaf:#F4EEE8;--onLeaf:#161515;--brandSoft:rgba(255,255,255,.1);--leafSoft:rgba(255,255,255,.1);
+  --sel:#F4EEE8;--onSel:#161515;--accent:#EBB2A9;--accentSoft:rgba(235,178,169,.14);--onAccent:#2A1714;--herb:#F4EEE8;--coffee:#22201F;
   --glass:rgba(26,24,24,.92);--glassLine:rgba(255,255,255,.1);--glassShadow:none;
-  --fontDisplay:"Fraunces", Georgia, "Times New Roman", serif;
+  --fontDisplay:"Fraunces", Georgia, serif;
   color-scheme:dark}
 html.skin-wortwelt:not(#_x#_y) body.grouped{--bg:#161515;--surface:#22201F}
-html.skin-wortwelt:not(#_x#_y) .cookOverlay{--cBg:#161515;--cCard:#22201F;--cFill:rgba(255,255,255,.07);--cLine:rgba(255,255,255,.12);--cText:#F4EEE8;--cSub:#CFC5BD;--cLeaf:#EDB9B1;--cOnLeaf:#2A1714}
-html.skin-wortwelt:not(#_x#_y) ::selection{background:#EDB9B1;color:#2A1714}
-/* gestrichener Grund wie Pinselspuren auf dunklem Karton */
-html.skin-wortwelt{background:#161515 radial-gradient(120% 80% at 50% 30%, #1E1C1C, #121111) fixed}
-html.skin-wortwelt:has(body.fieldPage){background:#161515}
-.skinScene-wortwelt{background:repeating-linear-gradient(118deg, rgba(255,255,255,.028) 0 3px, transparent 3px 46px),repeating-linear-gradient(118deg, rgba(0,0,0,.25) 0 18px, transparent 18px 90px)}
+html.skin-wortwelt:not(#_x#_y) .cookOverlay{--cBg:#161515;--cCard:#22201F;--cFill:rgba(255,255,255,.07);--cLine:rgba(255,255,255,.12);--cText:#F4EEE8;--cSub:#CFC5BD;--cLeaf:#F4EEE8;--cOnLeaf:#161515}
+html.skin-wortwelt:not(#_x#_y) ::selection{background:#EBB2A9;color:#2A1714}
+/* gestrichener Grund wie Pinselspuren auf dunklem Karton, steht still */
+html.skin-wortwelt{background:#161515}
+html.skin-wortwelt:not(#_x#_y)::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+  repeating-linear-gradient(118deg, rgba(255,255,255,.03) 0 3px, transparent 3px 46px),
+  repeating-linear-gradient(118deg, rgba(0,0,0,.32) 0 22px, transparent 22px 96px),
+  radial-gradient(120% 80% at 50% 30%, #222020, #111010)}
+html.skin-wortwelt:not(#_x#_y) body{background:transparent !important}
+html.skin-wortwelt:not(#_x#_y) .skinScene{background:transparent !important}
+html.skin-wortwelt:not(#_x#_y) body .pageContent{background:transparent !important;box-shadow:none !important}
 
-html.skin-wortwelt:not(#_x#_y) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark){font-family:var(--fontDisplay);font-weight:400;letter-spacing:-.01em}
-html.skin-wortwelt:not(#_x#_y) .pageTitleBlock .h1,html.skin-wortwelt:not(#_x#_y) body .homeGreetingTitle.homeGreetingTitle{font-family:"Skin Feder", "Caveat", cursive;font-weight:500;font-size:min(clamp(3rem, 14vw, 5rem), 14vw);line-height:.9;letter-spacing:0}
-html.skin-wortwelt:not(#_x#_y) .homeSectionTitle,html.skin-wortwelt:not(#_x#_y) .h2{font-size:1.7rem}
-html.skin-wortwelt:not(#_x#_y) .recipeCard:not(.homeFeatured),html.skin-wortwelt:not(#_x#_y) .catTile,html.skin-wortwelt:not(#_x#_y) .homeFeatured,html.skin-wortwelt:not(#_x#_y) .homeEmpty,html.skin-wortwelt:not(#_x#_y) .homeTimer{border-radius:22px !important;box-shadow:none !important}
-html.skin-wortwelt:not(#_x#_y) .recipeCard:not(.homeFeatured){background:#22201F !important}
-html.skin-wortwelt:not(#_x#_y) .recipeCard .rcImg{border-radius:16px !important}
-html.skin-wortwelt:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary){background:#EDB9B1 !important;color:#2A1714 !important;border-radius:999px !important}
-html.skin-wortwelt:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22) !important;color:#F4EEE8;border-radius:999px !important}
-html.skin-wortwelt:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"]){background:#EDB9B1 !important;color:#2A1714 !important}
-html.skin-wortwelt:not(#_x#_y) .bottomRail{background:rgba(26,24,24,.9) !important;border:1px solid rgba(255,255,255,.1);box-shadow:0 12px 36px rgba(0,0,0,.4) !important}
-html.skin-wortwelt:not(#_x#_y) .tabItem{color:#CFC5BD !important}
-html.skin-wortwelt:not(#_x#_y) .tabItem.active{background:#EDB9B1 !important;color:#2A1714 !important}
-html.skin-wortwelt:not(#_x#_y) .homeAllLink{color:#EDB9B1}
-html.skin-wortwelt:not(#_x#_y) .continueCard{background:#EDB9B1 !important;color:#2A1714 !important}
-html.skin-wortwelt:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:#2A1714 !important}
-html.skin-wortwelt:not(#_x#_y) .continuePlay{background:#2A1714 !important;color:#EDB9B1 !important}
+/* ---------- Schrift ---------- */
+html.skin-wortwelt:not(#_x#_y) :is(.homeSectionTitle,.h2,.sheetTitle,.catGroupTitle,.prepTitle,.continueTitle,.navCompact,.recipeMeta,.resultCount,.homeAllLink,.kv,.recipeAuthor,.tabLabel,.planDayName){font-family:"Fraunces", Georgia, serif !important}
+html.skin-wortwelt:not(#_x#_y) :is(.pageTitleBlock .h1,.brandWordmark,.recipeTitle,.catTileName){font-family:"Skin Feder", "Caveat", cursive !important;font-weight:600 !important;letter-spacing:0 !important}
+html.skin-wortwelt:not(#_x#_y) .pageTitleBlock{text-align:center}
+html.skin-wortwelt:not(#_x#_y) .pageTitleBlock .h1{font-size:min(clamp(3.2rem, 15vw, 6rem), 15vw) !important;line-height:.9 !important}
+html.skin-wortwelt:not(#_x#_y) :is(.homeSectionTitle,.h2){font-size:1.75rem !important;font-weight:400 !important;text-align:center;justify-content:center}
+html.skin-wortwelt:not(#_x#_y) .homeSectionHead{justify-content:center;gap:14px}
+html.skin-wortwelt:not(#_x#_y) .homeAllLink{color:#F4EEE8 !important;text-decoration:underline;text-underline-offset:4px}
+html.skin-wortwelt:not(#_x#_y) .resultCount{text-align:center}
 
-/* 3D-Kochbuch auf der Startseite */
-.skinScene-wortwelt .wwGL{position:absolute;inset:0;width:100%;height:100%}
-.wwStage{position:relative;height:clamp(330px, calc(66vw + 70px), 660px);margin:10px calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
-  touch-action:pan-y;cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
-.wwNav{position:absolute;left:16px;right:16px;bottom:6px;display:flex;align-items:center;justify-content:center;gap:14px}
-.wwNav button{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#F4EEE8;cursor:pointer}
-.wwNav button:disabled{opacity:.35;cursor:default}
-.wwNav .ico{width:20px;height:20px}
-.wwCount{min-width:0;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#CFC5BD;font:400 .9375rem/1.3 "Fraunces", Georgia, serif;text-align:center}
+/* ---------- Knöpfe, Kapseln, Leiste ---------- */
+html.skin-wortwelt:not(#_x#_y) :is(.searchRow,.homeQuickBtn,.navIconBtn,.recipeActBtn,.recipeBack,.profileBadge,.segmented){background:rgba(255,255,255,.08) !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2) !important;color:#F4EEE8 !important;border-radius:999px !important}
+html.skin-wortwelt:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28) !important;color:#F4EEE8 !important;border-radius:999px !important;font-family:"Fraunces", Georgia, serif}
+html.skin-wortwelt:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#F4EEE8 !important;color:#161515 !important}
+html.skin-wortwelt:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary,.continuePlay){background:#F4EEE8 !important;color:#161515 !important;border-radius:999px !important;font-family:"Fraunces", Georgia, serif;font-weight:500 !important}
+html.skin-wortwelt:not(#_x#_y) .segBtn{background:transparent !important;color:#CFC5BD !important;border-radius:999px !important;font-family:"Fraunces", Georgia, serif}
+html.skin-wortwelt:not(#_x#_y) .segBtn.active{background:#F4EEE8 !important;color:#161515 !important}
+html.skin-wortwelt:not(#_x#_y) .bottomRail{background:rgba(22,21,21,.82) !important;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1) !important;box-shadow:0 12px 36px rgba(0,0,0,.45) !important}
+html.skin-wortwelt:not(#_x#_y) .tabItem{color:#CFC5BD !important;background:transparent !important}
+html.skin-wortwelt:not(#_x#_y) .tabItem.active{background:#F4EEE8 !important;color:#161515 !important}
+
+/* ---------- Karten = farbige Buchseiten ---------- */
+html.skin-wortwelt:not(#_x#_y) .recipeCard{--ink:#FFF6EA;background:var(--pc, #2B2827) !important;border-radius:26px 26px 26px 26px !important;padding:12px !important;box-shadow:0 18px 40px rgba(0,0,0,.45) !important;overflow:hidden !important}
+html.skin-wortwelt:not(#_x#_y) .recipeCard.wwInkDark{--ink:#2A1714}
+html.skin-wortwelt:not(#_x#_y) .recipeCard .rcImg{border-radius:16px !important;box-shadow:0 8px 18px rgba(0,0,0,.25) !important}
+html.skin-wortwelt:not(#_x#_y) .recipeCard .rcBody{padding:12px 6px 4px !important;text-align:center;align-items:center}
+html.skin-wortwelt:not(#_x#_y) .recipeCard .recipeTitle{color:var(--ink) !important;font-size:clamp(1.7rem, 7vw, 2.2rem) !important;line-height:.95 !important;text-transform:uppercase}
+html.skin-wortwelt:not(#_x#_y) .recipeCard .recipeMeta{color:var(--ink) !important;opacity:.9;justify-content:center;font-size:.875rem !important}
+html.skin-wortwelt:not(#_x#_y) .homeFeatured .rcBody{position:static !important;background:none !important}
+html.skin-wortwelt:not(#_x#_y) .homeFeatured :is(.homeFeaturedTitle,.recipeMeta){color:var(--ink) !important;text-shadow:none !important}
+html.skin-wortwelt:not(#_x#_y) .homeFeatured .homeFeaturedTitle{font-family:"Skin Feder", "Caveat", cursive !important;font-weight:600 !important;font-size:clamp(2.2rem, 10vw, 3rem) !important;text-transform:uppercase;line-height:.95 !important}
+html.skin-wortwelt:not(#_x#_y) .homeFeatured .heroOverlayCat{background:rgba(0,0,0,.35) !important;color:#FFF6EA !important;font-family:"Fraunces", Georgia, serif}
+html.skin-wortwelt:not(#_x#_y) .hScroll .rcImg{aspect-ratio:4/3 !important}
+html.skin-wortwelt:not(#_x#_y) #recipeGrid{display:grid !important;grid-template-columns:minmax(0,1fr) !important;gap:30px !important}
+@media (min-width:700px){html.skin-wortwelt:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+@media (min-width:1100px){html.skin-wortwelt:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+html.skin-wortwelt:not(#_x#_y) #recipeGrid .linkCard{margin:0 !important}
+html.skin-wortwelt:not(#_x#_y) #recipeGrid .rcImg{aspect-ratio:4/3 !important}
+html.skin-wortwelt:not(#_x#_y) #recipeGrid .linkCard:nth-child(odd) .recipeCard{transform:rotate(-1deg)}
+html.skin-wortwelt:not(#_x#_y) #recipeGrid .linkCard:nth-child(even) .recipeCard{transform:rotate(1deg)}
+html.skin-wortwelt:not(#_x#_y) :is(.catTile,.homeEmpty,.uEmpty,.homeTimer){border-radius:24px !important}
+html.skin-wortwelt:not(#_x#_y) .catTileName{font-size:1.8rem !important;text-transform:uppercase}
+html.skin-wortwelt:not(#_x#_y) .continueCard{background:#F4EEE8 !important;color:#161515 !important;border-radius:24px !important}
+html.skin-wortwelt:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:#161515 !important}
+html.skin-wortwelt:not(#_x#_y) .continuePlay{background:#161515 !important;color:#F4EEE8 !important}
+
+/* ---------- Startseite: das Buch ---------- */
+html.skin-wortwelt:not(#_x#_y) body.wwHome .homeGreeting{min-height:100svh;display:flex;flex-direction:column;padding-bottom:calc(env(safe-area-inset-bottom) + 112px) !important}
+html.skin-wortwelt:not(#_x#_y) body.wwHome .homeBrand{justify-content:center;position:relative}
+html.skin-wortwelt:not(#_x#_y) body.wwHome .brandWordmark{font-size:1.6rem !important}
+html.skin-wortwelt:not(#_x#_y) body.wwHome .homeBrand .profileBadge{position:absolute;right:0}
+html.skin-wortwelt:not(#_x#_y) body.wwHome :is(.homeGreetingTitle,.homeGreetingSub){position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wwHero{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;margin:0 calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left))}
+.wwStage{position:relative;height:min(62svh, calc(78vw + 40px), 720px);touch-action:pan-y;cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.wwStage .wwGL{position:absolute;inset:0;width:100%;height:100%}
+.wwArrow{position:absolute;top:50%;z-index:2;width:56px;height:48px;margin-top:-24px;display:grid;place-items:center;border:0;background:transparent;color:#F4EEE8;cursor:pointer;transition:opacity .3s}
+.wwArrow .ico{width:40px;height:20px}
+.wwPrev{left:max(4px, 2vw)} .wwNext{right:max(4px, 2vw)}
+.wwArrow:disabled{opacity:0;pointer-events:none}
+.wwUnder{display:flex;flex-direction:column;align-items:center;gap:14px;padding:0 20px;text-align:center}
+.wwClosed{display:flex;flex-direction:column;align-items:center;gap:16px}
+.wwOpenBtn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 20px;border:0;border-radius:999px;background:transparent;box-shadow:inset 0 0 0 1px rgba(244,238,232,.5);color:#F4EEE8;font:400 .9375rem "Fraunces", Georgia, serif;cursor:pointer}
+.wwOpenBtn .ico{width:20px;height:20px}
+.wwDedic{margin:0;font:400 1.0625rem/1.45 "Fraunces", Georgia, serif;color:#F4EEE8}
+.wwDedic small{display:block;font-size:.8125rem;color:#CFC5BD}
+.wwDedic em{display:block;margin-top:4px;font-size:.875rem;color:#CFC5BD}
+.wwCap{display:flex;flex-direction:column;align-items:center;gap:4px;max-width:34rem;color:#F4EEE8;text-decoration:none}
+.wwCap b{font:400 1.5rem/1.15 "Fraunces", Georgia, serif}
+.wwCap span{font:400 1rem/1.4 "Fraunces", Georgia, serif;color:#CFC5BD}
+.wwCap i{font:italic 400 .875rem "Fraunces", Georgia, serif;color:#CFC5BD}
+.wwDots{display:flex;align-items:center;gap:2px;flex-wrap:wrap;justify-content:center}
+.wwDots button{width:28px;height:44px;border:0;background:transparent;padding:0;cursor:pointer;position:relative}
+.wwDots button::before{content:"";position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:var(--c);transition:transform .3s var(--ease)}
+.wwDots button[aria-selected="true"]::before{transform:scale(2.1);box-shadow:0 0 0 1.5px #161515, 0 0 0 2.5px rgba(244,238,232,.8)}
+.wwFlat{position:absolute;inset:8% 6%;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:6%;padding:5%;border-radius:22px;background:var(--c);box-shadow:0 24px 50px rgba(0,0,0,.5)}
+.wwFlat img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;border:8px solid #FFFDF8}
+.wwFlat b{font:700 clamp(2rem, 9vw, 4.5rem)/.9 "Skin Feder", "Caveat", cursive;color:#FFF6EA;transform:rotate(-4deg);word-break:break-word}
+.wwFlatCover{grid-column:1/-1;text-align:center;color:#F4EEE8;font-family:"Skin Feder", "Caveat", cursive}
+.wwFlatCover small{display:block;font-size:2rem}
+.wwFlatCover b{font-size:clamp(3rem, 14vw, 6rem);line-height:.9;text-transform:uppercase;color:#F4EEE8}
+
+/* ---------- Rezeptseite: Foto auf einer farbigen Buchseite, Name handgemalt ---------- */
+html.skin-wortwelt:not(#_x#_y) .recipePageCard{background:transparent !important;box-shadow:none !important;overflow:visible !important}
+html.skin-wortwelt:not(#_x#_y) .recipePageHero{--ink:#FFF6EA;display:flex !important;flex-direction:column;height:auto !important;max-height:none !important;aspect-ratio:auto !important;overflow:hidden !important;margin-top:58px !important;
+  padding:14px;border-radius:30px !important;background:var(--pc, #E2604A) !important;box-shadow:0 24px 50px rgba(0,0,0,.5)}
+html.skin-wortwelt:not(#_x#_y) .recipePageHero.wwInkDark{--ink:#2A1714}
+html.skin-wortwelt:not(#_x#_y) .recipePageHero::before,html.skin-wortwelt:not(#_x#_y) .recipePageHero::after{display:none !important}
+html.skin-wortwelt:not(#_x#_y) .recipePageHero img.recipeHeroImg{position:static !important;width:100% !important;height:auto !important;aspect-ratio:4/3;object-fit:cover;border-radius:18px !important;transform:none !important}
+html.skin-wortwelt:not(#_x#_y) .recipeHeroText{position:static !important;padding:16px 8px 8px !important;background:none !important;text-align:center}
+html.skin-wortwelt:not(#_x#_y) .recipeHeroText .recipeName{font-family:"Skin Feder", "Caveat", cursive !important;font-weight:700 !important;font-size:min(clamp(2.6rem, 12vw, 5rem), 12vw) !important;line-height:.9 !important;text-transform:uppercase;color:var(--ink) !important;text-shadow:none !important;transform:rotate(-2deg)}
+html.skin-wortwelt:not(#_x#_y) .recipeHeroText .recipeSubtitle{display:block !important;-webkit-line-clamp:unset !important;margin-top:10px;font:400 1.0625rem/1.4 "Fraunces", Georgia, serif !important;color:var(--ink) !important;text-shadow:none !important}
+@media (min-width:900px){html.skin-wortwelt:not(#_x#_y) .recipePageHero{display:grid !important;grid-template-columns:1.1fr 1fr;align-items:center;gap:20px} html.skin-wortwelt:not(#_x#_y) .recipePageHero img.recipeHeroImg{aspect-ratio:1}}
+html.skin-wortwelt:not(#_x#_y) .recipePageBody{background:transparent !important;box-shadow:none !important;margin-top:0 !important;padding-top:24px !important}
+html.skin-wortwelt:not(#_x#_y) :is(.recipeFacts,.recipeAuthor,.recipeTags,.recipeActions){justify-content:center;text-align:center}
+html.skin-wortwelt:not(#_x#_y) .recipeInnerCard{background:rgba(255,255,255,.04) !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1) !important;border-radius:24px !important}
+html.skin-wortwelt:not(#_x#_y) .recipeSegWrap.isStuck{background:rgba(22,21,21,.94) !important}
 
 html.skin-wortwelt:not(#_x#_y) .bxRv{opacity:0;transform:translateY(24px)}
-html.skin-wortwelt:not(#_x#_y) .bxRv.bxRvX{transform:translateX(24px)}
 html.skin-wortwelt:not(#_x#_y) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .8s ease,transform 1s var(--easeSheet)}
-
-html.skin-wortwelt:not(#_x#_y) .bbFooter{background:#121111;color:#F4EEE8}
-html.skin-wortwelt:not(#_x#_y) .bbFootText b{font-family:"Skin Feder", "Caveat", cursive;font-weight:500;font-size:clamp(2.6rem, 12vw, 3.6rem)}
+html.skin-wortwelt:not(#_x#_y) .bbFooter{background:#111010;color:#F4EEE8}
+html.skin-wortwelt:not(#_x#_y) .bbFootText b{font-family:"Skin Feder", "Caveat", cursive;font-weight:600;font-size:clamp(2.6rem, 12vw, 3.6rem)}
 html.skin-wortwelt:not(#_x#_y) .bbFootText span{color:#CFC5BD}
-html.skin-wortwelt:not(#_x#_y) .bbFootText a{background:#EDB9B1;color:#2A1714}
+html.skin-wortwelt:not(#_x#_y) .bbFootText a{background:#F4EEE8;color:#161515}
 
 /* Vorspann: der Buchdeckel klappt auf */
 .skIntro-wortwelt{background:#161515;color:#2A1714;perspective:1200px}
@@ -65,4 +140,5 @@ html.skin-wortwelt:not(#_x#_y) .bbFootText a{background:#EDB9B1;color:#2A1714}
 
 @media (prefers-reduced-motion: reduce){
 html.skin-wortwelt:not(#_x#_y) .bxRv{opacity:1;transform:none}
+.wwDots button::before{transition:none}
 }

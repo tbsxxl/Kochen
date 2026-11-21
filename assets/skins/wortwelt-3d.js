@@ -3,7 +3,10 @@
 // (Wischen, Pfeile, Tastatur), Antippen der Doppelseite öffnet das Rezept. Seiteninhalte werden auf 2D-Leinwänden gemalt (CanvasTexture).
 import * as THREE from "../vendor/three/three.module.min.js";
 
-const PASTELS = ["#EDB9B1", "#F2BE93", "#B8D6A8", "#B5C6EC", "#F3CF85", "#E8A9A9", "#AEB6E2", "#9FD4CD", "#F0C2D8", "#CFE0A0"];
+// kräftige Seitenfarben wie im Vorbild (Rosa, Koralle, Grün, Violett, Gelb, Blau); Schrift darauf hell bzw. dunkel
+export const VIVID = ["#EBB2A9", "#E2604A", "#3E8A5E", "#5B40D4", "#F0B23C", "#2E6EA6"];
+const PASTELS = VIVID;
+const LIGHT = { "#EBB2A9": false, "#F0B23C": false };
 const INK = "#3A2B28";
 const PW = 1, PH = 1.3, TW = 800, TH = Math.round(800 * PH / PW);
 
@@ -65,28 +68,60 @@ function photoPage(r, k, img){
   return c;
 }
 
-// rechte Seite: handgeschriebener Name, Kringel, Untertitel, Zeit/Portionen, „Zum Rezept“
+// Kreide-Struktur: feine helle/dunkle Sprenkel nur auf schon gemalter Schrift
+function chalk(g, x, y, w, h, seed){
+  let st = seed; const rnd = ()=>{ st = (st * 9301 + 49297) % 233280; return st / 233280; };
+  g.save(); g.globalCompositeOperation = "source-atop";
+  for(let i = 0; i < 2600; i++){ g.fillStyle = rnd() < .5 ? "rgba(255,255,255,.35)" : "rgba(0,0,0,.18)"; g.fillRect(x + rnd() * w, y + rnd() * h, 2 + rnd() * 4, 1.5 + rnd() * 2); }
+  g.restore();
+}
+
+// rechte Seite: kleines Wort in Schreibschrift + riesiges handgemaltes Hauptwort (wie „Take RESPONSIBILITY“), Kritzeleien
 function textPage(r, k){
   const c = document.createElement("canvas"); c.width = TW; c.height = TH; const g = c.getContext("2d");
-  paper(g, PASTELS[k % PASTELS.length], "r", k * 17 + 3);
-  g.fillStyle = INK; g.textAlign = "left";
-  g.font = '500 84px "Skin Feder", "Caveat", cursive';
-  const n = wrap(g, r.t, 90, 250, TW - 160, 82, 3);
-  let y = 250 + n * 82 - 40;
-  g.strokeStyle = INK; g.lineWidth = 4; g.lineCap = "round"; g.beginPath(); g.moveTo(92, y + 10);
-  for(let x = 92; x < 420; x += 24) g.quadraticCurveTo(x + 12, y + (x % 48 ? -6 : 12), x + 24, y + 10); g.stroke();
-  y += 90;
-  g.font = '400 46px "Fraunces", Georgia, serif'; g.fillStyle = "rgba(58,43,40,.9)";
-  const m = wrap(g, r.s || "", 92, y, TW - 170, 58, 4); y += m * 58 + 34;
-  g.font = '500 40px "Fraunces", Georgia, serif'; g.fillStyle = INK;
-  if(r.z) { g.fillText(r.z, 92, y); y += 52; }
-  g.font = '500 56px "Skin Feder", "Caveat", cursive'; g.fillText("Zum Rezept", 92, TH - 140);
-  g.beginPath(); g.moveTo(92, TH - 122); g.lineTo(330, TH - 126); g.stroke();
-  // kleine Schmetterlinge/Blätter wie Kritzeleien
-  g.fillStyle = "rgba(255,255,255,.75)";
-  [[TW - 140, 150, .3], [TW - 210, 230, -.4], [TW - 120, TH - 260, .2]].forEach(([x, yy, a])=>{
-    g.save(); g.translate(x, yy); g.rotate(a); g.beginPath(); g.ellipse(-10, 0, 14, 9, -.5, 0, 7); g.ellipse(10, 0, 14, 9, .5, 0, 7); g.fill(); g.restore();
+  const col = PASTELS[k % PASTELS.length], dark = LIGHT[col] === false, ink = dark ? "#2A1714" : "#FFF6EA";
+  paper(g, col, "r", k * 17 + 3);
+  // längster Wortteil groß (auch bei Bindestrich-Wörtern), der Rest klein darüber
+  const t = String(r.t || ""), parts = t.split(/[\s-]+/).filter(Boolean);
+  let big = parts.reduce((a, w)=> w.length >= a.length ? w : a, "");
+  const at = t.lastIndexOf(big), small = (t.slice(0, at) + t.slice(at + big.length)).replace(/\s+/g, " ").trim();
+  big = big.toUpperCase();
+  // Wort auf eigener Ebene malen, damit die Kreide-Struktur nur die Schrift trifft
+  const L = document.createElement("canvas"); L.width = TW; L.height = TH; const q = L.getContext("2d");
+  q.fillStyle = ink; q.textAlign = "center"; q.textBaseline = "middle";
+  let fs = 300; q.font = `700 ${fs}px "Skin Feder", "Caveat", cursive`;
+  while(q.measureText(big).width > TW * .86 && fs > 90){ fs -= 8; q.font = `700 ${fs}px "Skin Feder", "Caveat", cursive`; }
+  q.save(); q.translate(TW / 2, TH * .5); q.rotate(-.06); q.scale(1, 1.5); q.fillText(big, 0, 0); q.restore();
+  chalk(q, 0, 0, TW, TH, k * 13 + 5);
+  if(small){
+    q.font = '500 78px "Skin Feder", "Caveat", cursive'; q.textAlign = "left"; q.fillStyle = ink;
+    q.save(); q.translate(80, TH * .5 - fs * .78); q.rotate(-.05); wrap(q, small, 0, 0, TW - 160, 74, 2); q.restore();
+  }
+  g.drawImage(L, 0, 0);
+  // Kritzeleien: Sterne und Bögen
+  g.strokeStyle = dark ? "rgba(42,23,20,.55)" : "rgba(255,246,234,.7)"; g.lineWidth = 5; g.lineCap = "round";
+  [[TW - 130, 150], [150, TH - 190], [TW - 200, TH - 150]].forEach(([x, y], i)=>{
+    g.beginPath(); for(let j = 0; j < 4; j++){ const a = j * Math.PI / 4 + i; g.moveTo(x - Math.cos(a) * 18, y - Math.sin(a) * 18); g.lineTo(x + Math.cos(a) * 18, y + Math.sin(a) * 18); } g.stroke();
   });
+  g.beginPath(); g.moveTo(TW * .3, TH * .5 + fs * .9); g.quadraticCurveTo(TW * .5, TH * .5 + fs * 1.05, TW * .72, TH * .5 + fs * .88); g.stroke();
+  return c;
+}
+
+// Buchdeckel: dunkler Karton, Kreideschrift
+function coverPage(){
+  const c = document.createElement("canvas"); c.width = TW; c.height = TH; const g = c.getContext("2d");
+  paper(g, "#2B2A2D", "r", 99);
+  const L = document.createElement("canvas"); L.width = TW; L.height = TH; const q = L.getContext("2d");
+  q.fillStyle = "#F4EEE8"; q.textAlign = "center"; q.textBaseline = "middle";
+  q.font = '500 96px "Skin Feder", "Caveat", cursive'; q.save(); q.translate(TW * .42, TH * .3); q.rotate(-.08); q.fillText("Tobis", 0, 0); q.restore();
+  q.font = '700 190px "Skin Feder", "Caveat", cursive'; q.save(); q.translate(TW / 2, TH * .45); q.rotate(-.04); q.scale(1, 1.35); q.fillText("KOCH", 0, 0); q.restore();
+  q.save(); q.translate(TW / 2, TH * .6); q.rotate(-.03); q.scale(1, 1.35); q.fillText("BUCH", 0, 0); q.restore();
+  chalk(q, 0, 0, TW, TH, 7);
+  g.drawImage(L, 0, 0);
+  g.strokeStyle = "#F4EEE8"; g.lineWidth = 5; g.lineCap = "round";
+  g.beginPath(); g.moveTo(TW * .2, TH * .7); for(let x = TW * .2; x < TW * .8; x += 40) g.quadraticCurveTo(x + 20, TH * .7 + (x % 80 ? -14 : 14), x + 40, TH * .7); g.stroke();
+  g.fillStyle = "rgba(244,238,232,.8)"; g.font = '400 36px "Fraunces", Georgia, serif'; g.textAlign = "center";
+  g.fillText("Ein einfaches bebildertes Kochbuch", TW / 2, TH * .82);
   return c;
 }
 
@@ -127,7 +162,7 @@ export function create(canvas, recipes, onIndex){
 
   // Buchdeckel (dunkler Karton) und die zwei liegenden Seiten
   const coverG = new THREE.PlaneGeometry(PW * 2 + .08, PH + .08);
-  const cover = new THREE.Mesh(coverG, new THREE.MeshStandardMaterial({ color: 0x5a3b35, roughness: .8 }));
+  const cover = new THREE.Mesh(coverG, new THREE.MeshStandardMaterial({ color: 0x1d1c1e, roughness: .8 }));
   cover.position.z = -.012; book.add(cover);
   const lg = new THREE.PlaneGeometry(PW, PH); lg.translate(-PW / 2, 0, 0);
   const left = new THREE.Mesh(lg, mat(null, THREE.FrontSide)); left.position.z = -.002;
@@ -138,11 +173,14 @@ export function create(canvas, recipes, onIndex){
   const flipF = new THREE.Mesh(flipGeo, mat(null, THREE.FrontSide)), flipB = new THREE.Mesh(flipGeo, mat(null, THREE.BackSide));
   const flip = new THREE.Group(); flip.add(flipF, flipB); flip.visible = false; book.add(flip);
 
-  let idx = 0, anim = null;
+  let idx = -1, anim = null, openT = 0;
+  const coverTex = new THREE.CanvasTexture(coverPage()); coverTex.colorSpace = THREE.SRGBColorSpace; coverTex.anisotropy = 4;
   const set = (m, t)=>{ m.material.map = t; m.material.needsUpdate = true; };
   const show = ()=>{
     [idx - 1, idx, idx + 1, idx + 2].forEach(load);
-    set(left, texFor("p", idx)); set(right, texFor("t", idx));
+    left.visible = idx >= 0;
+    if(idx >= 0) set(left, texFor("p", idx));
+    set(right, idx >= 0 ? texFor("t", idx) : coverTex);
     onIndex?.(idx);
     api.dirty = true;
   };
@@ -154,9 +192,11 @@ export function create(canvas, recipes, onIndex){
     get index(){ return idx; }, count: recipes.length,
     go(dir){
       if(anim) return;
-      const to = idx + dir; if(to < 0 || to >= recipes.length) return;
+      const to = idx + dir; if(to < -1 || to >= recipes.length) return;
       [to - 1, to, to + 1].forEach(load);
-      if(dir > 0){ set(flipF, texFor("t", idx)); set(flipB, mirrored(texFor("p", to))); set(right, texFor("t", to)); anim = { from: 0, to: Math.PI, t: 0, done: ()=>{ idx = to; show(); } }; }
+      if(idx === -1){ set(flipF, coverTex); set(flipB, mirrored(texFor("p", 0))); set(right, texFor("t", 0)); left.visible = false; anim = { from: 0, to: Math.PI, t: 0, done: ()=>{ idx = 0; show(); } }; }
+      else if(to === -1){ set(flipF, coverTex); set(flipB, mirrored(texFor("p", 0))); left.visible = false; anim = { from: Math.PI, to: 0, t: 0, done: ()=>{ idx = -1; show(); } }; }
+      else if(dir > 0){ set(flipF, texFor("t", idx)); set(flipB, mirrored(texFor("p", to))); set(right, texFor("t", to)); anim = { from: 0, to: Math.PI, t: 0, done: ()=>{ idx = to; show(); } }; }
       else { set(flipF, texFor("t", to)); set(flipB, mirrored(texFor("p", idx))); set(left, texFor("p", to)); anim = { from: Math.PI, to: 0, t: 0, done: ()=>{ idx = to; show(); } }; }
       curl(flipGeo, base, anim.from); flip.visible = true; api.dirty = true;
     },
@@ -169,7 +209,14 @@ export function create(canvas, recipes, onIndex){
       const vis = 2 * tan * camera.position.z; book.position.y = (h / 2 - cy) / h * vis;
       api.dirty = true;
     },
+    get open(){ return idx >= 0; },
     render(t, dt, still){
+      // geschlossen: Deckel mittig (Buch um eine halbe Seite nach links), offen: Doppelseite mittig
+      const want = idx >= 0 || (anim && anim.to === Math.PI) ? 1 : 0;
+      openT += (want - openT) * (still ? 1 : .08);
+      book.position.x = -PW / 2 * (1 - openT) * 1.4; book.scale.setScalar(1 + .4 * (1 - openT));
+      cover.scale.x = .5 + .5 * openT; cover.position.x = PW / 2 * (1 - openT) + .02 * (1 - openT);
+      if(Math.abs(want - openT) > .002) api.dirty = true;
       if(anim){
         anim.t = Math.min(1, anim.t + (dt || 16) / (still ? 1 : 700));
         const e = anim.t < .5 ? 4 * anim.t ** 3 : 1 - (-2 * anim.t + 2) ** 3 / 2;
@@ -179,7 +226,7 @@ export function create(canvas, recipes, onIndex){
       book.rotation.x += ((still ? -.18 : -.18 + api.tiltX) - book.rotation.x) * .08;
       book.rotation.y += ((still ? 0 : api.tiltY) - book.rotation.y) * .08;
       if(!still) book.position.z = Math.sin(t * .0008) * .02;
-      renderer.render(scene, camera); api.dirty = !!anim;
+      renderer.render(scene, camera); api.dirty = !!anim || Math.abs(want - openT) > .002;
     },
     dispose(){ tex.forEach((t)=> t.dispose()); renderer.dispose(); },
   };
