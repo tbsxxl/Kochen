@@ -34,7 +34,8 @@ export function create(canvas, textCanvas){
   }
 
   // Qualle: Schirm (halbe, abgeflachte Kugel) und Fäden aus Röhren, schillerndes Chrom
-  const chrome = new THREE.MeshPhysicalMaterial({ color: 0xf2e9ff, metalness: 1, roughness: .12, iridescence: 1, iridescenceIOR: 1.8, iridescenceThicknessRange: [200, 900], envMapIntensity: 1.8 });
+  // Qualle: rosa-violett durchscheinend wie im Vorbild (nicht verchromt)
+  const chrome = new THREE.MeshPhysicalMaterial({ color: 0xe9a8ff, metalness: 0, roughness: .22, iridescence: 1, iridescenceIOR: 1.4, iridescenceThicknessRange: [300, 800], emissive: 0x9b45e0, emissiveIntensity: .35, transparent: true, opacity: .86, side: THREE.DoubleSide, envMapIntensity: 1.2 });
   const jelly = new THREE.Group(); jelly.scale.setScalar(1.35); ball.add(jelly);
   const bell = new THREE.Mesh(new THREE.SphereGeometry(.34, 48, 24, 0, TAU, 0, Math.PI * .55), chrome); jelly.add(bell);
   const tent = [];

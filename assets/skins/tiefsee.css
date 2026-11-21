@@ -1,56 +1,139 @@
 /* Skin „tiefsee“ – wird nur geladen, wenn dieser Skin aktiv ist.
-   Nov. 2026 neu nach Vergleich mit dem Vorbild (Labor-Seite einer Agentur): blasser Lavendel mit feinem Punktraster, riesiger Titel in
-   schmaler Versal-Grotesk, davor eine Kugel aus spiegelnden Scherben mit Chrom-Qualle (tiefsee.js, tiefsee-3d.js). Kleine Beschriftungen in
-   Schreibmaschinenschrift mit eckigen Klammern-Optik, schwarze Kapseln. Neue Regeln ans Ende. */
+   Dez. 2026 zweiter Neubau (Besitzer: „zu nah am Standard“), nach genauem Vergleich mit dem Vorbild (Labor-Seite: Start und Werkseite):
+   Lavendel-Verlauf mit Punktraster, riesige schmale Versal-Titel (Bebas, „Skin Zwei“), alles Kleine in Schreibmaschinenschrift versal,
+   Untertitel in weißen Milchglas-Kapseln, Karten mit Chrom-Rahmen (versetzt), weiße Kreis-Knöpfe mit Eckklammern.
+   Startseite: stehender 3D-Raum, Scrollen sprengt die Scherbenkugel (tiefsee.js, tiefsee-3d.js). Neue Regeln ans Ende. */
 html.skin-tiefsee:not(#_x#_y),html.skin-tiefsee:not(#_x#_y) body{
-  --field:#E6E4EE;--onField:#0B0B0F;--onField2:#3A3946;--fieldFill:rgba(255,255,255,.62);
-  --bg:#EEEDF3;--surface:#FFFFFF;--surface2:#F4F3F8;--fill:#E4E2EC;--line:rgba(11,11,15,.12);--lineStrong:rgba(11,11,15,.45);
+  --field:#E9E7F3;--onField:#0B0B0F;--onField2:#3A3946;--fieldFill:rgba(255,255,255,.62);
+  --bg:#E9E7F3;--surface:#FFFFFF;--surface2:#F4F3F8;--fill:rgba(255,255,255,.6);--line:rgba(11,11,15,.12);--lineStrong:rgba(11,11,15,.45);
   --text:#0B0B0F;--sub:#3A3946;--sub2:#3A3946;--muted:#4A4956;
   --brand:#0B0B0F;--onBrand:#FFFFFF;--leaf:#0B0B0F;--onLeaf:#FFFFFF;--brandSoft:#E4E2EC;--leafSoft:#E4E2EC;
   --sel:#0B0B0F;--onSel:#FFFFFF;--accent:#5B3FE0;--accentSoft:#E7E1FF;--onAccent:#FFFFFF;--herb:#0B0B0F;--coffee:#0B0B0F;
-  --glass:rgba(238,237,243,.9);--glassLine:rgba(255,255,255,.9);
+  --glass:rgba(244,243,250,.92);--glassLine:rgba(255,255,255,.9);
   --fontDisplay:"Skin Zwei", "Bebas Neue", "Arial Narrow", sans-serif;
   color-scheme:light}
-html.skin-tiefsee:not(#_x#_y) body.grouped{--bg:#EEEDF3;--surface:#FFFFFF}
+html.skin-tiefsee:not(#_x#_y) body.grouped{--bg:#E9E7F3;--surface:#FFFFFF}
 html.skin-tiefsee:not(#_x#_y) .cookOverlay{--cBg:#EEEDF3;--cCard:#FFFFFF;--cFill:#E4E2EC;--cLine:rgba(11,11,15,.12);--cText:#0B0B0F;--cSub:#3A3946;--cLeaf:#0B0B0F;--cOnLeaf:#FFFFFF}
 html.skin-tiefsee:not(#_x#_y) ::selection{background:#D9CCFF;color:#0B0B0F}
-html.skin-tiefsee:has(body.fieldPage){background:#E6E4EE}
-.skinScene-tiefsee{background:radial-gradient(rgba(11,11,15,.12) 1px, transparent 1.4px) 0 0/9px 9px, radial-gradient(120% 90% at 50% 40%, #F1EFF6, #D7DAE8)}
-.skinScene-tiefsee .tsGL{position:absolute;inset:0;width:100%;height:100%}
-
-/* riesiger, schmaler Versal-Titel */
-html.skin-tiefsee:not(#_x#_y) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark){font-family:var(--fontDisplay);font-weight:400;letter-spacing:0;text-transform:uppercase;line-height:.88}
-html.skin-tiefsee:not(#_x#_y) .pageTitleBlock .h1,html.skin-tiefsee:not(#_x#_y) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(3.4rem, 17.5vw, 8rem), 17.5vw);line-height:.86}
-html.skin-tiefsee:not(#_x#_y) .homeSectionTitle,html.skin-tiefsee:not(#_x#_y) .h2{font-size:2.3rem}
-html.skin-tiefsee:not(#_x#_y) .recipeTitle{font-size:1.45rem;line-height:.95}
-html.skin-tiefsee:not(#_x#_y) .recipeHeroText .recipeName,html.skin-tiefsee:not(#_x#_y) .homeFeatured .homeFeaturedTitle{font-size:clamp(3rem, 15vw, 4.6rem)}
+/* Grund: Lavendel-Verlauf mit Punktraster, steht beim Scrollen still */
+html.skin-tiefsee{background:#E9E7F3}
+html.skin-tiefsee:not(#_x#_y)::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(rgba(60,50,140,.16) 1px, transparent 1.5px) 0 0/8px 8px, radial-gradient(90% 60% at 30% 20%, #F6F5FB 0%, transparent 70%), linear-gradient(180deg, #F1F0F8 0%, #DCD9F2 55%, #C9CFF4 100%)}
+html.skin-tiefsee:not(#_x#_y) body{background:transparent !important}
+html.skin-tiefsee:not(#_x#_y) .skinScene{background:transparent !important}
+html.skin-tiefsee:not(#_x#_y) body .pageContent{background:transparent !important;box-shadow:none !important}
 html.skin-tiefsee:not(#_x#_y) .fxDrawn{color:transparent !important;-webkit-text-fill-color:transparent;text-shadow:none !important}
-html.skin-tiefsee:not(#_x#_y) :is(.homeGreetingSub,.homeAllLink,.resultCount,.catTileCount,.continueEyebrow,.recipeMeta){font-family:"Retro Mono", ui-monospace, monospace;text-transform:uppercase;letter-spacing:.04em;font-size:.8125rem}
-html.skin-tiefsee:not(#_x#_y) .homeAllLink{color:#0B0B0F}
-html.skin-tiefsee:not(#_x#_y) .homeAllLink::before{content:"["}
-html.skin-tiefsee:not(#_x#_y) .homeAllLink::after{content:"]"}
 
-html.skin-tiefsee:not(#_x#_y) :is(.recipeCard:not(.homeFeatured),.catTile,.homeFeatured,.homeEmpty,.homeTimer){border-radius:18px !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.9), 0 10px 30px rgba(40,30,90,.08) !important}
-html.skin-tiefsee:not(#_x#_y) .recipeCard:not(.homeFeatured){background:#FFFFFF !important}
-html.skin-tiefsee:not(#_x#_y) .recipeCard .rcImg{border-radius:12px !important}
-html.skin-tiefsee:not(#_x#_y) .searchRow,html.skin-tiefsee:not(#_x#_y) body.layout-home .searchRowCompact,html.skin-tiefsee:not(#_x#_y) body.layout-home .homeQuickBtn{background:rgba(255,255,255,.62) !important;color:#0B0B0F !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.9) !important;border-radius:999px !important}
-html.skin-tiefsee:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary,.continuePlay){background:#0B0B0F !important;color:#FFFFFF !important;border-radius:999px !important}
-html.skin-tiefsee:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:rgba(255,255,255,.62) !important;box-shadow:inset 0 0 0 1px rgba(11,11,15,.14) !important;color:#0B0B0F;border-radius:999px !important;font-family:"Retro Mono", monospace;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em}
-html.skin-tiefsee:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"]){background:#0B0B0F !important;color:#FFFFFF !important}
-html.skin-tiefsee:not(#_x#_y) .bottomRail{background:rgba(238,237,243,.86) !important;border:1px solid rgba(255,255,255,.9);box-shadow:0 12px 36px rgba(40,30,90,.14) !important}
-html.skin-tiefsee:not(#_x#_y) .tabItem{color:#3A3946 !important}
+/* ---------- Schrift ---------- */
+html.skin-tiefsee:not(#_x#_y) :is(.pageTitleBlock .h1,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.planDayName,.ingSection,.timerAlertTitle,.accountTitle){font-family:var(--fontDisplay) !important;font-weight:400 !important;letter-spacing:0 !important;text-transform:uppercase;line-height:.88 !important}
+html.skin-tiefsee:not(#_x#_y) .pageTitleBlock{text-align:center}
+html.skin-tiefsee:not(#_x#_y) .pageTitleBlock .h1{font-size:min(clamp(3.6rem, 19vw, 9rem), 19vw) !important;line-height:.84 !important}
+html.skin-tiefsee:not(#_x#_y) :is(.homeSectionTitle,.h2){font-size:2.6rem !important}
+html.skin-tiefsee:not(#_x#_y) :is(.homeAllLink,.resultCount,.catTileCount,.continueEyebrow,.recipeMeta,.tabLabel,.brandWordmark,.recipeAuthor,.kv,.ingHead,.notesTitle,.segBtn,.filterChip,.chip,.pillToggle,.searchRow input,.homeQuickBtn){font-family:"Retro Mono", ui-monospace, monospace !important;text-transform:uppercase;letter-spacing:.03em !important}
+html.skin-tiefsee:not(#_x#_y) .homeAllLink{color:#0B0B0F !important;font-size:.75rem}
+html.skin-tiefsee:not(#_x#_y) :is(.homeAllLink,.resultCount)::before{content:"["}
+html.skin-tiefsee:not(#_x#_y) :is(.homeAllLink,.resultCount)::after{content:"]"}
+html.skin-tiefsee:not(#_x#_y) .resultCount{text-align:center;font-size:.75rem !important}
+/* Milchglas-Kapsel */
+.tsPill{margin:14px auto 18px;max-width:44rem;padding:14px 22px;border-radius:22px;background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.95), 0 10px 30px rgba(60,50,140,.10);
+  font:400 clamp(1.15rem, 4.6vw, 1.6rem)/1.02 "Skin Zwei", sans-serif;text-transform:uppercase;text-align:center;color:#0B0B0F}
+
+/* ---------- Kapseln, Knöpfe, Leiste ---------- */
+html.skin-tiefsee:not(#_x#_y) :is(.searchRow,.homeQuickBtn,.navIconBtn,.recipeActBtn,.recipeBack,.profileBadge,.segmented){background:rgba(255,255,255,.6) !important;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.95), 0 6px 18px rgba(60,50,140,.08) !important;color:#0B0B0F !important;border-radius:999px !important}
+html.skin-tiefsee:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(11,11,15,.3) !important;color:#0B0B0F !important;border-radius:999px !important;font-size:.75rem !important}
+html.skin-tiefsee:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#0B0B0F !important;color:#FFFFFF !important}
+html.skin-tiefsee:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary,.continuePlay){background:#0B0B0F !important;color:#FFFFFF !important;border-radius:999px !important;font-family:"Retro Mono", ui-monospace, monospace !important;text-transform:uppercase;letter-spacing:.04em;font-size:.875rem !important}
+html.skin-tiefsee:not(#_x#_y) .segBtn{background:transparent !important;color:#3A3946 !important;border-radius:999px !important;font-size:.75rem !important}
+html.skin-tiefsee:not(#_x#_y) .segBtn.active{background:#0B0B0F !important;color:#FFFFFF !important}
+html.skin-tiefsee:not(#_x#_y) .bottomRail{background:rgba(250,249,255,.62) !important;-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);border:0 !important;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.95), 0 12px 36px rgba(60,50,140,.16) !important}
+html.skin-tiefsee:not(#_x#_y) .tabItem{color:#3A3946 !important;background:transparent !important}
 html.skin-tiefsee:not(#_x#_y) .tabItem.active{background:#0B0B0F !important;color:#FFFFFF !important}
+html.skin-tiefsee:not(#_x#_y) .tabLabel{font-size:.625rem !important}
+
+/* ---------- Karten mit Chrom-Rahmen ---------- */
+html.skin-tiefsee:not(#_x#_y) .recipeCard{padding:9px !important;border-radius:26px !important;overflow:visible !important;
+  background:linear-gradient(135deg, #FDFDFF 0%, #B9B8C8 18%, #F4F4FA 34%, #9C9BAE 52%, #ECEBF4 70%, #A9A8BB 86%, #F7F7FC 100%) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.9), 0 18px 40px rgba(60,50,140,.18) !important}
+html.skin-tiefsee:not(#_x#_y) .recipeCard .rcImg{border-radius:18px !important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+html.skin-tiefsee:not(#_x#_y) .recipeCard .rcBody{position:relative;margin-top:-30px;padding:0 10px 10px !important;gap:6px;z-index:1}
+html.skin-tiefsee:not(#_x#_y) .recipeCard .recipeTitle{font-size:clamp(1.9rem, 8vw, 2.5rem) !important;color:#0B0B0F;text-shadow:0 0 18px rgba(255,255,255,.9), 0 0 2px rgba(255,255,255,.9)}
+html.skin-tiefsee:not(#_x#_y) .recipeCard .recipeMeta{font-size:.6875rem !important;color:#0B0B0F !important;padding-right:52px}
+html.skin-tiefsee:not(#_x#_y) .recipeCard .recipeMeta .metaItem::before{content:"• "}
+html.skin-tiefsee:not(#_x#_y) .recipeCard .rcBody::after{content:"";position:absolute;right:10px;bottom:8px;width:34px;height:34px;border-radius:50%;
+  background:#0B0B0F url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/18px no-repeat}
+html.skin-tiefsee:not(#_x#_y) .hScroll .recipeCard .recipeTitle{font-size:1.7rem !important}
+html.skin-tiefsee:not(#_x#_y) .hScroll .rcImg{aspect-ratio:4/5 !important}
+html.skin-tiefsee:not(#_x#_y) .homeFeatured .rcImg{aspect-ratio:4/5 !important;max-height:none}
+html.skin-tiefsee:not(#_x#_y) .homeFeatured .rcBody{position:relative !important;background:none !important;color:#0B0B0F !important;inset:auto !important}
+html.skin-tiefsee:not(#_x#_y) .homeFeatured :is(.homeFeaturedTitle,.recipeMeta){color:#0B0B0F !important}
+html.skin-tiefsee:not(#_x#_y) .homeFeatured .heroOverlayCat{background:rgba(255,255,255,.7) !important;color:#0B0B0F !important;font-family:"Retro Mono", ui-monospace, monospace;text-transform:uppercase}
+html.skin-tiefsee:not(#_x#_y) :is(.catTile,.homeEmpty,.uEmpty,.homeTimer,.continueCard,.uRow,.planDay){border-radius:22px !important}
+html.skin-tiefsee:not(#_x#_y) :is(.homeEmpty,.uEmpty){background:rgba(255,255,255,.55) !important;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.95) !important}
 html.skin-tiefsee:not(#_x#_y) .continueCard{background:#0B0B0F !important;color:#FFFFFF !important}
 html.skin-tiefsee:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:#FFFFFF !important}
 html.skin-tiefsee:not(#_x#_y) .continuePlay{background:#FFFFFF !important;color:#0B0B0F !important}
 
-html.skin-tiefsee:not(#_x#_y) .bxRv{opacity:0;transform:translateY(26px) scale(.98)}
-html.skin-tiefsee:not(#_x#_y) .bxRv.bxRvX{transform:translateX(26px)}
-html.skin-tiefsee:not(#_x#_y) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .7s ease,transform .9s var(--easeSheet)}
+/* Rezeptliste: Chrom-Karten versetzt (Handy abwechselnd links/rechts, ab Tablet zwei Spalten mit Versatz) */
+html.skin-tiefsee:not(#_x#_y) #recipeGrid{display:grid !important;grid-template-columns:minmax(0,1fr) !important;gap:34px !important}
+html.skin-tiefsee:not(#_x#_y) #recipeGrid .linkCard{margin:0 !important;width:88%}
+html.skin-tiefsee:not(#_x#_y) #recipeGrid .linkCard:nth-child(even){margin-left:auto !important}
+html.skin-tiefsee:not(#_x#_y) #recipeGrid .rcImg{aspect-ratio:4/3 !important}
+html.skin-tiefsee:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+3){display:none !important}
+@media (min-width:700px){
+html.skin-tiefsee:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:56px 8% !important;padding:0 4%}
+html.skin-tiefsee:not(#_x#_y) #recipeGrid .linkCard,html.skin-tiefsee:not(#_x#_y) #recipeGrid .linkCard:nth-child(even){width:auto;margin-left:0 !important}
+html.skin-tiefsee:not(#_x#_y) #recipeGrid .linkCard:nth-child(even){transform:translateY(120px)}
+html.skin-tiefsee:not(#_x#_y) #recipeGrid{padding-bottom:140px}
+}
 
+/* ---------- Startseite: stehender Raum ---------- */
+html.skin-tiefsee:not(#_x#_y) body.tsHome .homeGreeting{position:relative;padding:0 !important}
+html.skin-tiefsee:not(#_x#_y) body.tsHome .homeBrand{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 6px);z-index:4}
+html.skin-tiefsee:not(#_x#_y) body.tsHome .brandWordmark{font-size:.8125rem !important}
+html.skin-tiefsee:not(#_x#_y) body.tsHome .homeGreetingTitle.homeGreetingTitle{position:absolute;left:0;top:calc(env(safe-area-inset-top) + 62px);z-index:4;margin:0;font:400 .75rem/1.3 "Retro Mono", ui-monospace, monospace !important;letter-spacing:.03em !important;text-transform:uppercase;white-space:normal;color:#0B0B0F}
+html.skin-tiefsee:not(#_x#_y) body.tsHome .homeGreetingTitle::before{content:"["}
+html.skin-tiefsee:not(#_x#_y) body.tsHome .homeGreetingTitle::after{content:"]"}
+html.skin-tiefsee:not(#_x#_y) body.tsHome .homeGreetingSub{display:none}
+.tsPin{position:relative;height:190svh;margin:calc(-1 * env(safe-area-inset-top)) calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left))}
+.tsPin.tsNoGL{height:100svh}
+.tsStage{position:sticky;top:0;height:100svh;overflow:hidden;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.tsStage .tsGL{position:absolute;inset:0;width:100%;height:100%}
+.tsBig{position:absolute;left:0;right:0;top:50%;transform:translateY(-58%);text-align:center;font:400 min(28vw, 15rem)/.8 "Skin Zwei", sans-serif;text-transform:uppercase;color:#0B0B0F;pointer-events:none}
+@media (min-aspect-ratio:1/1){ .tsBig{font-size:min(17vw, 20rem)} .tsBig br{display:none} }
+.tsHold{position:absolute;left:50%;top:50%;width:96px;height:96px;margin:-58px 0 0 -48px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 10px 30px rgba(60,50,140,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font:400 .625rem/1.3 "Retro Mono", ui-monospace, monospace;letter-spacing:.04em;text-transform:uppercase;color:#0B0B0F;pointer-events:none;transition:transform .3s var(--ease)}
+.tsHold::before{content:"";position:absolute;inset:-12px;background:
+  linear-gradient(#0B0B0F,#0B0B0F) 0 0/9px 1px, linear-gradient(#0B0B0F,#0B0B0F) 0 0/1px 9px,
+  linear-gradient(#0B0B0F,#0B0B0F) 100% 0/9px 1px, linear-gradient(#0B0B0F,#0B0B0F) 100% 0/1px 9px,
+  linear-gradient(#0B0B0F,#0B0B0F) 0 100%/9px 1px, linear-gradient(#0B0B0F,#0B0B0F) 0 100%/1px 9px,
+  linear-gradient(#0B0B0F,#0B0B0F) 100% 100%/9px 1px, linear-gradient(#0B0B0F,#0B0B0F) 100% 100%/1px 9px;background-repeat:no-repeat}
+.tsStage.isHold .tsHold{transform:scale(.86)}
+.tsBar{position:absolute;left:max(16px, 3vw);right:max(16px, 3vw);bottom:calc(env(safe-area-inset-bottom) + 100px);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;
+  font:400 .9375rem/1 "Skin Zwei", sans-serif;letter-spacing:.02em;text-transform:uppercase;color:#0B0B0F}
+.tsLine{display:block;height:6px;border-radius:6px;box-shadow:inset 0 0 0 1px #0B0B0F;overflow:hidden}
+.tsLine i{display:block;height:100%;background:#0B0B0F;transform-origin:0 50%;transform:scaleX(0)}
+
+/* ---------- Rezeptseite: Riesentitel, Kapsel, Chrom-Rahmen ---------- */
+html.skin-tiefsee:not(#_x#_y) .recipePageCard{background:transparent !important;box-shadow:none !important;overflow:visible !important}
+html.skin-tiefsee:not(#_x#_y) .recipePageHero{display:flex !important;flex-direction:column;align-items:center;height:auto !important;max-height:none !important;aspect-ratio:auto !important;overflow:visible !important;background:transparent !important;border-radius:0 !important;margin-top:58px !important}
+html.skin-tiefsee:not(#_x#_y) .recipePageHero::before,html.skin-tiefsee:not(#_x#_y) .recipePageHero::after{display:none !important}
+html.skin-tiefsee:not(#_x#_y) .recipeHeroText{order:-1;position:static !important;padding:0 0 4px !important;background:none !important;text-align:center;width:100%}
+html.skin-tiefsee:not(#_x#_y) .recipeHeroText .recipeName{font-size:min(clamp(3rem, 16vw, 8rem), 16vw) !important;line-height:.84 !important;color:#0B0B0F !important;text-shadow:none !important}
+html.skin-tiefsee:not(#_x#_y) .recipeHeroText .recipeSubtitle{display:block !important;-webkit-line-clamp:unset !important;margin:16px auto 22px;max-width:40rem;padding:12px 20px;border-radius:20px;background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.95);
+  font:400 clamp(1.1rem, 4.6vw, 1.5rem)/1.04 "Skin Zwei", sans-serif !important;text-transform:uppercase;color:#0B0B0F !important;text-shadow:none !important}
+html.skin-tiefsee:not(#_x#_y) .recipePageHero img.recipeHeroImg{position:static !important;width:100% !important;height:auto !important;aspect-ratio:4/3;object-fit:cover;transform:none !important;border-radius:18px !important;
+  border:9px solid transparent;background:linear-gradient(135deg, #FDFDFF 0%, #B9B8C8 18%, #F4F4FA 34%, #9C9BAE 52%, #ECEBF4 70%, #A9A8BB 86%, #F7F7FC 100%) border-box;box-shadow:0 18px 40px rgba(60,50,140,.18)}
+@media (min-width:900px){html.skin-tiefsee:not(#_x#_y) .recipePageHero img.recipeHeroImg{max-width:760px;aspect-ratio:16/10}}
+html.skin-tiefsee:not(#_x#_y) .recipePageBody{background:transparent !important;box-shadow:none !important;margin-top:0 !important;padding-top:24px !important}
+html.skin-tiefsee:not(#_x#_y) :is(.recipeFacts,.recipeAuthor){justify-content:center;text-align:center}
+html.skin-tiefsee:not(#_x#_y) .recipeActions{justify-content:center}
+html.skin-tiefsee:not(#_x#_y) .recipeInnerCard{background:rgba(255,255,255,.55) !important;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.95) !important;border-radius:24px !important}
+html.skin-tiefsee:not(#_x#_y) .recipeSegWrap.isStuck{background:rgba(238,237,246,.94) !important}
+
+html.skin-tiefsee:not(#_x#_y) .bxRv{opacity:0;transform:translateY(26px) scale(.98)}
+html.skin-tiefsee:not(#_x#_y) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .7s ease,transform .9s var(--easeSheet)}
 html.skin-tiefsee:not(#_x#_y) .bbFooter{background:#0B0B0F;color:#FFFFFF}
 html.skin-tiefsee:not(#_x#_y) .bbFootText b{font-family:var(--fontDisplay);font-weight:400;text-transform:uppercase;font-size:clamp(3rem, 16vw, 5rem);line-height:.9}
-html.skin-tiefsee:not(#_x#_y) .bbFootText span{color:#D7D5E2;font-family:"Retro Mono", monospace;text-transform:uppercase}
+html.skin-tiefsee:not(#_x#_y) .bbFootText span{color:#D7D5E2;font-family:"Retro Mono", ui-monospace, monospace;text-transform:uppercase}
 html.skin-tiefsee:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#0B0B0F}
 
 /* Vorspann: Scherben fliegen zur Kugel zusammen, dahinter der Name in riesiger Schrift */
@@ -64,4 +147,5 @@ html.skin-tiefsee:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#0B0B0F}
 
 @media (prefers-reduced-motion: reduce){
 html.skin-tiefsee:not(#_x#_y) .bxRv{opacity:1;transform:none}
+.tsHold{transition:none}
 }
