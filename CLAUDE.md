@@ -255,6 +255,8 @@ gespeicherte Favoriten, Kühltruhe, Wochenplan und Notizen im Browser um. PDF in
   `tools/flows.js` (alle Rezepte: Titel/Untertitel/Zutaten/Schritte, keine „[…|…]“/„Öl*“-Reste; Abläufe: Kochmodus,
   Zur Liste, Planen, Favorit, Kategorie-Kachel, Suche, Einstellungen) ausführen. Neue Abläufe dort mit aufnehmen.
   Lokal: Seite bauen, `python3 -m http.server 8411 --directory _site`, `node tools/smoke.js`, `node tools/flows.js`.
+- Beide Workflows laufen auf `ubuntu-24.04` (Nov. 2026: `ubuntu-latest` = 26.04 bietet Ruby 3.3.6 aus `.ruby-version` nicht mehr;
+  `.ruby-version` nicht ändern, ohne den Cloudflare-Build mitzudenken).
 - `pdfs.yml`: nach Änderungen an Rezepten auf `main` fehlende PDFs erzeugen (`tools/build-pdfs.js --missing`) und committen.
 
 ## Offline (`sw.js`)
