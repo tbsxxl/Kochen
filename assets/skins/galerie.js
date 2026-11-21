@@ -84,8 +84,48 @@
     figure(g, lx + W * .16, ly + 3, fs * .8, [70, 96, 140], .1);
   }
 
+  // 3D-Saal auf der Startseite (galerie-3d.js): Wischen/Scrollen geht die Wand entlang, Antippen öffnet das Rezept
+  async function hall(api){
+    const quick = document.querySelector(".homeQuick"), sc = api.scene();
+    if(!api.home() || !quick || !sc || !api.gpu()) return;
+    const rec = api.recipes(); if(rec.length < 3) return;
+    const stage = api.bit("gaStage", "galerie");
+    stage.setAttribute("role", "img"); stage.setAttribute("aria-label", "Bildersaal mit Rezepten");
+    quick.after(stage); api.add(()=> stage.remove());
+    dispatchEvent(new Event("kochbuch:sceneresize"));
+    const cv = document.createElement("canvas"); cv.className = "fxCanvas gaGL"; cv.setAttribute("aria-hidden", "true");
+    sc.appendChild(cv); api.add(()=> cv.remove());
+    try{ await document.fonts.load('italic 500 40px "Skin Garamond"'); }catch{}
+    const mod = await import(`/assets/skins/galerie-3d.js?v=${api.ver}`);
+    if(!cv.isConnected) return;
+    const three = mod.create(cv, rec); api.add(()=> three.dispose());
+    const fit = ()=>{
+      const r = cv.getBoundingClientRect(), s = sc.getBoundingClientRect(), st = stage.getBoundingClientRect();
+      if(!r.width) return;
+      const top = st.top - s.top;
+      three.resize(r.width, r.height, devicePixelRatio || 1, top + st.height / 2, st.height);
+      const m = `linear-gradient(to bottom, transparent ${Math.max(0, top - 2)}px, #000 ${top + 2}px, #000 ${top + st.height - 2}px, transparent ${top + st.height + 2}px)`;
+      cv.style.webkitMaskImage = m; cv.style.maskImage = m;
+      lp?.redraw();
+    };
+    const ro = new ResizeObserver(fit); ro.observe(cv); ro.observe(stage); api.add(()=> ro.disconnect());
+    const lp = api.loop(cv, (t, dt)=> three.render(t, dt, api.reduce()));
+    fit();
+    let lastX = null, downX = 0, moved = 0, lastY = scrollY;
+    api.on(stage, "pointerdown", (e)=>{ lastX = downX = e.clientX; moved = 0; });
+    api.on(stage, "pointermove", (e)=>{ if(lastX === null) return; const dx = e.clientX - lastX; moved += Math.abs(dx); three.drag -= dx * .004; lastX = e.clientX; if(api.reduce()) lp.redraw(); });
+    api.on(window, "pointerup", ()=>{ lastX = null; });
+    api.on(stage, "click", (e)=>{
+      if(moved > 8) return;
+      const r = cv.getBoundingClientRect(), url = three.pick(e.clientX - r.left, e.clientY - r.top, r.width, r.height);
+      if(url) location.href = url;
+    });
+    api.on(window, "scroll", ()=>{ three.drag += (scrollY - lastY) * .0012; lastY = scrollY; if(api.reduce()) lp.redraw(); }, { passive: true });
+  }
+
   window.KOCHBUCH_FX.galerie = {
     start(api){
+      hall(api).catch((e)=> console.warn("Galerie 3D:", e));
       const sc = api.scene();
       if(sc){
         const mk = (cls)=>{ const d = document.createElement("div"); d.className = `glPaint ${cls}`; sc.appendChild(d); api.add(()=> d.remove()); return d; };

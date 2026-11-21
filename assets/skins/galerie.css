@@ -63,6 +63,10 @@ html.skin-galerie:not(#_x#_y) .bbFootText a{background:#FBF9F5;color:#2D3D52;bor
 @keyframes glFrame{from{opacity:0;transform:scale(.9)}}
 @keyframes glDawn{from{opacity:0}}
 
+/* Nov. 2026: 3D-Bildersaal auf der Startseite (galerie.js, galerie-3d.js) */
+.skinScene-galerie .gaGL{position:absolute;inset:0;width:100%;height:100%;z-index:3}
+.gaStage{position:relative;height:clamp(300px, 70vw + 40px, 540px);margin:14px calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));touch-action:pan-y;cursor:grab}
+
 @media (prefers-reduced-motion: reduce){
 html.skin-galerie:not(#_x#_y) .recipePageHero img.bbKen{animation:none}
 }

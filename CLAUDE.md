@@ -151,6 +151,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Glasklar** (Vorbild: Portfolio mit Glasobjekt vor großer Schrift): Schwarz `#0D0D0E`, riesiger weißer Titel (Archivo, „Skin Glas“),
     Eisblau `#9FD8FF` als Akzent. Auf allen Feld-Seiten (`glasklar-3d.js`): Titel als undurchsichtige Fläche (sonst sieht die
     Transmission sie nicht), davor ein Eisbrocken aus `MeshPhysicalMaterial` (transmission, dispersion) – bricht die Schrift, folgt dem Finger.
+    **Galerie** (Vorbild: Kunst-Ausgabe mit gerahmten Gemälden): gemaltes Winterbild im Kopf bleibt; auf der Startseite darunter ein
+    3D-Bildersaal (`galerie-3d.js`, Bühne `.gaStage`): schräg gesehene Wand mit 12 Rezeptfotos in Goldrahmen, Bilderleuchten, Museumsschild
+    („Nº n · Zeit“), endlos; Wischen/Scrollen geht die Wand entlang, Antippen öffnet das Rezept. Damit sind alle sechs Effekt-Skins neu gebaut.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
