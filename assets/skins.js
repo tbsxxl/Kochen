@@ -856,9 +856,9 @@
     // Tiefsee: Scherben fliegen zur Kugel zusammen, dahinter der Name in riesiger Schrift
     tiefsee: { ms: 2200, html: ()=> `<div class="ivName">Tobis<br>Kochbuch</div><div class="ivBall">${Array.from({ length: 28 }, (_, i)=> `<i style="--a:${i * 360 / 28}deg;--r:${70 + (i % 4) * 12}px;--s:${(i * 47) % 90 - 45}deg;--d:${(i % 7) * .05}s"></i>`).join("")}</div>`,
       snd: (a)=>{ for(let i = 0; i < 10; i++) tone(a, { f: 2000 + i * 180, t: .1 + i * .07, d: .2, v: .025 }); } },
-    // Formlabor: rote Kugel fällt, federt, der Bildschirm tippt den Namen
-    formlabor: { ms: 2300, html: ()=> `<div class="ivBall"></div><div class="ivScreen"><span class="ivType">TOBIS KOCHBUCH</span></div>`,
-      snd: (a)=>{ tone(a, { f: 180, f2: 90, t: .42, d: .18, v: .3 }); for(let i = 0; i < 14; i++) noise(a, { t: .9 + i * .06, d: .02, f: 3500, q: 3, v: .1 }); } },
+    // Formlabor: die orange Schleife zeichnet sich, dann der Name
+    formlabor: { ms: 2200, html: ()=> `<svg viewBox="0 0 420 220" aria-hidden="true"><path d="M30 150C60 40 150 30 170 110S120 200 90 160 140 40 230 60 340 200 260 180 300 40 390 70"/></svg><div class="ivName"><i>Tobis</i> Kochbuch</div>`,
+      snd: (a)=>{ tone(a, { f: 220, f2: 440, d: 1.2, type: "triangle", v: .05 }); tone(a, { f: 660, t: 1.15, d: .5, v: .04 }); } },
     // Galerie: Rahmen zieht auf, das Bild dämmert herein
     galerie: { ms: 2300, html: ()=> `<div class="ivFrame"><div class="ivPaint"></div></div><div class="ivName"><i>Tobis</i> Kochbuch</div>`,
       snd: (a)=>{ [392, 494, 587].forEach((f, i)=> tone(a, { f, t: .2 + i * .18, d: 1.4, v: .03 })); } },
@@ -969,7 +969,7 @@
   const FOOT_LEAVES = { bildband: ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"], standard: ["#7EC48A", "#A9D8A0", "#4F8F62", "#E4EFE2", "#CFE3B4"],
     wortwelt: ["#EDB9B1", "#F2BE93", "#B8D6A8", "#B5C6EC", "#F3CF85", "#F4EEE8"], blauraum: ["#FFFFFF", "#BFD0FF", "#FFD8E4", "#8FA8FF", "#E8EEFF"],
     glasklar: ["#FFFFFF", "#CFE3F0", "#9DC3DB", "#E8F2F8"], tiefsee: ["#FFFFFF", "#D9CCFF", "#B9B4D6", "#8F89B5", "#E6E1FF"],
-    formlabor: ["#D7301B", "#F05A3A", "#A3200F", "#EEEAE3"], galerie: ["#E9E2D3", "#C9B48A", "#9FB0C2", "#FFFFFF", "#7C8E86"] };
+    formlabor: ["#F2541B", "#F3EDE4", "#C9B8FF", "#FF8A4C", "#E9DCC8"], galerie: ["#E9E2D3", "#C9B48A", "#9FB0C2", "#FFFFFF", "#7C8E86"] };
   // „Gekocht“ feiern: ein kurzer Wirbel derselben Blätter über den ganzen Bildschirm (recipe.js ruft KOCHBUCH_LEAVES() in markCooked())
   window.KOCHBUCH_LEAVES = function(){
     const COL = FOOT_LEAVES[skin()];

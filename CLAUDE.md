@@ -145,6 +145,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Tiefsee** (Vorbild: Labor-Seite mit Glaskugel): blasser Lavendel mit Punktraster, riesiger Titel in Bebas („Skin Zwei“), Beschriftungen
     in „Retro Mono“ versal. Auf allen Feld-Seiten (`tiefsee-3d.js`): Titel als Fläche im Raum (Textur aus `api.glyphs()`, echter Titel
     `.fxDrawn`), davor eine Kugel aus 150 Spiegelscherben (InstancedMesh, schillernd) mit Chrom-Qualle; Scrollen/Gedrückthalten sprengt sie.
+    **Formlabor** (Vorbild: Studio-Seite mit oranger Schleife): Schokobraun `#2A1912`, Creme, Orange `#F2541B`, dünne Grotesk + kursives
+    Fraunces-Wort. Startseite: 3D-Bühne (`formlabor-3d.js`, glänzende orange Schleife, schwebender Topf/Kochbuch/Löffel/Tomate/Teller,
+    Ziehen dreht) und nummerierte Kategorienliste „(01) Schnell …“ (`.flList`, antippbar). Der frühere Retro-Computer ist entfallen.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
