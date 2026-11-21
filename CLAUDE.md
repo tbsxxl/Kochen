@@ -138,6 +138,10 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     unter den Schnellknöpfen, Leinwand in der Szene, oberhalb der Bühne per Maske ausgeblendet. Three.js r170 in `assets/vendor/three/`
     (nur für diesen Skin geladen). Nur mit echter Grafikkarte (Software-Renderer → gezeichnete 2D-Rose), zum Testen
     `localStorage['kochbuch.ui.cineForce'] = '1'`. Listen-Seiten behalten die 2D-Rose.
+    **Bilderbuch** (Schlüssel `wortwelt`, Vorbild: ein illustriertes Online-Buch): dunkler, diagonal gestrichener Grund, Pastellrosa-Akzent,
+    Handschrift („Skin Feder“) für Datum/Seitentitel, Fraunces sonst. Startseite: 3D-Kochbuch (`wortwelt-3d.js`) – jede Doppelseite ein
+    Rezept (links eingeklebtes Foto, rechts Name/Untertitel/Zeit, gemalt auf 2D-Leinwänden als Textur), Umblättern mit gewölbter Seite
+    (Wischen, Pfeile), Antippen öffnet das Rezept. Gemeinsame Helfer: `api.gpu()`, `api.recipes()` (`#homeRecipes` mit t/s/z/u/i).
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**

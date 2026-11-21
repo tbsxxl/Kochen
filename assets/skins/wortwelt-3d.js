@@ -1,0 +1,188 @@
+// Bilderbuch (Skin-Schlüssel „wortwelt“) – 3D-Kochbuch auf der Startseite (Nov. 2026, nach dem Vorbild eines illustrierten Online-Buchs):
+// jede Doppelseite ein Rezept (links eingeklebtes Foto, rechts handgeschriebener Name, Untertitel, Zeit), Seiten blättern in 3D um
+// (Wischen, Pfeile, Tastatur), Antippen der Doppelseite öffnet das Rezept. Seiteninhalte werden auf 2D-Leinwänden gemalt (CanvasTexture).
+import * as THREE from "../vendor/three/three.module.min.js";
+
+const PASTELS = ["#EDB9B1", "#F2BE93", "#B8D6A8", "#B5C6EC", "#F3CF85", "#E8A9A9", "#AEB6E2", "#9FD4CD", "#F0C2D8", "#CFE0A0"];
+const INK = "#3A2B28";
+const PW = 1, PH = 1.3, TW = 800, TH = Math.round(800 * PH / PW);
+
+function rr(g, x, y, w, h, r){ g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+
+// Papier: Pastellgrund mit weichen hellen Tupfen, Rundung nur an der Außenkante
+function paper(g, col, side, seed){
+  g.clearRect(0, 0, TW, TH);
+  const R = 70;
+  g.save();
+  g.beginPath();
+  if(side === "r"){ g.moveTo(0, 0); g.lineTo(TW - R, 0); g.arcTo(TW, 0, TW, R, R); g.lineTo(TW, TH - R); g.arcTo(TW, TH, TW - R, TH, R); g.lineTo(0, TH); }
+  else { g.moveTo(TW, 0); g.lineTo(R, 0); g.arcTo(0, 0, 0, R, R); g.lineTo(0, TH - R); g.arcTo(0, TH, R, TH, R); g.lineTo(TW, TH); }
+  g.closePath(); g.clip();
+  g.fillStyle = col; g.fillRect(0, 0, TW, TH);
+  let s = seed;
+  const rnd = ()=>{ s = (s * 9301 + 49297) % 233280; return s / 233280; };
+  for(let i = 0; i < 26; i++){
+    const x = rnd() * TW, y = rnd() * TH, r = 40 + rnd() * 60, gr = g.createRadialGradient(x, y, 0, x, y, r);
+    gr.addColorStop(0, "rgba(255,255,255,.28)"); gr.addColorStop(1, "rgba(255,255,255,0)");
+    g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2);
+  }
+  // Schatten am Falz
+  const fz = side === "r" ? g.createLinearGradient(0, 0, 90, 0) : g.createLinearGradient(TW, 0, TW - 90, 0);
+  fz.addColorStop(0, "rgba(60,30,25,.22)"); fz.addColorStop(1, "rgba(60,30,25,0)");
+  g.fillStyle = fz; g.fillRect(0, 0, TW, TH);
+  g.restore();
+}
+
+function wrap(g, text, x, y, maxW, lh, maxLines){
+  const words = String(text || "").replace(/-(?=\S)/g, "-\u0000").split(/[\s\u0000]+/).map((w)=> w); let line = "", n = 0;
+  for(const w of words){
+    const t = line ? line + (line.endsWith("-") ? "" : " ") + w : w;
+    if(g.measureText(t).width > maxW && line){ g.fillText(line, x, y + n * lh); n++; line = w; if(n >= maxLines - 1){ line = words.slice(words.indexOf(w)).join(" "); break; } }
+    else line = t;
+  }
+  if(line){ while(g.measureText(line).width > maxW && line.length > 3) line = line.slice(0, -2).trim() + "…"; g.fillText(line, x, y + n * lh); n++; }
+  return n;
+}
+
+// linke Seite: eingeklebtes Foto mit weißem Rand und Klebestreifen
+function photoPage(r, k, img){
+  const c = document.createElement("canvas"); c.width = TW; c.height = TH; const g = c.getContext("2d");
+  paper(g, PASTELS[k % PASTELS.length], "l", k * 31 + 7);
+  if(img){
+    g.save(); g.translate(TW / 2, TH * .46); g.rotate((k % 2 ? -1 : 1) * .045);
+    const w = TW * .74, h = w * 1.05;
+    g.shadowColor = "rgba(40,20,15,.28)"; g.shadowBlur = 24; g.shadowOffsetY = 10;
+    g.fillStyle = "#FFFDF8"; rr(g, -w / 2, -h / 2, w, h, 14); g.fill(); g.shadowColor = "transparent";
+    const iw = w - 44, ih = h - 44, ia = img.width / img.height, ca = iw / ih;
+    let sx = 0, sy = 0, sw = img.width, sh = img.height;
+    if(ia > ca){ sw = img.height * ca; sx = (img.width - sw) / 2; } else { sh = img.width / ca; sy = (img.height - sh) / 2; }
+    g.save(); rr(g, -iw / 2, -ih / 2, iw, ih, 8); g.clip(); g.drawImage(img, sx, sy, sw, sh, -iw / 2, -ih / 2, iw, ih); g.restore();
+    g.fillStyle = "rgba(255,250,235,.72)"; g.rotate(-.12); g.fillRect(-70, -h / 2 - 22, 140, 40);
+    g.restore();
+  }
+  g.fillStyle = "rgba(58,43,40,.55)"; g.font = '500 30px "Skin Feder", "Caveat", cursive'; g.textAlign = "center";
+  g.fillText(String(k + 1), TW / 2, TH - 60);
+  return c;
+}
+
+// rechte Seite: handgeschriebener Name, Kringel, Untertitel, Zeit/Portionen, „Zum Rezept“
+function textPage(r, k){
+  const c = document.createElement("canvas"); c.width = TW; c.height = TH; const g = c.getContext("2d");
+  paper(g, PASTELS[k % PASTELS.length], "r", k * 17 + 3);
+  g.fillStyle = INK; g.textAlign = "left";
+  g.font = '500 84px "Skin Feder", "Caveat", cursive';
+  const n = wrap(g, r.t, 90, 250, TW - 160, 82, 3);
+  let y = 250 + n * 82 - 40;
+  g.strokeStyle = INK; g.lineWidth = 4; g.lineCap = "round"; g.beginPath(); g.moveTo(92, y + 10);
+  for(let x = 92; x < 420; x += 24) g.quadraticCurveTo(x + 12, y + (x % 48 ? -6 : 12), x + 24, y + 10); g.stroke();
+  y += 90;
+  g.font = '400 46px "Fraunces", Georgia, serif'; g.fillStyle = "rgba(58,43,40,.9)";
+  const m = wrap(g, r.s || "", 92, y, TW - 170, 58, 4); y += m * 58 + 34;
+  g.font = '500 40px "Fraunces", Georgia, serif'; g.fillStyle = INK;
+  if(r.z) { g.fillText(r.z, 92, y); y += 52; }
+  g.font = '500 56px "Skin Feder", "Caveat", cursive'; g.fillText("Zum Rezept", 92, TH - 140);
+  g.beginPath(); g.moveTo(92, TH - 122); g.lineTo(330, TH - 126); g.stroke();
+  // kleine Schmetterlinge/Blätter wie Kritzeleien
+  g.fillStyle = "rgba(255,255,255,.75)";
+  [[TW - 140, 150, .3], [TW - 210, 230, -.4], [TW - 120, TH - 260, .2]].forEach(([x, yy, a])=>{
+    g.save(); g.translate(x, yy); g.rotate(a); g.beginPath(); g.ellipse(-10, 0, 14, 9, -.5, 0, 7); g.ellipse(10, 0, 14, 9, .5, 0, 7); g.fill(); g.restore();
+  });
+  return c;
+}
+
+function leafGeo(){ const g = new THREE.PlaneGeometry(PW, PH, 28, 1); g.translate(PW / 2, 0, 0); return g; }
+// Seite um den Falz biegen: Winkel wächst zur Außenkante (Papier wellt sich beim Umblättern)
+function curl(geo, base, theta){
+  const p = geo.attributes.position, b = base.attributes.position, lift = Math.sin(theta) * .55;
+  for(let i = 0; i < p.count; i++){
+    const x = b.getX(i), f = x / PW, a = theta - lift * f * (1 - f * .4);
+    p.setXYZ(i, Math.cos(a) * x, b.getY(i), Math.sin(a) * x);
+  }
+  p.needsUpdate = true; geo.computeVertexNormals();
+}
+
+export function create(canvas, recipes, onIndex){
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setClearColor(0, 0); renderer.outputColorSpace = THREE.SRGBColorSpace;
+  const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(30, 1, .1, 50);
+  scene.add(new THREE.AmbientLight(0xffffff, 2.2));
+  const key = new THREE.DirectionalLight(0xfff2e6, 1.4); key.position.set(-2, 3, 4); scene.add(key);
+  const book = new THREE.Group(); scene.add(book);
+
+  const imgs = new Map(), tex = new Map();
+  const texFor = (kind, k)=>{
+    const id = kind + k; if(tex.has(id)) return tex.get(id);
+    const r = recipes[k]; if(!r) return null;
+    const t = new THREE.CanvasTexture(kind === "p" ? photoPage(r, k, imgs.get(k)) : textPage(r, k));
+    t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; tex.set(id, t); return t;
+  };
+  const load = (k)=>{
+    if(k < 0 || k >= recipes.length || imgs.has(k)) return;
+    imgs.set(k, null);
+    const im = new Image(); im.decoding = "async";
+    im.onload = ()=>{ imgs.set(k, im); const old = tex.get("p" + k); if(old){ old.image = photoPage(recipes[k], k, im); old.needsUpdate = true; api.dirty = true; } };
+    im.src = recipes[k].i;
+  };
+  const mat = (t, side)=> new THREE.MeshStandardMaterial({ map: t, transparent: true, alphaTest: .02, side, roughness: .95, metalness: 0 });
+
+  // Buchdeckel (dunkler Karton) und die zwei liegenden Seiten
+  const coverG = new THREE.PlaneGeometry(PW * 2 + .08, PH + .08);
+  const cover = new THREE.Mesh(coverG, new THREE.MeshStandardMaterial({ color: 0x5a3b35, roughness: .8 }));
+  cover.position.z = -.012; book.add(cover);
+  const lg = new THREE.PlaneGeometry(PW, PH); lg.translate(-PW / 2, 0, 0);
+  const left = new THREE.Mesh(lg, mat(null, THREE.FrontSide)); left.position.z = -.002;
+  const right = new THREE.Mesh(leafGeo(), mat(null, THREE.FrontSide)); right.position.z = -.002;
+  book.add(left, right);
+  // umblätternde Seite: Vorderseite rechts (Text), Rückseite links (Foto)
+  const base = leafGeo(), flipGeo = leafGeo();
+  const flipF = new THREE.Mesh(flipGeo, mat(null, THREE.FrontSide)), flipB = new THREE.Mesh(flipGeo, mat(null, THREE.BackSide));
+  const flip = new THREE.Group(); flip.add(flipF, flipB); flip.visible = false; book.add(flip);
+
+  let idx = 0, anim = null;
+  const set = (m, t)=>{ m.material.map = t; m.material.needsUpdate = true; };
+  const show = ()=>{
+    [idx - 1, idx, idx + 1, idx + 2].forEach(load);
+    set(left, texFor("p", idx)); set(right, texFor("t", idx));
+    onIndex?.(idx);
+    api.dirty = true;
+  };
+  // Rückseiten-Textur gespiegelt (u → 1-u), damit sie nach dem Umblättern links richtig steht
+  const mirrored = (t)=>{ if(!t) return null; const m = t.clone(); m.wrapS = THREE.RepeatWrapping; m.repeat.x = -1; m.offset.x = 1; m.needsUpdate = true; return m; };
+
+  const api = {
+    dirty: true, tiltX: 0, tiltY: 0,
+    get index(){ return idx; }, count: recipes.length,
+    go(dir){
+      if(anim) return;
+      const to = idx + dir; if(to < 0 || to >= recipes.length) return;
+      [to - 1, to, to + 1].forEach(load);
+      if(dir > 0){ set(flipF, texFor("t", idx)); set(flipB, mirrored(texFor("p", to))); set(right, texFor("t", to)); anim = { from: 0, to: Math.PI, t: 0, done: ()=>{ idx = to; show(); } }; }
+      else { set(flipF, texFor("t", to)); set(flipB, mirrored(texFor("p", idx))); set(left, texFor("p", to)); anim = { from: Math.PI, to: 0, t: 0, done: ()=>{ idx = to; show(); } }; }
+      curl(flipGeo, base, anim.from); flip.visible = true; api.dirty = true;
+    },
+    resize(w, h, dpr, cy, stageH){
+      renderer.setPixelRatio(Math.min(dpr, 2)); renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      const tan = Math.tan(THREE.MathUtils.degToRad(15));
+      const byW = (PW * 2 + .22) / 2 / (tan * camera.aspect), byH = (PH + .55) / 2 / tan * (h / Math.max(1, stageH));
+      camera.position.set(0, -.15, Math.max(byW, byH)); camera.lookAt(0, 0, 0); camera.updateProjectionMatrix();
+      const vis = 2 * tan * camera.position.z; book.position.y = (h / 2 - cy) / h * vis;
+      api.dirty = true;
+    },
+    render(t, dt, still){
+      if(anim){
+        anim.t = Math.min(1, anim.t + (dt || 16) / (still ? 1 : 700));
+        const e = anim.t < .5 ? 4 * anim.t ** 3 : 1 - (-2 * anim.t + 2) ** 3 / 2;
+        curl(flipGeo, base, anim.from + (anim.to - anim.from) * e);
+        if(anim.t >= 1){ flip.visible = false; const d = anim.done; anim = null; d(); }
+      }
+      book.rotation.x += ((still ? -.18 : -.18 + api.tiltX) - book.rotation.x) * .08;
+      book.rotation.y += ((still ? 0 : api.tiltY) - book.rotation.y) * .08;
+      if(!still) book.position.z = Math.sin(t * .0008) * .02;
+      renderer.render(scene, camera); api.dirty = !!anim;
+    },
+    dispose(){ tex.forEach((t)=> t.dispose()); renderer.dispose(); },
+  };
+  show();
+  return api;
+}
