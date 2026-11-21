@@ -5,16 +5,16 @@
 
 @font-face{font-family:"Skin Glas";font-weight:100 900;font-display:swap;src:url("../fonts/archivo.woff2") format("woff2")}
 html.skin-glasklar:not(#_x#_y),html.skin-glasklar:not(#_x#_y) body{
-  --field:#E8EDF1;--onField:#0D0F12;--onField2:#3B4148;--fieldFill:rgba(255,255,255,.72);
-  --bg:#F4F7F9;--surface:#FFFFFF;--surface2:#EEF2F5;--fill:#E6ECF0;--line:rgba(13,15,18,.12);--lineStrong:rgba(13,15,18,.45);
-  --text:#0D0F12;--sub:#3B4148;--sub2:#3B4148;--muted:#4A525A;
-  --brand:#0D0F12;--onBrand:#FFFFFF;--leaf:#0D0F12;--onLeaf:#FFFFFF;--brandSoft:#E6ECF0;--leafSoft:#E6ECF0;
-  --sel:#0D0F12;--onSel:#FFFFFF;--accent:#1F5F8B;--accentSoft:#E2EDF5;--onAccent:#FFFFFF;--herb:#0D0F12;--coffee:#0D0F12;
-  --glass:rgba(244,247,249,.9);--glassLine:rgba(255,255,255,.95);
+  --field:#0D0D0E;--onField:#F2F4F6;--onField2:#B9C0C7;--fieldFill:rgba(255,255,255,.08);
+  --bg:#0D0D0E;--surface:#18191B;--surface2:#202225;--fill:rgba(255,255,255,.07);--line:rgba(255,255,255,.12);--lineStrong:rgba(255,255,255,.4);
+  --text:#F2F4F6;--sub:#B9C0C7;--sub2:#B9C0C7;--muted:#A3AAB2;
+  --brand:#F2F4F6;--onBrand:#0D0D0E;--leaf:#F2F4F6;--onLeaf:#0D0D0E;--brandSoft:rgba(255,255,255,.1);--leafSoft:rgba(255,255,255,.1);
+  --sel:#F2F4F6;--onSel:#0D0D0E;--accent:#9FD8FF;--accentSoft:rgba(159,216,255,.14);--onAccent:#0D0D0E;--herb:#F2F4F6;--coffee:#18191B;
+  --glass:rgba(16,17,19,.9);--glassLine:rgba(255,255,255,.12);--glassShadow:none;
   --fontDisplay:"Skin Glas", -apple-system, "Inter", sans-serif;
-  color-scheme:light}
-html.skin-glasklar:not(#_x#_y) body.grouped{--bg:#F4F7F9;--surface:#FFFFFF}
-html.skin-glasklar:not(#_x#_y) .cookOverlay{--cBg:#F4F7F9;--cCard:#FFFFFF;--cFill:#E6ECF0;--cLine:rgba(13,15,18,.12);--cText:#0D0F12;--cSub:#3B4148;--cLeaf:#0D0F12;--cOnLeaf:#FFFFFF}
+  color-scheme:dark}
+html.skin-glasklar:not(#_x#_y) body.grouped{--bg:#0D0D0E;--surface:#18191B}
+html.skin-glasklar:not(#_x#_y) .cookOverlay{--cBg:#0D0D0E;--cCard:#18191B;--cFill:rgba(255,255,255,.07);--cLine:rgba(255,255,255,.12);--cText:#F2F4F6;--cSub:#B9C0C7;--cLeaf:#F2F4F6;--cOnLeaf:#0D0D0E}
 html.skin-glasklar:not(#_x#_y) ::selection{background:#CFE3F0;color:#0D0F12}
 
 html.skin-glasklar:not(#_x#_y) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark){font-family:var(--fontDisplay);font-weight:800;letter-spacing:-.05em}
@@ -63,6 +63,27 @@ html.skin-glasklar:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#0D0F12}
   animation:glSweep 1.8s cubic-bezier(.6,0,.2,1) .15s both}
 @keyframes glWord{from{opacity:0;transform:scale(1.06)}}
 @keyframes glSweep{from{transform:translateX(-80vw) rotate(-25deg)}to{transform:translateX(0) rotate(8deg)}}
+
+/* Nov. 2026 neu: dunkle Fassung nach dem Vorbild, echtes 3D-Glas (glasklar.js, glasklar-3d.js) */
+html.skin-glasklar:has(body.fieldPage){background:#0D0D0E}
+.skinScene-glasklar .glGL{position:absolute;inset:0;width:100%;height:100%}
+html.skin-glasklar:not(#_x#_y) ::selection{background:#9FD8FF;color:#0D0D0E}
+html.skin-glasklar:not(#_x#_y) :is(.recipeCard:not(.homeFeatured),.catTile,.homeFeatured,.continueCard,.homeEmpty,.homeTimer){box-shadow:inset 0 0 0 1px rgba(255,255,255,.08) !important}
+html.skin-glasklar:not(#_x#_y) .recipeCard:not(.homeFeatured){background:#18191B !important}
+html.skin-glasklar:not(#_x#_y) .searchRow,html.skin-glasklar:not(#_x#_y) body.layout-home .searchRowCompact,html.skin-glasklar:not(#_x#_y) .homeQuickBtn{background:rgba(255,255,255,.08) !important;color:#F2F4F6 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12) !important}
+html.skin-glasklar:not(#_x#_y) .homeQuickBtn .uiIcon{color:#9FD8FF}
+html.skin-glasklar:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary){background:#F2F4F6 !important;color:#0D0D0E !important}
+html.skin-glasklar:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22) !important;color:#F2F4F6}
+html.skin-glasklar:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"]){background:#F2F4F6 !important;color:#0D0D0E !important}
+html.skin-glasklar:not(#_x#_y) .bottomRail{background:rgba(16,17,19,.88) !important;border:1px solid rgba(255,255,255,.1);box-shadow:0 12px 36px rgba(0,0,0,.5) !important}
+html.skin-glasklar:not(#_x#_y) .tabItem{color:#B9C0C7 !important}
+html.skin-glasklar:not(#_x#_y) .tabItem.active{background:#F2F4F6 !important;color:#0D0D0E !important}
+html.skin-glasklar:not(#_x#_y) .homeAllLink{color:#9FD8FF}
+html.skin-glasklar:not(#_x#_y) .continueCard{background:#F2F4F6 !important;color:#0D0D0E !important}
+html.skin-glasklar:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:#0D0D0E !important}
+html.skin-glasklar:not(#_x#_y) .continuePlay{background:#0D0D0E !important;color:#F2F4F6 !important}
+html.skin-glasklar:not(#_x#_y) .bbFooter{background:#000000;color:#F2F4F6}
+.skIntro-glasklar{background:#0D0D0E;color:#F2F4F6}
 
 @media (prefers-reduced-motion: reduce){
 html.skin-glasklar:not(#_x#_y) .bxRv{opacity:1;transform:none}

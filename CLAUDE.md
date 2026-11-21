@@ -148,6 +148,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Formlabor** (Vorbild: Studio-Seite mit oranger Schleife): Schokobraun `#2A1912`, Creme, Orange `#F2541B`, dünne Grotesk + kursives
     Fraunces-Wort. Startseite: 3D-Bühne (`formlabor-3d.js`, glänzende orange Schleife, schwebender Topf/Kochbuch/Löffel/Tomate/Teller,
     Ziehen dreht) und nummerierte Kategorienliste „(01) Schnell …“ (`.flList`, antippbar). Der frühere Retro-Computer ist entfallen.
+    **Glasklar** (Vorbild: Portfolio mit Glasobjekt vor großer Schrift): Schwarz `#0D0D0E`, riesiger weißer Titel (Archivo, „Skin Glas“),
+    Eisblau `#9FD8FF` als Akzent. Auf allen Feld-Seiten (`glasklar-3d.js`): Titel als undurchsichtige Fläche (sonst sieht die
+    Transmission sie nicht), davor ein Eisbrocken aus `MeshPhysicalMaterial` (transmission, dispersion) – bricht die Schrift, folgt dem Finger.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**

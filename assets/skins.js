@@ -968,7 +968,7 @@
   // Blattfarben je Skin; im Standard-Look (Wunsch des Besitzers, Nov. 2026) Grüntöne auf dem Basilikum-Feld
   const FOOT_LEAVES = { bildband: ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"], standard: ["#7EC48A", "#A9D8A0", "#4F8F62", "#E4EFE2", "#CFE3B4"],
     wortwelt: ["#EDB9B1", "#F2BE93", "#B8D6A8", "#B5C6EC", "#F3CF85", "#F4EEE8"], blauraum: ["#FFFFFF", "#BFD0FF", "#FFD8E4", "#8FA8FF", "#E8EEFF"],
-    glasklar: ["#FFFFFF", "#CFE3F0", "#9DC3DB", "#E8F2F8"], tiefsee: ["#FFFFFF", "#D9CCFF", "#B9B4D6", "#8F89B5", "#E6E1FF"],
+    glasklar: ["#FFFFFF", "#CFE3F0", "#9FD8FF", "#E8F2F8"], tiefsee: ["#FFFFFF", "#D9CCFF", "#B9B4D6", "#8F89B5", "#E6E1FF"],
     formlabor: ["#F2541B", "#F3EDE4", "#C9B8FF", "#FF8A4C", "#E9DCC8"], galerie: ["#E9E2D3", "#C9B48A", "#9FB0C2", "#FFFFFF", "#7C8E86"] };
   // „Gekocht“ feiern: ein kurzer Wirbel derselben Blätter über den ganzen Bildschirm (recipe.js ruft KOCHBUCH_LEAVES() in markCooked())
   window.KOCHBUCH_LEAVES = function(){
