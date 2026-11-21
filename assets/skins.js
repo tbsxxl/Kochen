@@ -844,9 +844,9 @@
     // Bildband: Titelseite der Ausgabe – Linie zieht sich, Titel und Monat blenden ein
     bildband: { ms: 2200, html: ()=> `<div><div class="ivRule"></div><div class="ivTitle">Tobis<i>Kochbuch</i></div><div class="ivIssue">Ausgabe ${new Date().toLocaleDateString("de-DE", { month: "long", year: "numeric" })}</div></div>`,
       snd: (a)=>{ tone(a, { f: 523, t: .2, d: 1.2, v: .04 }); tone(a, { f: 784, t: .55, d: 1.2, v: .03 }); } },
-    // Wortwelt: drei Farbflächen schieben sich mit je einem Küchenwort herein, dann der Name
-    wortwelt: { ms: 2100, html: ()=> `<div class="ivPanels">${["Schnippeln", "Brutzeln", "Genießen"].map((w, i)=> `<div class="ivPanel" style="--i:${i}"><b>${w}</b></div>`).join("")}</div><div class="ivName">Tobis<br>Kochbuch</div>`,
-      snd: (a)=>{ [523, 659, 784].forEach((f, i)=> tone(a, { f, t: .05 + i * .32, d: .25, type: "triangle", v: .07 })); } },
+    // Bilderbuch (Schlüssel wortwelt): der Buchdeckel klappt auf
+    wortwelt: { ms: 2200, html: ()=> `<div class="ivBook"><div class="ivPage"></div><div class="ivCover"><b>Tobis<br>Kochbuch</b></div></div>`,
+      snd: (a)=>{ noise(a, { t: .5, d: .6, type: "lowpass", f: 1200, v: .25 }); tone(a, { f: 523, t: 1.3, d: .8, v: .04 }); } },
     // Blauraum: Dinge aus der Küche kreisen herein und ordnen sich zur Rose
     blauraum: { ms: 2200, html: ()=> `<div class="ivRose">${Array.from({ length: 18 }, (_, i)=> `<i style="--a:${i * 20}deg;--r:${28 + (i % 3) * 22}px;--d:${(i % 6) * .05}s"></i>`).join("")}</div><div class="ivName">Tobis Kochbuch</div>`,
       snd: (a)=>{ tone(a, { f: 392, f2: 784, d: 1.4, v: .04 }); tone(a, { f: 1175, t: 1.3, d: .6, v: .04 }); } },
@@ -967,7 +967,7 @@
   function bbKen(){ const img = $(".recipePageHero img"); if(img && !reduce() && !img.dataset.bbKen){ img.dataset.bbKen = "1"; img.classList.add("bbKen"); img.addEventListener("animationend", ()=> img.classList.remove("bbKen"), { once: true }); } }
   // Blattfarben je Skin; im Standard-Look (Wunsch des Besitzers, Nov. 2026) Grüntöne auf dem Basilikum-Feld
   const FOOT_LEAVES = { bildband: ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"], standard: ["#7EC48A", "#A9D8A0", "#4F8F62", "#E4EFE2", "#CFE3B4"],
-    wortwelt: ["#FFD23F", "#FF9EC2", "#7FE0B5", "#8EC5FF", "#FFA45C", "#C3B1FF"], blauraum: ["#FFFFFF", "#BFD0FF", "#FFD8E4", "#8FA8FF", "#E8EEFF"],
+    wortwelt: ["#EDB9B1", "#F2BE93", "#B8D6A8", "#B5C6EC", "#F3CF85", "#F4EEE8"], blauraum: ["#FFFFFF", "#BFD0FF", "#FFD8E4", "#8FA8FF", "#E8EEFF"],
     glasklar: ["#FFFFFF", "#CFE3F0", "#9DC3DB", "#E8F2F8"], tiefsee: ["#5FF2D8", "#9C7CFF", "#3FA8FF", "#C8FFF4"],
     formlabor: ["#D7301B", "#F05A3A", "#A3200F", "#EEEAE3"], galerie: ["#E9E2D3", "#C9B48A", "#9FB0C2", "#FFFFFF", "#7C8E86"] };
   // „Gekocht“ feiern: ein kurzer Wirbel derselben Blätter über den ganzen Bildschirm (recipe.js ruft KOCHBUCH_LEAVES() in markCooked())
@@ -1102,6 +1102,18 @@
   const FX_API = {
     skin, reduce, bit, activeTimer, fmtShort, hhmm, ptr, $, ver: VER,
     home: ()=> document.body.classList.contains("layout-home"),
+    // echte Grafikkarte? (Software-Renderer zeichnen 3D fehlerhaft und langsam; zum Testen kochbuch.ui.cineForce = "1")
+    gpu(){
+      try{
+        if(localStorage.getItem("kochbuch.ui.cineForce") === "1") return true;
+        const c = document.createElement("canvas"), gl = c.getContext("webgl2") || c.getContext("webgl");
+        if(!gl) return false;
+        const ext = gl.getExtension("WEBGL_debug_renderer_info"), r = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : "";
+        gl.getExtension("WEBGL_lose_context")?.loseContext();
+        return !/swiftshader|llvmpipe|software/i.test(r);
+      }catch{ return false; }
+    },
+    recipes(){ try{ return JSON.parse(document.getElementById("homeRecipes")?.textContent || "[]").filter(Boolean); }catch{ return []; } },
     scene: ()=> document.querySelector(".skinScene"),
     title: ()=> document.querySelector(".homeGreetingTitle, .pageTitleBlock .h1"),
     on(t, ev, fn, o){ t.addEventListener(ev, fn, o); fxClean.push(()=> t.removeEventListener(ev, fn, o)); },
