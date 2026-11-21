@@ -1,6 +1,8 @@
-// Skin „Galerie“ (Nov. 2026): ein selbst gemaltes Winterbild (Pinselstriche auf drei Leinwänden: Himmel, ferne Hügel, verschneiter See
-// mit kleinen Figuren) im Kopf. Beim Scrollen bewegen sich die Ebenen unterschiedlich schnell (Tiefe); Karten und Abschnitte blenden
-// beim Hereinkommen ein und oben am Rand wieder aus. Gemalt wird nur beim Aufbau und bei Größenänderung.
+// Skin „Galerie“ (Dez. 2026, zweiter Neubau nach genauem Vergleich mit dem Vorbild – einer Kunst-Ausgabe eines Shop-Anbieters):
+// Startseite beginnt mit einem selbst gemalten Winterbild über die ganze Fläche, mittig ein dünner weißer Rahmen mit Titel und
+// Inhaltsverzeichnis (Kategorien mit römischen Kapitelzahlen); beim Scrollen schrumpft der Rahmen, ein Funkelring öffnet sich.
+// Darunter Kapitel: dunkles Band mit riesigem weißem Wort und Satz mit verziertem Anfangsbuchstaben, eingerissener Papierrand in die
+// graubeige Seite. Am Rechner steht das Inhaltsverzeichnis links fest. Die Malerei: Pinselstriche auf drei Leinwänden (Himmel, Hügel, See).
 (()=>{
   "use strict";
   const TAU = Math.PI * 2;
@@ -84,94 +86,105 @@
     figure(g, lx + W * .16, ly + 3, fs * .8, [70, 96, 140], .1);
   }
 
-  // 3D-Saal auf der Startseite (galerie-3d.js): Wischen/Scrollen geht die Wand entlang, Antippen öffnet das Rezept
-  async function hall(api){
-    const quick = document.querySelector(".homeQuick"), sc = api.scene();
-    if(!api.home() || !quick || !sc || !api.gpu()) return;
-    const rec = api.recipes(); if(rec.length < 3) return;
-    const stage = api.bit("gaStage", "galerie");
-    stage.setAttribute("role", "img"); stage.setAttribute("aria-label", "Bildersaal mit Rezepten");
-    quick.after(stage); api.add(()=> stage.remove());
-    dispatchEvent(new Event("kochbuch:sceneresize"));
-    const cv = document.createElement("canvas"); cv.className = "fxCanvas gaGL"; cv.setAttribute("aria-hidden", "true");
-    sc.appendChild(cv); api.add(()=> cv.remove());
-    try{ await document.fonts.load('italic 500 40px "Skin Garamond"'); }catch{}
-    const mod = await import(`/assets/skins/galerie-3d.js?v=${api.ver}`);
-    if(!cv.isConnected) return;
-    const three = mod.create(cv, rec); api.add(()=> three.dispose());
-    const fit = ()=>{
-      const r = cv.getBoundingClientRect(), s = sc.getBoundingClientRect(), st = stage.getBoundingClientRect();
-      if(!r.width) return;
-      const top = st.top - s.top;
-      three.resize(r.width, r.height, devicePixelRatio || 1, top + st.height / 2, st.height);
-      const m = `linear-gradient(to bottom, transparent ${Math.max(0, top - 2)}px, #000 ${top + 2}px, #000 ${top + st.height - 2}px, transparent ${top + st.height + 2}px)`;
-      cv.style.webkitMaskImage = m; cv.style.maskImage = m;
-      lp?.redraw();
+  const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+  const TOC = ["Schnell", "Pasta", "Curry", "Suppen & Eintöpfe", "Schmorgerichte", "Burger & Sandwiches", "Süßes & Backen", "Wochenendprojekt"];
+  const STAR = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9L4.9 19.1" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>`;
+  const esc = (t)=> String(t || "").replace(/[&<>"]/g, (c)=> ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const cats = ()=>{ let c = []; try{ c = JSON.parse(document.getElementById("homeCats")?.textContent || "null") || []; }catch{} return c.length ? TOC.filter((x)=> c.includes(x)) : TOC; };
+  const tocHtml = ()=> `<ol class="gaToc">${cats().map((c, i)=> `<li><a href="/rezeptindex/?kategorie=${encodeURIComponent(c)}"><span>${esc(c)}</span><i>${ROMAN[i]}</i></a></li>`).join("")}</ol>`;
+  const logo = `<span class="gaLogo">Tobis<br>Koch<b>${STAR}</b>buch</span>`;
+
+  // gemaltes Bild in einen Behälter (drei Ebenen, Parallaxe beim Scrollen)
+  function painting(api, host){
+    const mk = (cls)=>{ const d = document.createElement("div"); d.className = `glPaint ${cls}`; host.appendChild(d); return d; };
+    const L = [mk("glSky"), mk("glFar"), mk("glNear")];
+    const cv = L.map((d)=> api.canvas(d, ""));
+    const paint = ()=>{
+      const [a, b, n] = cv;
+      if(!a.w) return;
+      paintSky(a.g, a.w, a.h);
+      b.g.clearRect(0, 0, b.w, b.h);
+      ridge(b.g, b.w, b.h * .7, b.h * .16, [94, 112, 136], [214, 222, 232], 3);
+      ridge(b.g, b.w, b.h * .76, b.h * .12, [70, 88, 108], [200, 210, 222], 7);
+      n.g.clearRect(0, 0, n.w, n.h);
+      paintNear(n.g, n.w, n.h);
     };
-    const ro = new ResizeObserver(fit); ro.observe(cv); ro.observe(stage); api.add(()=> ro.disconnect());
-    const lp = api.loop(cv, (t, dt)=> three.render(t, dt, api.reduce()));
-    fit();
-    let lastX = null, downX = 0, moved = 0, lastY = scrollY;
-    api.on(stage, "pointerdown", (e)=>{ lastX = downX = e.clientX; moved = 0; });
-    api.on(stage, "pointermove", (e)=>{ if(lastX === null) return; const dx = e.clientX - lastX; moved += Math.abs(dx); three.drag -= dx * .004; lastX = e.clientX; if(api.reduce()) lp.redraw(); });
-    api.on(window, "pointerup", ()=>{ lastX = null; });
-    api.on(stage, "click", (e)=>{
-      if(moved > 8) return;
-      const r = cv.getBoundingClientRect(), url = three.pick(e.clientX - r.left, e.clientY - r.top, r.width, r.height);
-      if(url) location.href = url;
+    cv.forEach((o)=>{ o.onresize = ()=>{ clearTimeout(paint.t); paint.t = setTimeout(paint, 30); }; });
+    paint();
+    const SPEED = [.45, .22, 0];
+    const par = ()=>{ if(api.reduce()) return; const y = Math.min(scrollY, 900); L.forEach((d, i)=>{ d.style.transform = `translate3d(0,${(y * SPEED[i]).toFixed(1)}px,0)`; }); };
+    api.on(window, "scroll", ()=> requestAnimationFrame(par), { passive: true });
+    par();
+  }
+
+  // Funkelring in der Bildmitte, öffnet sich beim Scrollen
+  function sparkle(api, host){
+    const c = api.canvas(host, "gaSpark"), P = [];
+    for(let i = 0; i < 260; i++) P.push({ a: Math.random() * TAU, r: .8 + Math.random() * .4, s: .6 + Math.random() * 1.8, tw: Math.random() * TAU });
+    api.loop(c.cv, (t)=>{
+      const g = c.g, w = c.w, h = c.h; if(!w) return;
+      g.clearRect(0, 0, w, h);
+      const p = Math.min(1, scrollY / (innerHeight * .7)); if(p < .02) return;
+      const R = Math.min(w, h) * (.06 + p * .2), cx = w / 2, cy = h * .46;
+      g.globalCompositeOperation = "lighter";
+      P.forEach((q)=>{
+        const a = q.a + t * .0003, rr = R * q.r, x = cx + Math.cos(a) * rr, y = cy + Math.sin(a) * rr * .95, al = (.4 + .6 * Math.abs(Math.sin(t * .004 + q.tw))) * p;
+        g.fillStyle = `rgba(255,${230 + Math.round(q.s * 10)},200,${al.toFixed(3)})`; g.fillRect(x, y, q.s, q.s);
+      });
+      g.globalCompositeOperation = "source-over";
     });
-    api.on(window, "scroll", ()=>{ three.drag += (scrollY - lastY) * .0012; lastY = scrollY; if(api.reduce()) lp.redraw(); }, { passive: true });
+  }
+
+  function hero(api){
+    const host = document.querySelector(".homeGreeting");
+    if(!host) return null;
+    const el = api.bit("gaHero", "galerie");
+    const n = api.recipes().length;
+    el.innerHTML = `<div class="gaFrame">${logo}<p class="gaLead">Die Winter-Ausgabe. ${n} Rezepte für kalte Tage und lange Abende.</p>${tocHtml()}</div>`;
+    host.prepend(el); api.add(()=> el.remove());
+    painting(api, el); sparkle(api, el);
+    const fr = el.querySelector(".gaFrame");
+    if(!api.reduce()) api.on(window, "scroll", ()=>{ const p = Math.min(1, scrollY / (innerHeight * .8)); fr.style.transform = `translate(-50%,-50%) scale(${(1 - p * .25).toFixed(3)})`; fr.style.opacity = (1 - p * 1.1).toFixed(3); }, { passive: true });
+    document.body.classList.add("gaHome"); api.add(()=> document.body.classList.remove("gaHome"));
+    return el;
+  }
+
+  // Kapitel „Heute“: dunkles Band, riesiges Wort, Satz mit verziertem Anfangsbuchstaben, eingerissener Rand
+  function chapter(api, after){
+    const a = document.getElementById("todayLink"), title = a?.querySelector(".homeFeaturedTitle")?.textContent.trim();
+    if(!a || !title) return;
+    const meta = [...a.querySelectorAll(".recipeMeta .metaItem")].map((m)=> m.textContent.trim()).filter(Boolean).join(", ");
+    const el = api.bit("gaChapter", "galerie", "section");
+    el.innerHTML = `<p class="gaBig" aria-hidden="true">Heute</p><p class="gaSay"><span class="gaCap">H</span>eute auf dem Tisch: <a href="${esc(a.getAttribute("href"))}">${esc(title)}</a>${meta ? ` – ${esc(meta)}` : ""}. Dazu ein Glas Wein und Zeit für ein zweites Stück.</p>`;
+    after.after(el); api.add(()=> el.remove());
+  }
+
+  // links fest: Inhaltsverzeichnis (nur breite Bildschirme, per CSS)
+  function side(api){
+    const el = api.bit("gaSide", "galerie", "aside");
+    el.setAttribute("aria-label", "Inhalt");
+    el.innerHTML = `<a class="gaSideHome" href="/">${logo}</a>${tocHtml()}<p class="gaFine">© Tobis Küche<br>Ausgabe Winter ’${String(new Date().getFullYear()).slice(2)}</p>`;
+    document.body.appendChild(el); api.add(()=> el.remove());
+  }
+
+  // Rezeptseite: Untertitel als großer Satz mit verziertem Anfangsbuchstaben
+  function statement(api){
+    const sub = window.RECIPE_DATA?.subtitle, body = document.querySelector(".recipePageBody");
+    if(!sub || !body) return;
+    const el = api.bit("gaStatement", "galerie", "p");
+    el.innerHTML = `<span class="gaCap" aria-hidden="true">${esc(sub[0])}</span><span aria-hidden="true">${esc(sub.slice(1))}</span><span class="sr">${esc(sub)}</span>`;
+    el.querySelector(".sr").style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+    body.prepend(el); api.add(()=> el.remove());
   }
 
   window.KOCHBUCH_FX.galerie = {
     start(api){
-      hall(api).catch((e)=> console.warn("Galerie 3D:", e));
-      const sc = api.scene();
-      if(sc){
-        const mk = (cls)=>{ const d = document.createElement("div"); d.className = `glPaint ${cls}`; sc.appendChild(d); api.add(()=> d.remove()); return d; };
-        const L = [mk("glSky"), mk("glFar"), mk("glNear")];
-        const cv = L.map((d)=> api.canvas(d, ""));
-        const paint = ()=>{
-          const [a, b, n] = cv;
-          if(!a.w) return;
-          paintSky(a.g, a.w, a.h);
-          b.g.clearRect(0, 0, b.w, b.h);
-          ridge(b.g, b.w, b.h * .7, b.h * .16, [94, 112, 136], [214, 222, 232], 3);
-          ridge(b.g, b.w, b.h * .76, b.h * .12, [70, 88, 108], [200, 210, 222], 7);
-          n.g.clearRect(0, 0, n.w, n.h);
-          paintNear(n.g, n.w, n.h);
-        };
-        cv.forEach((o)=>{ o.onresize = ()=>{ clearTimeout(paint.t); paint.t = setTimeout(paint, 30); }; });
-        paint();
-        const SPEED = [.45, .22, 0];
-        const par = ()=>{ if(api.reduce()) return; const y = Math.min(scrollY, 700); L.forEach((d, i)=>{ d.style.transform = `translate3d(0,${(y * SPEED[i]).toFixed(1)}px,0)`; }); };
-        api.on(window, "scroll", ()=> requestAnimationFrame(par), { passive: true });
-        par();
-      }
-
-      // Ein- und Ausblenden der Inhalte, abhängig von der Lage im Bild
-      if(api.reduce() || !("IntersectionObserver" in window)) return;
-      const vis = new Set(), seen = new WeakSet();
-      const io = new IntersectionObserver((es)=> es.forEach((e)=>{ e.isIntersecting ? vis.add(e.target) : vis.delete(e.target); }), { rootMargin: "80px 0px" });
-      const watch = ()=> document.querySelectorAll(".appMain :is(.linkCard, .catTile, .homeSectionHead, .planDay, .catGroupTitle, .homeEmpty)").forEach((el)=>{ if(!seen.has(el)){ seen.add(el); io.observe(el); } });
-      const fade = ()=>{
-        const vh = innerHeight, top = 70;
-        vis.forEach((el)=>{
-          const r = el.getBoundingClientRect();
-          const fin = Math.max(0, Math.min(1, (vh - r.top) / (vh * .22)));
-          const fout = Math.max(0, Math.min(1, (r.bottom - top) / (Math.min(r.height, vh * .3))));
-          const o = Math.min(fin, fout);
-          el.style.opacity = (.04 + .96 * o).toFixed(3);
-          el.style.transform = fin < 1 ? `translate3d(0,${((1 - fin) * 28).toFixed(1)}px,0)` : "";
-        });
-      };
-      let raf = 0;
-      api.on(window, "scroll", ()=>{ if(!raf) raf = requestAnimationFrame(()=>{ raf = 0; fade(); }); }, { passive: true });
-      api.add(()=>{ io.disconnect(); cancelAnimationFrame(raf); document.querySelectorAll(".appMain :is(.linkCard, .catTile, .homeSectionHead, .planDay, .catGroupTitle, .homeEmpty)").forEach((el)=>{ el.style.opacity = ""; el.style.transform = ""; }); });
-      this._watch = ()=>{ watch(); requestAnimationFrame(fade); };
-      this._watch();
+      side(api);
+      statement(api);
+      if(!api.home()) return;
+      const h = hero(api);
+      if(h) chapter(api, document.querySelector(".homeGreeting"));
+      dispatchEvent(new Event("kochbuch:sceneresize"));
     },
-    refresh(){ this._watch?.(); },
-    stop(){ this._watch = null; },
   };
 })();

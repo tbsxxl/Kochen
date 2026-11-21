@@ -162,9 +162,13 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Glasklar** (Vorbild: Portfolio mit Glasobjekt vor großer Schrift): Schwarz `#0D0D0E`, riesiger weißer Titel (Archivo, „Skin Glas“),
     Eisblau `#9FD8FF` als Akzent. Auf allen Feld-Seiten (`glasklar-3d.js`): Titel als undurchsichtige Fläche (sonst sieht die
     Transmission sie nicht), davor ein Eisbrocken aus `MeshPhysicalMaterial` (transmission, dispersion) – bricht die Schrift, folgt dem Finger.
-    **Galerie** (Vorbild: Kunst-Ausgabe mit gerahmten Gemälden): gemaltes Winterbild im Kopf bleibt; auf der Startseite darunter ein
-    3D-Bildersaal (`galerie-3d.js`, Bühne `.gaStage`): schräg gesehene Wand mit 12 Rezeptfotos in Goldrahmen, Bilderleuchten, Museumsschild
-    („Nº n · Zeit“), endlos; Wischen/Scrollen geht die Wand entlang, Antippen öffnet das Rezept. Damit sind alle sechs Effekt-Skins neu gebaut.
+    **Galerie** (Dez. 2026 zweiter Neubau wie Blauraum, Vorbild shopify.com/editions/winter2026, jetzt vollständig sichtbar): graubeige Seiten
+    `#DCDAD1`, Serifen-Titel mit verziertem Anfangsbuchstaben (`::first-letter` in „Skin Garamond“ kursiv), kleine fette Etiketten, schwarze Kapseln.
+    Start: selbst gemaltes Winterbild über die ganze Fläche (`.gaHero`, drei Leinwände mit Parallaxe), mittig dünner weißer Rahmen `.gaFrame` mit
+    „Tobis Koch✱buch“ (Stern als SVG), „Die Winter-Ausgabe“ und Inhaltsverzeichnis (Kategorien mit römischen Zahlen); beim Scrollen schrumpft der
+    Rahmen, ein Funkelring öffnet sich (`sparkle()`). Danach Kapitel `.gaChapter`: dunkles Sternenband, riesiges „Heute“, Satz mit Anfangsbuchstabe,
+    eingerissener Papierrand (`galerie-torn.svg`). Am Rechner ab 1180 px links festes Inhaltsverzeichnis `.gaSide`. Rezeptseite: Foto über die ganze
+    Breite mit riesigem weißem Titel und Papierriss, Untertitel als großer Satz mit Anfangsbuchstabe (`.gaStatement`). Der 3D-Bildersaal ist entfallen.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
