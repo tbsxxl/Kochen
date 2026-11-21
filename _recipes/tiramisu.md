@@ -34,3 +34,14 @@ prep:
 9. Restliche Creme darauf verteilen und glattstreichen.
 10. Mindestens 2 Stunden, besser über Nacht, im Kühlschrank kühlen.
 11. Vor dem Servieren mit ungesüßtem Kakaopulver bestäuben.
+
+## Tipps
+Tipp – Bittermandelaroma statt Amaretto bei 6 Portionen
+
+* 2 Tropfen Bittermandelaroma in die 200 ml abgekühlten Espresso geben.
+* 2 Tropfen zur Eigelb-Zucker-Mischung hinzufügen.
+* Bei Bedarf einen weiteren Tropfen in die Creme geben.
+
+Das Aroma lieber sparsam dosieren, damit das Tiramisu eine dezente Mandelnote bekommt und nicht zu stark nach Marzipan schmeckt.
+
+Insgesamt zunächst mit 4 Tropfen beginnen.
