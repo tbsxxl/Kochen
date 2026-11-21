@@ -128,7 +128,16 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     bei „Bewegung reduzieren“ einmal), `api.on()/add()` räumen beim Wechsel selbst auf; `api.zone(titel, szene)` = freier Platz neben der
     kürzesten Titelzeile (dort stehen Rose, Formen, Illustrationen), `api.glyphs()` = Buchstaben mit Lage zum Nachzeichnen. Glasklar/Tiefsee
     machen den echten Titel durchsichtig (`.fxDrawn`, bleibt fürs Vorlesen), erst nachdem die Leinwand ihn gezeichnet hat. Alle sechs nutzen die
-    leise Scroll-Bewegung (`LITE_FX`) und die Schlussseite mit eigenen Farben (`FOOT_LEAVES`). Keine 3D-Bibliothek, alles 2D-Leinwand.
+    leise Scroll-Bewegung (`LITE_FX`) und die Schlussseite mit eigenen Farben (`FOOT_LEAVES`).
+    **Nach Vergleich mit den echten Vorbild-Seiten (Besitzer: „nicht mal annähernd vergleichbar“) werden die Skins einzeln mit echtem 3D neu
+    gebaut.** Vorbild-Seiten jetzt in den Netzwerk-Freigaben; ansehen mit Playwright + `--use-gl=angle --use-angle=swiftshader
+    --enable-unsafe-swiftshader` (WebGL-Seiten rendern langsam, Screenshot-Timeout 60 s). Erster: **Blauraum** = Startseite mit 3D-Galerie
+    (`assets/skins/blauraum-3d.js`, ES-Modul): 30 Rezeptfotos (`#homeRecipes` in `home.html`, Auswahl wechselt täglich) auf gebogenen Karten
+    in drei gegenläufigen Ringen oder einer Spirale (Umschalter „Ringe | Spirale“), in der Mitte eine verchromte Kochmütze aus Würfeln
+    (InstancedMesh, RoomEnvironment-Spiegelung). Ziehen dreht, Antippen einer Karte öffnet das Rezept, Scrollen dreht mit. Bühne `.blStage`
+    unter den Schnellknöpfen, Leinwand in der Szene, oberhalb der Bühne per Maske ausgeblendet. Three.js r170 in `assets/vendor/three/`
+    (nur für diesen Skin geladen). Nur mit echter Grafikkarte (Software-Renderer → gezeichnete 2D-Rose), zum Testen
+    `localStorage['kochbuch.ui.cineForce'] = '1'`. Listen-Seiten behalten die 2D-Rose.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
