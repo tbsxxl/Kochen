@@ -139,10 +139,13 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     öffnet, am Rechner Etikett `.blTip` am Zeiger); ohne Grafikkarte CSS-Bilderring `.blRing`. Rezeptliste: Fotos hochkant auf gewölbter
     Fläche (Neigung je nach Lage, `listPage()`), Umschalter „Raster | Liste“ (`kochbuch.ui.blList`). Rezeptseite: Foto mittig, Name klein
     in Versalien, Untertitel groß. Die anderen fünf Effekt-Skins sollen nach dem OK des Besitzers genauso gründlich umgebaut werden.
-    **Bilderbuch** (Schlüssel `wortwelt`, Vorbild: ein illustriertes Online-Buch): dunkler, diagonal gestrichener Grund, Pastellrosa-Akzent,
-    Handschrift („Skin Feder“) für Datum/Seitentitel, Fraunces sonst. Startseite: 3D-Kochbuch (`wortwelt-3d.js`) – jede Doppelseite ein
-    Rezept (links eingeklebtes Foto, rechts Name/Untertitel/Zeit, gemalt auf 2D-Leinwänden als Textur), Umblättern mit gewölbter Seite
-    (Wischen, Pfeile), Antippen öffnet das Rezept. Gemeinsame Helfer: `api.gpu()`, `api.recipes()` (`#homeRecipes` mit t/s/z/u/i).
+    **Bilderbuch** (Schlüssel `wortwelt`; Dez. 2026 zweiter Neubau wie Blauraum, Vorbild howtotalktowhitekidsaboutracism.com mit „Open book“
+    durchgeblättert): dunkler, diagonal gestrichener Grund (`html::before`); die Startseite IST das Buch (`.wwHero`): erst geschlossen (Kreide-Deckel
+    „Tobis KOCH BUCH“, Kapsel „Buch öffnen“, Widmung mit Datum), dann je Rezept eine Doppelseite in kräftiger Farbe (`VIVID`: Rosa, Koralle, Grün,
+    Violett, Gelb, Blau; links eingeklebtes Foto, rechts riesiges handgemaltes Wort mit Kreide-Struktur, kleiner Rest darüber), darunter
+    Bildunterschrift `.wwCap` (Name, Untertitel, Zeit), handgezeichnete Pfeile, farbige Seitenpunkte `.wwDots` (12 Rezepte am Tag). Ohne Grafikkarte
+    flache Doppelseite `.wwFlat`. Karten überall als farbige Buchseiten (`--pc`, dunkle Schrift auf Rosa/Gelb `.wwInkDark`), Rezeptseite: Foto auf
+    farbiger Seite, Name handgemalt. Handschrift „Skin Feder“ für große Wörter, Fraunces für Text. Gemeinsame Helfer: `api.gpu()`, `api.recipes()` (`#homeRecipes` mit t/s/z/u/i).
     **Tiefsee** (Dez. 2026 zweiter Neubau wie Blauraum, Vorbild labs.noomoagency.com: Start nach „Start“-Klick, Werkseite): Lavendel-Verlauf mit
     Punktraster (`html::before`, steht still), riesige Versal-Titel in Bebas („Skin Zwei“), alles Kleine in „Retro Mono“ versal, Untertitel als weiße
     Milchglas-Kapsel (`.tsPill`, auch Rezept-Untertitel), Karten mit Chrom-Rahmen und Pfeil-Kreis, Rezeptliste versetzt (Handy links/rechts, ab
