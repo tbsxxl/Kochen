@@ -143,9 +143,12 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Handschrift („Skin Feder“) für Datum/Seitentitel, Fraunces sonst. Startseite: 3D-Kochbuch (`wortwelt-3d.js`) – jede Doppelseite ein
     Rezept (links eingeklebtes Foto, rechts Name/Untertitel/Zeit, gemalt auf 2D-Leinwänden als Textur), Umblättern mit gewölbter Seite
     (Wischen, Pfeile), Antippen öffnet das Rezept. Gemeinsame Helfer: `api.gpu()`, `api.recipes()` (`#homeRecipes` mit t/s/z/u/i).
-    **Tiefsee** (Vorbild: Labor-Seite mit Glaskugel): blasser Lavendel mit Punktraster, riesiger Titel in Bebas („Skin Zwei“), Beschriftungen
-    in „Retro Mono“ versal. Auf allen Feld-Seiten (`tiefsee-3d.js`): Titel als Fläche im Raum (Textur aus `api.glyphs()`, echter Titel
-    `.fxDrawn`), davor eine Kugel aus 150 Spiegelscherben (InstancedMesh, schillernd) mit Chrom-Qualle; Scrollen/Gedrückthalten sprengt sie.
+    **Tiefsee** (Dez. 2026 zweiter Neubau wie Blauraum, Vorbild labs.noomoagency.com: Start nach „Start“-Klick, Werkseite): Lavendel-Verlauf mit
+    Punktraster (`html::before`, steht still), riesige Versal-Titel in Bebas („Skin Zwei“), alles Kleine in „Retro Mono“ versal, Untertitel als weiße
+    Milchglas-Kapsel (`.tsPill`, auch Rezept-Untertitel), Karten mit Chrom-Rahmen und Pfeil-Kreis, Rezeptliste versetzt (Handy links/rechts, ab
+    Tablet zwei Spalten mit Versatz). Start: stehender Raum `.tsPin` (190svh, `.tsStage` sticky) mit Schriftzug „Tobis Kochbuch“ als 3D-Fläche,
+    Scherbenkugel und rosa durchscheinender Qualle (`tiefsee-3d.js`); Scrollen und Gedrückthalten sprengen die Kugel, Balken „Bereit für den Herd?“
+    füllt sich, weißer Kreis „Gedrückt halten“ mit Eckklammern. 3D nur noch auf der Startseite.
     **Formlabor** (Dez. 2026 zweiter Neubau wie Blauraum, Vorbild studioloop.com.br: Start, Work, Projektseite): Seiten in Creme `#F5F3EE` mit
     Dunkelbraun `#2A1912`, Lavendel `#C9C3FF` für Aktives, Orange `#F2541B` nur als Schmuck. Titel dünne Grotesk + letztes Wort kursiv in Fraunces
     (`mixTitles()`, `.flEm`), Beschriftungen in „[ … ]“ mit Linien (`.flKick`), tanzende orange Punkte am Seitentitel (`dots()`). Start: brauner
