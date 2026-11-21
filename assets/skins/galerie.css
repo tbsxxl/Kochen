@@ -1,0 +1,68 @@
+/* Skin „galerie“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Wunsch des Besitzers (Nov. 2026): Winterbild im Gemälde-Stil, Tiefe beim Scrollen, Ein- und Ausblenden (Vorbild: eine
+   Winter-Ausgabe eines Shop-Anbieters; die Bilder dort sind Kunstwerke – hier ein selbst gemaltes Landschaftsbild auf der Leinwand).
+   Verhalten (Leinwand, Scroll-Bewegung): assets/skins/galerie.js, geladen von fxRun() in assets/skins.js. Neue Regeln ans Ende. */
+
+html.skin-galerie:not(#_x#_y),html.skin-galerie:not(#_x#_y) body{
+  --field:#2D3D52;--onField:#FFFFFF;--onField2:rgba(255,255,255,.9);--fieldFill:rgba(20,28,40,.5);
+  --bg:#F3EFE8;--surface:#FBF9F5;--surface2:#EFEAE1;--fill:#E9E3D7;--line:rgba(31,35,40,.12);--lineStrong:rgba(31,35,40,.45);
+  --text:#1F2328;--sub:#4B4F55;--sub2:#4B4F55;--muted:#5B5F65;
+  --brand:#2D3D52;--onBrand:#FFFFFF;--leaf:#2D3D52;--onLeaf:#FFFFFF;--brandSoft:#E4E8EE;--leafSoft:#E4E8EE;
+  --sel:#2D3D52;--onSel:#FFFFFF;--accent:#7D5E2C;--accentSoft:#EFE6D6;--onAccent:#FFFFFF;--herb:#2D3D52;--coffee:#1F2328;
+  --glass:rgba(243,239,232,.94);--glassLine:rgba(31,35,40,.12);
+  --fontDisplay:"Fraunces", Georgia, "Times New Roman", serif;
+  color-scheme:light}
+html.skin-galerie:not(#_x#_y) body.grouped{--bg:#F3EFE8;--surface:#FBF9F5}
+html.skin-galerie:not(#_x#_y) .cookOverlay{--cBg:#F3EFE8;--cCard:#FBF9F5;--cFill:#E9E3D7;--cLine:rgba(31,35,40,.12);--cText:#1F2328;--cSub:#4B4F55;--cLeaf:#2D3D52;--cOnLeaf:#FFFFFF}
+html.skin-galerie:not(#_x#_y) ::selection{background:#E4D5B5;color:#1F2328}
+
+html.skin-galerie:not(#_x#_y) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark){font-family:var(--fontDisplay);font-weight:400;letter-spacing:-.01em}
+html.skin-galerie:not(#_x#_y) .pageTitleBlock .h1,html.skin-galerie:not(#_x#_y) body .homeGreetingTitle.homeGreetingTitle{font-family:"Skin Garamond", "Fraunces", Georgia, serif;font-style:italic;font-weight:500;
+  font-size:min(clamp(2.8rem, 13vw, 4.6rem), 13vw);line-height:.95;letter-spacing:-.01em;text-shadow:0 2px 18px rgba(10,16,26,.45)}
+html.skin-galerie:not(#_x#_y) .homeGreetingSub,html.skin-galerie:not(#_x#_y) body.layout-home .homeBrand{text-shadow:0 1px 10px rgba(10,16,26,.5)}
+html.skin-galerie:not(#_x#_y) .homeSectionTitle,html.skin-galerie:not(#_x#_y) .h2{font-size:1.7rem;font-style:italic}
+html.skin-galerie:not(#_x#_y) :is(.homeAllLink,.continueEyebrow,.heroOverlayCat,.catTileCount,.resultCount){font-variant:small-caps;letter-spacing:.08em;text-transform:lowercase}
+html.skin-galerie:not(#_x#_y) .homeAllLink{color:#7D5E2C}
+.skinScene-galerie .glPaint{position:absolute;left:0;right:0;top:0;height:100%;will-change:transform}
+.skinScene-galerie .glPaint canvas{position:absolute;inset:0;width:100%;height:100%}
+
+/* Rezepte als gerahmte Bilder mit Museumsschild */
+html.skin-galerie:not(#_x#_y) .recipeCard:not(.homeFeatured){background:transparent !important;box-shadow:none !important;overflow:visible !important}
+html.skin-galerie:not(#_x#_y) .recipeCard .rcImg{border-radius:0 !important;border:7px solid #FBF9F5;outline:1px solid #B08D57;box-shadow:0 1px 0 4px rgba(176,141,87,.18), 0 16px 32px rgba(31,35,40,.18)}
+html.skin-galerie:not(#_x#_y) .recipeCard:not(.homeFeatured) .rcBody{padding:10px 2px 0}
+html.skin-galerie:not(#_x#_y) .recipeCard .recipeTitle{font-size:1.1rem;line-height:1.15}
+html.skin-galerie:not(#_x#_y) .recipeCard .recipeMeta{font-variant:small-caps;letter-spacing:.05em}
+html.skin-galerie:not(#_x#_y) .homeFeatured,html.skin-galerie:not(#_x#_y) .catTile{border-radius:2px !important;border:7px solid #FBF9F5;outline:1px solid #B08D57;box-shadow:0 18px 40px rgba(31,35,40,.22) !important}
+html.skin-galerie:not(#_x#_y) .homeFeatured .rcImg{border:0;outline:0;box-shadow:none}
+html.skin-galerie:not(#_x#_y) .searchRow,html.skin-galerie:not(#_x#_y) .homeQuickBtn{border-radius:2px !important}
+html.skin-galerie:not(#_x#_y) body.layout-home .searchRowCompact,html.skin-galerie:not(#_x#_y) body.layout-home .homeQuickBtn{background:rgba(20,28,40,.55) !important;color:#FFFFFF !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28) !important}
+html.skin-galerie:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary){background:#2D3D52 !important;color:#FFFFFF !important;border-radius:2px !important}
+html.skin-galerie:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(31,35,40,.3) !important;border-radius:2px !important}
+html.skin-galerie:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"]){background:#2D3D52 !important;color:#FFFFFF !important}
+html.skin-galerie:not(#_x#_y) .bottomRail{background:rgba(243,239,232,.94) !important;border:1px solid rgba(176,141,87,.45);box-shadow:0 12px 34px rgba(31,35,40,.16) !important}
+html.skin-galerie:not(#_x#_y) .tabItem{color:#4B4F55 !important}
+html.skin-galerie:not(#_x#_y) .tabItem.active{background:#2D3D52 !important;color:#FFFFFF !important}
+html.skin-galerie:not(#_x#_y) .continueCard{background:#2D3D52 !important;color:#FFFFFF !important;border-radius:2px !important}
+html.skin-galerie:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:#FFFFFF !important}
+html.skin-galerie:not(#_x#_y) .continuePlay{background:#FBF9F5 !important;color:#2D3D52 !important}
+@keyframes glKen{from{transform:scale(1.08)}}
+html.skin-galerie:not(#_x#_y) .recipePageHero img.bbKen{animation:glKen 2.6s cubic-bezier(.2,.7,.2,1) both}
+
+html.skin-galerie:not(#_x#_y) .bbFooter{background:#2D3D52;color:#FFFFFF}
+html.skin-galerie:not(#_x#_y) .bbFootText b{font-family:"Skin Garamond", "Fraunces", serif;font-style:italic;font-weight:500}
+html.skin-galerie:not(#_x#_y) .bbFootText span{color:#E3E6EA;font-variant:small-caps;letter-spacing:.1em;text-transform:lowercase;font-size:1rem}
+html.skin-galerie:not(#_x#_y) .bbFootText a{background:#FBF9F5;color:#2D3D52;border-radius:2px}
+
+/* Vorspann: Rahmen zieht auf, das Bild dämmert herein */
+.skIntro-galerie{background:#1F2328;color:#FFFFFF}
+.skIntro-galerie .ivFrame{position:relative;width:min(70vw, 320px);aspect-ratio:4/5;padding:12px;background:#FBF9F5;outline:2px solid #B08D57;outline-offset:-6px;
+  box-shadow:0 30px 60px rgba(0,0,0,.5);animation:glFrame .7s cubic-bezier(.2,.8,.2,1) both}
+.skIntro-galerie .ivPaint{position:absolute;inset:12px;background:linear-gradient(#22314A, #4E6582 46%, #C9B591 64%, #5E7088 66%, #4A5B70 74%, #DDE3E6 76%, #C9D3DA);animation:glDawn 1.2s ease .5s both}
+.skIntro-galerie .ivName{position:absolute;left:0;right:0;bottom:12%;text-align:center;font:400 clamp(1.6rem, 7vw, 2.4rem)/1 "Fraunces", serif;animation:glDawn .9s ease 1.2s both}
+.skIntro-galerie .ivName i{font-family:"Skin Garamond", serif}
+@keyframes glFrame{from{opacity:0;transform:scale(.9)}}
+@keyframes glDawn{from{opacity:0}}
+
+@media (prefers-reduced-motion: reduce){
+html.skin-galerie:not(#_x#_y) .recipePageHero img.bbKen{animation:none}
+}

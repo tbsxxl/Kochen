@@ -92,7 +92,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   `(hover:hover) and (pointer:fine)`. Bewegung nur über `transform`/`opacity` mit den Kurven-Tokens; „Bewegung reduzieren“ lässt
   Bewegung weg. Rezeptkarten gibt es zweimal (`_includes/recipe-card.html`, `assets/cards.js`) – Änderungen in beiden.
   Blätter sind echte Dialoge (`bindDialogs()`), lassen sich wegziehen (`bindSheetDrag()`).
-- **Skins:** „Mehr“ → „Skin“ (`kochbuch.ui.skin`, pro Gerät). 14 Stück (dazu Boxengasse und Bildband, siehe unten): Standard, Retro (`html.retro`, bleibt in `styles.css`),
+- **Skins:** „Mehr“ → „Skin“ (`kochbuch.ui.skin`, pro Gerät). 20 Stück (dazu Boxengasse, Bildband und die sechs Effekt-Skins, siehe unten): Standard, Retro (`html.retro`, bleibt in `styles.css`),
   Terminal, Diner, Bauhaus (diese fünf „sollen gleich bleiben“) und sieben Serien-Welten mit eigenen Namen: Nordwall, Zauberschule,
   Jahr 3000, Zwei Städte, Die Insel, Akte, Brigade. **Keine Logos, Figuren, Namen, Zitate oder Original-Schriften der Serien;
   Fotos unverfälscht; Tab-Symbole überall gleich; jedes Detail soll beim Kochen nützen.**
@@ -118,6 +118,17 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Die Schlussseite gibt es auf Wunsch des Besitzers auch im Standard-Look (Abschnitt 23 in `styles.css`): Feld-Grün, grüne Blätter
     (`FOOT_LEAVES`), Systemschrift, keine Versalien; bei „Bewegung reduzieren“ stehen die Blätter still.
     Braucht `z-index:2`: am PC malt `.pageContent` (z-index 1) seinen Grund per `box-shadow:0 0 0 100vmax` und verdeckte das Feld sonst.
+  - **Effekt-Skins (Nov. 2026, Wunsch des Besitzers nach sechs Vorbild-Seiten; nur Aufbau/Bewegung, eigene Grafiken):** Wortwelt (Farbwelten
+    mit Küchenwörtern wechseln beim Scrollen, flache Illustrationen in drei Ebenen), Blauraum (Rose aus Küchen-Dingen auf Blau, schwebende
+    Fotos), Glasklar (Titel auf der Leinwand nachgezeichnet, ein Eisblock bricht ihn), Tiefsee (Titel aus Leuchtteilchen zerfällt beim
+    Scrollen/Antippen, Quallen), Formlabor (rote Formen aus schattierten Kugeln, Retro-Computer mit Uhrzeit/Timer unter den Schnellknöpfen,
+    antippbar bei laufendem Timer), Galerie (gemaltes Winterbild in drei Ebenen, Karten blenden ein und oben wieder aus).
+    Verhalten je Skin in `assets/skins/<skin>.js`, nur für den aktiven Skin nachgeladen (`fxRun()`/`fxStop()` in `skins.js`, `FX_JS`);
+    die Datei meldet sich mit `KOCHBUCH_FX.<skin> = { start(api), refresh?, stop? }`. `api.canvas()`, `api.loop()` (zeichnet nur sichtbar,
+    bei „Bewegung reduzieren“ einmal), `api.on()/add()` räumen beim Wechsel selbst auf; `api.zone(titel, szene)` = freier Platz neben der
+    kürzesten Titelzeile (dort stehen Rose, Formen, Illustrationen), `api.glyphs()` = Buchstaben mit Lage zum Nachzeichnen. Glasklar/Tiefsee
+    machen den echten Titel durchsichtig (`.fxDrawn`, bleibt fürs Vorlesen), erst nachdem die Leinwand ihn gezeichnet hat. Alle sechs nutzen die
+    leise Scroll-Bewegung (`LITE_FX`) und die Schlussseite mit eigenen Farben (`FOOT_LEAVES`). Keine 3D-Bibliothek, alles 2D-Leinwand.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
@@ -244,6 +255,8 @@ gespeicherte Favoriten, Kühltruhe, Wochenplan und Notizen im Browser um. PDF in
   `tools/flows.js` (alle Rezepte: Titel/Untertitel/Zutaten/Schritte, keine „[…|…]“/„Öl*“-Reste; Abläufe: Kochmodus,
   Zur Liste, Planen, Favorit, Kategorie-Kachel, Suche, Einstellungen) ausführen. Neue Abläufe dort mit aufnehmen.
   Lokal: Seite bauen, `python3 -m http.server 8411 --directory _site`, `node tools/smoke.js`, `node tools/flows.js`.
+- Beide Workflows laufen auf `ubuntu-24.04` (Nov. 2026: `ubuntu-latest` = 26.04 bietet Ruby 3.3.6 aus `.ruby-version` nicht mehr;
+  `.ruby-version` nicht ändern, ohne den Cloudflare-Build mitzudenken).
 - `pdfs.yml`: nach Änderungen an Rezepten auf `main` fehlende PDFs erzeugen (`tools/build-pdfs.js --missing`) und committen.
 
 ## Offline (`sw.js`)

@@ -2,6 +2,7 @@
 // Alle Motive sind selbst gezeichnet (keine Logos, Figuren oder Bilder aus Serien). Bewegung nur ohne „Bewegung reduzieren“.
 (function(){
   const R = document.documentElement;
+  const VER = (document.currentScript && document.currentScript.src.match(/[?&]v=([^&]+)/) || [])[1] || "1";
   const skin = ()=> R.dataset.skin || "standard";
   const reduce = ()=> matchMedia("(prefers-reduced-motion: reduce)").matches;
   const svg = (vb, body, extra = "")=> `<svg viewBox="${vb}" ${extra} aria-hidden="true" focusable="false">${body}</svg>`;
@@ -10,6 +11,8 @@
   // Aufbau: Schmuck oben rechts (neben dem Titel) und ein „Horizont“ am unteren Feldrand (.scHorizon, rechtsbündig,
   // auf breiten Bildschirmen höchstens 640 px breit), dazu Wetter-Ebenen (Schnee, Regen, Sterne) über die ganze Breite.
   const SCENES = {
+    // Effekt-Skins (Nov. 2026): leeres Szenen-Element, die Bilder zeichnet assets/skins/<skin>.js hinein
+    wortwelt: ()=> "", blauraum: ()=> "", glasklar: ()=> "", tiefsee: ()=> "", formlabor: ()=> "", galerie: ()=> "",
     // Nordwall: Schneefall, Kompassrose, die Eismauer am Horizont mit Burg und Fackeln
     // Welten mit eigenem Material (Abschnitt 48 · 16): Szene = Untergrund des Felds, kein Wetter, kein 3D
     // Nordwall: Landkarte auf dem Kartentisch (Küsten, Berge, Kompassrose)
@@ -841,6 +844,24 @@
     // Bildband: Titelseite der Ausgabe – Linie zieht sich, Titel und Monat blenden ein
     bildband: { ms: 2200, html: ()=> `<div><div class="ivRule"></div><div class="ivTitle">Tobis<i>Kochbuch</i></div><div class="ivIssue">Ausgabe ${new Date().toLocaleDateString("de-DE", { month: "long", year: "numeric" })}</div></div>`,
       snd: (a)=>{ tone(a, { f: 523, t: .2, d: 1.2, v: .04 }); tone(a, { f: 784, t: .55, d: 1.2, v: .03 }); } },
+    // Wortwelt: drei Farbflächen schieben sich mit je einem Küchenwort herein, dann der Name
+    wortwelt: { ms: 2100, html: ()=> `<div class="ivPanels">${["Schnippeln", "Brutzeln", "Genießen"].map((w, i)=> `<div class="ivPanel" style="--i:${i}"><b>${w}</b></div>`).join("")}</div><div class="ivName">Tobis<br>Kochbuch</div>`,
+      snd: (a)=>{ [523, 659, 784].forEach((f, i)=> tone(a, { f, t: .05 + i * .32, d: .25, type: "triangle", v: .07 })); } },
+    // Blauraum: Dinge aus der Küche kreisen herein und ordnen sich zur Rose
+    blauraum: { ms: 2200, html: ()=> `<div class="ivRose">${Array.from({ length: 18 }, (_, i)=> `<i style="--a:${i * 20}deg;--r:${28 + (i % 3) * 22}px;--d:${(i % 6) * .05}s"></i>`).join("")}</div><div class="ivName">Tobis Kochbuch</div>`,
+      snd: (a)=>{ tone(a, { f: 392, f2: 784, d: 1.4, v: .04 }); tone(a, { f: 1175, t: 1.3, d: .6, v: .04 }); } },
+    // Glasklar: ein Glasblock gleitet über das riesige Wort
+    glasklar: { ms: 2000, html: ()=> `<div class="ivWord">Kochbuch</div><div class="ivGlass"></div>`,
+      snd: (a)=>{ tone(a, { f: 2093, d: .9, v: .04 }); tone(a, { f: 3136, t: .12, d: .8, v: .025 }); } },
+    // Tiefsee: eine Qualle steigt aus dem Dunkel auf, Schwebeteilchen ziehen nach oben
+    tiefsee: { ms: 2400, html: ()=> `<div class="ivJelly"><i></i><i></i><i></i><i></i><i></i></div>${'<b class="ivMote"></b>'.repeat(16)}<div class="ivName">Tobis Kochbuch</div>`,
+      snd: (a)=>{ noise(a, { d: 2, type: "lowpass", f: 300, v: .25 }); tone(a, { f: 220, f2: 330, t: .3, d: 1.6, v: .04 }); } },
+    // Formlabor: rote Kugel fällt, federt, der Bildschirm tippt den Namen
+    formlabor: { ms: 2300, html: ()=> `<div class="ivBall"></div><div class="ivScreen"><span class="ivType">TOBIS KOCHBUCH</span></div>`,
+      snd: (a)=>{ tone(a, { f: 180, f2: 90, t: .42, d: .18, v: .3 }); for(let i = 0; i < 14; i++) noise(a, { t: .9 + i * .06, d: .02, f: 3500, q: 3, v: .1 }); } },
+    // Galerie: Rahmen zieht auf, das Bild dämmert herein
+    galerie: { ms: 2300, html: ()=> `<div class="ivFrame"><div class="ivPaint"></div></div><div class="ivName"><i>Tobis</i> Kochbuch</div>`,
+      snd: (a)=>{ [392, 494, 587].forEach((f, i)=> tone(a, { f, t: .2 + i * .18, d: 1.4, v: .03 })); } },
   };
   let introOn = false;
   function playIntro(force){
@@ -945,7 +966,10 @@
   // ---------- Bildband: Foto fährt beim Öffnen des Rezepts heran; Schlussseite mit schwebenden Kräuterblättern ----------
   function bbKen(){ const img = $(".recipePageHero img"); if(img && !reduce() && !img.dataset.bbKen){ img.dataset.bbKen = "1"; img.classList.add("bbKen"); img.addEventListener("animationend", ()=> img.classList.remove("bbKen"), { once: true }); } }
   // Blattfarben je Skin; im Standard-Look (Wunsch des Besitzers, Nov. 2026) Grüntöne auf dem Basilikum-Feld
-  const FOOT_LEAVES = { bildband: ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"], standard: ["#7EC48A", "#A9D8A0", "#4F8F62", "#E4EFE2", "#CFE3B4"] };
+  const FOOT_LEAVES = { bildband: ["#8FA05A", "#6F7F45", "#C9B48A", "#B8683C", "#E8DCC6"], standard: ["#7EC48A", "#A9D8A0", "#4F8F62", "#E4EFE2", "#CFE3B4"],
+    wortwelt: ["#FFD23F", "#FF9EC2", "#7FE0B5", "#8EC5FF", "#FFA45C", "#C3B1FF"], blauraum: ["#FFFFFF", "#BFD0FF", "#FFD8E4", "#8FA8FF", "#E8EEFF"],
+    glasklar: ["#FFFFFF", "#CFE3F0", "#9DC3DB", "#E8F2F8"], tiefsee: ["#5FF2D8", "#9C7CFF", "#3FA8FF", "#C8FFF4"],
+    formlabor: ["#D7301B", "#F05A3A", "#A3200F", "#EEEAE3"], galerie: ["#E9E2D3", "#C9B48A", "#9FB0C2", "#FFFFFF", "#7C8E86"] };
   // „Gekocht“ feiern: ein kurzer Wirbel derselben Blätter über den ganzen Bildschirm (recipe.js ruft KOCHBUCH_LEAVES() in markCooked())
   window.KOCHBUCH_LEAVES = function(){
     const COL = FOOT_LEAVES[skin()];
@@ -1009,13 +1033,15 @@
   }
   // Dieselbe Scroll-Bewegung nutzen Boxengasse und Bildband (Aussehen je Skin-Datei)
   // Der Standard-Look bekommt nur das Einblenden der Karten und das Heranfahren des Rezeptfotos (leise Fassung, Abschnitt 24 in styles.css)
-  const SCROLL_FX = { boxengasse: 1, bildband: 1, standard: 1 };
+  const SCROLL_FX = { boxengasse: 1, bildband: 1, standard: 1, wortwelt: 1, blauraum: 1, glasklar: 1, tiefsee: 1, formlabor: 1, galerie: 1 };
+  // nur Einblenden + Heranfahren, ohne Parallaxe/Fortschrittslinie (die Effekt-Skins bringen ihre eigene Bewegung mit)
+  const LITE_FX = { standard: 1, wortwelt: 1, blauraum: 1, glasklar: 1, tiefsee: 1, formlabor: 1, galerie: 1 };
   let bxOn = "";
   function boxengasse(){
     const sk = skin();
     if(bxOn && bxOn !== sk){ bxOn = ""; bxOff(); }
     if(!SCROLL_FX[sk]) return;
-    const lite = sk === "standard";
+    const lite = !!LITE_FX[sk];
     if(sk === "boxengasse"){ bxTitles(); bxMarquee(); } else { bbFooter(); bbKen(); }
     if(bxOn){ bxWatch(); return; }   // läuft schon (enhance() kommt bei jeder Änderung im Inhalt wieder)
     bxOn = sk;
@@ -1059,12 +1085,126 @@
     }, 30);
   });
 
-  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); document.body.classList.toggle("hasFootLeaves", !!$(".bbFooter")); }
+
+  // ---------- Effekt-Skins (Nov. 2026): Verhalten je Skin in assets/skins/<skin>.js, nur für den aktiven Skin geladen ----------
+  // Die Datei meldet sich mit KOCHBUCH_FX.<skin> = { start(api), refresh?(api), stop?() }. Was sie über api.on()/api.add()/api.canvas()/
+  // api.loop() anlegt, räumt skins.js beim Wechsel auf. api.loop() zeichnet nur, solange das Element sichtbar und die Seite offen ist;
+  // bei „Bewegung reduzieren“ genau einmal.
+  const FX_JS = { wortwelt: 1, blauraum: 1, glasklar: 1, tiefsee: 1, formlabor: 1, galerie: 1 };
+  window.KOCHBUCH_FX = window.KOCHBUCH_FX || {};
+  let fxOn = "";
+  const fxClean = [], fxLoaded = {};
+  const ptr = { x: -1e4, y: -1e4, down: false, t: -1e5 };
+  addEventListener("pointermove", (e)=>{ ptr.x = e.clientX; ptr.y = e.clientY; ptr.t = performance.now(); }, { passive: true });
+  addEventListener("pointerdown", (e)=>{ ptr.x = e.clientX; ptr.y = e.clientY; ptr.down = true; ptr.t = performance.now(); }, { passive: true });
+  addEventListener("pointerup", ()=>{ ptr.down = false; }, { passive: true });
+  addEventListener("pointercancel", ()=>{ ptr.down = false; }, { passive: true });
+  const FX_API = {
+    skin, reduce, bit, activeTimer, fmtShort, hhmm, ptr, $,
+    home: ()=> document.body.classList.contains("layout-home"),
+    scene: ()=> document.querySelector(".skinScene"),
+    title: ()=> document.querySelector(".homeGreetingTitle, .pageTitleBlock .h1"),
+    on(t, ev, fn, o){ t.addEventListener(ev, fn, o); fxClean.push(()=> t.removeEventListener(ev, fn, o)); },
+    add(fn){ fxClean.push(fn); },
+    canvas(parent, cls){
+      const cv = document.createElement("canvas"); cv.className = `fxCanvas ${cls || ""}`; cv.setAttribute("aria-hidden", "true");
+      parent.appendChild(cv);
+      const o = { cv, g: cv.getContext("2d"), w: 0, h: 0, dpr: 1, onresize: null };
+      o.fit = ()=>{
+        const r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+        if(!r.width || !r.height) return;
+        const W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
+        if(W === cv.width && H === cv.height && o.w) return;
+        o.w = r.width; o.h = r.height; o.dpr = dpr; cv.width = W; cv.height = H; o.g.setTransform(dpr, 0, 0, dpr, 0, 0);
+        o.onresize?.(o);
+      };
+      const ro = new ResizeObserver(()=> o.fit()); ro.observe(cv);
+      fxClean.push(()=>{ ro.disconnect(); cv.remove(); });
+      o.fit();
+      return o;
+    },
+    loop(el, fn){
+      let raf = 0, vis = true, last = 0, dead = false;
+      const tick = (t)=>{ raf = 0; if(dead) return; const dt = last ? Math.min(64, t - last) : 16; last = t; fn(t, dt); go(); };
+      const go = ()=>{ if(!raf && vis && !document.hidden && !reduce() && !dead) raf = requestAnimationFrame(tick); };
+      const io = new IntersectionObserver((es)=>{ vis = es[es.length - 1].isIntersecting; if(vis){ last = 0; go(); } });
+      io.observe(el);
+      const onVis = ()=>{ last = 0; go(); };
+      document.addEventListener("visibilitychange", onVis);
+      if(reduce()) requestAnimationFrame((t)=>{ if(!dead) fn(t, 16); });
+      go();
+      fxClean.push(()=>{ dead = true; cancelAnimationFrame(raf); io.disconnect(); document.removeEventListener("visibilitychange", onVis); });
+      return { redraw: ()=> requestAnimationFrame((t)=>{ if(!dead) fn(t, 0); }) };
+    },
+    // freier Platz rechts neben der kürzesten Titelzeile (relativ zu base): { x, y, w, h } – dort stehen Rose, Formen, Illustrationen
+    zone(el, base){
+      const b = base.getBoundingClientRect();
+      const range = document.createRange(); range.selectNodeContents(el);
+      const lines = [];
+      [...range.getClientRects()].forEach((r)=>{
+        if(!r.width) return;
+        const L = lines.find((l)=> Math.abs(l.top - (r.top - b.top)) < r.height * .5);
+        if(L){ L.right = Math.max(L.right, r.right - b.left); L.bottom = Math.max(L.bottom, r.bottom - b.top); }
+        else lines.push({ top: r.top - b.top, bottom: r.bottom - b.top, right: r.right - b.left });
+      });
+      const W = b.width;
+      if(!lines.length) return { x: W * .6, y: 40, w: W * .36, h: 60, lines };
+      const best = lines.reduce((m, l)=> (W - l.right > W - m.right ? l : m), lines[0]);
+      const x = best.right + 14;
+      return { x, y: best.top, w: Math.max(0, W - x - 12), h: best.bottom - best.top, lines };
+    },
+    // Buchstaben eines Titels mit Lage (relativ zu base) und Schrift – zum Nachzeichnen auf einer Leinwand
+    glyphs(el, base){
+      const cs = getComputedStyle(el), font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      const b = base.getBoundingClientRect(), out = [], range = document.createRange();
+      const m = document.createElement("canvas").getContext("2d"); m.font = font;
+      const fm = m.measureText("Hg"), asc = fm.fontBoundingBoxAscent || parseFloat(cs.fontSize) * .8, desc = fm.fontBoundingBoxDescent || parseFloat(cs.fontSize) * .2;
+      const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      for(let n = walk.nextNode(); n; n = walk.nextNode()){
+        const t = n.textContent;
+        for(let i = 0; i < t.length; i++){
+          if(!t[i].trim()) continue;
+          range.setStart(n, i); range.setEnd(n, i + 1);
+          const r = range.getClientRects()[0]; if(!r || !r.width) continue;
+          out.push({ ch: t[i], x: r.left - b.left, y: r.top - b.top + (r.height - asc - desc) / 2 + asc, w: r.width, h: r.height });
+        }
+      }
+      return { font, color: cs.color, list: out, size: parseFloat(cs.fontSize) };
+    },
+  };
+  function fxStop(){
+    const def = window.KOCHBUCH_FX[fxOn];
+    fxClean.splice(0).forEach((f)=>{ try{ f(); }catch{} });
+    try{ def?.stop?.(); }catch{}
+    document.querySelectorAll(".fxDrawn").forEach((e)=> e.classList.remove("fxDrawn"));
+    fxOn = "";
+  }
+  function fxRun(){
+    const sk = skin();
+    if(fxOn && fxOn !== sk) fxStop();
+    if(!FX_JS[sk]) return;
+    const def = window.KOCHBUCH_FX[sk];
+    if(!def){
+      if(!fxLoaded[sk]){
+        fxLoaded[sk] = 1;
+        const s = document.createElement("script");
+        s.src = `/assets/skins/${sk}.js?v=${VER}`; s.async = true;
+        s.onload = ()=>{ if(skin() === sk) fxRun(); };
+        document.head.appendChild(s);
+      }
+      return;
+    }
+    if(fxOn === sk){ try{ def.refresh?.(FX_API); }catch(e){ console.error(e); } return; }
+    fxOn = sk;
+    try{ def.start(FX_API); }catch(e){ console.error(e); }
+  }
+
+  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); fxRun(); document.body.classList.toggle("hasFootLeaves", !!$(".bbFooter")); }
 
   function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
 
   // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
-  const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade","boxengasse","bildband"];
+  const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade","boxengasse","bildband","wortwelt","blauraum","glasklar","tiefsee","formlabor","galerie"];
   function skinLogo(){
     const img = document.querySelector(".homeBrand .logoSkin");
     if(!img) return;
@@ -1073,7 +1213,7 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=2`;
   }
 
-  function apply(){ mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); homeTimer(); introOnSwitch(); }
+  function apply(){ fxStop(); mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); homeTimer(); introOnSwitch(); }
   function init(){
     apply();
     watchProgress();
