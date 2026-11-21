@@ -138,7 +138,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     (`blauraum-3d.js`: drei Ringe aus Rezeptfotos um eine Kochmütze aus verchromten Lamellen, Ringe/Spirale, Ziehen/Scrollen dreht, Antippen
     öffnet, am Rechner Etikett `.blTip` am Zeiger); ohne Grafikkarte CSS-Bilderring `.blRing`. Rezeptliste: Fotos hochkant auf gewölbter
     Fläche (Neigung je nach Lage, `listPage()`), Umschalter „Raster | Liste“ (`kochbuch.ui.blList`). Rezeptseite: Foto mittig, Name klein
-    in Versalien, Untertitel groß. Die anderen fünf Effekt-Skins sollen nach dem OK des Besitzers genauso gründlich umgebaut werden.
+    in Versalien, Untertitel groß. Nach dem OK des Besitzers sind die anderen fünf Effekt-Skins genauso umgebaut worden (Dez. 2026).
     **Bilderbuch** (Schlüssel `wortwelt`; Dez. 2026 zweiter Neubau wie Blauraum, Vorbild howtotalktowhitekidsaboutracism.com mit „Open book“
     durchgeblättert): dunkler, diagonal gestrichener Grund (`html::before`); die Startseite IST das Buch (`.wwHero`): erst geschlossen (Kreide-Deckel
     „Tobis KOCH BUCH“, Kapsel „Buch öffnen“, Widmung mit Datum), dann je Rezept eine Doppelseite in kräftiger Farbe (`VIVID`: Rosa, Koralle, Grün,
@@ -159,9 +159,13 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     „aus Tobis Küche.“; darunter große Kategorienliste auf Braun (Zeile in der Bildmitte leuchtet, `.flRow.on`), dann Creme-Teil „[ Heute für dich ]“,
     dessen Text sich beim Scrollen Wort für Wort füllt (`today()`). Rezeptliste: eine Spalte großer Fotos (4:5). Rezeptseite: großer Titel über dem
     Foto, Steckbrief „[ Über das Rezept ]“ (Kategorie, Zeit, Portionen, Von; `facts()`).
-    **Glasklar** (Vorbild: Portfolio mit Glasobjekt vor großer Schrift): Schwarz `#0D0D0E`, riesiger weißer Titel (Archivo, „Skin Glas“),
-    Eisblau `#9FD8FF` als Akzent. Auf allen Feld-Seiten (`glasklar-3d.js`): Titel als undurchsichtige Fläche (sonst sieht die
-    Transmission sie nicht), davor ein Eisbrocken aus `MeshPhysicalMaterial` (transmission, dispersion) – bricht die Schrift, folgt dem Finger.
+    **Glasklar** (Dez. 2026 zweiter Neubau wie Blauraum, Vorbild daikifujita.com – bleibt im Container beim Ladebild, weil `api.framer.com`
+    gesperrt ist; Aufbau aus dem Seitentext): Schwarz `#0B0B0C`, Versal-Grotesk Archivo („Skin Glas“), winzige Versal-Beschriftungen, Abschnitte
+    nummeriert „(02) Favoriten“ (`numbers()`, `.gkN` in Eisblau `#9FD8FF`), Fotos ohne Kartenfläche (Liste 2–4 Spalten, 3:4). Start: Vollbild `.gkHero`
+    mit Leitsatz „Rezepte zum Aufwachen. / Gerichte zum Träumen.“ (Grotesk + kursive Fraunces), oben Beschriftungen, unten „Zum Entdecken scrollen“;
+    davor ein Eisbrocken aus echtem 3D-Glas (`glasklar-3d.js`, Titel als undurchsichtige Fläche, folgt dem Finger; `glass()` zeichnet jede Spanne mit
+    eigener Schrift und beachtet `text-transform`). Danach „(01) Heute“: Versal-Satz mit kursivem Teil, füllt sich beim Scrollen. Auf anderen
+    Feld-Seiten Glas über dem Seitentitel. Rezeptseite: Titel groß über dem Foto, Untertitel kursiv.
     **Galerie** (Dez. 2026 zweiter Neubau wie Blauraum, Vorbild shopify.com/editions/winter2026, jetzt vollständig sichtbar): graubeige Seiten
     `#DCDAD1`, Serifen-Titel mit verziertem Anfangsbuchstaben (`::first-letter` in „Skin Garamond“ kursiv), kleine fette Etiketten, schwarze Kapseln.
     Start: selbst gemaltes Winterbild über die ganze Fläche (`.gaHero`, drei Leinwände mit Parallaxe), mittig dünner weißer Rahmen `.gaFrame` mit
