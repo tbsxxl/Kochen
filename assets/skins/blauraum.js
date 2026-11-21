@@ -62,8 +62,8 @@
     g.restore();
   }
 
-  window.KOCHBUCH_FX.blauraum = {
-    start(api){
+  function start2d(api){
+    {
       const sc = api.scene(), title = api.title();
       if(!sc || !title) return;
       const c = api.canvas(sc, "blRose"), g = c.g, items = build();
@@ -96,6 +96,89 @@
       c.onresize = ()=>{ measure(); lp.redraw(); };
       measure();
       document.fonts?.ready?.then(()=>{ measure(); lp.redraw(); });
+    }
+  }
+
+  // ---------- 3D-Galerie (Startseite, nur mit echter Grafikkarte; sonst die gezeichnete Rose) ----------
+  function gpuOk(){
+    try{
+      if(localStorage.getItem("kochbuch.ui.cineForce") === "1") return true;
+      const c = document.createElement("canvas"), gl = c.getContext("webgl2") || c.getContext("webgl");
+      if(!gl) return false;
+      const ext = gl.getExtension("WEBGL_debug_renderer_info"), r = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : "";
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      return !/swiftshader|llvmpipe|software/i.test(r);
+    }catch{ return false; }
+  }
+
+  async function start3d(api){
+    const sc = api.scene(), quick = document.querySelector(".homeQuick");
+    let recipes = [];
+    try{ recipes = JSON.parse(document.getElementById("homeRecipes")?.textContent || "[]").filter(Boolean); }catch{}
+    if(!sc || !quick || recipes.length < 6) throw new Error("no stage");
+    // jeden Tag eine andere Auswahl, aber am selben Tag stabil
+    let seed = Math.floor(Date.now() / 864e5);
+    const rnd = ()=>{ seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    recipes = recipes.map((r)=> [rnd(), r]).sort((a, b)=> a[0] - b[0]).map((x)=> x[1]).slice(0, 30);
+
+    const stage = api.bit("blStage", "blauraum");
+    stage.innerHTML = `<div class="blBar"><div class="blSeg" role="group" aria-label="Anordnung der Bilder">
+      <button type="button" data-m="rings" aria-pressed="true">Ringe</button><button type="button" data-m="spiral" aria-pressed="false">Spirale</button></div>
+      <span class="blCount">${recipes.length} Rezepte · antippen zum Öffnen</span></div>`;
+    quick.after(stage);
+    api.add(()=> stage.remove());
+    dispatchEvent(new Event("kochbuch:sceneresize"));
+
+    const cv = document.createElement("canvas");
+    cv.className = "fxCanvas blGL"; cv.setAttribute("aria-hidden", "true");
+    sc.appendChild(cv);
+    api.add(()=> cv.remove());
+    const mod = await import(`/assets/skins/blauraum-3d.js?v=${api.ver}`);
+    if(!cv.isConnected) return;
+    const three = mod.create(cv, recipes);
+    api.add(()=> three.dispose());
+
+    const fit = ()=>{
+      const r = cv.getBoundingClientRect(), s = sc.getBoundingClientRect(), st = stage.getBoundingClientRect();
+      if(!r.width || !r.height) return;
+      const top = st.top - s.top;
+      three.resize(r.width, r.height, devicePixelRatio || 1, top + st.height * .46, st.height);
+      // oberhalb der Bühne (Titel, Suche, Knöpfe) weich ausblenden
+      const m = `linear-gradient(to bottom, transparent ${Math.max(0, top - 24)}px, #000 ${top + 36}px)`;
+      cv.style.webkitMaskImage = m; cv.style.maskImage = m;
+      lp?.redraw();
+    };
+    const ro = new ResizeObserver(fit); ro.observe(cv); ro.observe(stage);
+    api.add(()=> ro.disconnect());
+    const lp = api.loop(cv, (t, dt)=> three.render(t, dt, api.reduce()));
+    fit();
+    if(api.reduce()) [600, 1500, 3000, 6000].forEach((ms)=>{ const id = setTimeout(()=> lp.redraw(), ms); api.add(()=> clearTimeout(id)); });
+
+    // Ziehen dreht, Antippen öffnet das Rezept; senkrechtes Wischen bleibt Scrollen (touch-action: pan-y)
+    let down = null, lastX = 0;
+    api.on(stage, "pointerdown", (e)=>{ if(e.target.closest("button")) return; down = { x: e.clientX, y: e.clientY, t: performance.now() }; lastX = e.clientX; });
+    api.on(stage, "pointermove", (e)=>{ if(!down) return; three.drag = (e.clientX - lastX) * .004; lastX = e.clientX; if(api.reduce()) lp.redraw(); });
+    api.on(stage, "pointerup", (e)=>{
+      if(!down) return;
+      const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y), quickTap = performance.now() - down.t < 450;
+      down = null;
+      if(moved > 8 || !quickTap) return;
+      const r = cv.getBoundingClientRect(), url = three.pick((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height * 2 - 1));
+      if(url) location.href = url;
+    });
+    api.on(stage, "pointercancel", ()=>{ down = null; });
+    let lastY = scrollY;
+    api.on(window, "scroll", ()=>{ three.drag += (scrollY - lastY) * .0005; lastY = scrollY; }, { passive: true });
+    stage.querySelectorAll("[data-m]").forEach((b)=> api.on(b, "click", ()=>{
+      stage.querySelectorAll("[data-m]").forEach((x)=> x.setAttribute("aria-pressed", String(x === b)));
+      three.setMode(b.dataset.m); if(api.reduce()) [50, 400, 900].forEach((ms)=> setTimeout(()=> lp.redraw(), ms));
+    }));
+  }
+
+  window.KOCHBUCH_FX.blauraum = {
+    start(api){
+      if(api.home() && gpuOk()) start3d(api).catch((e)=>{ console.warn("Blauraum 3D:", e); start2d(api); });
+      else start2d(api);
     },
   };
 })();

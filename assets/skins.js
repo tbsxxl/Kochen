@@ -1100,7 +1100,7 @@
   addEventListener("pointerup", ()=>{ ptr.down = false; }, { passive: true });
   addEventListener("pointercancel", ()=>{ ptr.down = false; }, { passive: true });
   const FX_API = {
-    skin, reduce, bit, activeTimer, fmtShort, hhmm, ptr, $,
+    skin, reduce, bit, activeTimer, fmtShort, hhmm, ptr, $, ver: VER,
     home: ()=> document.body.classList.contains("layout-home"),
     scene: ()=> document.querySelector(".skinScene"),
     title: ()=> document.querySelector(".homeGreetingTitle, .pageTitleBlock .h1"),
