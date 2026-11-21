@@ -1,67 +1,154 @@
 /* Skin „formlabor“ – wird nur geladen, wenn dieser Skin aktiv ist.
-   Nov. 2026 neu nach Vergleich mit dem Vorbild (Studio-Seite): Schokobraun, Creme-Schrift, leuchtendes Orange; große dünne Grotesk mit einem
-   kursiven, orange unterstrichenen Serifenwort; nummerierte Liste mit feinen Linien. Startseite: 3D-Schleife mit schwebenden Küchen-Dingen
-   (formlabor.js, formlabor-3d.js). Neue Regeln ans Ende. */
+   Dez. 2026 zweiter Neubau (Besitzer: „zu nah am Standard“), nach genauem Vergleich mit dem Vorbild (Studio-Seite): Seiten in Creme mit
+   dunkelbrauner Schrift, Startseite oben braun (3D-Schleife mit Dingen, die beim Scrollen auseinanderfliegen; große Kategorienliste),
+   Titel aus dünner Grotesk + kursivem Serifenwort, „[ … ]“-Beschriftungen mit Linien, orange Punkte, Steckbrief-Tabelle, Lavendel für Aktives.
+   Verhalten: formlabor.js, formlabor-3d.js. Neue Regeln ans Ende. */
 @font-face{font-family:"Skin Raum";font-weight:300 800;font-display:swap;src:url("../fonts/host-grotesk.woff2") format("woff2")}
 html.skin-formlabor:not(#_x#_y),html.skin-formlabor:not(#_x#_y) body{
-  --field:#2A1912;--onField:#F3EDE4;--onField2:#CFC2B4;--fieldFill:rgba(243,237,228,.09);
-  --bg:#2A1912;--surface:#352219;--surface2:#3E2A20;--fill:rgba(243,237,228,.08);--line:rgba(243,237,228,.14);--lineStrong:rgba(243,237,228,.4);
-  --text:#F3EDE4;--sub:#CFC2B4;--sub2:#CFC2B4;--muted:#BBAD9F;
-  --brand:#F2541B;--onBrand:#FFFFFF;--leaf:#F2541B;--onLeaf:#FFFFFF;--brandSoft:rgba(242,84,27,.16);--leafSoft:rgba(242,84,27,.16);
-  --sel:#F2541B;--onSel:#FFFFFF;--accent:#F2541B;--accentSoft:rgba(242,84,27,.16);--onAccent:#FFFFFF;--herb:#F2541B;--coffee:#352219;
-  --glass:rgba(42,25,18,.92);--glassLine:rgba(243,237,228,.12);--glassShadow:none;
+  --field:#F5F3EE;--onField:#2A1912;--onField2:#5E4A40;--fieldFill:rgba(42,25,18,.06);
+  --bg:#F5F3EE;--surface:#FFFFFF;--surface2:#EFEBE4;--fill:rgba(42,25,18,.06);--line:rgba(42,25,18,.14);--lineStrong:rgba(42,25,18,.45);
+  --text:#2A1912;--sub:#5E4A40;--sub2:#5E4A40;--muted:#6B5A50;
+  --brand:#2A1912;--onBrand:#F5F3EE;--leaf:#2A1912;--onLeaf:#F5F3EE;--brandSoft:#EFEBE4;--leafSoft:#EFEBE4;
+  --sel:#2A1912;--onSel:#F5F3EE;--accent:#C43E0E;--accentSoft:#F8E3D8;--onAccent:#FFFFFF;--herb:#2A1912;--coffee:#2A1912;
+  --glass:rgba(245,243,238,.94);--glassLine:rgba(42,25,18,.12);--glassShadow:none;
   --fontUi:"Skin Raum", -apple-system, "Inter", sans-serif;--fontDisplay:"Skin Raum", -apple-system, "Inter", sans-serif;
-  color-scheme:dark}
-html.skin-formlabor:not(#_x#_y) body.grouped{--bg:#2A1912;--surface:#352219}
-html.skin-formlabor:not(#_x#_y) .cookOverlay{--cBg:#2A1912;--cCard:#352219;--cFill:rgba(243,237,228,.08);--cLine:rgba(243,237,228,.14);--cText:#F3EDE4;--cSub:#CFC2B4;--cLeaf:#F2541B;--cOnLeaf:#FFFFFF}
+  color-scheme:light}
+html.skin-formlabor:not(#_x#_y) body.grouped{--bg:#F5F3EE;--surface:#FFFFFF}
+html.skin-formlabor:not(#_x#_y) body.layout-home{--statusBar:#2A1912}
+html.skin-formlabor:not(#_x#_y) .cookOverlay{--cBg:#F5F3EE;--cCard:#FFFFFF;--cFill:#EFEBE4;--cLine:rgba(42,25,18,.14);--cText:#2A1912;--cSub:#5E4A40;--cLeaf:#2A1912;--cOnLeaf:#F5F3EE}
 html.skin-formlabor:not(#_x#_y) ::selection{background:#F2541B;color:#FFFFFF}
-html.skin-formlabor:has(body.fieldPage){background:#2A1912}
-.skinScene-formlabor .flGL{position:absolute;inset:0;width:100%;height:100%}
+html.skin-formlabor{background:#F5F3EE}
+html.skin-formlabor:not(#_x#_y) .skinScene{background:transparent !important}
+html.skin-formlabor:not(#_x#_y) body .pageContent{background:transparent !important;box-shadow:none !important}
 
-html.skin-formlabor:not(#_x#_y) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark){font-family:var(--fontDisplay);font-weight:300;letter-spacing:-.035em}
-html.skin-formlabor:not(#_x#_y) .pageTitleBlock .h1,html.skin-formlabor:not(#_x#_y) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(2.8rem, 13vw, 4.8rem), 13vw);line-height:.95;font-weight:300}
-html.skin-formlabor:not(#_x#_y) .homeGreetingTitle::first-line{font-family:"Fraunces", Georgia, serif;font-style:italic;color:#F2541B}
-html.skin-formlabor:not(#_x#_y) .homeSectionTitle,html.skin-formlabor:not(#_x#_y) .h2{font-size:1.8rem;font-weight:300}
-html.skin-formlabor:not(#_x#_y) .recipeTitle{font-weight:400}
-html.skin-formlabor:not(#_x#_y) :is(.homeGreetingSub,.resultCount,.catTileCount,.continueEyebrow){text-transform:uppercase;letter-spacing:.08em;font-size:.75rem}
-html.skin-formlabor:not(#_x#_y) .homeAllLink{color:#F2541B;font-family:"Fraunces", Georgia, serif;font-style:italic;text-decoration:underline;text-underline-offset:4px}
+/* ---------- Schrift: dünne Grotesk, kursives Serifenwort ---------- */
+html.skin-formlabor:not(#_x#_y) :is(.pageTitleBlock .h1,.recipeHeroText .recipeName,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark){font-family:var(--fontDisplay) !important;font-weight:300 !important;letter-spacing:-.03em !important}
+html.skin-formlabor:not(#_x#_y) .flEm{font-family:"Fraunces", Georgia, serif;font-style:italic;font-weight:400;letter-spacing:-.02em}
+html.skin-formlabor:not(#_x#_y) .pageTitleBlock{position:relative;padding-top:18px}
+html.skin-formlabor:not(#_x#_y) .pageTitleBlock .h1{font-size:min(clamp(3rem, 14vw, 7.5rem), 14vw) !important;hyphens:none;-webkit-hyphens:none;overflow-wrap:normal;line-height:.9 !important;letter-spacing:-.05em !important;position:relative;z-index:1}
+html.skin-formlabor:not(#_x#_y) .homeSectionTitle,html.skin-formlabor:not(#_x#_y) .h2{font-size:2rem !important;line-height:1 !important}
+html.skin-formlabor:not(#_x#_y) :is(.homeAllLink,.resultCount,.catTileCount,.continueEyebrow,.recipeMeta,.catGroupTitle,.planDayName,.ingHead){font-family:var(--fontUi)}
+html.skin-formlabor:not(#_x#_y) .homeAllLink{color:#2A1912 !important;text-decoration:underline;text-underline-offset:4px;font-size:.875rem}
+html.skin-formlabor:not(#_x#_y) :is(.resultCount,.catGroupTitle,.ingHead,.notesTitle){font-size:.8125rem !important;font-weight:400 !important;letter-spacing:0 !important;text-transform:none !important}
+html.skin-formlabor:not(#_x#_y) :is(.resultCount,.catGroupTitle,.notesTitle)::before{content:"[ "}
+html.skin-formlabor:not(#_x#_y) :is(.resultCount,.catGroupTitle,.notesTitle)::after{content:" ]"}
+.flBr{margin:0 0 14px;font:400 .8125rem/1.3 var(--fontUi);color:#5E4A40}
+.flKick{display:flex;align-items:center;gap:10px;margin:0;font:400 .6875rem/1.3 var(--fontUi);letter-spacing:.02em;text-transform:uppercase}
+.flKick i{flex:1;height:1px;background:currentColor;opacity:.35}
+.flKickPage{margin:18px 0 8px;color:#5E4A40}
+.flDots{position:absolute;inset:-10px -16px;width:calc(100% + 32px);height:calc(100% + 20px);pointer-events:none;z-index:0}
+.pageTitleBlock .h1 .flDots{inset:-24px -16px;height:calc(100% + 48px)}
 
-html.skin-formlabor:not(#_x#_y) :is(.recipeCard:not(.homeFeatured),.catTile,.homeFeatured,.homeEmpty,.homeTimer){border-radius:4px !important;box-shadow:none !important}
-html.skin-formlabor:not(#_x#_y) .recipeCard:not(.homeFeatured){background:transparent !important}
-html.skin-formlabor:not(#_x#_y) .recipeCard .rcImg{border-radius:4px !important}
-html.skin-formlabor:not(#_x#_y) .recipeCard:not(.homeFeatured) .rcBody{padding-left:0;padding-right:0}
-html.skin-formlabor:not(#_x#_y) .searchRow,html.skin-formlabor:not(#_x#_y) body.layout-home .searchRowCompact,html.skin-formlabor:not(#_x#_y) body.layout-home .homeQuickBtn{background:rgba(243,237,228,.09) !important;color:#F3EDE4 !important;box-shadow:none !important;border-radius:999px !important}
-html.skin-formlabor:not(#_x#_y) .homeQuickBtn .uiIcon{color:#F2541B}
-html.skin-formlabor:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary,.continuePlay){background:#F2541B !important;color:#FFFFFF !important;border-radius:999px !important}
-html.skin-formlabor:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(243,237,228,.3) !important;color:#F3EDE4;border-radius:999px !important}
-html.skin-formlabor:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"]){background:#F3EDE4 !important;color:#2A1912 !important}
-html.skin-formlabor:not(#_x#_y) .bottomRail{background:rgba(42,25,18,.9) !important;border:1px solid rgba(243,237,228,.12);box-shadow:0 12px 36px rgba(0,0,0,.35) !important}
-html.skin-formlabor:not(#_x#_y) .tabItem{color:#CFC2B4 !important}
-html.skin-formlabor:not(#_x#_y) .tabItem.active{background:#F2541B !important;color:#FFFFFF !important}
-html.skin-formlabor:not(#_x#_y) .continueCard{background:#F3EDE4 !important;color:#2A1912 !important;border-radius:4px !important}
-html.skin-formlabor:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:#2A1912 !important}
+/* ---------- Kapseln und Knöpfe ---------- */
+html.skin-formlabor:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(42,25,18,.28) !important;color:#2A1912 !important;border-radius:999px !important;font-size:.75rem !important;text-transform:uppercase;letter-spacing:.02em;font-weight:400 !important}
+html.skin-formlabor:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#C9C3FF !important;box-shadow:none !important;color:#2A1912 !important}
+html.skin-formlabor:not(#_x#_y) :is(.searchRow,.homeQuickBtn,.navIconBtn,.recipeActBtn,.recipeBack,.profileBadge){background:#FFFFFF !important;box-shadow:inset 0 0 0 1px rgba(42,25,18,.14) !important;color:#2A1912 !important;border-radius:999px !important}
+html.skin-formlabor:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary,.continuePlay){background:#2A1912 !important;color:#F5F3EE !important;border-radius:999px !important;font-weight:400 !important}
+html.skin-formlabor:not(#_x#_y) .segmented{background:#FFFFFF !important;box-shadow:inset 0 0 0 1px rgba(42,25,18,.14) !important;border-radius:999px !important}
+html.skin-formlabor:not(#_x#_y) .segBtn{border-radius:999px !important;background:transparent !important;color:#5E4A40 !important}
+html.skin-formlabor:not(#_x#_y) .segBtn.active{background:#2A1912 !important;color:#F5F3EE !important}
 
-/* 3D-Bühne und nummerierte Kategorienliste */
-.flStage{position:relative;height:clamp(300px, 58vw + 60px, 560px);margin:6px calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));touch-action:pan-y;cursor:grab}
-.flList{margin:8px 0 6px}
-.flKicker{display:flex;justify-content:space-between;gap:12px;margin:0 0 6px;font:500 .6875rem/1.3 var(--fontUi);letter-spacing:.1em;text-transform:uppercase;color:#CFC2B4}
-.flKicker span{color:#CFC2B4}
-.flRow{display:flex;align-items:baseline;gap:14px;min-height:56px;padding:10px 0;border-top:1px solid rgba(243,237,228,.14);color:#F3EDE4;text-decoration:none}
-.flRow:last-child{border-bottom:1px solid rgba(243,237,228,.14)}
-.flNum{flex:none;width:2.4em;font:400 .875rem/1 var(--fontUi);color:#C9B8FF}
-.flName{font:300 clamp(1.7rem, 8vw, 2.4rem)/1.05 var(--fontUi);letter-spacing:-.03em}
-.flName em{font-family:"Fraunces", Georgia, serif;font-style:italic;font-weight:400;color:#F2541B;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px}
-.flRow:nth-child(odd) .flName{padding-left:12%}
-@media (hover:hover) and (pointer:fine){ .flRow:hover .flName{transform:translateX(6px)} .flName{transition:transform .3s var(--ease)} }
+/* ---------- untere Leiste: helle Kapsel, aktiver Reiter braun ---------- */
+html.skin-formlabor:not(#_x#_y) .bottomRail{background:rgba(245,243,238,.86) !important;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(42,25,18,.12) !important;box-shadow:0 10px 30px rgba(42,25,18,.12) !important}
+html.skin-formlabor:not(#_x#_y) .tabItem{color:#5E4A40 !important;background:transparent !important}
+html.skin-formlabor:not(#_x#_y) .tabItem.active{background:#2A1912 !important;color:#F5F3EE !important}
+html.skin-formlabor:not(#_x#_y) .tabLabel{font-weight:400 !important;text-transform:lowercase}
+
+/* ---------- Startseite: brauner Kopf ---------- */
+html.skin-formlabor:not(#_x#_y) body.flHome .homeGreeting{position:relative;min-height:100svh;color:#F3EDE4;margin-top:calc(-1 * env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
+.flHero{position:absolute;top:-140px;bottom:0;left:50%;width:100vw;margin-left:-50vw;background:#2A1912;z-index:0;overflow:hidden;touch-action:pan-y}
+.flHero .flGL{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+html.skin-formlabor:not(#_x#_y) body.flHome :is(.homeBrand,.homeGreetingTitle){position:relative;z-index:2}
+html.skin-formlabor:not(#_x#_y) body.flHome .brandWordmark{color:#F3EDE4 !important}
+html.skin-formlabor:not(#_x#_y) body.flHome .profileBadge{background:rgba(243,237,228,.1) !important;color:#F3EDE4 !important;box-shadow:inset 0 0 0 1px rgba(243,237,228,.25) !important}
+html.skin-formlabor:not(#_x#_y) body.flHome .homeGreetingTitle.homeGreetingTitle{font:400 .8125rem/1.4 var(--fontUi) !important;letter-spacing:0 !important;color:#CFC2B4 !important;white-space:normal;margin-top:14px;text-shadow:none}
+html.skin-formlabor:not(#_x#_y) body.flHome .homeGreetingTitle::before{content:"[ "}
+html.skin-formlabor:not(#_x#_y) body.flHome .homeGreetingTitle::after{content:" ]"}
+html.skin-formlabor:not(#_x#_y) body.flHome .homeGreetingSub{display:none}
+.flArc{position:absolute;left:max(64px, 16vw);top:50%;width:0;height:0;z-index:1;pointer-events:none}
+.flArc span{position:absolute;left:0;top:0;font:300 clamp(1.4rem, 5vw, 2.4rem)/1 var(--fontUi);color:#F3EDE4;transform-origin:0 clamp(70px, 18vw, 120px);transform:rotate(calc(var(--i) * 17deg))}
+.flAnd{position:absolute;right:max(18px, 6vw);top:44%;z-index:1;text-align:right;color:#F3EDE4;pointer-events:none}
+.flAnd small{display:block;font:300 .75rem/1.2 var(--fontUi)}
+.flAnd em{font:italic 400 clamp(1.5rem, 5.5vw, 2.6rem)/1 "Fraunces", Georgia, serif}
+.flHero .flKick{position:absolute;left:max(16px, 4vw);right:max(16px, 4vw);bottom:calc(env(safe-area-inset-bottom) + 104px);color:#CFC2B4;z-index:1}
+
+/* große Kategorienliste auf Braun, die Zeile in der Bildmitte leuchtet */
+.flList{position:relative;z-index:1;background:#2A1912;box-shadow:0 0 0 100vmax #2A1912;clip-path:inset(0 -100vmax);padding:20px 0 44px;margin:0}
+.flRow{display:flex;align-items:baseline;gap:14px;min-height:56px;padding:26px 0 26px var(--o);border-bottom:1px solid rgba(243,237,228,.16);color:#F3EDE4;text-decoration:none;opacity:.3;transition:opacity .45s var(--ease)}
+.flRow.on{opacity:1}
+.flNum{flex:none;font:300 .875rem/1 var(--fontUi);color:#C9C3FF}
+.flName{font:300 clamp(2rem, 9vw, 4.2rem)/1 var(--fontUi);letter-spacing:-.04em}
+.flName em{font-family:"Fraunces", Georgia, serif;font-style:italic;font-weight:400;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:6px}
+.flRow.on .flName em{color:#F2541B}
+@media (hover:hover) and (pointer:fine){ .flRow:hover{opacity:1} }
+
+/* Creme-Teil: „[ Heute für dich ]“ */
+.flToday{position:relative;padding:64px 0 48px}
+.flToday .flText{position:relative;z-index:1;margin:0 0 22px;font:300 clamp(1.6rem, 6.6vw, 2.9rem)/1.15 var(--fontUi);letter-spacing:-.03em}
+.flW{color:#9A8B81;transition:color .3s ease}
+.flW.on{color:#2A1912}
+.flWT{font-family:"Fraunces", Georgia, serif;font-style:italic;font-weight:400}
+.flWT.on{color:#C43E0E}
+.flMore{position:relative;z-index:1;display:inline-flex;align-items:center;min-height:44px;color:#2A1912;font:400 .9375rem var(--fontUi);text-decoration:underline;text-underline-offset:4px}
+
+/* ---------- Fotos mit Bildunterschrift statt Karten ---------- */
+html.skin-formlabor:not(#_x#_y) .recipeCard{background:transparent !important;box-shadow:none !important;border-radius:0 !important;overflow:visible !important}
+html.skin-formlabor:not(#_x#_y) .recipeCard .rcImg{border-radius:4px !important;box-shadow:none !important}
+html.skin-formlabor:not(#_x#_y) .recipeCard .rcBody{padding:10px 0 0 !important}
+html.skin-formlabor:not(#_x#_y) .recipeCard .recipeTitle{font-size:1.1875rem !important;line-height:1.15 !important;color:#2A1912}
+html.skin-formlabor:not(#_x#_y) .recipeCard .recipeMeta{color:#5E4A40 !important;font-size:.8125rem !important}
+html.skin-formlabor:not(#_x#_y) .hScroll .rcImg{aspect-ratio:4/5 !important}
+html.skin-formlabor:not(#_x#_y) .homeFeatured .rcImg{aspect-ratio:4/5 !important;max-height:none}
+html.skin-formlabor:not(#_x#_y) .homeFeatured .rcBody{position:static !important;background:none !important;color:#2A1912 !important}
+html.skin-formlabor:not(#_x#_y) .homeFeatured :is(.homeFeaturedTitle,.recipeMeta){color:#2A1912 !important;text-shadow:none !important}
+html.skin-formlabor:not(#_x#_y) .homeFeatured .heroOverlayCat{background:#C9C3FF !important;color:#2A1912 !important;border-radius:999px}
+html.skin-formlabor:not(#_x#_y) :is(.catTile,.homeEmpty,.uEmpty,.homeTimer,.continueCard){border-radius:4px !important;box-shadow:none !important}
+html.skin-formlabor:not(#_x#_y) .continueCard{background:#2A1912 !important;color:#F5F3EE !important}
+html.skin-formlabor:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:#F5F3EE !important}
+html.skin-formlabor:not(#_x#_y) .continuePlay{background:#F2541B !important;color:#FFFFFF !important}
+html.skin-formlabor:not(#_x#_y) :is(.homeEmpty,.uEmpty){background:transparent !important;border-top:1px solid rgba(42,25,18,.16)}
+
+/* ---------- Rezeptliste: eine Spalte großer Fotos (Tablet zwei, Rechner drei) ---------- */
+html.skin-formlabor:not(#_x#_y) #recipeGrid{display:grid !important;grid-template-columns:minmax(0,1fr) !important;gap:40px !important}
+@media (min-width:700px){html.skin-formlabor:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:48px 24px !important}}
+@media (min-width:1100px){html.skin-formlabor:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+html.skin-formlabor:not(#_x#_y) #recipeGrid .linkCard{margin:0 !important}
+html.skin-formlabor:not(#_x#_y) #recipeGrid .rcImg{aspect-ratio:4/5 !important}
+html.skin-formlabor:not(#_x#_y) #recipeGrid .rcBody{display:flex !important;flex-direction:row !important;justify-content:space-between;align-items:baseline;gap:12px}
+html.skin-formlabor:not(#_x#_y) #recipeGrid .recipeTitle{font-size:1.375rem !important;-webkit-line-clamp:2}
+html.skin-formlabor:not(#_x#_y) #recipeGrid .recipeMeta{flex:none}
+html.skin-formlabor:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2){display:none !important}
+
+/* ---------- Rezeptseite: großer Titel, Steckbrief, Foto ---------- */
+html.skin-formlabor:not(#_x#_y) .recipePageCard{background:transparent !important;box-shadow:none !important;overflow:visible !important}
+html.skin-formlabor:not(#_x#_y) .recipePageHero{display:flex !important;flex-direction:column;height:auto !important;max-height:none !important;aspect-ratio:auto !important;overflow:visible !important;background:transparent !important;border-radius:0 !important;margin-top:56px !important}
+html.skin-formlabor:not(#_x#_y) .recipePageHero::before,html.skin-formlabor:not(#_x#_y) .recipePageHero::after{display:none !important}
+html.skin-formlabor:not(#_x#_y) .recipeHeroText{order:-1;position:static !important;padding:0 0 26px !important;background:none !important}
+html.skin-formlabor:not(#_x#_y) .recipeHeroText .recipeName{font-size:min(clamp(2.6rem, 12.5vw, 5.6rem), 12.5vw) !important;line-height:.92 !important;letter-spacing:-.05em !important;color:#2A1912 !important;text-shadow:none !important}
+html.skin-formlabor:not(#_x#_y) .recipeHeroText .recipeSubtitle{display:block !important;-webkit-line-clamp:unset !important;margin-top:14px;font:300 1.1875rem/1.35 var(--fontUi) !important;color:#5E4A40 !important;text-shadow:none !important}
+html.skin-formlabor:not(#_x#_y) .recipePageHero img.recipeHeroImg{position:static !important;width:100% !important;height:auto !important;aspect-ratio:4/3;object-fit:cover;border-radius:4px !important;transform:none !important}
+html.skin-formlabor:not(#_x#_y) .recipePageBody{background:transparent !important;box-shadow:none !important;margin-top:0 !important;padding-top:26px !important}
+.flFacts{margin:0 0 22px}
+.flFacts dl{margin:0}
+.flFacts dl div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid rgba(42,25,18,.14);font:400 .9375rem/1.3 var(--fontUi)}
+.flFacts dl div:last-child{border-bottom:1px solid rgba(42,25,18,.14)}
+.flFacts dt{color:#5E4A40}
+.flFacts dd{margin:0;color:#2A1912;text-align:right}
+html.skin-formlabor:not(#_x#_y) .recipeAuthor{display:none !important}
+html.skin-formlabor:not(#_x#_y) .recipeFacts .kv:nth-child(-n+2){display:none !important}
+html.skin-formlabor:not(#_x#_y) .recipeInnerCard{background:transparent !important;box-shadow:none !important}
+html.skin-formlabor:not(#_x#_y) .recipeSegWrap.isStuck{background:rgba(245,243,238,.94) !important}
+@media (min-width:900px){html.skin-formlabor:not(#_x#_y) .recipePageHero img.recipeHeroImg{aspect-ratio:16/9;max-height:70vh}}
+
+/* ---------- übrige Listen: Linien statt Flächen ---------- */
+html.skin-formlabor:not(#_x#_y) :is(.uRow,.planDay){border-radius:0 !important;box-shadow:none !important}
 
 html.skin-formlabor:not(#_x#_y) .bxRv{opacity:0;transform:translateY(28px)}
-html.skin-formlabor:not(#_x#_y) .bxRv.bxRvX{transform:translateX(28px)}
 html.skin-formlabor:not(#_x#_y) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .7s ease,transform .9s var(--easeSheet)}
-
-html.skin-formlabor:not(#_x#_y) .bbFooter{background:#1E120C;color:#F3EDE4}
+html.skin-formlabor:not(#_x#_y) .bbFooter{background:#2A1912;color:#F3EDE4}
 html.skin-formlabor:not(#_x#_y) .bbFootText b{font-family:"Fraunces", Georgia, serif;font-style:italic;font-weight:400;color:#F2541B}
-html.skin-formlabor:not(#_x#_y) .bbFootText span{color:#CFC2B4;text-transform:uppercase;letter-spacing:.1em;font-size:.75rem}
-html.skin-formlabor:not(#_x#_y) .bbFootText a{background:#F2541B;color:#FFFFFF}
+html.skin-formlabor:not(#_x#_y) .bbFootText span{color:#CFC2B4}
+html.skin-formlabor:not(#_x#_y) .bbFootText a{background:#F3EDE4;color:#2A1912}
 
 /* Vorspann: die orange Schleife zeichnet sich, dann der Name */
 .skIntro-formlabor{background:#2A1912;color:#F3EDE4}
@@ -75,4 +162,5 @@ html.skin-formlabor:not(#_x#_y) .bbFootText a{background:#F2541B;color:#FFFFFF}
 @media (prefers-reduced-motion: reduce){
 html.skin-formlabor:not(#_x#_y) .bxRv{opacity:1;transform:none}
 .skIntro-formlabor path{animation:none;stroke-dashoffset:0}
+.flRow,.flW{transition:none}
 }
