@@ -142,6 +142,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Handschrift („Skin Feder“) für Datum/Seitentitel, Fraunces sonst. Startseite: 3D-Kochbuch (`wortwelt-3d.js`) – jede Doppelseite ein
     Rezept (links eingeklebtes Foto, rechts Name/Untertitel/Zeit, gemalt auf 2D-Leinwänden als Textur), Umblättern mit gewölbter Seite
     (Wischen, Pfeile), Antippen öffnet das Rezept. Gemeinsame Helfer: `api.gpu()`, `api.recipes()` (`#homeRecipes` mit t/s/z/u/i).
+    **Tiefsee** (Vorbild: Labor-Seite mit Glaskugel): blasser Lavendel mit Punktraster, riesiger Titel in Bebas („Skin Zwei“), Beschriftungen
+    in „Retro Mono“ versal. Auf allen Feld-Seiten (`tiefsee-3d.js`): Titel als Fläche im Raum (Textur aus `api.glyphs()`, echter Titel
+    `.fxDrawn`), davor eine Kugel aus 150 Spiegelscherben (InstancedMesh, schillernd) mit Chrom-Qualle; Scrollen/Gedrückthalten sprengt sie.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
