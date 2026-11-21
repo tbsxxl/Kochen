@@ -1,0 +1,69 @@
+/* Skin „glasklar“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
+   Wunsch des Besitzers (Nov. 2026): ein Glas- bzw. Eisblock vor riesiger Schrift (Vorbild: ein Portfolio mit Glasobjekt).
+   Der Seitentitel wird auf einer Leinwand nachgezeichnet, ein Glasblock gleitet darüber und bricht ihn.
+   Verhalten (Leinwand, Scroll-Bewegung): assets/skins/glasklar.js, geladen von fxRun() in assets/skins.js. Neue Regeln ans Ende. */
+
+@font-face{font-family:"Skin Glas";font-weight:100 900;font-display:swap;src:url("../fonts/archivo.woff2") format("woff2")}
+html.skin-glasklar:not(#_x#_y),html.skin-glasklar:not(#_x#_y) body{
+  --field:#E8EDF1;--onField:#0D0F12;--onField2:#3B4148;--fieldFill:rgba(255,255,255,.72);
+  --bg:#F4F7F9;--surface:#FFFFFF;--surface2:#EEF2F5;--fill:#E6ECF0;--line:rgba(13,15,18,.12);--lineStrong:rgba(13,15,18,.45);
+  --text:#0D0F12;--sub:#3B4148;--sub2:#3B4148;--muted:#4A525A;
+  --brand:#0D0F12;--onBrand:#FFFFFF;--leaf:#0D0F12;--onLeaf:#FFFFFF;--brandSoft:#E6ECF0;--leafSoft:#E6ECF0;
+  --sel:#0D0F12;--onSel:#FFFFFF;--accent:#1F5F8B;--accentSoft:#E2EDF5;--onAccent:#FFFFFF;--herb:#0D0F12;--coffee:#0D0F12;
+  --glass:rgba(244,247,249,.9);--glassLine:rgba(255,255,255,.95);
+  --fontDisplay:"Skin Glas", -apple-system, "Inter", sans-serif;
+  color-scheme:light}
+html.skin-glasklar:not(#_x#_y) body.grouped{--bg:#F4F7F9;--surface:#FFFFFF}
+html.skin-glasklar:not(#_x#_y) .cookOverlay{--cBg:#F4F7F9;--cCard:#FFFFFF;--cFill:#E6ECF0;--cLine:rgba(13,15,18,.12);--cText:#0D0F12;--cSub:#3B4148;--cLeaf:#0D0F12;--cOnLeaf:#FFFFFF}
+html.skin-glasklar:not(#_x#_y) ::selection{background:#CFE3F0;color:#0D0F12}
+
+html.skin-glasklar:not(#_x#_y) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark){font-family:var(--fontDisplay);font-weight:800;letter-spacing:-.05em}
+html.skin-glasklar:not(#_x#_y) .pageTitleBlock .h1,html.skin-glasklar:not(#_x#_y) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(2.8rem, 13.5vw, 5rem), 13.5vw);line-height:.86;font-weight:850;letter-spacing:-.06em}
+html.skin-glasklar:not(#_x#_y) .homeSectionTitle,html.skin-glasklar:not(#_x#_y) .h2{font-size:1.7rem}
+html.skin-glasklar:not(#_x#_y) .recipeTitle{font-weight:700;letter-spacing:-.03em}
+/* Titel, den die Leinwand nachzeichnet: Text bleibt für Vorlesen und Suche da, ist aber durchsichtig */
+html.skin-glasklar:not(#_x#_y) .fxDrawn{color:transparent !important;-webkit-text-fill-color:transparent;text-shadow:none !important}
+.skinScene-glasklar .fxCanvas{position:absolute;inset:0;width:100%;height:100%}
+
+/* Eis: helle Flächen mit weißer Lichtkante */
+html.skin-glasklar:not(#_x#_y) :is(.recipeCard:not(.homeFeatured),.catTile,.homeFeatured,.continueCard,.homeEmpty,.homeTimer){border-radius:22px !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.9), 0 12px 32px rgba(30,60,90,.10) !important}
+html.skin-glasklar:not(#_x#_y) .recipeCard:not(.homeFeatured){background:#FFFFFF !important}
+html.skin-glasklar:not(#_x#_y) .recipeCard .rcImg{border-radius:16px !important}
+html.skin-glasklar:not(#_x#_y) .searchRow,html.skin-glasklar:not(#_x#_y) body.layout-home .searchRowCompact,html.skin-glasklar:not(#_x#_y) .homeQuickBtn{background:rgba(255,255,255,.72) !important;color:#0D0F12 !important;
+  box-shadow:inset 0 1px 0 #FFFFFF, inset 0 0 0 1px rgba(255,255,255,.9), 0 8px 24px rgba(30,60,90,.08) !important;border-radius:18px !important}
+html.skin-glasklar:not(#_x#_y) .homeQuickBtn .uiIcon{color:#1F5F8B}
+html.skin-glasklar:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary){background:#0D0F12 !important;color:#FFFFFF !important;border-radius:999px !important}
+html.skin-glasklar:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:rgba(255,255,255,.75) !important;box-shadow:inset 0 0 0 1px rgba(13,15,18,.14) !important;border-radius:999px !important}
+html.skin-glasklar:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"]){background:#0D0F12 !important;color:#FFFFFF !important}
+html.skin-glasklar:not(#_x#_y) .bottomRail{background:rgba(244,247,249,.82) !important;border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 0 #FFFFFF, 0 12px 36px rgba(30,60,90,.14) !important}
+html.skin-glasklar:not(#_x#_y) .tabItem{color:#3B4148 !important}
+html.skin-glasklar:not(#_x#_y) .tabItem.active{background:#0D0F12 !important;color:#FFFFFF !important}
+html.skin-glasklar:not(#_x#_y) .homeAllLink{color:#1F5F8B}
+html.skin-glasklar:not(#_x#_y) .continueCard{background:#0D0F12 !important;color:#FFFFFF !important}
+html.skin-glasklar:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:#FFFFFF !important}
+html.skin-glasklar:not(#_x#_y) .continuePlay{background:#FFFFFF !important;color:#0D0F12 !important}
+
+html.skin-glasklar:not(#_x#_y) .bxRv{opacity:0;transform:translateY(20px) scale(.97)}
+html.skin-glasklar:not(#_x#_y) .bxRv.bxRvX{transform:translateX(20px) scale(.97)}
+html.skin-glasklar:not(#_x#_y) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .7s var(--easeSheet),transform .9s var(--easeSheet)}
+
+html.skin-glasklar:not(#_x#_y) .bbFooter{background:#0D0F12;color:#FFFFFF}
+html.skin-glasklar:not(#_x#_y) .bbFootText b{font-family:var(--fontDisplay);font-weight:850;letter-spacing:-.06em}
+html.skin-glasklar:not(#_x#_y) .bbFootText span{color:#C9D3DA}
+html.skin-glasklar:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#0D0F12}
+
+/* Vorspann: riesiges Wort, ein Glasblock gleitet darüber */
+.skIntro-glasklar{background:#E8EDF1;color:#0D0F12}
+.skIntro-glasklar .ivWord{font:850 clamp(4rem, 24vw, 12rem)/.85 "Skin Glas", sans-serif;letter-spacing:-.07em;animation:glWord .6s ease both}
+.skIntro-glasklar .ivGlass{position:absolute;left:50%;top:50%;width:min(52vw, 280px);aspect-ratio:1;margin:calc(min(52vw, 280px) / -2) 0 0 calc(min(52vw, 280px) / -2);border-radius:34%;
+  background:radial-gradient(circle at 30% 25%, rgba(255,255,255,.85), rgba(255,255,255,.15) 38%, rgba(160,200,225,.18) 70%, rgba(255,255,255,.55));
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.9), inset 0 -18px 40px rgba(120,160,190,.25), 0 30px 60px rgba(30,60,90,.18);
+  -webkit-backdrop-filter:blur(3px) saturate(1.3);backdrop-filter:blur(3px) saturate(1.3);
+  animation:glSweep 1.8s cubic-bezier(.6,0,.2,1) .15s both}
+@keyframes glWord{from{opacity:0;transform:scale(1.06)}}
+@keyframes glSweep{from{transform:translateX(-80vw) rotate(-25deg)}to{transform:translateX(0) rotate(8deg)}}
+
+@media (prefers-reduced-motion: reduce){
+html.skin-glasklar:not(#_x#_y) .bxRv{opacity:1;transform:none}
+}

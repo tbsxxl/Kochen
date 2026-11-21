@@ -380,3 +380,13 @@ getrennt (Wunsch des Besitzers).
   auf Weiß mit leichtem Verlauf nach `#EEEEF0` (wie Apples Health-Icon), nur hell (Web-Apps können kein dunkles Icon festlegen), gerendert per Playwright, ico mit ImageMagick `convert`.
   Bei Logo-Änderungen die Icon-Dateinamen (`-v10` → `-v11`) und `?v=` an `logo.svg`/`favicon.ico` hochzählen,
   sonst zeigen iPhones und der Service Worker weiter das alte Icon.
+
+## Sechs Effekt-Skins (Nov. 2026)
+
+Der Besitzer wollte sechs weitere Skins nach Vorbild-Seiten (Wort-Illustrationen mit Farbwechsel, blauer Raum mit Rose aus Objekten,
+Glasobjekt vor großer Schrift, zerfallende Schrift mit Quallen, rote 3D-Formen mit Retro-Computer, Winterbild im Gemälde-Stil).
+Umgesetzt als Wortwelt, Blauraum, Glasklar, Tiefsee, Formlabor, Galerie – ohne Namen, Bilder oder Schriften der Vorbilder, alle Grafiken
+selbst gezeichnet, nur 2D-Leinwand (die 3D-Köpfe mit Three.js waren zuvor wieder entfernt worden). Die Vorbild-Seiten wurden nicht geöffnet;
+Grundlage war die Beschreibung des Besitzers. Erste Fassung: Rose und rote Formen waren zu groß und lagen über dem Titel → seitdem stehen sie
+in der freien Fläche neben der kürzesten Titelzeile (`api.zone()`).
+
