@@ -1,59 +1,163 @@
 /* Skin „blauraum“ – wird nur geladen, wenn dieser Skin aktiv ist (siehe Kopf von _layouts/default.html).
-   Wunsch des Besitzers (Nov. 2026): kräftiges Blau, schwebende Bilder, eine Rose aus Küchen-Dingen (Vorbild: eine Agentur-Seite
-   mit blauem Raum; eigene Zeichnung auf einer 2D-Leinwand statt 3D-Bibliothek).
+   Wunsch des Besitzers (Nov. 2026): wie die Vorbild-Seite (Agentur mit Bilderringen) – zweiter Neubau mit eigenem Seitenaufbau:
+   elektrisches Blau mit gebogenem Gitter, winzige Versal-Beschriftungen, Glas-Kapseln, scharfe Fotos ohne Kartenfläche, gelber Punkt.
    Verhalten (Leinwand, Scroll-Bewegung): assets/skins/blauraum.js, geladen von fxRun() in assets/skins.js. Neue Regeln ans Ende. */
 
 @font-face{font-family:"Skin Raum";font-weight:300 800;font-display:swap;src:url("../fonts/host-grotesk.woff2") format("woff2")}
 html.skin-blauraum:not(#_x#_y),html.skin-blauraum:not(#_x#_y) body{
-  --field:#1420D2;--onField:#FFFFFF;--onField2:rgba(255,255,255,.86);--fieldFill:rgba(255,255,255,.14);
-  --bg:#1420D2;--surface:#1019B8;--surface2:#2330DE;--fill:rgba(255,255,255,.12);--line:rgba(255,255,255,.22);--lineStrong:rgba(255,255,255,.6);
+  --field:#0C0CD6;--onField:#FFFFFF;--onField2:rgba(255,255,255,.86);--fieldFill:rgba(255,255,255,.14);
+  --bg:#0C0CD6;--surface:#0A0AB8;--surface2:#1A1AE0;--fill:rgba(255,255,255,.12);--line:rgba(255,255,255,.22);--lineStrong:rgba(255,255,255,.6);
   --text:#FFFFFF;--sub:rgba(255,255,255,.86);--sub2:rgba(255,255,255,.86);--muted:rgba(255,255,255,.8);
-  --brand:#FFFFFF;--onBrand:#1420D2;--leaf:#FFFFFF;--onLeaf:#1420D2;--brandSoft:rgba(255,255,255,.14);--leafSoft:rgba(255,255,255,.14);
-  --sel:#FFFFFF;--onSel:#1420D2;--accent:#FFFFFF;--accentSoft:rgba(255,255,255,.14);--onAccent:#1420D2;--herb:#FFFFFF;--coffee:#1019B8;
+  --brand:#FFFFFF;--onBrand:#0C0CD6;--leaf:#FFFFFF;--onLeaf:#0C0CD6;--brandSoft:rgba(255,255,255,.14);--leafSoft:rgba(255,255,255,.14);
+  --sel:#FFFFFF;--onSel:#0C0CD6;--accent:#FFFFFF;--accentSoft:rgba(255,255,255,.14);--onAccent:#0C0CD6;--herb:#FFFFFF;--coffee:#0A0AB8;
   --glass:rgba(16,25,184,.94);--glassLine:rgba(255,255,255,.2);--glassShadow:none;
   --fontUi:"Skin Raum", -apple-system, "Inter", sans-serif;--fontDisplay:"Skin Raum", -apple-system, "Inter", sans-serif;
   color-scheme:dark}
-html.skin-blauraum:not(#_x#_y) body.grouped{--bg:#1420D2;--surface:#1019B8}
-html.skin-blauraum:not(#_x#_y) .cookOverlay{--cBg:#1420D2;--cCard:#1019B8;--cFill:rgba(255,255,255,.12);--cLine:rgba(255,255,255,.2);--cText:#FFFFFF;--cSub:rgba(255,255,255,.86);--cLeaf:#FFFFFF;--cOnLeaf:#1420D2}
-html.skin-blauraum:not(#_x#_y) ::selection{background:#FFFFFF;color:#1420D2}
+html.skin-blauraum:not(#_x#_y) body.grouped{--bg:#0C0CD6;--surface:#0A0AB8}
+html.skin-blauraum:not(#_x#_y) .cookOverlay{--cBg:#0C0CD6;--cCard:#0A0AB8;--cFill:rgba(255,255,255,.12);--cLine:rgba(255,255,255,.2);--cText:#FFFFFF;--cSub:rgba(255,255,255,.86);--cLeaf:#FFFFFF;--cOnLeaf:#0C0CD6}
+html.skin-blauraum:not(#_x#_y) ::selection{background:#FFFFFF;color:#0C0CD6}
 
-html.skin-blauraum:not(#_x#_y) :is(.pageTitleBlock .h1,.homeGreetingTitle,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark){font-family:var(--fontDisplay);font-weight:500;letter-spacing:-.035em}
-html.skin-blauraum:not(#_x#_y) .pageTitleBlock .h1,html.skin-blauraum:not(#_x#_y) body .homeGreetingTitle.homeGreetingTitle{font-size:min(clamp(2.6rem, 12vw, 4.2rem), 12vw);line-height:.95;font-weight:400;letter-spacing:-.045em}
-html.skin-blauraum:not(#_x#_y) .homeSectionTitle,html.skin-blauraum:not(#_x#_y) .h2{font-size:1.6rem;font-weight:500}
-html.skin-blauraum:not(#_x#_y) .recipeTitle{font-weight:500}
+/* ---------- Grundton: Gitter, Schrift, Kapseln ---------- */
+html.skin-blauraum:not(#_x#_y){background:#0C0CD6}
+html.skin-blauraum:not(#_x#_y) body{background:transparent !important}
+html.skin-blauraum:not(#_x#_y)::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:url("blauraum-grid.svg?v=1") center/100% 100% no-repeat}
+.skinScene-blauraum{background:transparent !important}
+html.skin-blauraum:not(#_x#_y) .skinScene{background:transparent !important}
+html.skin-blauraum:not(#_x#_y) body.fieldPage .pageContent,html.skin-blauraum:not(#_x#_y) body .pageContent{background:transparent !important;box-shadow:none !important}
+html.skin-blauraum:not(#_x#_y) :is(.card,.recipeInnerCard,.notesCard,.cardPad){background:transparent !important;box-shadow:none !important;border-radius:0 !important}
+/* winzige Versalien als Grundschrift aller Beschriftungen */
+html.skin-blauraum:not(#_x#_y) :is(.pageTitleBlock .h1,.homeSectionTitle,.h2,.catGroupTitle,.sheetTitle,.prepTitle,.navCompact,.resultCount,.homeAllLink,.continueEyebrow,.recipeMeta,.catTileCount,.planDayName,.notesTitle,.ingHead,.listGroup .ingHead){
+  font-family:var(--fontUi) !important;font-size:.8125rem !important;font-weight:500 !important;letter-spacing:.02em !important;text-transform:uppercase;line-height:1.3 !important}
+html.skin-blauraum:not(#_x#_y) .pageTitleBlock{padding-top:6px}
+html.skin-blauraum:not(#_x#_y) .pageTitleBlock .h1{font-size:.9375rem !important}
+html.skin-blauraum:not(#_x#_y) :is(.homeSectionTitle,.h2,.catGroupTitle)::before{content:"(";opacity:.7}
+html.skin-blauraum:not(#_x#_y) :is(.homeSectionTitle,.h2,.catGroupTitle)::after{content:")";opacity:.7}
+html.skin-blauraum:not(#_x#_y) .homeSectionHead{border-top:1px solid rgba(255,255,255,.28);padding-top:10px;margin-bottom:14px}
+html.skin-blauraum:not(#_x#_y) .homeAllLink{color:#FFFFFF !important;text-decoration:underline;text-underline-offset:3px}
+/* Kapseln: dunkles Glas */
+html.skin-blauraum:not(#_x#_y) :is(.filterChip,.chip,.pillToggle,.searchRow,.navIconBtn,.recipeActBtn,.segmented,.homeQuickBtn,.profileBadge,.recipeBack){
+  background:rgba(0,0,120,.42) !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22) !important;color:#FFFFFF !important;border-radius:999px !important;border:0 !important}
+html.skin-blauraum:not(#_x#_y) :is(.filterChip,.chip,.pillToggle,.homeQuickBtn,.segBtn){font-size:.8125rem !important;font-weight:500 !important;letter-spacing:.02em;text-transform:uppercase}
+html.skin-blauraum:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#FFFFFF !important;color:#0C0CD6 !important}
+html.skin-blauraum:not(#_x#_y) .segmented{padding:3px !important}
+html.skin-blauraum:not(#_x#_y) .segBtn{border-radius:999px !important;color:rgba(255,255,255,.8) !important;background:transparent !important}
+html.skin-blauraum:not(#_x#_y) .segBtn.active{background:rgba(255,255,255,.2) !important;color:#FFFFFF !important;box-shadow:none !important}
+html.skin-blauraum:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary){background:#FFFFFF !important;color:#0C0CD6 !important;border-radius:999px !important;text-transform:uppercase;font-size:.875rem !important;letter-spacing:.02em;font-weight:500 !important}
+html.skin-blauraum:not(#_x#_y) .searchRow input{color:#FFFFFF}
+html.skin-blauraum:not(#_x#_y) .searchRow input::placeholder{color:rgba(255,255,255,.78);text-transform:uppercase;font-size:.875rem;letter-spacing:.02em}
 
-/* Bilder schweben frei im Blau: keine Kartenfläche, nur das Foto */
-html.skin-blauraum:not(#_x#_y) .recipeCard:not(.homeFeatured){background:transparent !important;box-shadow:none !important;overflow:visible !important}
-html.skin-blauraum:not(#_x#_y) .recipeCard .rcImg{border-radius:6px !important;box-shadow:0 18px 40px rgba(8,16,80,.35)}
-html.skin-blauraum:not(#_x#_y) .recipeCard:not(.homeFeatured) .rcBody{padding-left:2px;padding-right:2px}
-html.skin-blauraum:not(#_x#_y) .homeFeatured,html.skin-blauraum:not(#_x#_y) .catTile{border-radius:6px !important;box-shadow:0 22px 50px rgba(8,16,80,.4) !important}
-@keyframes blFloat{0%,100%{transform:translate3d(0,0,0) rotate(var(--r0, 0deg))}50%{transform:translate3d(0,-9px,0) rotate(var(--r1, .6deg))}}
-html.skin-blauraum:not(#_x#_y) .hScroll .linkCard .rcImg,html.skin-blauraum:not(#_x#_y) .homeFeatured{animation:blFloat 6.4s ease-in-out infinite}
-html.skin-blauraum:not(#_x#_y) .hScroll .linkCard:nth-child(3n+2) .rcImg{animation-duration:7.6s;animation-delay:-2.2s;--r0:-.5deg;--r1:.4deg}
-html.skin-blauraum:not(#_x#_y) .hScroll .linkCard:nth-child(3n) .rcImg{animation-duration:5.8s;animation-delay:-4s;--r0:.4deg;--r1:-.6deg}
-html.skin-blauraum:not(#_x#_y) :is(.btn.action,.recipeCookBtn,.cookNext,.btnPrimary,.continuePlay){background:#FFFFFF !important;color:#1420D2 !important;border-radius:999px !important}
-html.skin-blauraum:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55) !important;color:#FFFFFF;border-radius:999px !important}
-html.skin-blauraum:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"]){background:#FFFFFF !important;color:#1420D2 !important}
-html.skin-blauraum:not(#_x#_y) .bottomRail{background:rgba(12,22,170,.88) !important;border:1px solid rgba(255,255,255,.22);box-shadow:0 12px 40px rgba(8,16,80,.4) !important}
-html.skin-blauraum:not(#_x#_y) .tabItem{color:rgba(255,255,255,.86) !important}
-html.skin-blauraum:not(#_x#_y) .tabItem.active{background:#FFFFFF !important;color:#1420D2 !important}
-html.skin-blauraum:not(#_x#_y) .continueCard{background:#FFFFFF !important;color:#1420D2 !important}
-html.skin-blauraum:not(#_x#_y) .continueCard :is(.continueEyebrow,.continueTitle,.continueSub){color:#1420D2 !important}
-html.skin-blauraum:not(#_x#_y) .continuePlay{background:#1420D2 !important;color:#FFFFFF !important}
-html.skin-blauraum:not(#_x#_y) .homeAllLink{color:#FFFFFF;text-decoration:underline;text-underline-offset:3px}
-.skinScene-blauraum .fxCanvas{position:absolute;inset:0;width:100%;height:100%}
+/* ---------- Untere Leiste: schmale Glas-Kapsel, Versal-Beschriftung, aktiver Reiter hell ---------- */
+html.skin-blauraum:not(#_x#_y) .bottomRail{background:rgba(0,0,140,.5) !important;-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border:0 !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2) !important}
+html.skin-blauraum:not(#_x#_y) .tabItem{color:rgba(255,255,255,.78) !important;background:transparent !important}
+html.skin-blauraum:not(#_x#_y) .tabItem.active{background:rgba(255,255,255,.2) !important;color:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y) .tabLabel{font-size:.6875rem !important;font-weight:500 !important;letter-spacing:.03em;text-transform:uppercase}
+html.skin-blauraum:not(#_x#_y) .tabItem.active .tabLabel::before{content:"";display:inline-block;width:5px;height:5px;margin:0 4px 1px 0;border-radius:50%;background:#F4F000;vertical-align:middle}
+/* Buchstaben rollen beim Darüberfahren (nur Maus) */
+@media (hover:hover) and (pointer:fine){
+html.skin-blauraum:not(#_x#_y) :is(.tabLabel,.homeAllLink,.blCount u){display:inline-block;overflow:hidden;vertical-align:bottom}
+html.skin-blauraum:not(#_x#_y) .tabItem:hover .tabLabel{text-shadow:0 1.4em 0 currentColor;animation:blRoll .45s cubic-bezier(.7,0,.2,1)}
+@keyframes blRoll{from{transform:translateY(0)}50%{transform:translateY(-1.4em)}50.01%{transform:translateY(1.4em)}to{transform:translateY(0)}}
+}
 
-html.skin-blauraum:not(#_x#_y) .bxRv{opacity:0;transform:translateY(34px) scale(.96)}
-html.skin-blauraum:not(#_x#_y) .bxRv.bxRvX{transform:translateX(30px) scale(.96)}
+/* ---------- Startseite: erster Bildschirm = 3D-Raum ---------- */
+html.skin-blauraum:not(#_x#_y) body.blHome .homeGreeting{position:relative;min-height:100svh;margin-top:calc(-1 * env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
+html.skin-blauraum:not(#_x#_y) body.blHome .homeBrand{position:relative;z-index:3}
+html.skin-blauraum:not(#_x#_y) body.blHome .brandWordmark{font-size:.9375rem !important;font-weight:500 !important;letter-spacing:.02em;text-transform:uppercase}
+html.skin-blauraum:not(#_x#_y) body.blHome .homeGreetingTitle.homeGreetingTitle{position:relative;z-index:3;font:500 .8125rem/1.3 var(--fontUi) !important;letter-spacing:.02em !important;text-transform:uppercase;white-space:normal;margin-top:18px;max-width:12em;text-shadow:none}
+html.skin-blauraum:not(#_x#_y) body.blHome .homeGreetingSub{display:none}
+.blHero{position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;z-index:1;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;overflow:hidden}
+.blHero .blGL{position:absolute;inset:0;width:100%;height:100%;cursor:grab;-webkit-mask-image:linear-gradient(to bottom, transparent calc(env(safe-area-inset-top) + 96px), #000 calc(env(safe-area-inset-top) + 170px));mask-image:linear-gradient(to bottom, transparent calc(env(safe-area-inset-top) + 96px), #000 calc(env(safe-area-inset-top) + 170px))}
+.blHero.blOver .blGL{cursor:pointer}
+.blBar{position:absolute;left:max(16px, env(safe-area-inset-left));right:max(16px, env(safe-area-inset-right));bottom:calc(env(safe-area-inset-bottom) + 92px);display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:2}
+.blSeg{display:inline-flex;flex:none;padding:3px;border-radius:999px;background:rgba(0,0,140,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.blSeg button{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,.8);font:500 .8125rem/1 var(--fontUi);letter-spacing:.02em;text-transform:uppercase;cursor:pointer}
+.blSeg button[aria-pressed="true"]{background:rgba(255,255,255,.22);color:#FFFFFF}
+.blCount{gap:.35em;padding:0 16px;border-radius:999px;background:rgba(0,0,140,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#FFFFFF;font:500 .8125rem/1.3 var(--fontUi);letter-spacing:.02em;text-transform:uppercase;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.blCount u{text-underline-offset:3px}
+.blTip{position:absolute;left:0;top:0;z-index:3;display:flex;flex-direction:column;gap:2px;padding:9px 14px 9px 30px;border-radius:14px;background:rgba(0,0,140,.55);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#FFFFFF;pointer-events:none;opacity:0;transition:opacity .2s}
+.blTip.on{opacity:1}
+.blTip::before{content:"↗";position:absolute;left:12px;top:9px;font-size:.8125rem}
+.blTipT{font:500 .875rem/1.2 var(--fontUi)}
+.blTipZ{font:400 .75rem/1.2 var(--fontUi);color:rgba(255,255,255,.8)}
+/* ohne 3D: Bilderring aus CSS */
+.blRing{position:absolute;left:50%;top:48%;width:0;height:0;transform-style:preserve-3d;perspective:900px}
+.blRing img{position:absolute;width:min(30vw,170px);aspect-ratio:3/4;object-fit:cover;left:calc(min(30vw,170px) / -2);top:calc(min(40vw,227px) / -2);
+  transform:rotateY(calc(var(--i) * 30deg)) translateZ(min(52vw,330px));animation:blSpin 60s linear infinite;animation-delay:calc(var(--i) * -5s)}
+@keyframes blSpin{from{transform:rotateY(calc(var(--i) * 30deg)) translateZ(min(52vw,330px))}to{transform:rotateY(calc(var(--i) * 30deg + 360deg)) translateZ(min(52vw,330px))}}
+/* Inhalte unter dem Raum */
+html.skin-blauraum:not(#_x#_y) body.blHome .homeQuick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+html.skin-blauraum:not(#_x#_y) .homeQuickBtn{min-height:48px;justify-content:center}
+html.skin-blauraum:not(#_x#_y) .continueCard{background:rgba(0,0,120,.42) !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22) !important;border-radius:999px !important;color:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y) .continueCard :is(.continueTitle,.continueSub,.continueEyebrow){color:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y) .continuePlay{background:#FFFFFF !important;color:#0C0CD6 !important}
+
+/* ---------- Fotos statt Karten: scharfe Kanten, Titel klein darunter ---------- */
+html.skin-blauraum:not(#_x#_y) .recipeCard{background:transparent !important;box-shadow:none !important;overflow:visible !important;border-radius:0 !important}
+html.skin-blauraum:not(#_x#_y) .recipeCard .rcImg{border-radius:0 !important;box-shadow:none !important;background:#1A1AE0}
+html.skin-blauraum:not(#_x#_y) .recipeCard .rcBody{padding:10px 0 0 !important;gap:3px}
+html.skin-blauraum:not(#_x#_y) .recipeCard .recipeTitle{font:500 .875rem/1.25 var(--fontUi) !important;letter-spacing:.02em !important;text-transform:uppercase;color:#FFFFFF}
+html.skin-blauraum:not(#_x#_y) .recipeCard .recipeMeta{color:rgba(255,255,255,.8) !important;font-size:.75rem !important}
+html.skin-blauraum:not(#_x#_y) .homeFeatured .rcImg{aspect-ratio:4/5 !important;max-height:none}
+html.skin-blauraum:not(#_x#_y) .homeFeatured{width:min(78%,420px);margin:0 auto}
+html.skin-blauraum:not(#_x#_y) .homeFeatured .rcBody{position:static !important;background:none !important;padding:12px 0 0 !important;color:#FFFFFF}
+html.skin-blauraum:not(#_x#_y) .homeFeatured :is(.homeFeaturedTitle,.recipeMeta){text-shadow:none !important;color:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y) .homeFeatured .heroOverlayCat{background:rgba(0,0,120,.5) !important;color:#FFFFFF !important;text-transform:uppercase;letter-spacing:.02em;border-radius:999px}
+html.skin-blauraum:not(#_x#_y) .hScroll .rcImg{aspect-ratio:3/4 !important}
+html.skin-blauraum:not(#_x#_y) .catTile{border-radius:0 !important;box-shadow:none !important;background:transparent !important}
+html.skin-blauraum:not(#_x#_y) .catTile img{border-radius:0 !important}
+html.skin-blauraum:not(#_x#_y) .catTileName{font:500 .875rem/1.25 var(--fontUi) !important;letter-spacing:.02em !important;text-transform:uppercase;color:#FFFFFF !important;text-shadow:0 1px 10px rgba(0,0,80,.6)}
+
+/* ---------- Rezeptliste: Fotos hochkant auf gewölbter Fläche, oder als Textliste ---------- */
+html.skin-blauraum:not(#_x#_y) #recipeGrid{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:34px 22px !important;perspective:1100px}
+@media (min-width:700px){html.skin-blauraum:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:56px 48px !important}}
+@media (min-width:1100px){html.skin-blauraum:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(4,minmax(0,1fr)) !important}}
+html.skin-blauraum:not(#_x#_y) #recipeGrid .linkCard{margin:0 !important}
+html.skin-blauraum:not(#_x#_y) #recipeGrid .recipeCard{transform-origin:50% 50%;will-change:transform}
+html.skin-blauraum:not(#_x#_y) #recipeGrid .rcImg{aspect-ratio:3/4 !important}
+html.skin-blauraum:not(#_x#_y) #recipeGrid .recipeTitle{-webkit-line-clamp:2}
+html.skin-blauraum:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2){display:none !important}
+.blView{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 92px);transform:translateX(-50%);z-index:30}
+html.blList.skin-blauraum:not(#_x#_y) #recipeGrid{grid-template-columns:minmax(0,1fr) !important;gap:0 !important}
+html.blList.skin-blauraum:not(#_x#_y) #recipeGrid .recipeCard{display:grid !important;grid-template-columns:56px 1fr;gap:14px;align-items:center;padding:10px 0;border-top:1px solid rgba(255,255,255,.28)}
+html.blList.skin-blauraum:not(#_x#_y) #recipeGrid .rcImg{width:56px;aspect-ratio:1 !important}
+html.blList.skin-blauraum:not(#_x#_y) #recipeGrid .rcBody{padding:0 !important}
+
+/* ---------- Rezeptseite: Bild mittig, Name und Zeit klein, Text groß ---------- */
+html.skin-blauraum:not(#_x#_y) .recipePageCard{overflow:visible !important}
+html.skin-blauraum:not(#_x#_y) .recipePageHero{position:relative;width:min(74%,440px) !important;margin:64px auto 0 !important;aspect-ratio:auto !important;height:auto !important;max-height:none !important;overflow:visible !important;border-radius:0 !important;background:transparent !important}
+html.skin-blauraum:not(#_x#_y) .recipePageHero img.recipeHeroImg{position:static !important;display:block;width:100% !important;height:auto !important;aspect-ratio:4/5;object-fit:cover;border-radius:0 !important;transform:none !important}
+html.skin-blauraum:not(#_x#_y) .recipePageHero::after,html.skin-blauraum:not(#_x#_y) .recipePageHero::before{display:none !important}
+html.skin-blauraum:not(#_x#_y) .recipeHeroText{position:static !important;padding:18px 0 0 !important;background:none !important;text-align:left}
+html.skin-blauraum:not(#_x#_y) .recipeHeroText .recipeName{font:500 1rem/1.25 var(--fontUi) !important;letter-spacing:.02em !important;text-transform:uppercase;color:#FFFFFF !important;text-shadow:none !important}
+html.skin-blauraum:not(#_x#_y) .recipeHeroText .recipeSubtitle{font:400 1.25rem/1.35 var(--fontUi) !important;color:rgba(255,255,255,.9) !important;text-shadow:none !important;margin-top:6px;display:block !important;-webkit-line-clamp:unset !important;overflow:visible !important;max-height:none !important}
+html.skin-blauraum:not(#_x#_y) .recipePageBody{padding-top:22px !important;margin-top:0 !important;background:transparent !important;box-shadow:none !important;border-radius:0 !important}
+html.skin-blauraum:not(#_x#_y) .recipeFacts .kv{font-size:.8125rem;text-transform:uppercase;letter-spacing:.02em;background:none !important}
+html.skin-blauraum:not(#_x#_y) .recipeAuthor{font-size:.8125rem;text-transform:uppercase;letter-spacing:.02em}
+html.skin-blauraum:not(#_x#_y) .recipeSegWrap.isStuck{background:rgba(12,12,214,.9) !important}
+html.skin-blauraum:not(#_x#_y) :is(#ingPane,#stepsPane) :is(li,.ingRow,p){font-size:1.125rem;line-height:1.45}
+html.skin-blauraum:not(#_x#_y) .recipeBody ol>li::marker{font:500 .8125rem var(--fontUi);color:rgba(255,255,255,.8)}
+
+html.skin-blauraum:not(#_x#_y) .recipeInnerCard :is(.listGroup,ul,ol){background:transparent !important;box-shadow:none !important;border-radius:0 !important}
+html.skin-blauraum:not(#_x#_y) .recipeInnerCard :is(li,.ingRow){border-color:rgba(255,255,255,.24) !important}
+html.skin-blauraum:not(#_x#_y) :is(.homeEmpty,.uEmpty){background:transparent !important;box-shadow:none !important;border-top:1px solid rgba(255,255,255,.28);border-radius:0 !important}
+
+/* ---------- übrige Listen (Einkauf, Plan, Kühltruhe): Linien statt Flächen ---------- */
+html.skin-blauraum:not(#_x#_y) :is(.uRow,.planDay,.sheetRow){background:transparent !important;border-radius:0 !important;box-shadow:none !important;border-top:1px solid rgba(255,255,255,.24)}
+html.skin-blauraum:not(#_x#_y) .sheet{background:#0C0CD6 !important;background-image:url("blauraum-grid.svg?v=1") !important;background-size:100% 100% !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.3) !important}
+
+/* ---------- gelber Punkt (nur Maus) ---------- */
+.blDot{position:fixed;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#F4F000;z-index:2147483000;pointer-events:none;opacity:0;transition:opacity .2s;mix-blend-mode:normal}
+.blDot.on{opacity:1}
+
+html.skin-blauraum:not(#_x#_y) .bxRv{opacity:0;transform:translateY(34px)}
 html.skin-blauraum:not(#_x#_y) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .9s var(--easeSheet),transform 1.2s var(--easeSheet)}
-
-html.skin-blauraum:not(#_x#_y) .bbFooter{background:#0B14A0;color:#FFFFFF}
+html.skin-blauraum:not(#_x#_y) .bbFooter{background:#0A0AB8;color:#FFFFFF}
 html.skin-blauraum:not(#_x#_y) .bbFootText b{font-weight:400;letter-spacing:-.04em}
 html.skin-blauraum:not(#_x#_y) .bbFootText span{color:rgba(255,255,255,.86)}
-html.skin-blauraum:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#1420D2}
+html.skin-blauraum:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#0C0CD6}
 
 /* Vorspann: Dinge kreisen herein und ordnen sich zur Rose */
-.skIntro-blauraum{background:#1420D2;color:#FFFFFF}
+.skIntro-blauraum{background:#0C0CD6;color:#FFFFFF}
 .skIntro-blauraum .ivRose{position:relative;width:200px;height:200px}
 .skIntro-blauraum .ivRose i{position:absolute;left:50%;top:50%;width:22px;height:13px;margin:-6px 0 0 -11px;border-radius:50% 50% 50% 0;background:#FFFFFF;
   transform:rotate(var(--a)) translateX(var(--r)) rotate(40deg);animation:blIn 1.2s cubic-bezier(.2,.8,.2,1) var(--d) both}
@@ -64,19 +168,7 @@ html.skin-blauraum:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#1420D2}
 @keyframes blIn{from{opacity:0;transform:rotate(calc(var(--a) - 220deg)) translateX(170px) rotate(40deg) scale(.4)}}
 @keyframes blName{from{opacity:0;transform:translateY(12px)}}
 
-/* 3D-Galerie auf der Startseite (blauraum-3d.js): Bühne unter den Schnellknöpfen, Leinwand liegt in der Szene dahinter */
-.skinScene-blauraum{background-image:linear-gradient(rgba(0,0,70,.2) 1px, transparent 1px),linear-gradient(90deg, rgba(0,0,70,.2) 1px, transparent 1px);background-size:64px 64px}
-.skinScene-blauraum .blGL{position:absolute;inset:0;width:100%;height:100%}
-.blStage{position:relative;height:clamp(340px, 62svh, 620px);margin:10px calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
-  touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
-.blStage:active{cursor:grabbing}
-.blBar{position:absolute;left:16px;right:16px;bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none}
-.blSeg{pointer-events:auto;display:inline-flex;flex:none;padding:3px;border-radius:999px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
-.blSeg button{min-height:44px;padding:0 16px;border:0;border-radius:999px;background:transparent;color:#FFFFFF;font:500 .8125rem/1 var(--fontUi);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
-.blSeg button[aria-pressed="true"]{background:#FFFFFF;color:#1420D2}
-.blCount{color:rgba(255,255,255,.88);font-size:.8125rem;line-height:1.3;text-align:right}
-
 @media (prefers-reduced-motion: reduce){
 html.skin-blauraum:not(#_x#_y) .bxRv{opacity:1;transform:none}
-html.skin-blauraum:not(#_x#_y) .hScroll .linkCard .rcImg,html.skin-blauraum:not(#_x#_y) .homeFeatured{animation:none}
+.blRing img{animation:none}
 }
