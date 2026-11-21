@@ -131,13 +131,14 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     leise Scroll-Bewegung (`LITE_FX`) und die Schlussseite mit eigenen Farben (`FOOT_LEAVES`).
     **Nach Vergleich mit den echten Vorbild-Seiten (Besitzer: „nicht mal annähernd vergleichbar“) werden die Skins einzeln mit echtem 3D neu
     gebaut.** Vorbild-Seiten jetzt in den Netzwerk-Freigaben; ansehen mit Playwright + `--use-gl=angle --use-angle=swiftshader
-    --enable-unsafe-swiftshader` (WebGL-Seiten rendern langsam, Screenshot-Timeout 60 s). Erster: **Blauraum** = Startseite mit 3D-Galerie
-    (`assets/skins/blauraum-3d.js`, ES-Modul): 30 Rezeptfotos (`#homeRecipes` in `home.html`, Auswahl wechselt täglich) auf gebogenen Karten
-    in drei gegenläufigen Ringen oder einer Spirale (Umschalter „Ringe | Spirale“), in der Mitte eine verchromte Kochmütze aus Würfeln
-    (InstancedMesh, RoomEnvironment-Spiegelung). Ziehen dreht, Antippen einer Karte öffnet das Rezept, Scrollen dreht mit. Bühne `.blStage`
-    unter den Schnellknöpfen, Leinwand in der Szene, oberhalb der Bühne per Maske ausgeblendet. Three.js r170 in `assets/vendor/three/`
-    (nur für diesen Skin geladen). Nur mit echter Grafikkarte (Software-Renderer → gezeichnete 2D-Rose), zum Testen
-    `localStorage['kochbuch.ui.cineForce'] = '1'`. Listen-Seiten behalten die 2D-Rose.
+    --enable-unsafe-swiftshader` (WebGL-Seiten rendern langsam, Screenshot-Timeout 60 s). **Blauraum** (Dez. 2026 zweiter Neubau, Besitzer: „zu nah am Standard, eigener Charakter“ – darf den ganzen Aufbau ändern;
+    Vorbild k95.it genau angesehen: Start, Arbeiten, Projektseite): elektrisches Blau `#0C0CD6` mit gebogenem Gitter (`blauraum-grid.svg`
+    als `html::before`), alle Beschriftungen winzige Versalien, Abschnitte als „(Favoriten)“, Glas-Kapseln, Fotos ohne Kartenfläche und
+    ohne Rundung, gelber Punkt `#F4F000` (aktiver Reiter, Mauszeiger `.blDot`). Start: erster Bildschirm = Vollbild-3D-Raum `.blHero`
+    (`blauraum-3d.js`: drei Ringe aus Rezeptfotos um eine Kochmütze aus verchromten Lamellen, Ringe/Spirale, Ziehen/Scrollen dreht, Antippen
+    öffnet, am Rechner Etikett `.blTip` am Zeiger); ohne Grafikkarte CSS-Bilderring `.blRing`. Rezeptliste: Fotos hochkant auf gewölbter
+    Fläche (Neigung je nach Lage, `listPage()`), Umschalter „Raster | Liste“ (`kochbuch.ui.blList`). Rezeptseite: Foto mittig, Name klein
+    in Versalien, Untertitel groß. Die anderen fünf Effekt-Skins sollen nach dem OK des Besitzers genauso gründlich umgebaut werden.
     **Bilderbuch** (Schlüssel `wortwelt`, Vorbild: ein illustriertes Online-Buch): dunkler, diagonal gestrichener Grund, Pastellrosa-Akzent,
     Handschrift („Skin Feder“) für Datum/Seitentitel, Fraunces sonst. Startseite: 3D-Kochbuch (`wortwelt-3d.js`) – jede Doppelseite ein
     Rezept (links eingeklebtes Foto, rechts Name/Untertitel/Zeit, gemalt auf 2D-Leinwänden als Textur), Umblättern mit gewölbter Seite

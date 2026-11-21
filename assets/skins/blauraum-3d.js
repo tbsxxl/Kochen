@@ -1,5 +1,6 @@
-// Blauraum – 3D-Galerie im Kopf der Startseite (Nov. 2026, nach Vergleich mit dem Vorbild): Rezeptfotos auf gebogenen Karten kreisen in
-// drei Ringen (oder einer Spirale) um eine verchromte Kochmütze aus Würfeln. Ziehen dreht, Antippen einer Karte öffnet das Rezept.
+// Blauraum – Vollbild-3D-Raum der Startseite (Nov. 2026, zweiter Neubau nach Vergleich mit dem Vorbild, einer Agentur-Seite mit
+// Bilderringen um eine Skulptur aus Lamellen): man steht mitten in drei Ringen aus Rezeptfotos, die vorderen ziehen groß vorbei.
+// In der Mitte eine Kochmütze aus verchromten Lamellen (Schichten wie beim 3D-Druck). Ziehen/Scrollen dreht, Antippen öffnet.
 // Als ES-Modul von blauraum.js nachgeladen; Three.js liegt in assets/vendor/three/ (nur für diesen Skin geladen).
 import * as THREE from "../vendor/three/three.module.min.js";
 import { RoomEnvironment } from "../vendor/three/RoomEnvironment.js";
@@ -7,19 +8,26 @@ import { RoundedBoxGeometry } from "../vendor/three/RoundedBoxGeometry.js";
 
 const TAU = Math.PI * 2;
 
-// Kochmütze aus Würfeln: Band unten, gebauschter Kopf aus mehreren Kugeln; nur Oberflächen-Würfel
-function toque(u){
-  const blobs = [[0, .3, 0, 1.02], [-.7, .12, .3, .66], [.72, .14, .22, .66], [.04, .16, -.72, .64], [-.36, .74, -.2, .6], [.4, .78, .18, .58], [0, .6, .58, .56], [-.5, .5, .5, .5]];
-  const inside = (x, y, z)=>{
-    if(y >= -1.25 && y <= -.3){ const r = Math.hypot(x, z); return r <= .7 + (y + 1.25) * .12; }
-    return y > -.45 && blobs.some(([bx, by, bz, r])=> (x - bx) ** 2 + (y - by) ** 2 + (z - bz) ** 2 <= r * r);
+// Kochmütze aus Lamellen (wie Schichten beim 3D-Druck, mit Luft dazwischen): Band unten, gefalteter Bausch oben, Deckel aus Ringen
+function toque(){
+  const out = [], STEP = .15, PLEATS = 9;
+  const radius = (y)=>{
+    if(y < -.45) return .6;                                   // Band
+    const t = (y + .45) / 1.95;                                 // Bausch: weitet sich aus, oben gewölbt
+    return .66 + .62 * Math.sin(Math.min(1, t * 1.5) * Math.PI * .5) - (t > .72 ? Math.pow((t - .72) / .28, 2) * 1.05 : 0);
   };
-  const N = Math.ceil(1.9 / u), out = [];
-  const has = (i, j, k)=> inside(i * u, j * u, k * u);
-  for(let i = -N; i <= N; i++) for(let j = -N; j <= N; j++) for(let k = -N; k <= N; k++){
-    if(!has(i, j, k)) continue;
-    if(has(i + 1, j, k) && has(i - 1, j, k) && has(i, j + 1, k) && has(i, j - 1, k) && has(i, j, k + 1) && has(i, j, k - 1)) continue;
-    out.push([i * u, j * u, k * u]);
+  for(let y = -1.25, L = 0; y <= 1.5; y += STEP, L++){
+    const r = radius(y); if(r < .15) continue;
+    const band = y < -.45, amp = band ? 0 : .17, N = band ? 18 : 63, pts = [];
+    for(let i = 0; i < N; i++){ const a = i / N * Math.PI * 2 + L * .05, rr = r * (1 + amp * Math.cos(a * PLEATS)); pts.push([Math.cos(a) * rr, Math.sin(a) * rr]); }
+    for(let i = 0; i < N; i++){
+      if(band ? i % 2 : (i + L) % 7 > 3) continue;                       // Lücken entlang der Falten
+      const [x1, z1] = pts[i], [x2, z2] = pts[(i + 1) % N];
+      const len = Math.hypot(x2 - x1, z2 - z1) * (band ? 1.5 : 1.1);
+      out.push({ x: (x1 + x2) / 2, y, z: (z1 + z2) / 2, rot: -Math.atan2(z2 - z1, x2 - x1), len, tilt: 0 });
+    }
+    // Deckel: oben innere Ringe, damit die Mütze geschlossen wirkt
+    if(y > 1.05) [.62, .3].forEach((f)=>{ const rr = r * f, n = Math.max(4, Math.round(rr * 9)); for(let j = 0; j < n; j++){ const a = j / n * Math.PI * 2 + L; out.push({ x: Math.cos(a) * rr, y: y + .02, z: Math.sin(a) * rr, rot: -a + Math.PI / 2, len: rr * 6.28 / n * .8, tilt: 0 }); } });
   }
   return out;
 }
@@ -36,92 +44,103 @@ export function create(canvas, recipes){
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.15;
+  renderer.toneMappingExposure = 1.2;
   const scene = new THREE.Scene();
   const pmrem = new THREE.PMREMGenerator(renderer);
   const room = new RoomEnvironment();
-  room.traverse((o)=>{ if(o.isMesh && o.material && o.material.color && !o.material.emissive?.getHex()) o.material.color.lerp(new THREE.Color(0x2030ff), .22); });
-  scene.environment = pmrem.fromScene(room, .03).texture;
-  const camera = new THREE.PerspectiveCamera(34, 1, .1, 100);
+  room.traverse((o)=>{ if(o.isMesh && o.material && o.material.color && !o.material.emissive?.getHex()) o.material.color.lerp(new THREE.Color(0x2a2aff), .18); });
+  scene.environment = pmrem.fromScene(room, .035).texture;
+  const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(3, 5, 6); scene.add(key);
+  const camera = new THREE.PerspectiveCamera(55, 1, .1, 100);
   const world = new THREE.Group(); scene.add(world);
 
   // Skulptur
-  const U = .2, vox = toque(U);
-  const box = new RoundedBoxGeometry(U * .96, U * .96, U * .96, 3, U * .22);
-  const metal = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: .1, envMapIntensity: 2 });
-  const inst = new THREE.InstancedMesh(box, metal, vox.length);
-  const m = new THREE.Matrix4();
-  vox.forEach(([x, y, z], i)=>{ m.makeTranslation(x, y, z); inst.setMatrixAt(i, m); });
-  const sculpt = new THREE.Group(); sculpt.add(inst); sculpt.scale.setScalar(1.5); sculpt.position.y = .05; world.add(sculpt);
+  const sl = toque(), H = .085;
+  const box = new RoundedBoxGeometry(1, H, .13, 2, .028);
+  const metal = new THREE.MeshStandardMaterial({ color: 0xf4f6ff, metalness: .9, roughness: .16, envMapIntensity: 1.5 });
+  const inst = new THREE.InstancedMesh(box, metal, sl.length);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), pos = new THREE.Vector3(), sc = new THREE.Vector3();
+  sl.forEach((s, i)=>{ e.set(0, s.rot, s.tilt, "YXZ"); q.setFromEuler(e); pos.set(s.x, s.y, s.z); sc.set(s.len, 1, 1); m.compose(pos, q, sc); inst.setMatrixAt(i, m); });
+  const sculpt = new THREE.Group(); sculpt.add(inst); sculpt.position.y = .1; sculpt.scale.setScalar(1.35); world.add(sculpt);
 
-  // Karten
-  const list = recipes.slice(0, 30), loader = new THREE.TextureLoader(), cards = [];
-  const CW = 1.22, CH = 1.56, RING = 4.1;
-  const geo = bend(new THREE.PlaneGeometry(CW, CH, 14, 1), RING);
-  const back = null;
-  list.forEach((r, k)=>{
-    const tex = loader.load(r.i, (t)=>{
-      const ia = t.image.width / t.image.height, ca = CW / CH;
-      if(ia > ca){ t.repeat.set(ca / ia, 1); t.offset.set((1 - ca / ia) / 2, 0); } else { t.repeat.set(1, ia / ca); t.offset.set(0, (1 - ia / ca) / 2); }
-      t.needsUpdate = true; api.dirty = true;
+  // Karten: drei Ringe (oben/unten klein und weit, Mitte groß und nah) oder eine Spirale
+  const loader = new THREE.TextureLoader(), cards = [];
+  const SPEC = [{ y: 2.9, R: 5.3, w: 1.15, h: 1.5 }, { y: 0, R: 4.4, w: 1.4, h: 1.82 }, { y: -2.9, R: 5.3, w: 1.15, h: 1.5 }];
+  const geos = SPEC.map((s)=> bend(new THREE.PlaneGeometry(s.w, s.h, 12, 1), s.R));
+  const spiralGeo = bend(new THREE.PlaneGeometry(1.25, 1.62, 12, 1), 5.4);
+  recipes.forEach((r, k)=>{
+    const ring = k % 3;
+    const mat = new THREE.MeshBasicMaterial({ color: 0x3340ff, toneMapped: false, side: THREE.DoubleSide, transparent: true, opacity: 1 });
+    loader.load(r.i, (t)=>{
+      t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
+      mat.map = t; mat.color.set(0xffffff); mat.needsUpdate = true; api.dirty = true;
+      cards.forEach((c)=> c.mat === mat && fitTex(c));
     });
-    tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
-    const front = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: tex, toneMapped: false, side: THREE.DoubleSide }));
-    const g = new THREE.Group(); g.add(front);
-    const pivot = new THREE.Group(); pivot.add(g); g.position.z = RING; world.add(pivot);
-    front.userData.url = r.u;
-    cards.push({ pivot, g, front, a: 0, y: 0, ta: 0, ty: 0, ring: k % 3 });
+    const mesh = new THREE.Mesh(geos[ring], mat);
+    const pivot = new THREE.Group(); pivot.add(mesh); world.add(pivot);
+    mesh.userData = { url: r.u, t: r.t, z: r.z };
+    cards.push({ pivot, mesh, mat, ring, a: 0, y: 0, R: SPEC[ring].R, ta: 0, ty: 0, tR: SPEC[ring].R });
   });
-
-  // Anordnung: Ringe (drei Höhen, gegenläufig) oder Spirale
-  const layout = (mode)=>{
-    const per = Math.ceil(cards.length / 3);
+  function fitTex(c){
+    const t = c.mat.map; if(!t || !t.image) return;
+    const g = c.mesh.geometry.parameters || {}, cw = c.spiral ? 1.25 : SPEC[c.ring].w, ch = c.spiral ? 1.62 : SPEC[c.ring].h;
+    const ia = t.image.width / t.image.height, ca = cw / ch;
+    if(ia > ca){ t.repeat.set(ca / ia, 1); t.offset.set((1 - ca / ia) / 2, 0); } else { t.repeat.set(1, ia / ca); t.offset.set(0, (1 - ia / ca) / 2); }
+    void g;
+  }
+  let mode = "rings";
+  const layout = ()=>{
+    const per = SPEC.map((_, i)=> cards.filter((c)=> c.ring === i).length);
+    const idx = [0, 0, 0];
     cards.forEach((c, k)=>{
-      if(mode === "spiral"){ c.ta = k * .52; c.ty = 2.7 - k * (5.4 / Math.max(1, cards.length - 1)); c.ring = 0; }
-      else { const ring = Math.floor(k / per), j = k % per; c.ring = ring; c.ta = j / per * TAU + ring * .4; c.ty = [2.05, 0, -2.05][ring] || 0; }
+      if(mode === "spiral"){
+        c.spiral = true; c.mesh.geometry = spiralGeo; c.ta = k * .5; c.ty = 3.3 - k * (6.6 / Math.max(1, cards.length - 1)); c.tR = 5.4;
+      } else {
+        c.spiral = false; c.mesh.geometry = geos[c.ring];
+        const j = idx[c.ring]++; c.ta = j / per[c.ring] * TAU + c.ring * .35; c.ty = SPEC[c.ring].y; c.tR = SPEC[c.ring].R;
+      }
+      fitTex(c);
     });
   };
-  let mode = "rings"; layout(mode);
-  cards.forEach((c)=>{ c.a = c.ta; c.y = c.ty; });
+  layout(); cards.forEach((c)=>{ c.a = c.ta; c.y = c.ty; c.R = c.tR; });
 
+  const ray = new THREE.Raycaster(), v2 = new THREE.Vector2();
   const api = {
-    dirty: true, spin: 0, drag: 0, focusY: 0,
-    resize(w, h, dpr, centerY, stageH){
+    dirty: true, spin: 0, drag: 0, lift: 0,
+    resize(w, h, dpr){
       renderer.setPixelRatio(Math.min(dpr, 1.75)); renderer.setSize(w, h, false);
       camera.aspect = w / h;
-      const tan = Math.tan(THREE.MathUtils.degToRad(17)), half = 4.3;   // halbe Weltbreite, die sichtbar sein soll
-      const byW = half / (tan * camera.aspect), byH = 7.4 * (h / Math.max(1, stageH || h)) / (2 * tan);   // Ringe passen in die Bühne
-      camera.position.set(0, .3, Math.max(12, byW, byH));
-      camera.lookAt(0, 0, 0); camera.updateProjectionMatrix();
-      // Mitte der Galerie auf die Bühne legen (nicht auf die Mitte der ganzen Leinwand)
-      const vis = 2 * Math.tan(THREE.MathUtils.degToRad(17)) * camera.position.z;
-      world.position.y = (h / 2 - centerY) / h * vis;
-      api.dirty = true;
+      // hochkant weiter Blick (alle drei Ringe sichtbar), quer enger
+      camera.fov = camera.aspect < 1 ? 64 : 46;
+      api.camZ = camera.aspect < 1 ? 8.6 : 9;
+      camera.updateProjectionMatrix(); api.dirty = true;
     },
-    setMode(m2){ mode = m2; layout(mode); api.dirty = true; },
+    setMode(m2){ mode = m2; layout(); api.dirty = true; },
     render(t, dt, still){
       const k = Math.min(3, (dt || 16) / 16);
-      api.spin += (still ? 0 : .0016 * k) + api.drag; api.drag *= .92;
+      api.spin += (still ? 0 : .0014 * k) + api.drag; api.drag *= .9;
+      camera.position.set(0, 1.3 + api.lift * 1.6, (api.camZ || 8.4) + api.lift * 2.5); camera.lookAt(0, api.lift * .6, 0);
       cards.forEach((c)=>{
-        c.a += (c.ta - c.a) * .08 * k; c.y += (c.ty - c.y) * .08 * k;
-        const dir = mode === "rings" ? (c.ring === 1 ? -1 : 1) : 1;
+        c.a += (c.ta - c.a) * .07 * k; c.y += (c.ty - c.y) * .07 * k;
+        const dir = mode === "rings" && c.ring === 1 ? -1 : 1;
+        // Karten auf dem Ring: Abstand R, nach außen gewandt (die Geometrie ist schon gebogen, liegt bei z = 0 → nach vorn schieben)
         c.pivot.rotation.y = c.a + api.spin * dir;
-        c.pivot.position.y = c.y + (still ? 0 : Math.sin(t * .0007 + c.a * 3) * .05);
+        c.pivot.position.y = c.y + (still ? 0 : Math.sin(t * .0006 + c.a * 3) * .06);
+        c.mesh.position.z = c.tR;
       });
-      sculpt.rotation.y = still ? .5 : t * .00025 + api.spin * .3;
-      sculpt.position.y = .05 + (still ? 0 : Math.sin(t * .0009) * .06);
-      renderer.render(scene, camera);
-      api.dirty = false;
+      sculpt.rotation.y = still ? .6 : t * .00022 + api.spin * .35;
+      renderer.render(scene, camera); api.dirty = false;
     },
     pick(nx, ny){
-      const rc = new THREE.Raycaster(); rc.setFromCamera(new THREE.Vector2(nx, ny), camera);
-      const hit = rc.intersectObjects(cards.map((c)=> c.front), false)[0];
-      return hit ? hit.object.userData.url : "";
+      v2.set(nx, ny); ray.setFromCamera(v2, camera);
+      const hit = ray.intersectObjects(cards.map((c)=> c.mesh), false)[0];
+      return hit ? hit.object.userData : null;
     },
     count: cards.length,
     dispose(){
-      cards.forEach((c)=>{ c.front.material.map?.dispose(); c.front.material.dispose(); });
-      geo.dispose(); box.dispose(); metal.dispose(); inst.dispose(); scene.environment?.dispose(); pmrem.dispose(); renderer.dispose();
+      cards.forEach((c)=>{ c.mat.map?.dispose(); c.mat.dispose(); });
+      geos.forEach((g)=> g.dispose()); spiralGeo.dispose(); box.dispose(); metal.dispose(); inst.dispose();
+      scene.environment?.dispose(); pmrem.dispose(); renderer.dispose();
     },
   };
   return api;
