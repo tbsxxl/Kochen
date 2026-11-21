@@ -146,9 +146,13 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Tiefsee** (Vorbild: Labor-Seite mit Glaskugel): blasser Lavendel mit Punktraster, riesiger Titel in Bebas („Skin Zwei“), Beschriftungen
     in „Retro Mono“ versal. Auf allen Feld-Seiten (`tiefsee-3d.js`): Titel als Fläche im Raum (Textur aus `api.glyphs()`, echter Titel
     `.fxDrawn`), davor eine Kugel aus 150 Spiegelscherben (InstancedMesh, schillernd) mit Chrom-Qualle; Scrollen/Gedrückthalten sprengt sie.
-    **Formlabor** (Vorbild: Studio-Seite mit oranger Schleife): Schokobraun `#2A1912`, Creme, Orange `#F2541B`, dünne Grotesk + kursives
-    Fraunces-Wort. Startseite: 3D-Bühne (`formlabor-3d.js`, glänzende orange Schleife, schwebender Topf/Kochbuch/Löffel/Tomate/Teller,
-    Ziehen dreht) und nummerierte Kategorienliste „(01) Schnell …“ (`.flList`, antippbar). Der frühere Retro-Computer ist entfallen.
+    **Formlabor** (Dez. 2026 zweiter Neubau wie Blauraum, Vorbild studioloop.com.br: Start, Work, Projektseite): Seiten in Creme `#F5F3EE` mit
+    Dunkelbraun `#2A1912`, Lavendel `#C9C3FF` für Aktives, Orange `#F2541B` nur als Schmuck. Titel dünne Grotesk + letztes Wort kursiv in Fraunces
+    (`mixTitles()`, `.flEm`), Beschriftungen in „[ … ]“ mit Linien (`.flKick`), tanzende orange Punkte am Seitentitel (`dots()`). Start: brauner
+    Vollbild-Kopf `.flHero` (3D-Schleife mit Topf/Buch/Löffel/Tomate/Aufklebern, fliegt beim Scrollen auseinander, `scatter`), „kochen“ im Bogen,
+    „aus Tobis Küche.“; darunter große Kategorienliste auf Braun (Zeile in der Bildmitte leuchtet, `.flRow.on`), dann Creme-Teil „[ Heute für dich ]“,
+    dessen Text sich beim Scrollen Wort für Wort füllt (`today()`). Rezeptliste: eine Spalte großer Fotos (4:5). Rezeptseite: großer Titel über dem
+    Foto, Steckbrief „[ Über das Rezept ]“ (Kategorie, Zeit, Portionen, Von; `facts()`).
     **Glasklar** (Vorbild: Portfolio mit Glasobjekt vor großer Schrift): Schwarz `#0D0D0E`, riesiger weißer Titel (Archivo, „Skin Glas“),
     Eisblau `#9FD8FF` als Akzent. Auf allen Feld-Seiten (`glasklar-3d.js`): Titel als undurchsichtige Fläche (sonst sieht die
     Transmission sie nicht), davor ein Eisbrocken aus `MeshPhysicalMaterial` (transmission, dispersion) – bricht die Schrift, folgt dem Finger.

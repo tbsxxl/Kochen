@@ -23,6 +23,15 @@ function bookTex(){
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 }
 
+function sticker(lines, bg, fg, w, h){
+  const c = document.createElement("canvas"); c.width = w * 2; c.height = h * 2; const g = c.getContext("2d"); g.scale(2, 2);
+  g.fillStyle = "#FFFFFF"; g.beginPath(); g.roundRect(0, 0, w, h, h / 2); g.fill();
+  g.fillStyle = bg; g.beginPath(); g.roundRect(5, 5, w - 10, h - 10, (h - 10) / 2); g.fill();
+  g.fillStyle = fg; g.textAlign = "center"; g.textBaseline = "middle";
+  lines.forEach(([txt, font], i)=>{ g.font = font; g.fillText(txt, w / 2, h / 2 + (i - (lines.length - 1) / 2) * h * .32); });
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+
 export function create(canvas){
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setClearColor(0, 0); renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -66,8 +75,17 @@ export function create(canvas){
     for(let i = 0; i < 4; i++){ const p = new THREE.Mesh(new THREE.CylinderGeometry(.42 - i * .01, .34, .045, 48), pm); p.position.y = i * .06; g.add(p); }
     add(g, new THREE.Vector3(-.9, -.55, -.7), [.002, .004, .006]); }
 
+  // Aufkleber wie auf einem Studio-Tisch
+  [[[["Tobis", 'italic 400 34px "Fraunces", Georgia, serif'], ["Küche", '300 30px "Skin Raum", sans-serif']], "#C9C3FF", "#2A1912", 200, 110, new THREE.Vector3(.9, .75, 1.1)],
+   [[["frisch gekocht", 'italic 400 26px "Fraunces", Georgia, serif']], "#F3EDE4", "#2A1912", 230, 70, new THREE.Vector3(-.55, .15, 1.35)],
+   [[["(01)", '300 30px "Skin Raum", sans-serif']], "#F2541B", "#FFFFFF", 110, 70, new THREE.Vector3(-1.75, -.45, .9)]]
+  .forEach(([lines, bg, fg, w, h, pos])=>{
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w / 220, h / 220), new THREE.MeshStandardMaterial({ map: sticker(lines, bg, fg, w, h), transparent: true, roughness: .55, side: THREE.DoubleSide }));
+    add(m, pos, [0, .004, .002]);
+  });
+
   const api = {
-    dirty: true, drag: 0, rot: .4, tilt: 0,
+    dirty: true, drag: 0, rot: .4, tilt: 0, scatter: 0,
     resize(w, h, dpr, cy, stageH){
       renderer.setPixelRatio(Math.min(dpr, 2)); renderer.setSize(w, h, false);
       camera.aspect = w / h;
@@ -80,10 +98,14 @@ export function create(canvas){
     render(t, dt, still){
       const k = Math.min(3, (dt || 16) / 16);
       api.rot += (still ? 0 : .0018 * k) + api.drag; api.drag *= .92;
-      world.rotation.y = api.rot; world.rotation.x += ((.18 + api.tilt) - world.rotation.x) * .06;
+      world.rotation.y = api.rot; tube.scale.setScalar(1 + api.scatter * .35); world.rotation.x += ((.18 + api.tilt) - world.rotation.x) * .06;
       things.forEach((q)=>{
         if(!still){ q.g.rotation.x += q.spin[0] * k; q.g.rotation.y += q.spin[1] * k; q.g.rotation.z += q.spin[2] * k; }
-        q.g.position.y = q.base.y + (still ? 0 : Math.sin(t * .0012 + q.ph) * .08);
+        // Scrollen: die Dinge fliegen auseinander und aus dem Bild (wie im Vorbild)
+        const sp = api.scatter, d = Math.hypot(q.base.x, q.base.y) || 1;
+        q.g.position.x = q.base.x + q.base.x / d * sp * 3.2;
+        q.g.position.y = q.base.y + q.base.y / d * sp * 2.6 + (still ? 0 : Math.sin(t * .0012 + q.ph) * .08);
+        q.g.position.z = q.base.z + sp * 1.5;
       });
       renderer.render(scene, camera); api.dirty = false;
     },
