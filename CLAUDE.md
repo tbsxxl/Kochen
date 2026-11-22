@@ -198,6 +198,16 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     mit Position, Abstand zum Schnellsten, Sektorbalken (`html.bxList`), Rezept mit Telemetrie-Leiste `.bxTele`. **Bildband:** Start = Titelblatt
     (Foto über die Fläche, riesiges „Tobis“, Titelgeschichte, Titelzeilen; `.bdCover`), Liste = „Inhalt“ mit Seitenzahlen, jeder fünfte Eintrag
     als großer Aufmacher (`html.bdList`), Rezept mit Untertitel als Zitat `.bdQuote`.
+  - **Serien-Skins neu (Dez. 2026, Besitzer: „zu wenig wie die Serie, wirkt billig/gebastelt“; frei interpretiert, keine Vorlagen ansehen):**
+    `PURE` in `skins.js` schaltet für Nordwall, Zauberschule, Jahr 3000, Zwei Städte, Insel, Akte, Brigade alle alten Spielereien ab (Szenen,
+    Welt-Uhren, `worldHome`, Aufkleber, Bons, Kryo-Kammer …; die Timer-Karte `homeTimer()` gilt dort wieder). Jeder hat einen gemalten
+    Vollbild-Kopf auf der Startseite (`.cxHero` in `<skin>.js`: unbewegte Ebenen einmal je Größe auf eine Leinwand gemalt, darüber Bewegung
+    wie Schnee/Kerzen/Feuer, Parallaxe beim Scrollen, Titel „Tobis / Kochbuch“ + Linie + Datum, unten Sprung zu „Heute“). Die CSS-Dateien sind
+    neu und folgen einem Muster (Tokens, ruhige Karten mit Haarlinie, Heute-Karte groß mit Titel auf dem Foto, Rezeptfoto über die Breite);
+    erzeugt mit dem Python-Baukasten `cxcss.build()` (liegt nicht im Repo, Muster aus `nordwall.css` übernehmen). Nordwall = Eismauer im
+    Mondlicht, Burg mit Feuern, Nadelwald, Schnee; Schiefer, Cinzel-Versalien, Blutrot nur für Kochen/aktiven Reiter. Zauberschule = Schloss
+    mit erleuchteten Fenstern über dem See, Spiegelungen, schwebende Kerzen; Mitternachtsblau, Gold, Weinrot, IM Fell mit Goldschimmer.
+    Die älteren Angaben zu diesen sieben Skins (unten und im Absatz „Mehr Charakter“) gelten nicht mehr.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
