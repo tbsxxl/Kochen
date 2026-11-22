@@ -172,9 +172,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Graubeige Seiten `#DCDAD1`, Serifen-Titel mit verziertem Anfangsbuchstaben (`::first-letter` „Skin Garamond“ kursiv), schwarze Kapseln.
     Start: Beuckelaers Küchenszene über die ganze Fläche (`.gaHero`, `art()` mit Parallaxe), dünner weißer Rahmen `.gaFrame` „Tobis Koch✱buch – Die
     Tafel-Ausgabe“ mit Inhaltsverzeichnis (römische Zahlen), Funkelring beim Scrollen; Kapitel `.gaChapter` „Heute“ auf Arcimboldos Vertumnus mit
-    Satz und Anfangsbuchstabe, Papierriss (`galerie-torn.svg`). Andere Feld-Seiten: Kopf `.gaHead` mit eigenem Stillleben (`PAGE_ART`: Rezepte Claesz,
+    Satz und Anfangsbuchstabe. Den Papierriss an den Bildkanten hat der Besitzer abgelehnt („sieht billig aus“) – gerade Kanten. Andere Feld-Seiten: Kopf `.gaHead` mit eigenem Stillleben (`PAGE_ART`: Rezepte Claesz,
     Kategorien Cotán, Plan van Dyck, Liste Chardin, sonst Peeters) und riesigem weißem Titel. Am Rechner ab 1180 px links festes Inhaltsverzeichnis
-    `.gaSide`. Rezeptseite: Foto über die ganze Breite, weißer Titel, Papierriss, Untertitel als Satz mit Anfangsbuchstabe (`.gaStatement`).
+    `.gaSide`. Rezeptseite: Foto über die ganze Breite, weißer Titel, Untertitel als Satz mit Anfangsbuchstabe (`.gaStatement`).
   - **Mehr Charakter für die älteren Skins (Dez. 2026, Wunsch des Besitzers: „die alten behalten ihre Themes, aber mehr eigenen Charakter“; alle
     außer Standard):** jeder hat jetzt ein eigenes Aufbau-Skript `assets/skins/<skin>.js` (in `FX_JS`) mit eigenem Start-Element, Rezeptliste und
     Rezeptseite. Retro hat dafür eine eigene `retro.css` (Grundlook bleibt in `styles.css`). **Retro:** alles Fenster (Start: Ordner-Fenster mit
