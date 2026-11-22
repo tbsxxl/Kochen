@@ -240,7 +240,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Brigade:** Edelstahl-Pass vor weißen Metro-Fliesen, Wärmelampen, an der Bonschiene hängen die echten Rezeptfotos (unverändert,
     nur zugeschnitten) als Bestellungen mit blauem Malerband und Namen, rutschen langsam weiter; Dampf. Der Ordner `fotos/` ist entfernt.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
-  - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
+  - Die 3D-Köpfe der Serien-Skins (Three.js, vierte Fassung, siehe oben) sind seit Dez. 2026 wieder da; die älteren 3D-Köpfe waren zuvor entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
   Karten blenden beim Scrollen ein (`SCROLL_FX.standard`, leise Fassung ohne Parallaxe/Fortschrittslinie), Rezeptfoto fährt beim Öffnen
   heran (`stdKen`), Haken zeichnet sich beim Abhaken (`.tickNow` auf `.uRow`/`.prepRow`; die Zeile wird beim Abhaken neu aufgebaut, darum
