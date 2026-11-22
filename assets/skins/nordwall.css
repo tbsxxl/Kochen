@@ -123,3 +123,7 @@ html.skin-nordwall:not(#_x#_y) .cxRule i{box-shadow:0 0 12px rgba(163,48,42,.8)}
 .cxCredit{position:absolute;left:16px;bottom:calc(env(safe-area-inset-bottom) + 186px);z-index:2;max-width:60%;font:400 .625rem/1.3 -apple-system, "Inter", sans-serif;color:rgba(255,255,255,.6);text-align:left;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 @media (prefers-reduced-motion: reduce){.cxPhoto .cxImg{animation:none}}
 .nwHero .cxImg{filter:brightness(.5) saturate(.75) contrast(1.1)}
+/* Dez. 2026, vierte Fassung: 3D-Kopf (nordwall-3d.js) – Uhrwerk-Karte mit Armillarsphäre */
+.cxPhoto .cxPoster{background:radial-gradient(90% 60% at 50% 70%, #3A2C1A, #07090C 70%)}
+.cxPhoto .cxGL{position:absolute;inset:0;width:100%;height:100%}
+.nwHero .cxShade{background:linear-gradient(rgba(5,6,8,.65) 0%, rgba(5,6,8,0) 30%, rgba(5,6,8,0) 70%, rgba(5,6,8,.7) 100%)}
