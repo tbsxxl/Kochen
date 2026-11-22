@@ -6,7 +6,7 @@ permalink: /kuehltruhe/
 ---
 
 <div class="section" style="margin-top:6px">
-  <p class="sub">Was du eingefroren hast, das Älteste zuerst. Neue Einträge legst du auf der Rezeptseite über „Mehr“ → „Kühltruhe“ an.</p>
+  <p class="sub">Was du eingefroren hast, das Älteste zuerst.</p>
 </div>
 
 <div class="section">

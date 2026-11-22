@@ -413,3 +413,11 @@ Besitzer: „Ich finde den Galerie-Skin schon geil, können wir den noch optimie
 Gemälde, Werkschilder an allen Gemälden, Säle je Kategorie auf der Startseite, Rezeptliste als gerahmte Sammlung mit Museumsschildern,
 Rezeptseite mit Museumsschild und römischen Schritten, Einkaufsliste/Plan/Kochmodus in Serifen. Das Hauptwerk (jedes fünfte) ist am iPad
 nicht doppelt breit, weil die Karten nur kleine Bilder laden und es unscharf würde.
+
+## Dez. 2026 – unslop-Durchgang über alles
+
+Besitzer: „Nutze einmal den unslop skill über alles.“ Ergebnis: Der Standard-Look hat kaum KI-Anzeichen (keine Emoji, keine Verläufe
+oder Leucht-Schatten, keine Endlos-Animationen, keine Versalien oder Fettschrift ab 700 auf den Seiten). Vier Kleinigkeiten umgesetzt
+(vom Besitzer bestätigt): Kühltruhe ohne doppelten Hinweis, Symbole im „Mehr“-Blatt grau statt grün (Abschnitt 26 in `styles.css`),
+„Guten Appetit“ ohne Punkt, kürzerer Text auf der Datensicherung. Skins wurden nicht angefasst – Versalien, Ausrufe („Service!“) usw. sind
+dort gewollter Stil.

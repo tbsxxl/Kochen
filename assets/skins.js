@@ -1003,7 +1003,7 @@
     const sk = skin();
     if(!FOOT_LEAVES[sk] || $(".bbFooter") || !main || !(b.classList.contains("layout-home") || $("#recipeGrid"))) return;
     const el = bit("bbFooter", sk, "footer");
-    el.innerHTML = `<canvas aria-hidden="true"></canvas><div class="bbFootText"><b>Guten Appetit.</b><span>Noch nichts gefunden?</span><a href="/was-koche-ich/?zufall=1">Überrasch mich</a></div>`;
+    el.innerHTML = `<canvas aria-hidden="true"></canvas><div class="bbFootText"><b>Guten Appetit</b><span>Noch nichts gefunden?</span><a href="/was-koche-ich/?zufall=1">Überrasch mich</a></div>`;
     main.appendChild(el);
     const cv = el.querySelector("canvas"), g = cv.getContext("2d"), dpr = Math.min(2, devicePixelRatio || 1);
     let w = 0, h = 0, raf = 0, on = false, px = -999, py = -999;

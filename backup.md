@@ -6,7 +6,7 @@ permalink: /backup/
 ---
 
 <div class="section" style="margin-top:6px">
-  <p class="sub" style="margin:0">Sichert Favoriten, Kochstatistik, Notizen & Bewertungen, Kühltruhe, Einkaufsliste und Wochenplan von diesem Gerät. Mit Profil sind diese Daten zusätzlich automatisch auf dem Server gespeichert.</p>
+  <p class="sub" style="margin:0">Alle Daten dieses Geräts in einer Datei: Favoriten, Notizen, Kühltruhe, Liste und Plan. Mit Profil liegen sie zusätzlich auf dem Server.</p>
 </div>
 
 <div class="section">
