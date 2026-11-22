@@ -13,7 +13,7 @@ html.skin-galerie:not(#_x#_y),html.skin-galerie:not(#_x#_y) body{
   --fontDisplay:"Fraunces", Georgia, serif;
   color-scheme:light}
 html.skin-galerie:not(#_x#_y) body.grouped{--bg:#DCDAD1;--surface:#E8E6DF}
-html.skin-galerie:not(#_x#_y) body.layout-home{--statusBar:#1E2C44}
+html.skin-galerie:not(#_x#_y) body.layout-home{--statusBar:#2A2118}
 html.skin-galerie:not(#_x#_y) .cookOverlay{--cBg:#DCDAD1;--cCard:#E8E6DF;--cFill:#D2D0C6;--cLine:rgba(17,17,17,.14);--cText:#111111;--cSub:#46443E;--cLeaf:#111111;--cOnLeaf:#FFFFFF}
 html.skin-galerie:not(#_x#_y) ::selection{background:#111111;color:#FFFFFF}
 html.skin-galerie{background:#DCDAD1}
@@ -67,9 +67,10 @@ html.skin-galerie:not(#_x#_y) body.gaHome :is(.brandWordmark,.homeGreetingSub){c
 html.skin-galerie:not(#_x#_y) body.gaHome .homeGreetingTitle.homeGreetingTitle{font:600 .8125rem/1.4 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif !important;letter-spacing:0 !important;color:#FFFFFF !important;white-space:normal;text-shadow:0 1px 10px rgba(10,16,26,.5)}
 html.skin-galerie:not(#_x#_y) body.gaHome .homeGreetingSub{display:none}
 html.skin-galerie:not(#_x#_y) body.gaHome .profileBadge{background:rgba(255,255,255,.16) !important;color:#FFFFFF !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4) !important}
-.gaHero{position:absolute;top:-140px;bottom:0;left:50%;width:100vw;margin-left:-50vw;overflow:hidden;z-index:0;background:#1E2C44}
-.gaHero .glPaint{position:absolute;left:0;right:0;top:0;height:100%;will-change:transform}
-.gaHero .glPaint canvas,.gaHero .gaSpark{position:absolute;inset:0;width:100%;height:100%}
+.gaHero{position:absolute;top:-140px;bottom:0;left:50%;width:100vw;margin-left:-50vw;overflow:hidden;z-index:0;background:#2A2118}
+.gaHero::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(20,14,8,.35), rgba(20,14,8,.15) 40%, rgba(20,14,8,.4));pointer-events:none}
+.gaArt{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+.gaHero .gaSpark{position:absolute;inset:0;width:100%;height:100%;z-index:1}
 .gaFrame{position:absolute;left:50%;top:calc(50% + 70px);transform:translate(-50%,-50%);z-index:2;width:min(76vw, 340px);padding:18px 18px 14px;border:1px solid rgba(255,255,255,.85);color:#FFFFFF;
   background:linear-gradient(rgba(20,28,40,.18), rgba(20,28,40,.18));text-shadow:0 1px 8px rgba(10,16,26,.45)}
 .gaLogo{display:block;font:500 clamp(1.6rem, 7vw, 2.4rem)/.98 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;letter-spacing:-.03em}
@@ -82,10 +83,12 @@ html.skin-galerie:not(#_x#_y) body.gaHome .profileBadge{background:rgba(255,255,
 @media (hover:hover) and (pointer:fine){ .gaToc a:hover span{text-decoration:underline;text-underline-offset:3px} }
 
 /* Kapitel: dunkles Band, riesiges Wort, Satz mit Anfangsbuchstabe, eingerissener Rand */
-.gaChapter{position:relative;z-index:1;margin:0 calc(-16px - env(safe-area-inset-right)) 28px calc(-16px - env(safe-area-inset-left));padding:56px 22px 70px;color:#FFFFFF;
-  background:radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.9), transparent), radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,.7), transparent), radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,.8), transparent), radial-gradient(1px 1px at 40% 75%, rgba(255,255,255,.6), transparent), linear-gradient(#141B2B, #26304A)}
+.gaChapter{position:relative;z-index:1;overflow:hidden;margin:0 calc(-16px - env(safe-area-inset-right)) 28px calc(-16px - env(safe-area-inset-left));min-height:min(112svh, 980px);display:flex;align-items:flex-end;color:#FFFFFF;background:#1B1712}
+.gaChapter::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(10,8,6,.15), rgba(10,8,6,.05) 30%, rgba(10,8,6,.78) 72%, rgba(10,8,6,.9))}
+.gaChapIn{position:relative;z-index:2;width:100%;padding:0 22px 86px}
+.gaChapter::after{z-index:3}
 .gaChapter::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:26px;background:url("galerie-torn.svg?v=1") 0 100%/100% 100% no-repeat}
-.gaBig{margin:0 0 18px;text-align:center;font:700 clamp(4rem, 22vw, 10rem)/.85 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;letter-spacing:-.05em}
+.gaBig{margin:0 0 22px;text-align:center;text-shadow:0 4px 40px rgba(0,0,0,.4);font:700 clamp(4rem, 22vw, 10rem)/.85 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;letter-spacing:-.05em}
 .gaSay{max-width:40rem;margin:0 auto;font:400 clamp(1.5rem, 6.2vw, 2.4rem)/1.18 "Fraunces", Georgia, serif;letter-spacing:-.02em}
 .gaSay a{color:#FFFFFF;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
 .gaCap{float:left;margin:.02em .06em -.1em 0;font:italic 500 3.3em/.82 "Skin Garamond", "Fraunces", Georgia, serif}
@@ -101,6 +104,17 @@ html.skin-galerie:not(#_x#_y) body.gaHome .profileBadge{background:rgba(255,255,
 html.skin-galerie:not(#_x#_y) body:has(.gaSide) .appMain{padding-left:232px}
 html.skin-galerie:not(#_x#_y) body:has(.gaSide) .gaHero{left:calc(50% + 110px)}
 }
+
+/* andere Feld-Seiten: Kopf mit eigenem Gemälde, Titel riesig weiß, Papierriss */
+.gaHead{position:relative;overflow:hidden;margin:0 calc(-16px - env(safe-area-inset-right)) 18px calc(-16px - env(safe-area-inset-left));padding:calc(env(safe-area-inset-top) + 150px) 16px 54px;background:#2A2118;min-height:46svh;display:flex;flex-direction:column;justify-content:flex-end}
+.gaHead::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(10,8,6,.1), rgba(10,8,6,.2) 40%, rgba(10,8,6,.7))}
+.gaHead::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:26px;z-index:3;background:url("galerie-torn.svg?v=1") 0 100%/100% 100% no-repeat}
+.gaHead .pageTitleBlock{position:relative;z-index:2;padding:0 !important;margin:0 !important}
+html.skin-galerie:not(#_x#_y) .gaHead .pageTitleBlock .h1{color:#FFFFFF !important;font:700 min(clamp(3rem, 15vw, 7rem), 15vw)/.88 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif !important;letter-spacing:-.05em !important;text-shadow:0 4px 30px rgba(0,0,0,.35)}
+html.skin-galerie:not(#_x#_y) .gaHead .pageTitleBlock .h1::first-letter{font:inherit;font-size:1em;margin:0}
+html.skin-galerie:not(#_x#_y) .gaHead .searchRow{background:rgba(255,255,255,.9) !important}
+html.skin-galerie:not(#_x#_y) body.gaPaged .skinScene{display:none}
+.gaSr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* ---------- Rezeptseite: Foto über die ganze Breite, riesiger weißer Titel, Papierriss, Untertitel als Satz ---------- */
 html.skin-galerie:not(#_x#_y) .recipePageCard{background:transparent !important;box-shadow:none !important;overflow:visible !important}
@@ -120,7 +134,7 @@ html.skin-galerie:not(#_x#_y) .recipeSegWrap.isStuck{background:rgba(220,218,209
 
 html.skin-galerie:not(#_x#_y) .bxRv{opacity:0;transform:translateY(24px)}
 html.skin-galerie:not(#_x#_y) .bxRv.bxIn{opacity:1;transform:none;transition:opacity .8s ease,transform 1s var(--easeSheet)}
-html.skin-galerie:not(#_x#_y) .bbFooter{background:#1E2C44;color:#FFFFFF}
+html.skin-galerie:not(#_x#_y) .bbFooter{background:#2A2118;color:#FFFFFF}
 html.skin-galerie:not(#_x#_y) .bbFootText b{font-family:"Skin Garamond", "Fraunces", Georgia, serif;font-style:italic;font-weight:500}
 html.skin-galerie:not(#_x#_y) .bbFootText span{color:#E3E6EA}
 html.skin-galerie:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#111111}
@@ -129,7 +143,7 @@ html.skin-galerie:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#111111}
 .skIntro-galerie{background:#1F2328;color:#FFFFFF}
 .skIntro-galerie .ivFrame{position:relative;width:min(70vw, 320px);aspect-ratio:4/5;padding:12px;background:#FBF9F5;outline:2px solid #B08D57;outline-offset:-6px;
   box-shadow:0 30px 60px rgba(0,0,0,.5);animation:glFrame .7s cubic-bezier(.2,.8,.2,1) both}
-.skIntro-galerie .ivPaint{position:absolute;inset:12px;background:linear-gradient(#22314A, #4E6582 46%, #C9B591 64%, #5E7088 66%, #4A5B70 74%, #DDE3E6 76%, #C9D3DA);animation:glDawn 1.2s ease .5s both}
+.skIntro-galerie .ivPaint{position:absolute;inset:12px;background:#2A2118 url("galerie/beuckelaer-kueche.jpg?v=1") 62% 30%/cover;animation:glDawn 1.2s ease .5s both}
 .skIntro-galerie .ivName{position:absolute;left:0;right:0;bottom:12%;text-align:center;font:400 clamp(1.6rem, 7vw, 2.4rem)/1 "Fraunces", serif;animation:glDawn .9s ease 1.2s both}
 .skIntro-galerie .ivName i{font-family:"Skin Garamond", serif}
 @keyframes glFrame{from{opacity:0;transform:scale(.9)}}
@@ -140,5 +154,6 @@ html.skin-galerie:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#111111}
 .gaStage{position:relative;height:clamp(300px, 70vw + 40px, 540px);margin:14px calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));touch-action:pan-y;cursor:grab}
 
 @media (prefers-reduced-motion: reduce){
+.gaArt{transform:none !important}
 .skIntro-galerie .ivFrame,.skIntro-galerie .ivPaint,.skIntro-galerie .ivName{animation:none}
 }
