@@ -183,7 +183,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Inhaltsverzeichnis, eigenes Gemälde aus `SAAL_ART`, drei gerahmte Werke mit Museumsschild, „Den ganzen Saal ansehen“); dafür hat
     `#homeRecipes` jetzt auch `c` (Hauptkategorie). Rezeptliste = Sammlung: Foto mit Passepartout und dunklem Rahmen, Museumsschild
     „Nº n“, jedes fünfte Werk am Handy hochkant (am iPad nicht doppelt breit, die Karten laden nur 480-px-Bilder). Rezeptseite: Titel in
-    Fraunces, Museumsschild `.gaRecLabel` (Name, Kategorie · Zeit · Portionen, „Aus der Sammlung von …“; Autor und Zeit/Portionen-Zeile
+    Fraunces, Museumsschild `.gaRecLabel` (Kategorie, Zeit · Portionen, „Aus der Sammlung von …“ – ohne Namen, der steht schon groß auf dem Foto; Autor und Zeit/Portionen-Zeile
     darum ausgeblendet), Schritte mit römischen Zahlen in Garamond. Einkaufsliste/Plan/Kochmodus mit Serifen und Garamond-Überschriften.
   - **Mehr Charakter für die älteren Skins (Dez. 2026, Wunsch des Besitzers: „die alten behalten ihre Themes, aber mehr eigenen Charakter“; alle
     außer Standard):** jeder hat jetzt ein eigenes Aufbau-Skript `assets/skins/<skin>.js` (in `FX_JS`) mit eigenem Start-Element, Rezeptliste und
