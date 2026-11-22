@@ -1,0 +1,39 @@
+/* Skin „retro“ – Grundaussehen steht in styles.css (html.retro …). Diese Datei (Dez. 2026, mehr eigener Charakter) macht alles zu Fenstern:
+   Start mit Ordner-Fenster, Rezeptliste als Explorer in der Detailansicht, Rezeptseite als Bildbetrachter (retro.js). Neue Regeln ans Ende. */
+.rtWin,.rtExplorer,.rtHeroBar{--rtFace:#C3C3C3;--rtHi:#FFFFFF;--rtLo:#808080;--rtDk:#000000}
+.rtWin{margin:14px 0 4px;background:#C3C3C3;box-shadow:inset -1px -1px #000, inset 1px 1px #FFF, inset -2px -2px #808080, inset 2px 2px #DFDFDF;padding:3px}
+.rtBar{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:26px;padding:2px 3px 2px 6px;background:linear-gradient(90deg,#000080,#1084D0);color:#FFF;font:700 .875rem/1.2 "Retro Interface", sans-serif}
+.rtTitle{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rtBtns{display:flex;gap:2px;flex:none}
+.rtBtns i{display:grid;place-items:center;width:20px;height:18px;background:#C3C3C3;color:#000;font:700 .75rem/1 "Retro Interface", sans-serif;font-style:normal;box-shadow:inset -1px -1px #000, inset 1px 1px #FFF, inset -2px -2px #808080}
+.rtMenu{padding:4px 6px;font:400 .875rem "Retro Interface", sans-serif;color:#000;word-spacing:10px}
+.rtIcons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:12px 6px;background:#FFFFFF;box-shadow:inset 1px 1px #808080, inset -1px -1px #FFF, inset 2px 2px #000}
+@media (min-width:700px){.rtIcons{grid-template-columns:repeat(8,minmax(0,1fr))}}
+.rtIcon{display:flex;flex-direction:column;align-items:center;gap:4px;min-height:72px;padding:4px 2px;color:#000;text-decoration:none;text-align:center;font:400 .8125rem/1.15 "Retro Interface", sans-serif}
+.rtIcon svg{width:34px;height:34px}
+.rtIcon:focus-visible span,.rtIcon:active span{background:#000080;color:#FFF;outline:1px dotted #FFF}
+.rtStatus{display:flex;justify-content:space-between;gap:10px;margin-top:3px;padding:3px 6px;font:400 .8125rem "Retro Interface", sans-serif;color:#000;box-shadow:inset 1px 1px #808080, inset -1px -1px #FFF}
+/* Explorer: Rezeptliste in Detailansicht */
+.rtExplorer{margin:8px 0 0;background:#C3C3C3;padding:3px 3px 0;box-shadow:inset 1px 1px #FFF, inset -1px 0 #000, inset 2px 2px #DFDFDF}
+.rtCols{display:grid;grid-template-columns:1fr 6.5rem;margin:0 0 0;background:#C3C3C3}
+.rtCols span{padding:3px 8px;font:400 .8125rem "Retro Interface", sans-serif;color:#000;box-shadow:inset -1px -1px #808080, inset 1px 1px #FFF}
+html.retro.rtList:not(#_x#_y) #recipeGrid{display:block !important;background:#FFFFFF;margin:0 !important;padding:2px 0 !important;box-shadow:inset 1px 0 #000, inset -1px 0 #000;max-width:none}
+html.retro.rtList:not(#_x#_y) #recipeGrid .linkCard{display:block;margin:0 !important}
+html.retro.rtList:not(#_x#_y) #recipeGrid .recipeCard{display:grid !important;grid-template-columns:36px 1fr 6.5rem;align-items:center;gap:8px;min-height:44px;padding:4px 8px !important;background:transparent !important;box-shadow:none !important;border:0 !important}
+html.retro.rtList:not(#_x#_y) #recipeGrid .linkCard:nth-child(even) .recipeCard{background:#F1F1F1 !important}
+html.retro.rtList:not(#_x#_y) #recipeGrid .rcImg{width:36px !important;height:36px !important;aspect-ratio:1 !important;margin:0 !important;box-shadow:inset 0 0 0 1px #000}
+html.retro.rtList:not(#_x#_y) #recipeGrid .rcImg img{width:100%;height:100%;object-fit:cover}
+html.retro.rtList:not(#_x#_y) #recipeGrid .rcBody{display:contents !important}
+html.retro.rtList:not(#_x#_y) #recipeGrid .recipeTitle{font:400 .9375rem/1.2 "Retro Interface", sans-serif !important;text-transform:none !important;color:#000 !important;-webkit-line-clamp:2;margin:0}
+html.retro.rtList:not(#_x#_y) #recipeGrid .recipeMeta{font:400 .8125rem "Retro Interface", sans-serif !important;color:#000 !important;justify-content:flex-start;margin:0}
+html.retro.rtList:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2),html.retro.rtList:not(#_x#_y) #recipeGrid .recipeMeta svg,html.retro.rtList:not(#_x#_y) #recipeGrid .freezerFlag,html.retro.rtList:not(#_x#_y) #recipeGrid .rcFavBadge{display:none !important}
+@media (hover:hover) and (pointer:fine){html.retro.rtList:not(#_x#_y) #recipeGrid .linkCard:hover .recipeTitle{background:#000080;color:#FFF !important}}
+.rtGridStatus{background:#C3C3C3;margin:0 0 18px;box-shadow:inset 1px 1px #808080, inset -1px -1px #FFF, 0 0 0 3px #C3C3C3}
+/* Rezeptseite: Bildbetrachter */
+html.retro:not(#_x#_y) .recipePageHero{padding:3px !important;background:#C3C3C3 !important;box-shadow:inset -1px -1px #000, inset 1px 1px #FFF, inset -2px -2px #808080, inset 2px 2px #DFDFDF !important;height:auto !important;max-height:none !important;aspect-ratio:auto !important;overflow:visible !important;margin-top:56px !important;display:flex !important;flex-direction:column}
+html.retro:not(#_x#_y) .recipePageHero::before,html.retro:not(#_x#_y) .recipePageHero::after{display:none !important}
+html.retro:not(#_x#_y) .recipePageHero img.recipeHeroImg{position:static !important;width:100% !important;height:auto !important;aspect-ratio:4/3;object-fit:cover;transform:none !important;box-shadow:inset 1px 1px #808080;border:2px solid #FFF;border-top-color:#808080;border-left-color:#808080}
+html.retro:not(#_x#_y) .recipeHeroText{position:static !important;background:#FFFFFF !important;padding:10px 10px 12px !important;margin-top:3px;box-shadow:inset 1px 1px #808080, inset -1px -1px #FFF}
+html.retro:not(#_x#_y) .recipeHeroText :is(.recipeName,.recipeSubtitle){color:#000 !important;text-shadow:none !important}
+html.retro:not(#_x#_y) .recipeHeroText .recipeSubtitle{display:block !important;-webkit-line-clamp:unset !important}
+.rtHeroStatus{background:#C3C3C3;margin:0 0 8px;box-shadow:inset 1px 1px #808080, inset -1px -1px #FFF, 0 0 0 3px #C3C3C3}

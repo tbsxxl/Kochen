@@ -40,3 +40,37 @@ html.skin-diner:not(._a):not(._b):not(._c):not(._d).listCards .grid .rcBody .rec
 html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody::after{content:"";order:1;flex:1 1 16px;min-width:16px;margin:0 8px;height:0;border-bottom:3px dotted #B3122E;opacity:.55;transform:translateY(-.3em)}
 html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody .recipeMeta{order:2;flex:none;margin:0;font-weight:700;color:#A3102A}
 html.skin-diner:not(._a):not(._b):not(._c):not(._d) .grid .rcBody .recipeMeta .metaItem + .metaItem{display:none}
+
+/* Dez. 2026, mehr eigener Charakter (diner.js): Leuchtschild + Tagesgericht-Tafel, Speisekarte, Bestellzettel */
+.dnSign{position:relative;margin:16px 0 6px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.dnNeon{display:flex;flex-direction:column;align-items:center;padding:16px 26px 14px;border:3px solid #FF6B81;border-radius:22px;background:#1B0B10;box-shadow:0 0 0 4px #1B0B10, 0 0 18px rgba(255,45,85,.6), inset 0 0 18px rgba(255,45,85,.35)}
+.dnTobis{font:400 1.25rem/1 "Skin Diner", cursive;color:#9FF3FF;text-shadow:0 0 6px #4FE3FF, 0 0 16px #00C8FF}
+.dnDiner{font:400 clamp(3rem, 15vw, 4.6rem)/1 "Skin Diner", cursive;color:#FFFFFF;text-shadow:0 0 2px #fff, 0 0 10px #FF6B81, 0 0 24px #FF2D55}
+.dnOpen{margin-top:6px;padding:2px 12px;border:2px solid #FFD25E;border-radius:999px;font:700 .8125rem/1.4 -apple-system, sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#FFE9A8;text-shadow:0 0 8px #FFB800;animation:dnFlick 4s infinite}
+.dnOpen.off{border-color:#555;color:#888;text-shadow:none;animation:none}
+@keyframes dnFlick{0%,92%,100%{opacity:1}93%{opacity:.3}95%{opacity:1}96%{opacity:.4}}
+.dnBoard{display:flex;flex-direction:column;align-items:center;gap:2px;width:min(100%,420px);padding:16px 18px;border:10px solid #7A4B2A;border-radius:6px;background:#203A2E;color:#F6F1E6;text-decoration:none;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.dnBoard small{font:400 1.125rem/1 "Skin Diner", cursive;color:#FFE9A8}
+.dnBoard b{font:400 1.75rem/1.15 "Skin Diner", cursive}
+.dnBoard i{font:400 .875rem/1.3 -apple-system, sans-serif;font-style:normal;color:#D7E6DD}
+.dnMenuHead{display:flex;flex-direction:column;align-items:center;margin:16px 0 0;padding:16px 12px 10px;background:#FFFDF6;border:3px solid #B3122E;border-bottom:0;border-radius:14px 14px 0 0}
+.dnMenuHead b{font:400 2.2rem/1 "Skin Diner", cursive;color:#B3122E}
+.dnMenuHead span{font:600 .75rem/1.4 -apple-system, sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#4A4A4A}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid{display:block !important;background:#FFFDF6;border:3px solid #B3122E;border-top:0;border-radius:0 0 14px 14px;padding:4px 14px 14px !important;margin:0 0 20px !important}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid .linkCard{display:block;margin:0 !important}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid .recipeCard{display:grid !important;grid-template-columns:58px 1fr;align-items:center;gap:12px;padding:10px 0 !important;background:transparent !important;box-shadow:none !important;border:0 !important;border-bottom:1px dashed #B7DDCF !important}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid .rcImg{width:58px !important;height:58px !important;aspect-ratio:1 !important;border-radius:50% !important;margin:0 !important;box-shadow:0 0 0 3px #FFF, 0 0 0 5px #B3122E}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid .rcImg img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid .rcBody{display:grid !important;grid-template-columns:1fr auto;align-items:baseline;gap:0 6px;padding:0 !important}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid .recipeTitle{display:flex !important;align-items:baseline;gap:6px;font:700 1rem/1.25 -apple-system, sans-serif !important;color:#1A1A1A !important;margin:0;-webkit-line-clamp:unset;overflow:visible}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid .recipeTitle::after{content:"";flex:1;min-width:16px;border-bottom:2px dotted #B3122E;transform:translateY(-4px)}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid .recipeMeta{margin:0;font:700 .9375rem -apple-system, sans-serif !important;color:#B3122E !important;white-space:nowrap}
+html.skin-diner.dnList:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2),html.skin-diner.dnList:not(#_x#_y) #recipeGrid .recipeMeta svg,html.skin-diner.dnList:not(#_x#_y) #recipeGrid .freezerFlag{display:none !important}
+.dnSlip{position:relative;margin:4px auto 20px;max-width:420px;padding:14px 16px 18px;background:#FFFDF2;color:#1A1A1A;font:400 .9375rem/1.45 "Retro Mono", ui-monospace, monospace;box-shadow:0 8px 20px rgba(0,0,0,.12);transform:rotate(-1.2deg);
+  -webkit-mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 8px) no-repeat, radial-gradient(circle at 6px 0, transparent 5px, #000 5.5px) 0 100%/12px 8px repeat-x;mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 8px) no-repeat, radial-gradient(circle at 6px 0, transparent 5px, #000 5.5px) 0 100%/12px 8px repeat-x}
+.dnSlipHead{display:flex;justify-content:space-between;padding-bottom:6px;border-bottom:1px dashed #999;font-size:.8125rem;color:#4A4A4A}
+.dnSlipItem{margin:8px 0 4px;font-weight:600;color:#B3122E}
+.dnSlipRow{margin:0;color:#333}
+.dnSlipFoot{margin:10px 0 0;padding-top:6px;border-top:1px dashed #999;text-align:center;font:400 1.125rem "Skin Diner", cursive;color:#B3122E}
+html.skin-diner:not(#_x#_y) .recipePageHero{border-radius:26px !important;box-shadow:0 0 0 6px #FFF, 0 0 0 10px #B3122E !important;margin-top:64px !important}
+@media (prefers-reduced-motion: reduce){.dnOpen{animation:none}}

@@ -175,6 +175,14 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Satz und Anfangsbuchstabe, Papierriss (`galerie-torn.svg`). Andere Feld-Seiten: Kopf `.gaHead` mit eigenem Stillleben (`PAGE_ART`: Rezepte Claesz,
     Kategorien Cotán, Plan van Dyck, Liste Chardin, sonst Peeters) und riesigem weißem Titel. Am Rechner ab 1180 px links festes Inhaltsverzeichnis
     `.gaSide`. Rezeptseite: Foto über die ganze Breite, weißer Titel, Papierriss, Untertitel als Satz mit Anfangsbuchstabe (`.gaStatement`).
+  - **Mehr Charakter für die älteren Skins (Dez. 2026, Wunsch des Besitzers: „die alten behalten ihre Themes, aber mehr eigenen Charakter“; alle
+    außer Standard):** jeder hat jetzt ein eigenes Aufbau-Skript `assets/skins/<skin>.js` (in `FX_JS`) mit eigenem Start-Element, Rezeptliste und
+    Rezeptseite. Retro hat dafür eine eigene `retro.css` (Grundlook bleibt in `styles.css`). **Retro:** alles Fenster (Start: Ordner-Fenster mit
+    Kategorien, Liste: Explorer-Detailansicht `html.rtList`, Rezept: Bildbetrachter mit Statusleiste). **Terminal:** Start = Sitzung, Befehle tippen
+    sich (`.tmShell`), Liste = `ls -l` (`html.tmList`), Rezept beginnt mit `cat …rez`. **Diner:** Leuchtschild „Tobis Diner“ mit „Geöffnet“ (11–23 Uhr)
+    + Kreidetafel „Tagesgericht“, Liste = Speisekarte mit Punktlinie zur Zeit (`html.dnList`), Rezept mit Bestellzettel `.dnSlip`. **Bauhaus:**
+    Start = Kreis/Quadrat/Dreieck mit riesigem Datum (`.bhComp`), Liste = Farbflächen-Raster mit Nummern, Foto als Kreis (Fleisch), Quadrat (Gemüse),
+    Dreieck (Fisch) (`html.bhList`), Rezept: Foto im Kreis auf Gelb, Kategorie senkrecht.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
