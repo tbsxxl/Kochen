@@ -204,9 +204,12 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Vollbild-Kopf auf der Startseite (`.cxHero` in `<skin>.js`: unbewegte Ebenen einmal je Größe auf eine Leinwand gemalt, darüber Bewegung
     wie Schnee/Kerzen/Feuer, Parallaxe beim Scrollen, Titel „Tobis / Kochbuch“ + Linie + Datum, unten Sprung zu „Heute“). Die CSS-Dateien sind
     neu und folgen einem Muster (Tokens, ruhige Karten mit Haarlinie, Heute-Karte groß mit Titel auf dem Foto, Rezeptfoto über die Breite);
-    erzeugt mit dem Python-Baukasten `cxcss.build()` (liegt nicht im Repo, Muster aus `nordwall.css` übernehmen). Nordwall = Eismauer im
+    erzeugt mit dem Python-Baukasten `tools/skin_cx.py` (`build(skin, werte, extra, vorspann)`). Nordwall = Eismauer im
     Mondlicht, Burg mit Feuern, Nadelwald, Schnee; Schiefer, Cinzel-Versalien, Blutrot nur für Kochen/aktiven Reiter. Zauberschule = Schloss
     mit erleuchteten Fenstern über dem See, Spiegelungen, schwebende Kerzen; Mitternachtsblau, Gold, Weinrot, IM Fell mit Goldschimmer.
+    Jahr 3000 = Zukunftsstadt in der Dämmerung (Ringplanet, Kuppeltürme mit Rundfenstern und Konturen, Röhrenbahnen mit Kapseln, fliegende
+    Autos mit Lichtspur); Nachtblau, Mint, Orange, Righteous. Zwei Städte = oben goldene Art-déco-Türme im Abendlicht mit Luftschiff und
+    schwebendem blauem Kristall, unten Unterstadt in grünem Dunst mit Rohren, Rauch, pinken/türkisen Leuchtzeichen; Josefin-Versalien, Gold.
     Die älteren Angaben zu diesen sieben Skins (unten und im Absatz „Mehr Charakter“) gelten nicht mehr.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
