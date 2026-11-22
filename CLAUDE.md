@@ -221,6 +221,11 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Schnee, Zauberschule Schloss Hohenschwangau im Abendrot + Lichter, Jahr 3000 Pudong bei Nacht, Zwei Städte Neonschilder + Dunst, Insel Palme im
     Sonnenuntergang + Glühwürmchen, Akte Leuchtturm im Sturm + Regen/Wetterleuchten, Brigade echte Restaurantküche + Dampf. Gemalte Szenen sind raus.
     Die älteren Angaben zu diesen sieben Skins (unten und im Absatz „Mehr Charakter“) gelten nicht mehr.
+    **Vierte Fassung (Besitzer: „Fotos haben nichts mit den Serien zu tun; soll hochwertig und erkennbar sein, aus welchem Universum“):**
+    die Köpfe werden einer nach dem anderen echte 3D-Szenen (`assets/skins/<skin>-3d.js`, Three.js, `KOCHBUCH_CX(api, {scene})`;
+    Vertrag `create(canvas)` → `{resize, render(t, dt, still, {scroll, px, py, near}), dispose}`; ohne Grafikkarte dunkler Verlauf
+    `.cxPoster` mit den 2D-Teilchen). **Nordwall:** Pergament-Landkarte, darüber eine Messing-Armillarsphäre mit glühendem Kern,
+    Türme aus Zahnrädern wachsen aus der Karte und versinken wieder, 3D-Schnee; Scrollen senkt die Kamera.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
