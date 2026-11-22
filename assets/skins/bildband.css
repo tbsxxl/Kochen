@@ -93,3 +93,36 @@ html.skin-bildband:not(#_x#_y) .bxRv{opacity:1;transform:none}
 html.skin-bildband:not(#_x#_y) .recipePageHero img.bbKen{animation:none}
 html.skin-bildband::view-transition-new(root){animation:vtIn .18s both}
 }
+
+/* Dez. 2026, mehr eigener Charakter (bildband.js): Titelblatt, Inhaltsseite mit Seitenzahlen, Aufmacher mit Zitat */
+.bdCover{position:relative;min-height:min(118vw, 640px);margin:16px calc(-16px - env(safe-area-inset-right)) 10px calc(-16px - env(safe-area-inset-left));overflow:hidden;color:#FAF6EE;background:#2B2118;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 22px}
+.bdCoverImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bdCover::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(20,14,8,.45), transparent 30%, transparent 55%, rgba(20,14,8,.75))}
+.bdMast,.bdLead,.bdLines{position:relative;z-index:1}
+.bdMast span{display:block;font:500 .75rem "Fraunces", Georgia, serif;letter-spacing:.14em;text-transform:uppercase}
+.bdMast b{display:block;font:800 clamp(4.4rem, 26vw, 9rem)/.8 "Fraunces", Georgia, serif;letter-spacing:-.05em;font-variation-settings:"opsz" 144}
+.bdLead{display:block;color:#FAF6EE;text-decoration:none;max-width:80%}
+.bdLead small{display:block;font:italic 400 1rem "Fraunces", Georgia, serif;color:#F2D9B8}
+.bdLead b{font:600 clamp(1.8rem, 8vw, 2.8rem)/1.02 "Fraunces", Georgia, serif;letter-spacing:-.02em}
+.bdLines{list-style:none;margin:12px 0 0;padding:10px 0 0;border-top:1px solid rgba(250,246,238,.6)}
+.bdLines li{font:400 .9375rem/1.3 "Fraunces", Georgia, serif}
+.bdLines a{display:inline-flex;min-height:32px;align-items:center;color:#FAF6EE;text-decoration:none}
+.bdLines a::before{content:"— ";margin-right:4px}
+.bdInhalt{margin:18px 0 6px;font:italic 400 clamp(2.6rem, 12vw, 4rem)/1 "Fraunces", Georgia, serif;color:#2B2118;border-bottom:2px solid #2B2118;padding-bottom:6px}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid{display:block !important}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .linkCard{display:block;margin:0 !important}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .recipeCard{display:grid !important;grid-template-columns:3.2rem 1fr 72px;align-items:center;gap:12px;padding:12px 0 !important;background:transparent !important;box-shadow:none !important;border:0 !important;border-bottom:1px solid rgba(43,33,24,.2) !important;border-radius:0 !important}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .recipeCard::before{content:var(--pg);font:400 1.125rem "Fraunces", Georgia, serif;color:#8A4B2A;font-variant-numeric:oldstyle-nums}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .rcImg{grid-column:3;grid-row:1;width:72px !important;aspect-ratio:1 !important;border-radius:0 !important;margin:0 !important}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .rcBody{grid-column:2;grid-row:1;padding:0 !important}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .recipeTitle{font:500 1.25rem/1.15 "Fraunces", Georgia, serif !important;color:#2B2118 !important}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .recipeMeta{font:italic 400 .8125rem "Fraunces", Georgia, serif !important;color:#6A5646 !important}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2){display:none !important}
+/* jeder fünfte Eintrag als großer Aufmacher */
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .linkCard:nth-child(5n+1) .recipeCard{grid-template-columns:3.2rem 1fr;grid-template-rows:auto auto;padding:20px 0 16px !important}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .linkCard:nth-child(5n+1) .rcImg{grid-column:1 / -1;grid-row:1;width:100% !important;aspect-ratio:4/3 !important;margin-bottom:6px !important}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .linkCard:nth-child(5n+1) .recipeCard::before{grid-row:2}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .linkCard:nth-child(5n+1) .rcBody{grid-row:2}
+html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .linkCard:nth-child(5n+1) .recipeTitle{font-size:1.75rem !important}
+.bdQuote{margin:0 0 22px;padding:0 0 0 18px;border-left:3px solid #8A4B2A;font:italic 400 clamp(1.4rem, 5.8vw, 2rem)/1.2 "Fraunces", Georgia, serif;color:#2B2118}
+.bdQuote::before{content:"„"}.bdQuote::after{content:"“"}

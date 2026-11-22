@@ -193,6 +193,11 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Fallblatt-Uhr bis 18:30 und Eingabezeile (`.isStation`), Liste = Stationsprotokoll mit Nummer, Eintrag, Foto im Röhrenrahmen (`html.isList`).
     **Akte:** Start = aufgeschlagene Mappe „Fall des Tages“ mit angeklammertem Sofortbild, Schreibmaschinen-Befund und Stempel (`.akFolder`), Liste =
     Mappen mit Reiter „AZ Jahr-Nr“ und schiefem Sofortbild (`html.akList`), Rezept als Sofortbild mit Büroklammer.
+    **Brigade:** Start = Schiene mit drei Bons (`.bgRail`), Liste = Bons mit Abriss und Bon-Nummer an der Edelstahlschiene (`html.bgList`), Rezept
+    mit blauem Krepp-Etikett `.bgTape`. **Boxengasse:** Start = „Startaufstellung“ der drei schnellsten Gerichte (`.bxGrid`), Liste = Zeitenmonitor
+    mit Position, Abstand zum Schnellsten, Sektorbalken (`html.bxList`), Rezept mit Telemetrie-Leiste `.bxTele`. **Bildband:** Start = Titelblatt
+    (Foto über die Fläche, riesiges „Tobis“, Titelgeschichte, Titelzeilen; `.bdCover`), Liste = „Inhalt“ mit Seitenzahlen, jeder fünfte Eintrag
+    als großer Aufmacher (`html.bdList`), Rezept mit Untertitel als Zitat `.bdQuote`.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
