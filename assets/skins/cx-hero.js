@@ -1,7 +1,7 @@
-// Gemeinsamer Kopf der Serien-Skins (Dez. 2026, dritte Fassung – Besitzer: „gezeichnete Teile wirken billig“): ein echtes
-// Stimmungsfoto über die ganze Fläche (gemeinfrei bzw. frei lizenziert, Wikimedia Commons, Nachweis im Bild und in
-// assets/skins/fotos/quellen.txt), langsam heranfahrend, Parallaxe beim Scrollen; darüber nur Licht (Schnee, Regen, Glut, Dampf)
-// und die Schrift. Geladen von den Skin-Dateien, meldet sich als window.KOCHBUCH_CX(api, opts).
+// Gemeinsamer Kopf der Serien-Skins (Dez. 2026, vierte Fassung – Besitzer: „soll hochwertig und erkennbar sein, aus welchem
+// Universum es kommt“): eine 3D-Szene je Skin (assets/skins/<skin>-3d.js, Option `scene`) über die ganze Fläche, darüber der Titel.
+// Ohne Grafikkarte ein ruhiger Verlauf (.cxPoster, Farben in der Skin-CSS) mit Licht-Teilchen (Schnee, Regen, Glut, Dampf, Dunst).
+// Geladen von den Skin-Dateien, meldet sich als window.KOCHBUCH_CX(api, opts).
 (()=>{
   "use strict";
   if(window.KOCHBUCH_CX) return;
