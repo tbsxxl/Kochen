@@ -7,7 +7,7 @@ author: "Tobi"
 category: "Schnell"
 categories: ["Bowls & Salate", "Hähnchen", "Asiatisch"]
 time: "ca. 15 Min"
-image: /recipes/images/oyakodon-japanische-haehnchen-bowl-mit-ei-auf-reis-in-wuerzi.jpg
+image: /recipes/images/oyakodon-mwse92dh.jpg
 servings: 2
 ingredients:
   - { qty: 150, unit: "g", item: "Jasminreis" }
