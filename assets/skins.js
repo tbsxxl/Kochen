@@ -1090,7 +1090,9 @@
   // Die Datei meldet sich mit KOCHBUCH_FX.<skin> = { start(api), refresh?(api), stop?() }. Was sie über api.on()/api.add()/api.canvas()/
   // api.loop() anlegt, räumt skins.js beim Wechsel auf. api.loop() zeichnet nur, solange das Element sichtbar und die Seite offen ist;
   // bei „Bewegung reduzieren“ genau einmal.
-  const FX_JS = { wortwelt: 1, blauraum: 1, glasklar: 1, tiefsee: 1, formlabor: 1, galerie: 1 };
+  // Dez. 2026: auch die älteren Skins haben ein eigenes Aufbau-Skript (eigener Charakter für Start, Rezeptliste, Rezeptseite)
+  const FX_JS = { wortwelt: 1, blauraum: 1, glasklar: 1, tiefsee: 1, formlabor: 1, galerie: 1,
+    retro: 1, terminal: 1, diner: 1, bauhaus: 1, nordwall: 1, zauberschule: 1, jahr3000: 1, zweistaedte: 1, insel: 1, akte: 1, brigade: 1, boxengasse: 1, bildband: 1 };
   window.KOCHBUCH_FX = window.KOCHBUCH_FX || {};
   let fxOn = "";
   const fxClean = [], fxLoaded = {};

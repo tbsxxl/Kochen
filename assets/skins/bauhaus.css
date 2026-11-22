@@ -42,3 +42,41 @@ html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend span::before{con
 html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend [data-kind="fleisch"]::before{background:var(--kFleisch)}
 html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend [data-kind="veg"]::before{background:var(--kVeg);border-radius:50%}
 html.skin-bauhaus:not(._a):not(._b):not(._c):not(._d) .wbLegend [data-kind="fisch"]::before{background:var(--kFisch);clip-path:polygon(50% 0,100% 100%,0 100%)}
+
+/* Dez. 2026, mehr eigener Charakter (bauhaus.js): Komposition mit riesigem Datum, Farbflächen-Raster mit Nummern und geometrischen Fotos */
+.bhComp{position:relative;height:min(92vw, 420px);margin:10px 0 18px;overflow:hidden;background:#F3EEE2}
+.bhComp i{position:absolute;display:block}
+.bhC{left:-8%;top:8%;width:62%;aspect-ratio:1;border-radius:50% !important;background:#C8202A}
+.bhS{right:6%;top:-6%;width:38%;aspect-ratio:1;background:#F2C230}
+.bhT{right:-4%;bottom:-2%;width:50%;aspect-ratio:1;background:#1E4FB8;clip-path:polygon(50% 0, 100% 100%, 0 100%)}
+.bhDay{position:absolute;left:4%;bottom:-4%;font:800 min(56vw, 16rem)/.8 "Skin Bauhaus", "Futura", sans-serif;color:#111;letter-spacing:-.06em}
+.bhMon{position:absolute;right:4%;top:46%;font:600 1.125rem/1.15 "Skin Bauhaus", "Futura", sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#111;text-align:right}
+.bhLine{position:absolute;left:0;right:0;top:44%;height:6px;background:#111}
+html.skin-bauhaus:not(#_x#_y) body.layout-home .homeGreetingTitle{display:none}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:0 !important;counter-reset:bh;border:3px solid #111;background:#111}
+@media (min-width:700px){html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+@media (min-width:1100px){html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(4,minmax(0,1fr)) !important}}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .linkCard{margin:0 !important;counter-increment:bh;border:1.5px solid #111}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeCard{position:relative;height:100%;padding:14px 12px 12px !important;background:#F3EEE2 !important;box-shadow:none !important;border:0 !important}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeCard[data-kind="fleisch"]{background:#C8202A !important}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeCard[data-kind="veg"]{background:#F2C230 !important}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeCard[data-kind="fisch"]{background:#1E4FB8 !important}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeCard::before{content:counter(bh, decimal-leading-zero);position:absolute;right:10px;top:4px;font:800 2.4rem/1 "Skin Bauhaus", "Futura", sans-serif;color:#111;letter-spacing:-.04em;z-index:1}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeCard:is([data-kind="fleisch"],[data-kind="fisch"])::before,html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeCard:is([data-kind="fleisch"],[data-kind="fisch"]) :is(.recipeTitle,.recipeMeta){color:#FFF !important}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .rcImg{width:78% !important;aspect-ratio:1 !important;margin:18px 0 12px !important;border-radius:0 !important;background:#111}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .rcImg img{width:100%;height:100%;object-fit:cover}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeCard[data-kind="fleisch"] .rcImg{border-radius:50% !important;overflow:hidden}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeCard[data-kind="fisch"] .rcImg{clip-path:polygon(50% 0, 100% 100%, 0 100%)}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .rcBody{padding:0 !important}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeTitle{font:700 1rem/1.15 "Skin Bauhaus", "Futura", sans-serif !important;text-transform:uppercase;letter-spacing:.02em;color:#111 !important}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeMeta{color:#111 !important;font-size:.8125rem !important}
+html.skin-bauhaus.bhList:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2){display:none !important}
+html.skin-bauhaus:not(#_x#_y) .recipePageHero{position:relative;height:auto !important;max-height:none !important;aspect-ratio:auto !important;overflow:hidden !important;margin-top:56px !important;padding:24px 24px 0 56px;background:#F2C230 !important;display:flex !important;flex-direction:column}
+html.skin-bauhaus:not(#_x#_y) .recipePageHero::before,html.skin-bauhaus:not(#_x#_y) .recipePageHero::after{display:none !important}
+html.skin-bauhaus:not(#_x#_y) .recipePageHero img.recipeHeroImg{position:static !important;width:100% !important;height:auto !important;aspect-ratio:1;object-fit:cover;border-radius:50% !important;transform:none !important;box-shadow:12px 12px 0 #C8202A}
+html.skin-bauhaus:not(#_x#_y) .recipeHeroText{position:static !important;background:#111 !important;margin:24px -24px 0 -56px;padding:18px 20px !important}
+html.skin-bauhaus:not(#_x#_y) .recipeHeroText :is(.recipeName,.recipeSubtitle){color:#FFF !important;text-shadow:none !important}
+html.skin-bauhaus:not(#_x#_y) .recipeHeroText .recipeName{text-transform:uppercase;font-weight:800 !important;letter-spacing:-.02em}
+html.skin-bauhaus:not(#_x#_y) .recipeHeroText .recipeSubtitle{display:block !important;-webkit-line-clamp:unset !important}
+.bhVert{position:absolute;left:14px;top:24px;writing-mode:vertical-rl;transform:rotate(180deg);font:800 1rem/1 "Skin Bauhaus", "Futura", sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#111}
+@media (min-width:900px){html.skin-bauhaus:not(#_x#_y) .recipePageHero img.recipeHeroImg{width:min(100%, 520px) !important;align-self:center}}

@@ -55,3 +55,38 @@ html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbBar{height:12px;border
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbBar i{display:block;height:100%;
   clip-path:inset(0 calc((1 - var(--f)) * 100%) 0 0);background:repeating-linear-gradient(90deg,var(--leaf) 0 6px,transparent 6px 8px);filter:drop-shadow(0 0 4px rgba(92,255,138,.55))}
 html.skin-terminal:not(._a):not(._b):not(._c):not(._d) .sbRow b{font-weight:400;color:var(--text);min-width:4.5em;text-align:right}
+
+/* Dez. 2026, mehr eigener Charakter (terminal.js): Start = Terminal-Sitzung, Rezeptliste = ls -l, Rezeptseite = cat */
+.tmShell{margin:18px 0 6px;padding:14px 14px 16px;border:1px solid rgba(92,255,138,.4);background:#020502;font:400 .9375rem/1.55 "Retro Mono", ui-monospace, Menlo, monospace;color:#7DFFA0;box-shadow:0 0 24px rgba(51,255,102,.12) inset}
+.tmShell p{margin:0;overflow-wrap:anywhere}
+.tmShell b{color:#33FF66;font-weight:600}.tmShell i{color:#9CC7FF;font-style:normal}
+.tmShell kbd{font:inherit;color:#E6FFE9}
+.tmOut{margin:0 0 8px !important;padding-left:0;color:#4CC872}
+.tmOut a{display:inline-flex;align-items:center;min-height:32px;color:#33FF66;text-decoration:underline;text-underline-offset:3px;margin-right:6px}
+.tmOut span{color:#4CC872}
+.tmCaret{display:inline-block;width:.6em;height:1.1em;vertical-align:-.15em;background:#33FF66;animation:tmBlink 1s steps(1) infinite}
+@keyframes tmBlink{50%{opacity:0}}
+.tmLs,.tmCat{margin:14px 0 10px;font:400 .9375rem/1.55 "Retro Mono", ui-monospace, Menlo, monospace;color:#4CC872}
+.tmLs b,.tmCat b{color:#33FF66}.tmLs i,.tmCat i{color:#9CC7FF;font-style:normal}.tmLs kbd,.tmCat kbd{font:inherit;color:#E6FFE9}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid{display:block !important;counter-reset:tm;border-top:1px dashed rgba(92,255,138,.4)}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .linkCard{display:block;margin:0 !important;counter-increment:tm}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .recipeCard{display:grid !important;grid-template-columns:5.6rem 1fr 56px;align-items:center;gap:10px;min-height:56px;padding:6px 0 !important;background:transparent !important;box-shadow:none !important;border:0 !important;border-bottom:1px dashed rgba(92,255,138,.25) !important}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .rcImg{grid-column:3;grid-row:1;width:56px !important;height:42px !important;aspect-ratio:auto !important;margin:0 !important;border:1px solid rgba(92,255,138,.5)}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .rcImg img{width:100%;height:100%;object-fit:cover}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .rcBody{display:contents !important}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .recipeMeta{grid-column:1;grid-row:1;font:400 .8125rem "Retro Mono", ui-monospace, Menlo, monospace !important;color:#4CC872 !important;margin:0;flex-direction:column;align-items:flex-start;gap:0}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .recipeMeta::before{content:"-rw-r--r--";color:#3FAE62;font-size:.75rem}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2),html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .recipeMeta svg,html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .freezerFlag,html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .rcFavBadge{display:none !important}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .recipeTitle{grid-column:2;grid-row:1;font:400 1.0625rem/1.25 "Retro Mono", ui-monospace, Menlo, monospace !important;text-transform:lowercase !important;color:#E6FFE9 !important;margin:0}
+html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .recipeTitle::after{content:".rez";color:#4CC872}
+@media (hover:hover) and (pointer:fine){html.skin-terminal.tmList:not(#_x#_y) #recipeGrid .linkCard:hover .recipeCard{background:rgba(51,255,102,.12) !important}}
+html.skin-terminal:not(#_x#_y) .recipePageHero{margin-top:8px !important;border:1px solid rgba(92,255,138,.5);padding:6px;height:auto !important;max-height:none !important;aspect-ratio:auto !important;display:flex !important;flex-direction:column;overflow:visible !important;background:transparent !important}
+html.skin-terminal:not(#_x#_y) .recipePageHero::before,html.skin-terminal:not(#_x#_y) .recipePageHero::after{display:none !important}
+html.skin-terminal:not(#_x#_y) .recipePageHero img.recipeHeroImg{position:static !important;width:100% !important;height:auto !important;aspect-ratio:4/3;object-fit:cover;transform:none !important}
+html.skin-terminal:not(#_x#_y) .recipeHeroText{position:static !important;background:none !important;padding:12px 2px 4px !important}
+html.skin-terminal:not(#_x#_y) .recipeHeroText .recipeName::before{content:"# ";color:#4CC872}
+html.skin-terminal:not(#_x#_y) .recipeHeroText :is(.recipeName,.recipeSubtitle){text-shadow:none !important}
+html.skin-terminal:not(#_x#_y) .recipeHeroText .recipeSubtitle{display:block !important;-webkit-line-clamp:unset !important;color:#4CC872 !important}
+html.skin-terminal:not(#_x#_y) .recipeHeroText .recipeSubtitle::before{content:"> "}
+.tmCat{margin-top:58px}
+@media (prefers-reduced-motion: reduce){.tmCaret{animation:none}}

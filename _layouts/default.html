@@ -71,7 +71,7 @@
     // Jeder Skin hat seine eigene CSS-Datei (assets/skins/<skin>.css), geladen wird nur die des aktiven Skins – nach styles.css,
     // damit die Reihenfolge der Regeln stimmt. Beim ersten Aufbau schreibt das Skript direkt hinter dem styles.css-Link den Link
     // (blockiert das Zeichnen, kein Aufblitzen); beim Wechsel wird die neue Datei eingehängt und die alte danach entfernt.
-    window.KOCHBUCH_SKIN_HREF = function(s){ return s === 'standard' || s === 'retro' ? '' : "{{ '/assets/skins/' | relative_url }}" + s + ".css?v={{ site.time | date: '%s' }}"; };
+    window.KOCHBUCH_SKIN_HREF = function(s){ return s === 'standard' ? '' : "{{ '/assets/skins/' | relative_url }}" + s + ".css?v={{ site.time | date: '%s' }}"; };
     window.KOCHBUCH_SKIN_CSS = function(s){
       var main = document.getElementById('mainCss'); if (!main) return;      // Kopf wird noch gelesen → übernimmt das Skript hinter dem Link
       var want = window.KOCHBUCH_SKIN_HREF(s), old = document.querySelectorAll('link[data-skin-css]');
