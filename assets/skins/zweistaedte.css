@@ -119,3 +119,40 @@ html.skin-zweistaedte:not(#_x#_y) .recipeSegWrap .segBtn.active{box-shadow:inset
 /* Dez. 2026, vierte Fassung: 3D-Kopf (zweistaedte-3d.js) – Kristall in Messingringen zwischen Ober- und Unterstadt */
 .cxPhoto .cxPoster{background:radial-gradient(40% 30% at 50% 55%, rgba(80,190,255,.55), rgba(80,190,255,0)), linear-gradient(#2B1A10, #C8874A 25%, #F3D19A 42%, #3E4A3A 55%, #10241C 75%, #05100C)}
 .cxPhoto .cxGL{position:absolute;inset:0;width:100%;height:100%}
+
+/* ======== Dez. 2026, Unterseiten mit eigener Bildsprache (Besitzer: „nur die Startseite ist individuell“): Gold oben, Neon unten – Art-déco-Rahmen mit abgeschrägten Ecken, Kristallblau, pinkes Neon ======== */
+html.skin-zweistaedte:not(#_x#_y#_z) #ingredientsGroup .listGroup{background:transparent !important;box-shadow:none !important;border:0 !important}
+html.skin-zweistaedte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList) .uRow{background:transparent !important}
+html.skin-zweistaedte:not(#_x#_y#_z) #ingredientsGroup{padding:6px 14px !important}
+html.skin-zweistaedte:not(#_x#_y#_z) #recipeGrid .recipeCard .recipeMeta .metaItem:nth-of-type(n+2){display:none !important}
+
+html.skin-zweistaedte:not(#_x#_y#_z) {--gold:#E0B35A;--gold2:rgba(224,179,90,.45);--neon:#FF2E88;--hex:#2FA8FF}
+html.skin-zweistaedte:not(#_x#_y#_z) body{background:linear-gradient(#1A1810 0%, #0F1418 35%, #0A1A14 100%) fixed !important}
+html.skin-zweistaedte:not(#_x#_y#_z) #recipeGrid .recipeCard{background:linear-gradient(var(--gold),#8A6A2A) !important;padding:1px !important;border-radius:0 !important;box-shadow:none !important;clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px),0 14px)}
+html.skin-zweistaedte:not(#_x#_y#_z) #recipeGrid .recipeCard > *{background:#121A1E}
+html.skin-zweistaedte:not(#_x#_y#_z) #recipeGrid .recipeCard .rcImg{border-radius:0 !important;box-shadow:none !important;clip-path:polygon(13px 0,calc(100% - 13px) 0,100% 13px,100% 100%,0 100%,0 13px)}
+html.skin-zweistaedte:not(#_x#_y#_z) #recipeGrid .recipeCard .rcBody{text-align:center;padding:12px 8px 14px !important;background:linear-gradient(#121A1E,#121A1E) padding-box, linear-gradient(90deg, transparent, var(--gold), transparent) top/100% 1px no-repeat !important}
+html.skin-zweistaedte:not(#_x#_y#_z) #recipeGrid .recipeCard .recipeTitle{text-transform:uppercase;letter-spacing:.12em !important;font-size:.8125rem !important;color:#F3EBDD !important}
+html.skin-zweistaedte:not(#_x#_y#_z) #recipeGrid .recipeCard .recipeMeta{justify-content:center;color:var(--gold) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.notesCard){background:linear-gradient(#141D22,#0E1519) !important;border-radius:0 !important;box-shadow:inset 0 0 0 1px var(--gold2) !important;clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%,0 16px);border-top:3px double var(--gold) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList) .uRow + .uRow{border-top:1px solid rgba(224,179,90,.14) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .uLead{border:1.5px solid var(--gold) !important;border-radius:0 !important;transform:rotate(45deg) scale(.8);background:transparent !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .uRow.checked .uLead{background:var(--neon) !important;border-color:var(--neon) !important;color:transparent !important;box-shadow:0 0 10px var(--neon), 0 0 22px rgba(255,46,136,.6)}
+html.skin-zweistaedte:not(#_x#_y#_z) .uRow.checked .uName{color:rgba(243,235,221,.5) !important;text-decoration:line-through;text-decoration-color:var(--neon)}
+html.skin-zweistaedte:not(#_x#_y#_z) .ingSection{color:var(--gold) !important;text-transform:uppercase;letter-spacing:.16em}
+html.skin-zweistaedte:not(#_x#_y#_z) .recipeBody ol > li::before{background:var(--hex) !important;color:#06131F !important;border-radius:0 !important;clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%);width:32px !important;height:30px !important;box-shadow:none}
+html.skin-zweistaedte:not(#_x#_y#_z) .recipeBody ol > li.stepDone::before{background-color:var(--neon) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .recipeBody ol > li{border-bottom:1px solid rgba(224,179,90,.16) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .segmented{background:transparent !important;border-radius:0 !important;box-shadow:inset 0 0 0 1px var(--gold2) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .segBtn{border-radius:0 !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .segBtn.active{background:var(--gold) !important;color:#14100A !important}
+html.skin-zweistaedte:not(#_x#_y#_z) :is(.filterChip,.pillToggle,.chip,.sortToggle){border-radius:0 !important;background:transparent !important;box-shadow:inset 0 0 0 1px var(--gold2) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) :is(.filterChip,.pillToggle).active{box-shadow:inset 0 0 0 1px var(--neon), 0 0 12px rgba(255,46,136,.55) !important;color:#FFD3E6 !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .planDayCard{margin-bottom:10px !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .planDayCard .planDayWd{text-transform:uppercase;letter-spacing:.14em;color:var(--gold) !important;font-family:var(--fontDisplay) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .planDayCard.isToday{box-shadow:inset 3px 0 0 var(--neon), inset 0 0 0 1px var(--gold2), -6px 0 22px rgba(255,46,136,.3) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .planAdd{color:var(--neon) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .catTile{border-radius:0 !important;clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px),0 14px);box-shadow:inset 0 0 0 1px var(--gold) !important}
+html.skin-zweistaedte:not(#_x#_y#_z) .cookOverlay{--cLeaf:#E0B35A;--cOnLeaf:#14100A}
+html.skin-zweistaedte:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup){padding:20px !important;background:linear-gradient(#141D22,#0E1519) !important;border-top:3px double var(--gold) !important;box-shadow:inset 0 0 0 1px var(--gold2) !important;border-radius:0 !important;clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%,0 16px)}
+

@@ -3418,3 +3418,13 @@ html:not(.skin):not(.retro) .homeEmpty::after{content:"";position:absolute;right
   html:not(.skin):not(.retro) .recipePageHero img.bbKen,html:not(.skin):not(.retro) #favQuick.heartPop .ico,
   html:not(.skin):not(.retro) :is(.uRow.tickNow .uLead,.prepRow.tickNow .prepBox),html:not(.skin):not(.retro) :is(.uRow.tickNow .uLead,.prepRow.tickNow .prepBox) .ico path{animation:none}
 }
+
+/* ==== 25. Seitenkopf der Serien-Skins (Dez. 2026, Besitzer: „nur die Startseite ist individuell“): auf Rezepte, Kategorien, Plan, Liste,
+   Mehr … liegt ein Ausschnitt der 3D-Szene der Welt hinter dem Seitentitel (`KOCHBUCH_CX_HEAD()` in assets/skins/cx-hero.js). ==== */
+body.cxHeaded .pageTitleBlock{position:relative;isolation:isolate;padding-top:max(26vh, 170px) !important}
+body.cxHeaded .pageTitleBlock > :not(.cxHead){position:relative;z-index:1}
+.cxHead{position:absolute;z-index:0;left:50%;width:100vw;transform:translateX(-50%);top:calc(-24px - env(safe-area-inset-top));bottom:0;overflow:hidden;pointer-events:none}
+.cxHead .cxImgWrap{position:absolute;inset:0}
+.cxHead .cxGL{position:absolute;inset:0;width:100%;height:100%}
+.cxHead .cxShade{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 45%, var(--bg) 100%)}
+@media (min-width:900px){body.cxHeaded .pageTitleBlock{padding-top:max(30vh, 220px) !important}}

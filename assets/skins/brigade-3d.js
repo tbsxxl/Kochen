@@ -64,8 +64,10 @@ export function create(canvas, opts){
     const b = new THREE.Mesh(new THREE.SphereGeometry(.22, 16, 10), bulb); b.position.set(x, 5.4, .3); scene.add(b);
     const cord = new THREE.Mesh(new THREE.CylinderGeometry(.02, .02, 3), lampMat); cord.position.set(x, 7.3, .3); scene.add(cord);
     const g = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowT, blending: THREE.AdditiveBlending, depthWrite: false })); g.position.set(x, 5.2, .35); g.scale.set(2.2, 2.2, 1); scene.add(g);
-    const l = new THREE.SpotLight(0xffa850, 18, 9, .7, .6, 1.4); l.position.set(x, 5.3, .3); l.target.position.set(x, 0, .4); scene.add(l, l.target);
   }
+
+  // warmes Licht der Lampen: drei breite Spots statt einem je Lampe (spart Rechenzeit)
+  [-8, 0, 8].forEach((x)=>{ const l = new THREE.SpotLight(0xffa850, 40, 14, 1.1, .7, 1.2); l.position.set(x, 5.4, .8); l.target.position.set(x, 0, .4); scene.add(l, l.target); });
 
   // Bestellungen: echte Rezeptfotos an der Schiene, mit blauem Malerband und Namen
   const loader = new THREE.TextureLoader(), orders = [];

@@ -115,3 +115,47 @@ html.skin-akte:not(#_x#_y) .homeSectionTitle{text-transform:uppercase;letter-spa
 /* Dez. 2026, vierte Fassung: 3D-Kopf (akte-3d.js) – Felseninsel im Sturm mit Leuchtturm */
 .cxPhoto .cxPoster{background:linear-gradient(#0A0E13, #28323C 55%, #0C161C 56%, #05080A)}
 .cxPhoto .cxGL{position:absolute;inset:0;width:100%;height:100%}
+
+/* ======== Dez. 2026, Unterseiten mit eigener Bildsprache (Besitzer: „nur die Startseite ist individuell“): Ermittlungsakte – Aktenmappen mit Reiter, Schreibmaschinenpapier mit Rand, Stempel ======== */
+html.skin-akte:not(#_x#_y#_z) #ingredientsGroup .listGroup{background:transparent !important;box-shadow:none !important;border:0 !important}
+html.skin-akte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList) .uRow{background:transparent !important}
+html.skin-akte:not(#_x#_y#_z) #ingredientsGroup{padding:6px 14px !important}
+html.skin-akte:not(#_x#_y#_z) #recipeGrid .recipeCard .recipeMeta .metaItem:nth-of-type(n+2){display:none !important}
+
+html.skin-akte:not(#_x#_y#_z) {--kraft:#C9A86A;--kraft2:#B8955A;--paper:#F1ECE0;--typo:#2A2622;--rust:#B8432F}
+html.skin-akte:not(#_x#_y#_z) #recipeGrid{counter-reset:ak;gap:26px 14px !important;padding-top:10px}
+html.skin-akte:not(#_x#_y#_z) #recipeGrid .recipeCard{counter-increment:ak;background:var(--kraft) !important;border-radius:0 4px 4px 4px !important;overflow:visible !important;padding:8px !important;box-shadow:0 8px 20px rgba(0,0,0,.45) !important}
+html.skin-akte:not(#_x#_y#_z) #recipeGrid .recipeCard::before{content:"AKTE " counter(ak, decimal-leading-zero);position:absolute;left:0;top:-16px;height:16px;padding:0 12px;display:flex;align-items:center;background:var(--kraft);border-radius:4px 4px 0 0;font:700 .625rem/1 var(--fontDisplay);letter-spacing:.12em;color:#3A2A14}
+html.skin-akte:not(#_x#_y#_z) #recipeGrid .recipeCard .rcImg{border-radius:0 !important;box-shadow:0 0 0 5px #F8F5EE, 0 4px 10px rgba(0,0,0,.3) !important;transform:rotate(-1.2deg);margin:4px}
+html.skin-akte:not(#_x#_y#_z) #recipeGrid .recipeCard:nth-child(2n) .rcImg{transform:rotate(1deg)}
+html.skin-akte:not(#_x#_y#_z) #recipeGrid .recipeCard .rcBody{padding:12px 4px 4px !important}
+html.skin-akte:not(#_x#_y#_z) #recipeGrid .recipeCard :is(.recipeTitle,.recipeMeta,.metaItem){color:#2A1E0E !important}
+html.skin-akte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.notesCard){background:var(--paper) !important;border-radius:2px !important;box-shadow:inset 34px 0 0 var(--paper), inset 35px 0 0 rgba(184,67,47,.55), 0 10px 26px rgba(0,0,0,.45) !important;color:var(--typo) !important}
+html.skin-akte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.notesCard) :is(.uName,.num,.uQty,.ingQty,.uSub,.planDayWd,.planDayNum,.notesTitle,.notesHint,.ingSection,span,div,a:not(.btn)){color:var(--typo) !important;font-family:var(--fontDisplay) !important}
+html.skin-akte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList){padding:8px 14px 8px 44px !important}
+html.skin-akte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList) .uRow + .uRow{border-top:0 !important}
+html.skin-akte:not(#_x#_y#_z) .uLead{border:1.5px solid var(--typo) !important;border-radius:0 !important;background:transparent !important}
+html.skin-akte:not(#_x#_y#_z) .uRow.checked .uLead{background:transparent !important;border-color:var(--rust) !important;color:var(--rust) !important;font-size:18px}
+html.skin-akte:not(#_x#_y#_z) .uRow.checked .uName{text-decoration:line-through 2px;text-decoration-color:var(--rust)}
+html.skin-akte:not(#_x#_y#_z) .ingSection{color:var(--rust) !important;text-transform:uppercase;letter-spacing:.14em}
+html.skin-akte:not(#_x#_y#_z) .recipeBody ol > li::before{content:"§ " counter(step) !important;background:transparent !important;color:var(--rust) !important;font:700 .875rem/1 var(--fontDisplay) !important;width:40px !important;justify-content:flex-start !important}
+html.skin-akte:not(#_x#_y#_z) .recipeBody ol > li.stepDone::before{content:"✓" !important;background:none !important}
+html.skin-akte:not(#_x#_y#_z) .recipeBody ol > li{padding-left:52px !important;border-bottom:1px dashed rgba(230,232,230,.18) !important}
+html.skin-akte:not(#_x#_y#_z) .segmented{background:transparent !important;border-radius:2px !important;box-shadow:inset 0 0 0 1px rgba(230,232,230,.25) !important}
+html.skin-akte:not(#_x#_y#_z) .segBtn{border-radius:2px !important;font-family:var(--fontDisplay) !important}
+html.skin-akte:not(#_x#_y#_z) .segBtn.active{background:var(--kraft) !important;color:#2A1E0E !important}
+html.skin-akte:not(#_x#_y#_z) :is(.filterChip,.pillToggle,.chip,.sortToggle){border-radius:2px !important;font-family:var(--fontDisplay) !important;background:transparent !important;box-shadow:inset 0 0 0 1px rgba(230,232,230,.25) !important}
+html.skin-akte:not(#_x#_y#_z) :is(.filterChip,.pillToggle).active{color:var(--rust) !important;box-shadow:inset 0 0 0 2px var(--rust) !important;transform:rotate(-2deg);text-transform:uppercase}
+html.skin-akte:not(#_x#_y#_z) .planDayCard{margin-bottom:12px !important;padding-left:44px !important}
+html.skin-akte:not(#_x#_y#_z) .planDayCard.isPast{opacity:.6}
+html.skin-akte:not(#_x#_y#_z) .planDayCard.isToday::after{content:"HEUTE";position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(-8deg);border:2px solid var(--rust);color:var(--rust);font:700 .6875rem/1 var(--fontDisplay);letter-spacing:.2em;padding:4px 6px;border-radius:3px;opacity:.85}
+html.skin-akte:not(#_x#_y#_z) .planDayCard.isToday .planAdd{visibility:hidden}
+html.skin-akte:not(#_x#_y#_z) .planDayCard{position:relative}
+html.skin-akte:not(#_x#_y#_z) .planAdd{color:var(--rust) !important}
+html.skin-akte:not(#_x#_y#_z) .catTile{border-radius:0 4px 4px 4px !important;box-shadow:0 0 0 6px var(--kraft), 0 8px 20px rgba(0,0,0,.45) !important;margin:8px}
+html.skin-akte:not(#_x#_y#_z) .cookOverlay{--cLeaf:#B8432F;--cOnLeaf:#FFFFFF}
+html.skin-akte:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup){padding:18px 18px 18px 48px !important;background:var(--paper) !important;box-shadow:inset 34px 0 0 var(--paper), inset 35px 0 0 rgba(184,67,47,.55) !important;border-radius:2px !important}
+html.skin-akte:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup) *{color:var(--typo) !important;font-family:var(--fontDisplay) !important}
+
+html.skin-akte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList) .uRow{border-bottom:1px solid rgba(42,38,34,.14) !important}
+html.skin-akte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList) .uRow:last-child{border-bottom:0 !important}

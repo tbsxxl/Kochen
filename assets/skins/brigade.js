@@ -5,8 +5,7 @@
   const load = (api)=> new Promise((ok)=>{ if(window.KOCHBUCH_CX) return ok(); const s = document.createElement("script"); s.src = `/assets/skins/cx-hero.js?v=${api.ver}`; s.onload = ok; document.head.appendChild(s); });
   window.KOCHBUCH_FX.brigade = {
     start(api){
-      if(!api.home()) return;
-      load(api).then(()=>{ if(document.documentElement.classList.contains("skin-brigade")) window.KOCHBUCH_CX(api, { skin: "brigade", scene: "brigade", down: "Heute auf dem Pass", fx: "steam", dateExtra: " \u00b7 Service l\u00e4uft" }); });
+      load(api).then(()=>{ if(document.documentElement.classList.contains("skin-brigade")) if(api.home()) window.KOCHBUCH_CX(api, { skin: "brigade", scene: "brigade", down: "Heute auf dem Pass", fx: "steam", dateExtra: " \u00b7 Service l\u00e4uft" }); else window.KOCHBUCH_CX_HEAD(api, { skin: "brigade", scene: "brigade" }); });
     },
   };
 })();
