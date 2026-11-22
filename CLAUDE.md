@@ -226,6 +226,8 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Vertrag `create(canvas)` → `{resize, render(t, dt, still, {scroll, px, py, near}), dispose}`; ohne Grafikkarte dunkler Verlauf
     `.cxPoster` mit den 2D-Teilchen). **Nordwall:** Pergament-Landkarte, darüber eine Messing-Armillarsphäre mit glühendem Kern,
     Türme aus Zahnrädern wachsen aus der Karte und versinken wieder, 3D-Schnee; Scrollen senkt die Kamera.
+    **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
+    Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
