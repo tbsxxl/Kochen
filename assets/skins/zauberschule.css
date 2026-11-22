@@ -132,3 +132,6 @@ html.skin-zauberschule:not(#_x#_y) .recipeCard .recipeTitle{-webkit-line-clamp:2
 .cxPhoto .cxDown{color:#FFFFFF}
 .cxCredit{position:absolute;left:16px;bottom:calc(env(safe-area-inset-bottom) + 186px);z-index:2;max-width:60%;font:400 .625rem/1.3 -apple-system, "Inter", sans-serif;color:rgba(255,255,255,.6);text-align:left;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 @media (prefers-reduced-motion: reduce){.cxPhoto .cxImg{animation:none}}
+/* Dez. 2026, vierte Fassung: 3D-Kopf (zauberschule-3d.js) – Halle mit Sternendecke und schwebenden Kerzen */
+.cxPhoto .cxPoster{background:radial-gradient(80% 50% at 50% 35%, #1B2450, #05060D 75%)}
+.cxPhoto .cxGL{position:absolute;inset:0;width:100%;height:100%}
