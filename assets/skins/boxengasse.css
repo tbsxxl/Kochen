@@ -133,3 +133,7 @@ html.skin-boxengasse.bxList:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2),
 .bxTele span{display:flex;flex-direction:column;gap:2px;padding:8px 6px;background:#1C1F17}
 .bxTele small{font:800 .625rem -apple-system, sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#B9BDAE}
 .bxTele b{font:900 1.125rem/1 -apple-system, sans-serif;color:#D2FF00;font-variant-numeric:tabular-nums}
+
+/* ==== unslop-Durchgang Dez. 2026: Lesbarkeit (gemessen) ==== */
+/* Titel in der Rezeptliste nicht nach einer Zeile abschneiden („CHICKEN…“ sagte nichts) – zwei Zeilen */
+html.skin-boxengasse.bxList:not(#_x#_y#_z) #recipeGrid .recipeTitle{-webkit-line-clamp:2 !important;line-clamp:2;white-space:normal !important;hyphens:manual}

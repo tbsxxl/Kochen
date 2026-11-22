@@ -156,3 +156,6 @@ html.skin-zweistaedte:not(#_x#_y#_z) .catTile{border-radius:0 !important;clip-pa
 html.skin-zweistaedte:not(#_x#_y#_z) .cookOverlay{--cLeaf:#E0B35A;--cOnLeaf:#14100A}
 html.skin-zweistaedte:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup){padding:20px !important;background:linear-gradient(#141D22,#0E1519) !important;border-top:3px double var(--gold) !important;box-shadow:inset 0 0 0 1px var(--gold2) !important;border-radius:0 !important;clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%,0 16px)}
 
+
+/* ==== unslop-Durchgang Dez. 2026: Lesbarkeit (gemessen) ==== */
+html.skin-zweistaedte:not(#_x#_y#_z) #ingredientsGroup{padding-top:22px !important}

@@ -169,3 +169,6 @@ html.skin-jahr3000:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup){padding
 html.skin-jahr3000:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup) *{color:var(--ink) !important}
 html.skin-jahr3000:not(#_x#_y#_z) .cookNavBtn.primary{border:3px solid var(--ink) !important;box-shadow:4px 4px 0 var(--ink) !important}
 
+
+/* ==== unslop-Durchgang Dez. 2026: Lesbarkeit (gemessen) ==== */
+html.skin-jahr3000:not(#_x#_y#_z) .searchRow input::placeholder{color:#5A5470 !important;opacity:1}

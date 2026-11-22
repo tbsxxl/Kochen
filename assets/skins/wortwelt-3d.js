@@ -4,7 +4,7 @@
 import * as THREE from "../vendor/three/three.module.min.js";
 
 // kräftige Seitenfarben wie im Vorbild (Rosa, Koralle, Grün, Violett, Gelb, Blau); Schrift darauf hell bzw. dunkel
-export const VIVID = ["#EBB2A9", "#E2604A", "#3E8A5E", "#5B40D4", "#F0B23C", "#2E6EA6"];
+export const VIVID = ["#EBB2A9", "#E2604A", "#2F7550", "#5B40D4", "#F0B23C", "#2E6EA6"];
 const PASTELS = VIVID;
 const LIGHT = { "#EBB2A9": false, "#F0B23C": false };
 const INK = "#3A2B28";
