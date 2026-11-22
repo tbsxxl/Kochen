@@ -183,6 +183,11 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     + Kreidetafel „Tagesgericht“, Liste = Speisekarte mit Punktlinie zur Zeit (`html.dnList`), Rezept mit Bestellzettel `.dnSlip`. **Bauhaus:**
     Start = Kreis/Quadrat/Dreieck mit riesigem Datum (`.bhComp`), Liste = Farbflächen-Raster mit Nummern, Foto als Kreis (Fleisch), Quadrat (Gemüse),
     Dreieck (Fisch) (`html.bhList`), Rezept: Foto im Kreis auf Gelb, Kategorie senkrecht.
+    **Nordwall:** Start = hängende Banner der Kategorien mit eigenen Wappenzeichen (`.nwBanner`, schwingen leicht) + Steintafel „Heute an der Tafel“,
+    Liste = Wappenschilde (Foto im Schild, rotes Band mit römischer Nummer, `html.nwList`), Rezept: eiserner Rahmen, Titel auf Steinplatte.
+    **Zauberschule:** Start = Titelseite der Zeitung „Die Küchenpost“ (Kopf, Schlagzeile = Tagesgericht, Bild atmet leicht, zwei Spalten mit Initiale,
+    `.zpFront`), Liste = Zeitungsseite in Spalten (`html.zpList`, jede dritte Meldung ohne Bild). **Jahr 3000:** Comic – Start = Titelbild mit
+    Erzählkasten, Sprechblase und „Zack!“-Stern (`.cmCover`), Liste = Comicseite mit großen und kleinen Bildfeldern (`html.cmList`), Rezept mit Ausruf.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**

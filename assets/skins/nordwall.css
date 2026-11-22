@@ -196,3 +196,35 @@ html.skin.skin-nordwall:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f) .r
   text-shadow:0 -1px 0 #000,0 1px 0 rgba(255,255,255,.12);animation:ivFadeUp 1s cubic-bezier(.2,.8,.2,1) 1.6s both}
 html.skin-nordwall .recipeActions:not(#_x#_y){gap:8px !important}
 html.skin-nordwall .recipeCookBtn:not(#_x#_y){padding-inline:16px !important;letter-spacing:.02em !important;font-size:var(--fs14) !important}
+
+/* Dez. 2026, mehr eigener Charakter (nordwall.js): Banner der Kategorien, Steintafel, Wappenschilde in der Liste, eiserner Rahmen */
+.nwHall{margin:14px 0 6px}
+.nwBanners{display:flex;gap:10px;overflow-x:auto;padding:0 2px 18px;scrollbar-width:none;-webkit-mask:linear-gradient(90deg,#000 88%,transparent);mask:linear-gradient(90deg,#000 88%,transparent)}
+.nwBanners::-webkit-scrollbar{display:none}
+.nwBanner{flex:none;position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;width:92px;padding:16px 8px 30px;color:#ECE6DA;text-decoration:none;text-align:center;
+  background:linear-gradient(#7D1C1C,#5E1414);clip-path:polygon(0 0,100% 0,100% 100%,50% 86%,0 100%);box-shadow:inset 0 6px 0 #2E353C;transform-origin:50% 0;animation:nwSway 6s ease-in-out infinite;animation-delay:calc(var(--i) * -0.9s)}
+.nwBanner:nth-child(even){background:linear-gradient(#2E353C,#1C2126)}
+.nwBanner svg{width:36px;height:36px;fill:none;stroke:#E2C98A;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nwBanner span{font:400 .8125rem/1.15 "Skin Nordwall", "Trajan Pro", Georgia, serif;letter-spacing:.04em}
+@keyframes nwSway{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg)}}
+.nwStone{display:flex;flex-direction:column;align-items:center;gap:4px;margin:4px 0 10px;padding:18px 16px;text-align:center;text-decoration:none;color:#ECE6DA;
+  background:linear-gradient(135deg,#3A4046,#2A3035);box-shadow:inset 0 0 0 2px #50575E, inset 0 0 0 6px #2A3035, inset 0 0 0 7px #6A7178, 0 10px 24px rgba(0,0,0,.35)}
+.nwStone small{font:400 .75rem "Skin Nordwall", "Trajan Pro", Georgia, serif;letter-spacing:.2em;text-transform:uppercase;color:#C9B98F}
+.nwStone b{font:400 1.6rem/1.15 "Skin Nordwall", "Trajan Pro", Georgia, serif;text-shadow:0 -1px 0 rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.12)}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:30px 16px !important}
+@media (min-width:700px){html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+@media (min-width:1100px){html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(4,minmax(0,1fr)) !important}}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .linkCard{margin:0 !important}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .recipeCard{background:transparent !important;box-shadow:none !important;border:0 !important;display:flex !important;flex-direction:column;align-items:center;text-align:center}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .rcImg{position:relative;width:100% !important;aspect-ratio:5/6 !important;border-radius:0 !important;clip-path:polygon(0 0,100% 0,100% 58%,50% 100%,0 58%);box-shadow:none !important;background:#2E353C}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .rcImg::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 5px #2E353C, inset 0 0 0 7px #C9B98F}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .rcImg img{width:100%;height:100%;object-fit:cover}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .rcBody{position:relative;width:108%;margin-top:-14px;padding:10px 10px 8px !important;background:#7D1C1C;color:#ECE6DA;clip-path:polygon(0 0,100% 0,96% 50%,100% 100%,0 100%,4% 50%)}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .rcBody::before{content:var(--rom);display:block;font:400 .75rem "Skin Nordwall", "Trajan Pro", Georgia, serif;letter-spacing:.2em;color:#E2C98A}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .recipeTitle{font:400 1rem/1.15 "Skin Nordwall", "Trajan Pro", Georgia, serif !important;color:#ECE6DA !important;-webkit-line-clamp:2}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .recipeMeta{justify-content:center;color:#E7D9C0 !important;font-size:.75rem !important}
+html.skin-nordwall.nwList:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2){display:none !important}
+html.skin-nordwall:not(#_x#_y) .recipePageHero{border-radius:0 !important;box-shadow:inset 0 0 0 8px #2E353C, inset 0 0 0 10px #C9B98F, 0 14px 30px rgba(0,0,0,.3) !important}
+html.skin-nordwall:not(#_x#_y) .recipeHeroText{left:12px !important;right:12px !important;bottom:12px !important;padding:16px 14px !important;text-align:center;background:linear-gradient(135deg,rgba(58,64,70,.94),rgba(42,48,53,.94)) !important;box-shadow:inset 0 0 0 1px #6A7178}
+html.skin-nordwall:not(#_x#_y) .recipeHeroText .recipeName{font-family:"Skin Nordwall", "Trajan Pro", Georgia, serif !important;text-shadow:0 -1px 0 rgba(0,0,0,.6) !important}
+@media (prefers-reduced-motion: reduce){.nwBanner{animation:none}}

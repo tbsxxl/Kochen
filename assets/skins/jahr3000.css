@@ -202,3 +202,31 @@ html.skin-jahr3000 .sheet:not(#_x#_y){background:#FFFFFF !important;color:#1A1A1
 html.skin-jahr3000 .sheet:not(#_x#_y) :is(.sheetTitle,.sheetRow,.sheetRow span,.sheetSub,.planDayName,.planDayRow,.dim,p,label,b,strong){color:#1A1A1A !important}
 html.skin-jahr3000 .sheet:not(#_x#_y) .rowGlyph{color:#0E8F4A !important}
 html.skin-jahr3000 .sheet:not(#_x#_y) :is(.listGroup,.card){background:#F3FBFB !important;border-width:3px !important;box-shadow:3px 3px 0 #1A1A1A !important}
+
+/* Dez. 2026, mehr eigener Charakter (jahr3000.js): Comic – Titelbild, Comicseite aus Bildfeldern, Ausrufe-Stern */
+html.skin-jahr3000:not(#_x#_y) .j3Bubble{display:none !important}
+.cmCover{margin:16px 0 8px}
+.cmPanel{position:relative;display:block;overflow:hidden;border:4px solid #14141A;background:#FFE14D;box-shadow:6px 6px 0 #14141A;color:#14141A;text-decoration:none}
+.cmBig{aspect-ratio:4/5;max-height:72svh;width:100%}
+.cmPanel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cmBox{position:absolute;left:10px;top:10px;max-width:70%;padding:6px 10px;background:#FFE14D;border:3px solid #14141A;font:400 .875rem/1.25 "Skin Comic", "Skin Zukunft", sans-serif;text-transform:uppercase}
+.cmBubble{position:absolute;right:12px;bottom:72px;max-width:66%;padding:12px 14px;background:#FFF;border:3px solid #14141A;border-radius:50% / 46%;font:400 1.125rem/1.2 "Skin Comic", "Skin Zukunft", sans-serif;text-align:center}
+.cmBubble::after{content:"";position:absolute;left:24%;bottom:-18px;width:22px;height:22px;background:#FFF;border-right:3px solid #14141A;border-bottom:3px solid #14141A;transform:skew(25deg) rotate(40deg)}
+.cmBang{position:absolute;left:10px;bottom:14px;display:grid;place-items:center;width:110px;height:110px;background:#FF3B30;color:#FFF;font:400 1.5rem/1 "Skin Comic", "Skin Zukunft", sans-serif;text-transform:uppercase;transform:rotate(-10deg);
+  clip-path:polygon(50% 0,61% 22%,85% 10%,78% 35%,100% 44%,80% 58%,92% 82%,66% 76%,56% 100%,44% 78%,18% 92%,24% 66%,0 56%,21% 42%,8% 18%,36% 24%);text-shadow:2px 2px 0 #14141A}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;grid-auto-flow:dense;gap:12px !important;padding:12px !important;background:#FFF;border:4px solid #14141A;box-shadow:6px 6px 0 #14141A}
+@media (min-width:800px){html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(4,minmax(0,1fr)) !important}}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .linkCard{margin:0 !important}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .linkCard:nth-child(5n+1){grid-column:span 2}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .recipeCard{position:relative;height:100%;background:#14141A !important;border:3px solid #14141A !important;border-radius:0 !important;box-shadow:none !important;overflow:hidden !important}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .rcImg{border-radius:0 !important;aspect-ratio:1 !important;height:100%}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .linkCard:nth-child(5n+1) .rcImg{aspect-ratio:2/1 !important}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .rcImg img{width:100%;height:100%;object-fit:cover}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .rcBody{position:absolute !important;left:6px;right:auto;bottom:6px;max-width:calc(100% - 12px);padding:4px 8px !important;background:#FFE14D;border:2px solid #14141A}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .recipeTitle{font:400 .9375rem/1.15 "Skin Comic", "Skin Zukunft", sans-serif !important;text-transform:uppercase;color:#14141A !important;-webkit-line-clamp:2}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .recipeMeta{display:none !important}
+html.skin-jahr3000.cmList:not(#_x#_y) #recipeGrid .linkCard:nth-child(3n+2) .recipeCard::before{content:var(--say);position:absolute;right:6px;top:6px;z-index:1;padding:6px 10px;background:#FFF;border:2px solid #14141A;border-radius:50%;font:400 .875rem "Skin Comic", "Skin Zukunft", sans-serif;color:#14141A}
+.cmBangHero{left:auto;right:12px;bottom:auto;top:12px;width:96px;height:96px;font-size:1.25rem;z-index:3}
+html.skin-jahr3000:not(#_x#_y) .recipePageHero{border:4px solid #14141A !important;border-radius:0 !important;box-shadow:6px 6px 0 #14141A !important;overflow:hidden}
+html.skin-jahr3000:not(#_x#_y) .recipeHeroText{left:8px !important;right:auto !important;bottom:8px !important;max-width:calc(100% - 16px);padding:8px 12px !important;background:#FFE14D !important;border:3px solid #14141A}
+html.skin-jahr3000:not(#_x#_y) .recipeHeroText :is(.recipeName,.recipeSubtitle){color:#14141A !important;text-shadow:none !important}
