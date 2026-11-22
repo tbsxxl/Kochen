@@ -166,13 +166,15 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     davor ein Eisbrocken aus echtem 3D-Glas (`glasklar-3d.js`, Titel als undurchsichtige Fläche, folgt dem Finger; `glass()` zeichnet jede Spanne mit
     eigener Schrift und beachtet `text-transform`). Danach „(01) Heute“: Versal-Satz mit kursivem Teil, füllt sich beim Scrollen. Auf anderen
     Feld-Seiten Glas über dem Seitentitel. Rezeptseite: Titel groß über dem Foto, Untertitel kursiv.
-    **Galerie** (Dez. 2026 zweiter Neubau wie Blauraum, Vorbild shopify.com/editions/winter2026, jetzt vollständig sichtbar): graubeige Seiten
-    `#DCDAD1`, Serifen-Titel mit verziertem Anfangsbuchstaben (`::first-letter` in „Skin Garamond“ kursiv), kleine fette Etiketten, schwarze Kapseln.
-    Start: selbst gemaltes Winterbild über die ganze Fläche (`.gaHero`, drei Leinwände mit Parallaxe), mittig dünner weißer Rahmen `.gaFrame` mit
-    „Tobis Koch✱buch“ (Stern als SVG), „Die Winter-Ausgabe“ und Inhaltsverzeichnis (Kategorien mit römischen Zahlen); beim Scrollen schrumpft der
-    Rahmen, ein Funkelring öffnet sich (`sparkle()`). Danach Kapitel `.gaChapter`: dunkles Sternenband, riesiges „Heute“, Satz mit Anfangsbuchstabe,
-    eingerissener Papierrand (`galerie-torn.svg`). Am Rechner ab 1180 px links festes Inhaltsverzeichnis `.gaSide`. Rezeptseite: Foto über die ganze
-    Breite mit riesigem weißem Titel und Papierriss, Untertitel als großer Satz mit Anfangsbuchstabe (`.gaStatement`). Der 3D-Bildersaal ist entfallen.
+    **Galerie** (Dez. 2026 dritte Fassung, Besitzer: „nicht vergleichbar, keine Winter-Ausgabe“; Vorbild shopify.com/editions/winter2026 arbeitet mit
+    echten alten Gemälden): **gemeinfreie Gemälde alter Meister** in `assets/skins/galerie/` (Quellen in `quellen.txt`, von Wikimedia Commons; zum
+    Nachladen `commons.wikimedia.org` + `upload.wikimedia.org` freigegeben, nur Standard-Vorschaugrößen wie 1280px laden, sonst „Too many requests“).
+    Graubeige Seiten `#DCDAD1`, Serifen-Titel mit verziertem Anfangsbuchstaben (`::first-letter` „Skin Garamond“ kursiv), schwarze Kapseln.
+    Start: Beuckelaers Küchenszene über die ganze Fläche (`.gaHero`, `art()` mit Parallaxe), dünner weißer Rahmen `.gaFrame` „Tobis Koch✱buch – Die
+    Tafel-Ausgabe“ mit Inhaltsverzeichnis (römische Zahlen), Funkelring beim Scrollen; Kapitel `.gaChapter` „Heute“ auf Arcimboldos Vertumnus mit
+    Satz und Anfangsbuchstabe, Papierriss (`galerie-torn.svg`). Andere Feld-Seiten: Kopf `.gaHead` mit eigenem Stillleben (`PAGE_ART`: Rezepte Claesz,
+    Kategorien Cotán, Plan van Dyck, Liste Chardin, sonst Peeters) und riesigem weißem Titel. Am Rechner ab 1180 px links festes Inhaltsverzeichnis
+    `.gaSide`. Rezeptseite: Foto über die ganze Breite, weißer Titel, Papierriss, Untertitel als Satz mit Anfangsbuchstabe (`.gaStatement`).
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
