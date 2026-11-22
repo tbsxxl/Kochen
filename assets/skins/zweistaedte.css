@@ -116,3 +116,6 @@ html.skin-zweistaedte:not(#_x#_y) .recipeSegWrap .segBtn.active{box-shadow:inset
 .cxPhoto .cxDown{color:#FFFFFF}
 .cxCredit{position:absolute;left:16px;bottom:calc(env(safe-area-inset-bottom) + 186px);z-index:2;max-width:60%;font:400 .625rem/1.3 -apple-system, "Inter", sans-serif;color:rgba(255,255,255,.6);text-align:left;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 @media (prefers-reduced-motion: reduce){.cxPhoto .cxImg{animation:none}}
+/* Dez. 2026, vierte Fassung: 3D-Kopf (zweistaedte-3d.js) – Kristall in Messingringen zwischen Ober- und Unterstadt */
+.cxPhoto .cxPoster{background:radial-gradient(40% 30% at 50% 55%, rgba(80,190,255,.55), rgba(80,190,255,0)), linear-gradient(#2B1A10, #C8874A 25%, #F3D19A 42%, #3E4A3A 55%, #10241C 75%, #05100C)}
+.cxPhoto .cxGL{position:absolute;inset:0;width:100%;height:100%}
