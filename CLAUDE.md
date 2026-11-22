@@ -214,6 +214,12 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Fraunces weit gesperrt (Titel taucht unscharf auf), Glut-Orange. Akte = Sturmnacht: Wolken, schräger Regen, Wetterleuchten, Leuchtturm
     mit streichendem Kegel, langes Gebäude auf der Klippe; Schreibmaschine, Rostrot. Brigade (hell) = Küchenpass aus gebürstetem Edelstahl,
     Wärmelampen mit warmem Licht, Bonschiene, Teller mit Dampf; Archivo kräftig, „Tobis“ auf blauem Malerband, Schürzenblau.
+    **Dritte Fassung (Besitzer: „gezeichnete Teile wie Teller, Lampen, Zettel wirken billig“):** Der Kopf ist jetzt ein echtes Stimmungsfoto
+    (`assets/skins/fotos/<skin>.jpg`, frei lizenziert von Wikimedia Commons, Nachweis klein im Bild `.cxCredit` und in `fotos/quellen.txt`),
+    gemeinsam aufgebaut von `assets/skins/cx-hero.js` (`KOCHBUCH_CX(api, {skin, img, pos, down, credit, fx})`: Foto mit langsamem Heranfahren und
+    Parallaxe, darüber nur Licht-Teilchen `fx` = snow/rain/motes/steam/haze und die Schrift). Fotos: Nordwall Gletscher-Eiswand (abgedunkelt) +
+    Schnee, Zauberschule Schloss Hohenschwangau im Abendrot + Lichter, Jahr 3000 Pudong bei Nacht, Zwei Städte Neonschilder + Dunst, Insel Palme im
+    Sonnenuntergang + Glühwürmchen, Akte Leuchtturm im Sturm + Regen/Wetterleuchten, Brigade echte Restaurantküche + Dampf. Gemalte Szenen sind raus.
     Die älteren Angaben zu diesen sieben Skins (unten und im Absatz „Mehr Charakter“) gelten nicht mehr.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
