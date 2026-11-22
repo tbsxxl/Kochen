@@ -44,7 +44,7 @@
   function passClock(){
     clearInterval(clockT);
     const el = document.querySelector(".passClock .pcDigits");
-    if(skin() !== "brigade" || !el) return;
+    if(skin() !== "brigade" || PURE.brigade || !el) return;
     const day = document.querySelector(".passClock .pcDay");
     const tick = ()=>{
       if(document.hidden) return;
@@ -60,9 +60,12 @@
     tick(); clockT = setInterval(tick, 1000);
   }
 
+  // Dez. 2026: die Serien-Skins sind neu gebaut (eigene Datei assets/skins/<skin>.js mit gemaltem Vollbild-Kopf); ihre alten
+  // Spielereien (Szenen, Uhren, Aufkleber, Bons …) sind für sie abgeschaltet (Besitzer: „zu wenig wie die Serie, wirkt gebastelt“).
+  const PURE = { nordwall: 1, zauberschule: 1, jahr3000: 1, zweistaedte: 1, insel: 1, akte: 1, brigade: 1 };
   function mountScene(){
     document.querySelectorAll(".skinScene").forEach(el=> el.remove());
-    const make = SCENES[skin()];
+    const make = PURE[skin()] ? null : SCENES[skin()];
     if(!make || !document.body.classList.contains("fieldPage")) return;
     const el = document.createElement("div");
     el.className = `skinScene skinScene-${skin()}${document.body.classList.contains("layout-home") ? "" : " scList"}`;
@@ -269,7 +272,7 @@
   function cryo(){
     clearInterval(cryoTimer);
     const t1 = $(".pageTitleBlock .h1[data-orig]"); if(t1 && skin() !== "jahr3000"){ t1.textContent = t1.dataset.orig; delete t1.dataset.orig; }
-    if(skin() !== "jahr3000" || !$("#freezerList")) return;
+    if(skin() !== "jahr3000" || PURE.jahr3000 || !$("#freezerList")) return;
     const f = readLS("kochbuch.freezer", {});
     const tick = ()=> document.querySelectorAll(".freezerCard").forEach(card=>{
       const added = Date.parse(f[card.dataset.id]?.added || ""); if(!added) return;
@@ -460,7 +463,7 @@
   function homeTimer(){
     clearInterval(homeTimerT);
     const quick = document.querySelector(".homeQuick");
-    const off = WORLD_CLOCK[skin()] || skin() === "brigade" || !quick || !document.body.classList.contains("layout-home");
+    const off = (!PURE[skin()] && (WORLD_CLOCK[skin()] || skin() === "brigade")) || !quick || !document.body.classList.contains("layout-home");
     if(off){ document.querySelector(".homeTimer")?.remove(); markTimerVisible(); return; }
     const tick = ()=>{
       if(document.hidden) return;
@@ -492,7 +495,7 @@
     clearInterval(worldT);
     const sk = skin();
     const host = $(".homeQuick");
-    if(!WORLD_CLOCK[sk] || !host || !document.body.classList.contains("layout-home")) return;
+    if(!WORLD_CLOCK[sk] || PURE[sk] || !host || !document.body.classList.contains("layout-home")) return;
     let el = $(".worldClock");
     if(!el){
       el = bit("worldClock", sk);
@@ -1213,9 +1216,9 @@
     try{ def.start(FX_API); }catch(e){ console.error(e); }
   }
 
-  function worlds(){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); boxengasse(); fxRun(); document.body.classList.toggle("hasFootLeaves", !!$(".bbFooter")); }
+  function worlds(){ if(!PURE[skin()]){ j3Ship(); zsSeal(); zsRibbonMenu(); marginNote(); blockCaret(); protoHead(); typeJitter(); bonPrint(); } boxengasse(); fxRun(); document.body.classList.toggle("hasFootLeaves", !!$(".bbFooter")); }
 
-  function enhance(){ cleanBits(); worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); cookVoice(); worlds(); }
+  function enhance(){ cleanBits(); if(!PURE[skin()]){ worldHome(); houseCup(); tvAd(); caseHeader(); statBars(); weekBalance(); feasts(); bonClock(); } cookVoice(); worlds(); }
 
   // ---------- Logo je Skin (assets/logos/<skin>.svg; Standard/Retro haben ihre eigenen) ----------
   const LOGOS = ["terminal","diner","bauhaus","nordwall","zauberschule","jahr3000","zweistaedte","insel","akte","brigade","boxengasse","bildband","wortwelt","blauraum","glasklar","tiefsee","formlabor","galerie"];
@@ -1227,7 +1230,7 @@
     if(on) img.src = `/assets/logos/${skin()}.svg?v=2`;
   }
 
-  function apply(){ fxStop(); mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); cryo(); worldClock(); homeTimer(); introOnSwitch(); }
+  function apply(){ fxStop(); mountScene(); passClock(); placeholders(); watchScene(); futureDate(); markCooked(); skinLogo(); voice(); enhance(); if(!PURE[skin()]) cryo(); worldClock(); homeTimer(); introOnSwitch(); }
   function init(){
     apply();
     watchProgress();
