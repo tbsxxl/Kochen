@@ -8,6 +8,22 @@
   "use strict";
   const TAU = Math.PI * 2;
   const IMG = (n)=> `/assets/skins/galerie/${n}.jpg?v=1`;
+  // Werkangaben für die Schilder an den Gemälden (Quellen in galerie/quellen.txt)
+  const WORKS = {
+    "beuckelaer-kueche": ["Joachim Beuckelaer", "Küchenszene", "16. Jh."],
+    "arcimboldo-vertumnus": ["Giuseppe Arcimboldo", "Vertumnus", "1591"],
+    "peeters-kaese": ["Clara Peeters", "Stillleben mit Käse", "um 1625"],
+    "claesz-pastete": ["Pieter Claesz", "Stillleben mit Truthahnpastete", "1627"],
+    "cotan-gefluegel": ["Juan Sánchez Cotán", "Stillleben mit Geflügel", "um 1600"],
+    "chardin-brioche": ["Jean Siméon Chardin", "Die Brioche", "1763"],
+    "vandyck-tafel": ["Floris van Dyck", "Gedeckter Tisch", "um 1615"],
+    "carracci-bohnenesser": ["Annibale Carracci", "Der Bohnenesser", "um 1584"],
+    "campi-obsthaendlerin": ["Vincenzo Campi", "Die Obsthändlerin", "1580"],
+    "heda-austern": ["Willem Claesz. Heda", "Stillleben mit Austern", "1634"],
+    "aertsen-marktfrau": ["Pieter Aertsen", "Marktfrau am Gemüsestand", "1567"],
+    "snyders-speisekammer": ["Frans Snyders", "Speisekammer", "17. Jh."],
+  };
+  const SAAL_ART = ["campi-obsthaendlerin", "heda-austern", "carracci-bohnenesser", "aertsen-marktfrau", "snyders-speisekammer"];
   const PAGE_ART = { rezeptindex: "claesz-pastete", kategorien: "cotan-gefluegel", wochenplan: "vandyck-tafel", shopping: "chardin-brioche", kuehltruhe: "peeters-kaese", "was-koche-ich": "peeters-kaese" };
   const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
   const TOC = ["Schnell", "Pasta", "Curry", "Suppen & Eintöpfe", "Schmorgerichte", "Burger & Sandwiches", "Süßes & Backen", "Wochenendprojekt"];
@@ -27,7 +43,16 @@
       const par = ()=>{ raf = 0; const r = host.getBoundingClientRect(); if(r.bottom < 0 || r.top > innerHeight) return; im.style.transform = `translate3d(0,${(-r.top * .18).toFixed(1)}px,0) scale(1.08)`; };
       api.on(window, "scroll", ()=>{ if(!raf) raf = requestAnimationFrame(par); }, { passive: true }); par();
     }
+    plaque(host, name);
     return im;
+  }
+
+  // kleines Schild mit Maler, Titel, Jahr (unten rechts am Gemälde)
+  function plaque(host, name){
+    const w = WORKS[name]; if(!w || host.querySelector(":scope > .gaPlaque")) return;
+    const el = document.createElement("p"); el.className = "gaPlaque";
+    el.innerHTML = `<b>${esc(w[0])}</b><i>${esc(w[1])}</i>, ${esc(w[2])}`;
+    host.appendChild(el);
   }
 
   // Funkelring in der Bildmitte, öffnet sich beim Scrollen
@@ -85,6 +110,37 @@
     document.body.classList.add("gaPaged"); api.add(()=> document.body.classList.remove("gaPaged"));
   }
 
+
+  // weitere Säle auf der Startseite: je Kategorie ein Gemälde, „Saal II …“, drei gerahmte Werke mit Museumsschild
+  function halls(api, after){
+    const R = api.recipes(), used = new Set();
+    const list = cats().map((c)=> [c, R.filter((r)=> r.c === c)]).filter(([, rs])=> rs.length >= 3).slice(0, 4);
+    let prev = after;
+    list.forEach(([c, rs], i)=>{
+      const pick = rs.filter((r)=> !used.has(r.u)).slice(0, 3); pick.forEach((r)=> used.add(r.u));
+      if(pick.length < 3) return;
+      const el = api.bit("gaSaal", "galerie", "section");
+      const n = ROMAN[cats().indexOf(c)] || String(i + 2);
+      el.innerHTML = `<div class="gaSaalHead"><div class="gaSaalIn"><p class="gaKick">Saal ${n}</p><h2 class="gaSaalName">${esc(c)}</h2><p class="gaSaalCount">${rs.length} Werke</p></div></div>
+        <div class="gaWall">${pick.map((r, k)=> `<a class="gaWork" href="${esc(r.u)}"><span class="gaMat"><img src="${esc(r.i)}" alt="" loading="lazy" decoding="async"></span><span class="gaLabel"><small>Nº ${k + 1} · Saal ${n}</small><b>${esc(r.t)}</b>${r.z ? `<span>${esc(r.z)}</span>` : ""}</span></a>`).join("")}</div>
+        <a class="gaAll" href="/rezeptindex/?kategorie=${encodeURIComponent(c)}">Den ganzen Saal ansehen</a>`;
+      prev.after(el); prev = el; api.add(()=> el.remove());
+      art(api, el.querySelector(".gaSaalHead"), SAAL_ART[i % SAAL_ART.length], "50% 45%");
+    });
+  }
+
+  // Rezeptseite: Museumsschild mit den Angaben zum Werk
+  function label(api){
+    const D = window.RECIPE_DATA, body = document.querySelector(".recipePageBody");
+    if(!D || !body) return;
+    const kv = [...document.querySelectorAll(".recipeFacts .kv")].map((k)=> k.textContent.trim()).filter(Boolean);
+    const who = document.querySelector(".recipeAuthor span:last-child")?.textContent.replace(/^von\s+/, "").trim();
+    const el = api.bit("gaRecLabel", "galerie");
+    el.innerHTML = `<b>${esc(D.title || document.querySelector(".recipeName")?.textContent.trim() || "")}</b><span>${esc([D.category, kv[0], kv[1]].filter(Boolean).join(" · "))}</span>${who ? `<span>Aus der Sammlung von ${esc(who)}</span>` : ""}`;
+    const st = body.querySelector(".gaStatement"); if(st) st.after(el); else body.prepend(el);
+    api.add(()=> el.remove());
+  }
+
   // Rezeptseite: Untertitel als großer Satz mit verziertem Anfangsbuchstaben
   function statement(api){
     const sub = window.RECIPE_DATA?.subtitle, body = document.querySelector(".recipePageBody");
@@ -106,10 +162,11 @@
     start(api){
       side(api);
       statement(api);
+      label(api);
       pageHead(api);
       if(!api.home()) return;
       const h = hero(api);
-      if(h) chapter(api, document.querySelector(".homeGreeting"));
+      if(h){ chapter(api, document.querySelector(".homeGreeting")); const ch = document.querySelector(".gaChapter"); if(ch) halls(api, ch); }
       dispatchEvent(new Event("kochbuch:sceneresize"));
     },
   };

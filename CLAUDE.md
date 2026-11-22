@@ -177,6 +177,14 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Satz und Anfangsbuchstabe. Den Papierriss an den Bildkanten hat der Besitzer abgelehnt („sieht billig aus“) – gerade Kanten. Andere Feld-Seiten: Kopf `.gaHead` mit eigenem Stillleben (`PAGE_ART`: Rezepte Claesz,
     Kategorien Cotán, Plan van Dyck, Liste Chardin, sonst Peeters) und riesigem weißem Titel. Am Rechner ab 1180 px links festes Inhaltsverzeichnis
     `.gaSide`. Rezeptseite: Foto über die ganze Breite, weißer Titel, Untertitel als Satz mit Anfangsbuchstabe (`.gaStatement`).
+    **Ausbau (Dez. 2026, Besitzer: „Galerie ist geil – noch mehr“):** zwölf Gemälde (neu: Carracci Bohnenesser, Campi Obsthändlerin,
+    Heda Austern, Aertsen Marktfrau, Snyders Speisekammer; Werkangaben in `WORKS` in `galerie.js`). Jedes Gemälde trägt ein Werkschild
+    `.gaPlaque` (Maler, Titel, Jahr). Startseite: nach „Heute“ bis zu vier Säle `.gaSaal` („Saal II – Pasta“, römische Zahl wie im
+    Inhaltsverzeichnis, eigenes Gemälde aus `SAAL_ART`, drei gerahmte Werke mit Museumsschild, „Den ganzen Saal ansehen“); dafür hat
+    `#homeRecipes` jetzt auch `c` (Hauptkategorie). Rezeptliste = Sammlung: Foto mit Passepartout und dunklem Rahmen, Museumsschild
+    „Nº n“, jedes fünfte Werk am Handy hochkant (am iPad nicht doppelt breit, die Karten laden nur 480-px-Bilder). Rezeptseite: Titel in
+    Fraunces, Museumsschild `.gaRecLabel` (Name, Kategorie · Zeit · Portionen, „Aus der Sammlung von …“; Autor und Zeit/Portionen-Zeile
+    darum ausgeblendet), Schritte mit römischen Zahlen in Garamond. Einkaufsliste/Plan/Kochmodus mit Serifen und Garamond-Überschriften.
   - **Mehr Charakter für die älteren Skins (Dez. 2026, Wunsch des Besitzers: „die alten behalten ihre Themes, aber mehr eigenen Charakter“; alle
     außer Standard):** jeder hat jetzt ein eigenes Aufbau-Skript `assets/skins/<skin>.js` (in `FX_JS`) mit eigenem Start-Element, Rezeptliste und
     Rezeptseite. Retro hat dafür eine eigene `retro.css` (Grundlook bleibt in `styles.css`). **Retro:** alles Fenster (Start: Ordner-Fenster mit

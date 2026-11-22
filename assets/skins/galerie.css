@@ -156,3 +156,78 @@ html.skin-galerie:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#111111}
 
 /* Dez. 2026: kein Papierriss mehr (Besitzer: „sieht billig aus“) – Bilder enden mit gerader Kante */
 html.skin-galerie:not(#_x#_y) .recipePageHero::after{display:none !important}
+
+/* ======== Dez. 2026, Ausbau (Besitzer: „Galerie ist geil – noch optimieren und ergänzen“): Werkschilder, Säle, Sammlung, Museumsschilder ======== */
+/* Werkschild am Gemälde */
+.gaPlaque{position:absolute;z-index:4;right:14px;bottom:14px;margin:0;max-width:62%;padding:7px 10px;background:rgba(250,248,242,.92);color:#111111;border-radius:2px;
+  font:500 .6875rem/1.3 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;text-align:left;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.gaPlaque b{display:block;font-weight:700}
+.gaPlaque i{font:italic 400 .75rem/1.3 "Fraunces", Georgia, serif}
+.gaHero .gaPlaque{bottom:calc(env(safe-area-inset-bottom) + 104px)}
+.gaChapter .gaPlaque{top:calc(env(safe-area-inset-top) + 70px);bottom:auto}
+.gaHead .gaPlaque{top:calc(env(safe-area-inset-top) + 70px);bottom:auto;right:16px}
+@media (min-width:1180px){.gaHero .gaPlaque{right:24px}}
+
+/* Säle auf der Startseite */
+.gaSaal{position:relative;margin:0 calc(-16px - env(safe-area-inset-right)) 46px calc(-16px - env(safe-area-inset-left))}
+.gaSaalHead{position:relative;overflow:hidden;min-height:min(78svh, 640px);display:flex;align-items:flex-end;background:#2A2118;color:#FFFFFF}
+.gaSaalHead::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(10,8,6,.05) 30%, rgba(10,8,6,.75))}
+.gaSaalIn{position:relative;z-index:2;padding:0 22px 30px}
+.gaKick{margin:0 0 8px;font:600 .8125rem/1 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;letter-spacing:.02em}
+.gaSaalName{margin:0;font:700 min(clamp(3rem, 15vw, 7rem), 15vw)/.88 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;letter-spacing:-.05em;text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.gaSaalCount{margin:12px 0 0;font:italic 400 1.125rem/1 "Fraunces", Georgia, serif}
+.gaWall{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:14px;padding:26px 16px 6px}
+@media (max-width:699px){.gaWall{grid-template-columns:repeat(3, 72%);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:10px}.gaWall::-webkit-scrollbar{display:none}}
+.gaWork{scroll-snap-align:start;display:flex;flex-direction:column;gap:12px;color:#111111;text-decoration:none}
+.gaMat{display:block;padding:10px;background:#F4F2EC;box-shadow:0 0 0 4px #2A2118, 0 14px 30px rgba(17,17,17,.22)}
+.gaMat img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.gaLabel{display:flex;flex-direction:column;gap:3px;padding:10px 12px;background:#F4F2EC;border-radius:2px;align-self:flex-start;max-width:100%}
+.gaLabel small{font:600 .6875rem/1.2 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;color:#55534C}
+.gaLabel b{font:400 1.125rem/1.15 "Fraunces", Georgia, serif}
+.gaLabel span{font:500 .75rem/1.3 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;color:#46443E}
+.gaAll{display:inline-flex;align-items:center;min-height:44px;margin:14px 16px 0;padding:0 18px;border-radius:999px;background:#111111;color:#FFFFFF;
+  font:600 .875rem/1 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;text-decoration:none}
+
+/* Rezeptliste als Sammlung: gerahmte Werke mit Passepartout und Museumsschild, jedes fünfte als Hauptwerk */
+html.skin-galerie:not(#_x#_y#_z) #recipeGrid{counter-reset:ga;gap:44px 22px !important}
+html.skin-galerie:not(#_x#_y#_z) #recipeGrid .recipeCard{counter-increment:ga}
+html.skin-galerie:not(#_x#_y#_z) #recipeGrid .recipeCard .rcImg{border-radius:0 !important;padding:10px;background:#F4F2EC;box-shadow:0 0 0 4px #2A2118, 0 16px 32px rgba(17,17,17,.22) !important;box-sizing:border-box}
+html.skin-galerie:not(#_x#_y#_z) #recipeGrid .recipeCard .rcImg img{border-radius:0 !important}
+html.skin-galerie:not(#_x#_y#_z) #recipeGrid .recipeCard .rcBody{margin-top:16px;padding:10px 12px !important;background:#F4F2EC;border-radius:2px;display:inline-flex;flex-direction:column;gap:4px;max-width:calc(100% - 24px)}
+html.skin-galerie:not(#_x#_y#_z) #recipeGrid .recipeCard .rcBody::before{content:"Nº " counter(ga);font:600 .6875rem/1 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;color:#55534C}
+html.skin-galerie:not(#_x#_y#_z) #recipeGrid .recipeCard .recipeTitle{font-size:1.25rem !important}
+html.skin-galerie:not(#_x#_y#_z) #recipeGrid .recipeCard:nth-child(5n+1) .rcImg{aspect-ratio:4/5 !important}
+html.skin-galerie:not(#_x#_y#_z) #recipeGrid .recipeCard:nth-child(5n+1) .recipeTitle{font-size:1.75rem !important}
+/* am iPad/Rechner kein doppelt breites Hauptwerk: die Karten laden nur kleine Bilder (480 px) */
+
+/* Rezeptseite: Serifen-Titel, Museumsschild, römische Schritte */
+html.skin-galerie:not(#_x#_y#_z) .recipeHeroText .recipeName{font:400 min(clamp(2.6rem, 12vw, 6rem), 12vw)/.95 "Fraunces", Georgia, serif !important;letter-spacing:-.03em !important}
+.gaRecLabel{display:inline-flex;flex-direction:column;gap:4px;margin:0 0 26px;padding:12px 14px;background:#F4F2EC;border-radius:2px;box-shadow:0 1px 0 rgba(17,17,17,.06);
+  font:500 .8125rem/1.35 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;color:#46443E}
+.gaRecLabel b{font:400 1.25rem/1.15 "Fraunces", Georgia, serif;color:#111111}
+html.skin-galerie:not(#_x#_y#_z) .recipeBody ol > li::before{content:counter(step, upper-roman) !important;background:transparent !important;color:#111111 !important;font:italic 500 1.375rem/1 "Skin Garamond", "Fraunces", Georgia, serif !important;justify-content:flex-start !important;width:40px !important}
+html.skin-galerie:not(#_x#_y#_z) .recipeBody ol > li.stepDone::before{content:"" !important;background-color:#111111 !important;width:28px !important;border-radius:50%}
+html.skin-galerie:not(#_x#_y#_z) .recipeBody ol > li{font-family:"Fraunces", Georgia, serif;font-size:1.0625rem;border-bottom-color:rgba(17,17,17,.14) !important}
+html.skin-galerie:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList) .uName{font-family:"Fraunces", Georgia, serif;font-size:1.0625rem}
+html.skin-galerie:not(#_x#_y#_z) .ingSection{font:italic 500 1.375rem/1.1 "Skin Garamond", "Fraunces", Georgia, serif !important}
+
+/* Inventarliste (Einkauf) und Ausstellungsplan (Woche) */
+html.skin-galerie:not(#_x#_y#_z) .listGroup.compactList{background:#F4F2EC !important;border-radius:2px !important;box-shadow:none !important}
+html.skin-galerie:not(#_x#_y#_z) .shopSectionHead{font:italic 500 1.25rem/1.1 "Skin Garamond", "Fraunces", Georgia, serif !important;color:#111111 !important}
+html.skin-galerie:not(#_x#_y#_z) .uLead{border-radius:50% !important;border:1.5px solid #111111 !important}
+html.skin-galerie:not(#_x#_y#_z) .uRow.checked .uLead{background:#111111 !important}
+html.skin-galerie:not(#_x#_y#_z) .planDayCard{background:#F4F2EC !important;border-radius:2px !important;box-shadow:none !important;margin-bottom:10px !important}
+html.skin-galerie:not(#_x#_y#_z) .planDayCard .planDayWd{font:italic 500 1.375rem/1 "Skin Garamond", "Fraunces", Georgia, serif !important}
+html.skin-galerie:not(#_x#_y#_z) .planDayCard.isToday{box-shadow:inset 4px 0 0 #111111 !important}
+html.skin-galerie:not(#_x#_y#_z) .catTile{border-radius:0 !important;box-shadow:0 0 0 4px #2A2118, 0 12px 26px rgba(17,17,17,.2) !important}
+html.skin-galerie:not(#_x#_y#_z) .catTileName{font-family:"Fraunces", Georgia, serif !important;font-weight:400 !important}
+
+/* Kochmodus: Schritt als großer Serifen-Satz */
+html.skin-galerie:not(#_x#_y#_z) .cookOverlay .cookStep{font-family:"Fraunces", Georgia, serif !important;font-size:clamp(1.375rem, 5.4vw, 2rem) !important;line-height:1.25 !important;letter-spacing:-.01em}
+html.skin-galerie:not(#_x#_y#_z) .cookOverlay :is(.prepTitle,.cookIngsHead){font:italic 500 2rem/1 "Skin Garamond", "Fraunces", Georgia, serif !important}
+html.skin-galerie:not(#_x#_y#_z) .cookOverlay .prepGroup{background:#F4F2EC !important;border-radius:2px !important}
+@media (prefers-reduced-motion: reduce){.gaWall{scroll-snap-type:none}}
+/* Angaben stehen jetzt auf dem Museumsschild – Autor und Zeit/Portionen nicht doppelt zeigen */
+html.skin-galerie:not(#_x#_y#_z) .recipePageBody .recipeAuthor{display:none !important}
+html.skin-galerie:not(#_x#_y#_z) .recipeFacts .kv:not(.kvRating):not(.kvFav):not(.kvFreezer){display:none !important}
+@media (max-width:699px){.gaWall{grid-template-columns:repeat(3, 60%);padding:28px 20px 10px;scroll-padding-left:20px}.gaMat img{aspect-ratio:1/1}}
