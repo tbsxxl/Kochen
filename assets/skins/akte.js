@@ -5,8 +5,7 @@
   const load = (api)=> new Promise((ok)=>{ if(window.KOCHBUCH_CX) return ok(); const s = document.createElement("script"); s.src = `/assets/skins/cx-hero.js?v=${api.ver}`; s.onload = ok; document.head.appendChild(s); });
   window.KOCHBUCH_FX.akte = {
     start(api){
-      if(!api.home()) return;
-      load(api).then(()=>{ if(document.documentElement.classList.contains("skin-akte")) window.KOCHBUCH_CX(api, { skin: "akte", scene: "akte", down: "Der Fall des Tages", fx: "rain" }); });
+      load(api).then(()=>{ if(document.documentElement.classList.contains("skin-akte")) if(api.home()) window.KOCHBUCH_CX(api, { skin: "akte", scene: "akte", down: "Der Fall des Tages", fx: "rain" }); else window.KOCHBUCH_CX_HEAD(api, { skin: "akte", scene: "akte" }); });
     },
   };
 })();

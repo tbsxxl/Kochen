@@ -32,13 +32,14 @@ function flameTexture(){
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 }
 
-export function create(canvas){
+export function create(canvas, opts){
+  const compact = !!(opts && opts.compact);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
   renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
   const scene = new THREE.Scene(); scene.background = new THREE.Color(0x05060d); scene.fog = new THREE.FogExp2(0x0a0c1a, .032);
   const pmrem = new THREE.PMREMGenerator(renderer); scene.environment = pmrem.fromScene(new RoomEnvironment(), .04).texture; scene.environmentIntensity = .25;
   const camera = new THREE.PerspectiveCamera(50, 1, .1, 120);
-  scene.add(new THREE.HemisphereLight(0x5a6aa8, 0x2a1a0a, .55));
+  scene.add(new THREE.HemisphereLight(0x8a7ab8, 0x5a3a1a, .9));
 
   const HW = 7, LEN = 46, HT = 13;
   // Decke = Himmel
@@ -82,10 +83,11 @@ export function create(canvas){
   const cupI = new THREE.InstancedMesh(cup, gold, cups.length); cups.forEach((p, i)=>{ mtx.makeTranslation(...p); cupI.setMatrixAt(i, mtx); }); scene.add(cupI);
   const plI = new THREE.InstancedMesh(plate, gold, plates.length); plates.forEach((p, i)=>{ mtx.makeTranslation(...p); plI.setMatrixAt(i, mtx); }); scene.add(plI);
   // Lichter über den Tafeln
-  for(let z = -2; z > -LEN + 8; z -= 7){ const l = new THREE.PointLight(0xffb060, 22, 16, 1.4); l.position.set(0, 6.5, z); scene.add(l); [-1, 1].forEach((sd)=>{ const w = new THREE.PointLight(0xff9a50, 10, 7, 1.5); w.position.set(sd * (HW - 1.5), 6, z - 3); scene.add(w); }); }
+  // nur drei Lichter (viele Punktlichter machen jedes Material teuer)
+  [-3, -15, -28].forEach((z)=>{ const l = new THREE.PointLight(0xffb060, 40, 26, 1.2); l.position.set(0, 7, z); scene.add(l); });
 
   // Schwebende Kerzen
-  const N = 260, r = rng(13), wax = new THREE.MeshStandardMaterial({ color: 0xF2EAD8, roughness: .6, emissive: 0x402a10, emissiveIntensity: .4 });
+  const N = compact ? 110 : 260, r = rng(13), wax = new THREE.MeshStandardMaterial({ color: 0xF2EAD8, roughness: .6, emissive: 0x402a10, emissiveIntensity: .4 });
   const candleGeo = new THREE.CylinderGeometry(.045, .05, .5, 10); candleGeo.translate(0, -.25, 0);
   const candles = new THREE.InstancedMesh(candleGeo, wax, N); scene.add(candles);
   const fl = new Float32Array(N * 3), C = [];

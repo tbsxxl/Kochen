@@ -239,6 +239,16 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Zaun am Klippenrand, Leuchtturm mit zwei streichenden Lichtkegeln, schräger Regen, Wetterleuchten, schwere Dünung, Kamera schaukelt.
     **Brigade:** Edelstahl-Pass vor weißen Metro-Fliesen, Wärmelampen, an der Bonschiene hängen die echten Rezeptfotos (unverändert,
     nur zugeschnitten) als Bestellungen mit blauem Malerband und Namen, rutschen langsam weiter; Dampf. Der Ordner `fotos/` ist entfernt.
+    **Unterseiten (Dez. 2026, Besitzer: „nur die Startseite ist individuell“):** Auf allen anderen Feld-Seiten liegt ein Ausschnitt der 3D-Szene
+    hinter dem Seitentitel (`KOCHBUCH_CX_HEAD()` in `cx-hero.js`, Option `compact`, Abschnitt 25 in `styles.css`). Jede Welt hat am Ende ihrer
+    CSS einen Block „Unterseiten mit eigener Bildsprache“ für Rezeptkarten, Zutaten (`#ingredientsGroup`), Einkaufsliste (`.listGroup.compactList`),
+    Wochenplan (`.planDayCard`), Kategorien, Schritte, Umschalter und Kochmodus: Nordwall = Pergament + doppelter Messingrahmen, römische
+    Nummern; Zauberschule = Spitzbogen-Fotos mit Goldrand, Sternenhimmel, Stern als Haken; Jahr 3000 = Comic (3 px Umriss, harter Schatten,
+    Pastellflächen); Zwei Städte = abgeschrägte Art-déco-Ecken in Gold, Sechseck-Ziffern, pinkes Neon für Erledigtes; Insel = Sofortbilder
+    (leicht gedreht), Dämmerungs-Tafeln mit Glutkante; Akte = Aktenmappen mit Reiter „AKTE 01“, Papier mit rotem Rand, „§ 1“, Stempel „HEUTE“;
+    Brigade = Bons mit Perforation (`mask`), Titel auf blauem Malerband, Mengen in Monospace. **Keine mehrfachen Innen-Schatten mit Unschärfe
+    auf vielen Elementen** (zeichnete in Chromium Teile der Seite nicht mehr) – doppelte Rahmen mit `border` + `outline`/`outline-offset`.
+    3D-Szenen mit wenigen Lichtern (höchstens drei Punkt-/Spotlichter).
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe der Serien-Skins (Three.js, vierte Fassung, siehe oben) sind seit Dez. 2026 wieder da; die älteren 3D-Köpfe waren zuvor entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**

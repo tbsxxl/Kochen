@@ -5,8 +5,7 @@
   const load = (api)=> new Promise((ok)=>{ if(window.KOCHBUCH_CX) return ok(); const s = document.createElement("script"); s.src = `/assets/skins/cx-hero.js?v=${api.ver}`; s.onload = ok; document.head.appendChild(s); });
   window.KOCHBUCH_FX.insel = {
     start(api){
-      if(!api.home()) return;
-      load(api).then(()=>{ if(document.documentElement.classList.contains("skin-insel")) window.KOCHBUCH_CX(api, { skin: "insel", scene: "insel", cls: "inHero", down: "Heute auf der Insel", fx: "motes" }); });
+      load(api).then(()=>{ if(document.documentElement.classList.contains("skin-insel")) if(api.home()) window.KOCHBUCH_CX(api, { skin: "insel", scene: "insel", cls: "inHero", down: "Heute auf der Insel", fx: "motes" }); else window.KOCHBUCH_CX_HEAD(api, { skin: "insel", scene: "insel" }); });
     },
   };
 })();

@@ -21,6 +21,34 @@
     },
   };
 
+  // 3D-Szene in einen Behälter setzen (Startseite und Seitenköpfe)
+  function mount3d(api, el, wrap, scene, extra){
+    const cv = document.createElement("canvas"); cv.className = "cxGL"; cv.setAttribute("aria-hidden", "true");
+    wrap.appendChild(cv);
+    import(`/assets/skins/${scene}-3d.js?v=${api.ver}`).then((mod)=>{
+      if(!cv.isConnected) return;
+      const three = mod.create(cv, Object.assign({ recipes: api.recipes() }, extra || {})); api.add(()=> three.dispose());
+      const fit = ()=>{ const r = cv.getBoundingClientRect(); if(r.width) three.resize(r.width, r.height, Math.min(extra && extra.compact ? 1.25 : 2, devicePixelRatio || 1)); lp.redraw(); };
+      const lp = api.loop(cv, (t, dt)=>{
+        const r = el.getBoundingClientRect();
+        three.render(t, dt || 16, api.reduce(), { scroll: Math.min(1, Math.max(0, -r.top / Math.max(1, r.height))), px: (api.ptr.x / innerWidth - .5) * 2, py: (api.ptr.y / innerHeight - .5) * 2, near: performance.now() - api.ptr.t < 3000 });
+      });
+      const ro = new ResizeObserver(fit); ro.observe(cv); api.add(()=> ro.disconnect()); fit();
+    }).catch((e)=> console.warn("Kopf 3D:", e));
+  }
+
+  // Seitenkopf auf den anderen Feld-Seiten (Rezepte, Kategorien, Plan, Liste, Mehr …): ein Ausschnitt derselben Szene hinter dem Titel
+  window.KOCHBUCH_CX_HEAD = function(api, o){
+    const tb = document.querySelector("body.fieldPage:not(.layout-home) .pageTitleBlock"); if(!tb || tb.querySelector(".cxHead")) return;
+    const el = api.bit(`cxHead ${o.cls || ""}`, o.skin);
+    el.setAttribute("aria-hidden", "true");
+    const use3d = o.scene && api.gpu();
+    el.innerHTML = `<div class="cxImgWrap cxPoster"></div><div class="cxShade"></div>`;
+    tb.prepend(el); api.add(()=> el.remove());
+    document.body.classList.add("cxHeaded"); api.add(()=> document.body.classList.remove("cxHeaded"));
+    if(use3d) mount3d(api, el, el.querySelector(".cxImgWrap"), o.scene, { compact: true });
+  };
+
   window.KOCHBUCH_CX = function(api, o){
     const host = document.querySelector(".homeGreeting"); if(!host) return;
     const d = new Date(), a = document.getElementById("todayLink");
@@ -42,20 +70,7 @@
       tl.style.opacity = (1 - p).toFixed(3); tl.style.transform = `translate3d(0,${(scrollY * .35).toFixed(1)}px,0)`;
       wrap.style.transform = `translate3d(0,${(Math.min(scrollY, innerHeight) * .25).toFixed(1)}px,0)`;
     }, { passive: true });
-    if(use3d){
-      const cv = document.createElement("canvas"); cv.className = "cxGL"; cv.setAttribute("aria-hidden", "true");
-      wrap.appendChild(cv);
-      import(`/assets/skins/${o.scene}-3d.js?v=${api.ver}`).then((mod)=>{
-        if(!cv.isConnected) return;
-        const three = mod.create(cv, { recipes: api.recipes() }); api.add(()=> three.dispose());
-        const fit = ()=>{ const r = cv.getBoundingClientRect(); if(r.width) three.resize(r.width, r.height, Math.min(2, devicePixelRatio || 1)); lp.redraw(); };
-        const lp = api.loop(cv, (t, dt)=>{
-          const r = el.getBoundingClientRect();
-          three.render(t, dt || 16, api.reduce(), { scroll: Math.min(1, Math.max(0, -r.top / Math.max(1, r.height))), px: (api.ptr.x / innerWidth - .5) * 2, py: (api.ptr.y / innerHeight - .5) * 2, near: performance.now() - api.ptr.t < 3000 });
-        });
-        const ro = new ResizeObserver(fit); ro.observe(cv); api.add(()=> ro.disconnect()); fit();
-      }).catch((e)=> console.warn("Kopf 3D:", e));
-    }
+    if(use3d) mount3d(api, el, wrap, o.scene);
     if(o.fx && !use3d){
       const c = api.canvas(el, "cxFx"), P = FX.snow(o.fx === "rain" ? 180 : o.fx === "motes" ? 40 : o.fx === "steam" ? 26 : 140), st = {};
       api.loop(c.cv, (t, dt)=>{ if(!c.w) return; c.g.clearRect(0, 0, c.w, c.h); FX.step[o.fx](c.g, P, c.w, c.h, t, dt || 16, api.reduce(), st); });

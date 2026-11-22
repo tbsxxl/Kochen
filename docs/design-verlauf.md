@@ -400,3 +400,9 @@ Nordwall (Uhrwerk-Karte, Armillarsphäre, Zahnrad-Türme), Zauberschule (Halle m
 (Comic-Zukunftsstadt mit Röhrenbahnen), Zwei Städte (blauer Kristall in Messingringen zwischen Gold- und Unterstadt), Insel (Strand
 mit Flugzeugwrack), Akte (Felseninsel im Sturm mit Leuchtturm), Brigade (Edelstahl-Pass mit echten Rezeptfotos als Bestellungen).
 Verworfen und entfernt: Stimmungsfotos (`assets/skins/fotos/`), gemalte 2D-Szenen.
+
+## Dez. 2026 – Serien-Skins: auch die Unterseiten individuell
+
+Besitzer: „Es ist ja nur die Startseite individuell bei den meisten, alles andere nicht.“ Jetzt hat jede der sieben Welten auf Rezepte,
+Kategorien, Plan, Liste und Mehr einen Ausschnitt ihrer 3D-Szene hinter dem Titel und eine eigene Bildsprache für Karten, Zutaten,
+Einkaufsliste, Wochenplan, Schritte und Kochmodus (Pergament/Messing, Spitzbögen/Gold, Comic, Art déco/Neon, Sofortbilder, Aktenmappen, Bons).
