@@ -232,6 +232,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Untertassen, Kugeln und Ringen, runde Fenster, gläserne Röhrenbahnen mit Kapseln, fliegende Autos mit Lichtspur, Ringplanet.
     **Zwei Städte:** blauer Kristall in drei Messing-Gyroskopringen mit Zahnkranz, Funken, pinke Farbspritzer; oben goldene Art-déco-Türme
     und Bögen, unten dunkle Unterstadt mit Rohren, Leuchtschildern und grünem Dunst; Scrollen sinkt hinab.
+    **Insel:** Strand bei Sonnenuntergang mit Rumpf eines abgestürzten Flugzeugs (Fensterreihe, gezackte Abrisskante, Tragfläche,
+    Triebwerk), Trümmer und Koffer, Palmen im Wind, Lagerfeuer mit Funken, bewegtes Meer mit Brandungssaum, dunkler Dschungel;
+    der Titel schwebt beim Öffnen aus der Tiefe heran (`inRise`, nur transform/opacity).
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
