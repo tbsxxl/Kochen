@@ -1,7 +1,7 @@
 /* Skin „galerie“ – wird nur geladen, wenn dieser Skin aktiv ist.
    Dez. 2026 zweiter Neubau (Besitzer: „zu nah am Standard“), nach genauem Vergleich mit dem Vorbild (Kunst-Ausgabe eines Shop-Anbieters):
    gemaltes Bild über die ganze Fläche mit dünnem weißem Rahmen (Titel + Inhaltsverzeichnis mit römischen Zahlen), Kapitel als dunkles Band
-   mit riesigem weißem Wort und Satz mit verziertem Anfangsbuchstaben, eingerissener Papierrand (galerie-torn.svg) in die graubeige Seite,
+   mit riesigem weißem Wort und Satz mit verziertem Anfangsbuchstaben, gerade Kante in die graubeige Seite,
    am Rechner links festes Inhaltsverzeichnis. Verhalten: galerie.js. Neue Regeln ans Ende. */
 html.skin-galerie:not(#_x#_y),html.skin-galerie:not(#_x#_y) body{
   --field:#DCDAD1;--onField:#111111;--onField2:#46443E;--fieldFill:rgba(17,17,17,.06);
@@ -86,8 +86,6 @@ html.skin-galerie:not(#_x#_y) body.gaHome .profileBadge{background:rgba(255,255,
 .gaChapter{position:relative;z-index:1;overflow:hidden;margin:0 calc(-16px - env(safe-area-inset-right)) 28px calc(-16px - env(safe-area-inset-left));min-height:min(112svh, 980px);display:flex;align-items:flex-end;color:#FFFFFF;background:#1B1712}
 .gaChapter::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(10,8,6,.15), rgba(10,8,6,.05) 30%, rgba(10,8,6,.78) 72%, rgba(10,8,6,.9))}
 .gaChapIn{position:relative;z-index:2;width:100%;padding:0 22px 86px}
-.gaChapter::after{z-index:3}
-.gaChapter::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:26px;background:url("galerie-torn.svg?v=1") 0 100%/100% 100% no-repeat}
 .gaBig{margin:0 0 22px;text-align:center;text-shadow:0 4px 40px rgba(0,0,0,.4);font:700 clamp(4rem, 22vw, 10rem)/.85 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;letter-spacing:-.05em}
 .gaSay{max-width:40rem;margin:0 auto;font:400 clamp(1.5rem, 6.2vw, 2.4rem)/1.18 "Fraunces", Georgia, serif;letter-spacing:-.02em}
 .gaSay a{color:#FFFFFF;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
@@ -108,7 +106,6 @@ html.skin-galerie:not(#_x#_y) body:has(.gaSide) .gaHero{left:calc(50% + 110px)}
 /* andere Feld-Seiten: Kopf mit eigenem Gemälde, Titel riesig weiß, Papierriss */
 .gaHead{position:relative;overflow:hidden;margin:0 calc(-16px - env(safe-area-inset-right)) 18px calc(-16px - env(safe-area-inset-left));padding:calc(env(safe-area-inset-top) + 150px) 16px 54px;background:#2A2118;min-height:46svh;display:flex;flex-direction:column;justify-content:flex-end}
 .gaHead::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(10,8,6,.1), rgba(10,8,6,.2) 40%, rgba(10,8,6,.7))}
-.gaHead::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:26px;z-index:3;background:url("galerie-torn.svg?v=1") 0 100%/100% 100% no-repeat}
 .gaHead .pageTitleBlock{position:relative;z-index:2;padding:0 !important;margin:0 !important}
 html.skin-galerie:not(#_x#_y) .gaHead .pageTitleBlock .h1{color:#FFFFFF !important;font:700 min(clamp(3rem, 15vw, 7rem), 15vw)/.88 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif !important;letter-spacing:-.05em !important;text-shadow:0 4px 30px rgba(0,0,0,.35)}
 html.skin-galerie:not(#_x#_y) .gaHead .pageTitleBlock .h1::first-letter{font:inherit;font-size:1em;margin:0}
@@ -122,7 +119,6 @@ html.skin-galerie:not(#_x#_y) .recipePageHero{position:relative !important;margi
 html.skin-galerie:not(#_x#_y) .recipePageHero img.recipeHeroImg{position:static !important;display:block;width:100% !important;height:auto !important;aspect-ratio:4/5;object-fit:cover;border-radius:0 !important;transform:none !important}
 @media (min-width:700px){html.skin-galerie:not(#_x#_y) .recipePageHero img.recipeHeroImg{aspect-ratio:16/9;max-height:78vh}}
 html.skin-galerie:not(#_x#_y) .recipePageHero::before{display:none !important}
-html.skin-galerie:not(#_x#_y) .recipePageHero::after{content:"" !important;display:block !important;position:absolute !important;left:0 !important;right:0 !important;bottom:-1px !important;top:auto !important;height:26px !important;background:url("galerie-torn.svg?v=1") 0 100%/100% 100% no-repeat !important;z-index:2;opacity:1 !important}
 html.skin-galerie:not(#_x#_y) .recipeHeroText{position:absolute !important;left:0;right:0;bottom:22px;padding:60px 18px 26px !important;background:linear-gradient(transparent, rgba(10,14,22,.55)) !important;text-align:center}
 html.skin-galerie:not(#_x#_y) .recipeHeroText .recipeName{font:700 min(clamp(2.6rem, 13vw, 6.5rem), 13vw)/.9 -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif !important;letter-spacing:-.05em !important;color:#FFFFFF !important;text-shadow:0 2px 24px rgba(0,0,0,.35) !important}
 html.skin-galerie:not(#_x#_y) .recipeHeroText .recipeSubtitle{display:none !important}
@@ -157,3 +153,6 @@ html.skin-galerie:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#111111}
 .gaArt{transform:none !important}
 .skIntro-galerie .ivFrame,.skIntro-galerie .ivPaint,.skIntro-galerie .ivName{animation:none}
 }
+
+/* Dez. 2026: kein Papierriss mehr (Besitzer: „sieht billig aus“) – Bilder enden mit gerader Kante */
+html.skin-galerie:not(#_x#_y) .recipePageHero::after{display:none !important}
