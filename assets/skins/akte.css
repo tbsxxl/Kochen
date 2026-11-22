@@ -148,3 +148,34 @@ html.skin-akte .nowCooking:not(#_x#_y){background:#D4C5A9 !important;color:#1A1A
 html.skin-akte .nowCooking:not(#_x#_y) :is(.nowCookingTitle,.nowCookingSub){color:#1A1A1A !important}
 html.skin-akte :is(.listGroup,.freezerCard):not(#_x#_y),html.skin-akte body:not(.layout-home) .card:not(.recipeCard):not(#_x#_y){background-image:none !important}
 html.skin-akte body .segBtn.active:not(#_x#_y){color:#1A1A1A !important}
+
+/* Dez. 2026, mehr eigener Charakter (akte.js): aufgeschlagene Mappe „Fall des Tages“, Mappenstapel als Liste, Sofortbilder */
+.akFolder{position:relative;margin:26px 0 10px}
+.akTab{position:absolute;left:14px;top:-22px;padding:4px 16px 6px;background:#D9B98A;border-radius:8px 8px 0 0;font:400 .8125rem "Skin Akte", "American Typewriter", "Courier New", monospace;color:#3A2A16;text-transform:uppercase;letter-spacing:.06em}
+.akSheet{position:relative;display:flex;flex-direction:column;gap:14px;padding:18px 16px 20px;background:#D9B98A;color:#2B1D14;text-decoration:none;border-radius:2px 8px 8px 8px;box-shadow:0 12px 26px rgba(0,0,0,.35)}
+.akPola{position:relative;align-self:center;width:min(76%, 300px);padding:10px 10px 34px;background:#FBFAF6;box-shadow:0 6px 14px rgba(0,0,0,.3);transform:rotate(-3deg)}
+.akPola::before{content:"";position:absolute;left:44%;top:-14px;width:16px;height:46px;border:3px solid #9AA3AA;border-radius:10px;z-index:1}
+.akPola img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.akPola i{position:absolute;left:0;right:0;bottom:8px;text-align:center;font:400 1rem "Skin Filzstift", "Skin Feder", cursive;font-style:normal;color:#2B3A48}
+.akType{padding:12px;background:#FBFAF6;font:400 .9375rem/1.6 "Skin Akte", "American Typewriter", "Courier New", monospace;color:#1A1A1A;background-image:repeating-linear-gradient(transparent 0 23px, rgba(43,58,72,.18) 23px 24px)}
+.akType b{font-weight:700}
+.akStamp{position:absolute;right:14px;top:18px;padding:4px 10px;border:3px solid #A93226;color:#A93226;font:700 1rem "Skin Akte", "American Typewriter", "Courier New", monospace;text-transform:uppercase;letter-spacing:.1em;transform:rotate(12deg);opacity:.85}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:34px 14px !important;padding-top:18px !important}
+@media (min-width:700px){html.skin-akte.akList:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .linkCard{margin:0 !important}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .recipeCard{position:relative;overflow:visible !important;padding:10px 10px 12px !important;background:#D9B98A !important;border-radius:2px 8px 8px 8px !important;box-shadow:0 8px 18px rgba(0,0,0,.3) !important;border:0 !important}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .recipeCard::before{content:var(--az);position:absolute;left:0;top:-20px;padding:3px 10px 4px;background:#D9B98A;border-radius:6px 6px 0 0;font:400 .6875rem "Skin Akte", "American Typewriter", "Courier New", monospace;color:#3A2A16;white-space:nowrap}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .rcImg{padding:6px 6px 18px;background:#FBFAF6;border-radius:0 !important;aspect-ratio:auto !important;box-shadow:0 3px 8px rgba(0,0,0,.25);transform:rotate(-2deg)}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .linkCard:nth-child(even) .rcImg{transform:rotate(2deg)}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .rcImg img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .rcBody{padding:10px 2px 0 !important}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .recipeTitle{font:400 .9375rem/1.25 "Skin Akte", "American Typewriter", "Courier New", monospace !important;color:#2B1D14 !important;text-transform:uppercase}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .recipeMeta{color:#4A3A26 !important;font:400 .75rem "Skin Akte", "American Typewriter", "Courier New", monospace !important}
+html.skin-akte.akList:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2){display:none !important}
+html.skin-akte:not(#_x#_y) .recipePageHero{padding:12px 12px 44px !important;background:#FBFAF6 !important;transform:rotate(-1.2deg);box-shadow:0 10px 24px rgba(0,0,0,.35) !important;border-radius:0 !important;overflow:visible !important;height:auto !important;max-height:none !important;aspect-ratio:auto !important;display:flex !important;flex-direction:column;margin-top:64px !important}
+html.skin-akte:not(#_x#_y) .recipePageHero::before{content:"" !important;display:block !important;position:absolute !important;left:40% !important;top:-18px !important;width:20px !important;height:56px !important;border:3px solid #9AA3AA !important;border-radius:12px !important;background:none !important;z-index:3}
+html.skin-akte:not(#_x#_y) .recipePageHero::after{display:none !important}
+html.skin-akte:not(#_x#_y) .recipePageHero img.recipeHeroImg{position:static !important;width:100% !important;height:auto !important;aspect-ratio:4/3;object-fit:cover;transform:none !important;border-radius:0 !important}
+html.skin-akte:not(#_x#_y) .recipeHeroText{position:static !important;background:none !important;padding:12px 4px 0 !important}
+html.skin-akte:not(#_x#_y) .recipeHeroText :is(.recipeName,.recipeSubtitle){color:#1A1A1A !important;text-shadow:none !important}
+html.skin-akte:not(#_x#_y) .recipeHeroText .recipeSubtitle{display:block !important;-webkit-line-clamp:unset !important}

@@ -158,3 +158,39 @@ html.skin.skin-zweistaedte:not(._a):not(._b):not(._c):not(._d):not(._e):not(._f)
 .skIntro-zweistaedte .ivWord{position:absolute;bottom:22%;font:700 clamp(28px,8vw,56px) "Skin Deko", sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#E8E2D5;text-shadow:0 0 18px rgba(0,240,255,.6);animation:ivFadeUp .8s ease 1.7s both}
 html.skin-zweistaedte body.fieldPage .homeQuickBtn:not(#_x#_y){font-size:var(--fs12) !important;letter-spacing:.02em !important;white-space:nowrap !important;color:#F4EFE4 !important;background:linear-gradient(160deg,#22305A,#17203A) !important;gap:6px !important;padding-inline:10px !important}
 html.skin-zweistaedte body.fieldPage .pageTitleBlock .h1:not(#_x#_y){font-size:min(7.6vw,2rem) !important;letter-spacing:.04em !important;hyphens:manual !important;-webkit-hyphens:manual !important;overflow-wrap:normal !important}
+
+/* Dez. 2026, mehr eigener Charakter (zweistaedte.js): geteilter Start oben gold / unten neon, Liste im Wechsel, Bogenrahmen */
+.zwSplit{margin:16px calc(-16px - env(safe-area-inset-right)) 8px calc(-16px - env(safe-area-inset-left));position:relative}
+.zwUp,.zwDown{display:grid;grid-template-columns:42% 1fr;align-items:center;gap:6px 16px;padding:22px 18px;text-decoration:none}
+.zwUp{background:linear-gradient(180deg,#F5E6C0,#E3C27A);color:#2A1E0A}
+.zwDown{background:#0B0D1A;color:#E9F7FF;grid-template-columns:1fr 42%;background-image:linear-gradient(rgba(255,45,170,.08) 1px, transparent 1px),linear-gradient(90deg, rgba(0,240,255,.07) 1px, transparent 1px);background-size:22px 22px}
+.zwUp>*:not(.zwArch),.zwDown>*:not(.zwNeonImg){grid-column:2}
+.zwDown>*:not(.zwNeonImg){grid-column:1;grid-row:auto}
+.zwArch,.zwNeonImg{grid-row:1 / span 3;display:block;overflow:hidden;aspect-ratio:3/4}
+.zwDown .zwNeonImg{grid-column:2}
+.zwArch{border-radius:999px 999px 0 0;box-shadow:0 0 0 3px #F5E6C0, 0 0 0 5px #9C7A2C}
+.zwNeonImg{border-radius:6px;box-shadow:0 0 0 2px #FF2DAA, 0 0 18px rgba(255,45,170,.7), 0 0 36px rgba(0,240,255,.35)}
+.zwArch img,.zwNeonImg img{width:100%;height:100%;object-fit:cover;display:block}
+.zwUp small,.zwDown small{font:600 .75rem/1.3 "Skin Deko", "Avenir Next", "Futura", sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.zwUp small{color:#7A5A16}.zwDown small{color:#00F0FF;text-shadow:0 0 8px #00F0FF}
+.zwUp b,.zwDown b{font:600 1.45rem/1.1 "Skin Deko", "Avenir Next", "Futura", sans-serif}
+.zwDown b{color:#FFFFFF;text-shadow:0 0 10px rgba(255,45,170,.8)}
+.zwUp i,.zwDown i{font-style:normal;font-size:.875rem;opacity:.85}
+.zwGear{position:absolute;left:50%;top:50%;z-index:2;width:58px;height:58px;margin:-29px 0 0 -29px;display:grid;place-items:center;border-radius:50%;background:#9C7A2C;color:#F5E6C0;box-shadow:0 0 0 4px #0B0D1A, 0 0 18px rgba(255,45,170,.6);animation:zwSpin 18s linear infinite}
+.zwGear svg{width:40px;height:40px}
+@keyframes zwSpin{to{transform:rotate(360deg)}}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:26px 16px !important}
+@media (min-width:700px){html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .linkCard{margin:0 !important}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .recipeCard{padding:8px 8px 12px !important;border-radius:0 !important}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .linkCard:nth-child(odd) .recipeCard{background:linear-gradient(180deg,#F5E6C0,#E3C27A) !important;box-shadow:0 0 0 2px #9C7A2C !important;border-radius:999px 999px 4px 4px !important;padding-top:14px !important}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .linkCard:nth-child(odd) .rcImg{border-radius:999px 999px 0 0 !important;aspect-ratio:3/4 !important}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .linkCard:nth-child(odd) :is(.recipeTitle,.recipeMeta){color:#2A1E0A !important;text-align:center;justify-content:center}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .linkCard:nth-child(even) .recipeCard{background:#0B0D1A !important;box-shadow:0 0 0 2px #FF2DAA, 0 0 18px rgba(255,45,170,.45) !important;border-radius:6px !important;transform:translateY(22px)}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .linkCard:nth-child(even) .rcImg{border-radius:3px !important;aspect-ratio:3/4 !important}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .linkCard:nth-child(even) .recipeTitle{color:#FFFFFF !important;text-shadow:0 0 8px rgba(0,240,255,.6)}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .linkCard:nth-child(even) .recipeMeta{color:#9FEFFF !important}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .recipeMeta>:nth-child(n+2){display:none !important}
+html.skin-zweistaedte:not(#_x#_y) .recipePageHero{border-radius:999px 999px 6px 6px !important;box-shadow:0 0 0 4px #E3C27A, 0 0 0 7px #9C7A2C, 0 0 30px rgba(255,45,170,.35) !important}
+@media (prefers-reduced-motion: reduce){.zwGear{animation:none}}
+html.skin-zweistaedte.zwList:not(#_x#_y) #recipeGrid .recipeTitle{font-size:1.0625rem !important;line-height:1.15 !important;hyphens:manual !important;-webkit-line-clamp:3;margin-top:8px}

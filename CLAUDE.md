@@ -188,6 +188,11 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Zauberschule:** Start = Titelseite der Zeitung „Die Küchenpost“ (Kopf, Schlagzeile = Tagesgericht, Bild atmet leicht, zwei Spalten mit Initiale,
     `.zpFront`), Liste = Zeitungsseite in Spalten (`html.zpList`, jede dritte Meldung ohne Bild). **Jahr 3000:** Comic – Start = Titelbild mit
     Erzählkasten, Sprechblase und „Zack!“-Stern (`.cmCover`), Liste = Comicseite mit großen und kleinen Bildfeldern (`html.cmList`), Rezept mit Ausruf.
+    **Zwei Städte:** Start geteilt – oben goldene Stadt (Bogenrahmen, Tagesgericht), unten Neon-Stadt (schnelles Gericht ≤ 35 Min mit Leuchtrahmen),
+    Zahnrad dazwischen (`.zwSplit`); Liste im Wechsel gold/Bogen und neon/versetzt (`html.zwList`). **Die Insel:** Start = Stationsrechner mit
+    Fallblatt-Uhr bis 18:30 und Eingabezeile (`.isStation`), Liste = Stationsprotokoll mit Nummer, Eintrag, Foto im Röhrenrahmen (`html.isList`).
+    **Akte:** Start = aufgeschlagene Mappe „Fall des Tages“ mit angeklammertem Sofortbild, Schreibmaschinen-Befund und Stempel (`.akFolder`), Liste =
+    Mappen mit Reiter „AZ Jahr-Nr“ und schiefem Sofortbild (`html.akList`), Rezept als Sofortbild mit Büroklammer.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
