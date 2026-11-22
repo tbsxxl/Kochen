@@ -406,3 +406,10 @@ Verworfen und entfernt: Stimmungsfotos (`assets/skins/fotos/`), gemalte 2D-Szene
 Besitzer: „Es ist ja nur die Startseite individuell bei den meisten, alles andere nicht.“ Jetzt hat jede der sieben Welten auf Rezepte,
 Kategorien, Plan, Liste und Mehr einen Ausschnitt ihrer 3D-Szene hinter dem Titel und eine eigene Bildsprache für Karten, Zutaten,
 Einkaufsliste, Wochenplan, Schritte und Kochmodus (Pergament/Messing, Spitzbögen/Gold, Comic, Art déco/Neon, Sofortbilder, Aktenmappen, Bons).
+
+## Dez. 2026 – Galerie ausgebaut
+
+Besitzer: „Ich finde den Galerie-Skin schon geil, können wir den noch optimieren und mehr ergänzen?“ Ergänzt: fünf weitere gemeinfreie
+Gemälde, Werkschilder an allen Gemälden, Säle je Kategorie auf der Startseite, Rezeptliste als gerahmte Sammlung mit Museumsschildern,
+Rezeptseite mit Museumsschild und römischen Schritten, Einkaufsliste/Plan/Kochmodus in Serifen. Das Hauptwerk (jedes fünfte) ist am iPad
+nicht doppelt breit, weil die Karten nur kleine Bilder laden und es unscharf würde.
