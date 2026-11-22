@@ -102,7 +102,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Neue Regeln ans Ende der Skin-Datei; was für alle Skins gilt, nach `styles.css`.
   - **Verhalten:** `assets/skins.js` (Szenen `.skinScene`, eingefügte Elemente `.skinBit` + `data-for`, Uhr je Welt `worldClock()`,
     Timer-Karte `homeTimer()`, Vorspann `playIntro()`, Klänge nur mit Schalter „Klänge der Welten“, Stimme `VOICE`).
-  - **Vorschaubilder** der Skin-Auswahl: `assets/skins/<skin>.jpg` aus `tools/skin-previews.js` – nach sichtbaren Änderungen neu erzeugen.
+  - **Vorschaubilder** der Skin-Auswahl: `assets/skins/<skin>.jpg` aus `tools/skin-previews.js` (mit WebGL/SwiftShader, auch einzeln:
+    `node tools/skin-previews.js <url> nordwall,akte`) – nach sichtbaren Änderungen neu erzeugen **und `?v=` an den Bildern in
+    `_layouts/default.html` hochzählen** (sonst bleiben auf den Geräten die alten Bilder; Dez. 2026 auf `?v=2`).
   - **Boxengasse** (Nov. 2026, Wunsch des Besitzers: Aufbau, UI und Scroll-Bewegung wie landonorris.com, nicht der Inhalt): dunkles Oliv
     `#282C20`, Limette `#D2FF00` als einzige Signalfarbe, fette Versal-Titel mit einem Wort in dünner Serifenschrift (`em.bxSerif`),
     Karten mit ausgeklinkter Ecke. Bewegung in `boxengasse()` (`skins.js`): Einblenden beim Scrollen (`.bxRv`, nur was beim Aufbau
