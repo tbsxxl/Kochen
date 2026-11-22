@@ -80,3 +80,7 @@ html.skin-bauhaus:not(#_x#_y) .recipeHeroText .recipeName{text-transform:upperca
 html.skin-bauhaus:not(#_x#_y) .recipeHeroText .recipeSubtitle{display:block !important;-webkit-line-clamp:unset !important}
 .bhVert{position:absolute;left:14px;top:24px;writing-mode:vertical-rl;transform:rotate(180deg);font:800 1rem/1 "Skin Bauhaus", "Futura", sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#111}
 @media (min-width:900px){html.skin-bauhaus:not(#_x#_y) .recipePageHero img.recipeHeroImg{width:min(100%, 520px) !important;align-self:center}}
+
+/* ==== unslop-Durchgang Dez. 2026: Lesbarkeit (gemessen) ==== */
+html.skin-bauhaus:not(#_x#_y#_z) .chipMainCat{background:#111111 !important;color:#FFFFFF !important}
+html.skin-bauhaus:not(#_x#_y#_z) :is(.recipeTitle,.homeFeaturedTitle){hyphens:manual !important;-webkit-hyphens:manual !important}

@@ -421,3 +421,13 @@ oder Leucht-Schatten, keine Endlos-Animationen, keine Versalien oder Fettschrift
 (vom Besitzer bestätigt): Kühltruhe ohne doppelten Hinweis, Symbole im „Mehr“-Blatt grau statt grün (Abschnitt 26 in `styles.css`),
 „Guten Appetit“ ohne Punkt, kürzerer Text auf der Datensicherung. Skins wurden nicht angefasst – Versalien, Ausrufe („Service!“) usw. sind
 dort gewollter Stil.
+
+## Dez. 2026 – unslop-Durchgang über die Skins
+
+Besitzer: „Die Skins solltest du dir trotzdem einmal anschauen.“ Alle 19 Skins auf Start, Rezeptliste, Rezeptseite und Einkaufsliste
+angesehen und den Kontrast aller Texte gemessen. Der Stil der Skins bleibt (Versalien, Neon, Comic …), behoben wurden nur echte Mängel:
+unsichtbare Hauptkategorie-Kapsel (Bauhaus, Nordwall, Akte: Schrift = Hintergrund), zu blasses „Bei REWE bestellen“ (Nordwall, Akte,
+Zauberschule), kaum lesbarer Platzhalter im Suchfeld (Jahr 3000), Zeitangaben auf Koralle/Grün im Bilderbuch (Koralle jetzt mit dunkler
+Schrift, Grün dunkler `#2F7550`), Boxengasse-Titel nach einer Zeile abgeschnitten (jetzt zwei Zeilen), Glasklar-Eis lag auf Unterseiten
+mitten auf dem Seitentitel (jetzt kleiner rechts darüber), angeschnittene Zwischenüberschrift in der Zutatenliste (Zwei Städte, Akte),
+Silbentrennung „BUT-TER“ in Versal-Titeln (Bauhaus, Nordwall).

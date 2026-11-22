@@ -27,8 +27,11 @@
       });
       title.classList.add("fxDrawn");
       const tr = title.getBoundingClientRect(), s = sc.getBoundingClientRect();
-      const cx = opts.center ? r.width / 2 : Math.min(r.width - 50, tr.left - s.left + tr.width * .66);
-      return { w: r.width, h: r.height, d, cx, cy: tr.top - s.top + tr.height * .5, R: opts.center ? Math.min(tr.height * .42 + 20, r.width * .27, 190) : Math.min(tr.height * .55 + 20, r.width * .26, 170) };
+      // Startseite: Eisbrocken mitten im Leitsatz. Andere Seiten: kleiner, rechts über dem Titel, damit der Seitentitel lesbar bleibt
+      // (unslop-Durchgang Dez. 2026: das Eis lag mitten auf „Einkaufsliste“ und machte es unlesbar)
+      if(opts.center) return { w: r.width, h: r.height, d, cx: r.width / 2, cy: tr.top - s.top + tr.height * .5, R: Math.min(tr.height * .42 + 20, r.width * .27, 190) };
+      const R = Math.min(tr.height * .5 + 12, r.width * .2, 120);
+      return { w: r.width, h: r.height, d, cx: r.width - R - 12, cy: Math.max(R + 8, tr.top - s.top - R * .45), R };
     };
     api.add(()=> title.classList.remove("fxDrawn"));
     const fit = ()=>{

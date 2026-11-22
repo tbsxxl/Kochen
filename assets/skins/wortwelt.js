@@ -4,7 +4,7 @@
 // (Name, Untertitel, Zeit), seitlich handgezeichnete Pfeile, unten farbige Seitenpunkte. Ohne echte Grafikkarte: Seiten als flache Karten.
 (()=>{
   "use strict";
-  const VIVID = ["#EBB2A9", "#E2604A", "#3E8A5E", "#5B40D4", "#F0B23C", "#2E6EA6"];
+  const VIVID = ["#EBB2A9", "#E2604A", "#2F7550", "#5B40D4", "#F0B23C", "#2E6EA6"];
   const ARROW = (flip)=> `<svg class="ico" viewBox="0 0 48 24" aria-hidden="true" style="${flip ? "transform:scaleX(-1)" : ""}"><path d="M44 12C32 11 18 13 5 12M13 4C10 7 7 9 4 12c3 3 6 5 9 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   const esc = (t)=> String(t || "").replace(/[&<>"]/g, (c)=> ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
@@ -99,7 +99,7 @@
   }
 
   // Rezeptliste und andere Listen: jede Karte eine Buchseite in einer der Seitenfarben
-  const DARK_INK = { "#EBB2A9": 1, "#F0B23C": 1 };
+  const DARK_INK = { "#EBB2A9": 1, "#E2604A": 1, "#F0B23C": 1 };   // Koralle mit dunkler Schrift (weiß nur 3,3 : 1)
   const paint = (el, col)=>{ el.style.setProperty("--pc", col); el.classList.toggle("wwInkDark", !!DARK_INK[col]); };
   function pages(){
     document.querySelectorAll("#recipeGrid .recipeCard, .hScroll .recipeCard, .homeFeatured").forEach((c, i)=> paint(c, VIVID[i % VIVID.length]));

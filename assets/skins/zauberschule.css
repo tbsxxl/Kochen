@@ -174,3 +174,6 @@ html.skin-zauberschule:not(#_x#_y#_z) .catTile{border-radius:999px 999px 6px 6px
 html.skin-zauberschule:not(#_x#_y#_z) .cookOverlay{--cLeaf:#D9B25F;--cOnLeaf:#14100A}
 html.skin-zauberschule:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup){padding:20px !important;background:linear-gradient(#18203F, #10152B) !important;border-radius:26px 26px 6px 6px !important;border:1px solid var(--gold) !important;outline:1px solid var(--gold2);outline-offset:-6px;box-shadow:none !important}
 
+
+/* ==== unslop-Durchgang Dez. 2026: Lesbarkeit (gemessen) ==== */
+html.skin-zauberschule:not(#_x#_y#_z) .reweChip{color:#E9C77A !important}

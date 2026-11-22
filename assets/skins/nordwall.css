@@ -173,3 +173,8 @@ html.skin-nordwall:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList) 
 html.skin-nordwall:not(#_x#_y#_z) #recipeGrid .recipeCard .recipeMeta .metaItem:nth-of-type(n+2){display:none !important}
 html.skin-nordwall:not(#_x#_y#_z) #ingredientsGroup .listGroup{background:transparent !important;box-shadow:none !important}
 html.skin-nordwall:not(#_x#_y#_z) #ingredientsGroup{padding:6px 14px !important}
+
+/* ==== unslop-Durchgang Dez. 2026: Lesbarkeit (gemessen) ==== */
+html.skin-nordwall:not(#_x#_y#_z) .chipMainCat{background:var(--brass) !important;color:#14100A !important}
+html.skin-nordwall:not(#_x#_y#_z) .reweChip{color:#E8C98A !important}
+html.skin-nordwall:not(#_x#_y#_z) :is(.recipeTitle,.homeFeaturedTitle){hyphens:manual !important;-webkit-hyphens:manual !important}
