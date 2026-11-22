@@ -6,7 +6,7 @@ date: 2026-11-22
 author: "Tobi"
 category: "Hähnchen"
 time: "ca. 45 Min"
-image: /recipes/images/nigerianischer-jollof-reis-mit-haehnchenkeulen-in-wuerziger.jpg
+image: /recipes/images/jollof-rice-mwse9xkh.jpg
 servings: 2
 ingredients:
   - { qty: 1, unit: "Stück", item: "Zwiebel" }
