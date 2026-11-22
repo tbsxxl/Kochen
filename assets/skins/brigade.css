@@ -118,3 +118,6 @@ html.skin-brigade:not(#_x#_y) .homeSectionTitle{text-transform:uppercase;font-si
 .cxCredit{position:absolute;left:16px;bottom:calc(env(safe-area-inset-bottom) + 186px);z-index:2;max-width:60%;font:400 .625rem/1.3 -apple-system, "Inter", sans-serif;color:rgba(255,255,255,.6);text-align:left;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 @media (prefers-reduced-motion: reduce){.cxPhoto .cxImg{animation:none}}
 html.skin-brigade:not(#_x#_y) body.cxHome .brandWordmark{color:#FFF !important}
+/* Dez. 2026, vierte Fassung: 3D-Kopf (brigade-3d.js) – Edelstahl-Pass mit Bestellungen an der Bonschiene */
+.cxPhoto .cxPoster{background:linear-gradient(#D8DCDE, #EEF0F1 55%, #B8BEC3 56%, #8E959B)}
+.cxPhoto .cxGL{position:absolute;inset:0;width:100%;height:100%}

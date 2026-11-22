@@ -390,3 +390,13 @@ selbst gezeichnet, nur 2D-Leinwand (die 3D-Köpfe mit Three.js waren zuvor wiede
 Grundlage war die Beschreibung des Besitzers. Erste Fassung: Rose und rote Formen waren zu groß und lagen über dem Titel → seitdem stehen sie
 in der freien Fläche neben der kürzesten Titelzeile (`api.zone()`).
 
+
+## Dez. 2026 – Serien-Skins, vierte Fassung: 3D-Szenen statt Fotos
+
+Besitzer zur dritten Fassung: „random Fotos, die rein gar nichts mit den Serien zu tun haben“; Wunsch: „hochwertig und erkennbar,
+wovon es inspiriert ist oder aus welchem Universum es kommt“, Mittel frei. Jeder der sieben Köpfe ist jetzt eine eigene 3D-Szene
+(`assets/skins/<skin>-3d.js`) mit dem typischen Motiv der Welt, frei nachgebaut, ohne Logos, Figuren, Namen oder Original-Schriften:
+Nordwall (Uhrwerk-Karte, Armillarsphäre, Zahnrad-Türme), Zauberschule (Halle mit Sternendecke, schwebende Kerzen), Jahr 3000
+(Comic-Zukunftsstadt mit Röhrenbahnen), Zwei Städte (blauer Kristall in Messingringen zwischen Gold- und Unterstadt), Insel (Strand
+mit Flugzeugwrack), Akte (Felseninsel im Sturm mit Leuchtturm), Brigade (Edelstahl-Pass mit echten Rezeptfotos als Bestellungen).
+Verworfen und entfernt: Stimmungsfotos (`assets/skins/fotos/`), gemalte 2D-Szenen.

@@ -214,7 +214,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Fraunces weit gesperrt (Titel taucht unscharf auf), Glut-Orange. Akte = Sturmnacht: Wolken, schräger Regen, Wetterleuchten, Leuchtturm
     mit streichendem Kegel, langes Gebäude auf der Klippe; Schreibmaschine, Rostrot. Brigade (hell) = Küchenpass aus gebürstetem Edelstahl,
     Wärmelampen mit warmem Licht, Bonschiene, Teller mit Dampf; Archivo kräftig, „Tobis“ auf blauem Malerband, Schürzenblau.
-    **Dritte Fassung (Besitzer: „gezeichnete Teile wie Teller, Lampen, Zettel wirken billig“):** Der Kopf ist jetzt ein echtes Stimmungsfoto
+    **Dritte Fassung (überholt durch die vierte unten; Besitzer: „gezeichnete Teile wie Teller, Lampen, Zettel wirken billig“):** Der Kopf war ein Stimmungsfoto
     (`assets/skins/fotos/<skin>.jpg`, frei lizenziert von Wikimedia Commons, Nachweis klein im Bild `.cxCredit` und in `fotos/quellen.txt`),
     gemeinsam aufgebaut von `assets/skins/cx-hero.js` (`KOCHBUCH_CX(api, {skin, img, pos, down, credit, fx})`: Foto mit langsamem Heranfahren und
     Parallaxe, darüber nur Licht-Teilchen `fx` = snow/rain/motes/steam/haze und die Schrift). Fotos: Nordwall Gletscher-Eiswand (abgedunkelt) +
@@ -235,8 +235,12 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Insel:** Strand bei Sonnenuntergang mit Rumpf eines abgestürzten Flugzeugs (Fensterreihe, gezackte Abrisskante, Tragfläche,
     Triebwerk), Trümmer und Koffer, Palmen im Wind, Lagerfeuer mit Funken, bewegtes Meer mit Brandungssaum, dunkler Dschungel;
     der Titel schwebt beim Öffnen aus der Tiefe heran (`inRise`, nur transform/opacity).
+    **Akte:** Anfahrt übers Meer auf eine Felseninsel im Sturm: langes Backsteingebäude mit Turm und wenigen erleuchteten Fenstern,
+    Zaun am Klippenrand, Leuchtturm mit zwei streichenden Lichtkegeln, schräger Regen, Wetterleuchten, schwere Dünung, Kamera schaukelt.
+    **Brigade:** Edelstahl-Pass vor weißen Metro-Fliesen, Wärmelampen, an der Bonschiene hängen die echten Rezeptfotos (unverändert,
+    nur zugeschnitten) als Bestellungen mit blauem Malerband und Namen, rutschen langsam weiter; Dampf. Der Ordner `fotos/` ist entfernt.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
-  - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
+  - Die 3D-Köpfe der Serien-Skins (Three.js, vierte Fassung, siehe oben) sind seit Dez. 2026 wieder da; die älteren 3D-Köpfe waren zuvor entfernt worden.
 - **Leise Bewegung im Standard-Look (Nov. 2026, alle sechs vom Besitzer gewählt; Abschnitt 24 in `styles.css`, nur `html:not(.skin):not(.retro)`):**
   Karten blenden beim Scrollen ein (`SCROLL_FX.standard`, leise Fassung ohne Parallaxe/Fortschrittslinie), Rezeptfoto fährt beim Öffnen
   heran (`stdKen`), Haken zeichnet sich beim Abhaken (`.tickNow` auf `.uRow`/`.prepRow`; die Zeile wird beim Abhaken neu aufgebaut, darum

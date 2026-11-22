@@ -1,9 +1,11 @@
 ---
-title: "Hähnchenfilets in sticky Orangen-Zwiebelsoße mit Brokkoli und Rosmarin-Kartoffelspalten"
+title: "Hähnchen in Orangen-Zwiebelsoße"
+subtitle: "mit Brokkoli und Rosmarin-Kartoffelspalten"
 source: "HelloFresh"
 date: 2026-11-22
 author: "Tobi"
 category: "Schnell"
+categories: ["Hähnchen"]
 time: "ca. 25 Min"
 image: /recipes/images/haehnchenfilets-in-sticky-orangen-zwiebelsosse-mit-brokkoli.jpg
 servings: 2

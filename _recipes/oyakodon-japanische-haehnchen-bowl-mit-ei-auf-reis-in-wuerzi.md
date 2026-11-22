@@ -1,9 +1,11 @@
 ---
-title: "Oyakodon! Japanische Hähnchen Bowl mit Ei auf Reis in würziger Soße"
+title: "Oyakodon"
+subtitle: "Japanische Hähnchen-Bowl mit Ei auf Reis"
 source: "HelloFresh"
 date: 2026-11-22
 author: "Tobi"
 category: "Schnell"
+categories: ["Bowls & Salate", "Hähnchen", "Asiatisch"]
 time: "ca. 15 Min"
 image: /recipes/images/oyakodon-japanische-haehnchen-bowl-mit-ei-auf-reis-in-wuerzi.jpg
 servings: 2
