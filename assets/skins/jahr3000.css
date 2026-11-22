@@ -119,3 +119,6 @@ html.skin-jahr3000:not(#_x#_y) .tabItem.active .tabIcon{filter:none}
 .cxPhoto .cxDown{color:#FFFFFF}
 .cxCredit{position:absolute;left:16px;bottom:calc(env(safe-area-inset-bottom) + 186px);z-index:2;max-width:60%;font:400 .625rem/1.3 -apple-system, "Inter", sans-serif;color:rgba(255,255,255,.6);text-align:left;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 @media (prefers-reduced-motion: reduce){.cxPhoto .cxImg{animation:none}}
+/* Dez. 2026, vierte Fassung: 3D-Kopf (jahr3000-3d.js) – Comic-Zukunftsstadt in der Dämmerung */
+.cxPhoto .cxPoster{background:linear-gradient(#1A1446 0%, #5A2F7A 45%, #E0607A 70%, #FFB36B 88%, #2A2350 88.5%)}
+.cxPhoto .cxGL{position:absolute;inset:0;width:100%;height:100%}
