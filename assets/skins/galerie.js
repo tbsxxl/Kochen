@@ -136,7 +136,8 @@
     const kv = [...document.querySelectorAll(".recipeFacts .kv")].map((k)=> k.textContent.trim()).filter(Boolean);
     const who = document.querySelector(".recipeAuthor span:last-child")?.textContent.replace(/^von\s+/, "").trim();
     const el = api.bit("gaRecLabel", "galerie");
-    el.innerHTML = `<b>${esc(D.title || document.querySelector(".recipeName")?.textContent.trim() || "")}</b><span>${esc([D.category, kv[0], kv[1]].filter(Boolean).join(" · "))}</span>${who ? `<span>Aus der Sammlung von ${esc(who)}</span>` : ""}`;
+    // der Name steht schon groß auf dem Foto – das Schild nennt Gattung (Kategorie), Maße (Zeit, Portionen) und Herkunft
+    el.innerHTML = `${D.category ? `<b>${esc(D.category)}</b>` : ""}<span>${esc([kv[0], kv[1]].filter(Boolean).join(" · "))}</span>${who ? `<span>Aus der Sammlung von ${esc(who)}</span>` : ""}`;
     const st = body.querySelector(".gaStatement"); if(st) st.after(el); else body.prepend(el);
     api.add(()=> el.remove());
   }
