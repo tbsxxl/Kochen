@@ -7,7 +7,7 @@ author: "Tobi"
 category: "Schnell"
 categories: ["Hähnchen"]
 time: "ca. 25 Min"
-image: /recipes/images/haehnchenfilets-in-sticky-orangen-zwiebelsosse-mit-brokkoli.jpg
+image: /recipes/images/haehnchen-in-orangen-zwiebelsosse-mwseaw68.jpg
 servings: 2
 ingredients:
   - { qty: 250, unit: "g", item: "Hähncheninnenbrustfilet" }
