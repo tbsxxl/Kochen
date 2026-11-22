@@ -51,7 +51,7 @@
     // Versteckter Retro-Modus (5× auf „Tobis Kochbuch“ auf der Startseite tippen)
     // Skins (Nov. 2026): Standard, Retro und acht weitere; gewählt unter „Mehr“ → „Skin“ (kochbuch.ui.skin, pro Gerät).
     // Wert = Farbe der Statusleiste/theme-color. Skins außer Standard haben ein festes Aussehen (kein Hell/Dunkel).
-    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#23271F', diner:'#B3122E', bauhaus:'#111111', nordwall:'#0E1217', zauberschule:'#0C0F1C', jahr3000:'#0D1830', zweistaedte:'#0F1418', insel:'#2A2618', akte:'#1E140D', brigade:'#2A2F33', boxengasse:'#282C20', bildband:'#EFE7D8', wortwelt:'#161515', blauraum:'#0C0CD6', glasklar:'#0B0B0C', tiefsee:'#E6E4EE', formlabor:'#F5F3EE', galerie:'#DCDAD1' };
+    window.KOCHBUCH_SKINS = { standard:'', retro:'#000080', terminal:'#23271F', diner:'#B3122E', bauhaus:'#111111', nordwall:'#0E1217', zauberschule:'#0C0F1C', jahr3000:'#0D1830', zweistaedte:'#0F1418', insel:'#0E1311', akte:'#11161B', brigade:'#EEF0F1', boxengasse:'#282C20', bildband:'#EFE7D8', wortwelt:'#161515', blauraum:'#0C0CD6', glasklar:'#0B0B0C', tiefsee:'#E6E4EE', formlabor:'#F5F3EE', galerie:'#DCDAD1' };
     window.KOCHBUCH_SKIN = function(){
       var s = null;
       try { s = JSON.parse(localStorage.getItem('kochbuch.ui.skin')); if (!s && JSON.parse(localStorage.getItem('kochbuch.ui.retro'))) s = 'retro'; } catch(e){}

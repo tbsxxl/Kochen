@@ -210,6 +210,10 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Jahr 3000 = Zukunftsstadt in der Dämmerung (Ringplanet, Kuppeltürme mit Rundfenstern und Konturen, Röhrenbahnen mit Kapseln, fliegende
     Autos mit Lichtspur); Nachtblau, Mint, Orange, Righteous. Zwei Städte = oben goldene Art-déco-Türme im Abendlicht mit Luftschiff und
     schwebendem blauem Kristall, unten Unterstadt in grünem Dunst mit Rohren, Rauch, pinken/türkisen Leuchtzeichen; Josefin-Versalien, Gold.
+    Insel = Sonnenuntergang über dem Meer, Palmen mit feinen Wedeln, Flugzeugwrack am Strand, Lagerfeuer, Glühwürmchen, glitzerndes Wasser;
+    Fraunces weit gesperrt (Titel taucht unscharf auf), Glut-Orange. Akte = Sturmnacht: Wolken, schräger Regen, Wetterleuchten, Leuchtturm
+    mit streichendem Kegel, langes Gebäude auf der Klippe; Schreibmaschine, Rostrot. Brigade (hell) = Küchenpass aus gebürstetem Edelstahl,
+    Wärmelampen mit warmem Licht, Bonschiene, Teller mit Dampf; Archivo kräftig, „Tobis“ auf blauem Malerband, Schürzenblau.
     Die älteren Angaben zu diesen sieben Skins (unten und im Absatz „Mehr Charakter“) gelten nicht mehr.
   - **Brigade** ist hell (Edelstahl) mit Schürzenblau `#2E62A8`; ein dunkler Brigade-Look wurde abgelehnt.
   - Die 3D-Köpfe (Three.js) sind im Dez. 2026 entfernt worden.
