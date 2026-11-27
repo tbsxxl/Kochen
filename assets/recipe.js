@@ -622,6 +622,11 @@ const cookOverlay = $("#cookOverlay");
     let hits = ingredientsForStep(text);
     const named = [...new Set([...secOf.values()].filter(Boolean))].filter((n)=> { const w = n.toLowerCase().split(/[^a-zäöüß]+/).filter((x)=> x.length >= 4); return w.some((x)=> low.includes(x.slice(0, Math.max(4, x.length - 2)))); });
     if(named.length){ const only = hits.filter((i)=> named.includes(secOf.get(i.idx))); if(only.length) hits = only; }
+    // „Fleisch zurück in den Bräter“: allgemeines Wort → die Fleisch-Zutat des Rezepts
+    if(CS && /\bfleisch\b/i.test(low) && !hits.some((i)=> /^(fleisch|hack|haehnchen|speck)$/.test(CS.iconOf(i.item)))){
+      const meat = all.find((i)=> !i.section && /^(fleisch|hack|haehnchen)$/.test(CS.iconOf(i.item)) && !/brühe|fond/i.test(i.item));
+      if(meat) hits = [meat, ...hits];
+    }
     const seen = new Set();
     return hits.filter((i)=>{ const k = String(i.item).toLowerCase(); if(seen.has(k)) return false; seen.add(k); return true; });
   }

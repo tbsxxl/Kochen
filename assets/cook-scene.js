@@ -143,7 +143,7 @@
     const SUF = { pfanne: "pan", topf: "pot", kasserolle: "pot", bräter: "pot", form: "dish", blech: "tray", schüssel: "bowl", wok: "wok", sieb: "sieve" };
     const sufKind = nm ? SUF[Object.keys(SUF).find((x)=> nm[1].toLowerCase().endsWith(x))] : null;
     if(nm && sufKind === best) label = nm[1];
-    if(best === "tray" && /auflaufform|backform|\bform\b|gratin/i.test(raw) && !/blech/i.test(raw)){ best = "dish"; if(!nm) label = "Auflaufform"; }
+    if(best === "tray" && /auflaufform|backform|\bform\b|gratin/i.test(raw) && !/blech/i.test(raw)){ best = "dish"; label = nm && /form$/i.test(nm[1]) ? nm[1] : "Auflaufform"; }
     return { kind: best, label };
   }
   function heat(text){
@@ -182,7 +182,7 @@
     ["zitrone", /zitrone|limette|orange/],
     ["garnele", /garnel|shrimp|scampi|gamba/],
     ["fisch", /lachs|fisch|kabeljau|thunfisch|forelle|seelachs|dorsch|filet.*fisch/],
-    ["haehnchen", /hähnchen|huhn|chicken|pute|geflügel|keule|schenkel/],
+    ["haehnchen", /hähnchen|hühner(?!brüh)|huhn|chicken|pute|geflügel|keule|schenkel/],
     ["hack", /hack|faschiert/],
     ["speck", /speck|bacon|pancetta|guanciale|schinken|chorizo|salami|wurst/],
     ["fleisch", /rind|steak|beef|short.?rib|ribs|schwein|kotelett|gulasch|lamm|ente|kalb|braten|fleisch|filet|nacken/],
@@ -211,19 +211,41 @@
     // Schuss Likör, Aroma, Extrakt: zu wenig, um es zu zeichnen
     ["none", /amaretto|likör|\brum\b|cognac|brandy|weinbrand|marsala|aroma\b|extrakt|vanilleschote|lebensmittelfarbe/],
     ["oel", /öl\b/],
+    ["none", /fett für|chicken-mu|rettich/],
+    ["kaese", /parmesan|provolone|pecorino/],
+    ["bruehe", /brühe|\bfond\b|rinderfond|guinness|bourbon|wodka|eistee/],
+    ["mehl", /soßenbinder/],
+    ["fisch", /pangasius/],
+    ["gewuerz", /muskat|fenchelsamen|kumin|würzkraft|\bmsg\b|zitronensäure/],
+    ["kraeuter", /majoran/],
+    ["paste", /gochujang|sambal|konfitüre|marmelade|ketjap/],
+    ["tomatensosse", /salsa/],
+    ["zucchini", /essiggurke|gewürzgurke|sellerie/],
+    ["blatt", /rucola|coleslaw/],
+    ["pilz", /trüffel(?!öl)/],
+    ["karotte", /kürbis(?!kern)/],
+    ["nuss", /rosine|erdnüss|erdnuss(?!butter)/],
+    ["fleisch", /rib-eye|roastbeef/],
     ["nuss", /kokosflocken|kokosraspel/],
     ["mehl", /stärke|speisestärke|mehl\b/],
     ["kakaopulver", /kakao/],
     ["gewuerz", /pulver|gewürz|würzmix|flocken(?!.*kokos)|paprikamark/],
     ["honig", /sirup/],
-    ["bruehe", /essig|cola|limonade|sprudel|mineralwasser/],
+    ["bruehe", /essig|\bcola\b|limonade|sprudel|mineralwasser/],
     ["paste", /erdnussbutter|tahin|pesto|harissa|paste|mus\b|apfelmus|chutney|hummus/],
   ];
   function iconOf(name){
-    const n = String(name || "").toLowerCase();
-    for(const [k, re] of PRE) if(re.test(n)) return k === "kakaopulver" ? "gewuerz" : k;
-    for(const [k, re] of ICONS) if(re.test(n)) return k;
-    return "stueck";
+    // nur der Kern des Namens zählt: „Hähnchenkeule in Kräutermarinade“ → Hähnchenkeule, „Ingwerpaste (im Kühlbeutel)“ → Ingwerpaste
+    const full = String(name || "").toLowerCase().replace(/^(nach geschmack|nach bedarf|etwas|optional:?)\s+/, "");
+    const head = full.split(/\s+(?:in|mit|aus|für|zum|zur|ohne|oder|nach|vom|von)\s+|\s*[,(–-]\s+|\s*\(/)[0].trim();
+    const pick = (n)=>{ for(const [k, re] of PRE) if(re.test(n)) return k === "kakaopulver" ? "gewuerz" : k; for(const [k, re] of ICONS) if(re.test(n)) return k; return "stueck"; };
+    // Zubereitungsform im Nachsatz entscheidet bei Tomaten aus der Dose/passiert und Blätterteig
+    if(/passiert|stückig|(tomate|tomaten).*\bdose\b|geschälte tomaten/.test(full)) return "tomatensosse";
+    if(/blätterteig|pizzateig|hefeteig/.test(full)) return "brot";
+    // „geröstete, gesalzene Erdnüsse“: sagt der Kern nichts, zählt der ganze Name
+    // „Hühner- oder Rinderfond“: Ergänzungsstrich → das Grundwort steht erst hinten
+    const k = head.length >= 2 && !/^\S+-\s+(oder|und)\s/.test(full) ? pick(head) : "stueck";
+    return k !== "stueck" ? k : pick(full);
   }
   // Flüssiges färbt den Boden des Geräts statt eines Symbols
   const LIQUID = { kaffee: ["#5A3420", "#2E180B"], tomatensosse: ["#C7432B", "#9E2C1A"], sahne: ["#F3EEE2", "#DDD3BD"], bruehe: ["#9A6235", "#6E3F1D"], oel: ["#E7C45A", "#C49A28"] };
@@ -439,9 +461,9 @@
     if(main && flat && kind !== "dish") inner += `<path d="M-60 -20 C-20 -60 40 -40 70 0 C40 40 -30 50 -60 20Z" fill="${LIQUID[main][0]}" opacity=".85"/>`;
     // Größe nach Anzahl: wenige Zutaten groß, viele kleiner
     const n = Math.min(list.length, 8);
-    const sc = (n <= 2 ? 2.1 : n <= 4 ? 1.75 : n <= 6 ? 1.5 : 1.32) * (flat ? 1.05 : 1);
+    const sc = (n <= 1 ? 2.7 : n <= 2 ? 2.1 : n <= 4 ? 1.75 : n <= 6 ? 1.5 : 1.32) * (flat ? 1.05 : 1);
     const wide = kind === "tray" || kind === "dish" || kind === "board";
-    const spots = (n <= 2 ? [[-48, -6], [54, 10]] : n <= 4 ? [[-58, -46], [56, -48], [60, 50], [-52, 52]] : SPOTS).map(([x, y])=> wide ? [x * 1.4, y * .95] : [x, y]);
+    const spots = (n <= 1 ? [[0, 4]] : n <= 2 ? [[-48, -6], [54, 10]] : n <= 4 ? [[-58, -46], [56, -48], [60, 50], [-52, 52]] : SPOTS).map(([x, y])=> wide ? [x * 1.4, y * .95] : [x, y]);
     // Geschnittenes liegt verstreut (zwei weitere Häufchen), Ganzes einmal
     const SCATTER = new Set(["zwiebel", "paprika", "chili", "karotte", "kartoffel", "knoblauch", "kraeuter", "fruehling", "pilz", "zucchini", "huelsen", "nuss", "hack", "brokkoli", "blumenkohl", "mozza", "speck", "blatt", "stueck"]);
     const extra = [];
