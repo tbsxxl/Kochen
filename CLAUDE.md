@@ -366,7 +366,8 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   Überschrift Inter 800 riesig, Text 430 groß, Nebensätze „, bis …“ und Klammern in Salbei (`.ckSub`, recipe.js), Zeiten fett weiß ohne Kapsel,
   Timer als dünne Riesenzahl + „Timer starten“ als Text, Zutaten ohne Karte (Menge weiß rechtsbündig, Name Salbei), Zurück/Weiter als Text;
   keine Schritt-Punkte mehr (Kopfzeile zeigt n/m). Überholt die Optik aus 27b–27e und die helle Variante aus Abschnitt 41 (nur im Kochmodus des
-  Standard-Looks). Vorbereiten-Seite und Zutaten-Reiter behalten ihre Karten, auf Grün.
+  Standard-Looks). Vorbereiten-Seite und Zutaten-Reiter ebenso ohne Karten (Abschnitt 28b: Titel wie die Schritt-Überschrift,
+  Gruppen nur über Abstand; Zutaten = Haken · Menge weiß · Name Salbei, Zutaten des Schritts mit weißem Namen).
   Überschrift, Gerät, Hitze, Zeit und Bild erkennt `assets/cook-scene.js` (`KOCHBUCH_COOKSCENE.analyze()/scene()`) aus dem Schritttext –
   keine Lookbehind-Regexe (alte iOS). Zutaten möglichst echt gezeichnet: unregelmäßige Formen (`blob()`), viele kleine Stücke (`pile()`),
   Licht-Verläufe je Zutat (`g…` in `DEFS`), leichte Körnung (`ckGrain`, ein Filter über alle Zutaten); Ansicht aller Zutaten zum Prüfen:

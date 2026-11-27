@@ -20,7 +20,7 @@ größte Fläche, alles andere tritt in Salbei zurück.
 - **Abstände:** große, gleiche Abstände (2rem) zwischen Gruppen, enge innerhalb.
 
 ## Darf sich anpassen
-iPad (zwei Spalten: Schritt links, Zutaten rechts), Vorbereiten-Seite und Zutaten-Reiter nehmen Grund und Farben auf; laufender Timer
+iPad (zwei Spalten: Schritt links, Zutaten rechts). Vorbereiten-Seite und Zutaten-Reiter folgen A2 ganz (ohne Karten, Wunsch des Besitzers); laufender Timer
 zeigt „+1 Min“ (Salbei) und „Beenden“ (weiß); abgelaufener Timer „Fertig“.
 
 ## Nicht zurück zu
