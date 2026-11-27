@@ -642,10 +642,10 @@ const cookOverlay = $("#cookOverlay");
     ckStage.hidden = false;
     ckStage.innerHTML = CS.scene(ckInfo.kind, shown) + `<figcaption class="ckCap"><i aria-hidden="true"></i>${escHtml(ckInfo.gear)}${ckInfo.heat ? " · " + escHtml(ckInfo.heat) : ""}</figcaption>`;
     const sv = currentServings();
-    ckBonWrap.hidden = false;
-    ckBon.innerHTML = `<div class="ckBonHead"><div class="ckBonName">Jetzt</div><div class="ckBonSub">Schritt ${stepIdx + 1} · ${escHtml(ckInfo.title)}</div><div class="ckBonMeta">für ${sv} ${sv === 1 ? "Portion" : "Portionen"}</div></div>
-      <ul class="ckBonRows">${hits.length ? hits.map((i)=> `<li><span>${escHtml(i.item)}</span><span>${escHtml(fmtQty(i) || "–")}</span></li>`).join("") : `<li class="ckBonEmpty"><span>Keine neuen Zutaten</span></li>`}</ul>
-      <div class="ckBonFoot"><span>Gerät</span><span>${escHtml(ckInfo.gear)}${ckInfo.heat ? " · " + escHtml(ckInfo.heat) : ""}</span></div>`;
+    // Zutaten dieses Schritts als ruhige Liste (wie die Zutatenliste der Rezeptseite); ohne Zutaten keine Karte
+    ckBonWrap.hidden = !hits.length;
+    ckBon.innerHTML = hits.length ? `<div class="ckBonHead"><span class="ckBonName">Für diesen Schritt</span><span class="ckBonMeta">${sv} ${sv === 1 ? "Portion" : "Portionen"}</span></div>
+      <ul class="ckBonRows">${hits.map((i)=> `<li><span>${escHtml(i.item)}</span><span>${escHtml(fmtQty(i) || "")}</span></li>`).join("")}</ul>` : "";
   }
   ckHead?.addEventListener("click", (e)=>{
     const d = e.target.closest(".ckDot"); if(!d) return;
