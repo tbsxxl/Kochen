@@ -438,3 +438,6 @@ Der Besitzer zeigte einen Kochmodus aus einem eigenen Entwurf und wollte ihn „
 mit Zeichnung – große Schritt-Überschrift mit Schritt-Punkten, große Timer-Box im Schritt, Papier-Bon „Jetzt“ mit den Zutaten des Schritts
 und dem Gerät, und eine automatisch erzeugte Draufsicht (Pfanne, Topf, Brett … mit den Zutaten). Vorerst nur im Standard-Look
 („Erstmal nur Standard“); die Skins behalten ihren bisherigen Kochmodus.
+
+Der Papier-Bon „Jetzt“ (Zackenrand, Schreibmaschinenschrift, leicht schief) gefiel dem Besitzer nicht („passt nicht zum cleanen Design“).
+Ersetzt durch eine ruhige Karte „Für diesen Schritt“ wie die Zutatenliste; auch Schritt-Zähler, Timer und Gerätezeile in Systemschrift.
