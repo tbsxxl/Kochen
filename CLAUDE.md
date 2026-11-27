@@ -350,7 +350,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   Gerät: ausdrücklich genannte Geräte („in einer Pfanne“) zählen vor Tätigkeiten; nennt ein Schritt keins oder nur schwache Tätigkeiten
   (rühren, erhitzen, braten), bleibt das Gerät des vorigen Schritts (Topf/Pfanne/Wok; „backen“ nach der Auflaufform bleibt die Form); nie
   ein Schneidebrett als Ersatz, ohne Gerät kein Bild. Im Bild liegt alles, was in den letzten Schritten in dasselbe Gerät kam. Creme in
-  Form/Schüssel wird zur Schicht (Kakao bestäubt sie, Biskuits liegen in Reihen). Schuss Likör/Aroma wird nicht gezeichnet.
+  Form/Schüssel wird zur Schicht (Kakao bestäubt sie, Biskuits liegen in Reihen). Schuss Likör/Aroma wird nicht gezeichnet. Zutat → Zeichnung (`iconOf()`): zählt nur der Kern des Namens („Hähnchenkeule in
+  Kräutermarinade“ → Hähnchen, nicht Kräuter; vor „in/mit/oder“, Komma, Klammer), Vorregeln `PRE` (Pulver, Stärke, Essig, Fond, Pasten …)
+  vor der Liste `ICONS`; allgemeines „Fleisch“ im Schritt holt die Fleisch-Zutat des Rezepts.
   **Prüfen (Wunsch des Besitzers nach Tiramisu):** `node tools/cook-scenes.js ausgabe.txt [rezept]` listet je Schritt Überschrift,
   Gerät und Zutaten – nach Änderungen an cook-scene.js und bei neuen Rezepten durchsehen. Ab 768 px Raster mit Text links und Bild/Bon rechts, ab 1100 px drei Spalten.
 - Rezeptliste (Standard seit Nov. 2026: untereinander, Abschnitt 33); als Raster mit 2 Spalten (Abschnitt 12, quadratische Fotos, nur
