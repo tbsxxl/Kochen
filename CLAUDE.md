@@ -257,6 +257,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Brandbrief (neuer Skin, Dez. 2026, Entwurf I der Zauberschule-Runde, `docs/skins/brandbrief.md`, `brandbrief.css/.js`):** Signalrot
     `#E2473A`, eine Schriftfarbe `#120606`, Archivo schmal 800 versal; Startseite `.bbrHero` mit riesigem Tagesgericht, das aus dem Bild läuft;
     schwarze Linien statt Karten, Aktives schwarz mit roter Schrift; in `PURE` und `FX_JS`, kein Logo.
+    **Jahr 3000, fünfte Fassung (Dez. 2026, Richtung D „Fünfziger-Zukunft“, `docs/skins/jahr3000-d.md`, letzter Block in `jahr3000.css`):**
+    Creme `#FBEBD1`, vier Tinten (Tinte, Orange `#C04A28` = Beschriftungen/Aktives, Petrol `#1F7068` = Zahlen, Lila `#6B5CA5` = Kategorien),
+    Jost 800 versal + Pacifico; Startseite `.j3Block` mit großen Kategorie-Zahlen; 3D-Stadt unter Creme-Schleier; keine Comic-Umrisse mehr.
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.
