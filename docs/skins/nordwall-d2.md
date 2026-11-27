@@ -23,7 +23,7 @@ Norden oben: Pasta oben gesperrt wie ein Reich, Curry und Schmorgerichte senkrec
 
 ## Darf sich anpassen
 3D-Karte (nordwall-3d.js) liegt unter einem Pergament-Schleier dahinter; ohne Grafikkarte flaches Pergament. Unterseiten nutzen dieselben
-Tinten. Kochmodus bleibt, wie er ist (Wunsch des Besitzers).
+Tinten. Kochmodus ebenfalls auf Pergament ohne Karten (Besitzer wollte die Kochmodi doch mit angepasst haben).
 
 ## Nicht zurück zu
 Schiefer-Dunkel, Messing-Doppelrahmen, Text auf Fotos in Rot.
