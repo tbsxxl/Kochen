@@ -458,3 +458,6 @@ Zutatenbilder im Kochmodus: Besitzer wollte erst echte Fotos statt Zeichnungen; 
 Canva-Kontingent zu klein → Besitzer: „Zutatenbilder ganz weglassen“. Gerät · Hitze bleibt als Zeile. Parallel zehn Schrift-Entwürfe
 (bencium-innovative) für die Schritt-Ansicht: A (Tätigkeit riesig auf Feld-Grün), B (Mengen-Spalte zuerst), F (eine Spalte im Blocksatz,
 Zutaten im Text) blieben im Kopf → Feinrunde A2/B2/F2.
+Besitzer wählte **A2** → eingebaut (Abschnitt 28, `docs/kochmodus-a2.md`): ganzer Kochmodus Feld-Grün, nur Weiß + Salbei, Inter
+variabel (Überschrift 800, Timer-Zahl 200), keine Karten/Knopf-Flächen, Zurück/Weiter als Text. Widerspricht der früheren Wahl
+„heller Kochmodus mit grünem Kopf“ (Abschnitt 41, „ganz grün“ damals nicht gewählt) – A2 ist die neuere, ausdrückliche Festlegung.
