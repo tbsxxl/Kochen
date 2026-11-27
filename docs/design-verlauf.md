@@ -462,3 +462,4 @@ Besitzer wählte **A2** → eingebaut (Abschnitt 28, `docs/kochmodus-a2.md`): ga
 variabel (Überschrift 800, Timer-Zahl 200), keine Karten/Knopf-Flächen, Zurück/Weiter als Text. Widerspricht der früheren Wahl
 „heller Kochmodus mit grünem Kopf“ (Abschnitt 41, „ganz grün“ damals nicht gewählt) – A2 ist die neuere, ausdrückliche Festlegung.
 Danach auch Vorbereiten und Zutaten-Reiter ohne Karten im A2-Stil (Besitzer: „Ja auch vorbereiten“).
+Screenshot des Besitzers: Timer doppelt (Leiste + groß) und Knöpfe unter der Leiste abgeschnitten → Timer des Schritts nur groß, Knöpfe neben der Zahl.

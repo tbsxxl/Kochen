@@ -368,6 +368,8 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   keine Schritt-Punkte mehr (Kopfzeile zeigt n/m). Überholt die Optik aus 27b–27e und die helle Variante aus Abschnitt 41 (nur im Kochmodus des
   Standard-Looks). Vorbereiten-Seite und Zutaten-Reiter ebenso ohne Karten (Abschnitt 28b: Titel wie die Schritt-Überschrift,
   Gruppen nur über Abstand; Zutaten = Haken · Menge weiß · Name Salbei, Zutaten des Schritts mit weißem Namen).
+  Läuft der Timer des Schritts, steht er nur groß im Schritt (in der Leiste oben ausgeblendet, `ckSyncBar()`; im Zutaten-Reiter und in
+  anderen Schritten wieder oben), „+1 Min“/„Beenden“ übereinander rechts neben der Zahl (28c).
   Überschrift, Gerät, Hitze, Zeit und Bild erkennt `assets/cook-scene.js` (`KOCHBUCH_COOKSCENE.analyze()/scene()`) aus dem Schritttext –
   keine Lookbehind-Regexe (alte iOS). Zutaten möglichst echt gezeichnet: unregelmäßige Formen (`blob()`), viele kleine Stücke (`pile()`),
   Licht-Verläufe je Zutat (`g…` in `DEFS`), leichte Körnung (`ckGrain`, ein Filter über alle Zutaten); Ansicht aller Zutaten zum Prüfen:

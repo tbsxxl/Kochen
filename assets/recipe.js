@@ -576,6 +576,7 @@ const cookOverlay = $("#cookOverlay");
   function showPrep(on){
     prepMode = !!on && hasPrep();
     if(cookPrep) cookPrep.hidden = !prepMode;
+    ckSyncBar();
     cookOverlay?.classList.toggle("isPrep", prepMode);
     if(prepMode) renderPrep();
     renderCookStep();
@@ -589,7 +590,16 @@ const cookOverlay = $("#cookOverlay");
   const mmss = (sec)=>{ sec = Math.max(0, Math.ceil(sec)); const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s2 = sec % 60, p = (x)=> String(x).padStart(2, "0"); return h ? `${h}:${p(m)}:${p(s2)}` : `${p(m)}:${p(s2)}`; };
   function ckHide(){ [ckHead, ckTimer, ckStage, ckBonWrap].forEach((el)=>{ if(el) el.hidden = true; }); }
   function ckStepTimer(){ return T ? T.list().find((t)=> t.title === (data.title || "") && String(t.label).startsWith(`Schritt ${stepIdx + 1} ·`)) : null; }
-  function ckRenderTimer(){
+  // Der Timer dieses Schritts steht groß im Schritt – in der Leiste oben nicht noch einmal zeigen (A2, Screenshot des Besitzers)
+  function ckSyncBar(){
+    const bar = document.getElementById("cookTimers"); if(!bar) return;
+    const id = ckTimer && !ckTimer.hidden && cookOverlay?.classList.contains("ckNew") && !prepMode && !cookPanelSteps?.hidden ? ckTimer.dataset.id : "";
+    const items = [...bar.querySelectorAll(".cookTimer")];
+    items.forEach((el)=> el.hidden = !!id && el.dataset.id === id);
+    bar.hidden = !items.some((el)=> !el.hidden);
+  }
+  function ckRenderTimer(){ ckRenderTimer0(); ckSyncBar(); }
+  function ckRenderTimer0(){
     if(!ckTimer) return;
     const tm = ckInfo && ckInfo.time, run = ckStepTimer();
     if(!tm && !run){ ckTimer.hidden = true; ckTimer.innerHTML = ""; delete ckTimer.dataset.state; return; }
@@ -837,6 +847,7 @@ const cookOverlay = $("#cookOverlay");
     cookTabIngs?.setAttribute('aria-selected', stepsOn?'false':'true');
     if(cookPanelSteps) cookPanelSteps.hidden = !stepsOn;
     if(cookPanelIngs) cookPanelIngs.hidden = stepsOn;
+    ckSyncBar();
   }
 
   cookingQuick?.addEventListener('click', openCook);
@@ -883,7 +894,7 @@ const cookOverlay = $("#cookOverlay");
   // Timer: Leiste im Kochmodus + kleiner Hinweis auf der Rezeptseite, solange einer läuft
   const cookTimers = $("#cookTimers");
   T?.bind(cookTimers);
-  T?.onChange(()=> T.render(cookTimers));
+  T?.onChange(()=>{ T.render(cookTimers); ckSyncBar(); });
 
   // Eigene Notizen & Bewertung (kochbuch.notes, wird mit dem Profil synchronisiert)
   const NOTES_KEY = "kochbuch.notes";
