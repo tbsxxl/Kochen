@@ -250,7 +250,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     `docs/skins/nordwall-d2.md`, letzter Block in `nordwall.css`):** Pergament `#E2D3B2` statt Schiefer, vier Tinten (Text, Rot = Gerichte/Aktives,
     Waldgrün = Kategorien, Meerblau = Zahlen/Daten), Cinzel weit gesperrt + Garamond kursiv. Startseite = Landkarte aus Schrift (`.nwMap` in
     `nordwall.js`): Norden oben, vier größte Kategorien an den Himmelsrichtungen (`#homeCatCount` in `home.html`), Gericht des Tages als Hauptstadt
-    in der Mitte; die 3D-Karte liegt unter einem Pergament-Schleier dahinter. Keine Kartenflächen/Rahmen; Kochmodus unverändert.
+    in der Mitte; die 3D-Karte liegt unter einem Pergament-Schleier dahinter. Keine Kartenflächen/Rahmen. Kochmodus ebenfalls auf Pergament (Besitzer: „Kochmodi nicht vergessen“): Schritt in Tinte, Zeiten Meerblau kursiv, Gruppen Waldgrün gesperrt, Weiter/Haken Rot.
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.
