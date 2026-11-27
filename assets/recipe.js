@@ -665,6 +665,10 @@ const cookOverlay = $("#cookOverlay");
     }
     // „Soße: …“ – die Zwischenüberschrift steht schon groß darüber
     if(ckInfo.body && ckInfo.body !== text) cookStepText.innerHTML = T ? T.linkify(ckInfo.body) : escHtml(ckInfo.body);
+    // A2: Nebensätze („, bis …“) und Klammern treten in Salbei zurück (nur Text außerhalb von Tags)
+    cookStepText.innerHTML = cookStepText.innerHTML
+      .replace(/(,\s(?:bis|sobald|damit|bevor|nachdem|während|sodass|so dass|ohne|aber nicht)\s[^.<;]*)/g, '<span class="ckSub">$1</span>')
+      .replace(/(\([^)<]*\))/g, '<span class="ckSub">$1</span>');
     const dots = steps.map((_, i)=> `<button type="button" class="ckDot${i < stepIdx ? " isDone" : ""}" data-step="${i}"${i === stepIdx ? ' aria-current="step"' : ""} aria-label="Schritt ${i + 1}">${i + 1}</button>`).join("");
     ckHead.hidden = false;
     ckHead.innerHTML = `<p class="ckEyebrow">Schritt ${stepIdx + 1} von ${total}</p><div class="ckDots" role="group" aria-label="Schritte">${dots}</div><h2 class="ckTitle">${escHtml(ckInfo.title)}</h2>`;
