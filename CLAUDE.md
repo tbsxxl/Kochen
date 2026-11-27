@@ -338,13 +338,15 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   Schritts hervorgehoben (`.isStep`). Auf dem Handy bleibt es bei den Reitern „Schritte/Zutaten“.
   **Neuer Schritt-Aufbau im Standard-Look (Nov. 2026, nach einer Vorlage des Besitzers; Skins behalten den alten):** Klasse `.ckNew`
   am Kochmodus, nur ohne `html.skin`/`html.retro` (Abschnitt 27 in `styles.css`). Je Schritt: „Schritt n von m“ + antippbare Punkte
-  (`#ckHead`), große Überschrift in Fraunces, darunter der Text (ein Doppelpunkt-Kopf „Soße: …“ wird zur Überschrift), große Timer-Box
+  (`#ckHead`), große Überschrift in Systemschrift (Fraunces abgelehnt: „passt nicht zum Stil“), darunter der Text (ein Doppelpunkt-Kopf „Soße: …“ wird zur Überschrift), große Timer-Box
   (`#ckTimer`, startet/verlängert/beendet den Timer des Schritts), Draufsicht als SVG (`#ckStage`: Pfanne/Topf/Wok/Blech/Form/Schüssel/
   Sieb/Mixer/Brett/Teller mit Zutaten-Symbolen) mit Gerät · Hitze darunter, ruhige Karte „Für diesen Schritt“ mit den Zutaten (`#ckBon`,
   fehlt ohne Zutaten). Den Papier-Bon mit Zackenrand und Schreibmaschinenschrift hat der Besitzer abgelehnt („passt nicht zum cleanen
   Design“): Systemschrift, nichts schief, Haarlinien (Abschnitt 27b).
   Überschrift, Gerät, Hitze, Zeit und Bild erkennt `assets/cook-scene.js` (`KOCHBUCH_COOKSCENE.analyze()/scene()`) aus dem Schritttext –
-  keine Lookbehind-Regexe (alte iOS). Ab 768 px Raster mit Text links und Bild/Bon rechts, ab 1100 px drei Spalten.
+  keine Lookbehind-Regexe (alte iOS). Zutaten möglichst echt gezeichnet: unregelmäßige Formen (`blob()`), viele kleine Stücke (`pile()`),
+  Licht-Verläufe je Zutat (`g…` in `DEFS`), leichte Körnung (`ckGrain`, ein Filter über alle Zutaten); Ansicht aller Zutaten zum Prüfen:
+  `KOCHBUCH_COOKSCENE.scene("board", [{item:"Zwiebel"}])` je Zutat. Ab 768 px Raster mit Text links und Bild/Bon rechts, ab 1100 px drei Spalten.
 - Rezeptliste (Standard seit Nov. 2026: untereinander, Abschnitt 33); als Raster mit 2 Spalten (Abschnitt 12, quadratische Fotos, nur
   Zeit statt Zeit + Portionen) unter „Mehr“ → „Rezeptliste“ umschaltbar (`kochbuch.ui.listView`,
   Klasse `listCards` auf `<html>`, schon im Kopf gesetzt). Kategorien-Seite = Kacheln (Foto, Name, Anzahl; jedes Foto nur einmal), Antippen →
