@@ -581,8 +581,81 @@ const cookOverlay = $("#cookOverlay");
     renderCookStep();
   }
 
+  // ---------- Kochmodus im Standard-Look: Überschrift, Schritt-Punkte, großer Timer, Draufsicht, Bon „Jetzt“ ----------
+  const ckHead = $("#ckHead"), ckTimer = $("#ckTimer"), ckStage = $("#ckStage"), ckBonWrap = $("#ckBonWrap"), ckBon = $("#ckBon");
+  const CS = window.KOCHBUCH_COOKSCENE;
+  const ckOn = ()=> !!CS && !document.documentElement.classList.contains("skin") && !document.documentElement.classList.contains("retro");
+  let ckInfo = null;
+  const mmss = (sec)=>{ sec = Math.max(0, Math.ceil(sec)); const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s2 = sec % 60, p = (x)=> String(x).padStart(2, "0"); return h ? `${h}:${p(m)}:${p(s2)}` : `${p(m)}:${p(s2)}`; };
+  function ckHide(){ [ckHead, ckTimer, ckStage, ckBonWrap].forEach((el)=>{ if(el) el.hidden = true; }); }
+  function ckStepTimer(){ return T ? T.list().find((t)=> t.title === (data.title || "") && String(t.label).startsWith(`Schritt ${stepIdx + 1} ·`)) : null; }
+  function ckRenderTimer(){
+    if(!ckTimer) return;
+    const tm = ckInfo && ckInfo.time, run = ckStepTimer();
+    if(!tm && !run){ ckTimer.hidden = true; ckTimer.innerHTML = ""; return; }
+    ckTimer.hidden = false;
+    if(run){
+      ckTimer.classList.toggle("isDone", !!run.done);
+      ckTimer.innerHTML = `<output class="ckTime">${run.done ? "Fertig" : mmss(run.left)}</output>
+        <div class="ckTimerBtns">${run.done ? "" : `<button type="button" class="ckTBtn" data-ck="plus">+1 Min</button>`}<button type="button" class="ckTBtn" data-ck="stop">${run.done ? "OK" : "Beenden"}</button></div>
+        <span class="ckTimerBar" style="transform:scaleX(${run.done ? 1 : Math.min(1, 1 - run.left / run.total).toFixed(3)})"></span>`;
+      ckTimer.dataset.id = run.id;
+    }else{
+      ckTimer.classList.remove("isDone");
+      ckTimer.innerHTML = `<output class="ckTime">${mmss(tm.secs)}</output><div class="ckTimerBtns"><button type="button" class="ckTBtn primary" data-ck="go">Timer starten</button></div>`;
+      delete ckTimer.dataset.id;
+    }
+  }
+  ckTimer?.addEventListener("click", (e)=>{
+    const b = e.target.closest("[data-ck]"); if(!b || !T) return;
+    if(b.dataset.ck === "go" && ckInfo?.time){ T.start(ckInfo.time.secs, `Schritt ${stepIdx + 1} · ${ckInfo.time.label}`, { title: data.title, url: location.pathname + "?kochen=1", image: data.image }); successTap(); }
+    if(b.dataset.ck === "plus" && ckTimer.dataset.id){ T.addTime(ckTimer.dataset.id, 60); lightTap(); }
+    if(b.dataset.ck === "stop" && ckTimer.dataset.id){ T.remove(ckTimer.dataset.id); lightTap(); }
+    ckRenderTimer();
+  });
+  T?.onChange(()=>{ if(cookOverlay?.classList.contains("ckNew") && !prepMode) ckRenderTimer(); });
+  // Zutaten eines Schritts ohne Doppelte: nennt der Schritt einen Abschnitt („Marinade“, „Soße“), nur dessen Zutaten
+  function ckStepIngs(text){
+    const all = scaledIngredients(), low = String(text || "").toLowerCase();
+    let sec = "", secOf = new Map();
+    all.forEach((i)=>{ if(i.section) sec = String(i.section); else secOf.set(i.idx, sec); });
+    let hits = ingredientsForStep(text);
+    const named = [...new Set([...secOf.values()].filter(Boolean))].filter((n)=> { const w = n.toLowerCase().split(/[^a-zäöüß]+/).filter((x)=> x.length >= 4); return w.some((x)=> low.includes(x.slice(0, Math.max(4, x.length - 2)))); });
+    if(named.length){ const only = hits.filter((i)=> named.includes(secOf.get(i.idx))); if(only.length) hits = only; }
+    const seen = new Set();
+    return hits.filter((i)=>{ const k = String(i.item).toLowerCase(); if(seen.has(k)) return false; seen.add(k); return true; });
+  }
+  function ckRender(){
+    const text = steps[stepIdx] || "", total = steps.length || 1;
+    ckInfo = CS.analyze(text);
+    const hits = ckStepIngs(text);
+    // Bild: keine neuen Zutaten → was vom vorigen Schritt schon im Gerät liegt
+    let shown = hits;
+    for(let k = stepIdx - 1; !shown.length && k >= 0 && k >= stepIdx - 2; k--) shown = ckStepIngs(steps[k] || "");
+    // „Soße: …“ – die Zwischenüberschrift steht schon groß darüber
+    if(ckInfo.body && ckInfo.body !== text) cookStepText.innerHTML = T ? T.linkify(ckInfo.body) : escHtml(ckInfo.body);
+    const dots = steps.map((_, i)=> `<button type="button" class="ckDot${i < stepIdx ? " isDone" : ""}" data-step="${i}"${i === stepIdx ? ' aria-current="step"' : ""} aria-label="Schritt ${i + 1}">${i + 1}</button>`).join("");
+    ckHead.hidden = false;
+    ckHead.innerHTML = `<p class="ckEyebrow">Schritt ${stepIdx + 1} von ${total}</p><div class="ckDots" role="group" aria-label="Schritte">${dots}</div><h2 class="ckTitle">${escHtml(ckInfo.title)}</h2>`;
+    ckHead.querySelector('[aria-current="step"]')?.scrollIntoView({ block: "nearest", inline: "center" });
+    ckRenderTimer();
+    ckStage.hidden = false;
+    ckStage.innerHTML = CS.scene(ckInfo.kind, shown) + `<figcaption class="ckCap"><i aria-hidden="true"></i>${escHtml(ckInfo.gear)}${ckInfo.heat ? " · " + escHtml(ckInfo.heat) : ""}</figcaption>`;
+    const sv = currentServings();
+    ckBonWrap.hidden = false;
+    ckBon.innerHTML = `<div class="ckBonHead"><div class="ckBonName">Jetzt</div><div class="ckBonSub">Schritt ${stepIdx + 1} · ${escHtml(ckInfo.title)}</div><div class="ckBonMeta">für ${sv} ${sv === 1 ? "Portion" : "Portionen"}</div></div>
+      <ul class="ckBonRows">${hits.length ? hits.map((i)=> `<li><span>${escHtml(i.item)}</span><span>${escHtml(fmtQty(i) || "–")}</span></li>`).join("") : `<li class="ckBonEmpty"><span>Keine neuen Zutaten</span></li>`}</ul>
+      <div class="ckBonFoot"><span>Gerät</span><span>${escHtml(ckInfo.gear)}${ckInfo.heat ? " · " + escHtml(ckInfo.heat) : ""}</span></div>`;
+  }
+  ckHead?.addEventListener("click", (e)=>{
+    const d = e.target.closest(".ckDot"); if(!d) return;
+    stepIdx = Number(d.dataset.step); renderCookStep(); lightTap();
+  });
+
   function renderCookStep(){
     if(!cookStepText || !cookStepPill) return;
+    cookOverlay?.classList.toggle("ckNew", ckOn());
+    if(prepMode || !ckOn()) ckHide();
     if(prepMode){
       cookStepText.hidden = true;
       if(cookStepIngs) cookStepIngs.hidden = true;
@@ -612,6 +685,7 @@ const cookOverlay = $("#cookOverlay");
       cookStepIngsList.innerHTML = hits.map(i=>`<div class="cookStepIng"><span>${escHtml(i.item)}</span><span class="num">${escHtml(fmtQty(i))}</span></div>`).join('');
     }
     markStepIngredients();
+    if(ckOn()) ckRender();
     const nextPrev = $("#cookNextPreview"), nextText = $("#cookNextText");
     if(nextPrev && nextText){
       const nx = steps[stepIdx + 1];
