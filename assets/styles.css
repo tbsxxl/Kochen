@@ -3545,3 +3545,14 @@ html:not(.skin):not(.retro) .cookOverlay.ckNew{--ckMono:var(--fontUi)}
 .ckNew .ckStage svg{animation:ckStageIn .4s var(--easeSheet) both}
 @keyframes ckStageIn{from{opacity:0;transform:scale(.97)}}
 @media (prefers-reduced-motion: reduce){.ckNew .ckStage svg{animation:none}}
+/* 27d. Unslop-Runde Kochmodus (Nov. 2026, vom Besitzer bestätigt): Grün bleibt der einzige Akzent – die antippbaren Zeiten im Text
+   waren im Dunkelmodus orange (im Standard-Look ausgeschlossen); „Timer starten“ leise statt zweiter gleich lauter grüner Knopf neben
+   „Weiter“; Überschrift 600 wie alle Titel; Abstände auf dem 4-px-Raster. */
+:root[data-theme="dark"]:not(.skin):not(.retro) .cookTime{background:rgba(126,196,138,.16);color:#7EC48A}
+:root[data-theme="dark"]:not(.skin):not(.retro) .cookOverlay .cookTime{background:rgba(157,187,163,.16);color:var(--cLeaf)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .ckTBtn.primary{background:rgba(29,74,51,.10);background:color-mix(in srgb, var(--cLeaf) 14%, transparent);border-color:transparent;color:var(--cLeaf)}
+.ckNew .ckTitle{font-weight:600}
+.ckNew .ckHead{padding-top:8px}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .ckTimer:not([hidden]){padding:16px 20px}
+.ckNew .ckBonHead{padding:12px 0}
+.ckNew .ckBonRows li{padding:12px 0}
