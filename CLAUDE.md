@@ -251,6 +251,10 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Waldgrün = Kategorien, Meerblau = Zahlen/Daten), Cinzel weit gesperrt + Garamond kursiv. Startseite = Landkarte aus Schrift (`.nwMap` in
     `nordwall.js`): Norden oben, vier größte Kategorien an den Himmelsrichtungen (`#homeCatCount` in `home.html`), Gericht des Tages als Hauptstadt
     in der Mitte; die 3D-Karte liegt unter einem Pergament-Schleier dahinter. Keine Kartenflächen/Rahmen. Kochmodus ebenfalls auf Pergament (Besitzer: „Kochmodi nicht vergessen“): Schritt in Tinte, Zeiten Meerblau kursiv, Gruppen Waldgrün gesperrt, Weiter/Haken Rot.
+    **Zauberschule, fünfte Fassung (Dez. 2026, Richtung C „Sternendecke“, `docs/skins/zauberschule-c.md`, letzter Block in `zauberschule.css`):**
+    Nachtblau `#0D1530`, nur Kerzenweiß `#E9DDB8` + Gold `#C9A94A`, Fraunces 300 weich + Jost gesperrt; Startseite = goldene „Sterne“ (`.zsSky`:
+    Name, Datum, Kategorien, Zeit, Links) um das Gericht des Tages; 3D-Halle unter Schleier; Kochmodus ohne Karten, Weiter golden.
+    Vorgemerkt: Entwurf I der Zauberschule-Runde (Brief, der schreit: Rot, Archivo schmal versal) soll ein zusätzlicher Skin werden.
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.

@@ -177,3 +177,142 @@ html.skin-zauberschule:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup){pad
 
 /* ==== unslop-Durchgang Dez. 2026: Lesbarkeit (gemessen) ==== */
 html.skin-zauberschule:not(#_x#_y#_z) .reweChip{color:#E9C77A !important}
+
+/* ==========================================================================================================================
+   Dez. 2026, fünfte Fassung: Richtung C „Sternendecke“ (bencium-innovative, vom Besitzer festgelegt; docs/skins/zauberschule-c.md).
+   Nachtblau #0D1530, zwei Farben: Kerzenweiß #E9DDB8 für Gerichte und Lesetext, Gold #C9A94A für alles Kleine (Beschriftungen,
+   Zahlen, Zeiten, Aktives). Fraunces leicht (300, weich) für Namen, Jost gesperrt für Beschriftungen. Keine Kartenflächen, keine
+   Rahmen, kein Weinrot mehr; Gruppen über Abstand. Kochmodus genauso.
+   ========================================================================================================================== */
+@font-face{font-family:"Skin Sternschrift";font-style:normal;font-weight:100 900;font-display:swap;src:url("../fonts/fraunces.woff2") format("woff2")}
+@font-face{font-family:"Skin Sternlabel";font-style:normal;font-weight:100 900;font-display:swap;src:url("../fonts/jost.woff2") format("woff2")}
+html.skin-zauberschule:not(#_x#_y#_z#_w),html.skin-zauberschule:not(#_x#_y#_z#_w) body{
+  --zsNight:#0D1530;--zsNight2:#141D3D;--zsCream:#E9DDB8;--zsGold:#C9A94A;
+  --field:#0D1530;--onField:#E9DDB8;--onField2:#C9A94A;--fieldFill:rgba(233,221,184,.07);
+  --bg:#0D1530;--surface:#141D3D;--surface2:#18224A;--fill:rgba(233,221,184,.07);--line:rgba(201,169,74,.2);--lineStrong:rgba(201,169,74,.45);
+  --text:#E9DDB8;--sub:#C9A94A;--sub2:#C9A94A;--muted:#C9A94A;
+  --brand:#C9A94A;--onBrand:#0D1530;--leaf:#C9A94A;--onLeaf:#0D1530;--brandSoft:rgba(201,169,74,.12);--leafSoft:rgba(201,169,74,.12);
+  --sel:#C9A94A;--onSel:#0D1530;--accent:#C9A94A;--accentSoft:rgba(201,169,74,.12);--onAccent:#0D1530;--herb:#C9A94A;--coffee:#141D3D;
+  --glass:rgba(13,21,48,.86);--glassLine:rgba(201,169,74,.2);
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Sternschrift", Georgia, serif;
+  color-scheme:dark}
+html.skin-zauberschule{background:#0D1530}
+html.skin-zauberschule:not(#_x#_y#_z#_w) body{background:#0D1530 !important;color:#E9DDB8}
+html.skin-zauberschule:not(#_x#_y#_z#_w) ::selection{background:#C9A94A;color:#0D1530}
+/* Namen: Fraunces leicht und weich, kerzenweiß */
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(.pageTitleBlock .h1,.recipeTitle,.homeFeaturedTitle,.catTileName,.sheetTitle,.continueTitle,.navCompact,.brandWordmark){font-family:"Skin Sternschrift", Georgia, serif !important;font-weight:300 !important;font-variation-settings:"SOFT" 100;letter-spacing:-.01em !important;text-transform:none !important;color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .pageTitleBlock .h1{font-size:min(clamp(2.6rem,12vw,4.8rem),12vw) !important;line-height:1 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .pageTitleBlock .h1::after{display:none !important}
+/* Beschriftungen: Jost, gesperrt, Gold */
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(.homeSectionTitle,.h2,.catGroupTitle,.ingSection,.prepTitle){font-family:"Skin Sternlabel", sans-serif !important;font-weight:500 !important;font-size:.8125rem !important;letter-spacing:.28em !important;text-transform:uppercase;color:#C9A94A !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .homeSectionTitle::after{display:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(.recipeMeta,.metaItem,.resultCount,.homeAllLink,.catTileCount,.recipeMeta .ico){font-family:"Skin Sternlabel", sans-serif !important;color:#C9A94A !important;letter-spacing:.08em !important}
+/* Felder, Knöpfe, Kapseln */
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(.searchRow,.homeQuickBtn,.navIconBtn,.recipeActBtn,.recipeBack,.profileBadge,.segmented){background:rgba(233,221,184,.07) !important;box-shadow:none !important;color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(201,169,74,.45) !important;color:#C9A94A !important;font-family:"Skin Sternlabel", sans-serif !important;letter-spacing:.08em;border-radius:999px !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#C9A94A !important;color:#0D1530 !important;box-shadow:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(.btn.action,.recipeCookBtn,.btnPrimary,.continuePlay){background:#C9A94A !important;color:#0D1530 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .segBtn{color:#C9A94A !important;background:transparent !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .segBtn.active{background:#C9A94A !important;color:#0D1530 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .bottomRail{background:rgba(13,21,48,.86) !important;border:1px solid rgba(201,169,74,.2) !important;box-shadow:0 12px 34px rgba(0,0,0,.4) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .tabItem{color:#C9A94A !important;background:transparent !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .tabItem.active{background:#C9A94A !important;color:#0D1530 !important}
+/* Flächen: kein Kartenkasten, nur leicht helleres Nachtblau */
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(.catTile,.homeEmpty,.uEmpty,.homeTimer,.continueCard,.recipeInnerCard,.notesCard,#ingredientsGroup,.listGroup.compactList,.planDayCard){background:#141D3D !important;box-shadow:none !important;border-radius:6px !important;color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.notesCard) :is(.uName,.planDayNum,.notesTitle,span,div,a:not(.btn)){color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) :is(.uQty,.ingQty,.num,.uSub){color:#C9A94A !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) .uRow + .uRow{border-top:1px solid rgba(201,169,74,.14) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) .uLead{border:1.5px solid rgba(201,169,74,.6) !important;border-radius:50% !important;background:transparent !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .uRow.checked .uLead{background:#C9A94A !important;border-color:#C9A94A !important;color:#0D1530 !important;box-shadow:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .planDayCard .planDayWd{color:#C9A94A !important;font-family:"Skin Sternlabel", sans-serif !important;letter-spacing:.2em;text-transform:uppercase}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .planDayCard.isToday{box-shadow:inset 0 0 0 1px #C9A94A !important}
+/* Rezeptkarten: Foto ohne Rahmen, Name darunter */
+html.skin-zauberschule:not(#_x#_y#_z#_w) :is(#recipeGrid .recipeCard,.recipeCard){background:transparent !important;box-shadow:none !important;padding:0 !important;border-radius:0 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeCard .rcImg{border-radius:6px !important;box-shadow:none !important;clip-path:none !important;mask:none !important;-webkit-mask:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody{padding:12px 2px 4px !important;text-align:left}
+html.skin-zauberschule:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody::before{display:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeCard .recipeTitle{font-size:1.0625rem !important;line-height:1.2 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .homeFeatured{box-shadow:none !important;background:transparent !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .homeFeatured .rcBody{position:static !important;background:transparent !important;padding:14px 0 0 !important;text-align:center}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .homeFeatured .homeFeaturedTitle{text-shadow:none !important;font-size:2rem !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .homeFeatured .recipeMeta{justify-content:center;text-shadow:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .homeFeatured .heroOverlayCat{background:rgba(13,21,48,.8) !important;color:#C9A94A !important}
+/* Kategorien-Kacheln: Name auf dem Foto */
+html.skin-zauberschule:not(#_x#_y#_z#_w) .catTile .catTileName{color:#FFFFFF !important;font-weight:400 !important;text-shadow:0 1px 10px rgba(0,0,0,.6) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .catTile .catTileCount{color:#F2E4BE !important;text-shadow:0 1px 8px rgba(0,0,0,.6) !important}
+/* Rezeptseite: Foto, darunter Name groß und leicht, Untertitel kursiv, alles mittig */
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeHeroText{position:static !important;padding:24px 16px 6px !important;text-align:center;background:#0D1530 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeHeroText .recipeName{font-family:"Skin Sternschrift", Georgia, serif !important;font-weight:300 !important;font-variation-settings:"SOFT" 100;color:#E9DDB8 !important;text-shadow:none !important;font-size:min(clamp(2.2rem,11vw,4rem),11vw) !important;line-height:1 !important;letter-spacing:-.01em !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle{color:#E9DDB8 !important;text-shadow:none !important;font:italic 300 1.25rem/1.35 "Skin Sternschrift", Georgia, serif !important;display:block !important;-webkit-line-clamp:unset !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipePageHero::after{background:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeSegWrap.isStuck{background:rgba(13,21,48,.94) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeBody ol > li::before{background:transparent !important;color:#C9A94A !important;box-shadow:inset 0 0 0 1.5px rgba(201,169,74,.6) !important;font-family:"Skin Sternlabel", sans-serif !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeBody ol > li.stepDone::before{background:#C9A94A !important;color:#0D1530 !important;box-shadow:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeBody ol > li{border-bottom-color:rgba(201,169,74,.14) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookTime{background:rgba(201,169,74,.12) !important;color:#C9A94A !important}
+/* Startseite: die Sternendecke (zauberschule.js) */
+html.skin-zauberschule:not(#_x#_y#_z#_w) body.cxHome .brandWordmark{opacity:0}
+.zsHero{background:#0D1530 !important}
+.zsHero .cxPoster{background:#0D1530 !important}
+.zsHero .cxShade{background:linear-gradient(rgba(13,21,48,.78) 0%, rgba(13,21,48,.55) 45%, rgba(13,21,48,.8) 100%) !important}
+.zsHero :is(.cxTitle,.cxDown){display:none !important}
+.zsSky{position:absolute;left:0;right:0;top:140px;bottom:0;z-index:2;will-change:opacity}
+.zsSky p{margin:0}
+.zsSky a{text-decoration:none;-webkit-tap-highlight-color:transparent}
+.zsStar{position:absolute;display:flex;align-items:center;min-height:44px;white-space:nowrap;color:#C9A94A !important;font:500 .75rem/1 "Skin Sternlabel", sans-serif;letter-spacing:.14em}
+p.zsStar{min-height:0;pointer-events:none}
+.zs1{top:calc(env(safe-area-inset-top) + 84px);left:8vw}
+.zs2{top:calc(env(safe-area-inset-top) + 116px);right:9vw}
+.zs3{top:calc(env(safe-area-inset-top) + 150px);left:14vw}
+.zs4{top:calc(env(safe-area-inset-top) + 184px);right:12vw}
+.zs9{top:calc(env(safe-area-inset-top) + 218px);left:26vw}
+.zs5{bottom:calc(env(safe-area-inset-bottom) + 210px);left:9vw}
+.zs6{bottom:calc(env(safe-area-inset-bottom) + 172px);right:11vw}
+.zs7{bottom:calc(env(safe-area-inset-bottom) + 132px);left:20vw}
+.zs8{bottom:calc(env(safe-area-inset-bottom) + 94px);right:8vw}
+.zsCenter{position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);width:min(24rem,84vw);display:flex;flex-direction:column;align-items:center;text-align:center;color:#E9DDB8}
+.zsHeute{font:500 .75rem/1 "Skin Sternlabel", sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#C9A94A}
+.zsTitle{font:300 clamp(2.6rem,13vw,5.5rem)/.98 "Skin Sternschrift", Georgia, serif;font-variation-settings:"SOFT" 100;letter-spacing:-.01em;margin:.8rem 0;color:#E9DDB8;text-wrap:balance}
+.zsSub{font:italic 300 1.25rem/1.35 "Skin Sternschrift", Georgia, serif;color:#E9DDB8}
+.zsSky a:focus-visible{outline:2px solid #C9A94A;outline-offset:4px;border-radius:4px}
+@media (hover:hover) and (pointer:fine){ .zsSky a:hover{opacity:.75} }
+@media (min-width:900px){ .zs1{left:12vw}.zs3{left:22vw}.zs5{left:16vw}.zs7{left:30vw}.zs2{right:14vw}.zs4{right:20vw}.zs6{right:18vw} }
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cxHead .cxShade{background:linear-gradient(rgba(13,21,48,.55), rgba(13,21,48,.7) 60%, #0D1530 100%) !important}
+
+/* Kochmodus: Nachtblau ohne Karten, Text kerzenweiß, alles Kleine golden, „Weiter“ golden */
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay{--cBg:#0D1530;--cCard:#141D3D;--cFill:rgba(233,221,184,.08);--cLine:rgba(201,169,74,.16);--cText:#E9DDB8;--cSub:#C9A94A;--cLeaf:#C9A94A;--cOnLeaf:#0D1530;background:#0D1530 !important;color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTop{background:#0D1530 !important;color:#E9DDB8 !important;box-shadow:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTitle{font:300 1.125rem "Skin Sternschrift", Georgia, serif !important;color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookPill{background:transparent !important;color:#C9A94A !important;font:500 .8125rem "Skin Sternlabel", sans-serif !important;letter-spacing:.14em}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .navIconBtn{background:rgba(233,221,184,.08) !important;color:#E9DDB8 !important;box-shadow:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookProgress{background:rgba(201,169,74,.18) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookProgressBar{background:#C9A94A !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTabs{background:rgba(233,221,184,.07) !important;box-shadow:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTab{color:#C9A94A !important;font-family:"Skin Sternlabel", sans-serif !important;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTab.active{background:#C9A94A !important;color:#0D1530 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStep,.prepGroup,.prepHead,.cookIngs,.cookStepIngsList,.cookNextPreview){background:transparent !important;box-shadow:none !important;border:0 !important;outline:0 !important;border-radius:0 !important;padding-left:0 !important;padding-right:0 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookStep{color:#E9DDB8 !important;font-family:"Skin Sternschrift", Georgia, serif !important;font-weight:350 !important;font-variation-settings:"SOFT" 100}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTime{background:transparent !important;color:#C9A94A !important;padding:0 .1em !important;font-weight:500 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTime .ico{color:#C9A94A !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStepIngsLabel,.cookIngSection,.prepGroupTitle,.cookIngsHead){color:#C9A94A !important;font:500 .6875rem "Skin Sternlabel", sans-serif !important;letter-spacing:.28em !important;text-transform:uppercase;background:transparent !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .prepTitle{font:300 2rem "Skin Sternschrift", Georgia, serif !important;letter-spacing:-.01em !important;text-transform:none !important;color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .prepCount{color:#C9A94A !important;font-family:"Skin Sternlabel", sans-serif !important;letter-spacing:.1em}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay :is(.prepRow,.cookIngRow,.cookStepIng){color:#E9DDB8 !important;background:transparent !important;padding-left:0 !important;padding-right:0 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .prepRow + .prepRow{box-shadow:inset 0 1px 0 rgba(201,169,74,.14) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .prepBox{box-shadow:inset 0 0 0 1.5px rgba(201,169,74,.7) !important;color:transparent !important;background:transparent !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .prepRow.isDone .prepBox{background:#C9A94A !important;box-shadow:none !important;color:#0D1530 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .prepRow.isDone .prepText{color:rgba(233,221,184,.6) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay :is(.cookIngQty,.cookStepIngQty){color:#C9A94A !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookIngRow.isStep{background:rgba(201,169,74,.1) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookChk{border-color:rgba(201,169,74,.7) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookChk:checked{background:#C9A94A !important;border-color:#C9A94A !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookChk::after{color:#0D1530 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookNav{background:linear-gradient(rgba(13,21,48,0), #0D1530 30%) !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn{background:rgba(233,221,184,.08) !important;color:#E9DDB8 !important;box-shadow:none !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn.primary{background:#C9A94A !important;color:#0D1530 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone){background:#141D3D !important;color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerLabel{color:#C9A94A !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerBtn{background:rgba(233,221,184,.08) !important;color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBar{background:#C9A94A !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTimer.isDone{background:#C9A94A !important;color:#0D1530 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeBack{background:rgba(13,21,48,.62) !important;color:#E9DDB8 !important}
