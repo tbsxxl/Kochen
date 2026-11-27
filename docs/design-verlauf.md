@@ -445,3 +445,8 @@ Ersetzt durch eine ruhige Karte „Für diesen Schritt“ wie die Zutatenliste; 
 Auch die Überschrift in Fraunces passte dem Besitzer nicht zum Stil → Systemschrift, fett. Wunsch „Zutaten realistischer“: statt flacher
 Symbole jetzt viele unregelmäßige Stücke mit Licht-Verlauf und leichter Körnung (Zwiebelstreifen, Tomatenwürfel mit Kernen, Chiliringe,
 Pilzscheiben, Spiegelei, Lachsfilet mit Fettlinien …), Soßen mit Verlauf.
+
+Besitzer: „bei Tiramisu haben die Bilder nichts damit zu tun“ (Schneidebrett als Ersatz, Mascarpone als geriebener Käse, Kakao als
+Schokostücke). Alle 76 Rezepte Schritt für Schritt durchgesehen (`tools/cook-scenes.js`) und die Erkennung umgebaut: Gerät bleibt
+vom vorigen Schritt, Inhalt sammelt sich, Creme als Schicht, Biskuits in Reihen, eigene Zeichnungen für Creme, Biskuit, Mozzarella,
+Blumenkohl, Pasten.

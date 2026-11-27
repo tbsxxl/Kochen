@@ -346,7 +346,13 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   Überschrift, Gerät, Hitze, Zeit und Bild erkennt `assets/cook-scene.js` (`KOCHBUCH_COOKSCENE.analyze()/scene()`) aus dem Schritttext –
   keine Lookbehind-Regexe (alte iOS). Zutaten möglichst echt gezeichnet: unregelmäßige Formen (`blob()`), viele kleine Stücke (`pile()`),
   Licht-Verläufe je Zutat (`g…` in `DEFS`), leichte Körnung (`ckGrain`, ein Filter über alle Zutaten); Ansicht aller Zutaten zum Prüfen:
-  `KOCHBUCH_COOKSCENE.scene("board", [{item:"Zwiebel"}])` je Zutat. Ab 768 px Raster mit Text links und Bild/Bon rechts, ab 1100 px drei Spalten.
+  `KOCHBUCH_COOKSCENE.scene("board", [{item:"Zwiebel"}])` je Zutat.
+  Gerät: ausdrücklich genannte Geräte („in einer Pfanne“) zählen vor Tätigkeiten; nennt ein Schritt keins oder nur schwache Tätigkeiten
+  (rühren, erhitzen, braten), bleibt das Gerät des vorigen Schritts (Topf/Pfanne/Wok; „backen“ nach der Auflaufform bleibt die Form); nie
+  ein Schneidebrett als Ersatz, ohne Gerät kein Bild. Im Bild liegt alles, was in den letzten Schritten in dasselbe Gerät kam. Creme in
+  Form/Schüssel wird zur Schicht (Kakao bestäubt sie, Biskuits liegen in Reihen). Schuss Likör/Aroma wird nicht gezeichnet.
+  **Prüfen (Wunsch des Besitzers nach Tiramisu):** `node tools/cook-scenes.js ausgabe.txt [rezept]` listet je Schritt Überschrift,
+  Gerät und Zutaten – nach Änderungen an cook-scene.js und bei neuen Rezepten durchsehen. Ab 768 px Raster mit Text links und Bild/Bon rechts, ab 1100 px drei Spalten.
 - Rezeptliste (Standard seit Nov. 2026: untereinander, Abschnitt 33); als Raster mit 2 Spalten (Abschnitt 12, quadratische Fotos, nur
   Zeit statt Zeit + Portionen) unter „Mehr“ → „Rezeptliste“ umschaltbar (`kochbuch.ui.listView`,
   Klasse `listCards` auf `<html>`, schon im Kopf gesetzt). Kategorien-Seite = Kacheln (Foto, Name, Anzahl; jedes Foto nur einmal), Antippen →

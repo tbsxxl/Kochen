@@ -629,9 +629,22 @@ const cookOverlay = $("#cookOverlay");
     const text = steps[stepIdx] || "", total = steps.length || 1;
     ckInfo = CS.analyze(text);
     const hits = ckStepIngs(text);
-    // Bild: keine neuen Zutaten → was vom vorigen Schritt schon im Gerät liegt
-    let shown = hits;
-    for(let k = stepIdx - 1; !shown.length && k >= 0 && k >= stepIdx - 2; k--) shown = ckStepIngs(steps[k] || "");
+    // Gerät: nennt der Schritt keins, arbeitet man im vorigen weiter („in die Form legen“ → „darauf verteilen“ → „kühlen“).
+    // Inhalt = was in diesem Gerät seit den letzten Schritten liegt (neueste zuerst), höchstens 7 Zutaten.
+    const kinds = []; let lastK = null, lastL = "";
+    for(let k = 0; k <= stepIdx; k++){
+      const a = k === stepIdx ? ckInfo : CS.analyze(steps[k] || "");
+      // schwache Angabe (rühren, erhitzen, braten ohne Gerät) → im vorigen Topf/der vorigen Pfanne weiter; „backen“ nach der Auflaufform bleibt die Form
+      // „backen“ ohne Blech nach Pfanne/Topf/Form: dasselbe Gefäß wandert in den Ofen
+      const keep = lastK && ((!a.strong && CS.STOVE.has(lastK)) || (a.kind === "tray" && !a.noun && lastK === "dish"));
+      if(a.kind && !keep){ lastK = a.kind; lastL = a.gear; }
+      kinds.push(lastK);
+    }
+    const kind = kinds[stepIdx], gearLabel = lastL;
+    let shown = hits.slice();
+    for(let k = stepIdx - 1; kind && k >= 0 && k >= stepIdx - 4 && kinds[k] === kind && shown.length < 7; k--){
+      for(const i of ckStepIngs(steps[k] || "")) if(shown.length < 7 && !shown.some((x)=> x.item === i.item)) shown.push(i);
+    }
     // „Soße: …“ – die Zwischenüberschrift steht schon groß darüber
     if(ckInfo.body && ckInfo.body !== text) cookStepText.innerHTML = T ? T.linkify(ckInfo.body) : escHtml(ckInfo.body);
     const dots = steps.map((_, i)=> `<button type="button" class="ckDot${i < stepIdx ? " isDone" : ""}" data-step="${i}"${i === stepIdx ? ' aria-current="step"' : ""} aria-label="Schritt ${i + 1}">${i + 1}</button>`).join("");
@@ -639,8 +652,8 @@ const cookOverlay = $("#cookOverlay");
     ckHead.innerHTML = `<p class="ckEyebrow">Schritt ${stepIdx + 1} von ${total}</p><div class="ckDots" role="group" aria-label="Schritte">${dots}</div><h2 class="ckTitle">${escHtml(ckInfo.title)}</h2>`;
     ckHead.querySelector('[aria-current="step"]')?.scrollIntoView({ block: "nearest", inline: "center" });
     ckRenderTimer();
-    ckStage.hidden = false;
-    ckStage.innerHTML = CS.scene(ckInfo.kind, shown) + `<figcaption class="ckCap"><i aria-hidden="true"></i>${escHtml(ckInfo.gear)}${ckInfo.heat ? " · " + escHtml(ckInfo.heat) : ""}</figcaption>`;
+    ckStage.hidden = !kind;
+    ckStage.innerHTML = kind ? CS.scene(kind, shown) + `<figcaption class="ckCap"><i aria-hidden="true"></i>${escHtml(gearLabel)}${ckInfo.heat && (CS.HEAT.has(kind) || kind === "dish") ? " · " + escHtml(ckInfo.heat) : ""}</figcaption>` : "";
     const sv = currentServings();
     // Zutaten dieses Schritts als ruhige Liste (wie die Zutatenliste der Rezeptseite); ohne Zutaten keine Karte
     ckBonWrap.hidden = !hits.length;
