@@ -178,3 +178,113 @@ html.skin-nordwall:not(#_x#_y#_z) #ingredientsGroup{padding:6px 14px !important}
 html.skin-nordwall:not(#_x#_y#_z) .chipMainCat{background:var(--brass) !important;color:#14100A !important}
 html.skin-nordwall:not(#_x#_y#_z) .reweChip{color:#E8C98A !important}
 html.skin-nordwall:not(#_x#_y#_z) :is(.recipeTitle,.homeFeaturedTitle){hyphens:manual !important;-webkit-hyphens:manual !important}
+
+/* ==========================================================================================================================
+   Dez. 2026, fünfte Fassung: Richtung D2 „Karte des Reichs“ (bencium-innovative, vom Besitzer festgelegt; docs/skins/nordwall-d2.md).
+   Pergament #E2D3B2 statt Schiefer, vier Tinten mit festen Aufgaben: Tinte #2B241B (Text), Rot #8E2219 (Gerichte = Hauptstädte,
+   Kochen, Aktives), Waldgrün #3B5536 (Kategorien = Reiche), Meerblau #2E5468 (Zahlen, Daten, Zeiten, kursive Beschriftungen).
+   Cinzel in weit gesperrten Versalien für Namen, EB Garamond kursiv für Beschriftungen, Systemschrift für Lesetext.
+   Keine Karten-Flächen, keine Rahmen um Fotos; Gruppen über Abstand. Kochmodus bleibt wie er ist (Wunsch des Besitzers).
+   ========================================================================================================================== */
+html.skin-nordwall:not(#_x#_y#_z#_w),html.skin-nordwall:not(#_x#_y#_z#_w) body{
+  --nwParch:#E2D3B2;--nwParch2:#EBDFC4;--nwInk:#2B241B;--nwRed:#8E2219;--nwGreen:#3B5536;--nwSea:#2E5468;--nwSub:#5E4F3A;
+  --field:#E2D3B2;--onField:#2B241B;--onField2:#5E4F3A;--fieldFill:rgba(43,36,27,.07);
+  --bg:#E2D3B2;--surface:#EBDFC4;--surface2:#E6D8BB;--fill:rgba(43,36,27,.07);--line:rgba(43,36,27,.16);--lineStrong:rgba(43,36,27,.4);
+  --text:#2B241B;--sub:#5E4F3A;--sub2:#5E4F3A;--muted:#5E4F3A;
+  --brand:#8E2219;--onBrand:#FFFFFF;--leaf:#8E2219;--onLeaf:#FFFFFF;--brandSoft:rgba(142,34,25,.1);--leafSoft:rgba(142,34,25,.1);
+  --sel:#2B241B;--onSel:#E2D3B2;--accent:#2E5468;--accentSoft:rgba(46,84,104,.1);--onAccent:#FFFFFF;--herb:#3B5536;--coffee:#EBDFC4;
+  --glass:rgba(235,223,196,.9);--glassLine:rgba(43,36,27,.16);
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Nordwall", Georgia, serif;
+  color-scheme:light}
+html.skin-nordwall{background:#E2D3B2}
+html.skin-nordwall:not(#_x#_y#_z#_w) body{background:#E2D3B2 !important;color:#2B241B}
+html.skin-nordwall:not(#_x#_y#_z#_w) ::selection{background:#2B241B;color:#E2D3B2}
+/* Namen: Cinzel, weit gesperrt; Seitentitel in Tinte, Gerichte in Rot */
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.pageTitleBlock .h1,.homeSectionTitle,.h2,.sheetTitle,.catGroupTitle,.prepTitle,.continueTitle,.ingSection,.navCompact){font-family:var(--fontDisplay) !important;font-weight:700 !important;text-transform:uppercase;letter-spacing:.16em !important;color:#2B241B !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .pageTitleBlock .h1{font-size:min(clamp(1.9rem,8.5vw,3.6rem),8.5vw) !important;letter-spacing:.18em !important;margin-right:-.18em}
+html.skin-nordwall:not(#_x#_y#_z#_w) .pageTitleBlock .h1::after{display:none !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.homeSectionTitle,.h2){font-size:.875rem !important;letter-spacing:.32em !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .homeSectionTitle::after{display:none !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.recipeTitle,.homeFeaturedTitle,.catTileName){font-family:var(--fontDisplay) !important;font-weight:800 !important;text-transform:uppercase;letter-spacing:.12em !important;color:#8E2219 !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.recipeMeta,.metaItem,.resultCount,.homeAllLink,.catTileCount){font-family:"Skin Garamond", Georgia, serif !important;font-style:italic;font-weight:500 !important;color:#2E5468 !important;letter-spacing:0 !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.recipeMeta,.metaItem) .ico{color:#2E5468 !important}
+/* Felder, Knöpfe, Kapseln: Tinte auf Pergament, Kategorien in Waldgrün, Aktives in Rot */
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.searchRow,.homeQuickBtn,.navIconBtn,.recipeActBtn,.recipeBack,.profileBadge,.segmented){background:rgba(43,36,27,.07) !important;box-shadow:none !important;color:#2B241B !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.searchRow input,.searchInput)::placeholder{color:#5E4F3A !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(43,36,27,.28) !important;color:#3B5536 !important;border-radius:999px !important;font-family:var(--fontDisplay) !important;text-transform:uppercase;letter-spacing:.12em;font-weight:700 !important;font-size:.75rem !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#3B5536 !important;color:#F4ECDA !important;box-shadow:none !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.btn.action,.recipeCookBtn,.btnPrimary,.continuePlay){background:#8E2219 !important;color:#FFFFFF !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .segBtn{color:#5E4F3A !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .segBtn.active{background:#2B241B !important;color:#F4ECDA !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .bottomRail{background:rgba(235,223,196,.9) !important;border:1px solid rgba(43,36,27,.14) !important;box-shadow:0 10px 30px rgba(60,40,20,.18) !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .tabItem{color:#5E4F3A !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .tabItem.active{background:#8E2219 !important;color:#FFFFFF !important}
+/* Flächen: keine Karten mehr, nur Pergament und Abstand */
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(.catTile,.homeEmpty,.uEmpty,.homeTimer,.continueCard,.recipeInnerCard,.notesCard,#ingredientsGroup,.listGroup.compactList,.planDayCard){background:#EBDFC4 !important;color:#2B241B !important;box-shadow:none !important;border-radius:4px !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.notesCard) :is(.uName,.num,.uQty,.ingQty,.uSub,.planDayWd,.planDayNum,.notesTitle,.notesHint,span,div,a:not(.btn)){color:#2B241B !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) :is(.uQty,.ingQty,.num){color:#2E5468 !important;font-variant-numeric:tabular-nums}
+html.skin-nordwall:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) .uRow + .uRow{border-top:1px solid rgba(43,36,27,.12) !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .uRow.checked .uLead{background:#8E2219 !important;border-color:#8E2219 !important;color:#FFFFFF !important;box-shadow:none}
+html.skin-nordwall:not(#_x#_y#_z#_w) .ingSection{color:#3B5536 !important;font-size:.75rem !important;letter-spacing:.28em !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .planDayCard .planDayWd{color:#2E5468 !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .planDayCard.isToday{box-shadow:inset 0 0 0 2px #8E2219 !important}
+/* Rezeptliste: Foto ohne Rahmen, darunter Name in rotem Cinzel und Zeit in kursivem Blau, Nummer als Breitengrad */
+html.skin-nordwall:not(#_x#_y#_z#_w) #recipeGrid .recipeCard,html.skin-nordwall:not(#_x#_y#_z#_w) .recipeCard{background:transparent !important;box-shadow:none !important;padding:0 !important;border-radius:0 !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipeCard .rcImg{border-radius:2px !important;box-shadow:none !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody{text-align:center;padding:12px 4px 6px !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody::before{font:500 italic .875rem/1 "Skin Garamond", Georgia, serif !important;letter-spacing:0 !important;color:#2E5468 !important;margin-bottom:6px}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipeCard .recipeTitle{font-size:.875rem !important;line-height:1.25 !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) #recipeGrid{gap:28px 14px !important}
+/* Heute-Karte weiter unten: Foto groß, Name darunter wie auf der Karte */
+html.skin-nordwall:not(#_x#_y#_z#_w) .homeFeatured{box-shadow:none !important;border-radius:2px !important;background:transparent !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .homeFeatured .rcBody{position:static !important;background:transparent !important;padding:14px 0 0 !important;text-align:center}
+html.skin-nordwall:not(#_x#_y#_z#_w) .homeFeatured :is(.homeFeaturedTitle){color:#8E2219 !important;text-shadow:none !important;font-size:1.5rem !important;letter-spacing:.16em !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .homeFeatured .recipeMeta{color:#2E5468 !important;text-shadow:none !important;justify-content:center}
+html.skin-nordwall:not(#_x#_y#_z#_w) .homeFeatured .heroOverlayCat{background:rgba(235,223,196,.92) !important;color:#3B5536 !important;font-family:var(--fontDisplay);text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+/* Rezeptseite: Foto über die Breite, darunter Name in rotem Cinzel, Untertitel kursiv, alles mittig wie die Hauptstadt */
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipePageHero::after{background:linear-gradient(transparent 55%, rgba(226,211,178,.0)) !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipeHeroText{position:static !important;padding:22px 16px 6px !important;text-align:center;background:#E2D3B2 !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipeHeroText .recipeName{color:#8E2219 !important;text-shadow:none !important;font-family:var(--fontDisplay) !important;font-weight:900 !important;text-transform:uppercase;letter-spacing:.18em !important;margin-right:-.18em;font-size:min(clamp(1.9rem,9vw,3.6rem),9vw) !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle{color:#2B241B !important;text-shadow:none !important;font:italic 500 1.1875rem/1.35 "Skin Garamond", Georgia, serif !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipeSegWrap.isStuck{background:rgba(226,211,178,.94) !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipeBody ol > li::before{color:#2E5468 !important;box-shadow:inset 0 0 0 1.5px #2E5468 !important;background:transparent !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipeBody ol > li.stepDone::before{background-color:#8E2219 !important;box-shadow:none !important;color:#FFFFFF !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipeBody ol > li{border-bottom-color:rgba(43,36,27,.12) !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .cookTime{background:rgba(46,84,104,.12) !important;color:#2E5468 !important}
+/* Startseite: die Landkarte (nordwall.js) */
+html.skin-nordwall:not(#_x#_y#_z#_w) body.cxHome .brandWordmark{opacity:0}
+html.skin-nordwall:not(#_x#_y#_z#_w) body.cxHome .profileBadge{background:rgba(43,36,27,.08) !important;color:#2B241B !important;box-shadow:none !important}
+.nwHero{background:#E2D3B2 !important}
+.nwHero .cxPoster{background:#E2D3B2 !important}
+.nwHero .cxShade{background:linear-gradient(rgba(226,211,178,.94) 0%, rgba(226,211,178,.9) 30%, rgba(226,211,178,.78) 55%, rgba(226,211,178,.86) 100%) !important}
+.nwHero :is(.cxTitle,.cxDown){display:none !important}
+.nwMap{position:absolute;left:0;right:0;top:140px;bottom:0;z-index:2;color:#2B241B;font-family:"Skin Nordwall", Georgia, serif;will-change:opacity}
+.nwMap a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.nwMap p{margin:0}
+.nwName{position:absolute;top:calc(env(safe-area-inset-top) + 30px);left:0;right:0;text-align:center;font-size:.75rem;font-weight:700;letter-spacing:.6em;padding-left:.6em;text-transform:uppercase;pointer-events:none}
+.nwDate{position:absolute;top:calc(env(safe-area-inset-top) + 52px);left:0;right:0;text-align:center;font:500 italic 1rem/1.2 "Skin Garamond", Georgia, serif;color:#2E5468;pointer-events:none}
+.nwCat{position:absolute;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;text-transform:uppercase;white-space:nowrap;color:#3B5536 !important;font-weight:700}
+.nwCat i{font:500 italic 1rem/1 "Skin Garamond", Georgia, serif;letter-spacing:0;color:#2E5468;text-transform:none}
+.nwC1,.nwC4{left:0;right:0;flex-direction:column;gap:4px;font-size:1.0625rem;letter-spacing:.7em;padding-left:.7em}
+.nwC1{top:max(17svh, calc(env(safe-area-inset-top) + 96px))}
+.nwC4{bottom:calc(env(safe-area-inset-bottom) + 182px)}
+.nwC2,.nwC3{top:50%;writing-mode:vertical-rl;font-size:.8125rem;letter-spacing:.5em;gap:.6rem;padding:.5em 0 0}
+.nwC2{right:max(8px, env(safe-area-inset-right));transform:translateY(-50%)}
+.nwC3{left:max(8px, env(safe-area-inset-left));transform:translateY(-50%) rotate(180deg)}
+.nwCapital{position:absolute;left:50%;top:50%;transform:translate(-50%,-56%);width:min(26rem,calc(100vw - 112px));display:flex;flex-direction:column;align-items:center;text-align:center}
+.nwHeute{font:500 italic 1.125rem/1.2 "Skin Garamond", Georgia, serif;color:#2E5468}
+.nwTitle{font-weight:900;font-size:clamp(2.1rem,10.5vw,4.6rem);line-height:1.02;letter-spacing:.16em;margin:.45rem -.16em .55rem 0;color:#8E2219;text-transform:uppercase;max-width:100%;overflow:hidden;hyphens:manual;-webkit-hyphens:manual;text-wrap:balance}
+.nwSub{font:500 italic 1.1875rem/1.35 "Skin Garamond", Georgia, serif;color:#2B241B}
+.nwMeta{font-size:.6875rem;font-weight:700;letter-spacing:.4em;margin:.9rem -.4em 0 0;text-transform:uppercase}
+.nwKat{position:absolute;left:0;right:0;margin:0 auto;width:max-content;bottom:calc(env(safe-area-inset-bottom) + 136px);min-height:44px;display:flex;align-items:center;font:500 italic 1rem/1 "Skin Garamond", Georgia, serif;color:#3B5536 !important}
+.nwAll{position:absolute;left:0;right:0;margin:0 auto;width:max-content;bottom:calc(env(safe-area-inset-bottom) + 96px);min-height:44px;display:flex;align-items:center;font-size:.6875rem;font-weight:700;letter-spacing:.55em;padding-left:.55em;text-transform:uppercase}
+.nwMap a:focus-visible{outline:2px solid #8E2219;outline-offset:4px;border-radius:2px}
+@media (hover:hover) and (pointer:fine){ .nwMap a:hover{opacity:.72} }
+@media (min-width:900px){ .nwC2{right:6vw} .nwC3{left:6vw} }
+/* Seitenköpfe der Unterseiten: 3D-Karte unter Pergament-Schleier statt dunklem Verlauf */
+html.skin-nordwall:not(#_x#_y#_z#_w) .cxHead .cxPoster{background:#E2D3B2 !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .cxHead .cxShade{background:linear-gradient(rgba(226,211,178,.72), rgba(226,211,178,.86) 60%, #E2D3B2 100%) !important}
+/* Kategorien-Kacheln: Name liegt auf dem Foto → hell und mit ruhigem Schatten, Zahl kursiv */
+html.skin-nordwall:not(#_x#_y#_z#_w) .catTile{background:#2B241B !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .catTile .catTileName{color:#FFFFFF !important;text-shadow:0 1px 10px rgba(0,0,0,.55) !important;font-size:.875rem !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .catTile .catTileCount{color:#F4ECDA !important;text-shadow:0 1px 8px rgba(0,0,0,.55) !important}

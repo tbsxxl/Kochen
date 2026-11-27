@@ -20,6 +20,8 @@ layout: default
 </script>
 
 <script type="application/json" id="homeCats">{{ site.data.categories | jsonify }}</script>
+<!-- Anzahl Rezepte je Kategorie (Haupt- und weitere Kategorien), z. B. für die Landkarte in Nordwall -->
+<script type="application/json" id="homeCatCount" data-total="{{ site.recipes | size }}">{ {%- for c in site.data.categories -%}{%- assign _n = site.recipes | where_exp: "r", "r.category == c or r.categories contains c" | size -%}{{ c | jsonify }}:{{ _n }}{% unless forloop.last %},{% endunless %}{%- endfor -%} }</script>
 <!-- Rezepte mit Foto für Skins mit Bildergalerie im Kopf (Blauraum): Titel, Adresse, kleines Bild -->
 <script type="application/json" id="homeRecipes">[{% for r in site.recipes %}{% if r.image %}{% assign _stem = r.image | replace: '.jpg', '' | replace: '.jpeg', '' | replace: '.png', '' %}{% assign _small = _stem | append: '-480.webp' %}{% assign _hit = site.static_files | where: 'path', _small | first %}{% capture _z %}{{ r.time }}{% if r.servings %} · {{ r.servings }} Portionen{% endif %}{% endcapture %}{"t":{{ r.title | jsonify }},"c":{{ r.category | default: "" | jsonify }},"s":{{ r.subtitle | default: "" | jsonify }},"z":{{ _z | strip | jsonify }},"u":{{ r.url | relative_url | jsonify }},"i":{% if _hit %}{{ _small | relative_url | append: '?v=' | append: site.image_version | jsonify }}{% else %}{{ r.image | relative_url | jsonify }}{% endif %}},{% endif %}{% endfor %}null]</script>
 

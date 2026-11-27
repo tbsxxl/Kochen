@@ -463,3 +463,4 @@ variabel (Überschrift 800, Timer-Zahl 200), keine Karten/Knopf-Flächen, Zurüc
 „heller Kochmodus mit grünem Kopf“ (Abschnitt 41, „ganz grün“ damals nicht gewählt) – A2 ist die neuere, ausdrückliche Festlegung.
 Danach auch Vorbereiten und Zutaten-Reiter ohne Karten im A2-Stil (Besitzer: „Ja auch vorbereiten“).
 Screenshot des Besitzers: Timer doppelt (Leiste + groß) und Knöpfe unter der Leiste abgeschnitten → Timer des Schritts nur groß, Knöpfe neben der Zahl.
+Nordwall mit bencium-innovative neu (Besitzer: ein Skin nach dem anderen, Thema bleibt): A–J → „d, e, g“ → D2/E2/G2 → „d2 festlegen“ (Karte des Reichs, Pergament, vier Tinten). Kochmodus der Skins bleibt eigen.
