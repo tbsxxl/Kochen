@@ -102,7 +102,7 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   `(hover:hover) and (pointer:fine)`. Bewegung nur über `transform`/`opacity` mit den Kurven-Tokens; „Bewegung reduzieren“ lässt
   Bewegung weg. Rezeptkarten gibt es zweimal (`_includes/recipe-card.html`, `assets/cards.js`) – Änderungen in beiden.
   Blätter sind echte Dialoge (`bindDialogs()`), lassen sich wegziehen (`bindSheetDrag()`).
-- **Skins:** „Mehr“ → „Skin“ (`kochbuch.ui.skin`, pro Gerät). 20 Stück (dazu Boxengasse, Bildband und die sechs Effekt-Skins, siehe unten): Standard, Retro (`html.retro`, bleibt in `styles.css`),
+- **Skins:** „Mehr“ → „Skin“ (`kochbuch.ui.skin`, pro Gerät). 21 Stück (dazu Brandbrief, Boxengasse, Bildband und die sechs Effekt-Skins, siehe unten): Standard, Retro (`html.retro`, bleibt in `styles.css`),
   Terminal, Diner, Bauhaus (diese fünf „sollen gleich bleiben“) und sieben Serien-Welten mit eigenen Namen: Nordwall, Zauberschule,
   Jahr 3000, Zwei Städte, Die Insel, Akte, Brigade. **Keine Logos, Figuren, Namen, Zitate oder Original-Schriften der Serien;
   Fotos unverfälscht; Tab-Symbole überall gleich; jedes Detail soll beim Kochen nützen.**
@@ -254,7 +254,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Zauberschule, fünfte Fassung (Dez. 2026, Richtung C „Sternendecke“, `docs/skins/zauberschule-c.md`, letzter Block in `zauberschule.css`):**
     Nachtblau `#0D1530`, nur Kerzenweiß `#E9DDB8` + Gold `#C9A94A`, Fraunces 300 weich + Jost gesperrt; Startseite = goldene „Sterne“ (`.zsSky`:
     Name, Datum, Kategorien, Zeit, Links) um das Gericht des Tages; 3D-Halle unter Schleier; Kochmodus ohne Karten, Weiter golden.
-    Vorgemerkt: Entwurf I der Zauberschule-Runde (Brief, der schreit: Rot, Archivo schmal versal) soll ein zusätzlicher Skin werden.
+    **Brandbrief (neuer Skin, Dez. 2026, Entwurf I der Zauberschule-Runde, `docs/skins/brandbrief.md`, `brandbrief.css/.js`):** Signalrot
+    `#E2473A`, eine Schriftfarbe `#120606`, Archivo schmal 800 versal; Startseite `.bbrHero` mit riesigem Tagesgericht, das aus dem Bild läuft;
+    schwarze Linien statt Karten, Aktives schwarz mit roter Schrift; in `PURE` und `FX_JS`, kein Logo.
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.

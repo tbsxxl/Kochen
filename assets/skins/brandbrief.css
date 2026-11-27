@@ -1,0 +1,125 @@
+/* Skin „brandbrief“ – wird nur geladen, wenn dieser Skin aktiv ist (Dez. 2026, neu; docs/skins/brandbrief.md).
+   Ein Brief, der schreit: Signalrot #E2473A, eine Schriftfarbe #120606 (Kontrast 4,9 : 1), Archivo schmal (wdth 62) und fett in Versalien
+   für alles Große, Archivo normal breit für Lesetext. Keine Fotos-Rahmen, keine Kartenflächen; Trennung über schwarze Linien (2 px).
+   Antippbares Aktives = schwarze Fläche mit roter Schrift. Neue Regeln ans Ende. */
+@font-face{font-family:"Skin Brief";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;src:url("../fonts/archivo.woff2") format("woff2")}
+
+html.skin-brandbrief:not(#_x#_y),html.skin-brandbrief:not(#_x#_y) body{
+  --bbRed:#E2473A;--bbInk:#120606;
+  --field:#E2473A;--onField:#120606;--onField2:#120606;--fieldFill:rgba(18,6,6,.1);
+  --bg:#E2473A;--surface:#E2473A;--surface2:#D94336;--fill:rgba(18,6,6,.1);--line:#120606;--lineStrong:#120606;
+  --text:#120606;--sub:#120606;--sub2:#120606;--muted:#120606;
+  --brand:#120606;--onBrand:#E2473A;--leaf:#120606;--onLeaf:#E2473A;--brandSoft:rgba(18,6,6,.1);--leafSoft:rgba(18,6,6,.1);
+  --sel:#120606;--onSel:#E2473A;--accent:#120606;--accentSoft:rgba(18,6,6,.1);--onAccent:#E2473A;--herb:#120606;--coffee:#E2473A;
+  --glass:#E2473A;--glassLine:#120606;--glassShadow:none;
+  --fontUi:"Skin Brief", -apple-system, "Inter", sans-serif;--fontDisplay:"Skin Brief", -apple-system, "Inter", sans-serif;
+  color-scheme:light}
+html.skin-brandbrief{background:#E2473A}
+html.skin-brandbrief:not(#_x#_y) body{background:#E2473A !important;color:#120606 !important;font-family:"Skin Brief", -apple-system, sans-serif}
+html.skin-brandbrief:not(#_x#_y) body .pageContent{background:transparent !important;box-shadow:none !important}
+html.skin-brandbrief:not(#_x#_y) .skinScene{display:none !important}
+html.skin-brandbrief:not(#_x#_y) ::selection{background:#120606;color:#E2473A}
+html.skin-brandbrief:not(#_x#_y) :is(.logoLight,.logoDark,.logoRetro,.logoSkin){display:none !important}
+/* alles Große: schmal, fett, versal */
+html.skin-brandbrief:not(#_x#_y) :is(.pageTitleBlock .h1,.recipeHeroText .recipeName,.homeSectionTitle,.h2,.sheetTitle,.recipeTitle,.catTileName,.navCompact,.catGroupTitle,.prepTitle,.continueTitle,.brandWordmark,.ingSection,.homeFeaturedTitle,.cookTitle){font-family:"Skin Brief", sans-serif !important;font-weight:800 !important;font-stretch:62% !important;text-transform:uppercase;letter-spacing:-.01em !important;color:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) .pageTitleBlock .h1{font-size:min(clamp(3.4rem,19vw,9rem),19vw) !important;line-height:.86 !important}
+html.skin-brandbrief:not(#_x#_y) :is(.homeSectionTitle,.h2){font-size:2.25rem !important;line-height:.9 !important}
+html.skin-brandbrief:not(#_x#_y) :is(.recipeMeta,.metaItem,.resultCount,.homeAllLink,.catTileCount,.pageTitleBlock .sub,.homeGreetingSub){color:#120606 !important;font-weight:600 !important;text-transform:uppercase;letter-spacing:.04em}
+html.skin-brandbrief:not(#_x#_y) .recipeMeta .ico{color:#120606 !important}
+/* Felder und Knöpfe: schwarze Linien, Aktives schwarz mit roter Schrift */
+html.skin-brandbrief:not(#_x#_y) :is(.searchRow,.homeQuickBtn,.recipeActBtn,.segmented,.profileBadge,.navIconBtn,.recipeBack){background:transparent !important;box-shadow:inset 0 0 0 2px #120606 !important;color:#120606 !important;border-radius:999px !important}
+html.skin-brandbrief:not(#_x#_y) .searchRow input{color:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) .searchRow input::placeholder{color:#120606 !important;opacity:.85}
+html.skin-brandbrief:not(#_x#_y) .recipeBack{background:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 2px #120606 !important;color:#120606 !important;font-weight:700 !important;text-transform:uppercase;letter-spacing:.02em}
+html.skin-brandbrief:not(#_x#_y) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat,.segBtn.active,.btn.action,.recipeCookBtn,.btnPrimary,.continuePlay){background:#120606 !important;color:#E2473A !important;box-shadow:none !important}
+html.skin-brandbrief:not(#_x#_y) .segBtn{color:#120606 !important;background:transparent !important;font-weight:700 !important;text-transform:uppercase}
+html.skin-brandbrief:not(#_x#_y) .bottomRail{background:#E2473A !important;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:inset 0 0 0 2px #120606 !important;border:0 !important}
+html.skin-brandbrief:not(#_x#_y) .tabItem{color:#120606 !important;background:transparent !important;font-weight:700}
+html.skin-brandbrief:not(#_x#_y) .tabItem.active{background:#120606 !important;color:#E2473A !important}
+/* Flächen: keine Karten, schwarze Linien */
+html.skin-brandbrief:not(#_x#_y) :is(.recipeCard,.catTile,.homeEmpty,.uEmpty,.homeTimer,.continueCard,.recipeInnerCard,.notesCard,#ingredientsGroup,.listGroup.compactList,.planDayCard,.listGroup,.recipePageCard){background:transparent !important;box-shadow:none !important;border-radius:0 !important;color:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.homeEmpty,.uEmpty,.notesCard,.continueCard,.homeTimer){border-top:2px solid #120606 !important;border-bottom:2px solid #120606 !important}
+html.skin-brandbrief:not(#_x#_y) :is(#ingredientsGroup,.listGroup,.planDayCard,.notesCard,.homeEmpty,.uEmpty,.continueCard,.homeTimer) :is(span,div,a:not(.btn),p,b,strong,.uName,.uQty,.ingQty,.num,.uSub){color:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) .uRow + .uRow{border-top:1px solid #120606 !important}
+html.skin-brandbrief:not(#_x#_y) .uLead{border:2px solid #120606 !important;background:transparent !important;border-radius:50% !important}
+html.skin-brandbrief:not(#_x#_y) .uRow.checked .uLead{background:#120606 !important;color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .recipeCard .rcImg,html.skin-brandbrief:not(#_x#_y) .homeFeatured .rcImg{border-radius:0 !important;box-shadow:none !important}
+html.skin-brandbrief:not(#_x#_y) .recipeCard .rcBody{padding:10px 0 4px !important}
+html.skin-brandbrief:not(#_x#_y) .recipeCard .recipeTitle{font-size:1.625rem !important;line-height:.92 !important}
+html.skin-brandbrief:not(#_x#_y) .homeFeatured .rcBody{position:static !important;background:transparent !important;padding:12px 0 0 !important}
+html.skin-brandbrief:not(#_x#_y) .homeFeatured :is(.homeFeaturedTitle,.recipeMeta){text-shadow:none !important;color:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) .homeFeatured .homeFeaturedTitle{font-size:3rem !important;line-height:.88 !important}
+html.skin-brandbrief:not(#_x#_y) .heroOverlayCat{background:#120606 !important;color:#E2473A !important;border-radius:0 !important;text-transform:uppercase;font-weight:700}
+html.skin-brandbrief:not(#_x#_y) .catTile .catTileName,html.skin-brandbrief:not(#_x#_y) .catTile .catTileCount{color:#FFFFFF !important;text-shadow:0 1px 10px rgba(0,0,0,.6) !important}
+html.skin-brandbrief:not(#_x#_y) .catTile .catTileName{font-size:1.5rem !important;line-height:.9 !important}
+html.skin-brandbrief:not(#_x#_y) .catTile{border-radius:0 !important}
+/* Rezeptseite: Foto, darunter der Name riesig */
+html.skin-brandbrief:not(#_x#_y) .recipePageHero{border-radius:0 !important}
+html.skin-brandbrief:not(#_x#_y) .recipePageHero::after{background:none !important}
+html.skin-brandbrief:not(#_x#_y) .recipeHeroText{position:static !important;padding:16px 16px 4px !important;background:#E2473A !important;text-align:left}
+html.skin-brandbrief:not(#_x#_y) .recipeHeroText .recipeName{text-shadow:none !important;font-size:min(clamp(3.2rem,17vw,8rem),17vw) !important;line-height:.86 !important}
+html.skin-brandbrief:not(#_x#_y) .recipeHeroText .recipeSubtitle{color:#120606 !important;text-shadow:none !important;font:800 1.5rem/.95 "Skin Brief", sans-serif !important;font-stretch:62% !important;text-transform:uppercase;display:block !important;-webkit-line-clamp:unset !important;margin-top:.4rem}
+html.skin-brandbrief:not(#_x#_y) .recipeSegWrap.isStuck{background:#E2473A !important;box-shadow:inset 0 -2px 0 #120606 !important}
+html.skin-brandbrief:not(#_x#_y) .recipeBody{color:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) .recipeBody ol > li::before{background:#120606 !important;color:#E2473A !important;box-shadow:none !important;font-weight:800 !important}
+html.skin-brandbrief:not(#_x#_y) .recipeBody ol > li.stepDone{opacity:.6}
+html.skin-brandbrief:not(#_x#_y) .recipeBody ol > li{border-bottom:1px solid #120606 !important}
+html.skin-brandbrief:not(#_x#_y) .cookTime{background:#120606 !important;color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) a{color:#120606}
+html.skin-brandbrief:not(#_x#_y) :focus-visible{outline:3px solid #120606 !important;outline-offset:3px}
+/* Startseite: der schreiende Brief */
+html.skin-brandbrief:not(#_x#_y) body.bbrHome :is(.homeGreetingTitle,.homeGreetingSub){position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html.skin-brandbrief:not(#_x#_y) body.bbrHome .brandWordmark{display:none}
+.bbrHero{margin:6px calc(-16px - env(safe-area-inset-left)) 28px calc(-16px - env(safe-area-inset-left));padding:0 12px;overflow:hidden;color:#120606;font-family:"Skin Brief", sans-serif;text-transform:uppercase}
+.bbrHero p{margin:0}
+.bbrHero a{color:#120606;text-decoration:none;display:block;-webkit-tap-highlight-color:transparent}
+.bbrName{font-weight:700;font-size:1rem;letter-spacing:.1em;line-height:1.3}
+.bbrDate{font-weight:400;font-size:1rem;letter-spacing:.06em;line-height:1.3;margin-bottom:5vh !important}
+.bbrToday span{display:block;font-weight:800;font-stretch:62%;line-height:.86;white-space:nowrap}
+.bbrHeute{font-size:min(9vw,4.5rem)}
+.bbrT{font-size:min(31vw,15rem);margin-left:-.04em;letter-spacing:-.01em}
+.bbrToday .bbrSub{font-size:min(7.4vw,3rem);white-space:normal;line-height:.95;margin-top:.25rem}
+.bbrToday .bbrMeta{font-size:min(5vw,1.75rem);font-stretch:100%;font-weight:600;line-height:1.1;margin-top:.6rem;white-space:normal}
+.bbrKat{font-size:min(5vw,1.75rem);font-weight:600;margin-top:5vh;min-height:44px;display:flex !important;align-items:center}
+.bbrCat{font-size:min(12.5vw,6rem);font-weight:800;font-stretch:62%;line-height:.86;white-space:nowrap}
+.bbrCat small{font-size:.45em;font-weight:600;font-stretch:100%;vertical-align:.9em;margin-left:.1em}
+.bbrAll{font-size:min(9vw,4.5rem);font-weight:800;font-stretch:62%;line-height:.9;margin-top:4vh;white-space:nowrap}
+@media (hover:hover) and (pointer:fine){ .bbrHero a:hover{opacity:.75} }
+
+/* Kochmodus: Rot, schwarze Schrift, Weiter schwarz */
+html.skin-brandbrief:not(#_x#_y) .cookOverlay{--cBg:#E2473A;--cCard:#E2473A;--cFill:rgba(18,6,6,.1);--cLine:#120606;--cText:#120606;--cSub:#120606;--cLeaf:#120606;--cOnLeaf:#E2473A;background:#E2473A !important;color:#120606 !important;font-family:"Skin Brief", sans-serif}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTop{background:#E2473A !important;color:#120606 !important;box-shadow:inset 0 -2px 0 #120606 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTitle{font-size:1.5rem !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookPill{background:#120606 !important;color:#E2473A !important;font-weight:800}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .navIconBtn{background:transparent !important;box-shadow:inset 0 0 0 2px #120606 !important;color:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookProgress{background:rgba(18,6,6,.2) !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookProgressBar{background:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTabs{background:transparent !important;box-shadow:inset 0 0 0 2px #120606 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTab{color:#120606 !important;font-weight:800 !important;text-transform:uppercase}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTab.active{background:#120606 !important;color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay :is(.cookStep,.prepGroup,.prepHead,.cookIngs,.cookStepIngsList,.cookNextPreview){background:transparent !important;box-shadow:none !important;border-radius:0 !important;padding-left:0 !important;padding-right:0 !important;color:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookStep{font-weight:600 !important;font-size:clamp(1.5rem,6.4vw,2.25rem) !important;line-height:1.18 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTime{background:#120606 !important;color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTime .ico{color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay :is(.cookStepIngsLabel,.cookIngSection,.prepGroupTitle,.cookIngsHead,.prepCount){color:#120606 !important;font-weight:800 !important;text-transform:uppercase;letter-spacing:.04em;background:transparent !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .prepTitle{font-size:3.5rem !important;line-height:.86 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay :is(.prepRow,.cookIngRow,.cookStepIng){color:#120606 !important;background:transparent !important;padding-left:0 !important;padding-right:0 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay :is(.prepRow + .prepRow,.cookIngRow + .cookIngRow,.cookStepIng + .cookStepIng){box-shadow:inset 0 1px 0 #120606 !important;border-top:0 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .prepBox{box-shadow:inset 0 0 0 2px #120606 !important;color:transparent !important;background:transparent !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .prepRow.isDone .prepBox{background:#120606 !important;color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookIngRow.isStep{background:#120606 !important;color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookIngRow.isStep *{color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookChk{border:2px solid #120606 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookChk:checked{background:#120606 !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookChk::after{color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookNav{background:#E2473A !important;box-shadow:inset 0 2px 0 #120606}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookNavBtn{background:transparent !important;box-shadow:inset 0 0 0 2px #120606 !important;color:#120606 !important;font-weight:800 !important;text-transform:uppercase}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookNavBtn.primary{background:#120606 !important;color:#E2473A !important;box-shadow:none !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTimer{background:#120606 !important;color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTimer :is(.cookTimerLabel,.cookTimerTime){color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTimerBtn{background:rgba(226,71,58,.18) !important;color:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .cookOverlay .cookTimerBar{background:#E2473A !important}
+html.skin-brandbrief:not(#_x#_y) .recipePageBody{margin-top:0 !important;background:transparent !important}
+html.skin-brandbrief:not(#_x#_y) body.bbrHome .homeBrand{justify-content:flex-end;margin-bottom:0;min-height:44px}
+html.skin-brandbrief:not(#_x#_y) .planDayCard{border-top:0 !important;margin-bottom:0 !important}
