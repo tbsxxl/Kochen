@@ -441,3 +441,7 @@ und dem Gerät, und eine automatisch erzeugte Draufsicht (Pfanne, Topf, Brett �
 
 Der Papier-Bon „Jetzt“ (Zackenrand, Schreibmaschinenschrift, leicht schief) gefiel dem Besitzer nicht („passt nicht zum cleanen Design“).
 Ersetzt durch eine ruhige Karte „Für diesen Schritt“ wie die Zutatenliste; auch Schritt-Zähler, Timer und Gerätezeile in Systemschrift.
+
+Auch die Überschrift in Fraunces passte dem Besitzer nicht zum Stil → Systemschrift, fett. Wunsch „Zutaten realistischer“: statt flacher
+Symbole jetzt viele unregelmäßige Stücke mit Licht-Verlauf und leichter Körnung (Zwiebelstreifen, Tomatenwürfel mit Kernen, Chiliringe,
+Pilzscheiben, Spiegelei, Lachsfilet mit Fettlinien …), Soßen mit Verlauf.

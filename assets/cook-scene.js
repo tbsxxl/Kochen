@@ -143,7 +143,7 @@
     ["hack", /hack|faschiert/],
     ["speck", /speck|bacon|pancetta|guanciale|schinken|chorizo|salami|wurst/],
     ["fleisch", /rind|steak|beef|short.?rib|ribs|schwein|kotelett|gulasch|lamm|ente|kalb|braten|fleisch|filet|nacken/],
-    ["ei", /\beier?\b|eigelb|eiweiß|\bei,|\bei\s/],
+    ["ei", /\bei(er)?\b|eigelb|eiweiß|\bei,|\bei\s/],
     ["reis", /reis(?!essig)|risotto|basmati|jasmin/],
     ["nudel", /nudel|pasta|spaghetti|tagliatelle|penne|fusilli|rigatoni|paccheri|linguine|gnocchi|lasagne|ramen|udon|noodle|maccheroni|orecchiette|pappardelle/],
     ["brot", /brot|brötchen|\bbun|baguette|toast|tortilla|wrap|naan|pita|fladen|taco/],
@@ -179,6 +179,8 @@
     <radialGradient id="ckShine" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></radialGradient>
     <filter id="ckBlur"><feGaussianBlur stdDeviation="12"/></filter>
     <filter id="ckSh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="2.6" flood-color="#000" flood-opacity=".35"/></filter>
+    <radialGradient id="gTom" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FF7A5C"/><stop offset=".55" stop-color="#D93A24"/><stop offset="1" stop-color="#9A1E10"/></radialGradient><radialGradient id="gTomIn" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFB59A"/><stop offset=".55" stop-color="#F07A5C"/><stop offset="1" stop-color="#D9503A"/></radialGradient><radialGradient id="gOni" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFCF3"/><stop offset=".55" stop-color="#F1E6D0"/><stop offset="1" stop-color="#D6C29C"/></radialGradient><radialGradient id="gGar" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFDF5"/><stop offset=".55" stop-color="#F2E9D2"/><stop offset="1" stop-color="#D5C49C"/></radialGradient><radialGradient id="gGin" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F5DCA6"/><stop offset=".55" stop-color="#D9B06A"/><stop offset="1" stop-color="#A97B3C"/></radialGradient><radialGradient id="gChi" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FF6A50"/><stop offset=".55" stop-color="#C81E14"/><stop offset="1" stop-color="#7E0E08"/></radialGradient><radialGradient id="gPep" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FF7A5E"/><stop offset=".55" stop-color="#D62B1C"/><stop offset="1" stop-color="#8C150C"/></radialGradient><radialGradient id="gCar" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFB066"/><stop offset=".55" stop-color="#F07A22"/><stop offset="1" stop-color="#B8500E"/></radialGradient><radialGradient id="gPot" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF2C2"/><stop offset=".55" stop-color="#EFCF7A"/><stop offset="1" stop-color="#C9A044"/></radialGradient><radialGradient id="gBro" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#8CCB66"/><stop offset=".55" stop-color="#3F8A2C"/><stop offset="1" stop-color="#1F5016"/></radialGradient><radialGradient id="gMus" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F7EFE2"/><stop offset=".55" stop-color="#E6D6BC"/><stop offset="1" stop-color="#BFA27A"/></radialGradient><radialGradient id="gMusCap" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#A4805E"/><stop offset=".55" stop-color="#7A5638"/><stop offset="1" stop-color="#4E331E"/></radialGradient><radialGradient id="gZuc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F6F8DE"/><stop offset=".55" stop-color="#E2E8B6"/><stop offset="1" stop-color="#BCC882"/></radialGradient><radialGradient id="gLeaf" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#74BD55"/><stop offset=".55" stop-color="#3A8A2E"/><stop offset="1" stop-color="#1D5518"/></radialGradient><radialGradient id="gLem" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF7B8"/><stop offset=".55" stop-color="#FADF5A"/><stop offset="1" stop-color="#E3B61E"/></radialGradient><radialGradient id="gShr" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFD8C2"/><stop offset=".55" stop-color="#F59268"/><stop offset="1" stop-color="#D35A34"/></radialGradient><radialGradient id="gFish" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFC6A8"/><stop offset=".55" stop-color="#F59A72"/><stop offset="1" stop-color="#D66C46"/></radialGradient><radialGradient id="gChk" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F8D8A2"/><stop offset=".55" stop-color="#D99A56"/><stop offset="1" stop-color="#94531C"/></radialGradient><radialGradient id="gMinc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#B8704E"/><stop offset=".55" stop-color="#874628"/><stop offset="1" stop-color="#552612"/></radialGradient><radialGradient id="gBac" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F3907E"/><stop offset=".55" stop-color="#C84A3A"/><stop offset="1" stop-color="#8A281C"/></radialGradient><radialGradient id="gBeef" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#A85438"/><stop offset=".55" stop-color="#6E2C1A"/><stop offset="1" stop-color="#3A160C"/></radialGradient><radialGradient id="gEggW" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#FBF8F0"/><stop offset="1" stop-color="#E5DCC6"/></radialGradient><radialGradient id="gYolk" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFD976"/><stop offset=".55" stop-color="#F6A31E"/><stop offset="1" stop-color="#D3720A"/></radialGradient><radialGradient id="gRice" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F8F3E4"/><stop offset="1" stop-color="#D9CCAC"/></radialGradient><radialGradient id="gBread" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FAE6BC"/><stop offset=".55" stop-color="#E9C88C"/><stop offset="1" stop-color="#C08C46"/></radialGradient><radialGradient id="gChs" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF3A8"/><stop offset=".55" stop-color="#F5CF4A"/><stop offset="1" stop-color="#D0A01C"/></radialGradient><radialGradient id="gBut" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF8D2"/><stop offset=".55" stop-color="#F8E08A"/><stop offset="1" stop-color="#D9B246"/></radialGradient><radialGradient id="gChoc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#8E5E3E"/><stop offset=".55" stop-color="#5A3420"/><stop offset="1" stop-color="#2A150A"/></radialGradient><radialGradient id="gBean" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#EED6A2"/><stop offset=".55" stop-color="#C9A15A"/><stop offset="1" stop-color="#8A642C"/></radialGradient><radialGradient id="gNut" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F4DAAC"/><stop offset=".55" stop-color="#D7B07A"/><stop offset="1" stop-color="#97703C"/></radialGradient><radialGradient id="gMehl" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F8F4EC"/><stop offset="1" stop-color="#DCD3C0"/></radialGradient><radialGradient id="gStk" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#E6D6B4"/><stop offset=".55" stop-color="#CDB892"/><stop offset="1" stop-color="#9C8660"/></radialGradient>
+    <filter id="ckGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".45" numOctaves="3" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 .18  0 0 0 0 .1  0 0 0 0 .04  .6 0 0 0 -.22" result="d"/><feComposite in="d" in2="SourceAlpha" operator="in" result="g"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="g"/></feMerge></filter>
     <clipPath id="ckClipR"><circle r="150"/></clipPath>
     <clipPath id="ckClipRect"><rect x="-176" y="-124" width="352" height="248" rx="14"/></clipPath>
   </defs>`;
@@ -186,7 +188,7 @@
 
   // Gerät: Rahmen + Innenfläche (Inhalt wird in die Innenfläche geschnitten)
   function vessel(kind, inner, floor){
-    const base = floor ? `<circle r="150" fill="${floor[0]}"/><circle r="150" fill="url(#ckShine)" opacity=".35"/>` : "";
+    const base = floor ? `<radialGradient id="ckFloor" cx="40%" cy="36%" r="75%"><stop offset="0" stop-color="${floor[0]}"/><stop offset="1" stop-color="${floor[1]}"/></radialGradient><circle r="150" fill="url(#ckFloor)"/><circle r="150" fill="url(#ckShine)" opacity=".3"/>` : "";
     switch(kind){
       case "pan": return shadow(190, 186) +
         `<g transform="rotate(35)"><rect x="176" y="-17" width="150" height="34" rx="16" fill="#26231F"/><rect x="176" y="-17" width="40" height="34" rx="6" fill="#55524C"/><circle cx="306" cy="0" r="7" fill="#0E0D0C"/></g>` +
@@ -234,45 +236,78 @@
     }
   }
 
-  // Zutaten-Symbole (Mitte bei 0,0, etwa ±34). Jedes zeigt die Zutat so, wie sie im Gerät liegt.
+  // Zutaten (Mitte bei 0,0, etwa ±34), möglichst echt: unregelmäßige Formen (blob), Licht von oben links (Verläufe in DEFS),
+  // viele kleine Stücke statt eines Symbols, feine Körnung über allem (Filter ckGrain).
+  const f1 = (v)=> (+v).toFixed(1);
+  const rng = (seed)=>{ let s = (seed * 9973) % 233280 || 1; return ()=> (s = (s * 9301 + 49297) % 233280) / 233280; };
+  function smooth(p){
+    const n = p.length; let d = `M${f1(p[0][0])} ${f1(p[0][1])}`;
+    for(let i = 0; i < n; i++){
+      const p0 = p[(i - 1 + n) % n], p1 = p[i], p2 = p[(i + 1) % n], p3 = p[(i + 2) % n];
+      d += `C${f1(p1[0] + (p2[0] - p0[0]) / 6)} ${f1(p1[1] + (p2[1] - p0[1]) / 6)} ${f1(p2[0] - (p3[0] - p1[0]) / 6)} ${f1(p2[1] - (p3[1] - p1[1]) / 6)} ${f1(p2[0])} ${f1(p2[1])}`;
+    }
+    return d + "Z";
+  }
+  function blob(r, jit, seed, sx = 1, sy = 1, n = 8){
+    const q = rng(seed), p = [];
+    for(let i = 0; i < n; i++){ const a = i / n * 6.2832, rr = r * (1 + (q() - .5) * 2 * jit); p.push([Math.cos(a) * rr * sx, Math.sin(a) * rr * sy]); }
+    return smooth(p);
+  }
+  // n Stücke locker verteilt (Sonnenblumen-Muster mit etwas Zufall)
+  function pile(n, spread, seed, fn){
+    const q = rng(seed); let out = "";
+    for(let i = 0; i < n; i++){ const a = i * 2.39996 + q() * .7, r = spread * Math.sqrt((i + .5) / n) + (q() - .5) * 4; out += fn(Math.cos(a) * r, Math.sin(a) * r, q() * 360, i, q); }
+    return out;
+  }
+  const at = (x, y, r, inner)=> `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(r)})">${inner}</g>`;
   const g = (s)=> `<g filter="url(#ckSh)">${s}</g>`;
   const ring = (n, r, fn)=> Array.from({ length: n }, (_, i)=> fn(Math.cos(i / n * 6.283) * r, Math.sin(i / n * 6.283) * r, i)).join("");
+  const hl = (w = 10, y = -4)=> `<path d="M${-w / 2} ${y} C${-w / 4} ${y - 1.6} ${w / 4} ${y - 1.6} ${w / 2} ${y}" stroke="#fff" stroke-opacity=".45" stroke-width="1.1" fill="none" stroke-linecap="round"/>`;
   const ICON = {
-    zwiebel: ()=> g(`<path d="M-30 -6 C-26 -22 -6 -28 6 -26 C22 -22 30 -8 30 4" stroke="#EADBB8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M-30 -6 C-26 -22 -6 -28 6 -26 C22 -22 30 -8 30 4" stroke="#C9A6CF" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/>
-      <path d="M-24 14 C-18 2 0 -2 14 4" stroke="#F1E5C8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M-6 26 C2 18 16 16 26 22" stroke="#EADBB8" stroke-width="6" fill="none" stroke-linecap="round"/>`),
-    fruehling: ()=> g(ring(7, 20, (x, y)=> `<circle cx="${x}" cy="${y}" r="7" fill="#5E9B37"/><circle cx="${x}" cy="${y}" r="5" fill="#BFE08A"/><circle cx="${x}" cy="${y}" r="2.6" fill="#EAF5C4"/>`) + `<circle r="7" fill="#5E9B37"/><circle r="5" fill="#BFE08A"/><circle r="2.6" fill="#EAF5C4"/>`),
-    knoblauch: ()=> g(ring(5, 16, (x, y, i)=> `<g transform="translate(${x} ${y}) rotate(${i * 72})"><path d="M0 -12 C8 -10 10 4 4 12 C0 14 -4 14 -6 10 C-10 2 -8 -10 0 -12Z" fill="#F7F2E6" stroke="#D9CDB0" stroke-width="1.4"/><path d="M0 -10 C2 -2 2 6 0 12" stroke="#E2D7BE" stroke-width="1"/></g>`)),
-    ingwer: ()=> g(`<path d="M-28 6 C-30 -6 -14 -10 -10 -16 C-4 -24 8 -16 10 -10 C22 -12 30 -2 26 8 C24 20 6 22 -6 20 C-18 22 -26 18 -28 6Z" fill="#D9B277" stroke="#9C7A45" stroke-width="2"/><path d="M-14 4 H0 M6 -2 H18 M-4 12 H8" stroke="#A98450" stroke-width="1.6" stroke-linecap="round"/>`),
-    tomate: ()=> g(`<circle r="26" fill="#E0412C" stroke="#A92916" stroke-width="2"/><circle r="26" fill="url(#ckShine)"/><path d="M-12 -24 L0 -16 L12 -24 L5 -30 L-5 -30Z" fill="#4E8A2E"/>`),
-    chili: ()=> g(ring(6, 18, (x, y)=> `<circle cx="${x}" cy="${y}" r="6.5" fill="#C8201A"/><circle cx="${x}" cy="${y}" r="3.2" fill="#F4E3C0"/><circle cx="${x - 1}" cy="${y - 1}" r="1" fill="#E8C680"/>`)),
-    paprika: ()=> g([[-18, -12, -20], [10, -16, 15], [-6, 8, 60], [18, 10, -40], [-22, 16, 30]].map(([x, y, r])=> `<rect x="${x - 10}" y="${y - 5}" width="20" height="10" rx="3" transform="rotate(${r} ${x} ${y})" fill="#D12A22" stroke="#8F1A14" stroke-width="1.4"/>`).join("")),
-    karotte: ()=> g(ring(6, 18, (x, y)=> `<circle cx="${x}" cy="${y}" r="8" fill="#EE7A23" stroke="#C25A12" stroke-width="1.4"/><circle cx="${x}" cy="${y}" r="3.6" fill="#F7A55A"/>`)),
-    kartoffel: ()=> g([[-16, -10], [12, -14], [-4, 10], [20, 10], [-22, 14]].map(([x, y], i)=> `<rect x="${x - 9}" y="${y - 9}" width="18" height="18" rx="4" transform="rotate(${i * 23} ${x} ${y})" fill="#F0D489" stroke="#C9A24C" stroke-width="1.4"/><rect x="${x - 6}" y="${y - 6}" width="7" height="4" rx="2" fill="#FFF3C8" opacity=".7"/>`).join("")),
-    brokkoli: ()=> g([[-14, -8], [12, -10], [0, 12]].map(([x, y])=> `<path d="M${x} ${y} l0 14" stroke="#8DB16A" stroke-width="6" stroke-linecap="round"/>` + ring(6, 8, (a, b)=> `<circle cx="${x + a}" cy="${y + b}" r="6" fill="#3E7A2C"/>`) + `<circle cx="${x}" cy="${y}" r="7" fill="#4F8F38"/>`).join("")),
-    pilz: ()=> g([[-12, -6, -20], [14, 8, 30]].map(([x, y, r])=> `<g transform="translate(${x} ${y}) rotate(${r})"><path d="M-18 4 C-18 -14 18 -14 18 4Z" fill="#9A7255"/><rect x="-5" y="2" width="10" height="14" rx="3" fill="#EADCC4"/><path d="M-18 4 H18" stroke="#6A4B34" stroke-width="2"/></g>`).join("")),
-    zucchini: ()=> g(ring(5, 17, (x, y)=> `<circle cx="${x}" cy="${y}" r="10" fill="#3F7A2E"/><circle cx="${x}" cy="${y}" r="8" fill="#E8EFC8"/><circle cx="${x}" cy="${y}" r="2.5" fill="#C8D69A"/>`)),
-    blatt: ()=> g([[-14, -6, -30], [10, -10, 25], [0, 12, 80], [-20, 14, 10]].map(([x, y, r])=> `<g transform="translate(${x} ${y}) rotate(${r})"><path d="M-16 0 C-8 -12 8 -12 16 0 C8 12 -8 12 -16 0Z" fill="#3F8A3A"/><path d="M-14 0 H14" stroke="#7CC06E" stroke-width="1.4"/></g>`).join("")),
-    kraeuter: ()=> g(ring(7, 16, (x, y, i)=> `<path transform="translate(${x} ${y}) rotate(${i * 51})" d="M-6 0 C-3 -6 3 -6 6 0 C3 6 -3 6 -6 0Z" fill="${i % 2 ? "#4C9A3E" : "#2F7A2C"}"/>`)),
-    zitrone: ()=> g(`<circle r="24" fill="#F2D33A" stroke="#C9A417" stroke-width="2"/><circle r="19" fill="#F8EBA0"/>` + ring(8, 10, (x, y, i)=> `<path d="M0 0 L${x * 1.7} ${y * 1.7}" stroke="#F2D33A" stroke-width="1.6"/>`)),
-    garnele: ()=> g([[-12, -6, 0], [14, 8, 160]].map(([x, y, r])=> `<g transform="translate(${x} ${y}) rotate(${r})"><path d="M-14 6 C-16 -10 6 -16 14 -4 C18 2 12 8 6 4 C2 -2 -6 -2 -6 6" stroke="#F08A5D" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M-14 6 C-16 -10 6 -16 14 -4" stroke="#FBC8A8" stroke-width="2.4" fill="none" stroke-linecap="round"/></g>`).join("")),
-    fisch: ()=> g(`<g transform="rotate(-12)"><rect x="-34" y="-16" width="68" height="32" rx="12" fill="#F29B76" stroke="#C86E4B" stroke-width="2"/><path d="M-20 -16 C-14 0 -14 0 -20 16 M-4 -16 C2 0 2 0 -4 16 M12 -16 C18 0 18 0 12 16" stroke="#FFD2BE" stroke-width="3" fill="none"/></g>`),
-    haehnchen: ()=> g(`<g transform="rotate(-20)"><ellipse rx="34" ry="22" fill="#D99A5E" stroke="#8A4E24" stroke-width="2.4"/><ellipse rx="34" ry="22" fill="url(#ckShine)"/><path d="M-22 -8 L10 4 M-20 6 L14 14" stroke="#7A3E18" stroke-width="3" stroke-linecap="round" opacity=".6"/></g>`),
-    hack: ()=> g(Array.from({ length: 16 }, (_, i)=> { const a = i * 2.4, r = 6 + (i % 5) * 5; return `<circle cx="${Math.cos(a) * r}" cy="${Math.sin(a) * r}" r="${5 + (i % 3)}" fill="${i % 2 ? "#8C4A2E" : "#A65C3A"}"/>`; }).join("")),
-    speck: ()=> g([[-14, -8, -10], [8, 8, 14]].map(([x, y, r])=> `<g transform="translate(${x} ${y}) rotate(${r})"><rect x="-22" y="-6" width="44" height="12" rx="4" fill="#C9503F"/><path d="M-20 -1 C-8 -4 8 2 20 -1" stroke="#F5D9C8" stroke-width="3" fill="none"/></g>`).join("")),
-    fleisch: ()=> g(`<g transform="rotate(-15)"><ellipse cx="2" cy="4" rx="36" ry="26" fill="#3E2217"/><ellipse rx="36" ry="26" fill="#A8483A" stroke="#6E2A1E" stroke-width="3"/><path d="M-26 -6 C-12 -16 8 -14 26 -6" stroke="#F2D8C6" stroke-width="3.4" fill="none" stroke-linecap="round" opacity=".9"/><path d="M-20 8 C-6 2 10 4 24 10" stroke="#E8C2AC" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".8"/></g>`),
-    ei: ()=> g(`<ellipse rx="30" ry="24" fill="#FFFDF7" stroke="#E6DCC6" stroke-width="2"/><circle cx="2" cy="1" r="11" fill="#F6A72A"/><circle cx="-1" cy="-2" r="3" fill="#FFE6A8"/>`),
-    reis: ()=> g(Array.from({ length: 22 }, (_, i)=> { const a = i * 2.39996, r = 4 + Math.sqrt(i) * 6; return `<ellipse cx="${(Math.cos(a) * r).toFixed(1)}" cy="${(Math.sin(a) * r).toFixed(1)}" rx="6" ry="2.4" transform="rotate(${i * 37} ${(Math.cos(a) * r).toFixed(1)} ${(Math.sin(a) * r).toFixed(1)})" fill="#FBF6E8" stroke="#DDD2B6" stroke-width=".8"/>`; }).join("")),
-    nudel: ()=> g(`<g fill="none" stroke-linecap="round"><path d="M-30 -10 C-10 -30 10 10 30 -10 M-30 4 C-10 -16 10 24 30 4 M-26 18 C-6 -2 14 38 30 18 M-20 -22 C0 -42 14 -2 26 -22" stroke="#D8B25A" stroke-width="6"/><path d="M-30 -10 C-10 -30 10 10 30 -10 M-30 4 C-10 -16 10 24 30 4" stroke="#F4DC94" stroke-width="2.4"/></g>`),
-    brot: ()=> g(`<ellipse rx="32" ry="24" fill="#C98A44" stroke="#8E5A22" stroke-width="2"/><ellipse rx="32" ry="24" fill="url(#ckShine)"/>` + ring(7, 12, (x, y)=> `<ellipse cx="${x}" cy="${y}" rx="2" ry="1.2" fill="#FBF1D8"/>`)),
-    kaese: ()=> g(`<path d="M-30 14 L28 -18 L30 14Z" fill="#F4C94A" stroke="#C99A1E" stroke-width="2"/><circle cx="12" cy="4" r="3.4" fill="#E2AF2A"/><circle cx="22" cy="-4" r="2.4" fill="#E2AF2A"/><circle cx="0" cy="10" r="2.4" fill="#E2AF2A"/>`),
-    butter: ()=> g(`<rect x="-24" y="-16" width="48" height="32" rx="5" fill="#F7E08C" stroke="#D6B44A" stroke-width="2"/><path d="M-18 -10 H14" stroke="#FFF3C4" stroke-width="3" stroke-linecap="round"/>`),
-    honig: ()=> g(`<path d="M-30 -14 C-10 -24 10 -4 30 -14 M-28 4 C-6 -8 12 14 30 2 M-24 20 C-4 10 14 28 28 18" stroke="#E2A22A" stroke-width="5" fill="none" stroke-linecap="round" opacity=".9"/>`),
-    schoko: ()=> g([[-14, -8], [10, -12], [0, 10], [18, 10]].map(([x, y], i)=> `<rect x="${x - 9}" y="${y - 7}" width="18" height="14" rx="2" transform="rotate(${i * 19} ${x} ${y})" fill="#5A3420" stroke="#3A1F12" stroke-width="1.4"/>`).join("")),
-    huelsen: ()=> g(Array.from({ length: 14 }, (_, i)=> { const a = i * 2.4, r = 4 + Math.sqrt(i) * 7; return `<ellipse cx="${(Math.cos(a) * r).toFixed(1)}" cy="${(Math.sin(a) * r).toFixed(1)}" rx="6" ry="4.4" fill="${i % 3 ? "#C9A15A" : "#B57A3E"}" stroke="#8A6430" stroke-width=".8"/>`; }).join("")),
-    nuss: ()=> g(Array.from({ length: 12 }, (_, i)=> { const a = i * 2.4, r = 4 + Math.sqrt(i) * 7; return `<ellipse cx="${(Math.cos(a) * r).toFixed(1)}" cy="${(Math.sin(a) * r).toFixed(1)}" rx="7" ry="4.6" transform="rotate(${i * 30} ${(Math.cos(a) * r).toFixed(1)} ${(Math.sin(a) * r).toFixed(1)})" fill="#D7B07A" stroke="#9C7440" stroke-width="1"/>`; }).join("")),
-    mehl: ()=> `<ellipse cx="2" cy="4" rx="30" ry="22" fill="#000" opacity=".12"/><ellipse rx="30" ry="22" fill="#FBF8F1"/><ellipse cx="-6" cy="-6" rx="16" ry="10" fill="#fff"/>`,
-    gewuerz: (col)=> `<ellipse cx="2" cy="3" rx="20" ry="15" fill="#000" opacity=".12"/><ellipse rx="20" ry="15" fill="${col || "#C9662A"}"/><ellipse cx="-5" cy="-4" rx="9" ry="6" fill="#fff" opacity=".22"/>`,
-    stueck: ()=> g([[-12, -6], [12, -10], [0, 12]].map(([x, y], i)=> `<rect x="${x - 10}" y="${y - 8}" width="20" height="16" rx="5" transform="rotate(${i * 25} ${x} ${y})" fill="#CDB892" stroke="#9C8660" stroke-width="1.4"/>`).join("")),
+    zwiebel: ()=> g(pile(10, 24, 11, (x, y, r, i)=> at(x, y, r, i % 3
+      ? `<path d="M-12 4 C-9 -8 9 -8 12 4 L9.5 5 C7 -3.5 -7 -3.5 -9.5 5Z" fill="url(#gOni)" fill-opacity=".92" stroke="#CDB894" stroke-width=".6"/><path d="M-9 1 C-5 -5 5 -5 9 1" stroke="#fff" stroke-opacity=".6" stroke-width=".8" fill="none"/>`
+      : `<path d="${blob(5.6, .18, i + 3, 1.1, 1, 6)}" fill="url(#gOni)" stroke="#CDB894" stroke-width=".6"/><path d="M-4 -1 C-1 -3 2 -3 4 -1" stroke="#E0CFAE" stroke-width=".8" fill="none"/>`))),
+    fruehling: ()=> g(pile(14, 23, 271, (x, y, r, i)=> at(x, y, r, `<path d="${blob(5.4, .08, i + 3, 1.1, 1, 8)} ${blob(3, .1, i + 5, 1.1, 1, 7)}" fill="${i % 3 ? "#4E9A34" : "#D8EDB0"}" fill-rule="evenodd"/><path d="${blob(4.2, .08, i + 4, 1.1, 1, 8)}" fill="none" stroke="${i % 3 ? "#A6D47E" : "#F2F8E0"}" stroke-width=".7"/>`))),
+    knoblauch: ()=> g(pile(18, 22, 23, (x, y, r, i)=> at(x, y, r, `<path d="${blob(2.6 + (i % 3) * .8, .3, i + 5, 1.25, 1, 6)}" fill="url(#gGar)" stroke="#CDBE98" stroke-width=".5"/>`))),
+    ingwer: ()=> g(pile(16, 22, 31, (x, y, r, i)=> at(x, y, r, `<path d="${blob(2.8 + (i % 3) * .7, .35, i + 7, 1.6, .9, 6)}" fill="url(#gGin)" stroke="#A9803F" stroke-width=".5"/>`))),
+    tomate: ()=> g(pile(7, 24, 41, (x, y, r, i)=> at(x, y, r, `<path d="${blob(8.6, .14, i + 7, 1, 1, 6)}" fill="url(#gTom)"/><path d="${blob(5, .22, i + 9, 1, 1, 6)}" fill="url(#gTomIn)" opacity=".9"/><ellipse cx="-1.6" cy="1" rx="1.6" ry="1" fill="#FBE7A8"/><ellipse cx="2" cy="-1" rx="1.6" ry="1" fill="#FBE7A8"/>${hl(9, -5)}`))),
+    tomatensosse: ()=> "",
+    chili: ()=> g(pile(8, 23, 53, (x, y, r, i)=> at(x, y, r, `<path d="${blob(7.2, .07, i + 2, 1, 1, 8)} ${blob(4.6, .12, i + 4, 1, 1, 7)}" fill="url(#gChi)" fill-rule="evenodd"/><circle cx="-1.4" cy=".2" r="1.1" fill="#F2D9A0"/><circle cx="1.4" cy="1" r="1.1" fill="#F2D9A0"/><circle cx=".3" cy="-1.7" r="1.1" fill="#F2D9A0"/>`))),
+    paprika: ()=> g(pile(8, 25, 61, (x, y, r)=> at(x, y, r, `<path d="M-14 -3 C-7 -6.5 7 -6.5 14 -3 L14 3 C7 -.5 -7 -.5 -14 3Z" fill="url(#gPep)"/><path d="M-12 -3.4 C-6 -5.6 6 -5.6 12 -3.4" stroke="#fff" stroke-opacity=".5" stroke-width="1" fill="none"/>`))),
+    karotte: ()=> g(pile(7, 23, 71, (x, y, r)=> at(x, y, r, `<circle r="8.4" fill="url(#gCar)"/><circle r="4.4" fill="#FFB86E" opacity=".75"/><circle r="8.4" fill="none" stroke="#C2560F" stroke-width=".7"/>` + ring(8, 6.2, (a, b)=> `<path d="M${f1(a * .75)} ${f1(b * .75)} L${f1(a)} ${f1(b)}" stroke="#E0701E" stroke-width=".5"/>`)))),
+    kartoffel: ()=> g(pile(7, 24, 81, (x, y, r)=> at(x, y, r, `<rect x="-8.5" y="-8.5" width="17" height="17" rx="4" fill="url(#gPot)" stroke="#BC923E" stroke-width=".6"/><path d="M-6 -6 H5" stroke="#fff" stroke-opacity=".55" stroke-width="1.2" stroke-linecap="round"/>`))),
+    brokkoli: ()=> g([[-13, -8, -20], [13, -9, 25], [0, 12, 160]].map(([x, y, r], k)=> at(x, y, r, `<path d="M0 4 L0 17" stroke="#9CC27A" stroke-width="6" stroke-linecap="round"/><path d="M0 4 L0 17" stroke="#C6DEA8" stroke-width="2" stroke-linecap="round"/>` + pile(11, 9, 141 + k, (a, b, rr, i)=> `<circle cx="${f1(a)}" cy="${f1(b)}" r="${f1(3.4 + (i % 3) * .6)}" fill="url(#gBro)"/>`))).join("")),
+    pilz: ()=> g(pile(5, 20, 151, (x, y, r)=> at(x, y, r, `<path d="M-14 2 C-14 -12 14 -12 14 2 C10 3 6 3 5 3 L4 11 C4 13.5 -4 13.5 -4 11 L-5 3 C-6 3 -10 3 -14 2Z" fill="url(#gMus)"/><path d="M-14 2 C-14 -12 14 -12 14 2" stroke="url(#gMusCap)" stroke-width="2.4" fill="none"/><path d="M-10 1.5 C-4 .5 4 .5 10 1.5" stroke="#C9B08A" stroke-width=".8" fill="none"/>`))),
+    zucchini: ()=> g(pile(6, 22, 161, (x, y, r)=> at(x, y, r, `<circle r="9.4" fill="#2C5A20"/><circle r="8.2" fill="url(#gZuc)"/>` + ring(6, 3.6, (a, b, i)=> `<ellipse cx="${f1(a)}" cy="${f1(b)}" rx="1.3" ry=".8" transform="rotate(${i * 60} ${f1(a)} ${f1(b)})" fill="#CBD596"/>`)))),
+    blatt: ()=> g(pile(6, 20, 171, (x, y, r)=> at(x, y, r, `<path d="M-17 0 C-11 -11 8 -12 17 0 C8 11 -11 10 -17 0Z" fill="url(#gLeaf)"/><path d="M-16 0 C-5 -1 5 -1 16 0 M-6 -.5 L-2 -6 M2 -.5 L6 -6 M-6 .5 L-2 6 M2 .5 L6 6" stroke="#A8D88E" stroke-opacity=".7" stroke-width=".8" fill="none"/>`))),
+    kraeuter: ()=> g(pile(24, 25, 91, (x, y, r, i, q)=> at(x, y, r, `<path d="${blob(2.2 + q() * 1.6, .35, i + 1, 1.4, 1, 6)}" fill="${i % 3 ? "#3A8530" : "#62AC47"}"/>`))),
+    zitrone: ()=> g(`<circle r="24" fill="#E9BF1E"/><circle r="22" fill="#FFF7D6"/>` + Array.from({ length: 9 }, (_, k)=>{ const a0 = k / 9 * 6.2832 + .07, a1 = (k + 1) / 9 * 6.2832 - .07, r0 = 2.6, r1 = 19.5;
+      return `<path d="M${f1(Math.cos(a0) * r0)} ${f1(Math.sin(a0) * r0)} L${f1(Math.cos(a0) * r1)} ${f1(Math.sin(a0) * r1)} A${r1} ${r1} 0 0 1 ${f1(Math.cos(a1) * r1)} ${f1(Math.sin(a1) * r1)} L${f1(Math.cos(a1) * r0)} ${f1(Math.sin(a1) * r0)}Z" fill="url(#gLem)"/>`; }).join("") + `<ellipse cx="-8" cy="-10" rx="7" ry="3" fill="#fff" opacity=".35" transform="rotate(-30 -8 -10)"/>`),
+    garnele: ()=> g([[-14, -10, -10], [14, 4, 150], [-4, 16, 60]].map(([x, y, r])=> at(x, y, r,
+      `<path d="M6 13 C10 16 14 15 15 12 C12 12 10 11 9 9Z" fill="#F07B4E"/><path d="M6 13 C3 17 0 18 -3 16 C0 15 2 13 3 11Z" fill="#F07B4E"/>` +
+      Array.from({ length: 6 }, (_, j)=>{ const k = 5 - j, an = -2.3 + k * .55, px = Math.cos(an) * 9, py = Math.sin(an) * 9; return `<ellipse cx="${f1(px)}" cy="${f1(py)}" rx="${f1(7 - k * .55)}" ry="${f1(5.6 - k * .45)}" transform="rotate(${f1(an * 57.3 + 90)} ${f1(px)} ${f1(py)})" fill="url(#gShr)" stroke="#D8613A" stroke-width=".5"/>`; }).join("")
+    )).join("")),
+    fisch: ()=> g(`<g transform="rotate(-12)"><path d="${blob(30, .05, 3, 1.15, .6, 10)}" fill="url(#gFish)" stroke="#C8603C" stroke-width="1.2"/>` +
+      [-20, -9, 2, 13, 23].map((x)=> `<path d="M${x} -15 C${x + 7} -5 ${x + 7} 5 ${x} 15" stroke="#FFE6D8" stroke-opacity=".85" stroke-width="2" fill="none"/>`).join("") + `${hl(30, -10)}</g>`),
+    haehnchen: ()=> g(pile(6, 22, 101, (x, y, r, i)=> at(x, y, r, `<path d="${blob(9.6, .22, i + 11, 1.2, .9, 7)}" fill="url(#gChk)" stroke="#8A4E20" stroke-width=".6"/><path d="${blob(5, .3, i + 13, 1.2, .8, 6)}" fill="#FBE6C4" opacity=".5"/>${hl(9, -5)}`))),
+    hack: ()=> g(pile(32, 27, 111, (x, y, r, i, q)=> at(x, y, r, `<path d="${blob(3.2 + q() * 1.8, .35, i + 3, 1, 1, 6)}" fill="url(#gMinc)"/>`))),
+    speck: ()=> g(pile(9, 22, 121, (x, y, r)=> at(x, y, r, `<rect x="-7.5" y="-4.2" width="15" height="8.4" rx="2" fill="url(#gBac)"/><rect x="-7.5" y="-1.2" width="15" height="2.6" fill="#F7DFCF" opacity=".9"/>`))),
+    fleisch: ()=> g(pile(6, 22, 131, (x, y, r, i)=> at(x, y, r, `<path d="${blob(9.4, .16, i + 17, 1.15, .95, 6)}" fill="url(#gBeef)"/><path d="${blob(5, .25, i + 19, 1.1, .8, 6)}" fill="#B9644C" opacity=".5"/>${hl(10, -5)}`))),
+    ei: ()=> g(`<path d="${blob(26, .12, 5, 1.1, 1, 9)}" fill="url(#gEggW)" stroke="#E3D9C2" stroke-width=".8"/><circle cx="3" cy="-1" r="10.5" fill="url(#gYolk)"/><ellipse cx="-.5" cy="-5" rx="3.4" ry="2" fill="#fff" opacity=".55"/>`),
+    reis: ()=> g(pile(44, 27, 181, (x, y, r)=> at(x, y, r, `<ellipse rx="4.6" ry="1.9" fill="url(#gRice)" stroke="#D6CAA8" stroke-width=".4"/>`))),
+    nudel: ()=>{ const q = rng(191); return g(`<g fill="none" stroke-linecap="round">` + Array.from({ length: 14 }, ()=>{ const P = ()=> f1(q() * 56 - 28); const d = `M${P()} ${P()} C${P()} ${P()} ${P()} ${P()} ${P()} ${P()}`; return `<path d="${d}" stroke="#C9A04A" stroke-width="3.6"/><path d="${d}" stroke="#F1D58E" stroke-width="2.2"/>`; }).join("") + `</g>`); },
+    brot: ()=> g(`<path d="M-24 18 L-24 -6 C-29 -22 -10 -29 0 -22 C10 -29 29 -22 24 -6 L24 18 C24 21 -24 21 -24 18Z" fill="#94591F"/><path d="M-21 16 L-21 -5 C-25 -18 -9 -24 0 -18 C9 -24 25 -18 21 -5 L21 16Z" fill="url(#gBread)"/>` + pile(18, 16, 201, (x, y, r, i)=> at(x, y + 1, r, `<ellipse rx="${1 + (i % 3) * .5}" ry=".8" fill="#C99A55" opacity=".6"/>`))),
+    kaese: ()=> g(pile(24, 25, 211, (x, y, r)=> at(x, y, r, `<rect x="-5.5" y="-1.1" width="11" height="2.2" rx="1" fill="url(#gChs)" stroke="#C99A1E" stroke-width=".3"/>`))),
+    butter: ()=> `<path d="${blob(22, .15, 7, 1.2, 1, 9)}" fill="#F6DC86" opacity=".55"/>` + g(`<rect x="-13" y="-9" width="26" height="18" rx="2.6" fill="url(#gBut)" stroke="#D7B04C" stroke-width=".6"/>${hl(18, -6)}`),
+    honig: ()=> g(`<g fill="none" stroke-linecap="round"><path d="M-30 -14 C-10 -24 10 -4 30 -14 M-28 4 C-6 -8 12 14 30 2 M-24 20 C-4 10 14 28 28 18" stroke="#C98414" stroke-width="5.4" opacity=".9"/><path d="M-30 -14 C-10 -24 10 -4 30 -14 M-28 4 C-6 -8 12 14 30 2 M-24 20 C-4 10 14 28 28 18" stroke="#F9D070" stroke-width="1.6"/></g>`),
+    schoko: ()=> g(pile(7, 20, 221, (x, y, r, i)=> at(x, y, r, `<path d="${blob(7, .25, i + 9, 1.1, .9, 5)}" fill="url(#gChoc)"/>${hl(7, -3)}`))),
+    huelsen: ()=> g(pile(16, 23, 231, (x, y, r)=> at(x, y, r, `<ellipse rx="5.2" ry="4.3" fill="url(#gBean)"/><path d="M-1.5 -3.6 C.5 -1 .5 1 -1.5 3.6" stroke="#8E6830" stroke-width=".6" fill="none"/>`))),
+    nuss: ()=> g(pile(11, 22, 241, (x, y, r)=> at(x, y, r, `<path d="M0 -7.5 C5.5 -4 5.5 4 0 8.5 C-5.5 4 -5.5 -4 0 -7.5Z" fill="url(#gNut)" stroke="#8E6430" stroke-width=".5"/><path d="M0 -5 C2 -1 2 3 0 6" stroke="#B88C52" stroke-width=".6" fill="none"/>`))),
+    mehl: ()=> `<path d="${blob(27, .12, 3, 1.15, 1, 10)}" fill="#000" opacity=".1" transform="translate(2 3)"/><path d="${blob(27, .12, 3, 1.15, 1, 10)}" fill="url(#gMehl)"/><path d="${blob(13, .2, 4, 1.2, 1, 8)}" fill="#fff" opacity=".7" transform="translate(-6 -6)"/>`,
+    gewuerz: (col)=>{ const id = "gSp" + col.slice(1); return `<radialGradient id="${id}" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="${col}" stop-opacity=".75"/><stop offset=".25" stop-color="${col}"/><stop offset="1" stop-color="${col}" stop-opacity="1"/></radialGradient>` +
+      `<path d="${blob(20, .14, 9, 1.2, .95, 9)}" fill="#000" opacity=".12" transform="translate(2 3)"/><path d="${blob(20, .14, 9, 1.2, .95, 9)}" fill="url(#${id})"/><path d="${blob(9, .2, 8, 1.2, .9, 7)}" fill="#fff" opacity=".18" transform="translate(-5 -5)"/>` +
+      pile(16, 16, 251, (x, y)=> `<circle cx="${f1(x)}" cy="${f1(y)}" r=".9" fill="#000" opacity=".18"/>`); },
+    stueck: ()=> g(pile(6, 21, 261, (x, y, r, i)=> at(x, y, r, `<path d="${blob(8, .2, i + 21, 1.1, .9, 6)}" fill="url(#gStk)" stroke="#9C8660" stroke-width=".6"/>${hl(8, -4)}`))),
   };
   // Farbe kleiner Gewürzhäufchen nach Name
   function spiceColor(n){
@@ -304,11 +339,11 @@
     if(main && flat && kind !== "dish") inner += `<path d="M-60 -20 C-20 -60 40 -40 70 0 C40 40 -30 50 -60 20Z" fill="${LIQUID[main][0]}" opacity=".85"/>`;
     // Größe nach Anzahl: wenige Zutaten groß, viele kleiner
     const n = Math.min(list.length, 8);
-    const sc = (n <= 2 ? 1.9 : n <= 4 ? 1.55 : n <= 6 ? 1.3 : 1.12) * (flat ? 1.05 : 1);
+    const sc = (n <= 2 ? 2.1 : n <= 4 ? 1.75 : n <= 6 ? 1.5 : 1.32) * (flat ? 1.05 : 1);
     const wide = kind === "tray" || kind === "dish" || kind === "board";
     const spots = (n <= 2 ? [[-48, -6], [54, 10]] : n <= 4 ? [[-58, -46], [56, -48], [60, 50], [-52, 52]] : SPOTS).map(([x, y])=> wide ? [x * 1.4, y * .95] : [x, y]);
     // Geschnittenes liegt verstreut (zwei weitere Häufchen), Ganzes einmal
-    const SCATTER = new Set(["zwiebel", "paprika", "chili", "karotte", "kartoffel", "knoblauch", "kraeuter", "fruehling", "pilz", "zucchini", "huelsen", "nuss", "hack", "brokkoli", "speck", "blatt", "stueck", "garnele"]);
+    const SCATTER = new Set(["zwiebel", "paprika", "chili", "karotte", "kartoffel", "knoblauch", "kraeuter", "fruehling", "pilz", "zucchini", "huelsen", "nuss", "hack", "brokkoli", "speck", "blatt", "stueck"]);
     const extra = [];
     list.slice(0, 8).forEach((it, i)=>{
       const [x, y] = spots[i] || [0, 0];
@@ -321,6 +356,8 @@
       }
     });
     inner = inner.replace(/(<g class="ckIng")/, extra.join("") + "$1");
+    // Körnung über alle Zutaten (eine Ebene, damit der Filter nur einmal läuft)
+    inner = inner.replace(/(<g class="ckIng"[\s\S]*$)/, '<g filter="url(#ckGrain)">$1</g>');
     // Flüssigkeit im Topf: ein paar Bläschen
     if(main && (kind === "pot" || kind === "pan" || kind === "wok")) inner += `<g fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2">${ring(11, 112, (x, y, i)=> `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${3 + (i % 3) * 2}"/>`)}</g>`;
     if(!list.length && !main && kind === "pot") inner += `<g fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2">${ring(6, 60, (x, y)=> `<circle cx="${x}" cy="${y}" r="5"/>`)}</g>`;
