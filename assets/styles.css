@@ -3626,7 +3626,7 @@ html:not(.skin):not(.retro) .cookOverlay.ckNew .cookNav{display:flex;justify-con
 html:not(.skin):not(.retro) .cookOverlay.ckNew .cookNavBtn{flex:0 0 auto;width:auto}
 /* übrige Teile des Kochmodus auf Grün (Vorbereiten, Zutaten-Reiter, Timer-Leiste) */
 html:not(.skin):not(.retro) .cookOverlay.ckNew .cookChk{border-color:rgba(255,255,255,.55)}
-html:not(.skin):not(.retro) .cookOverlay.ckNew .cookChk::after{background:var(--a2Bg)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookChk::after{color:var(--a2Bg)}
 html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngRow.isStep{background:rgba(255,255,255,.12)}
 html:not(.skin):not(.retro) .cookOverlay.ckNew .cookTimer.isDone{background:#FFFFFF;color:#1D4A33}
 html:not(.skin):not(.retro) .cookOverlay.ckNew .cookTimer.isDone .cookTimerLabel{color:#1D4A33}
@@ -3640,3 +3640,38 @@ html:not(.skin):not(.retro) .cookOverlay.ckNew .cookTimer:not(.isDone) .cookTime
 html:not(.skin):not(.retro) .cookOverlay.ckNew .cookTimerBar{background:#FFFFFF}
 html:not(.skin):not(.retro) .cookOverlay.ckNew #cookPrev{justify-content:flex-start}
 html:not(.skin):not(.retro) .cookOverlay.ckNew #cookNext{justify-content:flex-end}
+/* 28b. A2 auch für Vorbereiten und den Zutaten-Reiter (Wunsch des Besitzers): keine Karten, keine Linien */
+html:not(.skin):not(.retro) .cookOverlay.ckNew{--cOnLeaf:var(--a2Bg)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew :is(.prepHead,.prepGroup,.cookIngs){background:none;border-radius:0;box-shadow:none;padding:0}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepHead{align-items:baseline;padding:12px 0 0;margin-bottom:1rem}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepTitle{font:800 clamp(min(3.25rem,15vw),14.5vw,6.5rem)/.9 "Koch Inter",var(--fontLarge);letter-spacing:-.05em;color:#FFFFFF}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepCount{color:var(--a2Sage);font:500 .9375rem/1.3 "Koch Inter",var(--fontUi)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepGroup + .prepGroup{margin-top:2rem}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepGroupTitle{padding:0 0 .35rem;color:var(--a2Sage);font:500 .9375rem/1.3 "Koch Inter",var(--fontUi)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepRow{padding:10px 0;min-height:44px;color:#FFFFFF;font:430 clamp(1.1875rem,4.6vw,1.5rem)/1.35 "Koch Inter",var(--fontUi);gap:14px}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepRow + .prepRow{box-shadow:none}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepBox{margin-top:.1em;box-shadow:inset 0 0 0 2px var(--a2Sage)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepRow.isDone .prepBox{background:#FFFFFF;box-shadow:none;color:var(--a2Bg)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepRow.isDone .prepText{color:var(--a2Sage)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepRow:focus-visible{outline-color:#FFFFFF;outline-offset:2px}
+html:not(.skin):not(.retro) .cookOverlay.ckNew.isPrep .cookProgress{opacity:1}
+/* Zutaten-Reiter: Haken · Menge (weiß, rechtsbündig) · Name (Salbei); Zutaten des Schritts mit weißem Namen statt Fläche */
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngs{margin-top:8px}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngRow{display:grid;grid-template-columns:auto minmax(4.25rem,auto) 1fr;column-gap:1rem;align-items:baseline;padding:8px 0;min-height:44px;border:0;background:none;font:430 1.125rem/1.35 "Koch Inter",var(--fontUi)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngRow + .cookIngRow{border-top:0}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngRow .cookChk{align-self:center}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngQty{order:1;color:#FFFFFF;font-weight:700;text-align:right}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngName{order:2;color:var(--a2Sage)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngRow.isStep{background:none}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngRow.isStep .cookIngName{color:#FFFFFF;font-weight:600}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngRow.isStep .cookIngQty{color:#FFFFFF}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngSection{margin:1.5rem 0 .35rem;color:var(--a2Sage);font:500 .9375rem/1.3 "Koch Inter",var(--fontUi)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngSection:first-child{margin-top:0}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookChk{border-color:var(--a2Sage)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .cookChk:checked{background:#FFFFFF;border-color:#FFFFFF}
+@media (min-width:768px){
+  html:not(.skin):not(.retro) .cookOverlay.ckNew .cookIngsHead{font:500 .9375rem/1.3 "Koch Inter",var(--fontUi);padding-left:0}
+}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepRow{transition:opacity .15s var(--ease)}
+html:not(.skin):not(.retro) .cookOverlay.ckNew .prepRow.isPressed{background:none;opacity:.6}
+@media (hover:hover) and (pointer:fine){ html:not(.skin):not(.retro) .cookOverlay.ckNew .prepRow:hover{background:none;opacity:.8} }
