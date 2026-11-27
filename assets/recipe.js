@@ -671,7 +671,8 @@ const cookOverlay = $("#cookOverlay");
     ckHead.querySelector('[aria-current="step"]')?.scrollIntoView({ block: "nearest", inline: "center" });
     ckRenderTimer();
     ckStage.hidden = !kind;
-    ckStage.innerHTML = kind ? CS.scene(kind, shown) + `<figcaption class="ckCap"><i aria-hidden="true"></i>${escHtml(gearLabel)}${ckInfo.heat && (CS.HEAT.has(kind) || kind === "dish") ? " · " + escHtml(ckInfo.heat) : ""}</figcaption>` : "";
+    // Zutatenbilder auf Wunsch des Besitzers weggelassen (Nov. 2026) – nur Gerät · Hitze als Zeile; CS.scene() bleibt für später
+    ckStage.innerHTML = kind ? `<figcaption class="ckCap"><i aria-hidden="true"></i>${escHtml(gearLabel)}${ckInfo.heat && (CS.HEAT.has(kind) || kind === "dish") ? " · " + escHtml(ckInfo.heat) : ""}</figcaption>` : "";
     const sv = currentServings();
     // Zutaten dieses Schritts als ruhige Liste (wie die Zutatenliste der Rezeptseite); ohne Zutaten keine Karte
     ckBonWrap.hidden = !hits.length;
