@@ -356,6 +356,8 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   (Kopfzeile, Linie und Punkte zeigen es schon), Punktreihe mit weichen Rändern, Fokusring in `--cLeaf`, Zeichnung blendet als Ganzes ein
   (nicht je Zutat – sonst läuft der Körnungs-Filter bei jedem Bild neu). Unslop-Runde (Abschnitt 27d): antippbare Zeiten im Dunkelmodus grün
   statt orange (galt im ganzen Standard-Look), „Timer starten“ als leiser grüner Knopf (nur „Weiter“ ist voll grün), Überschrift 600.
+  Timer-Box (`ckRenderTimer()`): cook-timer.js meldet alle 0,5 s – läuft derselbe Timer, nur Zeit und Linie erneuern, bei gleichem Zustand
+  nichts neu bauen (sonst verliert Tastatur/VoiceOver den Fokus); nach Start/Beenden springt der Fokus auf den neuen Knopf.
   Überschrift, Gerät, Hitze, Zeit und Bild erkennt `assets/cook-scene.js` (`KOCHBUCH_COOKSCENE.analyze()/scene()`) aus dem Schritttext –
   keine Lookbehind-Regexe (alte iOS). Zutaten möglichst echt gezeichnet: unregelmäßige Formen (`blob()`), viele kleine Stücke (`pile()`),
   Licht-Verläufe je Zutat (`g…` in `DEFS`), leichte Körnung (`ckGrain`, ein Filter über alle Zutaten); Ansicht aller Zutaten zum Prüfen:

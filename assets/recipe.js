@@ -592,8 +592,19 @@ const cookOverlay = $("#cookOverlay");
   function ckRenderTimer(){
     if(!ckTimer) return;
     const tm = ckInfo && ckInfo.time, run = ckStepTimer();
-    if(!tm && !run){ ckTimer.hidden = true; ckTimer.innerHTML = ""; return; }
+    if(!tm && !run){ ckTimer.hidden = true; ckTimer.innerHTML = ""; delete ckTimer.dataset.state; return; }
     ckTimer.hidden = false;
+    // Läuft derselbe Timer weiter, nur Zeit und Linie erneuern – die Knöpfe bleiben stehen, sonst verliert Tastatur/VoiceOver
+    // alle 0,5 s den Fokus (cook-timer.js meldet jeden Takt)
+    const state = run ? `${run.id}|${run.done ? 1 : 0}` : `go|${tm.secs}`;
+    if(run && !run.done && ckTimer.dataset.state === state){
+      const o = ckTimer.querySelector(".ckTime"), bar = ckTimer.querySelector(".ckTimerBar");
+      if(o) o.textContent = mmss(run.left);
+      if(bar) bar.style.transform = `scaleX(${Math.min(1, 1 - run.left / run.total).toFixed(3)})`;
+      return;
+    }
+    if(ckTimer.dataset.state === state) return;   // nichts geändert (z. B. Schritt neu gezeichnet) → Knöpfe behalten
+    ckTimer.dataset.state = state;
     if(run){
       ckTimer.classList.toggle("isDone", !!run.done);
       ckTimer.innerHTML = `<output class="ckTime">${run.done ? "Fertig" : mmss(run.left)}</output>
@@ -612,6 +623,8 @@ const cookOverlay = $("#cookOverlay");
     if(b.dataset.ck === "plus" && ckTimer.dataset.id){ T.addTime(ckTimer.dataset.id, 60); lightTap(); }
     if(b.dataset.ck === "stop" && ckTimer.dataset.id){ T.remove(ckTimer.dataset.id); lightTap(); }
     ckRenderTimer();
+    // Der gedrückte Knopf kann durch den neuen Zustand ersetzt sein → Fokus auf den neuen Knopf, nicht ins Leere
+    if(!b.isConnected) requestAnimationFrame(()=>{ if(!ckTimer.contains(document.activeElement)) ckTimer.querySelector("button")?.focus({ preventScroll: true }); });
   });
   T?.onChange(()=>{ if(cookOverlay?.classList.contains("ckNew") && !prepMode) ckRenderTimer(); });
   // Zutaten eines Schritts ohne Doppelte: nennt der Schritt einen Abschnitt („Marinade“, „Soße“), nur dessen Zutaten
