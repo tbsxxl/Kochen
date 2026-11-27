@@ -246,6 +246,12 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     Vertrag `create(canvas)` → `{resize, render(t, dt, still, {scroll, px, py, near}), dispose}`; ohne Grafikkarte dunkler Verlauf
     `.cxPoster` mit den 2D-Teilchen). **Nordwall:** Pergament-Landkarte, darüber eine Messing-Armillarsphäre mit glühendem Kern,
     Türme aus Zahnrädern wachsen aus der Karte und versinken wieder, 3D-Schnee; Scrollen senkt die Kamera.
+    **Nordwall, fünfte Fassung (Dez. 2026, Richtung D2 „Karte des Reichs“ aus `bencium-innovative-ux-designer`, vom Besitzer festgelegt;
+    `docs/skins/nordwall-d2.md`, letzter Block in `nordwall.css`):** Pergament `#E2D3B2` statt Schiefer, vier Tinten (Text, Rot = Gerichte/Aktives,
+    Waldgrün = Kategorien, Meerblau = Zahlen/Daten), Cinzel weit gesperrt + Garamond kursiv. Startseite = Landkarte aus Schrift (`.nwMap` in
+    `nordwall.js`): Norden oben, vier größte Kategorien an den Himmelsrichtungen (`#homeCatCount` in `home.html`), Gericht des Tages als Hauptstadt
+    in der Mitte; die 3D-Karte liegt unter einem Pergament-Schleier dahinter. Keine Kartenflächen/Rahmen; Kochmodus unverändert.
+    Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.
     **Jahr 3000:** Zukunftsstadt im Comic-Stil (Toon-Schattierung, schwarze Umrisse über Rückseiten-Hülle) in der Dämmerung: Türme mit
