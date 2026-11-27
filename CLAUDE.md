@@ -358,6 +358,11 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   statt orange (galt im ganzen Standard-Look), „Timer starten“ als leiser grüner Knopf (nur „Weiter“ ist voll grün), Überschrift 600.
   Timer-Box (`ckRenderTimer()`): cook-timer.js meldet alle 0,5 s – läuft derselbe Timer, nur Zeit und Linie erneuern, bei gleichem Zustand
   nichts neu bauen (sonst verliert Tastatur/VoiceOver den Fokus); nach Start/Beenden springt der Fokus auf den neuen Knopf.
+  **Zutatenbilder weggelassen (Nov. 2026, Besitzer: „Zutatenbilder ganz weglassen“, nachdem echte Fotos nicht in einheitlicher Qualität zu
+  bekommen waren – Commons hat keine passende Serie und drosselt):** `#ckStage` zeigt nur noch „Gerät · Hitze“ als Zeile; `CS.scene()` und die
+  Zeichnungen bleiben in cook-scene.js, werden aber nicht aufgerufen. Am iPad zwei Spalten (Abschnitt 27e). Die Angaben zu Zeichnungen unten
+  gelten nur noch für `scene()`. Laufend: Neugestaltung der Schritt-Ansicht mit `bencium-innovative-ux-designer` (Besitzer mochte A, B, F;
+  Feinrunde A2/B2/F2) – noch keine Richtung festgelegt.
   Überschrift, Gerät, Hitze, Zeit und Bild erkennt `assets/cook-scene.js` (`KOCHBUCH_COOKSCENE.analyze()/scene()`) aus dem Schritttext –
   keine Lookbehind-Regexe (alte iOS). Zutaten möglichst echt gezeichnet: unregelmäßige Formen (`blob()`), viele kleine Stücke (`pile()`),
   Licht-Verläufe je Zutat (`g…` in `DEFS`), leichte Körnung (`ckGrain`, ein Filter über alle Zutaten); Ansicht aller Zutaten zum Prüfen:

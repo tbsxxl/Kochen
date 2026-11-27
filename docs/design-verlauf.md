@@ -453,3 +453,8 @@ Blumenkohl, Pasten.
 
 Unslop über den Kochmodus (Besitzer: „Alle vier umsetzen“): Zeiten-Kapseln im Dunkelmodus waren orange → grün; „Timer starten“ leise,
 damit nur „Weiter“ laut ist; Überschrift 600; Abstände auf 4 px. Richtung: ruhig, genau, ein wenig warm; die Draufsicht ist das eine reiche Element.
+
+Zutatenbilder im Kochmodus: Besitzer wollte erst echte Fotos statt Zeichnungen; Commons liefert keine einheitliche Serie (und drosselt),
+Canva-Kontingent zu klein → Besitzer: „Zutatenbilder ganz weglassen“. Gerät · Hitze bleibt als Zeile. Parallel zehn Schrift-Entwürfe
+(bencium-innovative) für die Schritt-Ansicht: A (Tätigkeit riesig auf Feld-Grün), B (Mengen-Spalte zuerst), F (eine Spalte im Blocksatz,
+Zutaten im Text) blieben im Kopf → Feinrunde A2/B2/F2.

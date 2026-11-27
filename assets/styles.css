@@ -3556,3 +3556,12 @@ html:not(.skin):not(.retro) .cookOverlay.ckNew .ckTBtn.primary{background:rgba(2
 html:not(.skin):not(.retro) .cookOverlay.ckNew .ckTimer:not([hidden]){padding:16px 20px}
 .ckNew .ckBonHead{padding:12px 0}
 .ckNew .ckBonRows li{padding:12px 0}
+/* 27e. Kochmodus ohne Zutatenbilder (Besitzer: „Zutatenbilder ganz weglassen“, Nov. 2026): Gerät · Hitze als ruhige Zeile unter dem Text,
+   am iPad zwei Spalten (Schritt links, Zutaten-Karte rechts) statt Bild in der Mitte. */
+.ckNew .ckStage:not([hidden]){margin:16px 0 0;max-width:none;text-align:left}
+.ckNew .ckCap{margin-top:0;font-size:.9375rem}
+@media (min-width:768px){
+  html:not(.skin):not(.retro) .cookOverlay.ckNew:not(.isPrep) #cookPanelSteps{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);grid-template-areas:"head bon" "text bon" "stage bon" "timer bon" ". bon" "nav nav";grid-template-rows:auto auto auto auto 1fr auto;gap:0 48px}
+  .ckNew .ckStage{align-self:start}
+  .ckNew .ckBonWrap{align-self:start;margin-top:0}
+}
