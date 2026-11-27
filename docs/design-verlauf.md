@@ -450,3 +450,6 @@ Besitzer: „bei Tiramisu haben die Bilder nichts damit zu tun“ (Schneidebrett
 Schokostücke). Alle 76 Rezepte Schritt für Schritt durchgesehen (`tools/cook-scenes.js`) und die Erkennung umgebaut: Gerät bleibt
 vom vorigen Schritt, Inhalt sammelt sich, Creme als Schicht, Biskuits in Reihen, eigene Zeichnungen für Creme, Biskuit, Mozzarella,
 Blumenkohl, Pasten.
+
+Unslop über den Kochmodus (Besitzer: „Alle vier umsetzen“): Zeiten-Kapseln im Dunkelmodus waren orange → grün; „Timer starten“ leise,
+damit nur „Weiter“ laut ist; Überschrift 600; Abstände auf 4 px. Richtung: ruhig, genau, ein wenig warm; die Draufsicht ist das eine reiche Element.

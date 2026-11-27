@@ -344,7 +344,8 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   fehlt ohne Zutaten). Den Papier-Bon mit Zackenrand und Schreibmaschinenschrift hat der Besitzer abgelehnt („passt nicht zum cleanen
   Design“): Systemschrift, nichts schief, Haarlinien (Abschnitt 27b). Skill-Runde (Abschnitt 27c): „Schritt n von m“ nur fürs Vorlesen
   (Kopfzeile, Linie und Punkte zeigen es schon), Punktreihe mit weichen Rändern, Fokusring in `--cLeaf`, Zeichnung blendet als Ganzes ein
-  (nicht je Zutat – sonst läuft der Körnungs-Filter bei jedem Bild neu).
+  (nicht je Zutat – sonst läuft der Körnungs-Filter bei jedem Bild neu). Unslop-Runde (Abschnitt 27d): antippbare Zeiten im Dunkelmodus grün
+  statt orange (galt im ganzen Standard-Look), „Timer starten“ als leiser grüner Knopf (nur „Weiter“ ist voll grün), Überschrift 600.
   Überschrift, Gerät, Hitze, Zeit und Bild erkennt `assets/cook-scene.js` (`KOCHBUCH_COOKSCENE.analyze()/scene()`) aus dem Schritttext –
   keine Lookbehind-Regexe (alte iOS). Zutaten möglichst echt gezeichnet: unregelmäßige Formen (`blob()`), viele kleine Stücke (`pile()`),
   Licht-Verläufe je Zutat (`g…` in `DEFS`), leichte Körnung (`ckGrain`, ein Filter über alle Zutaten); Ansicht aller Zutaten zum Prüfen:
