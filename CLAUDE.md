@@ -80,6 +80,10 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
 
 - **Skills für Reviews:** `apple-design` (HIG), `impeccable`, Emil Kowalskis Paket (`emil-design-eng`, `animate`, `review-animations`,
   `mobile-native`, `break-ui`; sein `apple-design` heißt hier `apple-design-web`), `design-taste-frontend`, `unslop`.
+  Dazu (Nov. 2026, vom Besitzer installiert, MIT, github.com/bencium/bencium-claude-code-design-skill): `bencium-controlled-ux-designer`
+  (fragt vor Design-Entscheidungen, Barrierefreiheit/Bewegung/Responsive) und `bencium-innovative-ux-designer` (eigene Bildsprache über
+  zehn Typo-Richtungen – nur für Neues, nicht für kleine Korrekturen). Im Original-Repo liegt die `SKILL.md` in `<name>/skills/<name>/`;
+  kopiert ist nur dieser innere Ordner.
   `swiftui-expert-skill` und `shadcn` passen nicht zu dieser Web-App. Dateien in `.agents/skills/`, Verweise in `.claude/skills/`;
   ein beim Installieren angelegter Ordner `agent/` muss gelöscht werden (Jekyll bricht sonst ab).
 - **Standard-Look „Markthalle“:** Feld-Seiten (`body.fieldPage`: Start, Listen) haben oben ein Basilikum-Farbfeld `--field`
