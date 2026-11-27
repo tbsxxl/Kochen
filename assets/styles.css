@@ -3533,3 +3533,15 @@ html:not(.skin):not(.retro) .cookOverlay.ckNew{--ckMono:var(--fontUi)}
 /* Überschrift wie alle Titel im Standard-Look: Systemschrift, kräftig, normal geschrieben (Besitzer: Fraunces passt nicht) */
 .ckNew .ckTitle{font:700 clamp(1.75rem, 7.4vw, 2.375rem)/1.12 var(--fontLarge);letter-spacing:-.022em}
 @media (min-width:768px){.ckNew .ckTitle{font-size:clamp(2rem, 3.6vw, 2.75rem)}}
+/* 27c. Skill-Runde Kochmodus (impeccable, apple-design, mobile-native, emil-design-eng, break-ui, unslop; Nov. 2026):
+   „Schritt n von m“ nur noch fürs Vorlesen (Kopfzeile „2/6“, Fortschrittslinie und Punkte zeigen es schon dreimal),
+   Punktreihe blendet an angeschnittenen Rändern weich aus, Fokusring im Kochmodus-Grün, Zeichnung blendet als Ganzes ein
+   (eine zusammengesetzte Ebene statt vieler Gruppen unter dem Körnungs-Filter – der Filter lief sonst bei jedem Bild neu). */
+.ckNew .ckEyebrow{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.ckNew .ckHead{padding-top:6px}
+.ckNew .ckDots{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 16px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 16px),transparent)}
+.ckNew :is(.ckDot,.ckTBtn):focus-visible{outline:2px solid var(--cLeaf);outline-offset:2px}
+.ckNew .ckIng{animation:none}
+.ckNew .ckStage svg{animation:ckStageIn .4s var(--easeSheet) both}
+@keyframes ckStageIn{from{opacity:0;transform:scale(.97)}}
+@media (prefers-reduced-motion: reduce){.ckNew .ckStage svg{animation:none}}

@@ -342,7 +342,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   (`#ckTimer`, startet/verlängert/beendet den Timer des Schritts), Draufsicht als SVG (`#ckStage`: Pfanne/Topf/Wok/Blech/Form/Schüssel/
   Sieb/Mixer/Brett/Teller mit Zutaten-Symbolen) mit Gerät · Hitze darunter, ruhige Karte „Für diesen Schritt“ mit den Zutaten (`#ckBon`,
   fehlt ohne Zutaten). Den Papier-Bon mit Zackenrand und Schreibmaschinenschrift hat der Besitzer abgelehnt („passt nicht zum cleanen
-  Design“): Systemschrift, nichts schief, Haarlinien (Abschnitt 27b).
+  Design“): Systemschrift, nichts schief, Haarlinien (Abschnitt 27b). Skill-Runde (Abschnitt 27c): „Schritt n von m“ nur fürs Vorlesen
+  (Kopfzeile, Linie und Punkte zeigen es schon), Punktreihe mit weichen Rändern, Fokusring in `--cLeaf`, Zeichnung blendet als Ganzes ein
+  (nicht je Zutat – sonst läuft der Körnungs-Filter bei jedem Bild neu).
   Überschrift, Gerät, Hitze, Zeit und Bild erkennt `assets/cook-scene.js` (`KOCHBUCH_COOKSCENE.analyze()/scene()`) aus dem Schritttext –
   keine Lookbehind-Regexe (alte iOS). Zutaten möglichst echt gezeichnet: unregelmäßige Formen (`blob()`), viele kleine Stücke (`pile()`),
   Licht-Verläufe je Zutat (`g…` in `DEFS`), leichte Körnung (`ckGrain`, ein Filter über alle Zutaten); Ansicht aller Zutaten zum Prüfen:
