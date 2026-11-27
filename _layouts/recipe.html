@@ -284,7 +284,12 @@ layout: default
     <div class="cookPanel" id="cookPanelSteps" role="tabpanel">
       <!-- Vorbereiten (Mise en place): vor Schritt 1, Inhalt aus assets/prep.js bzw. `prep:` im Front Matter -->
       <div class="cookPrep" id="cookPrep" hidden></div>
+      <!-- Standard-Look (assets/cook-scene.js): Schritt-Punkte und Überschrift, großer Timer, Draufsicht, Bon „Jetzt“ -->
+      <div class="ckHead" id="ckHead" hidden></div>
       <div class="cookStep" id="cookStepText" aria-live="polite"></div>
+      <div class="ckTimer" id="ckTimer" hidden></div>
+      <figure class="ckStage" id="ckStage" hidden></figure>
+      <div class="ckBonWrap" id="ckBonWrap" hidden><div class="ckBon" id="ckBon"></div></div>
       <div class="cookStepIngs" id="cookStepIngs" hidden>
         <div class="cookStepIngsLabel">Dafür brauchst du</div>
         <div class="cookStepIngsList" id="cookStepIngsList"></div>
@@ -307,6 +312,7 @@ layout: default
 
 
 <script defer src="{{ '/assets/prep.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+<script defer src="{{ '/assets/cook-scene.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script defer src="{{ '/assets/recipe.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script defer src="{{ '/assets/recipe-pdf.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 

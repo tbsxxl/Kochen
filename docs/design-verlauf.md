@@ -431,3 +431,10 @@ Zauberschule), kaum lesbarer Platzhalter im Suchfeld (Jahr 3000), Zeitangaben au
 Schrift, Grün dunkler `#2F7550`), Boxengasse-Titel nach einer Zeile abgeschnitten (jetzt zwei Zeilen), Glasklar-Eis lag auf Unterseiten
 mitten auf dem Seitentitel (jetzt kleiner rechts darüber), angeschnittene Zwischenüberschrift in der Zutatenliste (Zwei Städte, Akte),
 Silbentrennung „BUT-TER“ in Versal-Titeln (Bauhaus, Nordwall).
+
+## Kochmodus: Schritt als Karte mit Draufsicht (Nov. 2026)
+
+Der Besitzer zeigte einen Kochmodus aus einem eigenen Entwurf und wollte ihn „ein wenig schöner“ im Kochbuch. Gewählt: alle vier Bausteine
+mit Zeichnung – große Schritt-Überschrift mit Schritt-Punkten, große Timer-Box im Schritt, Papier-Bon „Jetzt“ mit den Zutaten des Schritts
+und dem Gerät, und eine automatisch erzeugte Draufsicht (Pfanne, Topf, Brett … mit den Zutaten). Vorerst nur im Standard-Look
+(„Erstmal nur Standard“); die Skins behalten ihren bisherigen Kochmodus.
