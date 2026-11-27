@@ -11,8 +11,8 @@
   const cap = (s)=> s ? s[0].toUpperCase() + s.slice(1) : s;
 
   // ---------- Überschrift ----------
-  const PREP = /^(in|im|auf|aus|mit|für|bei|zu|zum|zur|unter|über|nach|vom|von|am|an|ins|durch|ohne|um|neben|gegen)$/i;
-  const UNIT = /^(EL|TL|g|kg|ml|l|Min\.?|Minuten?|Std\.?|Stunden?|Sek\.?|Prise|Stk\.?|Stück|Dose|Bund|Zehen?|cm|mm|°C|Ober-\/Unterhitze|Umluft|Packung(sangabe)?|Hälfte|Hälften|Viertel|Drittel)$/i;
+  const PREP = /^(in|im|auf|aus|mit|für|bei|zu|zum|zur|unter|über|nach|vom|von|am|an|ins|durch|ohne|um|neben|gegen|vor|beim)$/i;
+  const UNIT = /^(EL|TL|g|kg|ml|l|Min\.?|Minuten?|Std\.?|Stunden?|Sek\.?|Prise|Stk\.?|Stück|Dose|Bund|Zehen?|cm|mm|°C|Ober-\/Unterhitze|Umluft|Packung(sangabe)?|Hälfte|Hälften|Viertel|Drittel|Unterhitze|Oberhitze|Ober-|Umluft|Grad|Garzeit|Backzeit)$/i;
   const VERB = /^[a-zäöüß]+(en|ern|eln)$/;
   const NOT_VERB = new Set(["einen", "einem", "einer", "eines", "den", "dem", "denen", "kleinen", "großen", "dünnen", "dicken", "feinen", "groben", "kalten", "warmen", "heißen", "restlichen", "ganzen", "halben", "frischen", "beiden", "anderen", "oben", "unten", "allen", "vorhandenen", "geschnittenen", "gehackten", "gekochten", "weichen", "festen", "flüssigen", "gleichen", "selben", "derselben", "dieselben", "mittleren", "hohen", "starken", "niedrigen", "offenen", "ofenfesten", "tiefen", "flachen", "verschiedenen", "vielen", "wenigen", "einigen", "fertigen", "letzten", "ersten", "nächsten", "mundgerechten"]);
   // Wörter, die nur wegen des Satzanfangs groß geschrieben sind
@@ -20,10 +20,14 @@
     "beide beiden dann danach inzwischen nun optional kurz etwa ca währenddessen anschließend zuerst zunächst nochmals erneut jetzt sofort " +
     "vorsichtig gut fein grob frisch frische frischen heiße heißes heißen kalte kaltes kalten große großen kleine kleinen übrige übrigen " +
     "gesamte gesamten mit nach je pro ggf evtl falls wenn sobald solange während bis noch weitere weiteren dazu nebenbei parallel " +
-    "beiseite außerdem ebenfalls abwechselnd gleichzeitig vorher später zum zur ganz halb").split(" "));
+    "beiseite außerdem ebenfalls abwechselnd gleichzeitig vorher später zum zur ganz halb " +
+    // Zählwörter und Mengen-Hauptwörter („Die Hälfte der Creme“, „Zweite Schicht Biskuits“) → das Hauptwort danach zählt
+    "erste ersten zweite zweiten dritte dritten letzte letzten mindestens höchstens ungefähr insgesamt zusätzlich nochmal einmal " +
+    "warm kalt heiß lauwarm jede jeden jedes jeder hälfte rest reste teil schicht lage menge prise portion portionen stück stücke").split(" "));
+  const HOW = new Set("steif glatt cremig fein grob goldbraun goldgelb knusprig weich glasig scharf kalt warm heiß kräftig hellgelb dünn dick".split(" "));
   // Abkürzungen mit Punkt, damit „ca. 5 Min.“ keinen Satz beendet
   const ABBR = /\b(ca|Min|Std|Sek|bzw|evtl|ggf|z\.B|u\.a|Pkt|EL|TL|Stk|max|min|mind|gr|Nr|etc)\./g;
-  const MODAL = new Set(["lassen", "geben", "stellen", "werden"]);
+  const MODAL = new Set(["lassen", "geben", "stellen", "werden", "nehmen", "holen"]);
   const words = (str)=> str.split(/\s+/).filter(Boolean);
   const clean = (w)=> w.replace(/[^\p{L}\-&]/gu, "");
   const isVerb = (w)=> VERB.test(w) && !NOT_VERB.has(w);
@@ -49,38 +53,72 @@
     let parts = clause.split(/,\s*/);
     // Nebensatz vorn („Sobald das Fleisch Farbe angenommen hat, …“) → der Hauptsatz danach zählt
     if(parts.length > 1 && /^(sobald|wenn|während|bis|falls|nachdem|sowie|solange)$/i.test(words(parts[0])[0] || "")) parts = parts.slice(1);
-    clause = parts.length > 1 && lastVerb(words(parts[0])) ? parts[0] : parts.join(", ");
+    const v0 = parts.length > 1 ? lastVerb(words(parts[0])) : null;
+    clause = v0 && !MODAL.has(v0.w) ? parts[0] : parts.join(", ");
+    // „Espresso zubereiten und abkühlen lassen“ → das erste Tun; nicht bei „… geben und aufschlagen“ (geben/stellen sagt nichts)
+    const und = clause.split(/\s+und\s+/);
+    // Aufzählungen („Butter, Honig und Sahne zugeben und köcheln“) laufen bis zum ersten Tun
+    for(let j = 0, acc = ""; und.length > 1 && j < und.length - 1; j++){
+      acc = acc ? acc + " und " + und[j] : und[j];
+      const w0 = words(und[j]), lw = clean(w0[w0.length - 1] || "");
+      if(isVerb(lw)){ if(!MODAL.has(lw)) clause = acc; break; }
+    }
     const ws = words(clause);
     const v = lastVerb(ws);
     // erstes Hauptwort, das nicht zu einer Ortsangabe gehört („in einer großen Pfanne“ → übersprungen, danach „Öl“)
-    let noun = null, inPP = false;
+    let noun = null, inPP = false, pp = "", withNoun = null;
     for(let i = 0; i < (v ? v.i : ws.length); i++){
       const w = clean(ws[i]).replace(/-$/, "");
-      if(PREP.test(w)){ inPP = true; continue; }
+      if(PREP.test(w)){ inPP = true; pp = w.toLowerCase(); continue; }
       if(!/^\p{Lu}/u.test(w) || w.length < 2 || UNIT.test(w) || START.has(w.toLowerCase())) continue;
-      if(inPP){ inPP = false; continue; }
-      noun = w; break;
+      // „vor Ende der Schmorzeit“: Genitiv gehört noch zur Ortsangabe
+      if(inPP){ inPP = /^(der|des)$/i.test(clean(ws[i + 1] || "")); if(pp === "mit" && !withNoun) withNoun = w; continue; }
+      noun = w;
+      // „Passierte Tomaten“, „Getrocknete Tomaten“: Eigenschaftswort am Satzanfang + Hauptwort
+      const nx = clean(ws[i + 1] || "");
+      if(i + 1 < (v ? v.i : ws.length) && /(te|ten|tes|ene|enen|ige|igen|ische|ischen|liche|lichen)$/.test(w) && !/,$/.test(ws[i]) && /^\p{Lu}/u.test(nx) && !UNIT.test(nx) && !START.has(nx.toLowerCase())) noun = `${w} ${nx}`;
+      break;
     }
-    let ti = v ? (noun ? `${noun} ${v.w}` : cap(v.w)) : ws.slice(0, 3).join(" ");
+    // „steif schlagen“, „glasig anschwitzen“: das Wie gehört dazu
+    const how = v && v.i > 0 && HOW.has(clean(ws[v.i - 1]).toLowerCase()) ? clean(ws[v.i - 1]).toLowerCase() + " " : "";
+    let ti = v ? (noun ? `${noun} ${how}${v.w}` : withNoun ? `Mit ${withNoun} ${v.w}` : cap(how + v.w)) : ws.slice(0, 3).join(" ");
     if(ti.length > 34) ti = ti.slice(0, 32).replace(/\s+\S*$/, "") + " …";
     return { title: ti, body: t };
   }
 
   // ---------- Gerät und Hitze ----------
   const KINDS = [
-    ["blender", /pürier|stabmixer|mixer|zerkleiner/],
+    ["blender", /pürier|stabmixer|standmixer|\bmixer|\bmixen/],
     ["wok", /\bwok/],
-    ["tray", /backblech|blech|backofen|\bofen\b|ofenfest|backpapier|gratinier|im ofen|backen|auflaufform|backform|form\b/],
+    ["tray", /backblech|blech|backofen|\bofen\b|ofenfest|backpapier|gratinier|im ofen|\bbacken|backzeit|auflaufform|backform|form\b/],
     ["sieve", /\bsieb|abgie(ß|ss)en|abtropfen/],
-    ["pan", /pfanne|anbraten|anrösten|rösten|anschwitzen|braten|scharf an/],
-    ["pot", /topf|kochen|köcheln|garen|wasserkocher|nudelwasser|salzwasser|schmor|einkochen|aufkochen|reduzier|ablöschen|simmern|kasserolle/],
-    ["bowl", /schüssel|verrühren|vermengen|verrühr|vermischen|mischen|marinier|kneten|teig|dressing|verquirl|aufschlagen|\brühren|glatt rühren|unterheben/],
-    ["board", /schneiden|hacken|würfeln|halbieren|vierteln|schälen|reiben|hobeln|brett|zupfen|entkernen|putzen/],
-    ["plate", /anrichten|servieren|teller|dazu passt|garnieren|bestreuen/],
+    ["pan", /pfanne|anbraten|anrösten|rösten|anschwitzen|braten|scharf an|\berhitz|\berwärm|schmelz|zerlass|bräun/],
+    ["pot", /topf|frittier|kochen|köcheln|garen|wasserkocher|nudelwasser|salzwasser|schmor|einkochen|aufkochen|reduzier|ablöschen|simmern|kasserolle/],
+    ["bowl", /schüssel|verrühren|vermengen|verrühr|vermischen|mischen|marinier|kneten|\bteig\b|dressing|verquirl|aufschlagen|\brühren|glatt rühren|unterheben|handmixer|rührgerät|schneebesen|steif schlagen|schaumig|\bheben\b|eier trennen/],
+    ["board", /schneiden|ausrollen|teigling|hacken|würfeln|halbieren|vierteln|schälen|reiben|hobeln|brett|zupfen|entkernen|putzen/],
+    ["plate", /anrichten|teller/],
   ];
   const LABEL = { blender: "Mixer", wok: "Wok", tray: "Backofen", sieve: "Sieb", pan: "Pfanne", pot: "Topf", bowl: "Schüssel", board: "Schneidebrett", plate: "Teller" };
   const HEAT = new Set(["wok", "tray", "pan", "pot"]);
+  // ausdrücklich genannte Geräte schlagen Tätigkeiten („in einer ofenfesten Pfanne“ → Pfanne)
+  const NOUNS = [["pan", /pfanne/], ["pot", /topf|bräter|kasserolle/], ["wok", /\bwok/], ["dish", /auflaufform|backform|\bform\b|gratinform/],
+    ["tray", /backblech|\bblech/], ["bowl", /schüssel|rührgefäß|rührschüssel/], ["sieve", /\bsieb/], ["blender", /standmixer|stabmixer|\bmixer/], ["plate", /teller|platte/]];
+  // diese Tätigkeiten wechseln das Gerät sicher; alle anderen (rühren, erhitzen, braten …) bleiben im vorigen Topf/der Pfanne
+  const STRONG = new Set(["tray", "dish", "sieve", "board", "blender", "plate"]);
   function gear(text){
+    const r = gear0(text); if(!r.kind) return r;
+    const raw = String(text || "").toLowerCase().split(/[.!?;]\s+/).filter((x)=> !/vorheiz|wasserkocher/.test(x)).join(" ");
+    let hit = null;
+    for(const [k, re] of NOUNS){ const m = raw.match(re); if(m && (!hit || m.index < hit[1])) hit = [k, m.index]; }
+    if(hit && hit[0] !== r.kind && !(r.kind === "plate")){
+      const k = hit[0]; const nm = String(text).match(/\b([A-ZÄÖÜ][a-zäöüß]*(?:pfanne|topf|form|blech|schüssel|wok|sieb|kasserolle|bräter))\b/);
+      return { kind: k, label: nm ? nm[1] : (k === "dish" ? "Auflaufform" : LABEL[k]), strong: true, noun: true };
+    }
+    r.noun = !!hit;
+    r.strong = !!hit || STRONG.has(r.kind) || /salzwasser|nudelwasser|wasser.{0,30}aufkoch/.test(raw);
+    return r;
+  }
+  function gear0(text){
     let low = " " + String(text || "").toLowerCase() + " ";
     // „Backofen vorheizen“ / Wasserkocher ist Vorbereitung – zählt nur, wenn sonst nichts passiert
     const sentences = low.split(/[.!?;]\s+/), rest = sentences.filter((s)=> !/vorheiz|wasserkocher/.test(s)).join(" ");
@@ -93,14 +131,18 @@
     // Wo gekocht wird, zählt mehr als wo geschnitten wird („Zwiebel hacken und in Butter anschwitzen“ → Pfanne)
     const heatHits = hits.filter(([k])=> HEAT.has(k));
     const pool = heatHits.length ? heatHits : hits;
-    let best = pool.length ? pool.reduce((a, b)=> b[1] < a[1] ? b : a)[0] : "board";
+    // nichts erkannt → kein eigenes Gerät (recipe.js nimmt dann das vom vorigen Schritt oder zeigt kein Bild)
+    let best = pool.length ? pool.reduce((a, b)=> b[1] < a[1] ? b : a)[0] : null;
     // „Anrichten: …“, „Servieren: …“ → Teller
     if(/^\s*(anrichten|servieren)\b/.test(low)) best = "plate";
+    if(!best) return { kind: null, label: "" };
     const raw = String(text || "");
     // Name aus dem Text übernehmen, wenn er genauer ist („Schmortopf“, „Auflaufform“)
     const nm = raw.match(/\b([A-ZÄÖÜ][a-zäöüß]*(?:pfanne|topf|form|blech|schüssel|wok|sieb|kasserolle|bräter))\b/);
     let label = LABEL[best];
-    if(nm && ["pan", "pot", "tray", "bowl", "sieve", "wok"].includes(best)) label = nm[1];
+    const SUF = { pfanne: "pan", topf: "pot", kasserolle: "pot", bräter: "pot", form: "dish", blech: "tray", schüssel: "bowl", wok: "wok", sieb: "sieve" };
+    const sufKind = nm ? SUF[Object.keys(SUF).find((x)=> nm[1].toLowerCase().endsWith(x))] : null;
+    if(nm && sufKind === best) label = nm[1];
     if(best === "tray" && /auflaufform|backform|\bform\b|gratin/i.test(raw) && !/blech/i.test(raw)){ best = "dish"; if(!nm) label = "Auflaufform"; }
     return { kind: best, label };
   }
@@ -131,7 +173,8 @@
     ["paprika", /paprika(?!pulver|gewürz)|spitzpaprika/],
     ["karotte", /karotte|möhre|möhren/],
     ["kartoffel", /kartoffel|süßkartoffel|pommes|fries|wedges/],
-    ["brokkoli", /brokkoli|broccoli|blumenkohl|romanesco/],
+    ["blumenkohl", /blumenkohl/],
+    ["brokkoli", /brokkoli|broccoli|romanesco/],
     ["pilz", /pilz|champignon|shiitake|steinpilz/],
     ["zucchini", /zucchini|gurke|aubergine/],
     ["blatt", /spinat|salat|rucola|kohl|mangold|pak choi|wirsing|grünkohl/],
@@ -144,28 +187,46 @@
     ["speck", /speck|bacon|pancetta|guanciale|schinken|chorizo|salami|wurst/],
     ["fleisch", /rind|steak|beef|short.?rib|ribs|schwein|kotelett|gulasch|lamm|ente|kalb|braten|fleisch|filet|nacken/],
     ["ei", /\bei(er)?\b|eigelb|eiweiß|\bei,|\bei\s/],
-    ["reis", /reis(?!essig)|risotto|basmati|jasmin/],
-    ["nudel", /nudel|pasta|spaghetti|tagliatelle|penne|fusilli|rigatoni|paccheri|linguine|gnocchi|lasagne|ramen|udon|noodle|maccheroni|orecchiette|pappardelle/],
+    ["reis", /reis(?!wein|essig|nudel|papier|sirup)|risotto|basmati|jasmin/],
+    ["nudel", /nudel|pasta|spaghetti|fettuccine|bucatini|farfalle|tortellini|ravioli|conchiglie|tagliatelle|penne|fusilli|rigatoni|paccheri|linguine|gnocchi|lasagne|ramen|udon|noodle|maccheroni|orecchiette|pappardelle/],
     ["brot", /brot|brötchen|\bbun|baguette|toast|tortilla|wrap|naan|pita|fladen|taco/],
-    ["kaese", /käse|parmesan|mozzarella|feta|cheddar|gouda|pecorino|grana|burrata|ricotta|halloumi|emmentaler|gruyère|mascarpone/],
+    ["creme", /mascarpone|ricotta|quark|frischkäse|schmand|crème fra|creme fra|joghurt|skyr|saure sahne|mayonnaise|\bmayo|aioli|hummus|guacamole/],
+    ["keks", /biskuit|keks|cookie|zwieback|cracker|amarettini|spekulatius/],
+    ["mozza", /mozzarella|burrata|feta|halloumi|ziegenkäse|camembert|brie/],
+    ["kaese", /käse|parmesan|cheddar|gouda|pecorino|grana|burrata|halloumi|emmentaler|gruyère/],
     ["butter", /butter(?!milch)|margarine|ghee/],
-    ["sahne", /sahne|milch|joghurt|crème|creme|schmand|quark|kokosmilch|buttermilch|skyr|mayonnaise|mayo/],
+    ["kaffee", /espresso|kaffee/],
+    ["sahne", /sahne|milch|crème|creme|kokosmilch|buttermilch/],
     ["honig", /honig|sirup|marmelade|chutney|agave|ahorn/],
-    ["schoko", /schoko|kakao|kuvertüre/],
+    ["schoko", /schoko(?!.*pulver)|kuvertüre|kakaonibs/],
     ["huelsen", /bohne|erbse|linse|mais|kichererbse|edamame/],
     ["nuss", /nuss|nüsse|mandel|sesam|pinien|cashew|erdnuss|pistazie|walnuss|haselnuss|samen|kerne/],
     ["mehl", /mehl|zucker|stärke|backpulver|natron|hefe|grieß|semmelbrösel|paniermehl|panko|haferflocken/],
     ["oel", /öl\b|olivenöl|rapsöl|sesamöl|pflanzenöl|sonnenblumenöl|\böl\b/],
     ["bruehe", /brühe|fond|bouillon|wein|bier|sojasoße|sojasauce|essig|worcester|fischsoße|austernsoße|teriyaki|hoisin|wasser|saft|soße|sauce|marinade|dressing/],
-    ["gewuerz", /pulver|curry|kurkuma|kreuzkümmel|kümmel|garam|zimt|flocken|pfeffer|salz|gewürz|muskat|nelke|kardamom|koriandersamen|senf|piment|sumach|za.?atar|ras el|cayenne|vanille/],
+    ["gewuerz", /pulver|kakao|curry|kurkuma|kreuzkümmel|kümmel|garam|zimt|flocken|pfeffer|salz|gewürz|muskat|nelke|kardamom|koriandersamen|senf|piment|sumach|za.?atar|ras el|cayenne|vanille/],
+  ];
+  // Vorregeln: Pulver, Stärke, Essig, Pasten sind nicht die Zutat, nach der sie heißen
+  const PRE = [
+    // Schuss Likör, Aroma, Extrakt: zu wenig, um es zu zeichnen
+    ["none", /amaretto|likör|\brum\b|cognac|brandy|weinbrand|marsala|aroma\b|extrakt|vanilleschote|lebensmittelfarbe/],
+    ["oel", /öl\b/],
+    ["nuss", /kokosflocken|kokosraspel/],
+    ["mehl", /stärke|speisestärke|mehl\b/],
+    ["kakaopulver", /kakao/],
+    ["gewuerz", /pulver|gewürz|würzmix|flocken(?!.*kokos)|paprikamark/],
+    ["honig", /sirup/],
+    ["bruehe", /essig|cola|limonade|sprudel|mineralwasser/],
+    ["paste", /erdnussbutter|tahin|pesto|harissa|paste|mus\b|apfelmus|chutney|hummus/],
   ];
   function iconOf(name){
     const n = String(name || "").toLowerCase();
+    for(const [k, re] of PRE) if(re.test(n)) return k === "kakaopulver" ? "gewuerz" : k;
     for(const [k, re] of ICONS) if(re.test(n)) return k;
     return "stueck";
   }
   // Flüssiges färbt den Boden des Geräts statt eines Symbols
-  const LIQUID = { tomatensosse: ["#C7432B", "#9E2C1A"], sahne: ["#F3EEE2", "#DDD3BD"], bruehe: ["#9A6235", "#6E3F1D"], oel: ["#E7C45A", "#C49A28"] };
+  const LIQUID = { kaffee: ["#5A3420", "#2E180B"], tomatensosse: ["#C7432B", "#9E2C1A"], sahne: ["#F3EEE2", "#DDD3BD"], bruehe: ["#9A6235", "#6E3F1D"], oel: ["#E7C45A", "#C49A28"] };
 
   // ---------- Zeichnungen ----------
   const DEFS = `<defs>
@@ -179,7 +240,7 @@
     <radialGradient id="ckShine" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></radialGradient>
     <filter id="ckBlur"><feGaussianBlur stdDeviation="12"/></filter>
     <filter id="ckSh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="2.6" flood-color="#000" flood-opacity=".35"/></filter>
-    <radialGradient id="gTom" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FF7A5C"/><stop offset=".55" stop-color="#D93A24"/><stop offset="1" stop-color="#9A1E10"/></radialGradient><radialGradient id="gTomIn" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFB59A"/><stop offset=".55" stop-color="#F07A5C"/><stop offset="1" stop-color="#D9503A"/></radialGradient><radialGradient id="gOni" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFCF3"/><stop offset=".55" stop-color="#F1E6D0"/><stop offset="1" stop-color="#D6C29C"/></radialGradient><radialGradient id="gGar" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFDF5"/><stop offset=".55" stop-color="#F2E9D2"/><stop offset="1" stop-color="#D5C49C"/></radialGradient><radialGradient id="gGin" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F5DCA6"/><stop offset=".55" stop-color="#D9B06A"/><stop offset="1" stop-color="#A97B3C"/></radialGradient><radialGradient id="gChi" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FF6A50"/><stop offset=".55" stop-color="#C81E14"/><stop offset="1" stop-color="#7E0E08"/></radialGradient><radialGradient id="gPep" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FF7A5E"/><stop offset=".55" stop-color="#D62B1C"/><stop offset="1" stop-color="#8C150C"/></radialGradient><radialGradient id="gCar" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFB066"/><stop offset=".55" stop-color="#F07A22"/><stop offset="1" stop-color="#B8500E"/></radialGradient><radialGradient id="gPot" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF2C2"/><stop offset=".55" stop-color="#EFCF7A"/><stop offset="1" stop-color="#C9A044"/></radialGradient><radialGradient id="gBro" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#8CCB66"/><stop offset=".55" stop-color="#3F8A2C"/><stop offset="1" stop-color="#1F5016"/></radialGradient><radialGradient id="gMus" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F7EFE2"/><stop offset=".55" stop-color="#E6D6BC"/><stop offset="1" stop-color="#BFA27A"/></radialGradient><radialGradient id="gMusCap" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#A4805E"/><stop offset=".55" stop-color="#7A5638"/><stop offset="1" stop-color="#4E331E"/></radialGradient><radialGradient id="gZuc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F6F8DE"/><stop offset=".55" stop-color="#E2E8B6"/><stop offset="1" stop-color="#BCC882"/></radialGradient><radialGradient id="gLeaf" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#74BD55"/><stop offset=".55" stop-color="#3A8A2E"/><stop offset="1" stop-color="#1D5518"/></radialGradient><radialGradient id="gLem" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF7B8"/><stop offset=".55" stop-color="#FADF5A"/><stop offset="1" stop-color="#E3B61E"/></radialGradient><radialGradient id="gShr" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFD8C2"/><stop offset=".55" stop-color="#F59268"/><stop offset="1" stop-color="#D35A34"/></radialGradient><radialGradient id="gFish" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFC6A8"/><stop offset=".55" stop-color="#F59A72"/><stop offset="1" stop-color="#D66C46"/></radialGradient><radialGradient id="gChk" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F8D8A2"/><stop offset=".55" stop-color="#D99A56"/><stop offset="1" stop-color="#94531C"/></radialGradient><radialGradient id="gMinc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#B8704E"/><stop offset=".55" stop-color="#874628"/><stop offset="1" stop-color="#552612"/></radialGradient><radialGradient id="gBac" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F3907E"/><stop offset=".55" stop-color="#C84A3A"/><stop offset="1" stop-color="#8A281C"/></radialGradient><radialGradient id="gBeef" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#A85438"/><stop offset=".55" stop-color="#6E2C1A"/><stop offset="1" stop-color="#3A160C"/></radialGradient><radialGradient id="gEggW" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#FBF8F0"/><stop offset="1" stop-color="#E5DCC6"/></radialGradient><radialGradient id="gYolk" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFD976"/><stop offset=".55" stop-color="#F6A31E"/><stop offset="1" stop-color="#D3720A"/></radialGradient><radialGradient id="gRice" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F8F3E4"/><stop offset="1" stop-color="#D9CCAC"/></radialGradient><radialGradient id="gBread" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FAE6BC"/><stop offset=".55" stop-color="#E9C88C"/><stop offset="1" stop-color="#C08C46"/></radialGradient><radialGradient id="gChs" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF3A8"/><stop offset=".55" stop-color="#F5CF4A"/><stop offset="1" stop-color="#D0A01C"/></radialGradient><radialGradient id="gBut" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF8D2"/><stop offset=".55" stop-color="#F8E08A"/><stop offset="1" stop-color="#D9B246"/></radialGradient><radialGradient id="gChoc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#8E5E3E"/><stop offset=".55" stop-color="#5A3420"/><stop offset="1" stop-color="#2A150A"/></radialGradient><radialGradient id="gBean" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#EED6A2"/><stop offset=".55" stop-color="#C9A15A"/><stop offset="1" stop-color="#8A642C"/></radialGradient><radialGradient id="gNut" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F4DAAC"/><stop offset=".55" stop-color="#D7B07A"/><stop offset="1" stop-color="#97703C"/></radialGradient><radialGradient id="gMehl" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F8F4EC"/><stop offset="1" stop-color="#DCD3C0"/></radialGradient><radialGradient id="gStk" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#E6D6B4"/><stop offset=".55" stop-color="#CDB892"/><stop offset="1" stop-color="#9C8660"/></radialGradient>
+    <radialGradient id="gTom" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FF7A5C"/><stop offset=".55" stop-color="#D93A24"/><stop offset="1" stop-color="#9A1E10"/></radialGradient><radialGradient id="gTomIn" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFB59A"/><stop offset=".55" stop-color="#F07A5C"/><stop offset="1" stop-color="#D9503A"/></radialGradient><radialGradient id="gOni" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFCF3"/><stop offset=".55" stop-color="#F1E6D0"/><stop offset="1" stop-color="#D6C29C"/></radialGradient><radialGradient id="gGar" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFDF5"/><stop offset=".55" stop-color="#F2E9D2"/><stop offset="1" stop-color="#D5C49C"/></radialGradient><radialGradient id="gGin" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F5DCA6"/><stop offset=".55" stop-color="#D9B06A"/><stop offset="1" stop-color="#A97B3C"/></radialGradient><radialGradient id="gChi" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FF6A50"/><stop offset=".55" stop-color="#C81E14"/><stop offset="1" stop-color="#7E0E08"/></radialGradient><radialGradient id="gPep" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FF7A5E"/><stop offset=".55" stop-color="#D62B1C"/><stop offset="1" stop-color="#8C150C"/></radialGradient><radialGradient id="gCar" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFB066"/><stop offset=".55" stop-color="#F07A22"/><stop offset="1" stop-color="#B8500E"/></radialGradient><radialGradient id="gPot" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF2C2"/><stop offset=".55" stop-color="#EFCF7A"/><stop offset="1" stop-color="#C9A044"/></radialGradient><radialGradient id="gBro" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#8CCB66"/><stop offset=".55" stop-color="#3F8A2C"/><stop offset="1" stop-color="#1F5016"/></radialGradient><radialGradient id="gMus" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F7EFE2"/><stop offset=".55" stop-color="#E6D6BC"/><stop offset="1" stop-color="#BFA27A"/></radialGradient><radialGradient id="gMusCap" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#A4805E"/><stop offset=".55" stop-color="#7A5638"/><stop offset="1" stop-color="#4E331E"/></radialGradient><radialGradient id="gZuc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F6F8DE"/><stop offset=".55" stop-color="#E2E8B6"/><stop offset="1" stop-color="#BCC882"/></radialGradient><radialGradient id="gLeaf" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#74BD55"/><stop offset=".55" stop-color="#3A8A2E"/><stop offset="1" stop-color="#1D5518"/></radialGradient><radialGradient id="gLem" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF7B8"/><stop offset=".55" stop-color="#FADF5A"/><stop offset="1" stop-color="#E3B61E"/></radialGradient><radialGradient id="gShr" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFD8C2"/><stop offset=".55" stop-color="#F59268"/><stop offset="1" stop-color="#D35A34"/></radialGradient><radialGradient id="gFish" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFC6A8"/><stop offset=".55" stop-color="#F59A72"/><stop offset="1" stop-color="#D66C46"/></radialGradient><radialGradient id="gChk" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F8D8A2"/><stop offset=".55" stop-color="#D99A56"/><stop offset="1" stop-color="#94531C"/></radialGradient><radialGradient id="gMinc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#B8704E"/><stop offset=".55" stop-color="#874628"/><stop offset="1" stop-color="#552612"/></radialGradient><radialGradient id="gBac" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F3907E"/><stop offset=".55" stop-color="#C84A3A"/><stop offset="1" stop-color="#8A281C"/></radialGradient><radialGradient id="gBeef" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#A85438"/><stop offset=".55" stop-color="#6E2C1A"/><stop offset="1" stop-color="#3A160C"/></radialGradient><radialGradient id="gEggW" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#FBF8F0"/><stop offset="1" stop-color="#E5DCC6"/></radialGradient><radialGradient id="gYolk" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFD976"/><stop offset=".55" stop-color="#F6A31E"/><stop offset="1" stop-color="#D3720A"/></radialGradient><radialGradient id="gRice" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F8F3E4"/><stop offset="1" stop-color="#D9CCAC"/></radialGradient><radialGradient id="gBread" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FAE6BC"/><stop offset=".55" stop-color="#E9C88C"/><stop offset="1" stop-color="#C08C46"/></radialGradient><radialGradient id="gChs" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF3A8"/><stop offset=".55" stop-color="#F5CF4A"/><stop offset="1" stop-color="#D0A01C"/></radialGradient><radialGradient id="gBut" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF8D2"/><stop offset=".55" stop-color="#F8E08A"/><stop offset="1" stop-color="#D9B246"/></radialGradient><radialGradient id="gChoc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#8E5E3E"/><stop offset=".55" stop-color="#5A3420"/><stop offset="1" stop-color="#2A150A"/></radialGradient><radialGradient id="gBean" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#EED6A2"/><stop offset=".55" stop-color="#C9A15A"/><stop offset="1" stop-color="#8A642C"/></radialGradient><radialGradient id="gNut" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F4DAAC"/><stop offset=".55" stop-color="#D7B07A"/><stop offset="1" stop-color="#97703C"/></radialGradient><radialGradient id="gMehl" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F8F4EC"/><stop offset="1" stop-color="#DCD3C0"/></radialGradient><radialGradient id="gCream" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#FBF6EA"/><stop offset="1" stop-color="#E7DCC4"/></radialGradient><radialGradient id="gBisc" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#F6D9A0"/><stop offset=".55" stop-color="#E4B66C"/><stop offset="1" stop-color="#B7803A"/></radialGradient><radialGradient id="gCauli" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFDF2"/><stop offset=".55" stop-color="#F1E8CC"/><stop offset="1" stop-color="#CDBE92"/></radialGradient><radialGradient id="gMoz" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#FAF8F2"/><stop offset="1" stop-color="#E0D9C8"/></radialGradient><radialGradient id="gStk" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#E6D6B4"/><stop offset=".55" stop-color="#CDB892"/><stop offset="1" stop-color="#9C8660"/></radialGradient>
     <filter id="ckGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".45" numOctaves="3" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 .18  0 0 0 0 .1  0 0 0 0 .04  .6 0 0 0 -.22" result="d"/><feComposite in="d" in2="SourceAlpha" operator="in" result="g"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="g"/></feMerge></filter>
     <clipPath id="ckClipR"><circle r="150"/></clipPath>
     <clipPath id="ckClipRect"><rect x="-176" y="-124" width="352" height="248" rx="14"/></clipPath>
@@ -307,13 +368,28 @@
     gewuerz: (col)=>{ const id = "gSp" + col.slice(1); return `<radialGradient id="${id}" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="${col}" stop-opacity=".75"/><stop offset=".25" stop-color="${col}"/><stop offset="1" stop-color="${col}" stop-opacity="1"/></radialGradient>` +
       `<path d="${blob(20, .14, 9, 1.2, .95, 9)}" fill="#000" opacity=".12" transform="translate(2 3)"/><path d="${blob(20, .14, 9, 1.2, .95, 9)}" fill="url(#${id})"/><path d="${blob(9, .2, 8, 1.2, .9, 7)}" fill="#fff" opacity=".18" transform="translate(-5 -5)"/>` +
       pile(16, 16, 251, (x, y)=> `<circle cx="${f1(x)}" cy="${f1(y)}" r=".9" fill="#000" opacity=".18"/>`); },
+    creme: ()=> g(`<path d="${blob(24, .12, 31, 1.15, 1, 10)}" fill="url(#gCream)"/><path d="M-14 -2 C-8 -12 8 -12 12 -2 C8 6 -6 8 -6 0 C-6 -6 4 -6 4 -1" stroke="#E6DDCB" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="${blob(8, .2, 32, 1.3, .8, 7)}" fill="#fff" opacity=".7" transform="translate(-8 -9)"/>`),
+    paste: ([a, b], n)=> `<radialGradient id="gPa${n}" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></radialGradient>` +
+      g(`<path d="${blob(19, .16, 41 + n, 1.2, .95, 9)}" fill="url(#gPa${n})"/><path d="M-10 -2 C-5 -9 6 -9 9 -2 C6 4 -4 5 -4 0" stroke="#fff" stroke-opacity=".35" stroke-width="1.6" fill="none" stroke-linecap="round"/>`),
+    blumenkohl: ()=> g([[-13, -8, -20], [13, -9, 25], [0, 12, 160]].map(([x, y, r], k)=> at(x, y, r, `<path d="M0 4 L0 16" stroke="#C9D7A4" stroke-width="6" stroke-linecap="round"/>` + pile(11, 9, 341 + k, (a, b, rr, i)=> `<circle cx="${f1(a)}" cy="${f1(b)}" r="${f1(3.4 + (i % 3) * .6)}" fill="url(#gCauli)"/>`))).join("")),
+    mozza: ()=> g(pile(5, 20, 351, (x, y, r, i)=> at(x, y, r, `<path d="${blob(10, .12, i + 61, 1.1, 1, 8)}" fill="url(#gMoz)" stroke="#E2DACA" stroke-width=".6"/><path d="M-5 -4 C-2 -6 2 -6 5 -4" stroke="#fff" stroke-width="1.2" fill="none" stroke-linecap="round"/>`))),
+    keks: ()=> g(pile(5, 18, 281, (x, y, r, i)=> at(x, y, r * .3 - 20, `<rect x="-17" y="-5.5" width="34" height="11" rx="5.5" fill="url(#gBisc)" stroke="#B9843E" stroke-width=".6"/>` + pile(12, 9, 291 + i, (a, b)=> `<circle cx="${f1(a * 1.6)}" cy="${f1(b * .35)}" r=".9" fill="#FFF6DC" opacity=".9"/>`)))),
     stueck: ()=> g(pile(6, 21, 261, (x, y, r, i)=> at(x, y, r, `<path d="${blob(8, .2, i + 21, 1.1, .9, 6)}" fill="url(#gStk)" stroke="#9C8660" stroke-width=".6"/>${hl(8, -4)}`))),
   };
+  function pasteColor(n){
+    n = n.toLowerCase();
+    if(/pesto(?!.*(rosso|tomate))|basilikum/.test(n)) return ["#9CC46A", "#4F7F2A"];
+    if(/tomate|rosso|harissa|chili|curry|paprika/.test(n)) return ["#E2724E", "#A8341C"];
+    if(/erdnuss|tahin|sesam/.test(n)) return ["#D9A66A", "#9A6430"];
+    if(/apfel|chutney|aprikose|mango/.test(n)) return ["#F2C66A", "#C98A2A"];
+    return ["#E9D9B8", "#B9A07A"];
+  }
   // Farbe kleiner Gewürzhäufchen nach Name
   function spiceColor(n){
     n = n.toLowerCase();
     if(/salz|zucker|natron|backpulver/.test(n)) return "#F4F2EC";
-    if(/pfeffer|kümmel|nelke|zimt|piment|kakao/.test(n)) return /zimt/.test(n) ? "#9A5A2E" : "#3A332E";
+    if(/kakao/.test(n)) return "#6B3E24";
+    if(/pfeffer|kümmel|nelke|zimt|piment/.test(n)) return /zimt/.test(n) ? "#9A5A2E" : "#3A332E";
     if(/kurkuma|curry|senf|garam/.test(n)) return "#E0A526";
     if(/paprika|chili|cayenne|sumach/.test(n)) return "#C4361F";
     if(/oregano|kräuter|za.?atar|thymian/.test(n)) return "#6E8A3A";
@@ -326,16 +402,40 @@
     const list = [], liquids = [];
     for(const i of ings || []){
       const k = iconOf(i.item);
+      if(k === "none") continue;
       if(LIQUID[k]){ liquids.push(k); continue; }
-      if(list.some((x)=> x.k === k && k !== "gewuerz")) continue;
+      if(list.some((x)=> x.k === k && k !== "gewuerz" && k !== "paste")) continue;
       list.push({ k, name: i.item });
     }
     const flat = kind === "tray" || kind === "dish" || kind === "board" || kind === "plate";
     // Flüssiges: Boden des Geräts in der Farbe der ersten Flüssigkeit (Öl nur als Glanz)
     const main = liquids.find((l)=> l !== "oel");
-    const floor = main && !flat ? LIQUID[main] : (main === "tomatensosse" && kind === "dish" ? LIQUID[main] : null);
+    let surface = "";
+    let floor = main && !flat ? LIQUID[main] : (main === "tomatensosse" && kind === "dish" ? LIQUID[main] : null);
+    // Creme in Form oder Schüssel liegt als Schicht (Tiramisu, Dip); Kakao darauf bestäubt die Oberfläche
+    if(!floor && (kind === "dish" || kind === "bowl") && list.some((x)=> x.k === "creme")){
+      const cocoa = list.some((x)=> /kakao/i.test(x.name));
+      // Liste: Neuestes zuerst. Kommt die Creme (oder der Kakao) nach dem Biskuit dazu, liegt sie obendrauf und verdeckt ihn
+      const ci = list.findIndex((x)=> x.k === "creme" || /kakao/i.test(x.name)), ki = list.findIndex((x)=> x.k === "keks");
+      if(ki > ci) list.splice(ki, 1);
+      surface = cocoa ? "cocoa" : "cream";
+      floor = cocoa ? ["#7A4A2C", "#4E2C18"] : ["#F7F0E0", "#E2D3B2"];
+      for(let j = list.length - 1; j >= 0; j--) if(list[j].k === "creme" || (cocoa && /kakao/i.test(list[j].name))) list.splice(j, 1);
+    }
     let inner = "";
     if(liquids.includes("oel") && !flat) inner += `<g fill="none" stroke="rgba(255,226,150,.5)" stroke-width="2">${ring(9, 70, (x, y, i)=> `<ellipse cx="${x * (1 + (i % 3) * .3)}" cy="${y}" rx="${6 + (i % 4) * 3}" ry="${4 + (i % 3) * 2}"/>`)}</g>`;
+    // Oberfläche: glattgestrichene Creme (Spachtelspuren) oder bestäubter Kakao (feine Körnung)
+    if(surface === "cream") inner += `<g fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3" stroke-linecap="round">${[-80, -30, 20, 70].map((y, i)=> `<path d="M${-150 + i * 12} ${y} C-60 ${y - 14} 40 ${y + 12} ${150 - i * 10} ${y - 4}"/>`).join("")}</g><g fill="none" stroke="#D9C9A6" stroke-opacity=".6" stroke-width="1.4">${[-56, -6, 44, 92].map((y)=> `<path d="M-140 ${y} C-50 ${y - 10} 50 ${y + 10} 140 ${y}"/>`).join("")}</g>`;
+    if(surface === "cocoa") inner += `<g filter="url(#ckGrain)"><rect x="-180" y="-130" width="360" height="260" fill="#7A4A2C"/></g>` + pile(140, 150, 401, (x, y, r, i)=> `<circle cx="${f1(x * 1.15)}" cy="${f1(y * .8)}" r="${i % 3 ? 1.2 : 2}" fill="${i % 2 ? "#5A341E" : "#9A6644"}" opacity=".7"/>`);
+    // Löffelbiskuits in der Form: eine ganze Lage in Reihen statt eines Häufchens
+    const bisc = (kind === "dish") && list.findIndex((x)=> x.k === "keks");
+    if(bisc !== false && bisc >= 0){
+      list.splice(bisc, 1);
+      for(let r = 0; r < 3; r++) for(let c = 0; c < 9; c++){
+        const x = -144 + c * 36, y = -80 + r * 80;
+        inner += `<g class="ckIng" style="--i:${c + r}" transform="translate(${x} ${y}) rotate(${90 + ((c * 7 + r * 3) % 5) - 2}) scale(2.1)"><rect x="-17" y="-7" width="34" height="14" rx="7" fill="url(#gBisc)" stroke="#B9843E" stroke-width=".5"/>${pile(10, 10, 300 + c + r * 9, (a, b2)=> `<circle cx="${f1(a * 1.5)}" cy="${f1(b2 * .45)}" r=".9" fill="#FFF6DC" opacity=".9"/>`)}</g>`;
+      }
+    }
     if(main && flat && kind !== "dish") inner += `<path d="M-60 -20 C-20 -60 40 -40 70 0 C40 40 -30 50 -60 20Z" fill="${LIQUID[main][0]}" opacity=".85"/>`;
     // Größe nach Anzahl: wenige Zutaten groß, viele kleiner
     const n = Math.min(list.length, 8);
@@ -343,12 +443,12 @@
     const wide = kind === "tray" || kind === "dish" || kind === "board";
     const spots = (n <= 2 ? [[-48, -6], [54, 10]] : n <= 4 ? [[-58, -46], [56, -48], [60, 50], [-52, 52]] : SPOTS).map(([x, y])=> wide ? [x * 1.4, y * .95] : [x, y]);
     // Geschnittenes liegt verstreut (zwei weitere Häufchen), Ganzes einmal
-    const SCATTER = new Set(["zwiebel", "paprika", "chili", "karotte", "kartoffel", "knoblauch", "kraeuter", "fruehling", "pilz", "zucchini", "huelsen", "nuss", "hack", "brokkoli", "speck", "blatt", "stueck"]);
+    const SCATTER = new Set(["zwiebel", "paprika", "chili", "karotte", "kartoffel", "knoblauch", "kraeuter", "fruehling", "pilz", "zucchini", "huelsen", "nuss", "hack", "brokkoli", "blumenkohl", "mozza", "speck", "blatt", "stueck"]);
     const extra = [];
     list.slice(0, 8).forEach((it, i)=>{
       const [x, y] = spots[i] || [0, 0];
-      const draw = it.k === "gewuerz" ? ICON.gewuerz(spiceColor(it.name)) : (ICON[it.k] || ICON.stueck)();
-      inner += `<g class="ckIng" style="--i:${i}" transform="translate(${x} ${y}) scale(${sc.toFixed(2)})"><g>${draw}</g></g>`;
+      const draw = it.k === "gewuerz" ? ICON.gewuerz(spiceColor(it.name)) : it.k === "paste" ? ICON.paste(pasteColor(it.name), i) : (ICON[it.k] || ICON.stueck)();
+      inner += `<g class="ckIng" data-k="${it.k}" style="--i:${i}" transform="translate(${x} ${y}) scale(${sc.toFixed(2)})"><g>${draw}</g></g>`;
       if(SCATTER.has(it.k) && n <= 6){
         const a = (i * 1.7) % 6.283;
         [[Math.cos(a) * 46 * sc / 1.3, Math.sin(a) * 40 * sc / 1.3, 145], [Math.cos(a + 2.4) * 40 * sc / 1.3, Math.sin(a + 2.4) * 46 * sc / 1.3, 260]].forEach(([dx, dy, r])=>
@@ -365,7 +465,8 @@
   }
 
   window.KOCHBUCH_COOKSCENE = {
-    analyze(text){ const t = title(text), gr = gear(text); return { title: t.title, body: t.body, kind: gr.kind, gear: gr.label, heat: heat(text), time: time(text) }; },
+    analyze(text){ const t = title(text), gr = gear(text); return { title: t.title, body: t.body, kind: gr.kind, gear: gr.label, strong: !!gr.strong, noun: !!gr.noun, heat: heat(text), time: time(text) }; },
+    HEAT, STOVE: new Set(["pan", "pot", "wok"]),
     scene,
     iconOf,
   };
