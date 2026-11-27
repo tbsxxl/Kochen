@@ -466,3 +466,4 @@ Screenshot des Besitzers: Timer doppelt (Leiste + groß) und Knöpfe unter der L
 Nordwall mit bencium-innovative neu (Besitzer: ein Skin nach dem anderen, Thema bleibt): A–J → „d, e, g“ → D2/E2/G2 → „d2 festlegen“ (Karte des Reichs, Pergament, vier Tinten). Kochmodus der Skins bleibt eigen.
 Zauberschule: A–J → „C“ (Sternendecke) festgelegt, „I“ soll zusätzlicher Skin werden. Besitzer: Kochmodi der Skins doch mit anpassen (Nordwall-Kochmodus nachgezogen).
 Brandbrief als neuer Skin gebaut (Entwurf I, Rot aufgehellt für Lesbarkeit). Danach weiter mit Jahr 3000.
+Jahr 3000: A–J → „d“ (Fünfziger-Zukunft) eingebaut, Orange abgedunkelt für Lesbarkeit.

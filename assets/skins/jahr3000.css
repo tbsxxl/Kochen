@@ -172,3 +172,142 @@ html.skin-jahr3000:not(#_x#_y#_z) .cookNavBtn.primary{border:3px solid var(--ink
 
 /* ==== unslop-Durchgang Dez. 2026: Lesbarkeit (gemessen) ==== */
 html.skin-jahr3000:not(#_x#_y#_z) .searchRow input::placeholder{color:#5A5470 !important;opacity:1}
+
+/* ==========================================================================================================================
+   Dez. 2026, fünfte Fassung: Richtung D „Fünfziger-Zukunft“ (bencium-innovative, vom Besitzer gewählt; docs/skins/jahr3000-d.md).
+   Creme #FBEBD1, vier Tinten: Tinte #2D3047 (Text, Gerichte), Orange #C04A28 (Schreibschrift-Beschriftungen, Kochen, Aktives),
+   Petrol #1F7068 (Zahlen, Zeiten), Lila #6B5CA5 (Kategorien). Jost 800 versal für Namen, Pacifico für Beschriftungen,
+   Systemschrift für Lesetext. Keine Comic-Umrisse und harten Schatten mehr, keine Kartenflächen.
+   ========================================================================================================================== */
+@font-face{font-family:"Skin Zukunft";font-style:normal;font-weight:100 900;font-display:swap;src:url("../fonts/jost.woff2") format("woff2")}
+@font-face{font-family:"Skin Schwung";font-style:normal;font-weight:400;font-display:swap;src:url("../fonts/pacifico.woff2") format("woff2")}
+html.skin-jahr3000:not(#_x#_y#_z#_w),html.skin-jahr3000:not(#_x#_y#_z#_w) body{
+  --j3Cream:#FBEBD1;--j3Ink:#2D3047;--j3Orange:#C04A28;--j3Teal:#1F7068;--j3Lila:#6B5CA5;
+  --field:#FBEBD1;--onField:#2D3047;--onField2:#1F7068;--fieldFill:rgba(45,48,71,.07);
+  --bg:#FBEBD1;--surface:#F6E1BF;--surface2:#F1D8B0;--fill:rgba(45,48,71,.07);--line:rgba(45,48,71,.14);--lineStrong:rgba(45,48,71,.35);
+  --text:#2D3047;--sub:#4A4D66;--sub2:#4A4D66;--muted:#4A4D66;
+  --brand:#C04A28;--onBrand:#FFFFFF;--leaf:#C04A28;--onLeaf:#FFFFFF;--brandSoft:rgba(192,74,40,.12);--leafSoft:rgba(192,74,40,.12);
+  --sel:#2D3047;--onSel:#FBEBD1;--accent:#1F7068;--accentSoft:rgba(31,112,104,.12);--onAccent:#FFFFFF;--herb:#1F7068;--coffee:#F6E1BF;
+  --glass:rgba(251,235,209,.9);--glassLine:rgba(45,48,71,.14);
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Zukunft", sans-serif;
+  color-scheme:light}
+html.skin-jahr3000{background:#FBEBD1}
+html.skin-jahr3000:not(#_x#_y#_z#_w) body{background:#FBEBD1 !important;color:#2D3047}
+html.skin-jahr3000:not(#_x#_y#_z#_w) ::selection{background:#2D3047;color:#FBEBD1}
+/* Namen: Jost 800 versal in Tinte; Abschnitte in Schreibschrift Orange */
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(.pageTitleBlock .h1,.recipeTitle,.homeFeaturedTitle,.catTileName,.sheetTitle,.continueTitle,.navCompact,.prepTitle,.catGroupTitle){font-family:"Skin Zukunft", sans-serif !important;font-weight:800 !important;text-transform:uppercase;letter-spacing:-.02em !important;color:#2D3047 !important;text-shadow:none !important;-webkit-text-stroke:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .pageTitleBlock .h1{font-size:min(clamp(2.8rem,14vw,5.6rem),14vw) !important;line-height:.9 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .pageTitleBlock .h1::after{display:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(.homeSectionTitle,.h2,.ingSection){font-family:"Skin Schwung", cursive !important;font-weight:400 !important;text-transform:none !important;letter-spacing:0 !important;color:#C04A28 !important;font-size:1.625rem !important;line-height:1.3 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .homeSectionTitle::after{display:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(.recipeMeta,.metaItem,.resultCount,.catTileCount){color:#1F7068 !important;font-weight:600 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeMeta .ico{color:#1F7068 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .homeAllLink{color:#6B5CA5 !important;font-weight:700 !important}
+/* Felder, Knöpfe */
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(.searchRow,.homeQuickBtn,.navIconBtn,.recipeActBtn,.profileBadge,.segmented){background:rgba(45,48,71,.07) !important;box-shadow:none !important;color:#2D3047 !important;border:0 !important;border-radius:999px !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeBack{background:rgba(251,235,209,.92) !important;box-shadow:none !important;color:#2D3047 !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1.5px rgba(107,92,165,.55) !important;border:0 !important;color:#6B5CA5 !important;font-weight:700 !important;text-transform:uppercase;letter-spacing:.04em;border-radius:999px !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#6B5CA5 !important;color:#FFFFFF !important;box-shadow:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(.btn.action,.recipeCookBtn,.btnPrimary,.continuePlay){background:#C04A28 !important;color:#FFFFFF !important;box-shadow:none !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .segBtn{color:#4A4D66 !important;background:transparent !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .segBtn.active{background:#2D3047 !important;color:#FBEBD1 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .bottomRail{background:rgba(251,235,209,.9) !important;border:1px solid rgba(45,48,71,.14) !important;box-shadow:0 10px 30px rgba(45,48,71,.16) !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .tabItem{color:#4A4D66 !important;background:transparent !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .tabItem.active{background:#C04A28 !important;color:#FFFFFF !important}
+/* Flächen ohne Comic-Umriss */
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(.catTile,.homeEmpty,.uEmpty,.homeTimer,.continueCard,.recipeInnerCard,.notesCard,#ingredientsGroup,.listGroup.compactList,.planDayCard){background:#F6E1BF !important;box-shadow:none !important;border:0 !important;outline:0 !important;border-radius:14px !important;color:#2D3047 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.notesCard) :is(.uName,.planDayNum,.notesTitle,span,div,a:not(.btn)){color:#2D3047 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) :is(.uQty,.ingQty,.num){color:#1F7068 !important;font-weight:700}
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) .uRow + .uRow{border-top:1px solid rgba(45,48,71,.12) !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .uLead{border:1.5px solid rgba(45,48,71,.5) !important;background:transparent !important;border-radius:50% !important;box-shadow:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .uRow.checked .uLead{background:#1F7068 !important;border-color:#1F7068 !important;color:#FFFFFF !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .planDayCard .planDayWd{color:#6B5CA5 !important;font-weight:800 !important;text-transform:uppercase}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .planDayCard.isToday{box-shadow:inset 0 0 0 2px #C04A28 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) :is(#recipeGrid .recipeCard,.recipeCard){background:transparent !important;box-shadow:none !important;border:0 !important;outline:0 !important;padding:0 !important;transform:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeCard .rcImg{border-radius:14px !important;box-shadow:none !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody{padding:10px 2px 4px !important;background:transparent !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeCard .recipeTitle{font-size:1.125rem !important;line-height:1 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .homeFeatured{box-shadow:none !important;border:0 !important;background:transparent !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .homeFeatured .rcBody{position:static !important;background:transparent !important;padding:12px 0 0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .homeFeatured :is(.homeFeaturedTitle,.recipeMeta){text-shadow:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .homeFeatured .homeFeaturedTitle{font-size:2.5rem !important;line-height:.9 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .heroOverlayCat{background:#FBEBD1 !important;color:#6B5CA5 !important;box-shadow:none !important;border:0 !important;font-weight:800;text-transform:uppercase}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .catTile .catTileName{color:#FFFFFF !important;text-shadow:0 1px 10px rgba(0,0,0,.55) !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .catTile .catTileCount{color:#FFF4E0 !important;text-shadow:0 1px 8px rgba(0,0,0,.55) !important}
+/* Rezeptseite */
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipePageHero::after{background:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeHeroText{position:static !important;padding:18px 16px 4px !important;background:#FBEBD1 !important;text-align:left}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeHeroText .recipeName{font-family:"Skin Zukunft", sans-serif !important;font-weight:800 !important;text-transform:uppercase;letter-spacing:-.03em !important;color:#2D3047 !important;text-shadow:none !important;font-size:min(clamp(2.6rem,13vw,5.4rem),13vw) !important;line-height:.88 !important;-webkit-text-stroke:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle{color:#2D3047 !important;text-shadow:none !important;font:400 1.1875rem/1.35 -apple-system, "Inter", sans-serif !important;display:block !important;-webkit-line-clamp:unset !important;margin-top:.4rem}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipePageBody{margin-top:0 !important;background:transparent !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeSegWrap.isStuck{background:rgba(251,235,209,.95) !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeBody ol > li::before{background:transparent !important;color:#1F7068 !important;box-shadow:inset 0 0 0 1.5px #1F7068 !important;border:0 !important;font-weight:800 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeBody ol > li.stepDone::before{background:#1F7068 !important;color:#FFFFFF !important;box-shadow:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeBody ol > li{border-bottom-color:rgba(45,48,71,.12) !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookTime{background:rgba(31,112,104,.12) !important;color:#1F7068 !important;box-shadow:none !important;border:0 !important}
+/* Startseite */
+html.skin-jahr3000:not(#_x#_y#_z#_w) body.cxHome .profileBadge{background:rgba(45,48,71,.08) !important;color:#2D3047 !important;box-shadow:none !important}
+.j3Hero{background:#FBEBD1 !important}
+.j3Hero .cxPoster{background:#FBEBD1 !important}
+.j3Hero .cxShade{background:linear-gradient(rgba(251,235,209,.95), rgba(251,235,209,.9) 50%, rgba(251,235,209,.96)) !important}
+.j3Hero :is(.cxTitle,.cxDown){display:none !important}
+.j3Block{position:relative;z-index:2;padding:8px 6px 40px;color:#2D3047;font-family:"Skin Zukunft", sans-serif}
+.j3Block a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.j3Top{display:flex;justify-content:space-between;gap:12px;font-weight:500;font-size:.9375rem}
+.j3Date{color:#C04A28}
+.j3Today{display:block;margin-top:2.2rem}
+.j3Today span{display:block}
+.j3Heute,.j3Kat{font-family:"Skin Schwung", cursive;color:#C04A28;font-size:1.75rem;line-height:1.3}
+.j3Title{font-weight:800;font-size:min(clamp(3rem,16vw,6rem),16vw);line-height:.88;letter-spacing:-.03em;text-transform:uppercase;margin:.15rem 0 .55rem;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
+.j3Sub{font-weight:400;font-size:1.1875rem;line-height:1.35}
+.j3Meta{font-weight:700;font-size:.9375rem;color:#1F7068;margin-top:.5rem;letter-spacing:.06em;text-transform:uppercase}
+.j3Kat{display:inline-flex;align-items:center;min-height:44px;margin-top:1.8rem}
+.j3Cats{display:grid;grid-template-columns:auto 1fr;column-gap:.8rem;align-items:baseline}
+.j3Cats a{display:contents}
+.j3Cats b{font-weight:800;font-size:2.75rem;line-height:1.05;color:#1F7068;text-align:right;font-variant-numeric:tabular-nums}
+.j3Cats span{font-weight:700;font-size:1.25rem;color:#6B5CA5;text-transform:uppercase;letter-spacing:.04em;min-height:44px;display:flex;align-items:center}
+.j3All{display:inline-flex;align-items:center;min-height:44px;font-weight:800;font-size:1.25rem;margin-top:1.4rem;text-transform:uppercase;color:#6B5CA5 !important}
+.j3Block a:focus-visible{outline:2px solid #C04A28;outline-offset:4px;border-radius:6px}
+@media (hover:hover) and (pointer:fine){ .j3Block a:hover{opacity:.75} }
+@media (min-width:900px){ .j3Block{max-width:44rem} }
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cxHead .cxPoster{background:#FBEBD1 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cxHead .cxShade{background:linear-gradient(rgba(251,235,209,.8), rgba(251,235,209,.9) 60%, #FBEBD1 100%) !important}
+
+/* Kochmodus: Creme ohne Karten, Zeiten Petrol, Beschriftungen Schreibschrift Orange, Weiter Orange */
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay{--cBg:#FBEBD1;--cCard:#F6E1BF;--cFill:rgba(45,48,71,.07);--cLine:rgba(45,48,71,.14);--cText:#2D3047;--cSub:#4A4D66;--cLeaf:#C04A28;--cOnLeaf:#FFFFFF;background:#FBEBD1 !important;color:#2D3047 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTop{background:#FBEBD1 !important;color:#2D3047 !important;box-shadow:none !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTitle{font-family:"Skin Zukunft", sans-serif !important;font-weight:800 !important;text-transform:uppercase;color:#2D3047 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookPill{background:transparent !important;color:#1F7068 !important;font-weight:700;box-shadow:none !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .navIconBtn{background:rgba(45,48,71,.07) !important;color:#2D3047 !important;box-shadow:none !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookProgress{background:rgba(45,48,71,.12) !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookProgressBar{background:#C04A28 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTabs{background:rgba(45,48,71,.07) !important;box-shadow:none !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTab{color:#4A4D66 !important;font-weight:700 !important;text-transform:uppercase}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTab.active{background:#2D3047 !important;color:#FBEBD1 !important;box-shadow:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStep,.prepGroup,.prepHead,.cookIngs,.cookStepIngsList,.cookNextPreview){background:transparent !important;box-shadow:none !important;border:0 !important;outline:0 !important;border-radius:0 !important;padding-left:0 !important;padding-right:0 !important;color:#2D3047 !important;transform:none !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTime{background:rgba(31,112,104,.12) !important;color:#1F7068 !important;box-shadow:none !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTime .ico{color:#1F7068 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStepIngsLabel,.cookIngSection,.prepGroupTitle,.cookIngsHead){font-family:"Skin Schwung", cursive !important;color:#C04A28 !important;font-size:1.25rem !important;font-weight:400 !important;text-transform:none !important;letter-spacing:0 !important;background:transparent !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .prepTitle{font-size:2.5rem !important;line-height:.9 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .prepCount{color:#1F7068 !important;font-weight:700}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay :is(.prepRow,.cookIngRow,.cookStepIng){color:#2D3047 !important;background:transparent !important;padding-left:0 !important;padding-right:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .prepRow + .prepRow{box-shadow:inset 0 1px 0 rgba(45,48,71,.12) !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .prepBox{box-shadow:inset 0 0 0 1.5px rgba(45,48,71,.5) !important;color:transparent !important;background:transparent !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .prepRow.isDone .prepBox{background:#1F7068 !important;box-shadow:none !important;color:#FFFFFF !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay :is(.cookIngQty,.cookStepIngQty){color:#1F7068 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookIngRow.isStep{background:rgba(107,92,165,.12) !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookChk{border-color:rgba(45,48,71,.5) !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookChk:checked{background:#1F7068 !important;border-color:#1F7068 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookChk::after{color:#FFFFFF !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookNav{background:linear-gradient(rgba(251,235,209,0), #FBEBD1 30%) !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn{background:rgba(45,48,71,.07) !important;color:#2D3047 !important;box-shadow:none !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn.primary{background:#C04A28 !important;color:#FFFFFF !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone){background:#F6E1BF !important;color:#2D3047 !important;box-shadow:none !important;border:0 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerLabel{color:#4A4D66 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerBtn{background:rgba(45,48,71,.08) !important;color:#2D3047 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBar{background:#C04A28 !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .cookOverlay .cookTimer.isDone{background:#C04A28 !important;color:#FFFFFF !important}
+html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeHeroText{padding-left:calc(32px + env(safe-area-inset-left)) !important;padding-right:calc(32px + env(safe-area-inset-right)) !important}
+.j3Block .j3Kat,.j3Block .j3Heute{color:#C04A28}
+.j3Block .j3Title{hyphens:manual;-webkit-hyphens:manual;overflow-wrap:normal;max-width:100%;overflow:hidden}
+@media (min-width:900px){ html.skin-jahr3000:not(#_x#_y#_z#_w) .recipeHeroText{padding-left:16px !important;padding-right:16px !important} }
