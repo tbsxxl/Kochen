@@ -467,3 +467,4 @@ Nordwall mit bencium-innovative neu (Besitzer: ein Skin nach dem anderen, Thema 
 Zauberschule: A–J → „C“ (Sternendecke) festgelegt, „I“ soll zusätzlicher Skin werden. Besitzer: Kochmodi der Skins doch mit anpassen (Nordwall-Kochmodus nachgezogen).
 Brandbrief als neuer Skin gebaut (Entwurf I, Rot aufgehellt für Lesbarkeit). Danach weiter mit Jahr 3000.
 Jahr 3000: A–J → „d“ (Fünfziger-Zukunft) eingebaut, Orange abgedunkelt für Lesbarkeit.
+Zwei Städte: A–J → „a“ (Oben und unten) eingebaut.

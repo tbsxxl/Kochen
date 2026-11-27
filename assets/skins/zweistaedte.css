@@ -159,3 +159,140 @@ html.skin-zweistaedte:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup){padd
 
 /* ==== unslop-Durchgang Dez. 2026: Lesbarkeit (gemessen) ==== */
 html.skin-zweistaedte:not(#_x#_y#_z) #ingredientsGroup{padding-top:22px !important}
+
+/* ==========================================================================================================================
+   Dez. 2026, fünfte Fassung: Richtung A „Oben und unten“ (bencium-innovative, vom Besitzer gewählt; docs/skins/zweistaedte-a.md).
+   Dunkler Grund #14110E. Obere Stadt = Namen, Titel, Daten: Josefin 700 weit gesperrt in Gold #D9B86A, kursive Garamond.
+   Untere Stadt = Kategorien, Beschriftungen, Aktionen, Zahlen: Permanent Marker in Pink #FF4FA3 und Türkis #38E3C8.
+   Lesetext hell #E9DFC9 in Systemschrift. Keine Art-déco-Ecken, keine Sechsecke, keine Kartenflächen.
+   ========================================================================================================================== */
+@font-face{font-family:"Skin Oben";font-style:normal;font-weight:700;font-display:swap;src:url("../fonts/josefin-sans-700.woff2") format("woff2")}
+@font-face{font-family:"Skin Unten";font-style:normal;font-weight:400;font-display:swap;src:url("../fonts/permanent-marker.woff2") format("woff2")}
+html.skin-zweistaedte:not(#_x#_y#_z#_w),html.skin-zweistaedte:not(#_x#_y#_z#_w) body{
+  --zwGround:#14110E;--zwGold:#D9B86A;--zwPink:#FF4FA3;--zwTeal:#38E3C8;--zwText:#E9DFC9;--zwSub:#A89B84;
+  --field:#14110E;--onField:#E9DFC9;--onField2:#A89B84;--fieldFill:rgba(233,223,201,.07);
+  --bg:#14110E;--surface:#1C1814;--surface2:#231E19;--fill:rgba(233,223,201,.07);--line:rgba(217,184,106,.18);--lineStrong:rgba(217,184,106,.4);
+  --text:#E9DFC9;--sub:#A89B84;--sub2:#A89B84;--muted:#A89B84;
+  --brand:#FF4FA3;--onBrand:#14110E;--leaf:#FF4FA3;--onLeaf:#14110E;--brandSoft:rgba(255,79,163,.12);--leafSoft:rgba(255,79,163,.12);
+  --sel:#D9B86A;--onSel:#14110E;--accent:#38E3C8;--accentSoft:rgba(56,227,200,.12);--onAccent:#14110E;--herb:#38E3C8;--coffee:#1C1814;
+  --glass:rgba(20,17,14,.88);--glassLine:rgba(217,184,106,.18);
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Oben", sans-serif;
+  color-scheme:dark}
+html.skin-zweistaedte{background:#14110E}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) body{background:#14110E !important;color:#E9DFC9}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) ::selection{background:#D9B86A;color:#14110E}
+/* obere Stadt: Namen */
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(.pageTitleBlock .h1,.recipeTitle,.homeFeaturedTitle,.catTileName,.sheetTitle,.continueTitle,.navCompact,.prepTitle){font-family:"Skin Oben", sans-serif !important;font-weight:700 !important;text-transform:uppercase;letter-spacing:.12em !important;color:#D9B86A !important;text-shadow:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .pageTitleBlock .h1{font-size:min(clamp(2rem,9vw,3.6rem),9vw) !important;line-height:1.05 !important;text-align:center;margin-right:-.12em}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .pageTitleBlock .h1::after{display:none !important}
+/* untere Stadt: Beschriftungen mit dem Marker */
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(.homeSectionTitle,.h2,.catGroupTitle,.ingSection){font-family:"Skin Unten", cursive !important;font-weight:400 !important;text-transform:none !important;letter-spacing:0 !important;color:#38E3C8 !important;font-size:1.5rem !important;line-height:1.2 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .homeSectionTitle::after{display:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(.recipeMeta,.metaItem,.resultCount,.catTileCount){color:#A89B84 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .homeAllLink{font-family:"Skin Unten", cursive !important;color:#FF4FA3 !important}
+/* Felder, Knöpfe */
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(.searchRow,.homeQuickBtn,.navIconBtn,.recipeActBtn,.profileBadge,.segmented){background:rgba(233,223,201,.07) !important;box-shadow:none !important;border:0 !important;color:#E9DFC9 !important;border-radius:999px !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeBack{background:rgba(20,17,14,.7) !important;box-shadow:none !important;border:0 !important;color:#E9DFC9 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1.5px rgba(56,227,200,.6) !important;border:0 !important;color:#38E3C8 !important;border-radius:999px !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#38E3C8 !important;color:#14110E !important;box-shadow:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(.btn.action,.recipeCookBtn,.btnPrimary,.continuePlay){background:#FF4FA3 !important;color:#14110E !important;box-shadow:none !important;border:0 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .segBtn{color:#A89B84 !important;background:transparent !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .segBtn.active{background:#D9B86A !important;color:#14110E !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .bottomRail{background:rgba(20,17,14,.88) !important;border:1px solid rgba(217,184,106,.18) !important;box-shadow:0 12px 34px rgba(0,0,0,.45) !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .tabItem{color:#A89B84 !important;background:transparent !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .tabItem.active{background:#FF4FA3 !important;color:#14110E !important}
+/* Flächen */
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(.catTile,.homeEmpty,.uEmpty,.homeTimer,.continueCard,.recipeInnerCard,.notesCard,#ingredientsGroup,.listGroup.compactList,.planDayCard){background:#1C1814 !important;box-shadow:none !important;border:0 !important;outline:0 !important;border-radius:8px !important;clip-path:none !important;color:#E9DFC9 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.notesCard) :is(.uName,.planDayNum,.notesTitle,span,div,a:not(.btn)){color:#E9DFC9 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) :is(.uQty,.ingQty,.num){color:#D9B86A !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) .uRow + .uRow{border-top:1px solid rgba(217,184,106,.14) !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .uLead{border:1.5px solid rgba(56,227,200,.7) !important;background:transparent !important;border-radius:50% !important;clip-path:none !important;box-shadow:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .uRow.checked .uLead{background:#38E3C8 !important;border-color:#38E3C8 !important;color:#14110E !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .uRow.checked .uName{text-shadow:none !important;color:#A89B84 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .planDayCard .planDayWd{color:#D9B86A !important;font-family:"Skin Oben", sans-serif !important;text-transform:uppercase;letter-spacing:.1em}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .planDayCard.isToday{box-shadow:inset 0 0 0 1.5px #FF4FA3 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) :is(#recipeGrid .recipeCard,.recipeCard){background:transparent !important;box-shadow:none !important;border:0 !important;outline:0 !important;padding:0 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeCard .rcImg{border-radius:8px !important;box-shadow:none !important;clip-path:none !important;border:0 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody{padding:10px 2px 4px !important;text-align:left;background:transparent !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody::before{display:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeCard .recipeTitle{font-size:.9375rem !important;line-height:1.2 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .homeFeatured{box-shadow:none !important;border:0 !important;background:transparent !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .homeFeatured .rcBody{position:static !important;background:transparent !important;padding:12px 0 0 !important;text-align:center}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .homeFeatured .homeFeaturedTitle{font-size:1.75rem !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .homeFeatured .recipeMeta{justify-content:center;text-shadow:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .heroOverlayCat{background:rgba(20,17,14,.8) !important;color:#38E3C8 !important;clip-path:none !important;border:0 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .catTile .catTileName{color:#FFFFFF !important;text-shadow:0 1px 10px rgba(0,0,0,.6) !important;font-size:.875rem !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .catTile .catTileCount{color:#F4ECDA !important;text-shadow:0 1px 8px rgba(0,0,0,.6) !important}
+/* Rezeptseite: Name gold, gesperrt, Untertitel kursiv */
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipePageHero::after{background:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeHeroText{position:static !important;padding:22px 32px 6px !important;background:#14110E !important;text-align:center}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeHeroText .recipeName{font-family:"Skin Oben", sans-serif !important;font-weight:700 !important;text-transform:uppercase;letter-spacing:.12em !important;color:#D9B86A !important;text-shadow:none !important;font-size:min(clamp(1.9rem,9vw,3.4rem),9vw) !important;line-height:1.05 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle{color:#E9DFC9 !important;text-shadow:none !important;font:italic 500 1.1875rem/1.35 "Skin Garamond", Georgia, serif !important;display:block !important;-webkit-line-clamp:unset !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipePageBody{margin-top:0 !important;background:transparent !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeSegWrap.isStuck{background:rgba(20,17,14,.95) !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeBody ol > li::before{background:transparent !important;color:#38E3C8 !important;box-shadow:inset 0 0 0 1.5px #38E3C8 !important;border:0 !important;clip-path:none !important;border-radius:50% !important;font-family:"Skin Unten", cursive !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeBody ol > li.stepDone::before{background:#38E3C8 !important;color:#14110E !important;box-shadow:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeBody ol > li{border-bottom-color:rgba(217,184,106,.14) !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookTime{background:rgba(56,227,200,.12) !important;color:#38E3C8 !important;box-shadow:none !important;border:0 !important;clip-path:none !important}
+@media (min-width:900px){ html.skin-zweistaedte:not(#_x#_y#_z#_w) .recipeHeroText{padding-left:16px !important;padding-right:16px !important} }
+/* Startseite: oben und unten (zweistaedte.js) */
+html.skin-zweistaedte:not(#_x#_y#_z#_w) body.cxHome .profileBadge{background:rgba(20,17,14,.5) !important;color:#E9DFC9 !important}
+.zwHero .cxShade{background:linear-gradient(rgba(20,17,14,.82), rgba(20,17,14,.72) 45%, rgba(20,17,14,.84) 100%) !important}
+.zwHero .cxPoster{background:#14110E !important}
+.zwHero :is(.cxTitle,.cxDown){display:none !important}
+.zwPage{position:absolute;left:0;right:0;top:140px;bottom:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 76px) 22px calc(env(safe-area-inset-bottom) + 100px);will-change:opacity}
+.zwPage p{margin:0}
+.zwPage a{text-decoration:none;-webkit-tap-highlight-color:transparent}
+.zwUp{text-align:center;color:#D9B86A;font-family:"Skin Oben", sans-serif}
+.zwName{font-size:.75rem;letter-spacing:.5em;padding-left:.5em;text-transform:uppercase}
+.zwDate{font:italic 500 1rem "Skin Garamond", Georgia, serif;margin-top:.4rem !important}
+.zwToday{display:block;color:#D9B86A;margin-top:2rem}
+.zwToday span{display:block}
+.zwHeute{font-size:.6875rem;letter-spacing:.5em;padding-left:.5em;text-transform:uppercase}
+.zwTitle{font-size:min(clamp(2.1rem,10vw,3.8rem),10vw);letter-spacing:.12em;padding-left:.12em;line-height:1.05;margin:.6rem 0 .4rem;text-transform:uppercase;text-wrap:balance}
+.zwSub{font:italic 500 1.1875rem/1.35 "Skin Garamond", Georgia, serif;color:#E9DFC9}
+.zwMeta{font-size:.6875rem;letter-spacing:.36em;padding-left:.36em;margin-top:.8rem;text-transform:uppercase}
+.zwDown{font-family:"Skin Unten", cursive;line-height:1.05}
+.zwKat{display:inline-flex;align-items:center;min-height:44px;color:#38E3C8;font-size:1.5rem;transform:rotate(-3deg);transform-origin:left}
+.zwCat{display:flex;align-items:center;min-height:44px;color:#FF4FA3;font-size:2.125rem}
+.zwCat i{font-style:normal;color:#38E3C8;font-size:1.25rem;margin-left:.35rem}
+.zwAll{display:inline-flex;align-items:center;min-height:44px;color:#38E3C8;font-size:1.75rem;margin-top:.4rem;transform:rotate(-2deg);transform-origin:left}
+.zwPage a:focus-visible{outline:2px solid #38E3C8;outline-offset:4px;border-radius:4px}
+@media (hover:hover) and (pointer:fine){ .zwPage a:hover{opacity:.75} }
+@media (max-height:720px){ .zwCat{font-size:1.75rem;min-height:40px} .zwToday{margin-top:1.2rem} }
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cxHead .cxShade{background:linear-gradient(rgba(20,17,14,.5), rgba(20,17,14,.7) 60%, #14110E 100%) !important}
+
+/* Kochmodus: dunkel ohne Karten, Text hell, Zeiten/Beschriftungen Türkis, Weiter Pink */
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay{--cBg:#14110E;--cCard:#1C1814;--cFill:rgba(233,223,201,.08);--cLine:rgba(217,184,106,.16);--cText:#E9DFC9;--cSub:#A89B84;--cLeaf:#FF4FA3;--cOnLeaf:#14110E;background:#14110E !important;color:#E9DFC9 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTop{background:#14110E !important;color:#E9DFC9 !important;box-shadow:none !important;border:0 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTitle{font-family:"Skin Oben", sans-serif !important;text-transform:uppercase;letter-spacing:.14em;color:#D9B86A !important;font-size:.875rem !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookPill{background:transparent !important;color:#38E3C8 !important;font-family:"Skin Unten", cursive !important;font-size:1.125rem !important;box-shadow:none !important;border:0 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .navIconBtn{background:rgba(233,223,201,.08) !important;color:#E9DFC9 !important;box-shadow:none !important;border:0 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookProgress{background:rgba(217,184,106,.18) !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookProgressBar{background:#FF4FA3 !important;box-shadow:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTabs{background:rgba(233,223,201,.07) !important;box-shadow:none !important;border:0 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTab{color:#A89B84 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTab.active{background:#D9B86A !important;color:#14110E !important;box-shadow:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStep,.prepGroup,.prepHead,.cookIngs,.cookStepIngsList,.cookNextPreview){background:transparent !important;box-shadow:none !important;border:0 !important;outline:0 !important;border-radius:0 !important;clip-path:none !important;padding-left:0 !important;padding-right:0 !important;color:#E9DFC9 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTime{background:rgba(56,227,200,.12) !important;color:#38E3C8 !important;box-shadow:none !important;border:0 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTime .ico{color:#38E3C8 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStepIngsLabel,.cookIngSection,.prepGroupTitle,.cookIngsHead){font-family:"Skin Unten", cursive !important;color:#38E3C8 !important;font-size:1.25rem !important;font-weight:400 !important;text-transform:none !important;letter-spacing:0 !important;background:transparent !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .prepTitle{font-size:1.75rem !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .prepCount{color:#38E3C8 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay :is(.prepRow,.cookIngRow,.cookStepIng){color:#E9DFC9 !important;background:transparent !important;padding-left:0 !important;padding-right:0 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .prepRow + .prepRow{box-shadow:inset 0 1px 0 rgba(217,184,106,.14) !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .prepBox{box-shadow:inset 0 0 0 1.5px rgba(56,227,200,.7) !important;color:transparent !important;background:transparent !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .prepRow.isDone .prepBox{background:#38E3C8 !important;box-shadow:none !important;color:#14110E !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay :is(.cookIngQty,.cookStepIngQty){color:#D9B86A !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookIngRow.isStep{background:rgba(255,79,163,.12) !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookChk{border-color:rgba(56,227,200,.7) !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookChk:checked{background:#38E3C8 !important;border-color:#38E3C8 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookChk::after{color:#14110E !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookNav{background:linear-gradient(rgba(20,17,14,0), #14110E 30%) !important;border:0 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn{background:rgba(233,223,201,.08) !important;color:#E9DFC9 !important;box-shadow:none !important;border:0 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn.primary{background:#FF4FA3 !important;color:#14110E !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone){background:#1C1814 !important;color:#E9DFC9 !important;box-shadow:none !important;border:0 !important;clip-path:none !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerLabel{color:#A89B84 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerBtn{background:rgba(233,223,201,.08) !important;color:#E9DFC9 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBar{background:#FF4FA3 !important}
+html.skin-zweistaedte:not(#_x#_y#_z#_w) .cookOverlay .cookTimer.isDone{background:#FF4FA3 !important;color:#14110E !important}

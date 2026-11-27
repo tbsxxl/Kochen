@@ -260,6 +260,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Jahr 3000, fünfte Fassung (Dez. 2026, Richtung D „Fünfziger-Zukunft“, `docs/skins/jahr3000-d.md`, letzter Block in `jahr3000.css`):**
     Creme `#FBEBD1`, vier Tinten (Tinte, Orange `#C04A28` = Beschriftungen/Aktives, Petrol `#1F7068` = Zahlen, Lila `#6B5CA5` = Kategorien),
     Jost 800 versal + Pacifico; Startseite `.j3Block` mit großen Kategorie-Zahlen; 3D-Stadt unter Creme-Schleier; keine Comic-Umrisse mehr.
+    **Zwei Städte, fünfte Fassung (Dez. 2026, Richtung A „Oben und unten“, `docs/skins/zweistaedte-a.md`, letzter Block in `zweistaedte.css`):**
+    `#14110E`, oben Gold Josefin gesperrt + Garamond kursiv, unten Permanent Marker Pink/Türkis; Startseite `.zwPage` (oben Gericht, unten
+    Kategorien); 3D-Szene unter dunklem Schleier; keine Art-déco-Ecken/Sechsecke mehr; Kochmodus dunkel, Weiter Pink.
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.
