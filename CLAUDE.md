@@ -84,6 +84,12 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
   (fragt vor Design-Entscheidungen, Barrierefreiheit/Bewegung/Responsive) und `bencium-innovative-ux-designer` (eigene Bildsprache über
   zehn Typo-Richtungen – nur für Neues, nicht für kleine Korrekturen). Im Original-Repo liegt die `SKILL.md` in `<name>/skills/<name>/`;
   kopiert ist nur dieser innere Ordner.
+  Außerdem (Nov. 2026, vom Besitzer gewünscht; `/plugin` gibt es in der Cloud-Sitzung nicht, darum per git geholt): `ui-ux-pro-max` (MIT,
+  nextlevelbuilder; Suche in mitgelieferten Tabellen: `python3 .agents/skills/ui-ux-pro-max/scripts/search.py "<begriffe>" --domain style`,
+  englische Begriffe) und accesslint (MIT): `accessibility-scan/-audit/-inspect/-fix/-diff` + gemeinsamer Ordner `shared/`. Die accesslint-Skills
+  rufen `npx @accesslint/cli`/`@accesslint/chrome` auf – das Ausführen dieser npm-Pakete hat die Sitzungs-Prüfung gesperrt; ohne Freigabe
+  stattdessen mit Playwright prüfen. Vercels `web-design-guidelines` ohne Lizenzangabe → nicht im Repo (nur je Sitzung nach `~/.claude/skills`).
+  `frontend-design` aus dem Anthropic-Marktplatz ist schon eingebaut; dessen übrige Plugins sind Entwickler-Werkzeuge.
   `swiftui-expert-skill` und `shadcn` passen nicht zu dieser Web-App. Dateien in `.agents/skills/`, Verweise in `.claude/skills/`;
   ein beim Installieren angelegter Ordner `agent/` muss gelöscht werden (Jekyll bricht sonst ab).
 - **Standard-Look „Markthalle“:** Feld-Seiten (`body.fieldPage`: Start, Listen) haben oben ein Basilikum-Farbfeld `--field`

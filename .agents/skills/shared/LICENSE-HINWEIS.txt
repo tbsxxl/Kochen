@@ -1,0 +1,1 @@
+MIT License – accesslint (github.com/accesslint/claude-marketplace), Lizenzangabe aus plugin.json.
