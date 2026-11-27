@@ -465,3 +465,4 @@ Danach auch Vorbereiten und Zutaten-Reiter ohne Karten im A2-Stil (Besitzer: „
 Screenshot des Besitzers: Timer doppelt (Leiste + groß) und Knöpfe unter der Leiste abgeschnitten → Timer des Schritts nur groß, Knöpfe neben der Zahl.
 Nordwall mit bencium-innovative neu (Besitzer: ein Skin nach dem anderen, Thema bleibt): A–J → „d, e, g“ → D2/E2/G2 → „d2 festlegen“ (Karte des Reichs, Pergament, vier Tinten). Kochmodus der Skins bleibt eigen.
 Zauberschule: A–J → „C“ (Sternendecke) festgelegt, „I“ soll zusätzlicher Skin werden. Besitzer: Kochmodi der Skins doch mit anpassen (Nordwall-Kochmodus nachgezogen).
+Brandbrief als neuer Skin gebaut (Entwurf I, Rot aufgehellt für Lesbarkeit). Danach weiter mit Jahr 3000.

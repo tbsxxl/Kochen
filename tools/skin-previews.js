@@ -7,7 +7,7 @@
 const { chromium } = require("playwright");
 const path = require("path");
 const BASE = process.argv[2] || "http://localhost:8411";
-const ALL = ["standard", "retro", "terminal", "diner", "bauhaus", "nordwall", "zauberschule", "jahr3000", "zweistaedte", "insel", "akte", "brigade", "boxengasse", "bildband", "wortwelt", "blauraum", "glasklar", "tiefsee", "formlabor", "galerie"];
+const ALL = ["standard", "retro", "terminal", "diner", "bauhaus", "nordwall", "zauberschule", "jahr3000", "zweistaedte", "insel", "akte", "brigade", "boxengasse", "bildband", "wortwelt", "blauraum", "glasklar", "tiefsee", "formlabor", "galerie", "brandbrief"];
 const SKINS = process.argv[3] ? process.argv[3].split(",") : ALL;
 (async ()=>{
   const b = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] });

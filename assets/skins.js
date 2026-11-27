@@ -62,7 +62,7 @@
 
   // Dez. 2026: die Serien-Skins sind neu gebaut (eigene Datei assets/skins/<skin>.js mit gemaltem Vollbild-Kopf); ihre alten
   // Spielereien (Szenen, Uhren, Aufkleber, Bons …) sind für sie abgeschaltet (Besitzer: „zu wenig wie die Serie, wirkt gebastelt“).
-  const PURE = { nordwall: 1, zauberschule: 1, jahr3000: 1, zweistaedte: 1, insel: 1, akte: 1, brigade: 1 };
+  const PURE = { brandbrief: 1, nordwall: 1, zauberschule: 1, jahr3000: 1, zweistaedte: 1, insel: 1, akte: 1, brigade: 1 };
   function mountScene(){
     document.querySelectorAll(".skinScene").forEach(el=> el.remove());
     const make = PURE[skin()] ? null : SCENES[skin()];
@@ -1094,7 +1094,7 @@
   // api.loop() anlegt, räumt skins.js beim Wechsel auf. api.loop() zeichnet nur, solange das Element sichtbar und die Seite offen ist;
   // bei „Bewegung reduzieren“ genau einmal.
   // Dez. 2026: auch die älteren Skins haben ein eigenes Aufbau-Skript (eigener Charakter für Start, Rezeptliste, Rezeptseite)
-  const FX_JS = { wortwelt: 1, blauraum: 1, glasklar: 1, tiefsee: 1, formlabor: 1, galerie: 1,
+  const FX_JS = { brandbrief: 1, wortwelt: 1, blauraum: 1, glasklar: 1, tiefsee: 1, formlabor: 1, galerie: 1,
     retro: 1, terminal: 1, diner: 1, bauhaus: 1, nordwall: 1, zauberschule: 1, jahr3000: 1, zweistaedte: 1, insel: 1, akte: 1, brigade: 1, boxengasse: 1, bildband: 1 };
   window.KOCHBUCH_FX = window.KOCHBUCH_FX || {};
   let fxOn = "";

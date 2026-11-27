@@ -329,3 +329,4 @@ html.skin-nordwall:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookT
 html.skin-nordwall:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBar{background:#8E2219 !important}
 html.skin-nordwall:not(#_x#_y#_z#_w) .cookOverlay .cookTimer.isDone{background:#8E2219 !important;color:#FFFFFF !important}
 html.skin-nordwall:not(#_x#_y#_z#_w):has(.cookOverlay.open){background:#E2D3B2 !important}
+html.skin-nordwall:not(#_x#_y#_z#_w) .recipePageBody{margin-top:0 !important}

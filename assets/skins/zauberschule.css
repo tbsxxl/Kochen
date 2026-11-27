@@ -316,3 +316,4 @@ html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .c
 html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBar{background:#C9A94A !important}
 html.skin-zauberschule:not(#_x#_y#_z#_w) .cookOverlay .cookTimer.isDone{background:#C9A94A !important;color:#0D1530 !important}
 html.skin-zauberschule:not(#_x#_y#_z#_w) .recipeBack{background:rgba(13,21,48,.62) !important;color:#E9DDB8 !important}
+html.skin-zauberschule:not(#_x#_y#_z#_w) .recipePageBody{margin-top:0 !important}
