@@ -2,6 +2,8 @@
 // Online-Buch): Die Startseite IST das Buch. Erst liegt es geschlossen da (Kreide-Deckel, „Buch öffnen“, Widmung), dann jede
 // Doppelseite ein Rezept in eigener kräftiger Farbe mit riesigem handgemaltem Wort (wortwelt-3d.js). Darunter die Bildunterschrift
 // (Name, Untertitel, Zeit), seitlich handgezeichnete Pfeile, unten farbige Seitenpunkte. Ohne echte Grafikkarte: Seiten als flache Karten.
+// Dritte Fassung (Dez. 2026, Entwurf B „Farbwechsel“ aus bencium-innovative, docs/skins/bilderbuch-b.md): auf dunklem Grund stehen die Wörter
+// in den Buchfarben – Handschrift für Großes, Fraunces für Text; nach dem Buch `.wwB` (Gericht des Tages, Kategorien je in eigener Farbe).
 (()=>{
   "use strict";
   const VIVID = ["#EBB2A9", "#E2604A", "#2F7550", "#5B40D4", "#F0B23C", "#2E6EA6"];
@@ -100,7 +102,35 @@
 
   // Rezeptliste und andere Listen: jede Karte eine Buchseite in einer der Seitenfarben
   const DARK_INK = { "#EBB2A9": 1, "#E2604A": 1, "#F0B23C": 1 };   // Koralle mit dunkler Schrift (weiß nur 3,3 : 1)
-  const paint = (el, col)=>{ el.style.setProperty("--pc", col); el.classList.toggle("wwInkDark", !!DARK_INK[col]); };
+  // Entwurf B: auf Dunkel stehen Wörter in hellen Fassungen der Buchfarben (alle ≥ 4,5 : 1 auf #161515)
+  const WORD = { "#EBB2A9": "#EBB2A9", "#E2604A": "#EE7A64", "#2F7550": "#7FC79B", "#5B40D4": "#A897FF", "#F0B23C": "#F0B23C", "#2E6EA6": "#7DB4E6" };
+  const paint = (el, col)=>{ el.style.setProperty("--pc", col); el.style.setProperty("--pw", WORD[col] || "#F4EEE8"); el.classList.toggle("wwInkDark", !!DARK_INK[col]); };
+
+  // ---------- Startseite nach dem Buch: Entwurf B „Farbwechsel“ ----------
+  function words(api){
+    const host = document.querySelector(".homeGreeting"); if(!host || document.querySelector(".wwB")) return;
+    let counts = {}, total = 0;
+    const cc = document.getElementById("homeCatCount");
+    try{ counts = JSON.parse(cc?.textContent || "{}"); total = Number(cc?.dataset.total) || 0; }catch{}
+    const cats = Object.entries(counts).sort((a, b)=> b[1] - a[1]).slice(0, 4);
+    const link = document.getElementById("todayLink");
+    const path = link ? new URL(link.href, location.href).pathname : "";
+    const r = api.recipes().find((x)=> x.u === path) || {};
+    const title = document.getElementById("todayTitle")?.textContent.trim() || r.t || "";
+    if(!title) return;
+    const date = new Date().toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long" });
+    const cols = ["#EE7A64", "#F0B23C", "#7FC79B", "#A897FF"];
+    const el = api.bit("wwB", "wortwelt", "section");
+    el.setAttribute("aria-label", "Heute für dich");
+    el.innerHTML = `<p class="wwBTop"><span>Tobis Kochbuch</span><span>${esc(date)}</span></p>
+      <a class="wwBToday" href="${esc(path)}"><span class="wwBSmall">Heute für dich</span><b>${esc(title)}</b>${r.s ? `<span class="wwBSub">${esc(r.s)}</span>` : ""}${r.z ? `<span class="wwBSmall">${esc(r.z)}</span>` : ""}</a>
+      <p class="wwBSmall wwBGap">Kategorien</p>
+      ${cats.map((c, i)=> `<a class="wwBCat" style="color:${cols[i]}" href="/rezeptindex/?kategorie=${encodeURIComponent(c[0])}">${esc(c[0])}<span>${c[1]}</span></a>`).join("")}
+      <a class="wwBAll" href="/rezeptindex/">Alle ${total || ""} Rezepte</a>`;
+    host.after(el); api.add(()=> el.remove());
+    document.body.classList.add("wwBHome"); api.add(()=> document.body.classList.remove("wwBHome"));
+  }
+
   function pages(){
     document.querySelectorAll("#recipeGrid .recipeCard, .hScroll .recipeCard, .homeFeatured").forEach((c, i)=> paint(c, VIVID[i % VIVID.length]));
     const hero = document.querySelector(".recipePageHero"), t = window.RECIPE_DATA?.title;
@@ -110,9 +140,10 @@
   window.KOCHBUCH_FX.wortwelt = {
     start(api){
       pages();
-      api.add(()=> document.querySelectorAll(".recipeCard, .recipePageHero").forEach((c)=>{ c.style.removeProperty("--pc"); c.classList.remove("wwInkDark"); }));
+      api.add(()=> document.querySelectorAll(".recipeCard, .recipePageHero").forEach((c)=>{ c.style.removeProperty("--pc"); c.style.removeProperty("--pw"); c.classList.remove("wwInkDark"); }));
       if(!api.home()) return;
       const h = hero(api);
+      words(api);
       if(h) run(api, h).catch((e)=> console.warn("Bilderbuch 3D:", e));
     },
     refresh(){ pages(); },

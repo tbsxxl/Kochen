@@ -278,6 +278,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Blauraum, dritte Fassung (Dez. 2026, Entwurf J „Dünn und fett“, `docs/skins/blauraum-j.md`, letzter Block in `blauraum.css`):** Host
     Grotesk 200 und 800 im selben Satz; nach dem 3D-Raum `.blJ` (Gericht des Tages als Satz, Kategorien „**Name** Zahl“); Rezeptseite Name +
     Untertitel als ein Satz; Kochmodus blau, Schritt dünn, Zeiten/Mengen fett, Weiter weiß.
+    **Bilderbuch, dritte Fassung (Dez. 2026, Entwurf B „Farbwechsel“, `docs/skins/bilderbuch-b.md`, letzter Block in `wortwelt.css`):** dunkel,
+    Buchfarben nur als Schriftfarbe (`--pw`, `WORD`), Handschrift für Großes; nach dem 3D-Buch `.wwB` (Gericht + Kategorien je in eigener Farbe);
+    Karten dunkel ohne Farbfläche und ohne Schräglage; Kochmodus dunkel, Überschriften in Handschrift, Weiter rosa.
     Retro, Terminal, Diner, Bauhaus und Boxengasse bleiben in dieser Runde unverändert (Wunsch des Besitzers).
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
