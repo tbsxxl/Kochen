@@ -272,6 +272,10 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Brigade (The-Bear-Welt), fünfte Fassung (Dez. 2026, Mischung M3 aus I/H/D/E, `docs/skins/brigade-m3.md`, letzter Block in `brigade.css`):**
     hell `#ECEEEF`, Tinte, Schürzenblau `#2E62A8` gesperrt, Rot `#B3261E` in Courier; Startseite `.bgMenu` als ruhige Karte mit Tafelzeilen;
     3D-Pass unter hellem Schleier; keine Bons/Perforation/Malerband mehr; Kochmodus hell, Weiter blau. Damit sind alle sieben Serien-Skins neu.
+    **Bildband, dritte Fassung (Dez. 2026, Entwurf E „Spaltensatz“, `docs/skins/bildband-e.md`, letzter Block in `bildband.css`):** Heftseite –
+    Fraunces 800 eng für Großes, Lesetext in Spalten, Etiketten Inter in Erdton (keine Versalien mehr); Startseite `.bdSpread` (Titel, Foto,
+    Spalten mit Untertitel/Zeit/Kategorien) statt Titelblatt; Liste zwei Spalten, jeder fünfte breit; Kochmodus Creme, Weiter Erdton.
+    Retro, Terminal, Diner, Bauhaus und Boxengasse bleiben in dieser Runde unverändert (Wunsch des Besitzers).
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.

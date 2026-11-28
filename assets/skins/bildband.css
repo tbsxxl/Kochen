@@ -126,3 +126,101 @@ html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .linkCard:nth-child(5n+1) .rcB
 html.skin-bildband.bdList:not(#_x#_y) #recipeGrid .linkCard:nth-child(5n+1) .recipeTitle{font-size:1.75rem !important}
 .bdQuote{margin:0 0 22px;padding:0 0 0 18px;border-left:3px solid #8A4B2A;font:italic 400 clamp(1.4rem, 5.8vw, 2rem)/1.2 "Fraunces", Georgia, serif;color:#2B2118}
 .bdQuote::before{content:"„"}.bdQuote::after{content:"“"}
+
+/* ===== Dritte Fassung (Dez. 2026): Entwurf E „Spaltensatz“ (bencium-innovative, docs/skins/bildband-e.md) =====
+   Eine Heftseite: Fraunces 800 eng für alles Große, Fließtext im Blocksatz mit Silbentrennung, kleine Etiketten in Inter (normal
+   geschrieben, nicht mehr versal) und Erdton #8A4B2A (6 : 1 auf Creme). Keine Verläufe auf Fotos, keine Linien als Schmuck. */
+html.skin-bildband:not(#_x#_y#_z#_w) :is(.pageTitleBlock .h1,.homeSectionTitle,.h2,.recipeHeroText .recipeName,.homeFeatured .homeFeaturedTitle,.bdInhalt,.prepTitle){font-family:"Fraunces", Georgia, serif !important;font-weight:800 !important;font-style:normal !important;letter-spacing:-.03em !important;font-variation-settings:"opsz" 144}
+html.skin-bildband:not(#_x#_y#_z#_w) .pageTitleBlock .h1{font-size:min(clamp(3rem,15vw,5.2rem),15vw) !important;line-height:.9 !important}
+html.skin-bildband:not(#_x#_y#_z#_w) :is(.homeSectionTitle,.h2){font-size:2rem !important;line-height:.95 !important}
+html.skin-bildband:not(#_x#_y#_z#_w) :is(.homeGreetingSub,.homeAllLink,.continueEyebrow,.heroOverlayCat,.catTileCount,.ingSection,.resultCount){text-transform:none !important;letter-spacing:0 !important;font:600 .8125rem/1.3 "Inter", -apple-system, sans-serif !important}
+html.skin-bildband:not(#_x#_y#_z#_w) :is(.ingSection,.resultCount,.homeAllLink){color:#8A4B2A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .grid .recipeTitle::before{text-transform:none;letter-spacing:0;font:600 .8125rem/1 "Inter", -apple-system, sans-serif}
+html.skin-bildband:not(#_x#_y#_z#_w) .homeFeatured .rcImg::after,html.skin-bildband:not(#_x#_y#_z#_w) .recipePageHero::after{background:linear-gradient(to top, rgba(30,20,12,.7), transparent 55%) !important}
+
+/* Startseite: die Heftseite */
+html.skin-bildband:not(#_x#_y#_z#_w) body.bdeHome :is(.homeGreetingTitle,.homeGreetingSub){position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html.skin-bildband:not(#_x#_y#_z#_w) body.bdeHome :is(.brandWordmark,.homeToday){display:none !important}
+.bdSpread{margin:4px 0 30px;color:#2B211A}
+.bdSpread p{margin:0}
+.bdsTop{display:flex;justify-content:space-between;gap:12px;font:500 .8125rem/1.3 "Inter", -apple-system, sans-serif;color:#6B5545}
+.bdsLead{display:block;color:#2B211A;text-decoration:none;margin-top:6vh;-webkit-tap-highlight-color:transparent}
+.bdsKick{display:block;font:600 .8125rem/1.3 "Inter", -apple-system, sans-serif;color:#8A4B2A}
+.bdsTitle{display:block;font:800 min(clamp(3rem,15vw,6rem),15vw)/.9 "Fraunces", Georgia, serif;letter-spacing:-.03em;font-variation-settings:"opsz" 144;margin-top:.15em;overflow-wrap:break-word;hyphens:auto}
+.bdsImg{display:block;width:calc(100% + 32px);max-width:none;margin:16px -16px 0;aspect-ratio:4/3;object-fit:cover}
+.bdsCols{columns:2;column-gap:16px;margin-top:16px;font:400 .9375rem/1.42 "Fraunces", Georgia, serif;text-align:left;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:6 3 2;overflow-wrap:break-word}
+.bdsCols p + p{margin-top:.7em}
+.bdsCols b{font-weight:700}
+.bdsCols i{font-style:normal;color:#8A4B2A;font-variant-numeric:oldstyle-nums}
+.bdsCols a{color:#2B211A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em;text-decoration-color:#8A4B2A}
+.bdsCols .bdsAll{font-weight:700}
+@media (min-width:768px){
+  .bdsImg{width:100%;margin:20px 0 0;border-radius:3px;aspect-ratio:16/9}
+  .bdsCols{columns:3;column-gap:24px;font-size:1.0625rem;text-align:justify}
+}
+@media (hover:hover) and (pointer:fine){ .bdsLead:hover .bdsTitle,.bdsCols a:hover{color:#8A4B2A} }
+
+/* Rezeptliste: Heftseite mit zwei Spalten, jeder fünfte Eintrag über die ganze Breite */
+.bdInhalt{border-bottom:0 !important;padding-bottom:0 !important;font-size:clamp(2.6rem,13vw,4rem) !important;line-height:.9 !important;color:#2B211A}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;row-gap:26px}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .recipeCard{display:flex !important;flex-direction:column;gap:0;padding:0 !important;border-bottom:0 !important}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .recipeCard::before{content:none !important}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .recipeTitle::before{margin:10px 0 4px}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .rcImg{order:0;width:100% !important;aspect-ratio:4/3 !important;border-radius:3px !important}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .rcBody{order:2;padding:2px 0 0 !important}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .recipeTitle{font:700 1.1875rem/1.08 "Fraunces", Georgia, serif !important;letter-spacing:-.02em !important;hyphens:auto}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .recipeMeta{font:400 .8125rem/1.3 "Inter", -apple-system, sans-serif !important;color:#6B5545 !important}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .linkCard:nth-child(5n+1){grid-column:1 / -1}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .linkCard:nth-child(5n+1) .recipeCard{display:flex !important;padding:0 !important}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .linkCard:nth-child(5n+1) .rcImg{aspect-ratio:16/10 !important;margin:0 !important}
+html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .linkCard:nth-child(5n+1) .recipeTitle{font-size:min(clamp(2rem,9vw,3rem),9vw) !important;font-weight:800 !important;line-height:.95 !important}
+@media (min-width:768px){
+  html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px}
+  html.skin-bildband.bdList:not(#_x#_y#_z#_w) #recipeGrid .linkCard:nth-child(5n+1){grid-column:span 2}
+}
+
+/* Rezeptseite: Foto, darunter der Titel groß; Untertitel als fetter Vorspann, Schritte im Blocksatz */
+html.skin-bildband:not(#_x#_y#_z#_w) .recipePageHero::after{background:none !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .recipeHeroText{position:static !important;padding:18px 32px 0 !important;background:transparent !important;text-align:left}
+html.skin-bildband:not(#_x#_y#_z#_w) .recipeHeroText .recipeName{color:#2B211A !important;text-shadow:none !important;font-size:min(clamp(2.8rem,14vw,5.6rem),14vw) !important;line-height:.9 !important;hyphens:auto}
+html.skin-bildband:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle{display:none !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .recipePageBody{margin-top:0 !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .bdQuote{border-left:0;padding:0;margin:4px 0 22px;font:700 1.25rem/1.3 "Fraunces", Georgia, serif;letter-spacing:-.01em;color:#2B211A;text-align:left;hyphens:auto}
+html.skin-bildband:not(#_x#_y#_z#_w) .bdQuote::before,html.skin-bildband:not(#_x#_y#_z#_w) .bdQuote::after{content:none}
+html.skin-bildband:not(#_x#_y#_z#_w) .recipeBody ol > li{font-family:"Fraunces", Georgia, serif;font-size:1.0625rem;line-height:1.5;text-align:left;hyphens:auto;-webkit-hyphens:auto}
+@media (min-width:768px){ html.skin-bildband:not(#_x#_y#_z#_w) .recipeBody ol > li{text-align:justify} }
+html.skin-bildband:not(#_x#_y#_z#_w) .recipeBody ol > li::before{background:transparent !important;box-shadow:none !important;color:#8A4B2A !important;font:800 1.25rem/1.2 "Fraunces", Georgia, serif !important}
+@media (min-width:900px){ html.skin-bildband:not(#_x#_y#_z#_w) .recipeHeroText{padding:22px 16px 0 !important} }
+
+/* Kochmodus: Heftseite auf Creme, Schritt in Fraunces, Etiketten Inter in Erdton, Weiter Erdton */
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay{--cBg:#FAF6EE;--cCard:#FAF6EE;--cFill:#EFE7D8;--cLine:rgba(43,33,26,.16);--cText:#2B211A;--cSub:#6B5545;--cLeaf:#8A4B2A;--cOnLeaf:#FFFDF8;background:#FAF6EE !important;color:#2B211A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTop{background:#FAF6EE !important;color:#2B211A !important;box-shadow:inset 0 -1px 0 rgba(43,33,26,.16) !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTitle{font:800 1.25rem/1.1 "Fraunces", Georgia, serif !important;letter-spacing:-.02em}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookPill{background:#EFE7D8 !important;color:#2B211A !important;font:600 .8125rem "Inter", -apple-system, sans-serif !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .navIconBtn{background:transparent !important;box-shadow:inset 0 0 0 1px rgba(43,33,26,.3) !important;color:#2B211A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookProgress{background:#EFE7D8 !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookProgressBar{background:#8A4B2A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTabs{background:#EFE7D8 !important;box-shadow:none !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTab{color:#2B211A !important;font:600 .9375rem "Inter", -apple-system, sans-serif !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTab.active{background:#2B211A !important;color:#FAF6EE !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStep,.prepGroup,.prepHead,.cookIngs,.cookStepIngsList,.cookNextPreview){background:transparent !important;box-shadow:none !important;border-radius:0 !important;padding-left:0 !important;padding-right:0 !important;color:#2B211A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookStep{font:400 clamp(1.375rem,5.6vw,2rem)/1.32 "Fraunces", Georgia, serif !important;letter-spacing:-.01em;hyphens:auto;-webkit-hyphens:auto}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTime{background:#F1E4D8 !important;color:#8A4B2A !important;font-weight:700 !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTime :is(.ico,.uiIcon){color:#8A4B2A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStepIngsLabel,.cookIngSection,.prepGroupTitle,.cookIngsHead,.prepCount){color:#8A4B2A !important;font:600 .875rem/1.3 "Inter", -apple-system, sans-serif !important;text-transform:none !important;letter-spacing:0 !important;background:transparent !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .prepTitle{font-size:3rem !important;line-height:.9 !important;color:#2B211A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay :is(.prepRow,.cookIngRow,.cookStepIng){color:#2B211A !important;background:transparent !important;padding-left:0 !important;padding-right:0 !important;font-family:"Fraunces", Georgia, serif}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay :is(.prepRow + .prepRow,.cookIngRow + .cookIngRow,.cookStepIng + .cookStepIng){box-shadow:inset 0 1px 0 rgba(43,33,26,.16) !important;border-top:0 !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookIngQty{font-family:"Inter", -apple-system, sans-serif;font-weight:600;color:#8A4B2A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .prepBox{box-shadow:inset 0 0 0 1.5px #8A4B2A !important;background:transparent !important;color:transparent !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .prepRow.isDone .prepBox{background:#8A4B2A !important;color:#FFFDF8 !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookIngRow.isStep{background:#F1E4D8 !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookChk{border:1.5px solid #8A4B2A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookChk:checked{background:#8A4B2A !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookNav{background:#FAF6EE !important;box-shadow:inset 0 1px 0 rgba(43,33,26,.16)}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn{background:transparent !important;box-shadow:inset 0 0 0 1px rgba(43,33,26,.3) !important;color:#2B211A !important;font:600 1rem "Inter", -apple-system, sans-serif !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn.primary{background:#8A4B2A !important;color:#FFFDF8 !important;box-shadow:none !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTimer{background:#2B211A !important;color:#FAF6EE !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTimer :is(.cookTimerLabel,.cookTimerTime){color:#FAF6EE !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBtn{background:rgba(250,246,238,.16) !important;color:#FAF6EE !important}
+html.skin-bildband:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBar{background:#E7C9A9 !important}
