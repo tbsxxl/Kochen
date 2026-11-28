@@ -472,3 +472,4 @@ Die Insel: A–J → „C, D, F“ → C2/D2/F2 → „F2, aber C2 reinbekommen�
 Akte: erste Runde fälschlich für Akte X → verworfen (Besitzer: „das ist für Shutter Island“); neue Runde → „D“ (Lichtkegel des Leuchtturms).
 Brigade: A–J → „Mischung aus I, H, D, E“ → M1–M3 → „M3“. Alle sieben Serien-Skins + Brandbrief damit neu gestaltet.
 - Dez. 2026: Skill-Runde über alle Skins – Retro, Terminal, Diner, Bauhaus, Boxengasse bleiben wie sie sind; Bildband bekommt Entwurf E „Spaltensatz“ (Heftseite, Spalten, Fraunces 800, Etiketten ohne Versalien).
+- Dez. 2026: Blauraum bekommt Entwurf J „Dünn und fett“ (Satz mit Host Grotesk 200/800 nach dem 3D-Raum, Rezeptname + Untertitel als ein Satz, Kochmodus angepasst).

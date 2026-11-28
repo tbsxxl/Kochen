@@ -275,6 +275,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Bildband, dritte Fassung (Dez. 2026, Entwurf E „Spaltensatz“, `docs/skins/bildband-e.md`, letzter Block in `bildband.css`):** Heftseite –
     Fraunces 800 eng für Großes, Lesetext in Spalten, Etiketten Inter in Erdton (keine Versalien mehr); Startseite `.bdSpread` (Titel, Foto,
     Spalten mit Untertitel/Zeit/Kategorien) statt Titelblatt; Liste zwei Spalten, jeder fünfte breit; Kochmodus Creme, Weiter Erdton.
+    **Blauraum, dritte Fassung (Dez. 2026, Entwurf J „Dünn und fett“, `docs/skins/blauraum-j.md`, letzter Block in `blauraum.css`):** Host
+    Grotesk 200 und 800 im selben Satz; nach dem 3D-Raum `.blJ` (Gericht des Tages als Satz, Kategorien „**Name** Zahl“); Rezeptseite Name +
+    Untertitel als ein Satz; Kochmodus blau, Schritt dünn, Zeiten/Mengen fett, Weiter weiß.
     Retro, Terminal, Diner, Bauhaus und Boxengasse bleiben in dieser Runde unverändert (Wunsch des Besitzers).
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
