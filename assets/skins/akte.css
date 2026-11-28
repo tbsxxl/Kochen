@@ -164,3 +164,134 @@ html.skin-akte:not(#_x#_y#_z) :is(#ingredientsGroup,.listGroup.compactList) .uRo
 html.skin-akte:not(#_x#_y#_z) .chipMainCat{background:var(--kraft) !important;color:#2A1E0E !important}
 html.skin-akte:not(#_x#_y#_z) .reweChip{color:#E8A08F !important}
 html.skin-akte:not(#_x#_y#_z) #ingredientsGroup{padding-top:14px !important}
+
+/* ==========================================================================================================================
+   Dez. 2026, fünfte Fassung: Richtung D „Lichtkegel“ (bencium-innovative, vom Besitzer gewählt; docs/skins/akte-d.md).
+   Akte = Shutter-Island-Welt (Insel-Anstalt 1954, Sturm, Leuchtturm). Sturmnacht #0F151B, zwei Farben: Graublau #7E8C99 (alles im Dunkeln)
+   und Leuchtgelb #F3E9C6 (was der Strahl trifft: Gerichte, Lesetext, Aktives). Jost. Zeilen der Startseite rücken treppenartig ein.
+   Keine Mappen, Sofortbilder, Stempel, Karten mehr.
+   ========================================================================================================================== */
+@font-face{font-family:"Skin Strahl";font-style:normal;font-weight:100 900;font-display:swap;src:url("../fonts/jost.woff2") format("woff2")}
+html.skin-akte:not(#_x#_y#_z#_w),html.skin-akte:not(#_x#_y#_z#_w) body{
+  --akNight:#0F151B;--akDim:#7E8C99;--akLit:#F3E9C6;
+  --field:#0F151B;--onField:#F3E9C6;--onField2:#7E8C99;--fieldFill:rgba(243,233,198,.07);
+  --bg:#0F151B;--surface:#151D25;--surface2:#1A242E;--fill:rgba(243,233,198,.07);--line:rgba(126,140,153,.22);--lineStrong:rgba(126,140,153,.45);
+  --text:#F3E9C6;--sub:#7E8C99;--sub2:#7E8C99;--muted:#7E8C99;
+  --brand:#F3E9C6;--onBrand:#0F151B;--leaf:#F3E9C6;--onLeaf:#0F151B;--brandSoft:rgba(243,233,198,.1);--leafSoft:rgba(243,233,198,.1);
+  --sel:#F3E9C6;--onSel:#0F151B;--accent:#F3E9C6;--accentSoft:rgba(243,233,198,.1);--onAccent:#0F151B;--herb:#7E8C99;--coffee:#151D25;
+  --glass:rgba(15,21,27,.9);--glassLine:rgba(126,140,153,.22);
+  --fontUi:"Skin Strahl", -apple-system, sans-serif;--fontDisplay:"Skin Strahl", sans-serif;
+  color-scheme:dark}
+html.skin-akte{background:#0F151B}
+html.skin-akte:not(#_x#_y#_z#_w) body{background:#0F151B !important;color:#F3E9C6;font-family:"Skin Strahl", -apple-system, sans-serif}
+html.skin-akte:not(#_x#_y#_z#_w) ::selection{background:#F3E9C6;color:#0F151B}
+html.skin-akte:not(#_x#_y#_z#_w) :is(.pageTitleBlock .h1,.recipeTitle,.homeFeaturedTitle,.catTileName,.sheetTitle,.continueTitle,.navCompact,.prepTitle){font-family:"Skin Strahl", sans-serif !important;font-weight:700 !important;text-transform:none !important;letter-spacing:-.02em !important;color:#F3E9C6 !important;text-shadow:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .pageTitleBlock .h1{font-size:min(clamp(2.6rem,13vw,4.8rem),13vw) !important;line-height:.92 !important;text-align:left}
+html.skin-akte:not(#_x#_y#_z#_w) .pageTitleBlock .h1::after{display:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(.homeSectionTitle,.h2,.catGroupTitle,.ingSection){font-family:"Skin Strahl", sans-serif !important;font-weight:500 !important;text-transform:uppercase;letter-spacing:.2em !important;color:#7E8C99 !important;font-size:.875rem !important}
+html.skin-akte:not(#_x#_y#_z#_w) .homeSectionTitle::after{display:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(.recipeMeta,.metaItem,.resultCount,.catTileCount,.homeAllLink){color:#7E8C99 !important;font-family:"Skin Strahl", sans-serif !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(.searchRow,.homeQuickBtn,.navIconBtn,.recipeActBtn,.profileBadge,.segmented){background:rgba(243,233,198,.07) !important;box-shadow:none !important;border:0 !important;color:#F3E9C6 !important;border-radius:999px !important;transform:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeBack{background:rgba(15,21,27,.7) !important;box-shadow:none !important;border:0 !important;color:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(126,140,153,.55) !important;border:0 !important;color:#A3B0BC !important;border-radius:999px !important;transform:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#F3E9C6 !important;color:#0F151B !important;box-shadow:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(.btn.action,.recipeCookBtn,.btnPrimary,.continuePlay){background:#F3E9C6 !important;color:#0F151B !important;box-shadow:none !important;border:0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .segBtn{color:#7E8C99 !important;background:transparent !important}
+html.skin-akte:not(#_x#_y#_z#_w) .segBtn.active{background:#F3E9C6 !important;color:#0F151B !important}
+html.skin-akte:not(#_x#_y#_z#_w) .bottomRail{background:rgba(15,21,27,.9) !important;border:1px solid rgba(126,140,153,.22) !important;box-shadow:0 12px 34px rgba(0,0,0,.5) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .tabItem{color:#7E8C99 !important;background:transparent !important}
+html.skin-akte:not(#_x#_y#_z#_w) .tabItem.active{background:#F3E9C6 !important;color:#0F151B !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(.catTile,.homeEmpty,.uEmpty,.homeTimer,.continueCard,.recipeInnerCard,.notesCard,#ingredientsGroup,.listGroup.compactList,.planDayCard){background:#151D25 !important;box-shadow:none !important;border:0 !important;outline:0 !important;border-radius:6px !important;transform:none !important;color:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.notesCard,.homeEmpty,.uEmpty) :is(.uName,.planDayNum,.notesTitle,span,div,a:not(.btn),p){color:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) :is(.uQty,.ingQty,.num,.uSub){color:#A3B0BC !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) .uRow + .uRow{border-top:1px solid rgba(126,140,153,.18) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .uLead{border:1.5px solid rgba(126,140,153,.7) !important;background:transparent !important;border-radius:50% !important;box-shadow:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .uRow.checked .uLead{background:#F3E9C6 !important;border-color:#F3E9C6 !important;color:#0F151B !important}
+html.skin-akte:not(#_x#_y#_z#_w) .planDayCard .planDayWd{color:#7E8C99 !important;text-transform:uppercase;letter-spacing:.12em}
+html.skin-akte:not(#_x#_y#_z#_w) .planDayCard.isToday{box-shadow:inset 0 0 0 1px #F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) :is(#recipeGrid .recipeCard,.recipeCard){background:transparent !important;box-shadow:none !important;border:0 !important;outline:0 !important;padding:0 !important;transform:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeCard .rcImg{border-radius:4px !important;box-shadow:none !important;border:0 !important;transform:none !important;padding:0 !important;background:transparent !important}
+html.skin-akte:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody{padding:10px 2px 4px !important;background:transparent !important;text-align:left}
+html.skin-akte:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody::before,html.skin-akte:not(#_x#_y#_z#_w) .recipeCard::before,html.skin-akte:not(#_x#_y#_z#_w) .recipeCard::after{display:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeCard .recipeTitle{font-size:1rem !important;line-height:1.2 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .homeFeatured{box-shadow:none !important;border:0 !important;background:transparent !important;transform:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .homeFeatured .rcBody{position:static !important;background:transparent !important;padding:12px 0 0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .homeFeatured .homeFeaturedTitle{font-size:2rem !important}
+html.skin-akte:not(#_x#_y#_z#_w) .homeFeatured .recipeMeta{text-shadow:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .heroOverlayCat{background:rgba(15,21,27,.8) !important;color:#F3E9C6 !important;border:0 !important;transform:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .catTile .catTileName{color:#FFFFFF !important;text-shadow:0 1px 10px rgba(0,0,0,.6) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .catTile .catTileCount{color:#F2F3EE !important;text-shadow:0 1px 8px rgba(0,0,0,.6) !important}
+/* Rezeptseite: Name groß unter dem Foto, Untertitel eine Stufe eingerückt */
+html.skin-akte:not(#_x#_y#_z#_w) .recipePageHero::after{background:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipePageHero{transform:none !important;padding:0 !important;background:transparent !important;box-shadow:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeHeroText{position:static !important;padding:22px 32px 6px !important;background:#0F151B !important;text-align:left}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeHeroText .recipeName{font-size:min(clamp(2.4rem,12vw,4.4rem),12vw) !important;line-height:.95 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle{color:#7E8C99 !important;text-shadow:none !important;font:400 1.125rem/1.4 "Skin Strahl", sans-serif !important;display:block !important;-webkit-line-clamp:unset !important;padding-left:8vw;margin-top:.4rem}
+html.skin-akte:not(#_x#_y#_z#_w) .recipePageBody{margin-top:0 !important;background:transparent !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeSegWrap.isStuck{background:rgba(15,21,27,.95) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeBody ol > li::before{background:transparent !important;color:#7E8C99 !important;box-shadow:inset 0 0 0 1px rgba(126,140,153,.7) !important;border:0 !important;content:counter(list-item) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeBody ol > li.stepDone::before{background:#F3E9C6 !important;color:#0F151B !important;box-shadow:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .recipeBody ol > li{border-bottom-color:rgba(126,140,153,.18) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookTime{background:rgba(243,233,198,.1) !important;color:#F3E9C6 !important;box-shadow:none !important;border:0 !important}
+@media (min-width:900px){ html.skin-akte:not(#_x#_y#_z#_w) .recipeHeroText{padding-left:16px !important;padding-right:16px !important} }
+/* Startseite: der Strahl (akte.js) */
+html.skin-akte:not(#_x#_y#_z#_w) body.cxHome .profileBadge{background:rgba(15,21,27,.5) !important;color:#F3E9C6 !important}
+.akHero .cxShade{background:linear-gradient(rgba(15,21,27,.84), rgba(15,21,27,.74) 45%, rgba(15,21,27,.88) 100%) !important}
+.akHero .cxPoster{background:#0F151B !important}
+.akHero :is(.cxTitle,.cxDown){display:none !important}
+.akBeam{position:relative;z-index:2;padding:4px 0 40px;color:#7E8C99;font-family:"Skin Strahl", sans-serif;overflow:hidden}
+.akBeam p{margin:0}
+.akBeam a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.akBeam > p{font-size:.875rem;white-space:nowrap}
+.akS0{margin-left:0}.akS1{margin-left:6vw}.akS2{margin-left:12vw}.akS3{margin-left:18vw}.akS4{margin-left:24vw}.akS5{margin-left:30vw}.akS6{margin-left:36vw}
+.akToday{display:block;margin-top:2.2rem}
+.akToday > span{display:block}
+.akHeute{font-size:.875rem;letter-spacing:.2em;text-transform:uppercase}
+.akTitle{color:#F3E9C6;font-weight:700;font-size:min(clamp(2.8rem,14vw,5.4rem),14vw);line-height:.95;letter-spacing:-.02em}
+.akSub{font-size:1.125rem;line-height:1.35;max-width:17rem;margin-top:.4rem}
+.akMeta{font-size:.9375rem;margin-top:.4rem}
+.akBeam .akKat{display:inline-flex;align-items:center;min-height:44px;font-size:.875rem;letter-spacing:.2em;text-transform:uppercase;margin-top:2rem}
+.akCat{display:flex;align-items:center;min-height:44px;font-size:1.25rem;white-space:nowrap}
+.akBeam .akLit{color:#F3E9C6}
+.akBeam .akAll{display:inline-flex;align-items:center;min-height:44px;font-weight:700;font-size:1.125rem;margin-top:.6rem}
+.akBeam a:focus-visible{outline:2px solid #F3E9C6;outline-offset:4px;border-radius:4px}
+@media (hover:hover) and (pointer:fine){ .akBeam a:hover{opacity:.75} }
+@media (min-width:900px){ .akS1{margin-left:4rem}.akS2{margin-left:8rem}.akS3{margin-left:12rem}.akS4{margin-left:16rem}.akS5{margin-left:20rem}.akS6{margin-left:24rem} }
+html.skin-akte:not(#_x#_y#_z#_w) .cxHead .cxShade{background:linear-gradient(rgba(15,21,27,.6), rgba(15,21,27,.78) 60%, #0F151B 100%) !important}
+
+/* Kochmodus: Sturmnacht ohne Karten, Text im warmen Licht, Beschriftungen Graublau, Weiter hell */
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay{--cBg:#0F151B;--cCard:#151D25;--cFill:rgba(243,233,198,.08);--cLine:rgba(126,140,153,.18);--cText:#F3E9C6;--cSub:#7E8C99;--cLeaf:#F3E9C6;--cOnLeaf:#0F151B;background:#0F151B !important;color:#F3E9C6 !important;font-family:"Skin Strahl", sans-serif}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTop{background:#0F151B !important;color:#F3E9C6 !important;box-shadow:none !important;border:0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTitle{font-family:"Skin Strahl", sans-serif !important;font-weight:700 !important;color:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookPill{background:transparent !important;color:#7E8C99 !important;box-shadow:none !important;border:0 !important;transform:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .navIconBtn{background:rgba(243,233,198,.08) !important;color:#F3E9C6 !important;box-shadow:none !important;border:0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookProgress{background:rgba(126,140,153,.22) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookProgressBar{background:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTabs{background:rgba(243,233,198,.07) !important;box-shadow:none !important;border:0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTab{color:#7E8C99 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTab.active{background:#F3E9C6 !important;color:#0F151B !important;box-shadow:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStep,.prepGroup,.prepHead,.cookIngs,.cookStepIngsList,.cookNextPreview){background:transparent !important;box-shadow:none !important;border:0 !important;outline:0 !important;border-radius:0 !important;transform:none !important;padding-left:0 !important;padding-right:0 !important;color:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStep,.prepGroup)::before,html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStep,.prepGroup)::after{display:none !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTime{background:rgba(243,233,198,.1) !important;color:#F3E9C6 !important;box-shadow:none !important;border:0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTime .ico{color:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStepIngsLabel,.cookIngSection,.prepGroupTitle,.cookIngsHead){color:#7E8C99 !important;font-family:"Skin Strahl", sans-serif !important;font-size:.75rem !important;font-weight:500 !important;text-transform:uppercase;letter-spacing:.2em !important;background:transparent !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .prepTitle{font-size:2rem !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .prepCount{color:#7E8C99 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay :is(.prepRow,.cookIngRow,.cookStepIng){color:#F3E9C6 !important;background:transparent !important;padding-left:0 !important;padding-right:0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .prepRow + .prepRow{box-shadow:inset 0 1px 0 rgba(126,140,153,.18) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .prepBox{box-shadow:inset 0 0 0 1.5px rgba(126,140,153,.7) !important;color:transparent !important;background:transparent !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .prepRow.isDone .prepBox{background:#F3E9C6 !important;box-shadow:none !important;color:#0F151B !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay :is(.cookIngQty,.cookStepIngQty){color:#A3B0BC !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookIngRow.isStep{background:rgba(243,233,198,.08) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookChk{border-color:rgba(126,140,153,.7) !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookChk:checked{background:#F3E9C6 !important;border-color:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookChk::after{color:#0F151B !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookNav{background:linear-gradient(rgba(15,21,27,0), #0F151B 30%) !important;border:0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn{background:rgba(243,233,198,.08) !important;color:#F3E9C6 !important;box-shadow:none !important;border:0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn.primary{background:#F3E9C6 !important;color:#0F151B !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone){background:#151D25 !important;color:#F3E9C6 !important;box-shadow:none !important;border:0 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerLabel{color:#7E8C99 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerBtn{background:rgba(243,233,198,.08) !important;color:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBar{background:#F3E9C6 !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookOverlay .cookTimer.isDone{background:#F3E9C6 !important;color:#0F151B !important}
+html.skin-akte:not(#_x#_y#_z#_w) .cookTime .uiIcon,html.skin-akte:not(#_x#_y#_z#_w) .cookTime .uiIcon *{color:#F3E9C6 !important;opacity:1 !important;filter:none !important;stroke:currentColor}
