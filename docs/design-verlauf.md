@@ -470,3 +470,4 @@ Jahr 3000: A–J → „d“ (Fünfziger-Zukunft) eingebaut, Orange abgedunkelt 
 Zwei Städte: A–J → „a“ (Oben und unten) eingebaut.
 Die Insel: A–J → „C, D, F“ → C2/D2/F2 → „F2, aber C2 reinbekommen“: Funkspruch mit Echos + Bernstein-Countdown für alles mit Zeit.
 Akte: erste Runde fälschlich für Akte X → verworfen (Besitzer: „das ist für Shutter Island“); neue Runde → „D“ (Lichtkegel des Leuchtturms).
+Brigade: A–J → „Mischung aus I, H, D, E“ → M1–M3 → „M3“. Alle sieben Serien-Skins + Brandbrief damit neu gestaltet.

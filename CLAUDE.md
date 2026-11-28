@@ -269,6 +269,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Akte = Shutter-Island-Welt (nicht Akte X!), fünfte Fassung (Dez. 2026, Richtung D „Lichtkegel“, `docs/skins/akte-d.md`, letzter Block in `akte.css`):**
     Sturmnacht `#0F151B`, Graublau `#7E8C99` + Leuchtgelb `#F3E9C6`, Jost; Startseite `.akBeam` mit treppenartig eingerückten Zeilen wie ein
     streichender Leuchtturmstrahl; 3D-Insel im Sturm unter dunklem Schleier; keine Mappen/Sofortbilder/Stempel mehr; Kochmodus Weiter hell.
+    **Brigade (The-Bear-Welt), fünfte Fassung (Dez. 2026, Mischung M3 aus I/H/D/E, `docs/skins/brigade-m3.md`, letzter Block in `brigade.css`):**
+    hell `#ECEEEF`, Tinte, Schürzenblau `#2E62A8` gesperrt, Rot `#B3261E` in Courier; Startseite `.bgMenu` als ruhige Karte mit Tafelzeilen;
+    3D-Pass unter hellem Schleier; keine Bons/Perforation/Malerband mehr; Kochmodus hell, Weiter blau. Damit sind alle sieben Serien-Skins neu.
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.
