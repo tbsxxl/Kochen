@@ -4,6 +4,8 @@
 //   Unten „Ringe | Spirale“ und „n / m Rezepte“, am Rechner zeigt der Zeiger ein Etikett mit dem Rezept unter ihm.
 // - Rezeptliste: Fotos auf einer gewölbten Fläche (Karten neigen sich je nach Lage auf dem Bildschirm), Umschalter „Raster | Liste“.
 // - Überall am Rechner: gelber Punkt folgt der Maus.
+// - Dritte Fassung (Dez. 2026, Entwurf J „Dünn und fett“ aus bencium-innovative, docs/skins/blauraum-j.md): nach dem 3D-Raum steht das
+//   Gericht des Tages als ein Satz `.blJ`, in dem dünne (200) und fette (800) Wörter wechseln; Kategorien genauso.
 (()=>{
   "use strict";
   const LIST_KEY = "kochbuch.ui.blList";
@@ -31,6 +33,36 @@
     document.body.classList.add("blHome"); api.add(()=> document.body.classList.remove("blHome"));
     dispatchEvent(new Event("kochbuch:sceneresize"));
     return { el, list };
+  }
+
+  // ---------- Heute als ein Satz: dünn und fett im Wechsel ----------
+  function sentence(api){
+    const host = document.querySelector(".homeGreeting"); if(!host || document.querySelector(".blJ")) return;
+    const esc = (t)=> String(t || "").replace(/[&<>"]/g, (c)=> ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+    let counts = {}, total = 0;
+    const cc = document.getElementById("homeCatCount");
+    try{ counts = JSON.parse(cc?.textContent || "{}"); total = Number(cc?.dataset.total) || 0; }catch{}
+    const cats = Object.entries(counts).sort((a, b)=> b[1] - a[1]).slice(0, 4);
+    const link = document.getElementById("todayLink");
+    const path = link ? new URL(link.href, location.href).pathname : "";
+    const r = api.recipes().find((x)=> x.u === path) || {};
+    const title = document.getElementById("todayTitle")?.textContent.trim() || r.t || "";
+    if(!title) return;
+    // Untertitel: das letzte Wort fett, der Rest dünn („mit Romanesco und <b>Kartoffelpüree</b>“)
+    let sub = "";
+    if(r.s){ const w = r.s.trim().split(/\s+/), last = w.pop(); sub = `, ${esc(w.join(" "))}${w.length ? " " : ""}<b>${esc(last.replace(/[.!]$/, ""))}</b>`; }
+    const date = new Date().toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long" });
+    const el = api.bit("blJ", "blauraum", "section");
+    el.setAttribute("aria-label", "Heute für dich");
+    el.innerHTML = `<p class="blJTop"><span>Tobis Kochbuch</span><span>${esc(date)}</span></p>
+      <p class="blJCap">Heute für dich</p>
+      <a class="blJBig" href="${esc(path)}"><b>${esc(title)}</b>${sub}.</a>
+      ${r.z ? `<p class="blJCap">${esc(r.z)}</p>` : ""}
+      <p class="blJCap blJGap">Kategorien</p>
+      ${cats.map((c)=> `<a class="blJCat" href="/rezeptindex/?kategorie=${encodeURIComponent(c[0])}"><b>${esc(c[0])}</b> ${c[1]}</a>`).join("")}
+      <a class="blJCap blJAll" href="/rezeptindex/">Alle ${total || ""} Rezepte</a>`;
+    host.after(el); api.add(()=> el.remove());
+    document.body.classList.add("blJHome"); api.add(()=> document.body.classList.remove("blJHome"));
   }
 
   function cssRing(api, h){
@@ -136,6 +168,7 @@
       if(!api.home()) return;
       const h = hero(api);
       if(!h) return;
+      sentence(api);
       if(api.gpu()) three(api, h).catch((e)=>{ console.warn("Blauraum 3D:", e); cssRing(api, h); });
       else cssRing(api, h);
     },

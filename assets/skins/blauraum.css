@@ -172,3 +172,71 @@ html.skin-blauraum:not(#_x#_y) .bbFootText a{background:#FFFFFF;color:#0C0CD6}
 html.skin-blauraum:not(#_x#_y) .bxRv{opacity:1;transform:none}
 .blRing img{animation:none}
 }
+
+/* ===== Dritte Fassung (Dez. 2026): Entwurf J „Dünn und fett“ (bencium-innovative, docs/skins/blauraum-j.md) =====
+   Host Grotesk in zwei Gewichten im selben Satz: 200 für den Fluss, 800 für das, was zählt (Name, Hauptwort, Menge).
+   Kleines bleibt winzig und versal, Gelb #F4F000 nur für „Alle Rezepte“ und den aktiven Reiter. */
+.blJ{padding:44px 0 36px;color:#FFFFFF;font-family:"Skin Raum", -apple-system, sans-serif}
+.blJ p{margin:0}
+.blJTop,.blJCap{font:600 .6875rem/1.4 "Skin Raum", -apple-system, sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#FFFFFF}
+.blJTop{display:flex;justify-content:space-between;gap:12px;margin-bottom:48px !important}
+.blJBig{display:block;margin:8px 0 12px;font:200 min(clamp(2.4rem,12vw,4.2rem),12vw)/.98 "Skin Raum", -apple-system, sans-serif;letter-spacing:-.05em;color:#FFFFFF;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.blJ b{font-weight:800}
+.blJGap{margin-top:44px !important;margin-bottom:6px !important}
+.blJCat{display:flex;align-items:center;min-height:44px;font:200 1.75rem/1.15 "Skin Raum", -apple-system, sans-serif;letter-spacing:-.03em;color:#FFFFFF;text-decoration:none}
+.blJCat b{margin-right:.3em}
+a.blJAll{display:inline-flex;align-items:center;min-height:44px;margin-top:20px;color:#F4F000;text-decoration:none}
+@media (min-width:768px){ .blJBig{max-width:16em} .blJ{padding-top:72px} }
+@media (hover:hover) and (pointer:fine){ .blJBig:hover b,.blJCat:hover b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.12em} }
+html.skin-blauraum:not(#_x#_y#_z#_w) body.blJHome .homeToday{display:none !important}
+
+/* Titel überall: Seitentitel dünn, Rezeptnamen fett */
+html.skin-blauraum:not(#_x#_y#_z#_w) .pageTitleBlock .h1{font-weight:200 !important;letter-spacing:-.05em !important;text-transform:none !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .recipeCard .recipeTitle{font-weight:800 !important;letter-spacing:-.03em !important;text-transform:none !important}
+
+/* Rezeptseite: Name und Untertitel als ein Satz, fett + dünn */
+html.skin-blauraum:not(#_x#_y#_z#_w) .recipeHeroText{padding:20px 16px 0 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .recipeHeroText :is(.recipeName,.recipeSubtitle){display:inline !important;font-size:min(clamp(2rem,9.5vw,3.6rem),9.5vw) !important;line-height:1 !important;letter-spacing:-.045em !important;text-transform:none !important;color:#FFFFFF !important;margin:0 !important;-webkit-line-clamp:unset !important;overflow:visible !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .recipeHeroText .recipeName{font-weight:800 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle{font-weight:200 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle::before{content:", "}
+html.skin-blauraum:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle::after{content:"."}
+html.skin-blauraum:not(#_x#_y#_z#_w) .recipePageBody{margin-top:0 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .recipeBody ol > li{font-weight:300}
+
+/* Kochmodus: Schritt dünn und groß, Zeiten und Mengen fett, Weiter weiß */
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay{--cBg:#0C0CD6;--cCard:#0C0CD6;--cFill:rgba(255,255,255,.12);--cLine:rgba(255,255,255,.28);--cText:#FFFFFF;--cSub:#FFFFFF;--cLeaf:#FFFFFF;--cOnLeaf:#0C0CD6;background:#0C0CD6 !important;color:#FFFFFF !important;font-family:"Skin Raum", -apple-system, sans-serif}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTop{background:#0C0CD6 !important;box-shadow:inset 0 -1px 0 rgba(255,255,255,.28) !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTitle{font-weight:800 !important;letter-spacing:-.03em;text-transform:none !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookPill{background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5) !important;color:#FFFFFF !important;font-weight:600 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .navIconBtn{background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5) !important;color:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookProgress{background:rgba(255,255,255,.2) !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookProgressBar{background:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTabs{background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5) !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTab{color:#FFFFFF !important;font-weight:600 !important;text-transform:uppercase;letter-spacing:.06em;font-size:.75rem !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTab.active{background:#FFFFFF !important;color:#0C0CD6 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStep,.prepGroup,.prepHead,.cookIngs,.cookStepIngsList,.cookNextPreview){background:transparent !important;box-shadow:none !important;border-radius:0 !important;padding-left:0 !important;padding-right:0 !important;color:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookStep{font-weight:200 !important;font-size:clamp(1.625rem,7vw,2.5rem) !important;line-height:1.12 !important;letter-spacing:-.035em}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookStep b,html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookStep strong{font-weight:800}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTime{background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6) !important;color:#FFFFFF !important;font-weight:800 !important;letter-spacing:-.02em}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTime :is(.ico,.uiIcon){color:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStepIngsLabel,.cookIngSection,.prepGroupTitle,.cookIngsHead,.prepCount){color:#FFFFFF !important;font:600 .6875rem/1.4 "Skin Raum", -apple-system, sans-serif !important;letter-spacing:.08em !important;text-transform:uppercase !important;background:transparent !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .prepTitle{font-weight:200 !important;font-size:3rem !important;letter-spacing:-.05em !important;line-height:.95 !important;text-transform:none !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay :is(.prepRow,.cookIngRow,.cookStepIng){color:#FFFFFF !important;background:transparent !important;padding-left:0 !important;padding-right:0 !important;font-weight:300}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay :is(.prepRow + .prepRow,.cookIngRow + .cookIngRow,.cookStepIng + .cookStepIng){box-shadow:inset 0 1px 0 rgba(255,255,255,.28) !important;border-top:0 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookIngQty{font-weight:800 !important;color:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .prepBox{box-shadow:inset 0 0 0 1.5px #FFFFFF !important;background:transparent !important;color:transparent !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .prepRow.isDone .prepBox{background:#FFFFFF !important;color:#0C0CD6 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookIngRow.isStep{background:rgba(255,255,255,.12) !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookIngRow.isStep *{font-weight:800}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookChk{border:1.5px solid #FFFFFF !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookChk:checked{background:#FFFFFF !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookChk::after{color:#0C0CD6 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookNav{background:#0C0CD6 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.28)}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn{background:transparent !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5) !important;color:#FFFFFF !important;font-weight:600 !important;text-transform:uppercase;letter-spacing:.06em;font-size:.8125rem !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn.primary{background:#FFFFFF !important;color:#0C0CD6 !important;box-shadow:none !important;font-weight:800 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTimer{background:#FFFFFF !important;color:#0C0CD6 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTimer :is(.cookTimerLabel,.cookTimerTime){color:#0C0CD6 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTimerTime{font-weight:800 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBtn{background:rgba(12,12,214,.1) !important;color:#0C0CD6 !important}
+html.skin-blauraum:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBar{background:#0C0CD6 !important}
