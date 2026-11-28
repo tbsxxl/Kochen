@@ -469,3 +469,4 @@ Brandbrief als neuer Skin gebaut (Entwurf I, Rot aufgehellt für Lesbarkeit). Da
 Jahr 3000: A–J → „d“ (Fünfziger-Zukunft) eingebaut, Orange abgedunkelt für Lesbarkeit.
 Zwei Städte: A–J → „a“ (Oben und unten) eingebaut.
 Die Insel: A–J → „C, D, F“ → C2/D2/F2 → „F2, aber C2 reinbekommen“: Funkspruch mit Echos + Bernstein-Countdown für alles mit Zeit.
+Akte: erste Runde fälschlich für Akte X → verworfen (Besitzer: „das ist für Shutter Island“); neue Runde → „D“ (Lichtkegel des Leuchtturms).

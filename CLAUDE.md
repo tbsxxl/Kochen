@@ -266,6 +266,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Die Insel, fünfte Fassung (Dez. 2026, Richtung F2 „Funkspruch“ + Countdown aus C2, `docs/skins/insel-f2.md`, letzter Block in `insel.css`):**
     `#07100C`, Funk-Grau in Stufen, Share Tech Mono versal; Name des Tagesgerichts mit schwächer werdenden Echos (aria-hidden); alles mit Zeit in
     Bernstein `#FFB547` (Startseite `.isRadio`: Kochdauer als riesiger VT323-Countdown, `clock()` in `insel.js`); Kochmodus dunkel, Weiter Bernstein.
+    **Akte = Shutter-Island-Welt (nicht Akte X!), fünfte Fassung (Dez. 2026, Richtung D „Lichtkegel“, `docs/skins/akte-d.md`, letzter Block in `akte.css`):**
+    Sturmnacht `#0F151B`, Graublau `#7E8C99` + Leuchtgelb `#F3E9C6`, Jost; Startseite `.akBeam` mit treppenartig eingerückten Zeilen wie ein
+    streichender Leuchtturmstrahl; 3D-Insel im Sturm unter dunklem Schleier; keine Mappen/Sofortbilder/Stempel mehr; Kochmodus Weiter hell.
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.
