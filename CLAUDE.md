@@ -263,6 +263,9 @@ Nur `/api/*` läuft durch den Worker (`run_worker_first`), alles andere sind sta
     **Zwei Städte, fünfte Fassung (Dez. 2026, Richtung A „Oben und unten“, `docs/skins/zweistaedte-a.md`, letzter Block in `zweistaedte.css`):**
     `#14110E`, oben Gold Josefin gesperrt + Garamond kursiv, unten Permanent Marker Pink/Türkis; Startseite `.zwPage` (oben Gericht, unten
     Kategorien); 3D-Szene unter dunklem Schleier; keine Art-déco-Ecken/Sechsecke mehr; Kochmodus dunkel, Weiter Pink.
+    **Die Insel, fünfte Fassung (Dez. 2026, Richtung F2 „Funkspruch“ + Countdown aus C2, `docs/skins/insel-f2.md`, letzter Block in `insel.css`):**
+    `#07100C`, Funk-Grau in Stufen, Share Tech Mono versal; Name des Tagesgerichts mit schwächer werdenden Echos (aria-hidden); alles mit Zeit in
+    Bernstein `#FFB547` (Startseite `.isRadio`: Kochdauer als riesiger VT323-Countdown, `clock()` in `insel.js`); Kochmodus dunkel, Weiter Bernstein.
     Reihenfolge der Skill-Runden: ein Skin nach dem anderen (Wunsch des Besitzers), Arbeitsstand der Entwürfe nicht im Repo.
     **Zauberschule:** hohe Halle mit Sternenhimmel als Decke, ~260 schwebende Kerzen, vier lange Tafeln mit goldenen Kelchen und
     Tellern, Spitzbogenfenster, Rosette am Ende; die Kamera gleitet durch die Halle, Scrollen hebt den Blick zur Decke.
