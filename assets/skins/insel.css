@@ -154,3 +154,141 @@ html.skin-insel:not(#_x#_y#_z) .catTiles .catTile:nth-child(2n+1){transform:rota
 html.skin-insel:not(#_x#_y#_z) .cookOverlay{--cLeaf:#E8833A;--cOnLeaf:#1A0E06}
 html.skin-insel:not(#_x#_y#_z) .cookOverlay :is(.cookStep,.prepGroup){padding:20px !important;background:linear-gradient(170deg, #1C2421 0%, #19201D 60%, #3A2216 140%) !important;border-radius:22px !important;box-shadow:inset 0 -2px 0 var(--ember2) !important}
 
+
+/* ==========================================================================================================================
+   Dez. 2026, fünfte Fassung: Richtung F2 „Funkspruch“ + Countdown aus C2 (bencium-innovative, vom Besitzer gewählt; docs/skins/insel-f2.md).
+   Fast schwarzes Grün #07100C. Funk-Grau in Stufen: #E4EEE8 (Wichtiges), #9DB5AA (Beschriftungen), #7A9888 (Nebensächliches),
+   Echos #4F6A5C/#3F5649 nur als Schmuck (aria-hidden). Bernstein #FFB547 für alles mit Zeit (Countdown, Zeiten, Timer, Weiter).
+   Share Tech Mono versal gesperrt für Namen/Beschriftungen, VT323 für Zahlen der Zeit, Systemschrift für Lesetext. Keine Karten.
+   ========================================================================================================================== */
+@font-face{font-family:"Skin Funk";font-style:normal;font-weight:400;font-display:swap;src:url("../fonts/share-tech-mono.woff2") format("woff2")}
+@font-face{font-family:"Skin Bunker";font-style:normal;font-weight:400;font-display:swap;src:url("../fonts/vt323.woff2") format("woff2")}
+html.skin-insel:not(#_x#_y#_z#_w),html.skin-insel:not(#_x#_y#_z#_w) body{
+  --isGround:#07100C;--is1:#E4EEE8;--is2:#9DB5AA;--is3:#7A9888;--isAmber:#FFB547;
+  --field:#07100C;--onField:#E4EEE8;--onField2:#9DB5AA;--fieldFill:rgba(228,238,232,.07);
+  --bg:#07100C;--surface:#0D1914;--surface2:#12211A;--fill:rgba(228,238,232,.07);--line:rgba(157,181,170,.18);--lineStrong:rgba(157,181,170,.4);
+  --text:#E4EEE8;--sub:#9DB5AA;--sub2:#9DB5AA;--muted:#7A9888;
+  --brand:#FFB547;--onBrand:#07100C;--leaf:#FFB547;--onLeaf:#07100C;--brandSoft:rgba(255,181,71,.12);--leafSoft:rgba(255,181,71,.12);
+  --sel:#E4EEE8;--onSel:#07100C;--accent:#FFB547;--accentSoft:rgba(255,181,71,.12);--onAccent:#07100C;--herb:#9DB5AA;--coffee:#0D1914;
+  --glass:rgba(7,16,12,.9);--glassLine:rgba(157,181,170,.18);
+  --fontUi:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;--fontDisplay:"Skin Funk", monospace;
+  color-scheme:dark}
+html.skin-insel{background:#07100C}
+html.skin-insel:not(#_x#_y#_z#_w) body{background:#07100C !important;color:#E4EEE8}
+html.skin-insel:not(#_x#_y#_z#_w) ::selection{background:#E4EEE8;color:#07100C}
+html.skin-insel:not(#_x#_y#_z#_w) :is(.pageTitleBlock .h1,.recipeTitle,.homeFeaturedTitle,.catTileName,.sheetTitle,.continueTitle,.navCompact,.prepTitle){font-family:"Skin Funk", monospace !important;font-weight:400 !important;text-transform:uppercase;letter-spacing:.08em !important;color:#E4EEE8 !important;text-shadow:none !important;filter:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .pageTitleBlock .h1{font-size:min(clamp(2rem,10vw,3.6rem),10vw) !important;line-height:1 !important;text-align:center}
+html.skin-insel:not(#_x#_y#_z#_w) .pageTitleBlock .h1::after{display:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) :is(.homeSectionTitle,.h2,.catGroupTitle,.ingSection){font-family:"Skin Funk", monospace !important;font-weight:400 !important;text-transform:uppercase;letter-spacing:.16em !important;color:#9DB5AA !important;font-size:.875rem !important}
+html.skin-insel:not(#_x#_y#_z#_w) .homeSectionTitle::after{display:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) :is(.recipeMeta,.metaItem,.resultCount,.catTileCount){color:#7A9888 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeMeta .metaItem:first-child{color:#FFB547 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .homeAllLink{font-family:"Skin Funk", monospace !important;color:#9DB5AA !important;text-transform:uppercase}
+html.skin-insel:not(#_x#_y#_z#_w) :is(.searchRow,.homeQuickBtn,.navIconBtn,.recipeActBtn,.profileBadge,.segmented){background:rgba(228,238,232,.07) !important;box-shadow:none !important;border:0 !important;color:#E4EEE8 !important;border-radius:999px !important;transform:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeBack{background:rgba(7,16,12,.7) !important;box-shadow:none !important;border:0 !important;color:#E4EEE8 !important}
+html.skin-insel:not(#_x#_y#_z#_w) :is(.filterChip,.chip,.pillToggle){background:transparent !important;box-shadow:inset 0 0 0 1px rgba(157,181,170,.5) !important;border:0 !important;color:#9DB5AA !important;font-family:"Skin Funk", monospace !important;text-transform:uppercase;letter-spacing:.06em;border-radius:999px !important;transform:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) :is(.filterChip.active,.filterChip[aria-pressed="true"],.pillToggle.active,.pillToggle[aria-pressed="true"],.chipMainCat){background:#E4EEE8 !important;color:#07100C !important;box-shadow:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) :is(.btn.action,.recipeCookBtn,.btnPrimary,.continuePlay){background:#FFB547 !important;color:#07100C !important;box-shadow:none !important;border:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .segBtn{color:#9DB5AA !important;background:transparent !important}
+html.skin-insel:not(#_x#_y#_z#_w) .segBtn.active{background:#E4EEE8 !important;color:#07100C !important}
+html.skin-insel:not(#_x#_y#_z#_w) .bottomRail{background:rgba(7,16,12,.9) !important;border:1px solid rgba(157,181,170,.18) !important;box-shadow:0 12px 34px rgba(0,0,0,.5) !important}
+html.skin-insel:not(#_x#_y#_z#_w) .tabItem{color:#9DB5AA !important;background:transparent !important}
+html.skin-insel:not(#_x#_y#_z#_w) .tabItem.active{background:#E4EEE8 !important;color:#07100C !important}
+html.skin-insel:not(#_x#_y#_z#_w) :is(.catTile,.homeEmpty,.uEmpty,.homeTimer,.continueCard,.recipeInnerCard,.notesCard,#ingredientsGroup,.listGroup.compactList,.planDayCard){background:#0D1914 !important;box-shadow:none !important;border:0 !important;outline:0 !important;border-radius:6px !important;transform:none !important;color:#E4EEE8 !important}
+html.skin-insel:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList,.planDayCard,.notesCard) :is(.uName,.planDayNum,.notesTitle,span,div,a:not(.btn)){color:#E4EEE8 !important}
+html.skin-insel:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) :is(.uQty,.ingQty,.num){color:#9DB5AA !important;font-family:"Skin Funk", monospace}
+html.skin-insel:not(#_x#_y#_z#_w) :is(#ingredientsGroup,.listGroup.compactList) .uRow + .uRow{border-top:1px solid rgba(157,181,170,.14) !important}
+html.skin-insel:not(#_x#_y#_z#_w) .uLead{border:1.5px solid rgba(157,181,170,.6) !important;background:transparent !important;border-radius:50% !important;box-shadow:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .uRow.checked .uLead{background:#E4EEE8 !important;border-color:#E4EEE8 !important;color:#07100C !important}
+html.skin-insel:not(#_x#_y#_z#_w) .planDayCard .planDayWd{color:#9DB5AA !important;font-family:"Skin Funk", monospace !important;text-transform:uppercase;letter-spacing:.1em}
+html.skin-insel:not(#_x#_y#_z#_w) .planDayCard.isToday{box-shadow:inset 0 0 0 1px #FFB547 !important}
+html.skin-insel:not(#_x#_y#_z#_w) :is(#recipeGrid .recipeCard,.recipeCard){background:transparent !important;box-shadow:none !important;border:0 !important;outline:0 !important;padding:0 !important;transform:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeCard .rcImg{border-radius:4px !important;box-shadow:none !important;border:0 !important;transform:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody{padding:10px 2px 4px !important;background:transparent !important;text-align:left}
+html.skin-insel:not(#_x#_y#_z#_w) #recipeGrid .recipeCard .rcBody::before{display:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeCard .recipeTitle{font-size:.9375rem !important;line-height:1.2 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .homeFeatured{box-shadow:none !important;border:0 !important;background:transparent !important;transform:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .homeFeatured .rcBody{position:static !important;background:transparent !important;padding:12px 0 0 !important;text-align:center}
+html.skin-insel:not(#_x#_y#_z#_w) .homeFeatured .homeFeaturedTitle{font-size:1.75rem !important}
+html.skin-insel:not(#_x#_y#_z#_w) .homeFeatured .recipeMeta{justify-content:center;text-shadow:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .heroOverlayCat{background:rgba(7,16,12,.8) !important;color:#E4EEE8 !important;border:0 !important;font-family:"Skin Funk", monospace;text-transform:uppercase}
+html.skin-insel:not(#_x#_y#_z#_w) .catTile .catTileName{color:#FFFFFF !important;text-shadow:0 1px 10px rgba(0,0,0,.6) !important;font-size:.875rem !important}
+html.skin-insel:not(#_x#_y#_z#_w) .catTile .catTileCount{color:#F2F6F3 !important;text-shadow:0 1px 8px rgba(0,0,0,.6) !important}
+/* Rezeptseite: Name zentriert in Funk-Schrift mit zwei Echos, Zeit in Bernstein */
+html.skin-insel:not(#_x#_y#_z#_w) .recipePageHero::after{background:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeHeroText{position:static !important;padding:22px 32px 6px !important;background:#07100C !important;text-align:center;filter:none !important;animation:none !important;opacity:1 !important;transform:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeHeroText .recipeName{color:#E4EEE8 !important;font-size:min(clamp(1.9rem,9vw,3.4rem),9vw) !important;line-height:1.05 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeHeroText .recipeSubtitle{color:#E4EEE8 !important;text-shadow:none !important;font:400 1.0625rem/1.4 -apple-system, "Inter", sans-serif !important;display:block !important;-webkit-line-clamp:unset !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipePageBody{margin-top:0 !important;background:transparent !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeSegWrap.isStuck{background:rgba(7,16,12,.95) !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeBody ol > li::before{background:transparent !important;color:#9DB5AA !important;box-shadow:inset 0 0 0 1px rgba(157,181,170,.6) !important;border:0 !important;transform:none !important;font-family:"Skin Funk", monospace !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeBody ol > li.stepDone::before{background:#E4EEE8 !important;color:#07100C !important;box-shadow:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .recipeBody ol > li{border-bottom-color:rgba(157,181,170,.14) !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookTime{background:rgba(255,181,71,.12) !important;color:#FFB547 !important;box-shadow:none !important;border:0 !important}
+@media (min-width:900px){ html.skin-insel:not(#_x#_y#_z#_w) .recipeHeroText{padding-left:16px !important;padding-right:16px !important} }
+/* Startseite: der Funkspruch (insel.js) */
+html.skin-insel:not(#_x#_y#_z#_w) body.cxHome .profileBadge{background:rgba(7,16,12,.5) !important;color:#E4EEE8 !important}
+.inHero .cxShade{background:linear-gradient(rgba(7,16,12,.86), rgba(7,16,12,.78) 45%, rgba(7,16,12,.9) 100%) !important}
+.inHero .cxPoster{background:#07100C !important}
+.inHero :is(.cxTitle,.cxDown,.cxFx){display:none !important}
+.isRadio{position:relative;z-index:2;text-align:center;padding:4px 0 40px;font-family:"Skin Funk", monospace;text-transform:uppercase;letter-spacing:.1em;color:#E4EEE8}
+.isRadio p{margin:0}
+.isRadio a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.isTop{font-size:.8125rem;color:#9DB5AA}
+.isToday{display:block;margin-top:1.4rem}
+.isToday > span{display:block}
+.isClock{display:flex !important;align-items:baseline;justify-content:center;gap:.6rem;color:#FFB547;font-family:"Skin Bunker", monospace;letter-spacing:0;line-height:.8}
+.isClock b{font-weight:400;font-size:clamp(6rem,40vw,13rem)}
+.isClock i{font-style:normal;font-size:clamp(2rem,11vw,4rem)}
+.isMeta{font-size:.875rem;color:#FFB547;margin-top:.6rem}
+.isHeute{font-size:.8125rem;color:#9DB5AA;margin-top:2rem}
+.isTitle{font-size:min(clamp(2.2rem,11vw,4rem),11vw);line-height:1;letter-spacing:.06em;margin-top:.2rem;overflow-wrap:anywhere}
+.isEcho2{color:#7A9888}.isEcho3{color:#4F6A5C}.isEcho4{color:#3F5649}
+.isSub{font-family:-apple-system, "Inter", sans-serif;text-transform:none;letter-spacing:.01em;font-size:1rem;margin-top:.6rem}
+.isKat{display:inline-flex;align-items:center;min-height:44px;font-size:.8125rem;color:#9DB5AA;margin-top:1.6rem}
+.isCat{display:flex;align-items:center;justify-content:center;min-height:44px;font-size:1.125rem}
+.isTone1{color:#E4EEE8}.isTone2{color:#9DB5AA}.isTone3{color:#7A9888}
+.isRadio .isAll{display:block;font-size:1rem;margin-top:1rem}
+.isRadio a.isAll{display:inline-flex;align-items:center;min-height:44px;color:#E4EEE8}
+.isRadio p.isAll{margin-top:-.4rem}
+.isRadio a:focus-visible{outline:2px solid #FFB547;outline-offset:4px;border-radius:4px}
+@media (hover:hover) and (pointer:fine){ .isRadio a:hover{opacity:.75} }
+html.skin-insel:not(#_x#_y#_z#_w) .cxHead .cxShade{background:linear-gradient(rgba(7,16,12,.6), rgba(7,16,12,.78) 60%, #07100C 100%) !important}
+html.skin-insel:not(#_x#_y#_z#_w) .homeTimer :is(.htTime,.ncTime){color:#FFB547 !important}
+
+/* Kochmodus: dunkel ohne Karten, Beschriftungen in Funk-Schrift, alles mit Zeit in Bernstein, Weiter Bernstein */
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay{--cBg:#07100C;--cCard:#0D1914;--cFill:rgba(228,238,232,.08);--cLine:rgba(157,181,170,.16);--cText:#E4EEE8;--cSub:#9DB5AA;--cLeaf:#FFB547;--cOnLeaf:#07100C;background:#07100C !important;color:#E4EEE8 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTop{background:#07100C !important;color:#E4EEE8 !important;box-shadow:none !important;border:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTitle{font-family:"Skin Funk", monospace !important;text-transform:uppercase;letter-spacing:.12em;font-size:.875rem !important;color:#E4EEE8 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookPill{background:transparent !important;color:#9DB5AA !important;font-family:"Skin Funk", monospace !important;box-shadow:none !important;border:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .navIconBtn{background:rgba(228,238,232,.08) !important;color:#E4EEE8 !important;box-shadow:none !important;border:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookProgress{background:rgba(157,181,170,.18) !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookProgressBar{background:#E4EEE8 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTabs{background:rgba(228,238,232,.07) !important;box-shadow:none !important;border:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTab{color:#9DB5AA !important;font-family:"Skin Funk", monospace !important;text-transform:uppercase;letter-spacing:.08em}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTab.active{background:#E4EEE8 !important;color:#07100C !important;box-shadow:none !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStep,.prepGroup,.prepHead,.cookIngs,.cookStepIngsList,.cookNextPreview){background:transparent !important;box-shadow:none !important;border:0 !important;outline:0 !important;border-radius:0 !important;transform:none !important;padding-left:0 !important;padding-right:0 !important;color:#E4EEE8 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTime{background:rgba(255,181,71,.12) !important;color:#FFB547 !important;box-shadow:none !important;border:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTime .ico{color:#FFB547 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay :is(.cookStepIngsLabel,.cookIngSection,.prepGroupTitle,.cookIngsHead){font-family:"Skin Funk", monospace !important;color:#9DB5AA !important;font-size:.75rem !important;font-weight:400 !important;text-transform:uppercase;letter-spacing:.16em !important;background:transparent !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .prepTitle{font-size:1.75rem !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .prepCount{color:#9DB5AA !important;font-family:"Skin Funk", monospace !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay :is(.prepRow,.cookIngRow,.cookStepIng){color:#E4EEE8 !important;background:transparent !important;padding-left:0 !important;padding-right:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .prepRow + .prepRow{box-shadow:inset 0 1px 0 rgba(157,181,170,.14) !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .prepBox{box-shadow:inset 0 0 0 1.5px rgba(157,181,170,.6) !important;color:transparent !important;background:transparent !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .prepRow.isDone .prepBox{background:#E4EEE8 !important;box-shadow:none !important;color:#07100C !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay :is(.cookIngQty,.cookStepIngQty){color:#9DB5AA !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookIngRow.isStep{background:rgba(228,238,232,.08) !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookChk{border-color:rgba(157,181,170,.6) !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookChk:checked{background:#E4EEE8 !important;border-color:#E4EEE8 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookChk::after{color:#07100C !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookNav{background:linear-gradient(rgba(7,16,12,0), #07100C 30%) !important;border:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn{background:rgba(228,238,232,.08) !important;color:#E4EEE8 !important;box-shadow:none !important;border:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookNavBtn.primary{background:#FFB547 !important;color:#07100C !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone){background:#0D1914 !important;color:#FFB547 !important;box-shadow:none !important;border:0 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerTime{font-family:"Skin Bunker", monospace !important;font-size:2rem !important;color:#FFB547 !important;font-weight:400 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerLabel{color:#9DB5AA !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTimer:not(.isDone) .cookTimerBtn{background:rgba(228,238,232,.08) !important;color:#E4EEE8 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTimerBar{background:#FFB547 !important}
+html.skin-insel:not(#_x#_y#_z#_w) .cookOverlay .cookTimer.isDone{background:#FFB547 !important;color:#07100C !important}
+.isRadio .isTone1{color:#E4EEE8}.isRadio .isTone2{color:#9DB5AA}.isRadio .isTone3{color:#7A9888}.isRadio .isKat{color:#9DB5AA}
